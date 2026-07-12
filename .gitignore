@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.ruff_cache/
+
+# OS
+.DS_Store
+
+# Secrets
+.env
+.env.*
+
+# Raw and intermediate data extracts — never committed.
+# Only gate-approved, anonymized derivatives belong in data/public/.
+experiments/*/data/raw/
+experiments/*/data/interim/
+
+# Site
+site/node_modules/
+site/dist/
+site/.astro/
+.vercel/
