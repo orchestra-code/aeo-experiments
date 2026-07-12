@@ -1,0 +1,68 @@
+---
+# Copy to site/src/content/articles/<slug>.mdx and fill in.
+title: "<Question or finding, stated plainly>"
+description: "<One-sentence summary for search snippets and social cards — no jargon>"
+pubDate: 2026-01-01
+# updatedDate: 2026-01-01
+authors:
+  - name: "<Author>"
+    url: "https://www.linkedin.com/in/<handle>/"
+experiment: "NNN-short-slug"
+heroFigure: "/figures/NNN-short-slug/<lead-chart>.png" # also the OG image (1200×630)
+datasets:
+  - title: "<Dataset name>"
+    path: "/datasets/NNN-short-slug/<slug>.csv"
+    license: "CC BY 4.0"
+tags: []
+draft: true
+---
+
+{/*
+  House rules (enforced by scripts/lint_article.py + the release checklist):
+  - Sample sizes are ALWAYS "N citations evaluated (in this study)" — never
+    a claim about the size or contents of the Spyglasses database.
+  - No customer prompts, AI responses, or fan-out query text — not even as
+    illustrative examples. Invent examples if you need one, and say so.
+  - The "What we can and cannot claim" section is mandatory and is not the
+    place for false modesty OR overreach: state exactly what the design
+    measures.
+  - Every figure comes from the experiment's pipeline (watermark + caption
+    are baked in by save_figure). No hand-made charts.
+*/}
+
+## Key findings
+
+<Three to five bullets a busy reader can quote. Each one supportable by a
+number that appears later in the article.>
+
+## Why we asked
+
+<The question, who cares, and the mechanistic prior — what we predicted
+before touching the data, and why.>
+
+## Methods in brief
+
+<Unit of analysis; "N citations evaluated in this study"; the model in one
+paragraph; link to the frozen spec on GitHub for the full pre-registration.>
+
+## Results
+
+<Lead with the money figure. Then the coefficient table. Robustness
+one-liners. Exploratory analyses labelled as such.>
+
+## What we can and cannot claim
+
+<Mandatory. The conditional the design actually measured; what it is blind
+to; the equivalence bound ("we could have detected an effect of X; we found
+none larger than Y"); measurement caveats from the spec's audits.>
+
+## Data and reproducibility
+
+- **Dataset:** [<name>](/datasets/NNN-short-slug/<slug>.csv) (CC BY 4.0) — see the
+  [datasheet](/datasets/NNN-short-slug/<slug>.datasheet.md) for the column dictionary.
+- **Pre-registered spec:** [frozen at `<hash>`](https://github.com/orchestra-code/aeo-experiments/blob/<hash>/experiments/NNN-short-slug/spec.md)
+- **Analysis code:** [experiments/NNN-short-slug/](https://github.com/orchestra-code/aeo-experiments/tree/main/experiments/NNN-short-slug)
+
+## Changelog
+
+- <date>: published.
