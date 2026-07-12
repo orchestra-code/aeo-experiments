@@ -1,4 +1,9 @@
-"""Shared paths and derivations for the experiment-001 pipeline."""
+"""Shared paths and derivations for the experiment-001 pipeline (post-pivot).
+
+Primary frame: Google AI Overviews CITED_INLINE units; outcome =
+``moment_cited`` (the citation URL carried a t= timestamp). See spec §A for
+why the original inline-vs-evaluated design was retired.
+"""
 
 from __future__ import annotations
 
@@ -14,11 +19,10 @@ PUBLIC = EXP / "data" / "public"
 FIGURES = EXP / "figures"
 RESULTS = EXP / "results"
 
-CITATIONS_CSV = INTERIM / "citations.csv"  # row-level, all platforms + SEARCH_RESULT
-VIDEOS_CSV = INTERIM / "videos.csv"        # (execution, video) unit, primary frame
+CITATIONS_CSV = INTERIM / "citations.csv"  # row-level, all platforms and types
+VIDEOS_CSV = INTERIM / "videos.csv"        # (execution, video) units, all platforms
 
-#: Platforms where the inline-vs-evaluated contrast exists (spec §2 Audit B).
-PRIMARY_PLATFORMS = ["openai", "gemini", "claude"]
+PRIMARY_PLATFORM = "google_ai_overview"
 
 SESOI_OR = 1.10
 ALPHA = 0.10
@@ -34,8 +38,11 @@ Z_SCORE_COLS = [
     "log_duration",
     "log_age",
     "n_sources_evaluated",
+    "desc_word_count_z",
     "placebo_dow",
 ]
+
+TRUTHY = {True: 1.0, False: 0.0, "true": 1.0, "false": 0.0, "t": 1.0, "f": 0.0}
 
 
 def load_videos() -> pd.DataFrame:
@@ -48,7 +55,8 @@ def derive(df: pd.DataFrame) -> pd.DataFrame:
     df = df.copy()
     df["log_subs"] = np.log10(df["audience_size"].astype(float) + 1)
     df["log_views"] = np.log10(df["video_view_count"].astype(float) + 1)
-    df["log_duration"] = np.log10(df["duration_seconds"].astype(float).fillna(0) + 1)
+    df["log_duration"] = np.log10(df["duration_seconds"].astype(float) + 1)
+    df["desc_word_count_z"] = df["desc_word_count"].astype(float)
 
     reactions = df["reactions_count"].astype(float).fillna(0)
     comments = df["comments_count"].astype(float).fillna(0)
@@ -68,12 +76,14 @@ def derive(df: pd.DataFrame) -> pd.DataFrame:
     df["category"] = cat.where(~cat.isin(rare), "Other")
 
     # psql \copy CSVs carry booleans as t/f; pandas round-trips give bools.
-    df["has_captions"] = df["video_has_captions"].map(
-        {True: 1.0, False: 0.0, "true": 1.0, "false": 0.0, "t": 1.0, "f": 0.0}
-    )
-    df["has_chapters_f"] = df["has_chapters"].astype(float)
+    df["has_captions"] = df["video_has_captions"].map(TRUTHY)
+    df["has_chapters_f"] = df["has_chapters"].map(TRUTHY)
 
-    primary = df["platform"].isin(PRIMARY_PLATFORMS) & df["similarity"].notna()
+    primary = (
+        (df["platform"] == PRIMARY_PLATFORM)
+        & (df["cited"] == 1)
+        & df["similarity"].notna()
+    )
     df["in_primary"] = primary
     for c in Z_SCORE_COLS:
         mu = df.loc[primary, c].mean()

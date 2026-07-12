@@ -41,60 +41,62 @@ class TestTost:
         assert r.or_hi == pytest.approx(np.exp(0.1 + z * 0.02))
 
 
+def prep(n=2000, true_effect=0.0, seed=7):
+    d = synthesize(n=n, true_effect=true_effect, n_other_platforms=0, seed=seed)
+    d["moment"] = d["timestamp_seconds"].notna().astype(int)
+    d["log_subs"] = np.log10(d["audience_size"] + 1)
+    d["log_duration"] = np.log10(d["duration_seconds"] + 1)
+    for c in ["log_subs", "log_duration", "similarity"]:
+        d[c] = (d[c] - d[c].mean()) / d[c].std()
+    d["chapters"] = d["has_chapters"].astype(float)
+    return d
+
+
 @pytest.fixture(scope="module")
 def df():
-    d = synthesize(n=2000, seed=7)
-    d["log_subs"] = np.log10(d["audience_size"] + 1)
-    for c in ["log_subs", "similarity"]:
-        d[c] = (d[c] - d[c].mean()) / d[c].std()
-    return d
+    return prep()
 
 
 class TestClusteredLogit:
 
+    FORMULA = "moment ~ similarity + chapters + log_duration + log_subs"
+
     def test_oneway_matches_statsmodels(self, df):
         import statsmodels.formula.api as smf
 
-        res = fit_clustered_logit(df, "cited ~ similarity + log_subs", ["execution_id"])
+        res = fit_clustered_logit(df, self.FORMULA, ["execution_id"])
         codes, _ = pd.factorize(df["execution_id"])
-        direct = smf.logit("cited ~ similarity + log_subs", data=df).fit(
+        direct = smf.logit(self.FORMULA, data=df).fit(
             disp=False, cov_type="cluster", cov_kwds={"groups": codes}
         )
         assert np.allclose(res.params, direct.params)
         assert np.allclose(res.bse, direct.bse)
 
     def test_twoway_runs_and_is_sane(self, df):
-        res2 = fit_clustered_logit(
-            df, "cited ~ similarity + log_subs", ["execution_id", "video_id"]
-        )
-        res_a = fit_clustered_logit(df, "cited ~ similarity + log_subs", ["execution_id"])
+        res2 = fit_clustered_logit(df, self.FORMULA, ["execution_id", "video_id"])
+        res_a = fit_clustered_logit(df, self.FORMULA, ["execution_id"])
         assert np.all(np.isfinite(res2.bse))
         assert np.all(res2.bse > 0)
         # Two-way SEs should be within an order of magnitude of one-way.
         assert np.all(res2.bse < res_a.bse * 10)
         assert np.all(res2.bse > res_a.bse / 10)
 
-    def test_positive_control_detected(self, df):
-        # Similarity drives citation in the generator: must be REAL and positive.
-        res = fit_clustered_logit(df, "cited ~ similarity + log_subs", ["execution_id"])
-        r = res.tost("similarity")
-        assert r.beta > 0
-        assert r.p_nhst < 0.01
+    def test_positive_controls_detected(self, df):
+        # Chapters and duration drive moment citation in the generator.
+        res = fit_clustered_logit(df, self.FORMULA, ["execution_id"])
+        for var in ["chapters", "log_duration"]:
+            r = res.tost(var)
+            assert r.beta > 0
+            assert r.p_nhst < 0.01
 
     def test_null_effect_judged_null(self):
-        d = synthesize(n=5500, true_effect=0.0, seed=42)
-        d["log_subs"] = np.log10(d["audience_size"] + 1)
-        for c in ["log_subs", "similarity"]:
-            d[c] = (d[c] - d[c].mean()) / d[c].std()
-        res = fit_clustered_logit(d, "cited ~ similarity + log_subs", ["execution_id"])
+        d = prep(n=5400, true_effect=0.0, seed=42)
+        res = fit_clustered_logit(d, self.FORMULA, ["execution_id"])
         assert res.tost("log_subs").verdict is Verdict.NULL
 
     def test_real_effect_detected(self):
-        d = synthesize(n=5500, true_effect=0.25, seed=42)
-        d["log_subs"] = np.log10(d["audience_size"] + 1)
-        for c in ["log_subs", "similarity"]:
-            d[c] = (d[c] - d[c].mean()) / d[c].std()
-        res = fit_clustered_logit(d, "cited ~ similarity + log_subs", ["execution_id"])
+        d = prep(n=5400, true_effect=0.30, seed=42)
+        res = fit_clustered_logit(d, self.FORMULA, ["execution_id"])
         assert res.tost("log_subs").verdict is Verdict.REAL
 
 

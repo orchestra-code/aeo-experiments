@@ -30,15 +30,16 @@ def test_og_figure_is_exactly_1200x630(tmp_path):
 
 def test_decile_plot_runs(tmp_path):
     theme()
-    df = synthesize(n=1500, seed=3)
+    df = synthesize(n=1500, n_other_platforms=0, seed=3)
+    df["moment"] = df["timestamp_seconds"].notna().astype(int)
     df["log_subs"] = df["audience_size"].apply(lambda v: v + 1).apply("log10")
     fig = decile_plot(
         df,
         "log_subs",
-        "cited",
+        "moment",
         xlabel="Channel size decile",
-        ylabel="Share cited inline",
-        title="Citation rate by channel size",
+        ylabel="Share moment-cited",
+        title="Moment-citation rate by channel size",
     )
     paths = save_figure(fig, tmp_path, "decile")
     assert paths["png"].exists()

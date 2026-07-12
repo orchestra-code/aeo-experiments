@@ -17,6 +17,7 @@ COLUMNS = [
     ColumnSpec("exec_pseudonym", "Pseudonymized response grouping key (exec_0001, ...)"),
     ColumnSpec("platform", "AI platform (openai, gemini, claude, perplexity, google_ai_overview)"),
     ColumnSpec("cited", "1 = cited inline in the answer; 0 = evaluated but not cited"),
+    ColumnSpec("moment_cited", "1 = the citation deep-links a moment (t= timestamp)"),
     ColumnSpec("similarity", "Cosine similarity, prompt embedding x video title+description embedding (rounded)"),
     ColumnSpec("audience_size", "Channel subscribers at enrichment time (YouTube Data API)"),
     ColumnSpec("video_view_count", "Video views at enrichment time"),
@@ -32,7 +33,6 @@ COLUMNS = [
     ColumnSpec("published_month", "Video publication month (YYYY-MM)"),
     ColumnSpec("n_sources_evaluated", "Sources the assistant evaluated for this response"),
     ColumnSpec("fetch_ok", "1 = video page content was successfully fetched"),
-    ColumnSpec("has_timestamp", "1 = the citation URL carried a t= timestamp"),
     ColumnSpec("timestamp_seconds", "The t= timestamp in seconds, when present"),
 ]
 
@@ -56,7 +56,9 @@ def main() -> None:
             study="001-youtube-citation-type",
             notes=[
                 "One row per (response, video) pair; responses are pseudonymized.",
-                "SEARCH_RESULT (SERP-appended) rows are excluded; this is the primary study frame.",
+                "All platforms included; the study's primary model uses the "
+                "google_ai_overview rows with cited = 1.",
+                "SEARCH_RESULT (SERP-appended) rows are excluded from units.",
                 "Metrics are point-in-time snapshots from the YouTube Data API at enrichment.",
             ],
         ),

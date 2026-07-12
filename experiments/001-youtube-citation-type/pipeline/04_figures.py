@@ -2,7 +2,7 @@
 """Step 4 — figures. Everything goes through save_figure (watermark + caption).
 
 Writes SVG+PNG pairs to figures/, including a 1200×630 OG variant of the
-money chart.
+lead chart (timestamped citations by platform).
 """
 
 from __future__ import annotations
@@ -24,33 +24,52 @@ from common import CITATIONS_CSV, FIGURES, load_videos, primary_frame
 INK_MUTED = "#6b7280"
 
 
-def money_chart(df: pd.DataFrame, og: bool = False) -> dict:
-    fig = decile_plot(
-        df[df["audience_size"].notna()],
-        "log_subs",
-        "cited",
-        xlabel="Channel subscriber count — decile (1 = smallest)",
-        ylabel="Share cited inline",
-        title="Citation rate by channel size\n(among YouTube videos the assistant already retrieved)",
-    )
-    name = "citation-rate-by-channel-size" + ("-og" if og else "")
+def timestamp_share_by_platform(rows: pd.DataFrame, og: bool = False) -> dict:
+    """Lead chart: share of YouTube citations carrying a t= timestamp."""
+    inline = rows[rows["citation_type"] == "CITED_INLINE"].copy()
+    inline["has_ts"] = inline["timestamp_seconds"].notna()
+    platforms = [p for p in PLATFORM_COLORS if p in set(inline["platform"])]
+
+    shares, los, his, ns = [], [], [], []
+    for plat in platforms:
+        sub = inline[inline["platform"] == plat]
+        s = int(sub["has_ts"].sum())
+        lo, hi = wilson_interval(s, len(sub))
+        shares.append(s / len(sub)), los.append(lo), his.append(hi), ns.append(len(sub))
+
+    fig, ax = plt.subplots(figsize=(9.5, 5.2))
+    x = np.arange(len(platforms))
+    shares = np.array(shares)
+    ax.bar(x, shares, 0.62, color=[PLATFORM_COLORS[p] for p in platforms])
+    ax.errorbar(x, shares, yerr=[shares - np.array(los), np.array(his) - shares],
+                fmt="none", ecolor=INK_MUTED, capsize=3, lw=1.2)
+    for xi, share, n in zip(x, shares, ns):
+        ax.annotate(f"{share:.0%}", (xi, share), textcoords="offset points",
+                    xytext=(0, 6), ha="center", fontsize=11, color="#222222")
+    ax.set_xticks(x, [PLATFORM_LABELS[p] for p in platforms])
+    ax.set_ylabel("Share of cited YouTube videos with a t= timestamp")
+    ax.set_ylim(0, 1)
+    ax.set_title("Only one AI surface cites YouTube moments")
+    name = "timestamp-share-by-platform" + ("-og" if og else "")
     return save_figure(fig, FIGURES, name, og=og)
 
 
-def views_deciles(df: pd.DataFrame) -> dict:
+def moment_rate_decile(df: pd.DataFrame, x: str, xlabel: str, name: str) -> dict:
     fig = decile_plot(
-        df[df["video_view_count"].notna()],
-        "log_views",
-        "cited",
-        xlabel="Video view count — decile (1 = fewest views)",
-        ylabel="Share cited inline",
-        title="Citation rate by video popularity\n(among YouTube videos the assistant already retrieved)",
+        df[df[x].notna()],
+        x,
+        "moment_cited",
+        xlabel=xlabel,
+        ylabel="Share moment-cited",
+        title=f"Moment-citation rate — {xlabel.split(' — ')[0].lower()}\n"
+        "(among YouTube videos cited by Google AI Overviews)",
     )
-    return save_figure(fig, FIGURES, "citation-rate-by-view-count")
+    return save_figure(fig, FIGURES, name)
 
 
 def rate_by(df: pd.DataFrame, col: str, labels: dict, title: str, name: str) -> dict:
-    g = df.groupby(col)["cited"].agg(["mean", "count", "sum"]).sort_values("mean")
+    d = df[df[col].notna()]
+    g = d.groupby(col)["moment_cited"].agg(["mean", "count", "sum"]).sort_values("mean")
     lo, hi = wilson_interval(g["sum"], g["count"])
     fig, ax = plt.subplots(figsize=(9, 0.8 + 0.55 * len(g)))
     y = np.arange(len(g))
@@ -59,49 +78,27 @@ def rate_by(df: pd.DataFrame, col: str, labels: dict, title: str, name: str) -> 
                 fmt="none", ecolor=INK_MUTED, capsize=3, lw=1.2)
     ax.set_yticks(y, [labels.get(i, str(i)) for i in g.index])
     ax.set_xlim(0, 1)
-    ax.set_xlabel("Share cited inline")
+    ax.set_xlabel("Share moment-cited")
     ax.set_title(title)
     ax.grid(axis="x", alpha=0.25)
     ax.grid(axis="y", visible=False)
     return save_figure(fig, FIGURES, name)
 
 
-def timestamp_share(rows: pd.DataFrame) -> dict:
-    """Stretch: timestamped-citation share by platform, split by source class."""
-    rows = rows.copy()
-    rows["has_ts"] = rows["timestamp_seconds"].notna()
-    classes = [
-        ("Model-cited (CITED_INLINE)", rows["citation_type"] == "CITED_INLINE"),
-        ("SERP-appended (SEARCH_RESULT)", rows["citation_type"] == "SEARCH_RESULT"),
-    ]
-    platforms = [p for p in PLATFORM_COLORS if p in set(rows["platform"])]
+def timestamp_position(df: pd.DataFrame) -> dict:
+    """How deep into videos do AI answers point?"""
+    d = df[(df["moment_cited"] == 1) & df["duration_seconds"].notna()].copy()
+    d = d[d["timestamp_seconds"] <= d["duration_seconds"]]
+    frac = d["timestamp_seconds"] / d["duration_seconds"]
 
-    fig, ax = plt.subplots(figsize=(9.5, 5.2))
-    width = 0.38
-    x = np.arange(len(platforms))
-    hatches = [None, "//"]
-    for i, (label, mask) in enumerate(classes):
-        shares, los, his = [], [], []
-        for plat in platforms:
-            sub = rows[mask & (rows["platform"] == plat)]
-            if len(sub) == 0:
-                shares.append(np.nan), los.append(np.nan), his.append(np.nan)
-                continue
-            s = sub["has_ts"].sum()
-            lo, hi = wilson_interval(s, len(sub))
-            shares.append(s / len(sub)), los.append(lo), his.append(hi)
-        shares = np.array(shares, dtype=float)
-        ax.bar(x + (i - 0.5) * width, shares, width * 0.92, label=label,
-               color=[PLATFORM_COLORS[p] for p in platforms],
-               alpha=1.0 if i == 0 else 0.45, hatch=hatches[i], edgecolor="white")
-        ax.errorbar(x + (i - 0.5) * width, shares,
-                    yerr=[shares - np.array(los), np.array(his) - shares],
-                    fmt="none", ecolor=INK_MUTED, capsize=3, lw=1.2)
-    ax.set_xticks(x, [PLATFORM_LABELS[p] for p in platforms])
-    ax.set_ylabel("Share of YouTube citations with a t= timestamp")
-    ax.set_title("Timestamped YouTube citations by platform\n(SERP-appended results = no model choice involved)")
-    ax.legend()
-    return save_figure(fig, FIGURES, "timestamp-share-by-platform")
+    fig, ax = plt.subplots(figsize=(9, 5))
+    ax.hist(frac, bins=20, color=BRAND_BLUE, edgecolor="white")
+    ax.set_xlabel("Timestamp position within the video (0 = start, 1 = end)")
+    ax.set_ylabel("Moment citations")
+    ax.set_title("How deep into videos do AI answers point?\n"
+                 "(among moment-cited YouTube videos, Google AI Overviews)")
+    ax.set_xlim(0, 1)
+    return save_figure(fig, FIGURES, "timestamp-position")
 
 
 def main() -> None:
@@ -111,16 +108,19 @@ def main() -> None:
     rows = pd.read_csv(CITATIONS_CSV)
 
     made = [
-        money_chart(df),
-        money_chart(df, og=True),
-        views_deciles(df),
-        rate_by(df, "category", {}, "Citation rate by video category", "citation-rate-by-category"),
-        rate_by(
-            df[df["has_captions"].notna()], "has_captions",
-            {0.0: "No captions", 1.0: "Has captions"},
-            "Citation rate by caption availability", "citation-rate-by-captions",
-        ),
-        timestamp_share(rows),
+        timestamp_share_by_platform(rows),
+        timestamp_share_by_platform(rows, og=True),
+        moment_rate_decile(df, "log_duration", "Video duration — decile (1 = shortest)",
+                           "moment-rate-by-duration"),
+        moment_rate_decile(df, "log_subs", "Channel subscriber count — decile (1 = smallest)",
+                           "moment-rate-by-channel-size"),
+        rate_by(df, "has_chapters_f", {0.0: "No chapters", 1.0: "Has chapters"},
+                "Moment-citation rate by description chapters", "moment-rate-by-chapters"),
+        rate_by(df, "has_captions", {0.0: "No captions", 1.0: "Has captions"},
+                "Moment-citation rate by caption availability", "moment-rate-by-captions"),
+        rate_by(df, "category", {}, "Moment-citation rate by video category",
+                "moment-rate-by-category"),
+        timestamp_position(df),
     ]
     for m in made:
         print(f"  {m['svg'].relative_to(FIGURES.parent)}")

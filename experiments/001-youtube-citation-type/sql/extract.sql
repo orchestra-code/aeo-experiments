@@ -68,6 +68,7 @@ LEFT JOIN "PropertyDiscoveryQuery" pdq
 JOIN "CitedPage" cp ON cp.id = dc."citedPageId"
 LEFT JOIN "Publisher" pub_dc ON pub_dc.id = dc."publisherId"
 LEFT JOIN "Publisher" pub_cp ON pub_cp.id = cp."publisherId"
-WHERE (cp."normalizedUrl" ~ '^https://(m\.|music\.)?youtube\.com/(watch|shorts/|embed/|live/|v/)'
+WHERE cp.domain IN ('youtube.com', 'm.youtube.com', 'music.youtube.com', 'youtu.be')
+  AND (cp."normalizedUrl" ~ '^https://(m\.|music\.)?youtube\.com/(watch|shorts/|embed/|live/|v/)'
        OR cp."normalizedUrl" LIKE 'https://youtu.be/%')
   AND dc."citationType" IS NOT NULL;

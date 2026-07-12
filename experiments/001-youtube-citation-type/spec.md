@@ -1,9 +1,11 @@
-# What predicts whether an AI assistant cites a YouTube video inline vs. merely evaluating it? — study spec
+# Who cites YouTube *moments*? Timestamped citations across AI surfaces — study spec
 
-**Status:** draft
+**Status:** draft — awaiting video-metadata backfill completion + freeze sign-off
 **Frozen commit:** _(record BEFORE running sql/extract.sql)_
 **Experiment slug:** `001-youtube-citation-type`
-**Supersedes:** `archive/spec-v1.md` (written before video metadata was backfilled in-DB; its design rationale — TOST, collider control, §5a collinearity simulation — carries over)
+**Supersedes:** `archive/spec-v1.md` and the v2 draft (see §A below — the
+original inline-vs-evaluated design was killed by pre-freeze counts, exactly
+as the audit step is designed to do)
 
 > Freeze rule: §4 and §5 are fixed before anyone looks at the joined data.
 > Count-only data-quality checks (`sql/counts.sql`) are allowed pre-freeze;
@@ -11,250 +13,239 @@
 
 ---
 
+## A. Pre-freeze findings that reshaped this study (2026-07-12, count-only)
+
+Class balance by platform × citationType for YouTube video citations:
+
+| platform | CITED_INLINE | EVALUATED_SOURCE | SEARCH_RESULT | with `t=` timestamp |
+|---|---|---|---|---|
+| google_ai_overview | 5,405 | — (structural) | — | **2,369 (43.8%)** |
+| gemini | 282 | 28 | — | 0 |
+| perplexity | 281 | — (structural) | — | 0 |
+| openai | 9 | 5 | 50 | 0 |
+| claude | 0 | 8 | — | 0 |
+
+1. **The planned inline-vs-evaluated study is not viable for YouTube**: the
+   rarer class across openai/gemini/claude is ~41 units — no power for
+   detection, hopeless for equivalence. (Why so few: assistants rarely list
+   YouTube as an evaluated-but-uncited source; whether that reflects model
+   behavior or source-list plumbing is itself platform-dependent and
+   documented in §A.1 of the article.)
+2. **Timestamped YouTube citations exist on exactly one surface**: Google AI
+   Overviews (43.8% of its YouTube citations). Zero on Gemini, Perplexity,
+   ChatGPT, and Claude. This answers the platform-level stretch question
+   outright and sets up a well-powered primary study: within AIO, what
+   predicts a *moment* citation vs a plain video citation? (2,369 vs 3,036 —
+   nearly balanced.)
+3. Coverage: 99.7% of YouTube citation rows have a channel publisher with
+   `audienceSize`; 97.5% have engagement snapshots. Video metadata
+   (duration/captions/category/views) covers only ~40% of video pages —
+   **the video-metadata backfill must complete before extraction.**
+
 ## 0. One-paragraph summary
 
-For YouTube videos that an AI assistant has already retrieved while answering
-a prompt, we test which video-level factors predict being **cited inline** in
-the answer (`CITED_INLINE`) versus being **read but not referenced**
-(`EVALUATED_SOURCE`): channel subscribers, video views, engagement, duration,
-captions, category, and description structure (chapter markers, links,
-length). Our mechanistic prior is that *none of the popularity metrics*
-matter — at citation time the model sees the video's title + description
-text, not its subscriber count — while semantic fit does all the work. The
-study is powered to make that null claim affirmatively via TOST. A separate
-descriptive section examines `&t=` timestamped citations as evidence about
-transcript access, with a built-in comparison class.
+Google AI Overviews is the only major AI answer surface that cites YouTube
+*moments* — deep links with a `t=` timestamp — and it does so for roughly
+44% of the YouTube videos it cites (counts above; exact modelling sample
+fixed at extraction). We test which video attributes predict receiving a
+moment citation rather than a plain video citation: creator-provided
+chapters, caption availability, duration, category, and — in null form —
+channel size and video popularity. Mechanistic prior: AIO moment links come
+from Google's "key moments" SERP feature, which is built from creator
+chapters and video transcripts; so *structure* (chapters, captions,
+duration) should predict moment citation, while *popularity* (subscribers,
+views) should not once structure is controlled. Cross-checking cited
+timestamps against description chapter markers separates chapter-sourced
+moments from transcript-derived ones — evidence about whether Google's
+pipeline reads the transcript where other assistants demonstrably do not.
 
 ## 1. The claim we can and cannot make
 
-**What this design measures:** the citation step, *conditional on retrieval*.
-Every row is a video the assistant already surfaced. The question is: given
-the model retrieved this video, do its popularity/structure attributes change
-the odds it ends up cited in the answer?
+**What this design measures:** among YouTube videos *already cited* by AI
+Overviews, the association between video attributes and the *form* of the
+citation (moment vs plain).
 
-**What this design does NOT measure:** the retrieval step. If big channels
-rank better in the underlying search index and get retrieved more often, this
-study is blind to that.
+**What it does NOT measure:** (a) whether an attribute gets a video cited at
+all (that's conditioned away); (b) anything causal about Google's ranking;
+(c) other platforms' transcript capabilities beyond the observed absence of
+timestamps.
 
-**Defensible claim:** "Audience size may help you get *found*. Conditional on
-an AI assistant retrieving a video, subscriber count has no detectable effect
-on whether it is cited in the answer" (if the TOST comes back NULL).
+**Defensible claims:**
+- "Among the AI answer surfaces we track, only Google AI Overviews cites
+  YouTube moments; N citations evaluated in this study."
+- "Conditional on being cited by AIO, videos with X are more/no more likely
+  to be moment-cited" per the TOST verdicts.
+- If non-chapter timestamps are common: "moment citations are not merely
+  copied chapter markers — consistent with transcript-derived key moments."
 
-**Indefensible claim:** "Subscriber count doesn't matter for AI citation."
-We measure the second half of the funnel only.
+**Indefensible claims:** "Chapters get you cited" (we don't measure
+citation); "Gemini/ChatGPT can't read transcripts" (absence of timestamps is
+absence of *this marker*, not proof of incapability).
 
 ### Mechanistic prior
 
-At citation time the model is working from the video's **title + description
-text** (that is what Spyglasses embeds and what the assistant's fetch
-returns; transcripts are not part of the retrieved content). Subscriber
-count, view count, and like counts are generally absent from that context.
-So the *expected* result on H1–H3 is a null — the information is physically
-absent at the decision point. Description *structure* (chapters, links,
-length) IS visible to the model, so H6–H8 are genuinely open questions, and
-a positive there would be actionable: description quality is a lever
-creators control.
+Google documents key moments as coming from creator-provided chapters and
+from automatic detection (transcript/visual analysis). AIO inherits SERP
+video features. Therefore: `has_chapters` and `video_has_captions` should
+raise moment-citation odds, `duration` should matter (very short videos have
+no distinct moments), and channel/video popularity should be null once
+structure is controlled — the moment-picker reads content structure, not
+subscriber counts. A popularity effect surviving structure controls would be
+the surprising, thesis-revising outcome.
 
 ## 2. Data-quality audits — run BEFORE the model
 
-- **Audit A — negative-class contamination.** `EVALUATED_SOURCE` rows whose
-  CitedPage has `fetchStatus != 'fetched'` have no embedding → no similarity
-  → they drop out of the primary model. This *silently implements* the
-  failed-fetch exclusion; we make it explicit: report the count and share of
-  negatives excluded this way, and run robustness #7 (the descriptive decile
-  figure with and without them).
-- **Audit B — what the outcome label means.** Quoting
-  `packages/core/src/utils/citation-type.ts` (main repo): openai/gemini
-  sources are checked against the answer markdown (SERP-appended extras are
-  tagged `SEARCH_RESULT` at parse time); claude distinguishes cited URLs from
-  everything web_search saw via the raw response; **google_ai_overview and
-  perplexity report displayed citations only and NEVER produce
-  `EVALUATED_SOURCE`**. Therefore the primary model is restricted to
-  **openai, gemini, claude** — the only platforms where the contrast exists.
-- **Audit C — independence.** The same video can appear across many
-  executions, and (because URL normalization keeps `t=`) as several CitedPage
-  rows. Unit of analysis is `(execution_id, video_id)` with `video_id` parsed
-  from the URL; SEs cluster two-way by execution and video. Report distinct
-  video counts and the repeat distribution.
-- **Audit D — hostname-fallback misclassification.** For openai/gemini,
-  inline detection falls back to hostname matching: in an execution whose
-  answer links any youtube.com URL, *other* evaluated YouTube sources can be
-  misclassified `CITED_INLINE`. Claude is clean (exact cited-URL sets).
-  Count executions with >1 YouTube source per platform; robustness #9
-  excludes them.
+- **Audit A — metadata completeness.** Extraction waits until the
+  video-metadata backfill covers ≥95% of AIO-cited video pages (currently
+  ~40%). Post-extract, report coverage; if <95%, missingness analysis is
+  mandatory (metadata presence may correlate with video age/popularity).
+- **Audit B — outcome integrity.** `t=` in `DiscoveryCitation.url` for AIO
+  rows only (`#t=` fragments too). Verify timestamps parse and, where
+  duration is known, that `timestamp ≤ duration` (violations = parse bugs or
+  hallucinated deep links — report either way; count-only sanity allowed
+  pre-freeze).
+- **Audit C — independence.** Same video cited across many executions; `t=`
+  variants are distinct CitedPages. Unit = `(execution_id, video_id)`;
+  two-way clustered SEs (execution, video); report repeat distribution.
+- **Audit D — snapshot timing.** Engagement/audience metrics are
+  enrichment-time snapshots, potentially weeks after the citation. Note as a
+  limitation; metrics are slow-moving relative to effect sizes of interest.
 
 ## 3. Data schema
 
-One row per `(execution_id, video_id)` after collapsing `t=`-variant
-CitedPages. Collapse rule (pre-registered): outcome = 1 if **any** variant is
-`CITED_INLINE`; metadata taken from the variant with a non-null embedding,
-else non-null `videoViewCount`.
+One row per `(execution_id, video_id)` among **AIO CITED_INLINE** rows.
+Collapse rule (pre-registered): `moment_cited = 1` if any variant URL for
+that video in that execution carries a parseable timestamp; video metadata
+from the variant with a non-null embedding, else non-null `videoViewCount`.
 
 | Field | Type | Source | Publishable? | Notes |
 |---|---|---|---|---|
 | `execution_id` | str | DiscoveryCitation | pseudonymized | cluster key 1 |
-| `video_id` | str | parsed from URL | yes | cluster key 2; public fact |
-| `cited` | 0/1 | citationType | yes | **outcome**; SEARCH_RESULT excluded |
-| `platform` | cat | DiscoveryQueryExecution | yes | primary model: openai/gemini/claude |
-| `similarity` | float | pgvector cosine, prompt embedding × page embedding | yes (rounded 3dp) | mandatory control, H4 |
-| `audience_size` | int | Publisher.audienceSize via dc.publisherId (channel publisher) | yes | H1; null for handle-less channels |
-| `video_view_count` | int | CitedPage | yes | H3 |
-| `reactions_count`, `comments_count` | int | DiscoveryCitation (YouTube Data API snapshot) | yes | H2 engagement |
-| `duration_seconds` | int | CitedPage | yes | control |
-| `published_at` | date | CitedPage | month only | → `log_age`, placebo dow |
-| `video_has_captions` | bool | CitedPage | yes | H6 |
-| `video_category` | cat | CitedPage | yes | H7 (exploratory slices) |
-| `chapter_count`, `has_chapters` | int/bool | regex on description | yes | H8 |
-| `desc_link_count`, `desc_word_count` | int | regex/wordCount | yes | description features |
-| `n_sources_evaluated` | int | dqe.totalCitations | yes | competition control |
-| `n_youtube_in_execution` | int | window count | yes | Audit D |
-| `fetch_ok` | 0/1 | fetchStatus == 'fetched' | yes | Audit A |
-| `timestamp_seconds` | int? | `t=`/`#t=` in citation URL | yes | stretch |
-| `chapter_times` | list | regex on description | derived-only | stretch cross-check; not released |
-| `citation_type` | cat | raw, incl. SEARCH_RESULT | yes | stretch comparison class |
+| `video_id` | str | parsed from URL | yes | cluster key 2 |
+| `moment_cited` | 0/1 | `t=`/`#t=` in citation URL | yes | **outcome** |
+| `timestamp_seconds` | int? | parsed | yes | descriptive + Audit B |
+| `has_chapters`, `chapter_count` | bool/int | description regex (in-SQL) | yes | H1 |
+| `video_has_captions` | bool | CitedPage | yes | H2 |
+| `duration_seconds` | int | CitedPage | yes | H3 (positive control) |
+| `audience_size` | int | channel Publisher via dc.publisherId | yes | H5 (null-form) |
+| `video_view_count` | int | CitedPage | yes | H6 (null-form) |
+| `reactions_count`, `comments_count` | int | DiscoveryCitation | yes | engagement control |
+| `video_category` | cat | CitedPage | yes | H7 exploratory |
+| `similarity` | float | pgvector cosine (prompt × title+description) | yes (3dp) | control |
+| `published_at` | date | CitedPage | month only | `log_age`, placebo dow |
+| `n_sources_evaluated` | int | dqe.totalCitations | yes | control |
+| `desc_word_count`, `desc_link_count` | int | in-SQL | yes | controls |
+| `chapter_times` | list | in-SQL | derived-only | H8 cross-check; not released |
+| `citation_type`, `platform` | cat | raw | yes | cross-platform descriptives |
 
-Never extracted at all: prompt text, fan-out text, answer text. Description
-text stays in the database — only derived scalars leave it (the extraction
-SQL computes them in-query).
+Never extracted: prompt text, fan-out text, answer text, description text
+(scalars derived in-query).
 
 ### Derived variables
 
-- `log_subs = log10(audience_size + 1)`, `log_views = log10(video_view_count + 1)`,
-  `log_duration`, `log_age = log10(days(response_at − published_at) + 1)`
-- `engagement_rate = log1p(100 × (reactions + comments) / (views + 1))` — a
-  ratio, decorrelated from raw size, stays in every model as a control
-- All continuous predictors z-scored so coefficients are per-SD and the SESOI
-  is comparable across variables.
-
-**Why logs:** subscriber/view counts are heavy-tailed over ~6 orders of
-magnitude; raw counts would let a handful of mega-channels dictate the fit,
-and "10× more subscribers" is the psychologically meaningful unit.
+`log_subs`, `log_views`, `log_duration`, `log_age`,
+`engagement_rate = log1p(100·(reactions+comments)/(views+1))`; continuous
+predictors z-scored on the modelling frame. Same rationale as v1: sizes are
+heavy-tailed; "10×" is the meaningful unit.
 
 ## 4. Pre-registered hypotheses
 
-Primary (each fitted in its own model — see §5a):
+Structure (directional — the mechanism can see these):
 
-- **H1:** `log_subs` has no effect on inline citation (null-form).
-- **H2:** `engagement_rate` — same.
-- **H3:** `log_views` — same.
+- **H1:** `has_chapters` increases moment-citation odds.
+- **H2:** `video_has_captions` increases moment-citation odds.
+- **H3 (doubles as positive control):** `log_duration` increases
+  moment-citation odds. **If H3 shows nothing, stop** — a moment-picker
+  that ignores duration means our outcome or predictors are broken.
 
-Description-structure (visible to the model, so genuinely open):
+Popularity (null-form, TOST):
 
-- **H6:** `video_has_captions` — no directional prediction; TOST verdict reported.
-- **H7:** `video_category` — global Wald test vs. "Other"; exploratory slices.
-- **H8:** `has_chapters` — no directional prediction; TOST verdict reported.
+- **H5:** `log_subs` has no effect once structure is controlled.
+- **H6:** `log_views` — same.
 
-Controls:
+Controls & checks:
 
-- **H4 (positive control):** `similarity` predicts citation, positive and
-  p < 0.05. **If H4 fails the study stops** — the data cannot detect anything
-  and a null on H1–H3 would be meaningless.
-- **H5 (placebo):** publication day-of-week has no effect. If it "does", the
-  SEs are too small (under-clustered); do not report results as-is.
+- **H4 (placebo):** publication day-of-week has no effect.
+- **H7 (exploratory):** category differences — reported with intervals, no
+  confirmatory claims.
+- **H8 (mechanism check, descriptive):** share of cited timestamps matching
+  a description chapter marker (±5 s). High → chapter-sourced; substantial
+  non-matching share → transcript/visual-derived key moments.
 
 ## 5. Model and decision rule
 
-Pooled logistic regression, **SEs clustered two-way by execution and video**
-(CGM; pre-registered fallback if the combined matrix is degenerate: the
-element-wise max of the two one-way SEs):
+Pooled logit, SEs clustered two-way by execution and video (CGM; fallback =
+max of one-way SEs):
 
 ```
-cited ~ similarity + <focal> + engagement_rate
-        + log_duration + log_age + n_sources_evaluated + C(platform)
+moment_cited ~ similarity + <focal> + engagement_rate
+               + log_age + desc controls + n_sources_evaluated
 ```
 
-Sample restriction: `platform ∈ {openai, gemini, claude}`, `citation_type ∈
-{CITED_INLINE, EVALUATED_SOURCE}`, non-null `similarity`.
+`log_duration` joins the controls for every focal except H3 itself.
+**§5a:** `log_subs` and `log_views` never share a model (v1 simulation:
+r≈0.9 doubles both SEs). One focal per model.
 
-**§5a — one size-variable per model.** `log_subs` and `log_views` measure the
-same latent factor (v1 simulation: r ≈ 0.9, joint fit doubles both SEs and
-makes the equivalence test unable to conclude anything, even when the truth
-is exactly zero). One focal size variable per model; `engagement_rate` is a
-ratio (VIF ≈ 1) and stays. Report `collinearity_report` in the write-up.
-
-**SESOI:** odds ratio **1.10 per SD** of the (standardized) predictor — the
-smallest effect that would plausibly change a content strategy.
-
-**Decision rule (TOST, 90% CI):** as in the toolkit's `Verdict`:
-CI inside [0.909, 1.10] → NULL; excludes 1.0 beyond band → REAL; excludes 1.0
-inside band → NEGLIGIBLE; wide + includes 1.0 → **INCONCLUSIVE — no null
-claim.**
-
-**Power:** verified on the synthetic generator (collider structure included):
-`true_effect=0` → NULL, `true_effect=0.25` → REAL (`tests/test_stats.py`).
-Confirm achieved CI widths from the fitted models rather than trusting the
-simulation; real class balance may differ from v1's assumption.
+**SESOI:** OR 1.10 per SD (binary predictors: per level).
+**Decision rule:** toolkit `Verdict` — NULL / NEGLIGIBLE / REAL /
+INCONCLUSIVE; no null claims without TOST.
+**Power:** rarer class ≈ 2.4k from pre-freeze counts → supports ~150
+parameters at 15 events each; comfortable. Confirm achieved CI widths.
 
 ## 6. Known traps
 
-- **Collider (admissions paradox).** Retrieval is caused by both semantic fit
-  and channel prominence; conditioning on retrieval makes them spuriously
-  negatively correlated in-sample, so *without* the similarity control, big
-  channels would appear to get cited less. The naive model is fitted once,
-  labelled "the number not to publish", to demonstrate the trap.
-- **Effective sample = the rarer class.** Whichever of cited/not-cited is
-  smaller is the information budget; report it and respect ~15+ events per
-  parameter (category levels count).
-- **Absence of evidence ≠ evidence of absence.** TOST or no null claim.
-- **Similarity is title+description similarity.** The embedding covers the
-  video's title + description (not the transcript). If a video is retrieved
-  on transcript content invisible to our similarity measure, the control is
-  imperfect; noted as a limitation.
+- **Conditioning on citation.** The frame is videos AIO chose to cite;
+  attributes that drive *being cited* are partially conditioned away.
+  Similarity stays as a control; claims are about the moment/plain contrast
+  only.
+- **Metadata missingness is not random** (Audit A): older/obscure videos are
+  likelier to lack enrichment. Fit with and without imputation-by-exclusion;
+  report both.
+- **Chapters ⊂ descriptions we fetched.** `has_chapters` is derived from the
+  fetched description; unfetched pages (≈3%) drop out — report.
+- **Effective sample = rarer class**; respect events-per-parameter with
+  category levels.
 
 ## 7. Robustness checks
 
-1. H4 first; fail → stop.
-2. H5 placebo must be null.
-3. Nonlinearity: subscriber deciles (the money chart) + 5-knot spline refit.
-4. Collinearity report (corr + VIF).
-5. Dedup refit: one row per distinct `video_id` (first appearance).
-6. Per-platform refits (openai / gemini / claude) — watch power on the
-   equivalence claim; detection is fine, equivalence may be marginal.
-7. Audit-A sensitivity: descriptive rates with/without `fetch_ok = 0` rows.
-8. Missingness: `audience_size` is null for handle-less channels and
-   `reactions/comments` can be creator-hidden — neither is random. Fit with
-   and without; compare cited-rates for null vs non-null groups.
-9. Audit-D sensitivity: exclude executions with >1 YouTube source
-   (openai/gemini only); claude subset is the clean benchmark.
+1. H3 positive control first; fail → stop.
+2. H4 placebo must be null.
+3. Nonlinearity: duration deciles; subscriber deciles (money chart for the
+   null claim).
+4. Collinearity report (subs/views; chapters/duration).
+5. Dedup refit: one row per video.
+6. Metadata-missingness refits (Audit A).
+7. Audit-B exclusion: drop `timestamp > duration` rows; conclusions must hold.
+8. Time-split: first half vs second half of citation dates (AIO feature
+   changes mid-window would show here).
 
-## 8. Stretch goal (descriptive, own section in the article): timestamped citations
+## 8. Descriptive companions (no confirmatory claims)
 
-**Question:** do `&t=`/`#t=` timestamped YouTube citations indicate the
-assistant read the transcript?
-
-**Design:** row-level (not collapsed), all five platforms, **including
-`SEARCH_RESULT` rows as a comparison class** — SERP-appended results carry
-whatever timestamps Google's "key moments" surface, so they estimate the
-timestamp rate *without* any model choice involved.
-
-1. Share of citations with a timestamp, by platform × citation_type.
-2. Hypothesis (directional, descriptive): Google-owned surfaces
-   (gemini, google_ai_overview) show timestamps; others don't.
-3. Cross-check: for each timestamped citation, does the timestamp coincide
-   (±5 s) with a chapter marker in the video's description? Timestamps that
-   match chapters could come from the *description*; only non-chapter,
-   non-SERP timestamps are even candidate evidence of transcript access.
-
-**Pre-committed caveat:** a timestamp proves the assistant had *some*
-temporal anchor — transcript access, SERP key-moments, and description
-chapters are all possible sources. We will report which sources the data can
-and cannot rule out, and we do not claim transcript access unless
-non-chapter timestamps appear at meaningful rates outside SERP-derived rows.
+- The platform table from §A — the "only AIO cites moments" headline.
+- Timestamp *position*: distribution of `t / duration` (how deep into videos
+  do AI answers point?) — likely the most shareable chart after the
+  headline.
+- H8 chapter-match share, split by `has_chapters`.
+- Inline-vs-evaluated infeasibility note (§A) — one honest paragraph:
+  evaluated-but-uncited YouTube is rare on every non-Google surface we
+  track.
 
 ## 9. Deliverables and sequence
 
-1. `sql/counts.sql` (pre-freeze, count-only) → confirm class balance + nulls
-2. Freeze this spec (commit, record hash above)
-3. `sql/extract.sql` → `data/raw/extract.csv` (psql `\copy` or Supabase MCP)
-4. `pipeline/01_features.py` … `05_release.py`
-5. Robustness suite; article + dataset + companion blog post
+1. ✅ Pre-freeze counts (§A)
+2. **Complete the video-metadata backfill** (main repo Inngest job) → re-run
+   coverage count until ≥95%
+3. Freeze this spec (commit, record hash above)
+4. `sql/extract.sql` → `data/raw/extract.csv`
+5. `pipeline/01…05` (H3 gate; robustness; figures; release)
+6. Article + dataset + companion blog post
 
 ## 10. Notes for the write-up
 
-- Money chart: citation rate across subscriber deciles with Wilson intervals.
-- Frame as **funnel decomposition** — "audience gets you retrieved; relevance
-  gets you cited" — not as a debunking.
+- Lead: the platform table — one surface cites moments, four don't.
+- Then the mechanism: what predicts *which* videos get moment-cited —
+  chapters/captions/duration results are directly actionable for creators
+  and PR teams ("structure your videos so Google can quote them").
+- The H8 cross-check is the transcript-access evidence; phrase per §1.
+- Popularity nulls get the TOST treatment with the achieved bound published.
 - Sample sizes as "N citations evaluated (in this study)".
-- Publish the achieved equivalence bound.
-- Description-structure results (H6–H8) are the actionable-advice section for
-  the companion blog post.
