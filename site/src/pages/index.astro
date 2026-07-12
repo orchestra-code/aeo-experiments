@@ -1,0 +1,69 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
+
+const articles = (await getCollection("articles", ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+---
+
+<BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
+  <h1>Spyglasses Research</h1>
+  <p class="muted intro">
+    Pre-registered studies of how AI assistants find, evaluate, and cite sources, from the
+    team behind the <a href="https://spyglasses.io">Spyglasses</a> AI visibility platform.
+    Every study publishes its <a href="/methodology">methodology</a>, analysis code, and —
+    where possible — an anonymized dataset.
+  </p>
+
+  {articles.length === 0 && <p>First study in progress — subscribe via <a href="/rss.xml">RSS</a>.</p>}
+
+  <ul class="articles">
+    {
+      articles.map((a) => (
+        <li>
+          <a href={`/articles/${a.id}`} class="title">
+            {a.data.title}
+          </a>
+          <p class="muted">{a.data.description}</p>
+          <p class="meta">
+            {fmt(a.data.pubDate)}
+            {a.data.datasets.length > 0 && <span> · dataset included</span>}
+          </p>
+        </li>
+      ))
+    }
+  </ul>
+</BaseLayout>
+
+<style>
+  .intro {
+    font-size: 1.05rem;
+    margin-bottom: 2.5rem;
+  }
+  .articles {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .articles li {
+    padding: 1.4rem 0;
+    border-top: 1px solid var(--line);
+  }
+  .title {
+    font-weight: 600;
+    font-size: 1.2rem;
+    text-decoration: none;
+  }
+  .articles p {
+    margin: 0.35rem 0 0;
+  }
+  .meta {
+    color: var(--ink-muted);
+    font-size: 0.85rem;
+  }
+</style>

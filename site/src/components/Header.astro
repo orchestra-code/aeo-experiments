@@ -1,0 +1,67 @@
+---
+import { SPYGLASSES_URL } from "../consts";
+---
+
+<header>
+  <div class="inner">
+    <a href="/" class="brand" aria-label="Spyglasses Research home">
+      <img src="/brand/spyglasses_logotype_black.svg" alt="Spyglasses" width="118" height="49" />
+      <span>Research</span>
+    </a>
+    <nav>
+      <a href="/">Articles</a>
+      <a href="/datasets">Datasets</a>
+      <a href="/methodology">Methodology</a>
+      <a href={SPYGLASSES_URL} rel="noopener">spyglasses.io ↗</a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  header {
+    border-bottom: 1px solid var(--line);
+  }
+  .inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0.9rem 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    text-decoration: none;
+    color: var(--ink);
+  }
+  .brand img {
+    display: block;
+    height: 30px;
+    width: auto;
+  }
+  .brand span {
+    font-weight: 500;
+    font-size: 1.05rem;
+    color: var(--ink-muted);
+    border-left: 1px solid var(--line);
+    padding-left: 0.6rem;
+  }
+  nav {
+    display: flex;
+    gap: 1.1rem;
+    flex-wrap: wrap;
+  }
+  nav a {
+    text-decoration: none;
+    color: var(--ink);
+    font-size: 0.92rem;
+    font-weight: 500;
+  }
+  nav a:hover {
+    color: var(--brand-blue-dark);
+  }
+</style>

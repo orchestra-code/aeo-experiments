@@ -1,0 +1,44 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const articles = (await getCollection("articles", ({ data }) => !data.draft))
+  .filter((a) => a.data.datasets.length > 0)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<BaseLayout
+  title="Datasets"
+  description="Anonymized, derived-feature datasets from Spyglasses Research studies — free to download and reuse under each dataset's license."
+>
+  <h1>Datasets</h1>
+  <p class="muted">
+    Each study publishes an anonymized dataset of derived features where possible. Datasets
+    contain no customer prompts, AI responses, or customer identifiers — see the
+    <a href="https://github.com/orchestra-code/aeo-experiments/blob/main/docs/data-policy.md"
+      >data policy</a
+    >. Row counts reflect the citations evaluated in each study.
+  </p>
+
+  {articles.length === 0 && <p>No datasets published yet — the first study is in progress.</p>}
+
+  {
+    articles.map((a) => (
+      <section>
+        <h2>
+          <a href={`/articles/${a.id}`}>{a.data.title}</a>
+        </h2>
+        <ul>
+          {a.data.datasets.map((ds) => (
+            <li>
+              <a href={ds.path}>{ds.title}</a> ({ds.license})
+              {ds.rows && <span class="muted"> — {ds.rows.toLocaleString()} citations evaluated</span>}
+              {" · "}
+              <a href={ds.path.replace(/\.csv$/, ".datasheet.md")}>datasheet</a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))
+  }
+</BaseLayout>

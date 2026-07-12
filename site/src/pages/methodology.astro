@@ -1,0 +1,15 @@
+---
+import { getEntry, render } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const doc = await getEntry("repoDocs", "methodology");
+if (!doc) throw new Error("docs/methodology.md missing");
+const { Content } = await render(doc);
+---
+
+<BaseLayout
+  title="Methodology"
+  description="How Spyglasses Research studies are designed, run, and reported: pre-registration, equivalence testing, positive and placebo controls, and open data."
+>
+  <Content />
+</BaseLayout>

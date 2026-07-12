@@ -1,0 +1,178 @@
+@font-face {
+  font-family: "Figtree";
+  src: url("/fonts/Figtree-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Figtree";
+  src: url("/fonts/Figtree-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Figtree";
+  src: url("/fonts/Figtree-SemiBold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --brand-blue: #5887da;
+  --brand-blue-dark: #3a62b8;
+  --ink: #222222;
+  --ink-muted: #5b6472;
+  --line: #e3e6ea;
+  --surface: #ffffff;
+  --surface-alt: #f6f8fb;
+  --max-width: 46rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: "Figtree", "Helvetica Neue", Arial, sans-serif;
+  color: var(--ink);
+  background: var(--surface);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 2.5rem 1.25rem 4rem;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+h1 {
+  font-size: 2rem;
+  margin: 0 0 0.5rem;
+}
+
+h2 {
+  font-size: 1.4rem;
+  margin: 2.2rem 0 0.6rem;
+}
+
+h3 {
+  font-size: 1.1rem;
+  margin: 1.6rem 0 0.4rem;
+}
+
+a {
+  color: var(--brand-blue-dark);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+a:hover {
+  color: var(--brand-blue);
+}
+
+code {
+  background: var(--surface-alt);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 0.08em 0.35em;
+  font-size: 0.88em;
+}
+
+pre {
+  background: var(--surface-alt);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 1rem;
+  overflow-x: auto;
+  font-size: 0.85rem;
+}
+
+pre code {
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+figure {
+  margin: 2rem 0;
+}
+
+figure img {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+figcaption {
+  color: var(--ink-muted);
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.9rem;
+  display: block;
+  overflow-x: auto;
+}
+
+th,
+td {
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  padding: 0.5rem 0.75rem;
+}
+
+th {
+  font-weight: 600;
+}
+
+blockquote {
+  margin: 1.5rem 0;
+  padding: 0.25rem 1.25rem;
+  border-left: 3px solid var(--brand-blue);
+  color: var(--ink-muted);
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--line);
+  margin: 2.5rem 0;
+}
+
+.muted {
+  color: var(--ink-muted);
+}
+
+.meta-line {
+  color: var(--ink-muted);
+  font-size: 0.9rem;
+  margin: 0 0 2rem;
+}

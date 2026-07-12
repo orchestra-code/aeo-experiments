@@ -1,0 +1,65 @@
+---
+title: "How Spyglasses Research studies work (demonstration article)"
+description: "A walkthrough of the publication format: pre-registered specs, equivalence testing, watermarked figures, and anonymized datasets — using synthetic demonstration data."
+pubDate: 2026-07-12
+authors:
+  - name: "Spyglasses Research"
+    url: "https://spyglasses.io"
+experiment: "001-youtube-citation-type"
+heroFigure: "/figures/demo/decile-demo-og.png"
+datasets: []
+tags: ["meta"]
+draft: true
+---
+
+{/* This is the format-demonstration article used to exercise the site build.
+    It stays draft: true — it renders in dev, never in production. */}
+
+## Key findings
+
+- This is a demonstration of the article format, rendered from MDX with a
+  figure produced by the analysis toolkit. **All data on this page is
+  synthetic.**
+- Every real study follows the same structure: key findings up top, methods
+  in brief, results, an explicit claims section, and data downloads.
+
+## Why we asked
+
+Real articles open with the research question, who it matters to, and the
+mechanistic prior — what we predicted before touching the data, and why.
+
+## Methods in brief
+
+Real articles report the unit of analysis, the sample ("N citations evaluated
+in this study"), the model in one paragraph, and link to the frozen
+pre-registered spec on GitHub.
+
+<figure>
+  <img
+    src="/figures/demo/decile-demo.svg"
+    alt="Line chart of inline-citation share across ten channel-size deciles; the line is flat around the overall rate, with Wilson confidence intervals on each point."
+    width="1800"
+    height="1080"
+  />
+  <figcaption>
+    The house figure style: watermark and source line are baked into every
+    chart by the pipeline. This one is generated from synthetic data.
+  </figcaption>
+</figure>
+
+## What we can and cannot claim
+
+This section is mandatory in every real article. It states the conditional
+the design actually measured, what the design is blind to, and the achieved
+equivalence bound — "we could have detected an effect of X; we found none
+larger than Y."
+
+## Data and reproducibility
+
+Real articles link the anonymized dataset (with its datasheet and license),
+the frozen spec commit, and the analysis code. See the
+[methodology](/methodology) page for the standing commitments.
+
+## Changelog
+
+- 2026-07-12: created as the format demonstration.

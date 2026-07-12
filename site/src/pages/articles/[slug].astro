@@ -1,0 +1,79 @@
+---
+import { getCollection, render } from "astro:content";
+import JsonLd from "../../components/JsonLd.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { GITHUB_URL } from "../../consts";
+
+export async function getStaticPaths() {
+  // Drafts render in dev but are excluded from production builds (and
+  // therefore from the sitemap).
+  const articles = await getCollection(
+    "articles",
+    ({ data }) => import.meta.env.DEV || !data.draft,
+  );
+  return articles.map((article) => ({
+    params: { slug: article.id },
+    props: { article },
+  }));
+}
+
+const { article } = Astro.props;
+const { Content } = await render(article);
+const d = article.data;
+
+const fmt = (date: Date) =>
+  date.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+---
+
+<BaseLayout title={d.title} description={d.description} image={d.heroFigure} type="article">
+  <JsonLd slot="head" article={article} />
+
+  <article>
+    <h1>{d.title}</h1>
+    <p class="meta-line">
+      {d.authors.map((a, i) => (
+        <>
+          {i > 0 && ", "}
+          {a.url ? <a href={a.url} rel="noopener">{a.name}</a> : a.name}
+        </>
+      ))}
+      · {fmt(d.pubDate)}
+      {d.updatedDate && <> · updated {fmt(d.updatedDate)}</>}
+      · <a href={`${GITHUB_URL}/tree/main/experiments/${d.experiment}`} rel="noopener">
+        spec &amp; code
+      </a>
+    </p>
+
+    <Content />
+
+    {
+      d.datasets.length > 0 && (
+        <aside class="datasets">
+          <h2>Download the data</h2>
+          <ul>
+            {d.datasets.map((ds) => (
+              <li>
+                <a href={ds.path}>{ds.title}</a> ({ds.license})
+                {ds.rows && <span class="muted"> — {ds.rows.toLocaleString()} citations evaluated in this study</span>}
+              </li>
+            ))}
+          </ul>
+        </aside>
+      )
+    }
+  </article>
+</BaseLayout>
+
+<style>
+  .datasets {
+    margin-top: 3rem;
+    padding: 1rem 1.25rem;
+    background: var(--surface-alt);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+  }
+  .datasets h2 {
+    margin-top: 0.25rem;
+    font-size: 1.1rem;
+  }
+</style>

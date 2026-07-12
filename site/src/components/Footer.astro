@@ -1,0 +1,37 @@
+---
+import { GITHUB_URL, SPYGLASSES_URL } from "../consts";
+const year = new Date().getFullYear();
+---
+
+<footer>
+  <div class="inner">
+    <p>
+      © {year} <a href={SPYGLASSES_URL} rel="noopener">Spyglasses</a> · Research from the
+      Spyglasses AI visibility platform.
+    </p>
+    <p>
+      <a href={GITHUB_URL} rel="noopener">Code &amp; pre-registered specs on GitHub</a> ·
+      <a href="/methodology">Methodology</a> · <a href="/rss.xml">RSS</a> ·
+      <a href="/llms.txt">llms.txt</a>
+    </p>
+  </div>
+</footer>
+
+<style>
+  footer {
+    border-top: 1px solid var(--line);
+    color: var(--ink-muted);
+    font-size: 0.85rem;
+  }
+  .inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 1.25rem;
+  }
+  p {
+    margin: 0.25rem 0;
+  }
+  a {
+    color: inherit;
+  }
+</style>

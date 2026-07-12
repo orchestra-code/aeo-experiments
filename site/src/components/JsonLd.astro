@@ -1,0 +1,62 @@
+---
+import { SITE_URL, SPYGLASSES_URL } from "../consts";
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  article: CollectionEntry<"articles">;
+}
+
+const { article } = Astro.props;
+const d = article.data;
+const url = new URL(`/articles/${article.id}`, SITE_URL).href;
+
+const publisher = {
+  "@type": "Organization",
+  name: "Spyglasses",
+  url: SPYGLASSES_URL,
+  logo: {
+    "@type": "ImageObject",
+    url: new URL("/brand/spyglasses_logotype_black.svg", SITE_URL).href,
+  },
+};
+
+const scholarlyArticle = {
+  "@context": "https://schema.org",
+  "@type": "ScholarlyArticle",
+  headline: d.title,
+  description: d.description,
+  url,
+  image: new URL(d.heroFigure, SITE_URL).href,
+  datePublished: d.pubDate.toISOString(),
+  ...(d.updatedDate && { dateModified: d.updatedDate.toISOString() }),
+  author: d.authors.map((a) => ({
+    "@type": "Person",
+    name: a.name,
+    ...(a.url && { url: a.url }),
+  })),
+  publisher,
+  isPartOf: { "@type": "WebSite", name: "Spyglasses Research", url: SITE_URL },
+};
+
+const datasets = d.datasets.map((ds) => ({
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  name: ds.title,
+  description: `Anonymized derived-feature dataset for the study "${d.title}"${
+    ds.rows ? ` — ${ds.rows.toLocaleString()} citations evaluated in this study` : ""
+  }. Contains no customer prompts, AI responses, or customer identifiers.`,
+  url,
+  license: ds.license === "CC BY 4.0" ? "https://creativecommons.org/licenses/by/4.0/" : ds.license,
+  creator: publisher,
+  distribution: [
+    {
+      "@type": "DataDownload",
+      encodingFormat: "text/csv",
+      contentUrl: new URL(ds.path, SITE_URL).href,
+    },
+  ],
+}));
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(scholarlyArticle)} />
+{datasets.map((ds) => <script type="application/ld+json" set:html={JSON.stringify(ds)} />)}
