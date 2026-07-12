@@ -34,8 +34,8 @@ cd site && pnpm install && pnpm dev
 
 See [`docs/data-policy.md`](docs/data-policy.md). In brief:
 
-- Customer prompts, AI responses, and fan-out query text are **never published**.
-- We never state or imply the total size of the Spyglasses citation database. Sample sizes are always "N citations evaluated (in this study)".
+- Customer prompts, AI responses, and fan-out query text are **never published** due to customer privacy concerns.
+- Sample sizes are always provided as "N citations evaluated (in this study)".
 - Null claims require TOST equivalence bounds, not just non-significant p-values. Every article carries a "What we can and cannot claim" section.
 
 ## License
