@@ -1,0 +1,156 @@
+---
+title: "Only one AI surface deep-links to the moment inside a YouTube video"
+description: "Google AI Overviews attaches a timestamp to 44% of the YouTube videos it cites, sending users to the exact second that answers their question. ChatGPT, Gemini, Perplexity, and Claude never do. We looked at what predicts a moment citation — and whether Google is reading the transcript."
+pubDate: 2026-07-13
+authors:
+  - name: "Spyglasses Research"
+    url: "https://spyglasses.io"
+experiment: "001-youtube-citation-type"
+heroFigure: "/figures/001-youtube-citation-type/timestamp-share-by-platform-og.png"
+datasets:
+  - title: "YouTube moment citations across AI answer surfaces (derived features)"
+    path: "/datasets/001-youtube-citation-type/youtube-citation-type.csv"
+    license: "CC BY 4.0"
+    rows: 5978
+tags: ["youtube", "google-ai-overviews", "citations", "video"]
+draft: false
+---
+
+## Key findings
+
+- **Google AI Overviews is the only AI answer surface we track that cites YouTube *moments*** — links with a `t=` timestamp that jump the viewer to a specific second. It does this for **44% of the YouTube videos it cites**. ChatGPT, Gemini, and Perplexity attach a timestamp to essentially none of theirs.
+- Among videos Google cites, **longer videos are far more likely to get a moment link** (the strongest predictor by a wide margin). A two-hour podcast gets deep-linked; a two-minute clip gets a plain link.
+- **Bigger, more-viewed channels are *less* likely to be moment-cited, not more.** When Google reaches for a precise moment, it disproportionately reaches into smaller creators' videos.
+- **The moments are not copied from creator chapter markers.** Only 8.4% of the cited timestamps line up with a chapter in the video's description — evidence that Google is deriving the moment from the video's content, not from metadata other assistants could read too.
+- All figures below come from **5,405 Google AI Overviews YouTube citations evaluated in this study**.
+
+## Why we asked
+
+When an AI answer cites a YouTube video, it can do one of two things. It can link the video — "here's a relevant video" — or it can link a *moment*: `youtube.com/watch?v=…&t=138`, which drops you 2 minutes 18 seconds in, at the exact point that answers the question.
+
+The second kind is much more useful to a reader, and much more revealing about the machine that produced it. To point at a specific second, something in the pipeline has to know what happens at that second. That is a claim about how deeply the system has actually *watched* the video — and it's a claim most people assume AI assistants can't make, because retrieving and citing a web page doesn't normally involve reading a video's transcript.
+
+So we asked two questions. First, descriptively: which assistants deep-link to moments, and how often? Second, mechanistically: for the surface that does it, what kind of video gets the moment treatment — and can we tell where the timestamp comes from?
+
+## Methods in brief
+
+The unit of analysis is one (response, video) pair. We restricted the main models to YouTube videos cited by Google AI Overviews, because — as the first result shows — it is the only surface that produces moment citations at all, so it is the only place where "moment vs. plain" is a question with two answers. That gives **5,405 videos evaluated in this study** (43.8% moment-cited); the adjusted models use the 4,886 with a complete feature set.
+
+The outcome is whether the citation URL carried a parseable `t=` timestamp. We modelled it with pooled logistic regressions, standard errors clustered by both response and video, fitting one focal predictor at a time. Because this is an observational study conditioned on Google having already cited the video, we pre-registered which claims the design can and cannot support, along with hypotheses, an equivalence bound, and a positive control — all frozen before we pulled the data. The full [pre-registered spec](https://github.com/orchestra-code/aeo-experiments/blob/b055bb904dee284b64625c007a1fa5de5492fcdb/experiments/001-youtube-citation-type/spec.md) and [analysis code](https://github.com/orchestra-code/aeo-experiments/tree/main/experiments/001-youtube-citation-type) are public.
+
+## Result 1: only Google cites moments
+
+<figure>
+  <img
+    src="/figures/001-youtube-citation-type/timestamp-share-by-platform.svg"
+    alt="Bar chart. Share of cited YouTube videos carrying a t= timestamp: ChatGPT 0%, Gemini 0%, Perplexity 0%, Google AI Overviews 44%."
+    width="1900"
+    height="1040"
+  />
+  <figcaption>
+    Google AI Overviews attaches a timestamp to 44% of the YouTube videos it
+    cites. Gemini and Perplexity — with hundreds of YouTube citations each in
+    this study — attach one to none. (Claude cited no YouTube videos inline in
+    our sample and so does not appear.)
+  </figcaption>
+</figure>
+
+This is the headline, and it is close to categorical. Gemini and Perplexity each cite hundreds of YouTube videos in our data and deep-link to a moment in exactly zero of them. Google does it nearly half the time.
+
+That Gemini shows the same flat zero as everyone else is the surprising part. Gemini is a Google product; if any assistant were positioned to inherit YouTube's own understanding of a video, it would be Gemini. It doesn't — at least not in the citations it emits. Whatever produces moment links lives in the **AI Overviews / Search** pipeline specifically, not in "Google" broadly.
+
+## Result 2: what gets the moment treatment
+
+Among the videos Google cites, what predicts a moment link rather than a plain one? We expected video *structure* to matter — a video needs distinct, findable moments — and video *popularity* not to, since a moment-picker reading content has no obvious reason to care how many subscribers the channel has.
+
+**Duration is the dominant signal, and it points the way we expected.**
+
+<figure>
+  <img
+    src="/figures/001-youtube-citation-type/moment-rate-by-duration.svg"
+    alt="Moment-citation rate rising across video-duration deciles, from about 13% for the shortest videos to about 60% for the longest."
+    width="1800"
+    height="1080"
+  />
+  <figcaption>
+    Longer videos are far more likely to be moment-cited. The shortest tenth of
+    videos are deep-linked ~13% of the time; the longest, ~60%.
+  </figcaption>
+</figure>
+
+The odds of a moment citation just about double for each standard-deviation increase in log-duration (odds ratio 2.14, the strongest effect in the study). This is intuitive and reassuring: a long video *has* distinct moments to point at, and a short clip largely *is* the moment. It also served as our positive control — proof the outcome responds to something sensible before we read anything into the subtler predictors.
+
+**Popularity runs the other way from the usual story.** We had pre-registered the popularity predictors in null form, expecting subscriber count and view count not to matter once content was accounted for. Instead both came back as real effects — and *negative*:
+
+<figure>
+  <img
+    src="/figures/001-youtube-citation-type/moment-rate-by-channel-size.svg"
+    alt="Moment-citation rate by channel subscriber decile, declining gently from about 52% for the smallest channels to about 40% for the largest."
+    width="1800"
+    height="1080"
+  />
+  <figcaption>
+    Videos from smaller channels are somewhat more likely to be moment-cited.
+    The effect is modest but exceeds our pre-registered threshold for a real
+    effect, and it holds for view count too.
+  </figcaption>
+</figure>
+
+Videos from the smallest-subscriber decile are moment-cited about 52% of the time; the largest channels sit closer to 40%. View count shows the same pattern a little more strongly (odds ratio 0.77 per standard deviation, versus 0.84 for subscribers). Neither is a large effect, but both clear the equivalence bound we set in advance, and the view-count effect survives every robustness check including collapsing to one row per video.
+
+The readable version: **when Google deep-links a moment, it is disproportionately reaching past the big, popular channels to a specific answer buried inside a smaller creator's longer video.** That is the opposite of the "authority gets you cited" intuition — though see the caveats below for why this is specifically about *moment vs. plain*, not about getting cited in the first place.
+
+**Description chapters look like they help, until you account for length.** Videos whose descriptions carry chapter markers are moment-cited a little more often (49% vs. 42%). But chaptered videos are also systematically longer, and once duration is in the model the chapter effect becomes statistically inconclusive — we can neither confirm nor rule it out at the size that would matter. Caption availability is likewise inconclusive. We report these honestly as open questions rather than dressing up a null.
+
+## Result 3: is Google reading the transcript?
+
+A timestamp has to come from somewhere. There are three plausible sources: the creator's own **chapter markers** in the description (which anyone can read), Google Search's **"key moments"** feature, and some form of **transcript or content analysis**. Only the last one implies Google is reading *into* the video in a way the citation itself wouldn't otherwise reveal.
+
+We can partly separate these. For every moment citation, we checked whether the cited timestamp lands within five seconds of a chapter marker in that video's description. If Google were mostly copying chapters, that match rate would be high.
+
+It isn't: **only 8.4% of moment citations coincide with a description chapter.** The other 91% point at seconds the creator never marked. Combined with the shape of where the timestamps land — clustered in the opening minutes but reaching throughout the video —
+
+<figure>
+  <img
+    src="/figures/001-youtube-citation-type/timestamp-position.svg"
+    alt="Histogram of timestamp position within the video, heavily weighted toward the first 10% but with a long tail extending to 90%."
+    width="1800"
+    height="1030"
+  />
+  <figcaption>
+    Where the cited moments land. Most are early, but a long tail reaches deep
+    into videos — past anything a title or description would surface.
+  </figcaption>
+</figure>
+
+— this is consistent with Google deriving moments from the video's actual content (its transcript or automatic key-moment detection), not from metadata that Gemini, ChatGPT, and Perplexity could read just as easily. That asymmetry is the most interesting thing in the data: the four surfaces that *don't* deep-link aren't missing chapter markers they could have copied; they appear not to have the temporal signal at all.
+
+## What we can and cannot claim
+
+This is an observational study, and it was conditioned on Google having already cited each video. That shapes what the numbers mean.
+
+- **We measured the *form* of a citation, not whether it happens.** Every result about duration, subscribers, and views describes videos Google *already chose to cite*. We cannot say chapters or length help a video *get* cited — only that, among the cited, they predict getting the moment treatment. In particular, the "smaller channels get moment-cited more" result is a statement about moment-vs-plain within Google's citations, not a claim that small channels win more citations overall.
+- **Absence of timestamps is not proof of incapability.** Gemini, ChatGPT, and Perplexity emit no moment citations in our data. That means they do not *surface* moments to users; it does not prove their underlying models cannot locate one. We are describing product behavior, not model limits.
+- **"Consistent with transcript access" is not "Google reads the transcript."** The 8.4% chapter-match rate rules out *chapters* as the main source. It is consistent with transcript- or content-derived moments, but Google Search's key-moments feature could itself be built on either, and we cannot see inside it. We report what the data can exclude, not a mechanism it can't.
+- **Metrics are point-in-time snapshots.** Subscriber and view counts were captured at enrichment, sometimes after the citation. They move slowly relative to the effects here, but the timing is imperfect.
+
+What we *can* say plainly: Google AI Overviews deep-links to specific moments in YouTube videos, no other major AI surface does, the moments favor long videos and smaller channels, and they are overwhelmingly not copied from creator chapter markers.
+
+## What this means if you make or place video
+
+If getting *into* an AI answer is the first battle, being cited at the *right moment* is the next one — and today only one surface fights it. A few practical reads, with the caveat that these follow from an observational study, not a controlled test:
+
+- **Length is not the enemy for AI video visibility that it is for human attention.** The long, thorough video is exactly what gets deep-linked. If your goal is to be the source an AI answer points *into*, a comprehensive video with a genuinely useful middle beats a tight clip.
+- **You do not need to be the biggest channel.** Google's moment links reach into smaller creators' videos at least as readily as large ones. Depth and relevance appear to matter more than audience for this particular prize.
+- **Chapters are good hygiene but not the lever.** They didn't clearly move the needle once length was accounted for, and Google mostly isn't citing the moments you'd mark anyway. Making the *content* clear and well-structured second by second is more likely to matter than the markers in your description.
+
+## Data and reproducibility
+
+- **Dataset:** [YouTube moment citations (derived features)](/datasets/001-youtube-citation-type/youtube-citation-type.csv) (CC BY 4.0) — one row per (response, video) pair, derived features only, no prompts, responses, or customer identifiers. See the [datasheet](/datasets/001-youtube-citation-type/youtube-citation-type.datasheet.md) for the column dictionary.
+- **Pre-registered spec:** [frozen at `b055bb9`](https://github.com/orchestra-code/aeo-experiments/blob/b055bb904dee284b64625c007a1fa5de5492fcdb/experiments/001-youtube-citation-type/spec.md)
+- **Analysis code:** [experiments/001-youtube-citation-type/](https://github.com/orchestra-code/aeo-experiments/tree/main/experiments/001-youtube-citation-type)
+- **Methodology:** how we design and report every study — [research.spyglasses.io/methodology](/methodology)
+
+## Changelog
+
+- 2026-07-13: published.

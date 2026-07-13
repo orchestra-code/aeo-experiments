@@ -51,7 +51,7 @@ def main() -> None:
         COLUMNS,
         PUBLIC,
         Datasheet(
-            title="YouTube citations: inline vs. evaluated (derived features)",
+            title="YouTube moment citations across AI answer surfaces (derived features)",
             dataset_slug="youtube-citation-type",
             study="001-youtube-citation-type",
             notes=[

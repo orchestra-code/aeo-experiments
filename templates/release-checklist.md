@@ -38,5 +38,5 @@ of the completed checklist lives in `experiments/<slug>/results/`.
 
 ## Sign-off
 
-- Name: ______________  Date: ______________
-- Release gate run: `pipeline/05_release.py` exit 0 on ______________
+- Name: ___Jim Wrubel_______  Date: __12 Jult 2026_____
+- Release gate run: `pipeline/05_release.py` exit 0 on ___12 July 2026______
