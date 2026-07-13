@@ -1,74 +1,86 @@
 ---
 name: brand-og-image
-description: Turn a raw generated image into a branded 1200×630 Spyglasses OpenGraph card — cover-crop to 1200×630 and stamp the gold isotype in the lower-right, output WEBP. Use whenever a blog post (spyglasses repo, apps/web/content/posts) or a research article (aeo-experiments, research.spyglasses.io) needs its `image`/OG header, replacing the manual Canva → convert → rename → add-logo steps. Triggers: "make an OG image", "branded header image", "blog hero image", "open graph card", "add the logo to this image".
+description: Generate and/or brand a 1200×630 Spyglasses OpenGraph card. Writes a prompt from the article's topic, generates abstract art via Replicate, cover-crops to 1200×630, and stamps the gold isotype lower-right → WEBP. Use whenever a blog post (spyglasses repo, apps/web/content/posts) or a research article (aeo-experiments, research.spyglasses.io) needs its `image`/OG header, replacing the manual Replicate → Canva → convert → rename → add-logo steps. Triggers: "make an OG image", "generate the header image", "branded blog hero", "open graph card", "add the logo to this image".
 ---
 
 # Brand OG image
 
-Automates the deterministic half of the Spyglasses article-header workflow: take a source image (usually generated via the Replicate API) and produce the branded 1200×630 card that goes in a post's `image:` frontmatter and on the research site.
+Automates the article-header workflow: from the written post, craft an abstract prompt, generate the art, and produce the branded 1200×630 card that goes in the post's `image:` frontmatter and on the research site. Two entry points: generate-and-brand (one command) or brand-an-existing-image.
 
 ## The house convention
 
 Study the existing cards in `spyglasses/apps/web/public/images/blog/` (e.g. `ai-readiness-validate-seo.webp`). They share:
 
-- **Abstract, no words.** Representative of the topic, not literal. Icons are OK; text is not.
+- **Abstract, no words.** Representative of the topic, not literal. Icons OK; text is not.
 - **Brand palette:** deep blues with copper/gold accents (`#5887DA` blue, `#C95920` copper).
-- **Gold isotype, lower-right.** The brass Spyglasses lens mark, ~74 px on a 1200 px card, inset ~22 px. This tool stamps it for you.
+- **Gold isotype, lower-right.** The tool stamps it (~74 px on a 1200 px card, ~22 px inset).
 - **Exactly 1200×630, WEBP.**
 
-Recommended Replicate prompt shape (the user generates the source; adapt the subject):
+## Writing the prompt
 
-> An abstract image representing &lt;the article's subject&gt;. Blue palette with copper accents. No words are in the image.
+When invoked, read the article and write a prompt in this shape (you fill in the subject):
 
-## Run it
+> An abstract image representing &lt;the article's subject or its key finding&gt;. Blue palette with copper accents. No words are in the image.
 
-The tool lives in the `aeo-experiments` toolkit (uv env with Pillow + cairosvg). Run from that repo root:
+Keep it a single conceptual scene, not a literal illustration. Prefer the study's *idea* (e.g. "AI scanning a video timeline to surface the single best moment") over its charts.
+
+## Path A — generate and brand (default)
+
+Requires a Replicate token. The script reads `REPLICATE_API_TOKEN` from the environment, or from `--env-file` pointing at a dotenv that defines it — the token in the **spyglasses checkout's `.env.local`** works. Generation costs a small Replicate credit.
 
 ```bash
-uv run python scripts/make_og_image.py <SOURCE_IMAGE> <OUTPUT.webp>
+# from the aeo-experiments repo root
+uv run python scripts/generate_og_image.py <DST>.webp \
+  --prompt "An abstract image representing <subject>. Blue palette with copper accents. No words are in the image." \
+  --env-file <path-to-spyglasses>/.env.local \
+  --source-out <keep the raw art here for reproducibility>
 ```
 
-It cover-crops the source to 1200×630 (center, no distortion) and composites the gold isotype lower-right. Default stamp is `site/public/brand/spyglasses_isotype.svg`; override with `--logo`.
+Default model `google/nano-banana-2` at 21:9 (crops cleanly to 1200×630). After it writes the card, **open it and check** it is on-brand, abstract, word-free, and the isotype sits over a calm corner. If not, rerun (image gen varies) or adjust the prompt.
+
+## Path B — brand art you already have
+
+Skip generation; just crop + stamp an existing image:
+
+```bash
+uv run python scripts/make_og_image.py <SOURCE_IMAGE> <DST>.webp
+```
+
+## Wiring the output
 
 ### Blog post (spyglasses repo)
 
-Output straight into the blog images dir, named to match the post slug:
+Name the card by post slug and set both `<slug>.mdx` and `<slug>.de.mdx`:
 
 ```bash
-uv run python scripts/make_og_image.py ~/Downloads/raw.png \
-  /Users/jcw/projects/spyglasses/apps/web/public/images/blog/<post-slug>.webp
+uv run python scripts/generate_og_image.py \
+  <path-to-spyglasses>/apps/web/public/images/blog/<post-slug>.webp \
+  --prompt "..." --env-file <path-to-spyglasses>/.env.local
 ```
-
-Then set the post frontmatter (both `<slug>.mdx` and `<slug>.de.mdx`):
-
 ```yaml
 image: /images/blog/<post-slug>.webp
 ```
 
-Do not commit in the spyglasses repo unless the user asks — leave it for review.
+Do not commit in the spyglasses repo unless asked — leave it for review.
 
 ### Research article (aeo-experiments)
 
-Output into the experiment's figures dir, then sync + set `ogImage`:
-
 ```bash
-uv run python scripts/make_og_image.py raw.png \
-  experiments/<slug>/figures/hero-og.webp
+uv run python scripts/generate_og_image.py experiments/<slug>/figures/hero.webp \
+  --prompt "..." --env-file <path-to-spyglasses>/.env.local \
+  --source-out experiments/<slug>/hero-source.jpg
 uv run python scripts/sync_site_assets.py <slug>
 ```
-
-Set the article frontmatter (`site/src/content/articles/<slug>.mdx`):
-
 ```yaml
-ogImage: "/figures/<slug>/hero-og.webp"
+ogImage: "/figures/<slug>/hero.webp"
 ```
 
-`ogImage` becomes the OpenGraph/Twitter image, the `ScholarlyArticle` JSON-LD image, and the header shown on the article page and in the article list. If omitted, the site falls back to `heroFigure` (the lead chart) for OG only.
+`ogImage` becomes the OpenGraph/Twitter image, the `ScholarlyArticle` JSON-LD image, the header on the article page, and the article-list thumbnail. Omit it and the site falls back to `heroFigure` (the lead chart) for OG only.
 
 ## Reuse the same art for both
 
-A study and its companion blog post should share one card. Generate once, write it to both destinations (blog images dir and experiment figures dir), and reference it from both frontmatters.
+A study and its companion blog post should share one card. Generate once with `--source-out`, then run Path B (`make_og_image.py`) on that saved source for the second destination — no second Replicate call.
 
 ## Verify
 
-Open the output; confirm it is 1200×630, the isotype sits cleanly in the lower-right on a busy-but-not-cluttered corner (regenerate the source if the corner is noisy), and no text appears in the art. For research articles, `pnpm build` in `site/` and check the article's `og:image` and the header render.
+Open the output: 1200×630, on-brand, no text, isotype clean in the lower-right. For research articles, `pnpm build` in `site/` and check the article's `og:image` and header render.

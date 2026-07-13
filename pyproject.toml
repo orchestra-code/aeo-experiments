@@ -18,6 +18,7 @@ dev = [
     "pytest>=8.0",
     "ruff>=0.5",
     "cairosvg>=2.7",
+    "replicate>=1.0",
 ]
 
 [build-system]
