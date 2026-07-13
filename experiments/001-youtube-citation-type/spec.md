@@ -1,7 +1,7 @@
 # Who cites YouTube *moments*? Timestamped citations across AI surfaces — study spec
 
 **Status:** frozen (2026-07-12)
-**Frozen commit:** _(recorded in the follow-up commit — see git history)_
+**Frozen commit:** `b055bb904dee284b64625c007a1fa5de5492fcdb`
 **Coverage gate at freeze:** 97.3% of YouTube video pages have video metadata
 (2,600/2,671); 99.4% have embeddings. Gate (≥95%) passed 2026-07-12 after the
 `includeEnriched` backfill run.
