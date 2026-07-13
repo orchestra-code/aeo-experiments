@@ -1,7 +1,10 @@
 # Who cites YouTube *moments*? Timestamped citations across AI surfaces — study spec
 
-**Status:** draft — awaiting video-metadata backfill completion + freeze sign-off
-**Frozen commit:** _(record BEFORE running sql/extract.sql)_
+**Status:** frozen (2026-07-12)
+**Frozen commit:** _(recorded in the follow-up commit — see git history)_
+**Coverage gate at freeze:** 97.3% of YouTube video pages have video metadata
+(2,600/2,671); 99.4% have embeddings. Gate (≥95%) passed 2026-07-12 after the
+`includeEnriched` backfill run.
 **Experiment slug:** `001-youtube-citation-type`
 **Supersedes:** `archive/spec-v1.md` and the v2 draft (see §A below — the
 original inline-vs-evaluated design was killed by pre-freeze counts, exactly
@@ -233,9 +236,8 @@ parameters at 15 events each; comfortable. Confirm achieved CI widths.
 ## 9. Deliverables and sequence
 
 1. ✅ Pre-freeze counts (§A)
-2. **Complete the video-metadata backfill** (main repo Inngest job) → re-run
-   coverage count until ≥95%
-3. Freeze this spec (commit, record hash above)
+2. ✅ Video-metadata backfill complete — coverage 97.3% (gate ≥95%)
+3. ✅ Freeze this spec (commit, record hash above)
 4. `sql/extract.sql` → `data/raw/extract.csv`
 5. `pipeline/01…05` (H3 gate; robustness; figures; release)
 6. Article + dataset + companion blog post
