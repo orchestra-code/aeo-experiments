@@ -135,34 +135,66 @@ def _watermark_image() -> np.ndarray:
     return _watermark_cache
 
 
-def add_watermark(fig: plt.Figure, alpha: float = 0.38, width_frac: float = 0.14) -> None:
-    """Corner logotype in the footer band, lower right, partially transparent."""
+# Watermark: the logotype sits in a dedicated footer band (see _place_footer),
+# never over the plot, so it can't collide with a tall bar or a low line in the
+# lower-right corner.
+WATERMARK_ALPHA = 0.45
+WATERMARK_WIDTH_FRAC = 0.11
+
+
+def _resized_watermark(fig_w_px: float, width_frac: float) -> np.ndarray:
     from PIL import Image
 
     img = _watermark_image()
-    fig_w_px = int(fig.get_figwidth() * fig.dpi)
-    fig_h_px = int(fig.get_figheight() * fig.dpi)
-    target_w = max(1, int(fig_w_px * width_frac))
-    target_h = max(1, int(target_w * img.shape[0] / img.shape[1]))
-
-    pil = Image.fromarray((img * 255).astype(np.uint8), mode="RGBA")
-    pil = pil.resize((target_w, target_h), Image.LANCZOS)
-    resized = np.asarray(pil).astype(float) / 255.0
-
-    margin = int(0.012 * fig_w_px)
-    fig.figimage(
-        resized,
-        xo=fig_w_px - target_w - margin,
-        yo=margin // 2,
-        alpha=alpha,
-        zorder=10,
-        origin="upper",
+    tw = max(1, int(fig_w_px * width_frac))
+    th = max(1, int(tw * img.shape[0] / img.shape[1]))
+    pil = Image.fromarray((img * 255).astype(np.uint8), mode="RGBA").resize(
+        (tw, th), Image.LANCZOS
     )
+    return np.asarray(pil).astype(float) / 255.0
 
 
-def add_caption(fig: plt.Figure, text: str = CAPTION) -> None:
-    """Source line in the footer band, lower left."""
-    fig.text(0.012, 0.012, text, fontsize=9, color=INK_MUTED, ha="left", va="bottom")
+def _place_footer(fig: plt.Figure, *, watermark: bool, caption: bool) -> None:
+    """Reserve a clear footer band and put the caption + watermark inside it.
+
+    The band is sized to the watermark and reserved via tight_layout's rect,
+    so the axes (and their tick/axis labels) are pushed entirely above it. That
+    guarantees the source line and logo never overlap chart content, whatever
+    shape the plot takes.
+    """
+    dpi = fig.dpi
+    fig_w_px = fig.get_figwidth() * dpi
+    fig_h_px = fig.get_figheight() * dpi
+    pad = 0.012 * fig_w_px
+
+    wm = _resized_watermark(fig_w_px, WATERMARK_WIDTH_FRAC) if watermark else None
+    band_px = 0.05 * fig_h_px  # floor: enough for the caption line
+    if wm is not None:
+        band_px = max(band_px, wm.shape[0] + 1.3 * pad)
+    band_frac = band_px / fig_h_px if (watermark or caption) else 0.0
+
+    fig.tight_layout(rect=(0, band_frac, 1, 1))
+
+    if caption:
+        fig.text(
+            pad / fig_w_px,
+            (band_px / 2) / fig_h_px,
+            CAPTION,
+            fontsize=9,
+            color=INK_MUTED,
+            ha="left",
+            va="center",
+        )
+    if wm is not None:
+        wm_h, wm_w = wm.shape[0], wm.shape[1]
+        fig.figimage(
+            wm,
+            xo=int(fig_w_px - wm_w - pad),
+            yo=int((band_px - wm_h) / 2),  # centered in the band
+            alpha=WATERMARK_ALPHA,
+            zorder=10,
+            origin="upper",
+        )
 
 
 def save_figure(
@@ -191,13 +223,7 @@ def save_figure(
     # figimage positions in device pixels, so fix the dpi BEFORE placing the
     # watermark and render both formats at that dpi — layout stays identical.
     fig.set_dpi(png_dpi)
-
-    # Reserve a footer band for caption + watermark.
-    fig.tight_layout(rect=(0, 0.06, 1, 1))
-    if caption:
-        add_caption(fig)
-    if watermark:
-        add_watermark(fig)
+    _place_footer(fig, watermark=watermark, caption=caption)
 
     paths = {
         "svg": outdir / f"{name}.svg",
