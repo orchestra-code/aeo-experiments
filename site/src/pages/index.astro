@@ -26,14 +26,21 @@ const fmt = (d: Date) =>
     {
       articles.map((a) => (
         <li>
-          <a href={`/articles/${a.id}`} class="title">
-            {a.data.title}
-          </a>
-          <p class="muted">{a.data.description}</p>
-          <p class="meta">
-            {fmt(a.data.pubDate)}
-            {a.data.datasets.length > 0 && <span> · dataset included</span>}
-          </p>
+          {a.data.ogImage && (
+            <a href={`/articles/${a.id}`} class="thumb" aria-hidden="true" tabindex="-1">
+              <img src={a.data.ogImage} alt="" width="1200" height="630" loading="lazy" />
+            </a>
+          )}
+          <div class="body">
+            <a href={`/articles/${a.id}`} class="title">
+              {a.data.title}
+            </a>
+            <p class="muted">{a.data.description}</p>
+            <p class="meta">
+              {fmt(a.data.pubDate)}
+              {a.data.datasets.length > 0 && <span> · dataset included</span>}
+            </p>
+          </div>
         </li>
       ))
     }
@@ -53,6 +60,25 @@ const fmt = (d: Date) =>
   .articles li {
     padding: 1.4rem 0;
     border-top: 1px solid var(--line);
+    display: flex;
+    gap: 1.1rem;
+    align-items: start;
+  }
+  .thumb {
+    flex: 0 0 200px;
+    display: block;
+  }
+  .thumb img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1200 / 630;
+    object-fit: cover;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+  }
+  .body {
+    flex: 1;
+    min-width: 0;
   }
   .title {
     font-weight: 600;
@@ -61,6 +87,15 @@ const fmt = (d: Date) =>
   }
   .articles p {
     margin: 0.35rem 0 0;
+  }
+  @media (max-width: 34rem) {
+    .articles li {
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+    .thumb {
+      flex-basis: auto;
+    }
   }
   .meta {
     color: var(--ink-muted);

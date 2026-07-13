@@ -26,7 +26,7 @@ const scholarlyArticle = {
   headline: d.title,
   description: d.description,
   url,
-  image: new URL(d.heroFigure, SITE_URL).href,
+  image: new URL(d.ogImage ?? d.heroFigure, SITE_URL).href,
   datePublished: d.pubDate.toISOString(),
   ...(d.updatedDate && { dateModified: d.updatedDate.toISOString() }),
   author: d.authors.map((a) => ({

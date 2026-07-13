@@ -12,7 +12,11 @@ const articles = defineCollection({
       .array(z.object({ name: z.string(), url: z.string().url().optional() }))
       .min(1),
     experiment: z.string(),
+    // Lead chart — the OG fallback and the JSON-LD image when no ogImage.
     heroFigure: z.string(),
+    // Branded 1200×630 card (see the brand-og-image skill). When set, it is the
+    // OpenGraph/Twitter image and renders as the header on the page and in the list.
+    ogImage: z.string().optional(),
     figures: z.array(z.string()).optional(),
     datasets: z
       .array(
