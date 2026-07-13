@@ -51,9 +51,10 @@ SELECT
   -- description-derived scalars (text itself stays in the DB)
   cp."wordCount"                          AS desc_word_count,
   regexp_count(cp."contentMarkdown", 'https?://')   AS desc_link_count,
+  -- NB: Postgres ARE word boundary is \y — \b means BACKSPACE and matches nothing.
   (
     SELECT string_agg(m[1], '|')
-    FROM regexp_matches(cp."contentMarkdown", '(?:^|\n)\s*[-*•\[]*\s*((?:\d{1,2}:)?\d{1,2}:\d{2})\b', 'g') m
+    FROM regexp_matches(cp."contentMarkdown", '(?:^|\n)\s*[-*•\[]*\s*((?:\d{1,2}:)?\d{1,2}:\d{2})\y', 'g') m
   )                                       AS chapter_times,
 
   -- semantic-similarity control (H4 canary; collider correction)

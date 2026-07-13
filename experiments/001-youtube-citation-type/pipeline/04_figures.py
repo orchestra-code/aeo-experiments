@@ -41,8 +41,9 @@ def timestamp_share_by_platform(rows: pd.DataFrame, og: bool = False) -> dict:
     x = np.arange(len(platforms))
     shares = np.array(shares)
     ax.bar(x, shares, 0.62, color=[PLATFORM_COLORS[p] for p in platforms])
-    ax.errorbar(x, shares, yerr=[shares - np.array(los), np.array(his) - shares],
-                fmt="none", ecolor=INK_MUTED, capsize=3, lw=1.2)
+    # Wilson bounds can straddle the sample share by float epsilon at 0%.
+    yerr = [np.clip(shares - np.array(los), 0, None), np.clip(np.array(his) - shares, 0, None)]
+    ax.errorbar(x, shares, yerr=yerr, fmt="none", ecolor=INK_MUTED, capsize=3, lw=1.2)
     for xi, share, n in zip(x, shares, ns):
         ax.annotate(f"{share:.0%}", (xi, share), textcoords="offset points",
                     xytext=(0, 6), ha="center", fontsize=11, color="#222222")

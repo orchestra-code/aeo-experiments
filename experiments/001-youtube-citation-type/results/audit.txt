@@ -1,0 +1,41 @@
+========================================================================
+AUDIT — experiment 001 (spec §2, moment-citation design)
+========================================================================
+
+Primary frame (AIO inline, unit = execution x video)
+  units                : 5,405
+  moment-cited (t=)    : 2,369 (43.8%)
+  plain citations      : 3,036
+  EFFECTIVE SAMPLE (rarer class): 2,369
+  -> supports ~157 parameters at 15 events each
+
+Audit A — video-metadata completeness (gate: >=95% before freeze)
+  duration_seconds    :  99.3% covered
+  video_has_captions  :  99.3% covered
+  video_category      :  99.3% covered
+  video_view_count    :  99.3% covered
+  audience_size       :  99.9% covered
+  reactions_count     :  97.5% covered
+  similarity           :  90.4% covered (null = page never fetched)
+
+Audit B — outcome integrity
+  timestamps > duration : 0 of 2,345 checkable (0.00%) — robustness #7 excludes these
+  non-AIO rows with timestamps : 0 (spec §A expects 0)
+
+Audit C — independence
+  distinct videos      : 1,978
+  repeat appearances   : 3,427 (63.4%) -> two-way clustering
+  executions           : 5,404; multi-video executions: 0.0%
+
+Audit D — snapshot timing: engagement/audience metrics are
+  enrichment-time snapshots; noted as an article limitation.
+
+Cross-platform (descriptive companion, from citations.csv)
+                          count                                         sum                               
+citation_type      CITED_INLINE EVALUATED_SOURCE SEARCH_RESULT CITED_INLINE EVALUATED_SOURCE SEARCH_RESULT
+platform                                                                                                  
+claude                        0                8             0            0                0             0
+gemini                      282               28             0            0                0             0
+google_ai_overview         5405                0             0         2369                0             0
+openai                        9                5            46            0                0             0
+perplexity                  280                0             0            0                0             0

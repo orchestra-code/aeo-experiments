@@ -242,6 +242,16 @@ parameters at 15 events each; comfortable. Confirm achieved CI widths.
 5. `pipeline/01…05` (H3 gate; robustness; figures; release)
 6. Article + dataset + companion blog post
 
+## Deviations from the frozen spec
+
+- **2026-07-12 — extraction bug fix (no design change):** the chapter-marker
+  regex in `sql/extract.sql` used `\b`, which PostgreSQL's ARE dialect reads
+  as a literal backspace (word boundary is `\y`), so `chapter_times` came
+  back empty for every row. Discovered when H1's design matrix was singular
+  (has_chapters constant at 0). Fixed to `\y`; `chapter_times` re-derived
+  for the same frozen extraction sample, keyed by page. Hypotheses, model,
+  and decision rules untouched.
+
 ## 10. Notes for the write-up
 
 - Lead: the platform table — one surface cites moments, four don't.

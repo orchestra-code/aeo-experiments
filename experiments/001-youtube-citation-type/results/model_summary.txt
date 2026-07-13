@@ -1,0 +1,54 @@
+========================================================================
+MODELS — n = 4,886 AIO video citations evaluated in this study
+Outcome: moment_cited (43.8% of units)
+SESOI: OR in [0.909, 1.100] per SD; 90% CIs
+Two-way cluster-robust SEs (execution, video); one focal per model (§5a)
+========================================================================
+
+[H3] POSITIVE CONTROL — log10 duration (n = 4,854)
+  OR = 2.136 [1.858, 2.456]  p = 3.90e-19
+  PASS — the moment-picker sees duration; the data can detect things.
+
+[H1] description has chapters  (n = 4,886)
+  OR = 1.100 [0.797, 1.518]  SE = 0.1956
+  p(nhst) = 0.626  p(TOST) = 0.5003
+  --> INCONCLUSIVE — underpowered, do NOT claim a null
+
+[H2] has captions  (n = 4,854)
+  OR = 1.191 [0.852, 1.665]  SE = 0.2038
+  p(nhst) = 0.392  p(TOST) = 0.6515
+  --> INCONCLUSIVE — underpowered, do NOT claim a null
+
+[H5] log10 channel subscribers (null-form)  (n = 4,886)
+  OR = 0.842 [0.727, 0.975]  SE = 0.0892
+  p(nhst) = 0.054  p(TOST) = 0.8044
+  --> REAL EFFECT — exceeds SESOI
+
+[H6] log10 video views (null-form)  (n = 4,854)
+  OR = 0.773 [0.673, 0.888]  SE = 0.0845
+  p(nhst) = 0.002  p(TOST) = 0.9724
+  --> REAL EFFECT — exceeds SESOI
+
+[H7] video_category (vs 'Other', exploratory):
+  C(category, Treatment('Other'))[T.Education]            OR = 0.760 [0.448, 1.290]
+  C(category, Treatment('Other'))[T.Entertainment]        OR = 1.083 [0.583, 2.010]
+  C(category, Treatment('Other'))[T.Howto & Style]        OR = 0.889 [0.507, 1.558]
+  C(category, Treatment('Other'))[T.News & Politics]      OR = 0.973 [0.524, 1.806]
+  C(category, Treatment('Other'))[T.People & Blogs]       OR = 1.077 [0.616, 1.884]
+  C(category, Treatment('Other'))[T.Science & Technology] OR = 0.778 [0.447, 1.356]
+  C(category, Treatment('Other'))[T.Sports]               OR = 0.805 [0.373, 1.736]
+  C(category, Treatment('Other'))[T.Travel & Events]      OR = 1.035 [0.245, 4.370]
+
+[H4] PLACEBO — publish day-of-week: OR = 1.031  p = 0.715
+  PASS — placebo null.
+
+corr(log_subs, log_views) = 0.456  VIFs = log_subs=1.3, log_views=1.3
+
+[H8] cited timestamps matching a description chapter (±5 s): 8.4%
+  (high -> chapter-sourced; low -> transcript/visual-derived key moments)
+
+ROBUSTNESS
+  #5 dedup (one row/video, n=1,614): H5 OR = 0.809 [0.735, 0.891] -> REAL EFFECT — exceeds SESOI
+  #6 metadata coverage: 4,854/4,886 units have duration; moment-rate with metadata = 0.436 vs without = 0.688
+  #8 first half (n=2,443): H1 OR = 1.223 [0.789, 1.895] -> INCONCLUSIVE — underpowered, do NOT claim a null
+  #8 second half (n=2,443): H1 OR = 0.960 [0.672, 1.370] -> INCONCLUSIVE — underpowered, do NOT claim a null
