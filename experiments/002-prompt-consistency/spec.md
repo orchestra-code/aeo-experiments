@@ -1,7 +1,7 @@
 # Prompt phrasing barely changes what ChatGPT recommends — and barely changes how it searches — study spec
 
-**Status:** draft
-**Frozen commit:** <record before wave 1 submits>
+**Status:** frozen (2026-07-16, before wave-1 submission)
+**Frozen commit:** 2ee335a (spec + pipeline + toolkit, this repo)
 **Experiment slug:** `002-prompt-consistency`
 
 > Freeze rule: everything in §4 (hypotheses) and §5 (model + decision rule) is
