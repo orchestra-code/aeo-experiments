@@ -271,4 +271,10 @@ is extreme (the INCONCLUSIVE row protects us there).
 
 ## Deviations from the frozen spec
 
-_None yet._
+- **2026-07-16 (wave 1):** survey row 54 (items h054/c054, the same
+  respondent in both intents — a 2,341/2,259-char "mega-prompt") was rejected
+  by DataForSEO's task_post with `40501 Invalid Field: 'keyword'` (keyword
+  length limit; the longest accepted prompt was 1,982 chars). Excluded from
+  the study rather than truncated — truncation would alter the respondent's
+  phrasing. Effective n = 143 prompts per intent. Both arms lose the same
+  row, so the cross-intent contrast stays symmetric.
