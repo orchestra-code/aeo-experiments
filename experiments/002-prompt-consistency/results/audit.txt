@@ -1,0 +1,63 @@
+# Experiment 002 — data-quality audits
+
+## Audit A — collection completeness and degenerate responses
+
+Ledger status counts:
+intent      wave  status   
+coffee      1     collected    143
+headphones  1     collected    143
+
+Degenerate-response rates (mean per intent/wave):
+                 empty_reply  no_brands  no_fanout  no_sources  had_web_search
+intent     wave                                                               
+coffee     1             0.0      0.231        0.0       0.042             1.0
+headphones 1             0.0      0.049        0.0       0.070             1.0
+
+Empty fan-out rate overall: {'coffee': 0.0, 'headphones': 0.0} (spec §6: if >0.30 for headphones, H2 grounding claims are INCONCLUSIVE territory)
+
+## Audit B — outcome-label meaning
+
+- 'brand recommended' = canonical brand whose alias matches the cleaned answer
+  markdown (URLs stripped, word-boundary, longest-alias-first) — brands.py::extract_brands.
+- 'domain cited' = registered domain of a normalized URL in result.sources[]
+  (search_results[] are SERP extras and are EXCLUDED) — 01_features.py.
+- 'grounding tokens' = stopword-filtered token union over result.fan_out_queries
+  — aeo_research.overlap.token_set.
+
+## Audit C — independence and clustering
+
+{'coffee': 144, 'headphones': 144} prompts; duplicate-text groups: {'headphones': 4} (['h011', 'h044', 'h101', 'h111'])
+Pair counts by condition (each response participates in many pairs — all
+inference is prompt-level cluster bootstrap, never pair-level SEs):
+condition
+cross_intent      20449
+between_prompt    10153
+
+## Audit D — extraction validity and drift
+
+Model version by intent/wave:
+intent      wave  model  
+coffee      1     gpt-5-5    143
+headphones  1     gpt-5-5    143
+
+Share of headphone responses mentioning each brand (SparkToro anchor: their
+top brands appeared in 55-77% of responses):
+sony                0.909
+bose                0.825
+sennheiser          0.769
+anker               0.636
+apple               0.524
+jbl                 0.154
+bowers & wilkins    0.049
+technics            0.028
+samsung             0.028
+focal               0.028
+1more               0.021
+edifier             0.014
+
+Entity cross-check: 59/143 responses carry DataForSEO
+brand/product entities; extractor recovers 1.000 of entity-derived brands on average.
+
+Spot-check sample of 30 responses written to /Users/jcw/projects/aeo-experiments/experiments/002-prompt-consistency/data/interim/spotcheck_sample.md (gitignored).
+Manually list recommended brands per response; require precision >= 0.95 and
+recall >= 0.90 vs the extractor, else refine the lexicon (log in Deviations).

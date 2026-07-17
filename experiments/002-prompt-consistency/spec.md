@@ -278,3 +278,14 @@ is extreme (the INCONCLUSIVE row protects us there).
   the study rather than truncated — truncation would alter the respondent's
   phrasing. Effective n = 143 prompts per intent. Both arms lose the same
   row, so the cross-intent contrast stays symmetric.
+- **2026-07-16 (wave 1):** the H_pos gate was run EARLY, on wave-1 data only
+  (Δ = 0.313 [0.266, 0.364], perm p = 0.0002, PASS), to avoid spending six
+  more collection days on a broken pipeline. Exactly the frozen test, frozen
+  code, no other hypothesis was computed early (H1/H2 need within-prompt
+  pairs, which require ≥2 waves). The gate will re-run in its pre-registered
+  position after wave 7.
+- **2026-07-16 (wave 1):** coffee-arm lexicon curated from wave-1 candidate
+  mining per the §2/Audit D plan (69 agencies; dribbble/behance dropped —
+  portfolio platforms, not agencies). Headphone seed lexicon unchanged by
+  mining. Zero-brand rates after curation: headphones 4.9%, coffee 23.1%
+  (clarifying-question answers — valid rows, empty sets per the NaN policy).

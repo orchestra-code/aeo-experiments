@@ -89,9 +89,13 @@ def build_real() -> pd.DataFrame:
     ledger = Ledger(LEDGER)
     frame = ledger.frame()
     collected = frame[frame["status"] == "collected"]
+    repo_root = Path(__file__).resolve().parents[3]
     rows = []
     for r in collected.itertuples():
-        result = json.loads(Path(r.result_path).read_text())
+        path = Path(r.result_path)
+        if not path.is_absolute():
+            path = repo_root / path
+        result = json.loads(path.read_text())
         rows.append(
             {
                 "task_id": r.task_id,

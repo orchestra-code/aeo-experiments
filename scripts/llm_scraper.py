@@ -141,7 +141,7 @@ def collect_once(a: argparse.Namespace, ledger: Ledger, api_key: str) -> int:
             "cost": row.cost,
         }
         if outcome.state == "done":
-            wave_dir = out_dir / f"w{row.wave}"
+            wave_dir = out_dir.resolve() / f"w{row.wave}"
             wave_dir.mkdir(parents=True, exist_ok=True)
             result_path = wave_dir / f"{row.task_id}.json"
             result_path.write_text(json.dumps(outcome.result, indent=1))
