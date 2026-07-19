@@ -73,7 +73,14 @@ def ledger_state() -> tuple[int, bool, bool]:
     max_wave = int(hp["wave"].max())
     latest = hp[hp["wave"] == max_wave]
     today = date.today().isoformat()
-    submitted_today = latest["submitted_at"].astype(str).str[:10].eq(today).any()
+
+    def local_date(iso: str) -> str:
+        # submitted_at is UTC; an 8pm ET submission has tomorrow's UTC date,
+        # so compare calendar days in LOCAL time or every nightly run
+        # concludes "already submitted today" and skips its wave.
+        return datetime.fromisoformat(iso).astimezone().date().isoformat()
+
+    submitted_today = latest["submitted_at"].astype(str).map(local_date).eq(today).any()
     # "Complete" = nothing pending; failed rows are resubmittable next day.
     complete = not (latest["status"] == "submitted").any()
     return max_wave, submitted_today, complete

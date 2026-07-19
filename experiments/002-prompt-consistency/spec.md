@@ -289,3 +289,11 @@ is extreme (the INCONCLUSIVE row protects us there).
   portfolio platforms, not agencies). Headphone seed lexicon unchanged by
   mining. Zero-brand rates after curation: headphones 4.9%, coffee 23.1%
   (clarifying-question answers — valid rows, empty sets per the NaN policy).
+- **2026-07-18 (wave 3):** the automated wave driver skipped its 20:00 ET
+  slot due to a UTC-vs-local calendar-day comparison bug (a wave submitted at
+  20:00 ET carries the next day's UTC date, so the driver judged it "already
+  submitted today"). Caught the same evening; wave 3 was submitted at 20:57
+  ET after the fix (`run_wave.py`, commit noted in git history). Wave spacing
+  is therefore 24h55m between waves 2→3 instead of 24h00m; run_date and
+  `.model` are recorded per response and the R5 day-drift robustness check is
+  unaffected. No data was lost and no wave ran twice.
