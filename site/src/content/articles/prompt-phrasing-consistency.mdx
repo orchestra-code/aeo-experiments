@@ -150,6 +150,30 @@ Honesty about the hollow dots matters as much as the filled ones: mentioning noi
 
 Why this matters: "phrasing matters" sounds like bad news you can't act on — you can't survey every customer's inner monologue. Sub-intent is different. Budget-framed, recipient-framed, use-case-framed queries are *enumerable segments* with their own leaderboards, and a brand can know exactly which segments include it and which shut it out.
 
+### Does sub-intent reach the retrieval layer?
+
+If sub-intents really are separate markets, they shouldn't just produce different *answers* — prompts sharing a sub-intent should also converge in the layer underneath: the grounding searches ChatGPT runs and the domains it cites. We checked, by splitting same-day between-prompt pairs on each attribute (both have it / one does / neither does). The answer is yes, with a mechanism split we didn't anticipate.
+
+<figure>
+  <img
+    src="/figures/002-prompt-consistency/subintent-retrieval.svg"
+    alt="Two grouped bar panels of pairwise Jaccard overlap for recommended brands, grounding searches, and cited domains. Left panel, travel context: pairs where both prompts mention it overlap most at every layer. Right panel, dollar budget: pairs where both prompts state a budget overlap least on brands, while pairs where neither states one overlap most."
+    width="2200"
+    height="1000"
+  />
+  <figcaption>
+    Same-day between-prompt pairs split by shared attribute. Travel framing
+    (left) converges at every layer; a stated dollar budget (right)
+    fragments, because different budgets are different markets. Exploratory.
+  </figcaption>
+</figure>
+
+**Frame attributes converge — retrieval included.** Two travel-framed prompts share more grounding-search tokens than travel/non-travel pairs (0.29 vs 0.16, Δ = +0.134 [+0.100, +0.170]), more cited domains (+0.093 [+0.047, +0.139]), and more brands (+0.110 [+0.039, +0.193]). Music framing converges on brands and domains too. Noise-cancelling is the neat edge case: ANC prompts run detectably more-similar *searches* (+0.056 [+0.012, +0.106]) yet end at indistinguishable brand sets — the retrieval funnel narrows and then lands on the same review pages everyone else gets, which is exactly what "table stakes" should look like in the data.
+
+**Valued attributes fragment.** Budget, recipient, and form-factor pairs run the *opposite* direction: two budget-stating prompts overlap less on brands (0.37) than two budget-free prompts (0.58). The resolution is that the flag isn't the sub-intent — the *value* is. Among budget prompts with a parseable amount (23 of 24, ranging 50–500 dollars), pairs in the same price bucket overlap at 0.45 versus 0.29 for pairs in different buckets (Δ = +0.167 [+0.055, +0.294]). A $100 prompt and a $400 prompt aren't one "budget segment"; they're two different markets. Attribute-free prompts, meanwhile, collapse onto the shared default answer — which is why "neither" pairs post the highest brand overlap in the whole analysis.
+
+For a brand, this sharpens the segment picture from Result 3: the citation pool and grounding behavior aren't just intent-level facts, they're *sub-intent-level* facts. A travel-framed query and a budget-capped query reach into measurably different search-and-source funnels before a single brand is named. Same caveats as everything in this section: post-hoc, small slices, no multiplicity correction.
+
 ## The pulse model: how to measure without fooling yourself
 
 The practical question underneath SparkToro's study — and underneath every AI-visibility tool, ours included — is a sampling problem: **what can a finite prompt panel tell you about your brand's true presence?** Our grid (143 phrasings × 7 days) lets us answer by simulation: draw a panel of k phrasings, run it for d days, and see how far its estimate lands from the whole-grid truth.
@@ -222,3 +246,4 @@ This study exists because **SparkToro (Rand Fishkin)** designed the original sur
 
 - 2026-07-23: published.
 - 2026-07-23: clarified SparkToro publication date (January 2026); watermarked the pulse-model illustration.
+- 2026-07-23: added exploratory retrieval-layer analysis of sub-intents (frames converge, valued attributes fragment).
