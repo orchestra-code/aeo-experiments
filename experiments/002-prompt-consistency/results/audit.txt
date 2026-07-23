@@ -6,14 +6,26 @@ Ledger status counts:
 intent      wave  status   
 coffee      1     collected    143
 headphones  1     collected    143
+            2     collected    143
+            3     collected    143
+            4     collected    143
+            5     collected    143
+            6     collected    143
+            7     collected    143
 
 Degenerate-response rates (mean per intent/wave):
                  empty_reply  no_brands  no_fanout  no_sources  had_web_search
 intent     wave                                                               
-coffee     1             0.0      0.231        0.0       0.042             1.0
-headphones 1             0.0      0.049        0.0       0.070             1.0
+coffee     1             0.0      0.231      0.000       0.042           1.000
+headphones 1             0.0      0.049      0.000       0.070           1.000
+           2             0.0      0.049      0.000       0.105           1.000
+           3             0.0      0.049      0.000       0.056           1.000
+           4             0.0      0.049      0.000       0.063           1.000
+           5             0.0      0.056      0.000       0.091           1.000
+           6             0.0      0.049      0.000       0.056           1.000
+           7             0.0      0.070      0.517       0.084           0.951
 
-Empty fan-out rate overall: {'coffee': 0.0, 'headphones': 0.0} (spec §6: if >0.30 for headphones, H2 grounding claims are INCONCLUSIVE territory)
+Empty fan-out rate overall: {'coffee': 0.0, 'headphones': 0.074} (spec §6: if >0.30 for headphones, H2 grounding claims are INCONCLUSIVE territory)
 
 ## Audit B — outcome-label meaning
 
@@ -30,8 +42,9 @@ Empty fan-out rate overall: {'coffee': 0.0, 'headphones': 0.0} (spec §6: if >0.
 Pair counts by condition (each response participates in many pairs — all
 inference is prompt-level cluster bootstrap, never pair-level SEs):
 condition
+between_prompt    71071
 cross_intent      20449
-between_prompt    10153
+within_prompt      3003
 
 ## Audit D — extraction validity and drift
 
@@ -39,23 +52,29 @@ Model version by intent/wave:
 intent      wave  model  
 coffee      1     gpt-5-5    143
 headphones  1     gpt-5-5    143
+            2     gpt-5-5    143
+            3     gpt-5-5    143
+            4     gpt-5-5    143
+            5     gpt-5-5    143
+            6     gpt-5-5    143
+            7     gpt-5-5     69
 
 Share of headphone responses mentioning each brand (SparkToro anchor: their
 top brands appeared in 55-77% of responses):
-sony                0.909
-bose                0.825
-sennheiser          0.769
-anker               0.636
-apple               0.524
-jbl                 0.154
-bowers & wilkins    0.049
-technics            0.028
-samsung             0.028
+sony                0.897
+bose                0.820
+sennheiser          0.802
+anker               0.683
+apple               0.448
+jbl                 0.167
+bowers & wilkins    0.042
+technics            0.030
+samsung             0.030
 focal               0.028
-1more               0.021
-edifier             0.014
+sonos               0.027
+edifier             0.026
 
-Entity cross-check: 59/143 responses carry DataForSEO
+Entity cross-check: 250/1001 responses carry DataForSEO
 brand/product entities; extractor recovers 1.000 of entity-derived brands on average.
 
 Spot-check sample of 30 responses written to /Users/jcw/projects/aeo-experiments/experiments/002-prompt-consistency/data/interim/spotcheck_sample.md (gitignored).

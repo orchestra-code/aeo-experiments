@@ -117,11 +117,11 @@ def main() -> None:
     f1_brand_share(hp)
     ecdf_by_condition(
         pairs, "brands",
-        "Brand overlap: rephrasing barely matters", "brand-jaccard-ecdf",
+        "Rewording a prompt costs real brand overlap", "brand-jaccard-ecdf",
     )
     ecdf_by_condition(
         pairs, "domains",
-        "Cited-source overlap: the retrieval layer is stable", "domain-jaccard-ecdf",
+        "Cited sources shift when the prompt is reworded", "domain-jaccard-ecdf",
     )
     f4_domain_concentration(hp)
     f5_stability(df, pairs)

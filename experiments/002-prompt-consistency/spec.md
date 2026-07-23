@@ -289,6 +289,23 @@ is extreme (the INCONCLUSIVE row protects us there).
   portfolio platforms, not agencies). Headphone seed lexicon unchanged by
   mining. Zero-brand rates after curation: headphones 4.9%, coffee 23.1%
   (clarifying-question answers — valid rows, empty sets per the NaN policy).
+- **2026-07-23 (wave 7 / analysis):** 74 of 143 wave-7 responses came back
+  from DataForSEO with `result.model = null` and `fan_out_queries = null`
+  (answer markdown, sources, and brand content intact — a scraper metadata
+  gap on the final night's batch, not observable model drift). Consequences:
+  (i) overall empty-fanout rate 7.4%, under the 30% Audit-A gate, so H2g
+  proceeded; the affected rows enter grounding pairs as NaN per the frozen
+  policy, and R4 (non-empty fan-outs only) is the clean refit. (ii) R6's
+  trigger (`model.nunique() > 1`) did NOT fire because null models are
+  dropped, not distinct — every response with a recorded model was
+  `gpt-5-5`, so no subgroup refit was needed; noted here because the R6
+  code path treats "missing tag" as "same model". Reported in audit.txt.
+- **2026-07-23 (analysis):** the two ECDF figure titles written before
+  collection asserted the expected null ("rephrasing barely matters", "the
+  retrieval layer is stable"). The pre-registered tests returned REAL on
+  H1/H2d/H2g, so the titles were rewritten to state the observed effect.
+  Figure titles are presentation, not part of the frozen §4/§5; logged for
+  transparency. No hypothesis, metric, SESOI, or decision rule was changed.
 - **2026-07-18 (wave 3):** the automated wave driver skipped its 20:00 ET
   slot due to a UTC-vs-local calendar-day comparison bug (a wave submitted at
   20:00 ET carries the next day's UTC date, so the driver judged it "already
