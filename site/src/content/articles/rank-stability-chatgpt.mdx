@@ -1,0 +1,114 @@
+---
+title: "A reader asked if 'rank is unstable' was measured or folklore. So we measured it."
+description: "Follow-up to our SparkToro replication: the first public coefficient on AI recommendation rank stability. Across 1,001 ChatGPT runs, the order of recommended brands agrees at Kendall's tau 0.64 when the same prompt is re-run and 0.36 across different phrasings — and nearly half of same-prompt pairs return shared brands in exactly the same order. The 'rank chaos' folklore mostly isn't about rank."
+pubDate: 2026-07-24
+authors:
+  - name: "Spyglasses Research"
+    url: "https://spyglasses.io"
+experiment: "002-prompt-consistency"
+heroFigure: "/figures/002-prompt-consistency/rank-tau-ecdf.png"
+ogImage: "/figures/002-prompt-consistency/hero-rank.webp"
+datasets:
+  - title: "Prompt-phrasing consistency of ChatGPT recommendations (derived features)"
+    path: "/datasets/002-prompt-consistency/prompt-consistency-chatgpt.csv"
+    license: "CC BY 4.0"
+    rows: 1144
+tags: ["chatgpt", "rank-stability", "brand-visibility", "consistency", "methodology", "follow-up"]
+draft: true
+---
+
+## Key findings
+
+- **Order, conditional on membership, is not chaos.** When the same prompt is re-run on different days, the brands both answers share appear in the same relative order at a mean Kendall's tau of **+0.64** [+0.62, +0.67] — and in 46% of pairs, in *exactly* the same order. Full reversals occur in under 1% of pairs.
+- **Even across differently-worded prompts, order agreement stays well above zero**: mean tau **+0.36** [+0.31, +0.41], with 31% of pairs in perfect agreement.
+- **The top slot is the exception — rewording resets it to a coin flip.** Two runs of the same prompt open with the same brand 68% of the time; two differently-worded prompts agree only 40% of the time, which is *exactly* the chance rate implied by the market's first-mention mix (39.9%, driven by one brand opening 60% of answers).
+- **This is, to our knowledge, the first public coefficient on AI recommendation rank stability.** Prior evidence — including the SparkToro study ours extends — mixed platforms and single runs, where set churn and platform differences dominate whatever rank is doing.
+
+## Why we measured this
+
+After we published [our prompt-phrasing study](/articles/prompt-phrasing-consistency), a reader asked a question we couldn't answer with a number: when we said brand *rank* in AI answers isn't stable, was that a computed statistic or an eyeball read?
+
+It was an eyeball read — inherited, honestly, from the January 2026 [SparkToro study](https://sparktoro.com/blog/new-research-ais-are-highly-inconsistent-when-recommending-brands-or-products-marketers-should-take-care-when-tracking-ai-visibility/) our experiment replicated and extended. Their data showed ordering bouncing around freely. But their design ran each prompt once across seven different platforms, which means observed rank variation bundled together three things: genuine rank instability, brands entering and leaving the answer entirely (set churn), and platform-to-platform differences. Our replication data — one platform, 143 phrasings, each run daily for a week — can separate them. The reader was right that nobody had published the number, and right that this dataset could produce it. Everything below is a post-hoc analysis of the [frozen experiment 002 data](https://github.com/orchestra-code/aeo-experiments/tree/main/experiments/002-prompt-consistency), labeled exploratory throughout.
+
+## Methods in brief
+
+"Rank" here means the order in which brands are first mentioned in the answer text — a proxy, since ChatGPT's answers are prose and only sometimes explicit rankings. For every pair of runs (1,001 headphone runs evaluated in this study), we computed Kendall's tau over the brands *both* answers contain, requiring at least three shared brands. That makes the statistic order-only and conditional on membership: the churn of brands in and out of answers — which our main study already quantified with set overlap — is deliberately excluded, so tau answers the reader's actual question. Pairs are compared within-prompt (same prompt, different days; 82% have 3+ shared brands) and between-prompt (different phrasings, same day; 70% qualify). Confidence intervals come from the same prompt-level cluster bootstrap as the main study.
+
+Kendall's tau runs from +1 (identical order) through 0 (no association) to −1 (exactly reversed). For context, tau on three shared items can only take four values, so the averages below are coarse-grained per pair and stable in aggregate.
+
+## Result 1: order is sticky — very sticky for the same prompt
+
+<figure>
+  <img
+    src="/figures/002-prompt-consistency/rank-tau-ecdf.svg"
+    alt="ECDF curves of pairwise Kendall's tau for two conditions. Same-prompt repeated-run pairs concentrate at high positive tau with 46% at exactly 1. Different-prompt same-intent pairs sit lower but still mostly positive, with 31% at exactly 1."
+    width="1900"
+    height="1040"
+  />
+  <figcaption>
+    Distribution of pairwise order agreement (Kendall's tau over shared
+    brands, 3+ required). A large mass sits at tau = 1 — identical ordering —
+    in both conditions. Exploratory.
+  </figcaption>
+</figure>
+
+Re-run the same prompt on different days and the shared brands come back in the same relative order far more often than not: mean tau +0.644 [+0.615, +0.673], perfect agreement in 46.2% of pairs, order-reversals in 0.9%. Only 12% of pairs show zero or negative association. For a statistic the folklore says is noise, that is a lot of signal.
+
+Across differently-worded prompts the agreement drops but doesn't collapse: mean tau +0.358 [+0.311, +0.410], with 31.2% of pairs still in perfect agreement. Rewording the question costs about as much ordering agreement as it costs set membership — but in neither case does it approach randomness.
+
+The mechanism is no mystery in hindsight: the order of first mention tracks the same popularity gradient that drives membership. Sony doesn't just appear in 90% of answers; it *opens* 60% of them. Order inherits stability from the market structure the answers reflect.
+
+## Result 2: the top slot is the genuinely unstable part
+
+<figure>
+  <img
+    src="/figures/002-prompt-consistency/top-slot-agreement.svg"
+    alt="Bar chart of the share of pairs agreeing on the first-mentioned brand: 68% for same-prompt repeated runs, 40% for different prompts with the same intent, with a dashed chance line at 40%."
+    width="1400"
+    height="960"
+  />
+  <figcaption>
+    Agreement on which brand is mentioned first. The dashed line is the
+    chance rate implied by the overall first-brand mix. Between-prompt
+    agreement lands exactly on it. Exploratory.
+  </figcaption>
+</figure>
+
+Whether two answers *open* with the same brand is a different story, and it's where the instability intuition survives. The same prompt re-run keeps its opener 68.3% of the time [65.4%, 71.1%] — far above chance. But two differently-worded prompts agree on the opener 39.7% of the time [36.0%, 43.7%], and the chance baseline computed from the empirical first-brand mix is 39.9%. The match is almost embarrassing: with respect to the lead position, rewording the prompt is statistically indistinguishable from drawing an opener at random from the market-share-weighted deck.
+
+So if your interest is "who gets mentioned first," phrasing genuinely scrambles it. If your interest is "does the ordering of the list mean anything," it does — and it means the same thing across phrasings much more often than chance.
+
+## What this refines about the folklore
+
+The "AI rank is chaos" impression comes from real observations, but our decomposition suggests it was mostly measuring other things:
+
+1. **Set churn, not rank churn.** Brands entering and leaving the answer (our main study's headline effect) destroys apparent rankings without any reordering of what remains. Tau conditions that away and finds order beneath the churn.
+2. **Platform mixing.** Single runs spread across seven platforms — the original study's design, appropriate for its question — can't distinguish rank instability from platforms simply ordering brands differently. On one platform, held constant, order is moderately-to-strongly conserved.
+3. **The top slot really is unstable across phrasings** — at exactly chance — and the top slot is what most people look at. The most salient rank position is the least stable one, which is exactly the recipe for a folklore of chaos built on accurate glimpses.
+
+To be clear about the relationship to SparkToro's work: their conclusion was sound at their design's scope, and their study is the reason this dataset exists. This result doesn't overturn it; it decomposes it, on one platform, into a stable component (relative order among shared brands) and an unstable one (lead position across phrasings).
+
+## What we can and cannot claim
+
+- **Everything here is post-hoc and exploratory** — computed after publication, in response to a reader question, with no pre-registration and no multiplicity correction. The CIs are honest but the hypothesis was chosen after seeing the main results.
+- **First-mention order is a proxy for rank.** Answers are prose; "mentioned earlier" is not always "recommended more strongly," though in list-style answers they usually coincide. We did not parse explicit numbered rankings separately.
+- **Tau is conditional on shared membership (3+ brands).** It says nothing about the brands that churned out of the pair — that's the main study's territory. The two statistics are complements, not substitutes; use both.
+- **Same scope as the parent study:** one intent (headphones as a travel gift), ChatGPT via DataForSEO's scraper (anonymous, free-tier, no personalization), en-US, one week, web search forced. The chance-baseline result depends on this market's concentration; a category with a less dominant opener would have a lower chance rate.
+- **"First public coefficient" is a claim about our awareness**, not a literature review. If someone has published a rank-stability coefficient for AI recommendations, we'd genuinely like to see it and will link it here.
+
+## What this means if you track a brand
+
+- **Read ordered AI answers as meaningful, but read the top slot as weather.** The middle of the ordering carries real signal about how the model sorts the market. The lead position, across the phrasings your customers actually use, is close to a market-share-weighted coin flip.
+- **"We dropped from #1 to #3" is usually not news.** Unless it's the same prompt, same platform, and it persists across runs, a lead-slot change is consistent with pure phrasing noise. A brand *leaving the set* is news — that's the stable layer changing.
+- **Rank-tracking dashboards inherit both properties.** Averaged over a diverse panel, mean position is informative; any single prompt's #1 is not. This is the same variety-over-repetition logic as the parent study's pulse model, applied one level down.
+
+## Data and reproducibility
+
+- **Dataset:** the same [derived-features dataset](/datasets/002-prompt-consistency/prompt-consistency-chatgpt.csv) (CC BY 4.0) as the parent study — the `brands_recommended` column preserves first-mention order, so every number here is recomputable from the public file.
+- **Analysis code:** [`94_exploratory_rank_stability.py`](https://github.com/orchestra-code/aeo-experiments/blob/main/experiments/002-prompt-consistency/pipeline/94_exploratory_rank_stability.py) in the experiment 002 pipeline (the `9x` series is labeled exploratory, outside the frozen `00`–`05` chain).
+- **Parent study:** [We pre-registered "prompt phrasing barely matters." ChatGPT proved us wrong.](/articles/prompt-phrasing-consistency) — pre-registered spec, decision rules, and the membership-level results this analysis conditions on.
+- **Methodology:** [research.spyglasses.io/methodology](/methodology)
+
+## Changelog
+
+- 2026-07-24: draft.
