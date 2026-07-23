@@ -1,0 +1,1145 @@
+item_code,intent_class,wave,run_date,model_version,n_brands_recommended,brands_recommended,top_brand,n_domains_cited,domains_cited,n_grounding_searches,had_web_search,reply_word_count
+item_0001,headphones,1,2026-07-17,gpt-5-5,4,sennheiser|sony|bose|anker,sennheiser,3,reddit.com|redditrecs.com|soundguys.com,1,1,566
+item_0002,headphones,1,2026-07-17,gpt-5-5,0,,,1,openai.com,1,1,478
+item_0003,headphones,1,2026-07-17,gpt-5-5,4,sony|bose|sennheiser|anker,sony,3,bose.com|rtings.com|soundguys.com,1,1,342
+item_0004,coffee,1,2026-07-17,gpt-5-5,0,,,2,clutch.co|resonate.ie,1,1,689
+item_0005,headphones,1,2026-07-17,gpt-5-5,4,sony|bose|sennheiser|anker,sony,2,rtings.com|soundguys.com,1,1,365
+item_0006,headphones,1,2026-07-17,gpt-5-5,5,sony|bose|sennheiser|apple|anker,sony,3,reddit.com|rtings.com|tomsguide.com,1,1,324
+item_0007,coffee,1,2026-07-17,gpt-5-5,0,,,0,,2,1,147
+item_0008,headphones,1,2026-07-17,gpt-5-5,5,sennheiser|anker|sony|jbl|apple,sennheiser,2,rtings.com|soundguys.com,1,1,610
+item_0009,headphones,1,2026-07-17,gpt-5-5,4,sony|bose|sennheiser|anker,sony,1,rtings.com,1,1,443
+item_0010,coffee,1,2026-07-17,gpt-5-5,1,mixed media collective,mixed media collective,3,bashdesignmiami.com|deepsleepstudio.com|jacober.com,1,1,355
+item_0011,headphones,1,2026-07-17,gpt-5-5,4,sony|bose|sennheiser|apple,sony,1,rtings.com,1,1,545
+item_0012,headphones,1,2026-07-17,gpt-5-5,4,bose|sennheiser|sony|anker,bose,4,news.com.au|reddit.com|rtings.com|whathifi.com,1,1,504
+item_0013,coffee,1,2026-07-17,gpt-5-5,0,,,0,,1,1,141
+item_0014,coffee,1,2026-07-17,gpt-5-5,0,,,9,brollydesign.com|jennaprinscreative.com|laura-anne-creative.com|martyb.design|nataliemdesign.com|nicoleboterman.com|tiffinstudio.com|toddhagler.com|typennerdesign.com,1,1,740
+item_0015,headphones,1,2026-07-17,gpt-5-5,4,sony|bose|apple|sennheiser,sony,1,rtings.com,1,1,964
+item_0016,headphones,1,2026-07-17,gpt-5-5,4,bose|sony|apple|sennheiser,bose,3,rtings.com|soundguys.com|whathifi.com,1,1,410
+item_0017,coffee,1,2026-07-17,gpt-5-5,9,all good nyc|ulysses design co|vorena studio|murmur creative|studio mpls|jones knowles ritchie|ragged edge|pentagram|red antler,all good nyc,11,allgoodnyc.com|designrush.com|jkrglobal.com|murmurcreative.com|outlinecreative.com|pentagram.com|raggededge.com|redantler.com|studiompls.com|ulyssesdesignco.com|vorenastudio.com,1,1,620
+item_0018,headphones,1,2026-07-17,gpt-5-5,4,sony|bose|sennheiser|anker,sony,1,rtings.com,1,1,570
+item_0019,coffee,1,2026-07-17,gpt-5-5,2,holman design|pentagram,holman design,5,brandclavehotels.com|brandingzest.com|holman.design|laeyrd.com|pentagram.com,5,1,473
+item_0020,coffee,1,2026-07-17,gpt-5-5,1,all good nyc,all good nyc,6,allgoodnyc.com|aventivestudio.com|foodandwine.com|marbury.co|reddit.com|theedibleaesthetic.com,1,1,339
+item_0021,headphones,1,2026-07-17,gpt-5-5,5,sony|bose|sennheiser|bowers & wilkins|anker,sony,1,rtings.com,1,1,961
+item_0022,coffee,1,2026-07-17,gpt-5-5,0,,,2,designrush.com|reddit.com,1,1,504
+item_0023,headphones,1,2026-07-17,gpt-5-5,6,samsung|google|sony|bose|sennheiser|anker,samsung,1,soundguys.com,1,1,274
+item_0024,headphones,1,2026-07-17,gpt-5-5,5,sennheiser|bose|sony|anker|apple,sennheiser,2,rtings.com|whathifi.com,1,1,446
+item_0025,coffee,1,2026-07-17,gpt-5-5,2,manypixels|basecoat,manypixels,6,bloo-studio.com|bybasecoat.com|koalartcreative.com|madebyevoke.com|manypixels.co|oceanfrontdigitalsolutions.com,1,1,530
+item_0026,coffee,1,2026-07-17,gpt-5-5,3,knapsack creative|manypixels|bureau of small projects,knapsack creative,4,clutch.co|knapsackcreative.com|manypixels.co|reddit.com,6,1,342
+item_0027,headphones,1,2026-07-17,gpt-5-5,3,bose|sony|sennheiser,bose,2,reddit.com|rtings.com,1,1,458
+item_0028,coffee,1,2026-07-17,gpt-5-5,6,murmur creative|helms workshop|mucca|bureau of small projects|mixed media collective|upstart food brands,murmur creative,4,designrush.com|foodandwine.com|marketingltb.com|mixedmediacollective.com,1,1,726
+item_0029,coffee,1,2026-07-17,gpt-5-5,1,holman design,holman design,5,behance.net|christophernathaniel.co.uk|cohesive-brands.com|considered.agency|holman.design,3,1,457
+item_0030,coffee,1,2026-07-17,gpt-5-5,5,bureau of small projects|splurge media|outcrowd|red antler|pentagram,bureau of small projects,10,bureauofsmallprojects.com|cbx.com|conjurebranding.com|elliebrands.com|originstoredesign.com|outcrowd.io|pentagram.com|redantler.com|rwconnect.com|splurgemedia.com,1,1,282
+item_0031,headphones,1,2026-07-17,gpt-5-5,3,sony|bose|apple,sony,2,cntraveller.com|rtings.com,1,1,542
+item_0032,coffee,1,2026-07-17,gpt-5-5,1,crate47,crate47,3,brewedbold.com|crate47.com|thecooperstudio.co,1,1,649
+item_0033,coffee,1,2026-07-17,gpt-5-5,2,manypixels|motto,manypixels,6,blackcoffee.com|creativegrocery.co|designrush.com|dribbble.com|foodandwine.com|manypixels.co,1,1,353
+item_0034,coffee,1,2026-07-17,gpt-5-5,4,stellen design|zut alors|all good nyc|vigor branding,stellen design,10,allgoodnyc.com|brandidentity.studio|graphicwise.com|moyerdesign.co|paperknife.co|stellendesign.com|studioreserveproduction.com|velobranding.com|vigorbranding.com|walkerdesign.co,2,1,774
+item_0035,coffee,1,2026-07-17,gpt-5-5,8,design ranch|la caballa agency|holman design|pentagram|mucho|pearlfisher|studio mpls|saint urbain,design ranch,5,bbrcreative.com|design-ranch.com|fiveacresagency.com|holman.design|lacaballa.com,1,1,501
+item_0036,headphones,1,2026-07-17,gpt-5-5,5,sony|bose|anker|sennheiser|apple,sony,2,rtings.com|techradar.com,1,1,846
+item_0037,headphones,1,2026-07-17,gpt-5-5,5,sony|bose|sennheiser|apple|bowers & wilkins,sony,2,proaudiovideo.in|rtings.com,1,1,408
+item_0038,coffee,1,2026-07-17,gpt-5-5,5,pentagram|landor|collins|chermayeff & geismar & haviv|designstudio,pentagram,5,interrobangdesign.com|parker-design.co.uk|petersenwest.com|ryanpaul.com|superfried.com,2,1,342
+item_0039,coffee,1,2026-07-17,gpt-5-5,2,crate47|all good nyc,crate47,4,allgoodnyc.com|blanddesignco.com|crate47.com|goldroom.io,1,1,373
+item_0040,headphones,1,2026-07-17,gpt-5-5,4,sony|anker|sennheiser|apple,sony,2,rtings.com|soundguys.com,1,1,471
+item_0041,coffee,1,2026-07-17,gpt-5-5,2,all good nyc|crate47,all good nyc,7,allgoodnyc.com|bcobranding.com|crate47.com|creativebloq.com|pineapplestudio.design|tgpinternational.com|zambellihospitalitydesign.com,1,1,468
+item_0042,headphones,1,2026-07-17,gpt-5-5,5,sony|bose|sennheiser|jbl|anker,sony,3,cntraveller.com|rtings.com|travelandleisure.com,1,1,497
+item_0043,headphones,1,2026-07-17,gpt-5-5,4,sony|bose|sennheiser|anker,sony,1,rtings.com,1,1,464
+item_0044,headphones,1,2026-07-17,gpt-5-5,4,sony|bose|sennheiser|anker,sony,2,rtings.com|techradar.com,1,1,266
+item_0045,headphones,1,2026-07-17,gpt-5-5,5,sony|bose|sennheiser|anker|apple,sony,1,rtings.com,1,1,348
+item_0046,headphones,1,2026-07-17,gpt-5-5,3,sony|bose|apple,sony,1,rtings.com,1,1,309
+item_0047,coffee,1,2026-07-17,gpt-5-5,3,pearlfisher|jones knowles ritchie|ragged edge,pearlfisher,4,digimadestudios.com|eatdrinkmediagroup.com|silvermoonbranding.com|slaplabels.com,2,1,416
+item_0048,coffee,1,2026-07-17,gpt-5-5,2,motto|clay,motto,2,seattlemet.com|visitseattle.org,1,1,798
+item_0049,coffee,1,2026-07-17,gpt-5-5,8,motto|manypixels|focus lab|bureau of small projects|knapsack creative|anchour|ramotion|basecoat,motto,7,bybasecoat.com|chloeleonard.com|designrush.com|dribbble.com|knapsackcreative.com|manypixels.co|reddit.com,2,1,423
+item_0050,coffee,1,2026-07-17,gpt-5-5,6,mucho|collins|holman design|designstudio|pearlfisher|black anchor design,mucho,11,alchemy.design|aspenalleycreative.com|blackanchordesign.com|design.studio|holman.design|meteorstreetstudio.com|muchomucho.com|pearlfisher.com|pinebeecreative.com|thebrandidentity.com|wearecollins.com,2,1,667
+item_0051,headphones,1,2026-07-17,gpt-5-5,4,sony|bose|sennheiser|anker,sony,1,rtings.com,1,1,486
+item_0052,headphones,1,2026-07-17,gpt-5-5,4,sony|bose|sennheiser|anker,sony,2,rtings.com|soundguys.com,1,1,450
+item_0053,headphones,1,2026-07-17,gpt-5-5,5,anker|sony|1more|sennheiser|bose,anker,5,reddit.com|rtings.com|soundguys.com|techgearlab.com|techradar.com,3,1,927
+item_0054,coffee,1,2026-07-17,gpt-5-5,0,,,3,clearbridgebranding.com|thebrandhopper.com|toasttab.com,1,1,503
+item_0055,headphones,1,2026-07-17,gpt-5-5,3,sony|anker|bose,sony,1,rtings.com,1,1,368
+item_0056,headphones,1,2026-07-17,gpt-5-5,5,sony|bose|anker|sennheiser|apple,sony,2,rtings.com|techradar.com,1,1,320
+item_0057,coffee,1,2026-07-17,gpt-5-5,0,,,0,,1,1,143
+item_0058,coffee,1,2026-07-17,gpt-5-5,1,all good nyc,all good nyc,6,allgoodnyc.com|beverage-design.com|digimadestudios.com|iceydesign.com|reddit.com|thecitystate.com,2,1,737
+item_0059,coffee,1,2026-07-17,gpt-5-5,0,,,1,clutch.co,1,1,327
+item_0060,coffee,1,2026-07-17,gpt-5-5,3,all good nyc|upstart food brands|murmur creative,all good nyc,3,allgoodnyc.com|designrush.com|reddit.com,1,1,464
+item_0061,coffee,1,2026-07-17,gpt-5-5,3,anchour|pentagram|collins,anchour,4,clutch.co|foodandwine.com|reddit.com|themanifest.com,1,1,779
+item_0062,coffee,1,2026-07-17,gpt-5-5,4,manypixels|knapsack creative|motto|canva,manypixels,15,bloo-studio.com|brandvillage.com|clementinehouse.com|cobanner.com|designjoy.co|foliofocus.com|jointmediamarketing.com|knapsackcreative.com|manypixels.co|newurbaninfluence.com|paulcobranding.com|spellbrand.com|thebranx.com|thelogocreative.co.uk|wearemotto.com,6,1,1118
+item_0063,coffee,1,2026-07-17,gpt-5-5,9,jones knowles ritchie|designstudio|pentagram|landor|brigade|all good nyc|ulysses design co|vorena studio|zut alors,jones knowles ritchie,6,allgoodnyc.com|brandidentity.studio|brigadebranding.com|shawnscott.studio|ulyssesdesignco.com|vorenastudio.com,2,1,582
+item_0064,coffee,1,2026-07-17,gpt-5-5,1,zut alors,zut alors,5,braidcreative.com|brandidentity.studio|genpubbranding.com|marbury.co|selbertperkins.com,1,1,1045
+item_0065,headphones,1,2026-07-17,gpt-5-5,5,sony|bose|sennheiser|anker|apple,sony,3,rtings.com|stuff.tv|techradar.com,1,1,459
+item_0066,headphones,1,2026-07-17,gpt-5-5,4,anker|sennheiser|sony|bose,anker,2,rtings.com|stuff.tv,1,1,375
+item_0067,headphones,1,2026-07-17,gpt-5-5,0,,,1,rtings.com,1,1,191
+item_0068,coffee,1,2026-07-17,gpt-5-5,4,stellen design|crate47|all good nyc|ulysses design co,stellen design,7,allgoodnyc.com|crate47.com|moyerdesign.co|paperknife.co|reddit.com|stellendesign.com|ulyssesdesignco.com,1,1,432
+item_0069,coffee,1,2026-07-17,gpt-5-5,4,mucho|red antler|pearlfisher|jones knowles ritchie,mucho,7,brandopus.com|jkrglobal.com|moyerdesign.co|pearlfisher.com|redantler.com|studiastudio.com|wearemucho.com,6,1,1510
+item_0070,headphones,1,2026-07-17,gpt-5-5,4,sony|apple|bose|sennheiser,sony,3,reddit.com|rtings.com|soundguys.com,1,1,598
+item_0071,coffee,1,2026-07-17,gpt-5-5,0,,,1,paperknife.co,1,1,245
+item_0072,coffee,1,2026-07-17,gpt-5-5,4,collins|clay|ramotion|focus lab,collins,5,bighuman.com|brandstack.agency|instrument.com|loudface.co|thedrum.com,2,1,802
+item_0073,coffee,1,2026-07-17,gpt-5-5,10,ulysses design co|crate47|mixed media collective|stellen design|zut alors|pentagram|collins|koto|red antler|gretel,ulysses design co,12,brandidentity.studio|crate47.com|gretelny.com|koto.studio|mixedmediacollective.com|moyerdesign.co|pentagram.com|redantler.com|reddit.com|stellendesign.com|ulyssesdesignco.com|wearecollins.com,1,1,537
+item_0074,coffee,1,2026-07-17,gpt-5-5,2,holman design|black anchor design,holman design,5,alchemy.design|blackanchordesign.com|christophernathaniel.co.uk|holman.design|signalandform.net,1,1,322
+item_0075,headphones,1,2026-07-17,gpt-5-5,5,sony|bose|apple|sennheiser|skullcandy,sony,2,rtings.com|whathifi.com,1,1,474
+item_0076,coffee,1,2026-07-17,gpt-5-5,2,all good nyc|mucca,all good nyc,2,allgoodnyc.com|reddit.com,1,1,459
+item_0077,headphones,1,2026-07-17,gpt-5-5,3,anker|sony|jbl,anker,3,jbl.com|jbl.nl|sony.fr,1,1,442
+item_0078,coffee,1,2026-07-17,gpt-5-5,0,,,2,foodandwine.com|holman.design,1,1,787
+item_0079,coffee,1,2026-07-17,gpt-5-5,7,crate47|matchstic|motto|collins|pentagram|landor|interbrand,crate47,4,crate47.com|perks.design|starbucks.com|voodoobrands.co,1,1,916
+item_0080,coffee,1,2026-07-17,gpt-5-5,0,,,1,pewresearch.org,1,1,183
+item_0081,headphones,1,2026-07-17,gpt-5-5,4,sony|bose|sennheiser|apple,sony,0,,1,1,766
+item_0082,headphones,1,2026-07-17,gpt-5-5,4,sony|sennheiser|bose|apple,sony,12,amazon.co.uk|apple.com|argos.co.uk|bose.co.uk|currys.co.uk|expertreviews.co.uk|johnlewis.com|reddit.com|richersounds.com|sennheiser-hearing.com|sony.co.uk|which.co.uk,1,1,917
+item_0083,headphones,1,2026-07-17,gpt-5-5,3,sony|jbl|anker,sony,2,reddit.com|smartprix.com,1,1,580
+item_0084,headphones,1,2026-07-17,gpt-5-5,0,,,0,,1,1,76
+item_0085,headphones,1,2026-07-17,gpt-5-5,0,,,1,rtings.com,1,1,143
+item_0086,headphones,1,2026-07-17,gpt-5-5,6,sennheiser|sony|apple|bose|sonos|anker,sennheiser,1,rtings.com,1,1,472
+item_0087,coffee,1,2026-07-17,gpt-5-5,16,pentagram|collins|wolff olins|landor|interbrand|jones knowles ritchie|lippincott|chermayeff & geismar & haviv|red antler|moving brands|gretel|koto|ragged edge|how&how|&walsh|mucho,pentagram,2,reddit.com|warc.com,1,1,439
+item_0088,coffee,1,2026-07-17,gpt-5-5,10,pentagram|wolff olins|collins|clay|lippincott|landor|interbrand|designstudio|jones knowles ritchie|ragged edge,pentagram,2,sortlist.com|topbrandagencies.com,1,1,291
+item_0089,coffee,1,2026-07-17,gpt-5-5,2,bureau of small projects|freshsparks,bureau of small projects,8,base95.co|bureauofsmallprojects.com|chloeleonard.com|designrush.com|dribbble.com|freshsparks.com|reddit.com|referent.agency,1,1,298
+item_0090,coffee,1,2026-07-17,gpt-5-5,7,pentagram|landor|jones knowles ritchie|designstudio|collins|crate47|nice branding,pentagram,6,bellwethercoffee.com|crate47.com|nice-branding.com|onbrandagency.ca|phvntom.com|wallpaper.com,2,1,409
+item_0091,headphones,1,2026-07-17,gpt-5-5,6,sony|bose|sennheiser|anker|apple|samsung,sony,1,rtings.com,1,1,523
+item_0092,coffee,1,2026-07-17,gpt-5-5,1,ember,ember,2,magnt.com|wix.com,1,1,634
+item_0093,headphones,1,2026-07-17,gpt-5-5,4,anker|sony|bose|sennheiser,anker,1,rtings.com,1,1,624
+item_0094,coffee,1,2026-07-17,gpt-5-5,3,crate47|design ranch|zut alors,crate47,6,bbrcreative.com|brandidentity.studio|crate47.com|design-ranch.com|naomicreativestudio.com|reddit.com,1,1,498
+item_0095,headphones,1,2026-07-17,gpt-5-5,5,apple|sony|sennheiser|jbl|anker,apple,2,rtings.com|soundguys.com,1,1,558
+item_0096,headphones,1,2026-07-17,gpt-5-5,4,sony|sennheiser|bose|anker,sony,3,rtings.com|soundguys.com|techradar.com,1,1,468
+item_0097,coffee,1,2026-07-17,gpt-5-5,2,crate47|ulysses design co,crate47,8,adelahaye.com|brewedbold.com|crate47.com|needmoredesigns.com|orenscreative.com|splashcreative.com|studionuwa.ch|ulyssesdesignco.com,1,1,301
+item_0098,headphones,1,2026-07-17,gpt-5-5,4,jbl|sony|bose|sennheiser,jbl,2,rtings.com|techradar.com,1,1,329
+item_0099,headphones,1,2026-07-17,gpt-5-5,3,sony|sennheiser|bose,sony,3,rtings.com|soundguys.com|techradar.com,1,1,410
+item_0100,coffee,1,2026-07-17,gpt-5-5,7,pentagram|collins|studio mpls|the working assembly|design womb|red antler|koto,pentagram,6,designwomb.com|farmdesign.com|mouthwashstudio.com|reddit.com|studiompls.com|theworkingassembly.com,1,1,501
+item_0101,coffee,1,2026-07-17,gpt-5-5,0,,,2,bellwethercoffee.com|madebyevoke.com,1,1,443
+item_0102,coffee,1,2026-07-17,gpt-5-5,9,collins|landor|interbrand|siegel+gale|pentagram|anchour|matchstic|focus lab|mucho,collins,15,anchour.com|brandrefresh.io|contra.agency|focuslab.agency|interbrand.com|iperdesign.com|landor.com|madebycharacter.com|matchstic.com|mucho.ws|oomphinc.com|pentagram.com|siegelgale.com|slammedialab.com|wearecollins.com,1,1,367
+item_0103,headphones,1,2026-07-17,gpt-5-5,3,sennheiser|anker|sony,sennheiser,1,rtings.com,1,1,437
+item_0104,headphones,1,2026-07-17,gpt-5-5,4,sony|bose|apple|sennheiser,sony,4,rtings.com|soundguys.com|t3.com|wsj.com,1,1,447
+item_0105,coffee,1,2026-07-17,gpt-5-5,10,pentagram|landor|wolff olins|siegel+gale|clay|&walsh|lippincott|ramotion|anchour|duck.design,pentagram,2,duck.design|slammedialab.com,1,1,316
+item_0106,headphones,1,2026-07-17,gpt-5-5,4,bose|sony|sennheiser|apple,bose,1,rtings.com,1,1,609
+item_0107,headphones,1,2026-07-17,gpt-5-5,5,sony|bose|sennheiser|anker|apple,sony,0,,1,1,746
+item_0108,headphones,1,2026-07-17,gpt-5-5,4,sony|bose|sennheiser|anker,sony,4,rtings.com|soundguys.com|techradar.com|whathifi.com,1,1,691
+item_0109,headphones,1,2026-07-17,gpt-5-5,4,sony|bose|apple|anker,sony,2,rtings.com|tomsguide.com,1,1,436
+item_0110,headphones,1,2026-07-17,gpt-5-5,4,sony|bose|sennheiser|anker,sony,2,rtings.com|stuff.tv,1,1,474
+item_0111,headphones,1,2026-07-17,gpt-5-5,5,sony|bose|sennheiser|apple|anker,sony,3,reddit.com|rtings.com|soundguys.com,2,1,717
+item_0112,headphones,1,2026-07-17,gpt-5-5,4,sennheiser|bose|sony|apple,sennheiser,3,reddit.com|rtings.com|stuff.tv,1,1,819
+item_0113,coffee,1,2026-07-17,gpt-5-5,11,pentagram|collins|wolff olins|landor|jones knowles ritchie|gretel|koto|&walsh|red antler|clay|how&how,pentagram,17,andwalsh.com|clay.global|clutch.co|gretelny.com|how.studio|jkrglobal.com|koto.studio|landor.com|motherdesign.com|order.design|pentagram.com|portorocha.com|redantler.com|reddit.com|studiolin.org|wearecollins.com|wolffolins.com,1,1,392
+item_0114,coffee,1,2026-07-17,gpt-5-5,4,jones knowles ritchie|pearlfisher|designstudio|studio tyrsa,jones knowles ritchie,6,alkeme.design|dropcapcreative.com|havenuemedia.com|reddit.com|studiotyrsa.com|walkproduction.com,2,1,597
+item_0115,headphones,1,2026-07-17,gpt-5-5,3,sony|bose|sennheiser,sony,3,bestbuy.com|forbes.com|soundguys.com,1,1,149
+item_0116,headphones,1,2026-07-17,gpt-5-5,5,sony|bose|sennheiser|anker|technics,sony,1,rtings.com,1,1,275
+item_0117,headphones,1,2026-07-17,gpt-5-5,5,bose|sony|sennheiser|anker|jbl,bose,0,,1,1,518
+item_0118,headphones,1,2026-07-17,gpt-5-5,0,,,0,,1,1,92
+item_0119,headphones,1,2026-07-17,gpt-5-5,5,sennheiser|sony|bose|apple|focal,sennheiser,2,reddit.com|soundguys.com,1,1,663
+item_0120,coffee,1,2026-07-17,gpt-5-5,4,ulysses design co|mixed media collective|stellen design|curbside agency,ulysses design co,10,bcobranding.com|box8creative.com|curbsideagency.com|finchform.com|goldroom.io|mixedmediacollective.com|paperknife.co|stellendesign.com|thestudio113.com|ulyssesdesignco.com,2,1,1090
+item_0121,coffee,1,2026-07-17,gpt-5-5,1,crate47,crate47,5,brewedbold.com|crate47.com|goodnoise.co.uk|perks.design|walkerdesign.co,1,1,768
+item_0122,coffee,1,2026-07-17,gpt-5-5,3,all good nyc|ulysses design co|blindtiger design,all good nyc,4,accoladecreative.ca|allgoodnyc.com|blindtigerdesign.com|ulyssesdesignco.com,1,1,382
+item_0123,headphones,1,2026-07-17,gpt-5-5,5,sony|bose|sennheiser|apple|anker,sony,2,esquire.com|rtings.com,1,1,1168
+item_0124,headphones,1,2026-07-17,gpt-5-5,4,sony|bose|jbl|anker,sony,2,rtings.com|soundguys.com,1,1,379
+item_0125,coffee,1,2026-07-17,gpt-5-5,0,,,5,amy-h.com|bbrcreative.com|reddit.com|studioimpulso.com|thecooperstudio.co,1,1,301
+item_0126,headphones,1,2026-07-17,gpt-5-5,5,jbl|puro|sony|bose|apple,jbl,1,peggyomara.com,1,1,431
+item_0127,headphones,1,2026-07-17,gpt-5-5,6,sony|bose|apple|sennheiser|jbl|anker,sony,2,rtings.com|techradar.com,1,1,513
+item_0128,headphones,1,2026-07-17,gpt-5-5,6,apple|bose|sony|jbl|anker|1more,apple,1,rtings.com,1,1,600
+item_0129,coffee,1,2026-07-17,gpt-5-5,3,saint urbain|freshsparks|bureau of small projects,saint urbain,4,craftedny.com|designrush.com|dribbble.com|reddit.com,1,1,528
+item_0130,headphones,1,2026-07-17,gpt-5-5,4,sony|bose|anker|apple,sony,2,reddit.com|rtings.com,2,1,315
+item_0131,coffee,1,2026-07-17,gpt-5-5,4,all good nyc|crown creative|pentagram|collins,all good nyc,10,adelahaye.com|allgoodnyc.com|bcobranding.com|brandbureau.com|crowncreative.com|foodandwine.com|pentagram.com|reddit.com|thebrandstrategylab.com|wearecollins.com,1,1,484
+item_0132,headphones,1,2026-07-17,gpt-5-5,3,sony|sennheiser|anker,sony,1,rtings.com,1,1,428
+item_0133,headphones,1,2026-07-17,gpt-5-5,4,sony|bose|sennheiser|anker,sony,0,,1,1,284
+item_0134,headphones,1,2026-07-17,gpt-5-5,0,,,1,axios.com,1,1,140
+item_0135,headphones,1,2026-07-17,gpt-5-5,4,sony|bose|sennheiser|apple,sony,4,reddit.com|rtings.com|soundguys.com|t3.com,1,1,772
+item_0136,headphones,1,2026-07-17,gpt-5-5,5,sony|bose|sennheiser|anker|apple,sony,3,consumerreports.org|rtings.com|tomsguide.com,1,1,401
+item_0137,headphones,1,2026-07-17,gpt-5-5,6,anker|jbl|sony|sennheiser|apple|bose,anker,2,rtings.com|techradar.com,1,1,425
+item_0138,headphones,1,2026-07-17,gpt-5-5,4,sony|bose|sennheiser|anker,sony,1,rtings.com,1,1,394
+item_0139,headphones,1,2026-07-17,gpt-5-5,4,sennheiser|philips|audio-technica|beyerdynamic,sennheiser,2,rtings.com|whathifi.com,1,1,310
+item_0140,coffee,1,2026-07-17,gpt-5-5,11,pentagram|collins|koto|red antler|gretel|ludlow kingsley|crate47|studio tyrsa|the cooper studio|stuck with pins|holman design,pentagram,13,crate47.com|gretelny.com|holman.design|jeromeandzimmerman.com|koto.studio|ludlowkingsley.com|pentagram.com|redantler.com|reddit.com|stuckwithpins.com|studiotyrsa.com|thecooperstudio.co|wearecollins.com,1,1,502
+item_0141,headphones,1,2026-07-17,gpt-5-5,6,sony|apple|bose|sennheiser|anker|technics,sony,1,rtings.com,1,1,543
+item_0142,coffee,1,2026-07-17,gpt-5-5,3,supervox|holman design|saint urbain,supervox,5,fiveacresagency.com|holman.design|mantlebranding.com|rycodesign.com|supervoxagency.com,1,1,401
+item_0143,coffee,1,2026-07-17,gpt-5-5,0,,,1,hatchly.co.uk,1,1,168
+item_0144,coffee,1,2026-07-17,gpt-5-5,4,jones knowles ritchie|red antler|pentagram|bureau of small projects,jones knowles ritchie,6,clutch.co|jkrglobal.com|pentagram.com|redantler.com|thebureauofsprojects.com|theoryhouse.com,6,1,542
+item_0145,headphones,1,2026-07-17,gpt-5-5,5,sony|bose|sennheiser|anker|apple,sony,2,rtings.com|techradar.com,1,1,437
+item_0146,coffee,1,2026-07-17,gpt-5-5,0,,,1,clutch.co,1,1,591
+item_0147,coffee,1,2026-07-17,gpt-5-5,4,cactus country|crate47|supervox|pentagram,cactus country,7,bellwethercoffee.com|blonderbrand.com|crate47.com|reddit.com|supervoxagency.com|thebrandley.com|thisiscactuscountry.com,1,1,411
+item_0148,headphones,1,2026-07-17,gpt-5-5,4,anker|sony|sennheiser|bose,anker,2,rtings.com|techradar.com,1,1,424
+item_0149,headphones,1,2026-07-17,gpt-5-5,4,apple|bose|sony|sennheiser,apple,1,rtings.com,1,1,663
+item_0150,coffee,1,2026-07-17,gpt-5-5,1,holman design,holman design,8,architecturaldigest.com|brandedagency.com|clementinehouse.com|consortcreative.com|holman.design|neoxica.com|sagefrog.com|thesprk.com,1,1,817
+item_0151,coffee,1,2026-07-17,gpt-5-5,0,,,2,gofishwink.com|veyrogroup.com,1,1,469
+item_0152,headphones,1,2026-07-17,gpt-5-5,4,sennheiser|bose|sony|apple,sennheiser,1,rtings.com,1,1,490
+item_0153,headphones,1,2026-07-17,gpt-5-5,4,sony|bose|sennheiser|anker,sony,2,rtings.com|soundguys.com,1,1,344
+item_0154,headphones,1,2026-07-17,gpt-5-5,4,sony|bose|sennheiser|apple,sony,2,rtings.com|travelandleisure.com,1,1,317
+item_0155,headphones,1,2026-07-17,gpt-5-5,4,sony|bose|sennheiser|anker,sony,1,rtings.com,1,1,440
+item_0156,coffee,1,2026-07-17,gpt-5-5,0,,,0,,1,1,127
+item_0157,headphones,1,2026-07-17,gpt-5-5,4,bose|sony|anker|1more,bose,2,rtings.com|soundguys.com,1,1,478
+item_0158,headphones,1,2026-07-17,gpt-5-5,4,anker|sony|sennheiser|bose,anker,1,rtings.com,1,1,487
+item_0159,headphones,1,2026-07-17,gpt-5-5,5,sennheiser|sony|bose|anker|apple,sennheiser,0,,1,1,456
+item_0160,headphones,1,2026-07-17,gpt-5-5,0,,,3,gamesradar.com|rtings.com|thetechsearch.com,1,1,585
+item_0161,headphones,1,2026-07-17,gpt-5-5,6,sennheiser|sony|bose|audio-technica|beyerdynamic|focal,sennheiser,3,headphonesty.com|reddit.com|rtings.com,1,1,247
+item_0162,headphones,1,2026-07-17,gpt-5-5,3,sony|bose|apple,sony,1,rtings.com,1,1,236
+item_0163,headphones,1,2026-07-17,gpt-5-5,5,anker|sony|bose|sennheiser|apple,anker,1,rtings.com,1,1,716
+item_0164,headphones,1,2026-07-17,gpt-5-5,5,sony|bose|sennheiser|anker|apple,sony,2,rtings.com|techradar.com,1,1,412
+item_0165,coffee,1,2026-07-17,gpt-5-5,5,bureau of small projects|freshsparks|born & bred|splurge media|manypixels,bureau of small projects,3,designrush.com|dribbble.com|manypixels.co,2,1,439
+item_0166,coffee,1,2026-07-17,gpt-5-5,3,crate47|holman design|richard manville studio,crate47,4,crate47.com|holman.design|richardmanville.com|wallabycreative.com,1,1,594
+item_0167,coffee,1,2026-07-17,gpt-5-5,2,crate47|zut alors,crate47,4,brandidentity.studio|crate47.com|rawwwagency.com|sonnysideup.com,1,1,624
+item_0168,headphones,1,2026-07-17,gpt-5-5,8,anker|sony|bose|jbl|sennheiser|focal|bowers & wilkins|apple,anker,1,whathifi.com,1,1,893
+item_0169,headphones,1,2026-07-17,gpt-5-5,4,sony|bose|sennheiser|anker,sony,1,rtings.com,1,1,433
+item_0170,coffee,1,2026-07-17,gpt-5-5,4,pentagram|studio tyrsa|the cooper studio|florence studios,pentagram,6,behance.net|elxel.com|florencestudios.net|graceperdanamulia.com|studiotyrsa.com|thecooperstudio.co,1,1,451
+item_0171,coffee,1,2026-07-17,gpt-5-5,0,,,1,mixedmediacollective.com,1,1,486
+item_0172,coffee,1,2026-07-17,gpt-5-5,2,crate47|the cooper studio,crate47,4,brewedbold.com|crate47.com|ligrade.agency|thecooperstudio.co,1,1,409
+item_0173,coffee,1,2026-07-17,gpt-5-5,8,crown creative|all good nyc|pentagram|designstudio|collins|gretel|helms workshop|atlas branding,crown creative,16,abmo.fr|allgoodnyc.com|atlasbranding.com|brandbureau.com|creativebloq.com|crowncreative.com|design.studio|gretelny.com|helmsworkshop.com|longitudebranding.com|marketingltb.com|pentagram.com|reddit.com|rubysignorelli.com|thebrandstrategylab.com|wearecollins.com,1,1,579
+item_0174,headphones,1,2026-07-17,gpt-5-5,5,sony|bose|sennheiser|anker|apple,sony,2,rtings.com|techradar.com,1,1,365
+item_0175,coffee,1,2026-07-17,gpt-5-5,0,,,2,abduzeedo.com|theguardian.com,1,1,487
+item_0176,headphones,1,2026-07-17,gpt-5-5,4,sony|bose|sennheiser|anker,sony,1,rtings.com,1,1,426
+item_0177,headphones,1,2026-07-17,gpt-5-5,5,sony|bose|anker|apple|technics,sony,2,rtings.com|techradar.com,1,1,314
+item_0178,headphones,1,2026-07-17,gpt-5-5,1,apple,apple,0,,1,1,83
+item_0179,headphones,1,2026-07-17,gpt-5-5,4,sony|sennheiser|bose|apple,sony,3,sony.co.uk|which.co.uk|wired.com,2,1,471
+item_0180,headphones,1,2026-07-17,gpt-5-5,5,sony|bose|sennheiser|apple|anker,sony,3,reddit.com|redditrecs.com|rtings.com,1,1,732
+item_0181,coffee,1,2026-07-17,gpt-5-5,1,curbside agency,curbside agency,5,curbsideagency.com|elitemediagroup.com|originmarketingroup.com|partly-sunny.com|rocketfinbranding.com,1,1,601
+item_0182,coffee,1,2026-07-17,gpt-5-5,7,zut alors|crate47|richard manville studio|pentagram|landor|designstudio|collins,zut alors,5,brandidentity.studio|c-istudios.com|crate47.com|mantlebranding.com|richardmanville.com,1,1,587
+item_0183,coffee,1,2026-07-17,gpt-5-5,2,supervox|holman design,supervox,5,arcadestudios.com|elxel.com|holman.design|rycodesign.com|supervoxagency.com,1,1,190
+item_0184,coffee,1,2026-07-17,gpt-5-5,0,,,4,elinaimre.com|maisonvoyage.de|reddit.com|sdcopartners.com,1,1,1431
+item_0185,coffee,1,2026-07-17,gpt-5-5,9,bureau of small projects|freshsparks|born & bred|splurge media|manypixels|collins|pentagram|red antler|koto,bureau of small projects,11,bornandbredbrand.com|bureauofsmallprojects.com|dribbble.com|freshsparks.com|goodbones.studio|koto.studio|manypixels.co|pentagram.com|redantler.com|splurgemedia.com|wearecollins.com,1,1,405
+item_0186,headphones,1,2026-07-17,gpt-5-5,7,sony|bose|sennheiser|bowers & wilkins|apple|sonos|anker,sony,2,rtings.com|soundguys.com,1,1,640
+item_0187,coffee,1,2026-07-17,gpt-5-5,0,,,7,at-gd.com|designweek.co.uk|eatsleepdesign.uk|geniecreative.co.uk|goodnoise.co.uk|pienopienopieno.com|seriesthree.co.uk,1,1,542
+item_0188,coffee,1,2026-07-17,gpt-5-5,3,brigade|stuck with pins|florence studios,brigade,7,christophernathaniel.co.uk|clutch.co|florencestudios.net|nuefound.com|reddit.com|stuckwithpins.com|wearebrigade.com,1,1,524
+item_0189,coffee,1,2026-07-17,gpt-5-5,4,bureau of small projects|freshsparks|born & bred|south square creative,bureau of small projects,8,agency722.com|bornandbredbrand.com|bureauofsmallprojects.com|dribbble.com|freshsparks.com|ramirez-agency.com|southsquarecreative.com|squero.com,1,1,362
+item_0190,coffee,1,2026-07-17,gpt-5-5,4,vigor branding|upstart food brands|crown creative|matchstic,vigor branding,4,designrush.com|dishn.app|marketingltb.com|thebrandstrategylab.com,2,1,983
+item_0191,coffee,1,2026-07-17,gpt-5-5,3,huckleberry branding|south square creative|element 47,huckleberry branding,2,darbycreative.com|southsquarecreative.com,1,1,440
+item_0192,coffee,1,2026-07-17,gpt-5-5,0,,,1,gautamkhorana.com,1,1,386
+item_0193,coffee,1,2026-07-17,gpt-5-5,5,pentagram|mucho|motto|saint urbain|studio mpls,pentagram,8,anagrama.com|finedesigngroup.com|mottostudio.com|pentagram.com|sainturbain.com|studiompls.com|thecooperstudio.co|wearemucho.com,1,1,382
+item_0194,coffee,1,2026-07-17,gpt-5-5,2,pentagram|chermayeff & geismar & haviv,pentagram,2,oomphinc.com|sutter-group.com,1,1,336
+item_0195,headphones,1,2026-07-17,gpt-5-5,4,sony|bose|sennheiser|anker,sony,1,rtings.com,1,1,426
+item_0196,coffee,1,2026-07-17,gpt-5-5,11,pentagram|landor|interbrand|wolff olins|lippincott|collins|siegel+gale|designstudio|pearlfisher|clay|ramotion,pentagram,1,unfoldmart.com,1,1,300
+item_0197,coffee,1,2026-07-17,gpt-5-5,0,,,3,indaliadesign.com|purplewavecreative.com|tingalls.com,1,1,246
+item_0198,coffee,1,2026-07-17,gpt-5-5,6,pentagram|wolff olins|collins|designstudio|mucho|moving brands,pentagram,3,monigle.com|penta-studio.com|therestudio.com,1,1,919
+item_0199,coffee,1,2026-07-17,gpt-5-5,10,pentagram|collins|wolff olins|landor|siegel+gale|lippincott|&walsh|clay|ramotion|anchour,pentagram,12,anchour.com|andwalsh.com|clay.global|dribbble.com|landor.com|lippincott.com|pentagram.com|ramotion.com|reddit.com|siegelgale.com|wearecollins.com|wolffolins.com,1,1,408
+item_0200,headphones,1,2026-07-17,gpt-5-5,4,sony|bose|sennheiser|apple,sony,2,rtings.com|travelandleisure.com,1,1,532
+item_0201,headphones,1,2026-07-17,gpt-5-5,5,sony|bose|sennheiser|anker|apple,sony,4,packhacker.com|reddit.com|rtings.com|soundguys.com,1,1,513
+item_0202,headphones,1,2026-07-17,gpt-5-5,3,anker|jbl|sony,anker,2,reddit.com|soundguys.com,1,1,336
+item_0203,headphones,1,2026-07-17,gpt-5-5,5,sony|bose|apple|sennheiser|anker,sony,3,consumerreports.org|rtings.com|tomsguide.com,1,1,262
+item_0204,coffee,1,2026-07-17,gpt-5-5,1,crate47,crate47,7,amccreativedesign.com|blackcoffee.com|crate47.com|designequals.com|magnt.com|reddit.com|studionuwa.ch,1,1,485
+item_0205,headphones,1,2026-07-17,gpt-5-5,4,sony|bose|sennheiser|anker,sony,1,rtings.com,1,1,388
+item_0206,headphones,1,2026-07-17,gpt-5-5,4,anker|sony|sennheiser|bose,anker,0,,1,1,873
+item_0207,coffee,1,2026-07-17,gpt-5-5,2,design ranch|la caballa agency,design ranch,3,design-ranch.com|lacaballa.com|roguestudio.ie,1,1,319
+item_0208,headphones,1,2026-07-17,gpt-5-5,3,sony|bose|anker,sony,1,rtings.com,1,1,646
+item_0209,coffee,1,2026-07-17,gpt-5-5,5,pentagram|landor|designstudio|crown creative|stellen design,pentagram,6,accoladecreative.ca|adelahaye.com|architecturaldigest.com|foodandwine.com|stellendesign.com|thebrandstrategylab.com,1,1,665
+item_0210,headphones,1,2026-07-17,gpt-5-5,4,sony|bose|apple|sennheiser,sony,2,rtings.com|stuff.tv,1,1,332
+item_0211,coffee,1,2026-07-17,gpt-5-5,1,black anchor design,black anchor design,3,aventivestudio.com|blackanchordesign.com|originstudioworks.com,1,1,550
+item_0212,headphones,1,2026-07-17,gpt-5-5,3,anker|sony|jbl,anker,3,nbcnews.com|rtings.com|soundguys.com,1,1,646
+item_0213,coffee,1,2026-07-17,gpt-5-5,5,zut alors|nice branding|crate47|la caballa agency|holman design,zut alors,5,brandidentity.studio|crate47.com|holman.design|lacaballa.com|nice-branding.com,1,1,392
+item_0214,headphones,1,2026-07-17,gpt-5-5,4,sony|bose|sennheiser|apple,sony,1,rtings.com,1,1,239
+item_0215,coffee,1,2026-07-17,gpt-5-5,0,,,3,bellwethercoffee.com|bloo-studio.com|brandbarista.co,1,1,409
+item_0216,coffee,1,2026-07-17,gpt-5-5,7,freshsparks|bureau of small projects|born & bred|motto|manypixels|focus lab|splurge media,freshsparks,3,designrush.com|dribbble.com|manypixels.co,1,1,323
+item_0217,coffee,1,2026-07-17,gpt-5-5,0,,,1,a2c.quebec,1,1,680
+item_0218,headphones,1,2026-07-17,gpt-5-5,5,jbl|bowers & wilkins|sony|puro|apple,jbl,3,rtings.com|t3.com|wsj.com,1,1,592
+item_0219,coffee,1,2026-07-17,gpt-5-5,0,,,7,aldicreative.com|brandedagency.com|bsh-technologies.com|designcafeagency.com|doggonemarketing.com|foundry-studios.com|hawd-design.com,1,1,464
+item_0220,coffee,1,2026-07-17,gpt-5-5,2,brigade|manypixels,brigade,2,clutch.co|manypixels.co,1,1,432
+item_0221,headphones,1,2026-07-17,gpt-5-5,6,anker|sony|sennheiser|apple|jbl|edifier,anker,1,rtings.com,1,1,603
+item_0222,headphones,1,2026-07-17,gpt-5-5,4,sony|jbl|anker|sennheiser,sony,5,bestbuy.com|bhphotovideo.com|rtings.com|soundcore.com|target.com,2,1,677
+item_0223,headphones,1,2026-07-17,gpt-5-5,4,bose|sony|apple|sennheiser,bose,3,rtings.com|soundguys.com|techradar.com,1,1,345
+item_0224,coffee,1,2026-07-17,gpt-5-5,6,pentagram|collins|landor|wolff olins|designstudio|crate47,pentagram,4,clutch.co|crate47.com|eat.studio|worthagency.com,1,1,529
+item_0225,headphones,1,2026-07-17,gpt-5-5,5,sony|sennheiser|bose|jbl|anker,sony,3,euronics.ee|kaup24.ee|klick.ee,1,1,368
+item_0226,coffee,1,2026-07-17,gpt-5-5,6,blindtiger design|ulysses design co|atlas branding|pentagram|collins|red antler,blindtiger design,6,blindtigerdesign.com|designrush.com|splashcreative.com|tekwanidesign.com|ulyssesdesignco.com|zambellihospitalitydesign.com,1,1,477
+item_0227,headphones,1,2026-07-17,gpt-5-5,4,sony|bose|sennheiser|anker,sony,1,rtings.com,1,1,382
+item_0228,headphones,1,2026-07-17,gpt-5-5,1,apple,apple,1,rtings.com,1,1,281
+item_0229,headphones,1,2026-07-17,gpt-5-5,4,anker|sony|bose|sennheiser,anker,2,esquire.com|forbes.com,1,1,575
+item_0230,headphones,1,2026-07-17,gpt-5-5,4,sony|sennheiser|bose|anker,sony,1,rtings.com,1,1,253
+item_0231,coffee,1,2026-07-17,gpt-5-5,2,zut alors|crate47,zut alors,5,blakejuras.com|brandidentity.studio|crate47.com|walkerdesign.co|wearescribe.com,1,1,444
+item_0232,coffee,1,2026-07-17,gpt-5-5,6,ulysses design co|all good nyc|zut alors|murmur creative|pentagram|designstudio,ulysses design co,9,allgoodnyc.com|brandidentity.studio|designequals.com|designrush.com|eatdrinkmediagroup.com|goodnoise.co.uk|murmurcreative.com|thefoodbrandguys.com|ulyssesdesignco.com,1,1,549
+item_0233,headphones,1,2026-07-17,gpt-5-5,3,bose|sony|sennheiser,bose,1,rtings.com,1,1,260
+item_0234,headphones,1,2026-07-17,gpt-5-5,4,sony|bose|apple|sennheiser,sony,0,,2,1,447
+item_0235,coffee,1,2026-07-17,gpt-5-5,3,pearlfisher|designstudio|holman design,pearlfisher,5,alchemy.design|brandbureau.com|havenuemedia.com|holman.design|pearlfisher.com,4,1,1170
+item_0236,coffee,1,2026-07-17,gpt-5-5,9,pentagram|collins|gretel|red antler|atlas branding|murmur creative|all good nyc|anchour|studio mpls,pentagram,13,allgoodnyc.com|anchour.com|atlasbranding.com|brandbureau.com|designrush.com|gretelny.com|murmurcreative.com|pentagram.com|redantler.com|reddit.com|studiompls.com|thebrandstrategylab.com|wearecollins.com,1,1,725
+item_0237,coffee,1,2026-07-17,gpt-5-5,0,,,2,abduzeedo.com|madebyevoke.com,1,1,702
+item_0238,coffee,1,2026-07-17,gpt-5-5,9,pentagram|collins|red antler|matchstic|studio mpls|nice branding|crown creative|louise fili|zut alors,pentagram,5,bonappetit.com|brandidentity.studio|nice-branding.com|thebrandstrategylab.com|thestudio113.com,1,1,706
+item_0239,coffee,1,2026-07-17,gpt-5-5,2,mixed media collective|curbside agency,mixed media collective,7,accoladecreative.ca|curbsideagency.com|mixedmediacollective.com|pineapplestudio.design|splashcreative.com|thestudio113.com|zambellihospitalitydesign.com,1,1,591
+item_0240,headphones,1,2026-07-17,gpt-5-5,5,sony|bose|sennheiser|anker|apple,sony,2,rtings.com|techradar.com,1,1,602
+item_0241,headphones,1,2026-07-17,gpt-5-5,3,bose|sony|apple,bose,2,rtings.com|soundguys.com,1,1,394
+item_0242,headphones,1,2026-07-17,gpt-5-5,4,sony|bose|anker|sennheiser,sony,1,rtings.com,1,1,260
+item_0243,coffee,1,2026-07-17,gpt-5-5,2,crate47|vigor branding,crate47,5,crate47.com|infantree.com|phvntom.com|studionuwa.ch|vigorbranding.com,1,1,204
+item_0244,headphones,1,2026-07-17,gpt-5-5,6,anker|sennheiser|sony|bose|apple|jbl,anker,2,reddit.com|rtings.com,1,1,510
+item_0245,headphones,1,2026-07-17,gpt-5-5,3,google|apple|samsung,google,2,techradar.com|tomsguide.com,1,1,353
+item_0246,coffee,1,2026-07-17,gpt-5-5,8,pentagram|landor|collins|wolff olins|clay|ramotion|red antler|huckleberry branding,pentagram,10,clay.global|landor.com|pentagram.com|ramotion.com|redantler.com|reddit.com|topbrandagencies.com|topbrandingagencies.io|wearecollins.com|wolffolins.com,1,1,465
+item_0247,headphones,1,2026-07-17,gpt-5-5,4,anker|jbl|apple|bose,anker,2,choice.com.au|rtings.com,1,1,477
+item_0248,headphones,1,2026-07-17,gpt-5-5,4,sony|bose|sennheiser|anker,sony,2,rtings.com|soundguys.com,1,1,453
+item_0249,headphones,1,2026-07-17,gpt-5-5,6,sennheiser|sony|bose|anker|jbl|apple,sennheiser,1,rtings.com,1,1,505
+item_0250,coffee,1,2026-07-17,gpt-5-5,7,crate47|nice branding|la caballa agency|designstudio|jones knowles ritchie|pearlfisher|landor,crate47,10,behance.net|bellwethercoffee.com|crate47.com|creativebloq.com|infusehospitality.com|inkbotdesign.com|lacaballa.com|laurenmhodges.com|nice-branding.com|studiobanaa.com,2,1,613
+item_0251,headphones,1,2026-07-17,gpt-5-5,5,sony|bose|apple|anker|technics,sony,3,rtings.com|soundguys.com|techradar.com,1,1,775
+item_0252,headphones,1,2026-07-17,gpt-5-5,4,sony|bose|apple|sennheiser,sony,2,soundguys.com|whathifi.com,1,1,387
+item_0253,headphones,1,2026-07-17,gpt-5-5,4,sony|bose|sennheiser|anker,sony,2,reddit.com|rtings.com,1,1,464
+item_0254,coffee,1,2026-07-17,gpt-5-5,7,freshsparks|bureau of small projects|born & bred|murmur creative|focus lab|motto|manypixels,freshsparks,2,designrush.com|manypixels.co,1,1,323
+item_0255,coffee,1,2026-07-17,gpt-5-5,3,zut alors|all good nyc|ulysses design co,zut alors,5,allgoodnyc.com|atclark.co.uk|brandidentity.studio|sepoandco.com|ulyssesdesignco.com,1,1,705
+item_0256,coffee,1,2026-07-17,gpt-5-5,1,basecoat,basecoat,7,bloo-studio.com|brewedbold.com|bybasecoat.com|cafeestudiodesigns.com|designequals.com|ramirez-agency.com|studioreserveproduction.com,1,1,394
+item_0257,headphones,1,2026-07-17,gpt-5-5,5,sony|bose|sennheiser|samsung|apple,sony,2,rtings.com|techgearlab.com,1,1,255
+item_0258,coffee,1,2026-07-17,gpt-5-5,0,,,1,rtings.com,1,1,252
+item_0259,coffee,1,2026-07-17,gpt-5-5,8,red antler|bureau of small projects|motto|manypixels|focus lab|freshsparks|splurge media|pentagram,red antler,5,bonappetit.com|designrush.com|dribbble.com|manypixels.co|reddit.com,1,1,542
+item_0260,headphones,1,2026-07-17,gpt-5-5,4,sennheiser|sony|bose|anker,sennheiser,1,medium.com,1,1,240
+item_0261,coffee,1,2026-07-17,gpt-5-5,6,murmur creative|mucca|matchstic|nice branding|atlas branding|pentagram,murmur creative,10,atlasbranding.com|atomicdust.com|designrush.com|marketingltb.com|matchstic.com|mucca.com|murmurcreative.com|nicebranding.com|pentagram.com|reddit.com,1,1,903
+item_0262,coffee,1,2026-07-17,gpt-5-5,6,pentagram|collins|red antler|gretel|anchour|vigor branding,pentagram,3,clutch.co|foodandwine.com|reddit.com,1,1,486
+item_0263,headphones,1,2026-07-17,gpt-5-5,2,sony|bose,sony,2,rtings.com|soundguys.com,1,1,390
+item_0264,headphones,1,2026-07-17,gpt-5-5,2,anker|sony,anker,1,rtings.com,1,1,204
+item_0265,coffee,1,2026-07-17,gpt-5-5,7,focus lab|ramotion|clay|anchour|bureau of small projects|knapsack creative|outcrowd,focus lab,2,designrush.com|reddit.com,1,1,461
+item_0266,coffee,1,2026-07-17,gpt-5-5,1,blindtiger design,blindtiger design,3,beliefagency.com|blindtigerdesign.com|partly-sunny.com,1,1,404
+item_0267,coffee,1,2026-07-17,gpt-5-5,6,freshsparks|bureau of small projects|splurge media|red antler|clay|collins,freshsparks,3,designrush.com|dribbble.com|reddit.com,1,1,389
+item_0268,coffee,1,2026-07-17,gpt-5-5,0,,,0,,1,1,94
+item_0269,coffee,1,2026-07-17,gpt-5-5,4,all good nyc|ulysses design co|crate47|the working assembly,all good nyc,10,allgoodnyc.com|campfireandco.com|crate47.com|esque.design|madebycharacter.com|mouthmedia.com|tekwanidesign.com|tgpinternational.com|theworkingassembly.com|ulyssesdesignco.com,1,1,445
+item_0270,headphones,1,2026-07-17,gpt-5-5,8,anker|sony|bose|edifier|sennheiser|apple|focal|bowers & wilkins,anker,2,rtings.com|soundguys.com,1,1,883
+item_0271,coffee,1,2026-07-17,gpt-5-5,6,pentagram|collins|landor|mucho|ludlow kingsley|crate47,pentagram,10,brandbarista.co|cafeestudiodesigns.com|crate47.com|fiveacresagency.com|flaskagency.com|jeromeandzimmerman.com|lucentstudio.co|ludlowkingsley.com|phvntom.com|tealfeatherdesign.com,1,1,1087
+item_0272,coffee,1,2026-07-17,gpt-5-5,0,,,0,,1,1,106
+item_0273,coffee,1,2026-07-17,gpt-5-5,1,brigade,brigade,2,clutch.co|townmedialabs.com,1,1,361
+item_0274,coffee,1,2026-07-17,gpt-5-5,0,,,1,bellwethercoffee.com,1,1,376
+item_0275,headphones,1,2026-07-17,gpt-5-5,4,bose|sony|sennheiser|apple,bose,2,rtings.com|soundguys.com,1,1,447
+item_0276,headphones,1,2026-07-17,gpt-5-5,2,earfun|philips,earfun,3,amazon.ie|babygearlab.com|slickdeals.net,1,1,525
+item_0277,coffee,1,2026-07-17,gpt-5-5,0,,,1,agencypro.app,1,1,393
+item_0278,coffee,1,2026-07-17,gpt-5-5,0,,,5,accoladecreative.ca|littleghost.ca|madebyemblem.com|pineapplestudio.design|stranoandpettigrew.com,1,1,594
+item_0279,coffee,1,2026-07-17,gpt-5-5,14,pentagram|landor|wolff olins|collins|red antler|chermayeff & geismar & haviv|lippincott|interbrand|koto|clay|ramotion|gretel|&walsh|duck.design,pentagram,2,clutch.co|reddit.com,1,1,315
+item_0280,headphones,1,2026-07-17,gpt-5-5,4,sony|bose|sennheiser|apple,sony,1,rtings.com,1,1,346
+item_0281,headphones,1,2026-07-17,gpt-5-5,5,sony|bose|sennheiser|apple|bowers & wilkins,sony,2,reddit.com|rtings.com,1,1,562
+item_0282,coffee,1,2026-07-17,gpt-5-5,4,jones knowles ritchie|pearlfisher|red antler|landor,jones knowles ritchie,10,b12-group.com|bulletproof.design|designbridge.com|jkrglobal.com|landor.com|lmpp.studio|pearlfisher.com|redantler.com|theoryhouse.com|turnerduckworth.com,1,1,355
+item_0283,coffee,1,2026-07-17,gpt-5-5,4,ludlow kingsley|design ranch|supervox|studio tyrsa,ludlow kingsley,10,alchemy.design|dearcoffee.com|design-ranch.com|dunnbrothers.com|groundworkcoffee.com|ludlowkingsley.com|mildredskitchen.com|studiotyrsa.com|supervoxagency.com|tactilecoffee.com,1,1,558
+item_0284,coffee,1,2026-07-17,gpt-5-5,5,designstudio|pearlfisher|jones knowles ritchie|design womb|matchstic,designstudio,2,clutch.co|shopify.com,2,1,440
+item_0285,coffee,1,2026-07-17,gpt-5-5,7,fiverr|99designs|holman design|designstudio|pentagram|jones knowles ritchie|pearlfisher,fiverr,11,99designs.com|bellmanagency.com.au|design.studio|designpickle.com|fiverr.com|holman.design|jkrglobal.com|pearlfisher.com|pentagram.com|percept.com.au|rycodesign.com,2,1,750
+item_0286,coffee,1,2026-07-17,gpt-5-5,3,black anchor design|holman design|supervox,black anchor design,5,blackanchordesign.com|holman.design|meteorstreetstudio.com|pinebeecreative.com|supervoxagency.com,1,1,484
+item_0115,headphones,2,2026-07-18,gpt-5-5,3,sony|bose|apple,sony,2,bestbuy.com|wsj.com,1,1,150
+item_0106,headphones,2,2026-07-18,gpt-5-5,4,sony|bose|sennheiser|apple,sony,2,rtings.com|whathifi.com,1,1,637
+item_0051,headphones,2,2026-07-18,gpt-5-5,4,bose|sony|sennheiser|apple,bose,1,rtings.com,1,1,354
+item_0152,headphones,2,2026-07-18,gpt-5-5,4,sennheiser|sony|bose|apple,sennheiser,2,rtings.com|soundguys.com,1,1,536
+item_0045,headphones,2,2026-07-18,gpt-5-5,3,sony|sennheiser|anker,sony,1,rtings.com,1,1,313
+item_0180,headphones,2,2026-07-18,gpt-5-5,5,bose|sony|sennheiser|apple|anker,bose,3,reddit.com|redditrecs.com|rtings.com,1,1,811
+item_0179,headphones,2,2026-07-18,gpt-5-5,5,sony|bose|sennheiser|anker|jbl,sony,3,johnlewis.com|whathifi.com|which.co.uk,1,1,430
+item_0127,headphones,2,2026-07-18,gpt-5-5,5,sony|bose|sennheiser|apple|anker,sony,3,rtings.com|techradar.com|tomsguide.com,1,1,388
+item_0023,headphones,2,2026-07-18,gpt-5-5,8,sony|bose|jbl|sennheiser|samsung|anker|apple|technics,sony,1,rtings.com,1,1,303
+item_0109,headphones,2,2026-07-18,gpt-5-5,4,sony|bose|sennheiser|anker,sony,3,rtings.com|stuff.tv|whathifi.com,1,1,430
+item_0103,headphones,2,2026-07-18,gpt-5-5,5,sennheiser|sony|anker|jbl|bose,sennheiser,1,rtings.com,1,1,389
+item_0012,headphones,2,2026-07-18,gpt-5-5,5,sony|apple|sennheiser|anker|bose,sony,3,rtings.com|whathifi.com|wsj.com,1,1,522
+item_0003,headphones,2,2026-07-18,gpt-5-5,4,sony|bose|sennheiser|anker,sony,1,rtings.com,1,1,330
+item_0206,headphones,2,2026-07-18,gpt-5-5,5,sony|bose|sennheiser|anker|apple,sony,2,rtings.com|wsj.com,1,1,890
+item_0264,headphones,2,2026-07-18,gpt-5-5,0,,,0,,1,1,120
+item_0086,headphones,2,2026-07-18,gpt-5-5,6,sennheiser|apple|jbl|sony|bose|anker,sennheiser,2,rtings.com|techradar.com,1,1,435
+item_0107,headphones,2,2026-07-18,gpt-5-5,7,sony|bose|sennheiser|anker|jbl|apple|nothing,sony,2,rtings.com|techradar.com,1,1,584
+item_0036,headphones,2,2026-07-18,gpt-5-5,7,sony|bose|sennheiser|apple|anker|1more|bowers & wilkins,sony,1,rtings.com,1,1,790
+item_0186,headphones,2,2026-07-18,gpt-5-5,5,bose|sony|sennheiser|apple|anker,bose,3,soundguys.com|techradar.com|whathifi.com,1,1,580
+item_0200,headphones,2,2026-07-18,gpt-5-5,4,sony|bose|sennheiser|anker,sony,1,rtings.com,1,1,422
+item_0037,headphones,2,2026-07-18,gpt-5-5,5,sony|bose|sennheiser|apple|bowers & wilkins,sony,2,rtings.com|whathifi.com,1,1,386
+item_0141,headphones,2,2026-07-18,gpt-5-5,5,sony|bose|sennheiser|apple|anker,sony,3,reddit.com|rtings.com|tomsguide.com,1,1,443
+item_0096,headphones,2,2026-07-18,gpt-5-5,4,sony|sennheiser|bose|anker,sony,3,rtings.com|techgearlab.com|techradar.com,1,1,443
+item_0133,headphones,2,2026-07-18,gpt-5-5,3,sony|bose|apple,sony,1,rtings.com,1,1,338
+item_0270,headphones,2,2026-07-18,gpt-5-5,9,sony|bose|sennheiser|apple|anker|jbl|1more|bowers & wilkins|focal,sony,2,reddit.com|rtings.com,2,1,895
+item_0001,headphones,2,2026-07-18,gpt-5-5,4,sennheiser|bose|sony|anker,sennheiser,0,,1,1,530
+item_0158,headphones,2,2026-07-18,gpt-5-5,4,anker|sennheiser|bose|sony,anker,1,rtings.com,1,1,466
+item_0227,headphones,2,2026-07-18,gpt-5-5,5,sony|bose|anker|sennheiser|apple,sony,2,rtings.com|techradar.com,1,1,396
+item_0202,headphones,2,2026-07-18,gpt-5-5,7,bose|sony|anker|1more|edifier|philips|jbl,bose,2,rtings.com|soundguys.com,1,1,326
+item_0067,headphones,2,2026-07-18,gpt-5-5,0,,,0,,1,1,20
+item_0162,headphones,2,2026-07-18,gpt-5-5,2,sony|bose,sony,1,rtings.com,1,1,288
+item_0168,headphones,2,2026-07-18,gpt-5-5,9,anker|edifier|skullcandy|sony|bose|sennheiser|jbl|apple|focal,anker,2,rtings.com|whathifi.com,1,1,970
+item_0208,headphones,2,2026-07-18,gpt-5-5,3,bose|sony|sennheiser,bose,3,reddit.com|rtings.com|techradar.com,2,1,548
+item_0018,headphones,2,2026-07-18,gpt-5-5,4,sony|bose|sennheiser|anker,sony,2,cntraveller.com|rtings.com,1,1,527
+item_0148,headphones,2,2026-07-18,gpt-5-5,3,anker|sony|bose,anker,2,rtings.com|whathifi.com,1,1,417
+item_0203,headphones,2,2026-07-18,gpt-5-5,3,sony|bose|anker,sony,3,consumerreports.org|rtings.com|tomsguide.com,1,1,264
+item_0139,headphones,2,2026-07-18,gpt-5-5,3,sennheiser|audio-technica|philips,sennheiser,2,rtings.com|tomsguide.com,1,1,394
+item_0230,headphones,2,2026-07-18,gpt-5-5,4,sennheiser|bose|anker|sony,sennheiser,1,rtings.com,1,1,269
+item_0098,headphones,2,2026-07-18,gpt-5-5,3,anker|shokz|jbl,anker,2,rtings.com|techradar.com,1,1,343
+item_0118,headphones,2,2026-07-18,gpt-5-5,3,sennheiser|sony|bose,sennheiser,1,rtings.com,1,1,341
+item_0016,headphones,2,2026-07-18,gpt-5-5,4,sony|bose|sennheiser|anker,sony,1,rtings.com,1,1,398
+item_0126,headphones,2,2026-07-18,gpt-5-5,1,jbl,jbl,0,,1,1,404
+item_0110,headphones,2,2026-07-18,gpt-5-5,4,sony|bose|apple|sennheiser,sony,1,rtings.com,1,1,390
+item_0178,headphones,2,2026-07-18,gpt-5-5,5,sony|bose|sennheiser|anker|apple,sony,3,soundguys.com|techradar.com|whathifi.com,1,1,551
+item_0009,headphones,2,2026-07-18,gpt-5-5,4,bose|sony|sennheiser|apple,bose,2,rtings.com|soundguys.com,1,1,478
+item_0247,headphones,2,2026-07-18,gpt-5-5,3,anker|sony|apple,anker,2,choice.com.au|rtings.com,1,1,445
+item_0083,headphones,2,2026-07-18,gpt-5-5,3,sony|jbl|anker,sony,2,reddit.com|smartprix.com,1,1,535
+item_0138,headphones,2,2026-07-18,gpt-5-5,4,sony|bose|sennheiser|anker,sony,1,rtings.com,1,1,429
+item_0104,headphones,2,2026-07-18,gpt-5-5,5,sony|bose|sennheiser|apple|jbl,sony,3,rtings.com|soundguys.com|techradar.com,1,1,470
+item_0176,headphones,2,2026-07-18,gpt-5-5,5,sony|bose|sennheiser|apple|anker,sony,3,reddit.com|rtings.com|whathifi.com,1,1,481
+item_0042,headphones,2,2026-07-18,gpt-5-5,5,sony|bose|sennheiser|apple|anker,sony,3,reddit.com|rtings.com|stuff.tv,1,1,497
+item_0002,headphones,2,2026-07-18,gpt-5-5,0,,,1,openai.com,1,1,598
+item_0153,headphones,2,2026-07-18,gpt-5-5,3,sony|bose|sennheiser,sony,3,rtings.com|travelandleisure.com|whathifi.com,1,1,306
+item_0119,headphones,2,2026-07-18,gpt-5-5,5,sony|sennheiser|bose|bowers & wilkins|jbl,sony,3,rtings.com|soundguys.com|whathifi.com,1,1,518
+item_0135,headphones,2,2026-07-18,gpt-5-5,1,apple,apple,0,,1,1,182
+item_0134,headphones,2,2026-07-18,gpt-5-5,0,,,1,aaai.org,1,1,208
+item_0008,headphones,2,2026-07-18,gpt-5-5,4,sennheiser|sony|anker|jbl,sennheiser,0,,1,1,502
+item_0116,headphones,2,2026-07-18,gpt-5-5,3,sony|bose|apple,sony,1,rtings.com,1,1,330
+item_0053,headphones,2,2026-07-18,gpt-5-5,4,sony|anker|bose|sennheiser,sony,3,reddit.com|redditrecs.com|rtings.com,3,1,1050
+item_0082,headphones,2,2026-07-18,gpt-5-5,4,sony|bose|sennheiser|anker,sony,11,amazon.co.uk|bose.co.uk|currys.co.uk|expertreviews.co.uk|johnlewis.com|reddit.com|richersounds.com|sennheiser-hearing.com|sony.co.uk|whathifi.com|which.co.uk,1,1,760
+item_0124,headphones,2,2026-07-18,gpt-5-5,4,bose|sony|apple|sennheiser,bose,2,soundguys.com|whathifi.com,1,1,409
+item_0123,headphones,2,2026-07-18,gpt-5-5,5,sony|bose|sennheiser|anker|apple,sony,2,news.com.au|rtings.com,1,1,1048
+item_0075,headphones,2,2026-07-18,gpt-5-5,6,sony|bose|sennheiser|anker|jbl|apple,sony,3,rtings.com|soundguys.com|techradar.com,1,1,348
+item_0015,headphones,2,2026-07-18,gpt-5-5,4,sony|bose|apple|sennheiser,sony,1,rtings.com,1,1,863
+item_0281,headphones,2,2026-07-18,gpt-5-5,4,sony|bose|sennheiser|anker,sony,4,reddit.com|rtings.com|techradar.com|whathifi.com,1,1,517
+item_0252,headphones,2,2026-07-18,gpt-5-5,5,sony|sennheiser|bose|anker|apple,sony,4,forbes.com|soundguys.com|techgearlab.com|whathifi.com,1,1,291
+item_0093,headphones,2,2026-07-18,gpt-5-5,4,sennheiser|bose|sony|anker,sennheiser,2,rtings.com|techradar.com,1,1,546
+item_0240,headphones,2,2026-07-18,gpt-5-5,3,sony|bose|sennheiser,sony,2,rtings.com|techradar.com,1,1,528
+item_0056,headphones,2,2026-07-18,gpt-5-5,4,sony|bose|sennheiser|anker,sony,2,rtings.com|stuff.tv,1,1,251
+item_0222,headphones,2,2026-07-18,gpt-5-5,3,sony|anker|jbl,sony,1,soundguys.com,1,1,740
+item_0149,headphones,2,2026-07-18,gpt-5-5,4,apple|bose|sony|sennheiser,apple,0,,1,1,581
+item_0276,headphones,2,2026-07-18,gpt-5-5,0,,,1,babygearlab.com,1,1,500
+item_0169,headphones,2,2026-07-18,gpt-5-5,4,sony|bose|sennheiser|anker,sony,1,rtings.com,1,1,400
+item_0095,headphones,2,2026-07-18,gpt-5-5,4,apple|anker|sony|sennheiser,apple,1,rtings.com,1,1,418
+item_0163,headphones,2,2026-07-18,gpt-5-5,5,sennheiser|bose|sony|anker|apple,sennheiser,2,rtings.com|soundguys.com,1,1,724
+item_0251,headphones,2,2026-07-18,gpt-5-5,5,sony|bose|apple|sennheiser|anker,sony,4,gummysearch.com|reddit.com|rtings.com|soundguys.com,2,1,661
+item_0021,headphones,2,2026-07-18,gpt-5-5,4,sony|bose|sennheiser|apple,sony,4,digitaltrends.com|headphonesty.com|reddit.com|rtings.com,1,1,830
+item_0024,headphones,2,2026-07-18,gpt-5-5,3,sennheiser|bose|apple,sennheiser,1,rtings.com,1,1,458
+item_0241,headphones,2,2026-07-18,gpt-5-5,4,sony|bose|sennheiser|anker,sony,3,rtings.com|soundguys.com|tomsguide.com,1,1,396
+item_0046,headphones,2,2026-07-18,gpt-5-5,4,sony|bose|sennheiser|anker,sony,1,rtings.com,1,1,270
+item_0031,headphones,2,2026-07-18,gpt-5-5,4,sony|bose|sennheiser|anker,sony,2,forbes.com|wired.com,1,1,469
+item_0201,headphones,2,2026-07-18,gpt-5-5,5,bose|sony|apple|anker|sennheiser,bose,2,rtings.com|soundguys.com,1,1,509
+item_0006,headphones,2,2026-07-18,gpt-5-5,5,sony|bose|sennheiser|anker|apple,sony,1,rtings.com,1,1,331
+item_0157,headphones,2,2026-07-18,gpt-5-5,1,anker,anker,2,rtings.com|soundguys.com,1,1,431
+item_0218,headphones,2,2026-07-18,gpt-5-5,5,bose|anker|jbl|sony|apple,bose,2,rtings.com|whathifi.com,1,1,551
+item_0160,headphones,2,2026-07-18,gpt-5-5,0,,,3,soundguys.com|techradar.com|tomsguide.com,1,1,537
+item_0229,headphones,2,2026-07-18,gpt-5-5,4,anker|sennheiser|sony|bose,anker,0,,1,1,585
+item_0214,headphones,2,2026-07-18,gpt-5-5,5,sony|bose|apple|sennheiser|bowers & wilkins,sony,1,rtings.com,2,1,189
+item_0044,headphones,2,2026-07-18,gpt-5-5,5,sony|bose|sennheiser|anker|apple,sony,4,rtings.com|techradar.com|travelandleisure.com|whathifi.com,1,1,251
+item_0070,headphones,2,2026-07-18,gpt-5-5,3,sennheiser|bose|sony,sennheiser,2,soundguys.com|whathifi.com,1,1,488
+item_0195,headphones,2,2026-07-18,gpt-5-5,4,bose|sennheiser|sony|anker,bose,1,rtings.com,1,1,382
+item_0177,headphones,2,2026-07-18,gpt-5-5,4,sony|bose|apple|anker,sony,3,rtings.com|stuff.tv|techradar.com,1,1,342
+item_0275,headphones,2,2026-07-18,gpt-5-5,4,sony|bose|sennheiser|anker,sony,1,rtings.com,1,1,344
+item_0084,headphones,2,2026-07-18,gpt-5-5,0,,,0,,1,1,65
+item_0253,headphones,2,2026-07-18,gpt-5-5,5,sony|bose|sennheiser|anker|jabra,sony,2,rtings.com|whathifi.com,1,1,438
+item_0234,headphones,2,2026-07-18,gpt-5-5,5,sony|apple|bose|sennheiser|anker,sony,2,forbes.com|techgearlab.com,1,1,406
+item_0161,headphones,2,2026-07-18,gpt-5-5,6,sennheiser|sony|beyerdynamic|focal|audio-technica|bose,sennheiser,2,headphonesty.com|rtings.com,1,1,336
+item_0154,headphones,2,2026-07-18,gpt-5-5,4,sony|sennheiser|bose|anker,sony,1,rtings.com,1,1,382
+item_0159,headphones,2,2026-07-18,gpt-5-5,3,sennheiser|sony|bose,sennheiser,1,rtings.com,1,1,288
+item_0205,headphones,2,2026-07-18,gpt-5-5,5,sony|bose|sennheiser|anker|jbl,sony,1,rtings.com,1,1,335
+item_0242,headphones,2,2026-07-18,gpt-5-5,5,sony|bose|sennheiser|anker|apple,sony,1,rtings.com,1,1,300
+item_0164,headphones,2,2026-07-18,gpt-5-5,4,sony|bose|sennheiser|apple,sony,3,rtings.com|travelandleisure.com|whathifi.com,1,1,433
+item_0136,headphones,2,2026-07-18,gpt-5-5,4,bose|sony|apple|sennheiser,bose,0,,1,1,435
+item_0132,headphones,2,2026-07-18,gpt-5-5,4,sony|sennheiser|bose|anker,sony,1,rtings.com,1,1,395
+item_0174,headphones,2,2026-07-18,gpt-5-5,4,sony|bose|sennheiser|anker,sony,1,rtings.com,1,1,330
+item_0233,headphones,2,2026-07-18,gpt-5-5,3,sony|bose|sennheiser,sony,2,rtings.com|techradar.com,1,1,279
+item_0210,headphones,2,2026-07-18,gpt-5-5,5,sony|bose|sennheiser|apple|anker,sony,0,,1,1,257
+item_0027,headphones,2,2026-07-18,gpt-5-5,4,bose|sony|sennheiser|apple,bose,1,rtings.com,1,1,425
+item_0145,headphones,2,2026-07-18,gpt-5-5,5,bose|sony|sennheiser|anker|apple,bose,3,rtings.com|soundguys.com|techradar.com,1,1,384
+item_0011,headphones,2,2026-07-18,gpt-5-5,4,sony|bose|sennheiser|bowers & wilkins,sony,2,rtings.com|soundguys.com,1,1,524
+item_0244,headphones,2,2026-07-18,gpt-5-5,4,sennheiser|sony|anker|jbl,sennheiser,2,soundguys.com|whathifi.com,1,1,553
+item_0081,headphones,2,2026-07-18,gpt-5-5,5,sony|sennheiser|bose|anker|apple,sony,2,soundguys.com|techradar.com,1,1,428
+item_0225,headphones,2,2026-07-18,gpt-5-5,5,sony|bose|sennheiser|anker|apple,sony,2,euronics.ee|sony.ee,2,1,432
+item_0223,headphones,2,2026-07-18,gpt-5-5,6,sony|bose|sennheiser|anker|apple|jbl,sony,2,rtings.com|techradar.com,1,1,375
+item_0040,headphones,2,2026-07-18,gpt-5-5,5,anker|sony|apple|sennheiser|jbl,anker,2,rtings.com|soundguys.com,1,1,480
+item_0130,headphones,2,2026-07-18,gpt-5-5,4,sony|bose|sennheiser|apple,sony,2,reddit.com|rtings.com,1,1,295
+item_0077,headphones,2,2026-07-18,gpt-5-5,3,anker|sennheiser|sony,anker,2,loudersound.com|radarofertas.es,1,1,342
+item_0249,headphones,2,2026-07-18,gpt-5-5,5,sennheiser|sony|bose|anker|edifier,sennheiser,0,,1,1,476
+item_0111,headphones,2,2026-07-18,gpt-5-5,4,sony|bose|sennheiser|anker,sony,0,,1,1,574
+item_0108,headphones,2,2026-07-18,gpt-5-5,4,sony|bose|sennheiser|apple,sony,4,rtings.com|techradar.com|whathifi.com|wsj.com,1,1,757
+item_0112,headphones,2,2026-07-18,gpt-5-5,4,sony|bose|sennheiser|anker,sony,1,rtings.com,1,1,657
+item_0066,headphones,2,2026-07-18,gpt-5-5,5,bose|sony|sennheiser|apple|anker,bose,1,rtings.com,1,1,649
+item_0137,headphones,2,2026-07-18,gpt-5-5,4,anker|sony|sennheiser|bose,anker,1,rtings.com,1,1,249
+item_0221,headphones,2,2026-07-18,gpt-5-5,8,sony|sennheiser|anker|jbl|apple|edifier|bose|skullcandy,sony,1,rtings.com,1,1,698
+item_0055,headphones,2,2026-07-18,gpt-5-5,3,sony|bose|apple,sony,1,rtings.com,1,1,334
+item_0212,headphones,2,2026-07-18,gpt-5-5,5,sony|bose|anker|audio-technica|shokz,sony,2,soundguys.com|techradar.com,1,1,569
+item_0043,headphones,2,2026-07-18,gpt-5-5,5,sony|bose|apple|anker|sennheiser,sony,1,rtings.com,1,1,580
+item_0155,headphones,2,2026-07-18,gpt-5-5,4,sony|sennheiser|bose|anker,sony,2,rtings.com|whathifi.com,1,1,404
+item_0065,headphones,2,2026-07-18,gpt-5-5,4,sony|bose|sennheiser|anker,sony,2,rtings.com|techradar.com,1,1,370
+item_0005,headphones,2,2026-07-18,gpt-5-5,4,sony|bose|sennheiser|anker,sony,2,rtings.com|stuff.tv,1,1,302
+item_0052,headphones,2,2026-07-18,gpt-5-5,3,sony|bose|sennheiser,sony,2,forbes.com|techradar.com,1,1,386
+item_0085,headphones,2,2026-07-18,gpt-5-5,3,sony|anker|bose,sony,2,rtings.com|sony.com,1,1,435
+item_0280,headphones,2,2026-07-18,gpt-5-5,4,sony|bose|sennheiser|apple,sony,4,nbcnews.com|rtings.com|soundguys.com|techradar.com,1,1,361
+item_0128,headphones,2,2026-07-18,gpt-5-5,6,apple|bose|anker|jbl|sony|audio-technica,apple,2,loudersound.com|techradar.com,1,1,471
+item_0257,headphones,2,2026-07-18,gpt-5-5,6,sony|sennheiser|bose|sonos|apple|samsung,sony,2,rtings.com|techgearlab.com,1,1,314
+item_0263,headphones,2,2026-07-18,gpt-5-5,4,sony|bose|sennheiser|anker,sony,2,rtings.com|whathifi.com,1,1,408
+item_0260,headphones,2,2026-07-18,gpt-5-5,3,sennheiser|sony|bose,sennheiser,2,soundguys.com|techradar.com,1,1,191
+item_0091,headphones,2,2026-07-18,gpt-5-5,4,sony|bose|sennheiser|apple,sony,1,rtings.com,1,1,490
+item_0228,headphones,2,2026-07-18,gpt-5-5,5,sony|bose|sennheiser|bowers & wilkins|jbl,sony,0,,1,1,308
+item_0248,headphones,2,2026-07-18,gpt-5-5,4,sony|bose|sennheiser|apple,sony,1,rtings.com,1,1,637
+item_0245,headphones,2,2026-07-18,gpt-5-5,3,apple|samsung|google,apple,1,tomsguide.com,1,1,356
+item_0099,headphones,2,2026-07-18,gpt-5-5,3,sony|sennheiser|apple,sony,3,reddit.com|rtings.com|soundguys.com,2,1,461
+item_0117,headphones,2,2026-07-18,gpt-5-5,4,bose|sony|anker|sennheiser,bose,0,,1,1,472
+item_0230,headphones,3,2026-07-19,gpt-5-5,4,sony|bose|sennheiser|apple,sony,3,rtings.com|stuff.tv|wsj.com,1,1,327
+item_0245,headphones,3,2026-07-19,gpt-5-5,3,apple|samsung|google,apple,2,techradar.com|tomsguide.com,1,1,464
+item_0053,headphones,3,2026-07-19,gpt-5-5,4,anker|sony|bose|sennheiser,anker,2,rtings.com|soundguys.com,1,1,721
+item_0051,headphones,3,2026-07-19,gpt-5-5,5,sony|bose|sennheiser|anker|apple,sony,2,rtings.com|techradar.com,1,1,480
+item_0244,headphones,3,2026-07-19,gpt-5-5,5,sony|anker|jbl|sennheiser|apple,sony,1,rtings.com,1,1,612
+item_0098,headphones,3,2026-07-19,gpt-5-5,4,sony|bose|jbl|shokz,sony,2,techradar.com|verywellfit.com,1,1,351
+item_0195,headphones,3,2026-07-19,gpt-5-5,4,sennheiser|sony|bose|anker,sennheiser,2,soundguys.com|whathifi.com,1,1,435
+item_0086,headphones,3,2026-07-19,gpt-5-5,0,,,0,,1,1,164
+item_0104,headphones,3,2026-07-19,gpt-5-5,6,sony|bose|sennheiser|apple|jbl|focal,sony,4,reddit.com|rtings.com|techradar.com|whathifi.com,1,1,498
+item_0218,headphones,3,2026-07-19,gpt-5-5,5,sony|anker|sennheiser|apple|jbl,sony,2,crutchfield.com|whathifi.com,1,1,355
+item_0240,headphones,3,2026-07-19,gpt-5-5,3,sony|bose|sennheiser,sony,1,rtings.com,1,1,591
+item_0225,headphones,3,2026-07-19,gpt-5-5,3,jbl|sony|bose,jbl,1,euronics.ee,1,1,344
+item_0015,headphones,3,2026-07-19,gpt-5-5,4,sony|bose|sennheiser|sonos,sony,3,rtings.com|soundguys.com|whathifi.com,1,1,752
+item_0249,headphones,3,2026-07-19,gpt-5-5,5,sony|sennheiser|bose|anker|apple,sony,3,rtings.com|soundguys.com|techradar.com,1,1,455
+item_0241,headphones,3,2026-07-19,gpt-5-5,5,bose|sony|sennheiser|anker|apple,bose,4,rtings.com|soundguys.com|techradar.com|whathifi.com,1,1,313
+item_0024,headphones,3,2026-07-19,gpt-5-5,5,sony|sennheiser|bose|sonos|jbl,sony,2,rtings.com|whathifi.com,1,1,484
+item_0148,headphones,3,2026-07-19,gpt-5-5,4,anker|sony|sennheiser|bose,anker,2,rtings.com|soundguys.com,1,1,476
+item_0128,headphones,3,2026-07-19,gpt-5-5,5,apple|anker|sony|jbl|bose,apple,3,expertreviews.co.uk|soundcore.com|whathifi.com,1,1,464
+item_0070,headphones,3,2026-07-19,gpt-5-5,4,sennheiser|bose|sony|apple,sennheiser,1,techradar.com,1,1,567
+item_0084,headphones,3,2026-07-19,gpt-5-5,0,,,0,,1,1,162
+item_0127,headphones,3,2026-07-19,gpt-5-5,5,sony|bose|sennheiser|apple|anker,sony,3,rtings.com|tomsguide.com|whathifi.com,1,1,323
+item_0152,headphones,3,2026-07-19,gpt-5-5,4,sennheiser|bose|sony|apple,sennheiser,2,rtings.com|whathifi.com,1,1,424
+item_0157,headphones,3,2026-07-19,gpt-5-5,6,anker|sennheiser|1more|sony|jbl|edifier,anker,2,rtings.com|soundguys.com,1,1,435
+item_0212,headphones,3,2026-07-19,gpt-5-5,3,anker|audio-technica|shokz,anker,2,esquire.com|soundguys.com,1,1,507
+item_0210,headphones,3,2026-07-19,gpt-5-5,4,sony|bose|sennheiser|anker,sony,1,rtings.com,1,1,394
+item_0251,headphones,3,2026-07-19,gpt-5-5,5,sony|bose|sennheiser|anker|apple,sony,3,reddit.com|rtings.com|soundguys.com,1,1,716
+item_0023,headphones,3,2026-07-19,gpt-5-5,8,sony|samsung|jbl|bose|sennheiser|anker|technics|apple,sony,1,rtings.com,1,1,322
+item_0135,headphones,3,2026-07-19,gpt-5-5,4,sony|bose|sennheiser|anker,sony,1,rtings.com,1,1,211
+item_0096,headphones,3,2026-07-19,gpt-5-5,4,sony|bose|sennheiser|anker,sony,3,rtings.com|soundguys.com|techgearlab.com,1,1,372
+item_0099,headphones,3,2026-07-19,gpt-5-5,4,sony|sennheiser|bose|anker,sony,3,rtings.com|soundguys.com|tomsguide.com,1,1,411
+item_0253,headphones,3,2026-07-19,gpt-5-5,3,sony|bose|sennheiser,sony,2,rtings.com|whathifi.com,1,1,357
+item_0055,headphones,3,2026-07-19,gpt-5-5,3,bose|sony|anker,bose,2,reddit.com|rtings.com,1,1,403
+item_0067,headphones,3,2026-07-19,gpt-5-5,4,anker|sony|edifier|sennheiser,anker,1,rtings.com,1,1,221
+item_0139,headphones,3,2026-07-19,gpt-5-5,3,philips|sennheiser|audio-technica,philips,1,rtings.com,1,1,332
+item_0155,headphones,3,2026-07-19,gpt-5-5,3,sennheiser|sony|bose,sennheiser,2,forbes.com|whathifi.com,1,1,387
+item_0124,headphones,3,2026-07-19,gpt-5-5,4,sony|bose|sennheiser|apple,sony,5,cnet.com|news.com.au|nytimes.com|rtings.com|techradar.com,1,1,271
+item_0132,headphones,3,2026-07-19,gpt-5-5,5,sony|bose|sennheiser|anker|apple,sony,2,rtings.com|techradar.com,1,1,381
+item_0177,headphones,3,2026-07-19,gpt-5-5,5,sony|bose|sennheiser|anker|technics,sony,3,rtings.com|techradar.com|whathifi.com,1,1,333
+item_0149,headphones,3,2026-07-19,gpt-5-5,4,apple|sony|sennheiser|bose,apple,3,rtings.com|techradar.com|wsj.com,1,1,614
+item_0117,headphones,3,2026-07-19,gpt-5-5,4,bose|sony|sennheiser|apple,bose,2,rtings.com|soundguys.com,1,1,646
+item_0008,headphones,3,2026-07-19,gpt-5-5,4,anker|sennheiser|edifier|jbl,anker,1,rtings.com,1,1,470
+item_0168,headphones,3,2026-07-19,gpt-5-5,5,sennheiser|sony|bose|anker|beyerdynamic,sennheiser,1,whathifi.com,1,1,991
+item_0257,headphones,3,2026-07-19,gpt-5-5,6,sony|bose|sennheiser|sonos|samsung|apple,sony,3,rtings.com|techradar.com|whathifi.com,1,1,329
+item_0109,headphones,3,2026-07-19,gpt-5-5,3,sony|bose|apple,sony,2,rtings.com|wsj.com,1,1,473
+item_0112,headphones,3,2026-07-19,gpt-5-5,5,sony|bose|sennheiser|apple|anker,sony,1,rtings.com,1,1,870
+item_0138,headphones,3,2026-07-19,gpt-5-5,5,sony|bose|sennheiser|apple|anker,sony,3,rtings.com|travelandleisure.com|whathifi.com,1,1,428
+item_0248,headphones,3,2026-07-19,gpt-5-5,4,sony|bose|sennheiser|anker,sony,1,rtings.com,1,1,420
+item_0037,headphones,3,2026-07-19,gpt-5-5,5,sony|bose|sennheiser|apple|bowers & wilkins,sony,3,gadgets360.com|proaudiovideo.in|reddit.com,1,1,523
+item_0233,headphones,3,2026-07-19,gpt-5-5,4,sennheiser|bose|sony|anker,sennheiser,2,rtings.com|techradar.com,1,1,273
+item_0095,headphones,3,2026-07-19,gpt-5-5,5,sony|sennheiser|apple|bose|anker,sony,1,rtings.com,1,1,520
+item_0126,headphones,3,2026-07-19,gpt-5-5,3,jbl|sony|anker,jbl,2,reddit.com|the-independent.com,1,1,463
+item_0223,headphones,3,2026-07-19,gpt-5-5,4,sony|bose|sennheiser|anker,sony,2,rtings.com|techradar.com,1,1,383
+item_0134,headphones,3,2026-07-19,gpt-5-5,0,,,0,,1,1,71
+item_0075,headphones,3,2026-07-19,gpt-5-5,6,sony|bose|sennheiser|audio-technica|anker|apple,sony,3,rtings.com|soundguys.com|whathifi.com,1,1,427
+item_0133,headphones,3,2026-07-19,gpt-5-5,4,sony|bose|sennheiser|anker,sony,1,rtings.com,1,1,291
+item_0200,headphones,3,2026-07-19,gpt-5-5,4,sony|bose|anker|sennheiser,sony,1,rtings.com,1,1,463
+item_0044,headphones,3,2026-07-19,gpt-5-5,4,sony|bose|anker|apple,sony,3,reddit.com|rtings.com|travelandleisure.com,1,1,307
+item_0275,headphones,3,2026-07-19,gpt-5-5,5,sony|bose|sennheiser|apple|anker,sony,0,,1,1,358
+item_0016,headphones,3,2026-07-19,gpt-5-5,4,sony|bose|sennheiser|anker,sony,1,rtings.com,1,1,371
+item_0031,headphones,3,2026-07-19,gpt-5-5,4,sony|bose|sennheiser|anker,sony,1,rtings.com,1,1,471
+item_0040,headphones,3,2026-07-19,gpt-5-5,5,sennheiser|anker|apple|bose|sony,sennheiser,2,rtings.com|soundguys.com,1,1,485
+item_0052,headphones,3,2026-07-19,gpt-5-5,3,sony|bose|apple,sony,1,bhphotovideo.com,1,1,341
+item_0203,headphones,3,2026-07-19,gpt-5-5,4,sony|bose|apple|anker,sony,5,rtings.com|soundguys.com|techradar.com|tomsguide.com|wsj.com,1,1,286
+item_0205,headphones,3,2026-07-19,gpt-5-5,4,sennheiser|anker|bose|sony,sennheiser,1,rtings.com,1,1,366
+item_0281,headphones,3,2026-07-19,gpt-5-5,3,sony|bose|sennheiser,sony,0,,1,1,403
+item_0162,headphones,3,2026-07-19,gpt-5-5,4,anker|sennheiser|bose|sony,anker,3,rtings.com|soundguys.com|techradar.com,1,1,265
+item_0083,headphones,3,2026-07-19,gpt-5-5,3,sony|jbl|anker,sony,2,reddit.com|smartprix.com,1,1,512
+item_0009,headphones,3,2026-07-19,gpt-5-5,4,sony|bose|sennheiser|anker,sony,1,rtings.com,1,1,375
+item_0042,headphones,3,2026-07-19,gpt-5-5,5,sony|bose|sennheiser|jbl|anker,sony,2,rtings.com|whathifi.com,1,1,496
+item_0270,headphones,3,2026-07-19,gpt-5-5,9,anker|edifier|sony|bose|sennheiser|apple|sonos|focal|bang & olufsen,anker,2,rtings.com|soundguys.com,1,1,890
+item_0263,headphones,3,2026-07-19,gpt-5-5,4,sony|bose|apple|sennheiser,sony,0,,1,1,477
+item_0130,headphones,3,2026-07-19,gpt-5-5,4,sony|bose|anker|technics,sony,1,rtings.com,1,1,284
+item_0234,headphones,3,2026-07-19,gpt-5-5,4,sony|apple|bose|sennheiser,sony,4,nbcnews.com|rtings.com|tomsguide.com|whathifi.com,1,1,437
+item_0174,headphones,3,2026-07-19,gpt-5-5,3,bose|sony|apple,bose,2,packhacker.com|rtings.com,1,1,405
+item_0159,headphones,3,2026-07-19,gpt-5-5,3,sennheiser|sony|bose,sennheiser,3,forbes.com|soundguys.com|whathifi.com,1,1,579
+item_0093,headphones,3,2026-07-19,gpt-5-5,4,sony|bose|sennheiser|apple,sony,1,rtings.com,1,1,555
+item_0227,headphones,3,2026-07-19,gpt-5-5,3,sony|sennheiser|anker,sony,1,rtings.com,1,1,331
+item_0247,headphones,3,2026-07-19,gpt-5-5,3,sennheiser|anker|jbl,sennheiser,2,techradar.com|top7.au,1,1,408
+item_0163,headphones,3,2026-07-19,gpt-5-5,5,anker|sennheiser|sony|apple|bose,anker,1,rtings.com,1,1,694
+item_0056,headphones,3,2026-07-19,gpt-5-5,4,sony|bose|sennheiser|anker,sony,3,rtings.com|soundguys.com|techradar.com,1,1,260
+item_0065,headphones,3,2026-07-19,gpt-5-5,5,sony|bose|sennheiser|anker|apple,sony,4,rtings.com|techradar.com|whathifi.com|wsj.com,1,1,346
+item_0045,headphones,3,2026-07-19,gpt-5-5,5,sony|bose|apple|sennheiser|anker,sony,4,reddit.com|rtings.com|soundguys.com|tomsguide.com,2,1,259
+item_0110,headphones,3,2026-07-19,gpt-5-5,4,sony|bose|sennheiser|anker,sony,2,rtings.com|stuff.tv,1,1,363
+item_0091,headphones,3,2026-07-19,gpt-5-5,6,sony|sennheiser|bose|anker|samsung|apple,sony,2,rtings.com|techradar.com,1,1,474
+item_0081,headphones,3,2026-07-19,gpt-5-5,4,sennheiser|sony|bose|anker,sennheiser,2,rtings.com|techradar.com,1,1,521
+item_0106,headphones,3,2026-07-19,gpt-5-5,4,sony|bose|sennheiser|apple,sony,2,rtings.com|tomsguide.com,1,1,660
+item_0176,headphones,3,2026-07-19,gpt-5-5,4,sony|bose|sennheiser|anker,sony,2,rtings.com|techradar.com,1,1,339
+item_0043,headphones,3,2026-07-19,gpt-5-5,5,sony|bose|sennheiser|anker|apple,sony,3,rtings.com|stuff.tv|techradar.com,1,1,450
+item_0118,headphones,3,2026-07-19,gpt-5-5,0,,,0,,1,1,91
+item_0222,headphones,3,2026-07-19,gpt-5-5,5,anker|sony|bose|jbl|sennheiser,anker,2,rtings.com|soundguys.com,1,1,572
+item_0021,headphones,3,2026-07-19,gpt-5-5,4,sony|bose|sennheiser|anker,sony,2,reddit.com|rtings.com,1,1,960
+item_0201,headphones,3,2026-07-19,gpt-5-5,7,sony|bose|sennheiser|sonos|bowers & wilkins|apple|anker,sony,5,packhacker.com|rtings.com|techradar.com|whathifi.com|youtube.com,1,1,424
+item_0178,headphones,3,2026-07-19,gpt-5-5,5,apple|sony|bose|sennheiser|anker,apple,2,reddit.com|rtings.com,1,1,623
+item_0003,headphones,3,2026-07-19,gpt-5-5,4,sony|bose|sennheiser|anker,sony,1,rtings.com,1,1,328
+item_0242,headphones,3,2026-07-19,gpt-5-5,5,sony|bose|sennheiser|anker|apple,sony,5,rtings.com|techradar.com|tomsguide.com|whathifi.com|wsj.com,1,1,269
+item_0111,headphones,3,2026-07-19,gpt-5-5,4,sony|bose|sennheiser|anker,sony,2,rtings.com|techradar.com,1,1,591
+item_0228,headphones,3,2026-07-19,gpt-5-5,4,sony|bose|sennheiser|bowers & wilkins,sony,1,rtings.com,1,1,279
+item_0018,headphones,3,2026-07-19,gpt-5-5,4,sony|bose|sennheiser|anker,sony,1,rtings.com,1,1,578
+item_0280,headphones,3,2026-07-19,gpt-5-5,4,sony|bose|sennheiser|apple,sony,2,rtings.com|techradar.com,1,1,404
+item_0264,headphones,3,2026-07-19,gpt-5-5,4,anker|sony|sennheiser|apple,anker,1,soundguys.com,1,1,303
+item_0066,headphones,3,2026-07-19,gpt-5-5,5,anker|sony|jbl|sennheiser|bose,anker,1,rtings.com,1,1,456
+item_0119,headphones,3,2026-07-19,gpt-5-5,5,sennheiser|sony|bose|bowers & wilkins|apple,sennheiser,1,soundguys.com,1,1,679
+item_0141,headphones,3,2026-07-19,gpt-5-5,5,sony|bose|anker|sennheiser|apple,sony,1,rtings.com,1,1,478
+item_0252,headphones,3,2026-07-19,gpt-5-5,4,sony|bose|apple|sennheiser,sony,4,soundguys.com|techradar.com|tomsguide.com|whathifi.com,1,1,335
+item_0005,headphones,3,2026-07-19,gpt-5-5,4,sennheiser|bose|sony|anker,sennheiser,2,rtings.com|techradar.com,1,1,393
+item_0077,headphones,3,2026-07-19,gpt-5-5,4,sennheiser|sony|anker|jbl,sennheiser,3,meilleurtest.fr|reddit.com|wired.it,1,1,341
+item_0158,headphones,3,2026-07-19,gpt-5-5,4,anker|sony|sennheiser|bose,anker,2,rtings.com|soundguys.com,1,1,429
+item_0011,headphones,3,2026-07-19,gpt-5-5,4,sony|bose|sennheiser|sonos,sony,3,forbes.com|soundguys.com|techradar.com,1,1,513
+item_0169,headphones,3,2026-07-19,gpt-5-5,5,sony|bose|sennheiser|anker|apple,sony,1,rtings.com,1,1,405
+item_0082,headphones,3,2026-07-19,gpt-5-5,4,sony|bose|sennheiser|apple,sony,12,ao.com|argos.co.uk|bose.co.uk|currys.co.uk|expertreviews.co.uk|johnlewis.com|reddit.com|richersounds.com|sennheiser-hearing.com|sony.co.uk|whathifi.com|which.co.uk,1,1,917
+item_0137,headphones,3,2026-07-19,gpt-5-5,4,anker|jbl|sony|bose,anker,2,rtings.com|techradar.com,1,1,267
+item_0276,headphones,3,2026-07-19,gpt-5-5,1,earfun,earfun,3,babygearlab.com|techadvisor.com|travelandleisure.com,1,1,538
+item_0153,headphones,3,2026-07-19,gpt-5-5,3,sony|bose|apple,sony,1,rtings.com,1,1,358
+item_0164,headphones,3,2026-07-19,gpt-5-5,5,sony|bose|sennheiser|apple|anker,sony,2,rtings.com|whathifi.com,1,1,501
+item_0027,headphones,3,2026-07-19,gpt-5-5,6,bose|sony|sennheiser|apple|bowers & wilkins|sonos,bose,1,rtings.com,1,1,452
+item_0006,headphones,3,2026-07-19,gpt-5-5,4,sony|bose|sennheiser|anker,sony,2,rtings.com|techradar.com,1,1,320
+item_0107,headphones,3,2026-07-19,gpt-5-5,7,sony|bose|sennheiser|anker|jbl|apple|technics,sony,1,rtings.com,1,1,644
+item_0161,headphones,3,2026-07-19,gpt-5-5,8,sennheiser|sony|bose|audio-technica|beyerdynamic|focal|jbl|anker,sennheiser,1,rtings.com,1,1,300
+item_0145,headphones,3,2026-07-19,gpt-5-5,5,sony|bose|sennheiser|anker|apple,sony,2,reddit.com|rtings.com,1,1,473
+item_0208,headphones,3,2026-07-19,gpt-5-5,4,sony|anker|sennheiser|bose,sony,1,rtings.com,1,1,507
+item_0115,headphones,3,2026-07-19,gpt-5-5,3,sony|bose|anker,sony,3,reddit.com|rtings.com|techradar.com,1,1,188
+item_0260,headphones,3,2026-07-19,gpt-5-5,4,sennheiser|sony|bose|apple,sennheiser,2,reddit.com|techgearlab.com,1,1,257
+item_0036,headphones,3,2026-07-19,gpt-5-5,5,anker|sony|bose|sennheiser|apple,anker,1,rtings.com,1,1,749
+item_0229,headphones,3,2026-07-19,gpt-5-5,4,anker|sennheiser|sony|bose,anker,1,rtings.com,1,1,635
+item_0160,headphones,3,2026-07-19,gpt-5-5,0,,,4,reddit.com|rtings.com|thetechsearch.com|tomshardware.com,2,1,703
+item_0002,headphones,3,2026-07-19,gpt-5-5,0,,,1,openai.com,1,1,444
+item_0186,headphones,3,2026-07-19,gpt-5-5,7,sony|bose|sennheiser|bowers & wilkins|sonos|anker|jbl,sony,2,rtings.com|techradar.com,1,1,787
+item_0116,headphones,3,2026-07-19,gpt-5-5,5,sony|bose|sennheiser|anker|apple,sony,2,rtings.com|techradar.com,1,1,276
+item_0206,headphones,3,2026-07-19,gpt-5-5,4,bose|sennheiser|anker|sony,bose,5,forbes.com|popsci.com|soundguys.com|techradar.com|whathifi.com,1,1,697
+item_0214,headphones,3,2026-07-19,gpt-5-5,4,sony|sennheiser|bose|anker,sony,2,rtings.com|whathifi.com,1,1,316
+item_0001,headphones,3,2026-07-19,gpt-5-5,4,sennheiser|bose|sony|anker,sennheiser,3,reddit.com|redditrecs.com|soundguys.com,1,1,590
+item_0103,headphones,3,2026-07-19,gpt-5-5,3,sennheiser|sony|anker,sennheiser,1,rtings.com,1,1,371
+item_0180,headphones,3,2026-07-19,gpt-5-5,4,sony|bose|sennheiser|anker,sony,2,rtings.com|whathifi.com,1,1,621
+item_0046,headphones,3,2026-07-19,gpt-5-5,4,sony|bose|sennheiser|anker,sony,2,rtings.com|techradar.com,1,1,299
+item_0221,headphones,3,2026-07-19,gpt-5-5,5,anker|sony|sennheiser|jbl|apple,anker,1,rtings.com,1,1,580
+item_0012,headphones,3,2026-07-19,gpt-5-5,5,sennheiser|bose|apple|anker|sony,sennheiser,2,rtings.com|wsj.com,1,1,481
+item_0202,headphones,3,2026-07-19,gpt-5-5,4,anker|sony|1more|edifier,anker,2,rtings.com|soundguys.com,1,1,411
+item_0136,headphones,3,2026-07-19,gpt-5-5,5,sony|bose|sennheiser|anker|apple,sony,3,rtings.com|tomsguide.com|wsj.com,1,1,448
+item_0154,headphones,3,2026-07-19,gpt-5-5,4,sony|bose|sennheiser|anker,sony,2,news.com.au|rtings.com,1,1,323
+item_0179,headphones,3,2026-07-19,gpt-5-5,4,anker|sony|sennheiser|bose,anker,1,rtings.com,1,1,444
+item_0108,headphones,3,2026-07-19,gpt-5-5,4,sony|bose|apple|sennheiser,sony,2,reddit.com|rtings.com,2,1,816
+item_0123,headphones,3,2026-07-19,gpt-5-5,5,bose|sony|sennheiser|anker|apple,bose,0,,1,1,1156
+item_0085,headphones,3,2026-07-19,gpt-5-5,0,,,1,rtings.com,1,1,133
+item_0257,headphones,4,2026-07-20,gpt-5-5,5,sony|sennheiser|bose|apple|samsung,sony,3,rtings.com|techradar.com|whathifi.com,1,1,297
+item_0130,headphones,4,2026-07-20,gpt-5-5,5,sony|bose|apple|anker|technics,sony,1,rtings.com,1,1,311
+item_0095,headphones,4,2026-07-20,gpt-5-5,5,apple|sony|bose|sennheiser|anker,apple,2,rtings.com|soundguys.com,1,1,580
+item_0124,headphones,4,2026-07-20,gpt-5-5,3,sony|bose|sennheiser,sony,6,cnet.com|news.com.au|nytimes.com|rtings.com|soundguys.com|whathifi.com,1,1,231
+item_0210,headphones,4,2026-07-20,gpt-5-5,5,sony|sennheiser|apple|anker|bose,sony,2,rtings.com|techradar.com,1,1,424
+item_0280,headphones,4,2026-07-20,gpt-5-5,5,sony|bose|sennheiser|sonos|apple,sony,3,news.com.au|rtings.com|tomsguide.com,1,1,389
+item_0201,headphones,4,2026-07-20,gpt-5-5,2,anker|philips,anker,0,,1,1,362
+item_0066,headphones,4,2026-07-20,gpt-5-5,4,sennheiser|sony|bose|apple,sennheiser,1,rtings.com,1,1,562
+item_0046,headphones,4,2026-07-20,gpt-5-5,4,sony|bose|sennheiser|anker,sony,2,rtings.com|tomsguide.com,1,1,247
+item_0249,headphones,4,2026-07-20,gpt-5-5,6,anker|sony|bose|jbl|sennheiser|apple,anker,0,,1,1,532
+item_0011,headphones,4,2026-07-20,gpt-5-5,5,bose|sony|sennheiser|apple|jbl,bose,2,rtings.com|soundguys.com,1,1,599
+item_0180,headphones,4,2026-07-20,gpt-5-5,4,sony|sennheiser|bose|anker,sony,3,gummysearch.com|reddit.com|redditrecs.com,1,1,539
+item_0214,headphones,4,2026-07-20,gpt-5-5,4,sony|bose|sennheiser|anker,sony,2,rtings.com|techradar.com,1,1,337
+item_0206,headphones,4,2026-07-20,gpt-5-5,4,sony|bose|anker|sennheiser,sony,3,rtings.com|techradar.com|tomsguide.com,1,1,653
+item_0200,headphones,4,2026-07-20,gpt-5-5,3,sony|bose|anker,sony,2,rtings.com|techradar.com,1,1,394
+item_0096,headphones,4,2026-07-20,gpt-5-5,4,sony|bose|sennheiser|anker,sony,3,rtings.com|techgearlab.com|techradar.com,1,1,343
+item_0040,headphones,4,2026-07-20,gpt-5-5,4,sennheiser|anker|sony|apple,sennheiser,1,rtings.com,1,1,423
+item_0168,headphones,4,2026-07-20,gpt-5-5,7,anker|philips|sennheiser|bose|sony|jbl|focal,anker,4,forbes.com|reddit.com|tomsguide.com|whathifi.com,1,1,850
+item_0119,headphones,4,2026-07-20,gpt-5-5,4,sony|sennheiser|bose|jbl,sony,3,petematheson.com|rtings.com|whathifi.com,1,1,468
+item_0163,headphones,4,2026-07-20,gpt-5-5,4,sennheiser|bose|anker|sony,sennheiser,1,rtings.com,1,1,609
+item_0253,headphones,4,2026-07-20,gpt-5-5,3,sony|bose|sennheiser,sony,2,rtings.com|whathifi.com,1,1,303
+item_0082,headphones,4,2026-07-20,gpt-5-5,4,sony|sennheiser|bose|anker,sony,4,expertreviews.co.uk|reddit.com|whathifi.com|which.co.uk,1,1,868
+item_0158,headphones,4,2026-07-20,gpt-5-5,4,sony|sennheiser|bose|anker,sony,1,rtings.com,1,1,475
+item_0245,headphones,4,2026-07-20,gpt-5-5,3,apple|samsung|google,apple,2,o2.co.uk|tomsguide.com,1,1,343
+item_0230,headphones,4,2026-07-20,gpt-5-5,3,sennheiser|bose|anker,sennheiser,2,rtings.com|techradar.com,1,1,272
+item_0005,headphones,4,2026-07-20,gpt-5-5,4,sony|bose|sennheiser|anker,sony,2,rtings.com|techradar.com,1,1,368
+item_0106,headphones,4,2026-07-20,gpt-5-5,4,sony|bose|sennheiser|anker,sony,2,rtings.com|techradar.com,1,1,544
+item_0233,headphones,4,2026-07-20,gpt-5-5,4,sony|sennheiser|bose|anker,sony,2,reddit.com|soundguys.com,1,1,194
+item_0157,headphones,4,2026-07-20,gpt-5-5,2,anker|edifier,anker,2,rtings.com|soundguys.com,1,1,401
+item_0152,headphones,4,2026-07-20,gpt-5-5,4,sennheiser|sony|apple|anker,sennheiser,2,rtings.com|whathifi.com,1,1,388
+item_0081,headphones,4,2026-07-20,gpt-5-5,5,sennheiser|sony|bose|apple|anker,sennheiser,2,soundguys.com|techradar.com,1,1,439
+item_0174,headphones,4,2026-07-20,gpt-5-5,3,bose|sony|apple,bose,3,packhacker.com|reddit.com|rtings.com,1,1,411
+item_0248,headphones,4,2026-07-20,gpt-5-5,5,sony|bose|sennheiser|anker|apple,sony,1,rtings.com,1,1,440
+item_0281,headphones,4,2026-07-20,gpt-5-5,3,sony|bose|sennheiser,sony,1,rtings.com,1,1,472
+item_0136,headphones,4,2026-07-20,gpt-5-5,5,sony|bose|sennheiser|anker|apple,sony,3,rtings.com|tomsguide.com|wsj.com,1,1,489
+item_0008,headphones,4,2026-07-20,gpt-5-5,3,anker|sony|jbl,anker,1,rtings.com,1,1,513
+item_0241,headphones,4,2026-07-20,gpt-5-5,5,sony|bose|sennheiser|anker|apple,sony,3,rtings.com|soundguys.com|whathifi.com,1,1,373
+item_0263,headphones,4,2026-07-20,gpt-5-5,4,sony|bose|sennheiser|anker,sony,1,rtings.com,1,1,386
+item_0135,headphones,4,2026-07-20,gpt-5-5,1,apple,apple,0,,1,1,175
+item_0002,headphones,4,2026-07-20,gpt-5-5,0,,,1,openai.com,1,1,386
+item_0227,headphones,4,2026-07-20,gpt-5-5,4,sony|bose|anker|sennheiser,sony,2,rtings.com|soundguys.com,1,1,366
+item_0001,headphones,4,2026-07-20,gpt-5-5,4,sony|sennheiser|bose|anker,sony,3,reddit.com|redditrecs.com|soundguys.com,1,1,592
+item_0138,headphones,4,2026-07-20,gpt-5-5,5,sony|bose|sennheiser|anker|apple,sony,2,rtings.com|wsj.com,1,1,446
+item_0139,headphones,4,2026-07-20,gpt-5-5,4,sennheiser|beyerdynamic|philips|audio-technica,sennheiser,2,audiospeclab.com|rtings.com,1,1,364
+item_0264,headphones,4,2026-07-20,gpt-5-5,3,anker|sony|sennheiser,anker,1,rtings.com,1,1,183
+item_0018,headphones,4,2026-07-20,gpt-5-5,4,sony|bose|sennheiser|anker,sony,1,rtings.com,1,1,601
+item_0148,headphones,4,2026-07-20,gpt-5-5,4,anker|sony|sennheiser|bose,anker,2,rtings.com|soundguys.com,1,1,477
+item_0240,headphones,4,2026-07-20,gpt-5-5,4,sony|bose|sennheiser|anker,sony,1,rtings.com,1,1,591
+item_0036,headphones,4,2026-07-20,gpt-5-5,5,anker|sony|bose|sennheiser|apple,anker,1,rtings.com,1,1,641
+item_0104,headphones,4,2026-07-20,gpt-5-5,4,sony|bose|sennheiser|bowers & wilkins,sony,3,rtings.com|soundguys.com|whathifi.com,1,1,453
+item_0260,headphones,4,2026-07-20,gpt-5-5,3,sennheiser|sony|bose,sennheiser,3,medium.com|soundguys.com|techgearlab.com,1,1,198
+item_0145,headphones,4,2026-07-20,gpt-5-5,6,sony|bose|sennheiser|anker|apple|jbl,sony,1,rtings.com,1,1,348
+item_0056,headphones,4,2026-07-20,gpt-5-5,4,sony|bose|sennheiser|anker,sony,2,rtings.com|stuff.tv,1,1,271
+item_0275,headphones,4,2026-07-20,gpt-5-5,3,bose|sony|apple,bose,2,rtings.com|soundguys.com,1,1,383
+item_0037,headphones,4,2026-07-20,gpt-5-5,5,sennheiser|apple|bowers & wilkins|focal|sony,sennheiser,4,etadviser.com|proaudiovideo.in|sony.co.in|techradar.com,1,1,380
+item_0153,headphones,4,2026-07-20,gpt-5-5,4,sony|bose|sennheiser|anker,sony,1,rtings.com,1,1,317
+item_0222,headphones,4,2026-07-20,gpt-5-5,5,anker|sony|bose|sennheiser|jbl,anker,1,rtings.com,1,1,618
+item_0031,headphones,4,2026-07-20,gpt-5-5,4,sony|bose|sennheiser|anker,sony,2,rtings.com|soundguys.com,1,1,425
+item_0091,headphones,4,2026-07-20,gpt-5-5,6,sony|bose|sennheiser|anker|samsung|apple,sony,2,rtings.com|techradar.com,1,1,444
+item_0252,headphones,4,2026-07-20,gpt-5-5,5,sony|bose|sennheiser|apple|anker,sony,1,rtings.com,1,1,278
+item_0085,headphones,4,2026-07-20,gpt-5-5,4,sony|bose|apple|anker,sony,4,bhphotovideo.com|sony.com|soundguys.com|tomsguide.com,1,1,751
+item_0123,headphones,4,2026-07-20,gpt-5-5,5,sony|bose|sennheiser|anker|apple,sony,2,rtings.com|whathifi.com,1,1,1065
+item_0021,headphones,4,2026-07-20,gpt-5-5,4,sony|bose|apple|sennheiser,sony,2,rtings.com|whathifi.com,3,1,1061
+item_0107,headphones,4,2026-07-20,gpt-5-5,7,sony|bose|sennheiser|anker|jbl|apple|technics,sony,2,rtings.com|techradar.com,1,1,659
+item_0003,headphones,4,2026-07-20,gpt-5-5,3,bose|sony|anker,bose,2,rtings.com|usersrated.com,1,1,346
+item_0115,headphones,4,2026-07-20,gpt-5-5,3,sony|bose|sennheiser,sony,3,bestbuy.com|forbes.com|reddit.com,1,1,147
+item_0052,headphones,4,2026-07-20,gpt-5-5,3,sony|bose|apple,sony,2,bose.com|sony.com,1,1,290
+item_0134,headphones,4,2026-07-20,gpt-5-5,0,,,0,,1,1,109
+item_0077,headphones,4,2026-07-20,gpt-5-5,3,sennheiser|anker|sony,sennheiser,2,reddit.com|wired.it,1,1,358
+item_0012,headphones,4,2026-07-20,gpt-5-5,4,sony|bose|sennheiser|apple,sony,3,rtings.com|tomsguide.com|whathifi.com,1,1,500
+item_0015,headphones,4,2026-07-20,gpt-5-5,4,sony|bose|sennheiser|apple,sony,3,rtings.com|soundguys.com|whathifi.com,1,1,737
+item_0016,headphones,4,2026-07-20,gpt-5-5,4,sony|bose|sennheiser|anker,sony,3,packhacker.com|rtings.com|techradar.com,1,1,385
+item_0159,headphones,4,2026-07-20,gpt-5-5,4,sony|sennheiser|bose|anker,sony,3,rtings.com|techgearlab.com|whathifi.com,1,1,534
+item_0042,headphones,4,2026-07-20,gpt-5-5,5,sony|bose|sennheiser|bowers & wilkins|anker,sony,3,rtings.com|travelandleisure.com|whathifi.com,1,1,457
+item_0043,headphones,4,2026-07-20,gpt-5-5,2,sony|bose,sony,2,reddit.com|rtings.com,1,1,408
+item_0160,headphones,4,2026-07-20,gpt-5-5,0,,,1,tomsguide.com,1,1,474
+item_0006,headphones,4,2026-07-20,gpt-5-5,5,sony|bose|sennheiser|anker|apple,sony,1,rtings.com,1,1,291
+item_0070,headphones,4,2026-07-20,gpt-5-5,4,sennheiser|bose|sony|apple,sennheiser,1,rtings.com,1,1,494
+item_0208,headphones,4,2026-07-20,gpt-5-5,4,sony|anker|bose|sennheiser,sony,2,rtings.com|techradar.com,1,1,439
+item_0186,headphones,4,2026-07-20,gpt-5-5,4,sony|bose|sennheiser|apple,sony,0,,1,1,668
+item_0242,headphones,4,2026-07-20,gpt-5-5,4,sony|bose|anker|sennheiser,sony,2,news.com.au|rtings.com,1,1,275
+item_0141,headphones,4,2026-07-20,gpt-5-5,4,anker|sennheiser|sony|bose,anker,3,rtings.com|soundguys.com|techradar.com,1,1,490
+item_0027,headphones,4,2026-07-20,gpt-5-5,5,bose|sony|sennheiser|apple|samsung,bose,1,rtings.com,1,1,475
+item_0128,headphones,4,2026-07-20,gpt-5-5,5,bose|apple|anker|edifier|sony,bose,1,loudersound.com,1,1,413
+item_0212,headphones,4,2026-07-20,gpt-5-5,5,anker|sony|bose|1more|shokz,anker,3,rtings.com|techgearlab.com|theverge.com,1,1,427
+item_0099,headphones,4,2026-07-20,gpt-5-5,4,sennheiser|sony|bose|apple,sennheiser,2,rtings.com|soundguys.com,1,1,399
+item_0065,headphones,4,2026-07-20,gpt-5-5,5,sony|bose|anker|sennheiser|technics,sony,1,rtings.com,1,1,349
+item_0164,headphones,4,2026-07-20,gpt-5-5,5,sony|bose|sennheiser|anker|apple,sony,2,rtings.com|wsj.com,1,1,522
+item_0044,headphones,4,2026-07-20,gpt-5-5,4,sony|bose|sennheiser|anker,sony,1,rtings.com,1,1,273
+item_0112,headphones,4,2026-07-20,gpt-5-5,4,sony|bose|apple|anker,sony,1,rtings.com,1,1,880
+item_0108,headphones,4,2026-07-20,gpt-5-5,4,sony|bose|sennheiser|apple,sony,5,hifiheadphones.co.uk|rtings.com|stuff.tv|techradar.com|wsj.com,1,1,824
+item_0083,headphones,4,2026-07-20,gpt-5-5,3,sony|jbl|anker,sony,3,indiatimes.com|reddit.com|smartprix.com,1,1,540
+item_0055,headphones,4,2026-07-20,gpt-5-5,5,sony|bose|sennheiser|anker|jbl,sony,2,rtings.com|whathifi.com,1,1,433
+item_0225,headphones,4,2026-07-20,gpt-5-5,4,sony|sennheiser|bose|anker,sony,1,euronics.ee,1,1,373
+item_0024,headphones,4,2026-07-20,gpt-5-5,3,sennheiser|anker|apple,sennheiser,1,rtings.com,1,1,434
+item_0133,headphones,4,2026-07-20,gpt-5-5,5,sony|bose|sennheiser|anker|apple,sony,1,rtings.com,1,1,292
+item_0169,headphones,4,2026-07-20,gpt-5-5,5,sony|bose|sennheiser|anker|apple,sony,1,rtings.com,1,1,366
+item_0075,headphones,4,2026-07-20,gpt-5-5,7,sony|bose|sennheiser|audio-technica|anker|apple|jbl,sony,3,rtings.com|tomsguide.com|whathifi.com,1,1,355
+item_0179,headphones,4,2026-07-20,gpt-5-5,4,anker|sennheiser|sony|bose,anker,3,expertreviews.co.uk|whathifi.com|which.co.uk,1,1,381
+item_0111,headphones,4,2026-07-20,gpt-5-5,4,sony|bose|sennheiser|anker,sony,3,cntraveller.com|rtings.com|techradar.com,1,1,613
+item_0234,headphones,4,2026-07-20,gpt-5-5,4,sony|apple|bose|sennheiser,sony,2,rtings.com|tomsguide.com,1,1,448
+item_0116,headphones,4,2026-07-20,gpt-5-5,6,sony|bose|sennheiser|anker|technics|apple,sony,2,rtings.com|techradar.com,1,1,356
+item_0228,headphones,4,2026-07-20,gpt-5-5,6,apple|sony|bose|sennheiser|bowers & wilkins|focal,apple,1,rtings.com,1,1,362
+item_0118,headphones,4,2026-07-20,gpt-5-5,0,,,0,,1,1,79
+item_0276,headphones,4,2026-07-20,gpt-5-5,1,earfun,earfun,5,amazon.ie|babygearlab.com|reddit.com|slickdeals.net|techadvisor.com,1,1,537
+item_0137,headphones,4,2026-07-20,gpt-5-5,4,anker|sony|bose|sennheiser,anker,1,rtings.com,1,1,243
+item_0195,headphones,4,2026-07-20,gpt-5-5,4,sennheiser|bose|sony|anker,sennheiser,1,rtings.com,1,1,416
+item_0221,headphones,4,2026-07-20,gpt-5-5,7,anker|sennheiser|sony|apple|jbl|edifier|philips,anker,2,rtings.com|techradar.com,1,1,615
+item_0177,headphones,4,2026-07-20,gpt-5-5,4,sony|bose|anker|apple,sony,3,rtings.com|techradar.com|travelandleisure.com,1,1,352
+item_0229,headphones,4,2026-07-20,gpt-5-5,5,anker|bose|sony|sennheiser|apple,anker,1,forbes.com,1,1,582
+item_0270,headphones,4,2026-07-20,gpt-5-5,7,anker|sony|bose|jbl|sennheiser|apple|focal,anker,4,esquire.com|forbes.com|reddit.com|rtings.com,1,1,887
+item_0045,headphones,4,2026-07-20,gpt-5-5,6,sony|bose|anker|1more|jbl|sennheiser,sony,2,hifiheadphones.co.uk|rtings.com,1,1,289
+item_0023,headphones,4,2026-07-20,gpt-5-5,9,samsung|google|sony|bose|sennheiser|anker|technics|jbl|apple,samsung,0,,1,1,292
+item_0162,headphones,4,2026-07-20,gpt-5-5,4,anker|sony|sennheiser|bose,anker,1,rtings.com,1,1,280
+item_0203,headphones,4,2026-07-20,gpt-5-5,5,sony|bose|sennheiser|apple|anker,sony,4,rtings.com|tomsguide.com|whathifi.com|wsj.com,1,1,228
+item_0218,headphones,4,2026-07-20,gpt-5-5,6,sony|bose|sennheiser|apple|jbl|anker,sony,2,rtings.com|whathifi.com,1,1,484
+item_0127,headphones,4,2026-07-20,gpt-5-5,5,sony|bose|sennheiser|apple|anker,sony,2,rtings.com|tomsguide.com,1,1,342
+item_0132,headphones,4,2026-07-20,gpt-5-5,4,sony|bose|anker|apple,sony,1,rtings.com,1,1,366
+item_0244,headphones,4,2026-07-20,gpt-5-5,5,sony|sennheiser|bose|anker|jbl,sony,2,rtings.com|soundguys.com,1,1,494
+item_0053,headphones,4,2026-07-20,gpt-5-5,4,anker|sony|bose|sennheiser,anker,3,digitaltrends.com|rtings.com|soundguys.com,1,1,660
+item_0009,headphones,4,2026-07-20,gpt-5-5,4,sony|sennheiser|bose|anker,sony,2,rtings.com|techradar.com,1,1,414
+item_0251,headphones,4,2026-07-20,gpt-5-5,4,sony|bose|sennheiser|anker,sony,2,reddit.com|rtings.com,1,1,568
+item_0154,headphones,4,2026-07-20,gpt-5-5,4,sony|bose|sennheiser|apple,sony,2,rtings.com|soundguys.com,1,1,325
+item_0086,headphones,4,2026-07-20,gpt-5-5,0,,,1,rtings.com,1,1,187
+item_0149,headphones,4,2026-07-20,gpt-5-5,4,apple|sony|bose|sennheiser,apple,3,appleinsider.com|rtings.com|techradar.com,1,1,683
+item_0161,headphones,4,2026-07-20,gpt-5-5,8,sennheiser|sony|bose|audio-technica|beyerdynamic|focal|jbl|anker,sennheiser,3,headphonesty.com|reddit.com|rtings.com,1,1,333
+item_0084,headphones,4,2026-07-20,gpt-5-5,0,,,0,,1,1,112
+item_0109,headphones,4,2026-07-20,gpt-5-5,4,sony|bose|sennheiser|anker,sony,3,rtings.com|stuff.tv|travelandleisure.com,1,1,441
+item_0202,headphones,4,2026-07-20,gpt-5-5,1,anker,anker,1,soundguys.com,1,1,311
+item_0093,headphones,4,2026-07-20,gpt-5-5,4,sony|anker|bose|apple,sony,1,rtings.com,1,1,568
+item_0176,headphones,4,2026-07-20,gpt-5-5,5,sony|bose|sennheiser|anker|apple,sony,2,rtings.com|techradar.com,1,1,380
+item_0110,headphones,4,2026-07-20,gpt-5-5,5,sony|bose|sennheiser|anker|jbl,sony,2,rtings.com|techradar.com,1,1,397
+item_0067,headphones,4,2026-07-20,gpt-5-5,0,,,0,,1,1,207
+item_0247,headphones,4,2026-07-20,gpt-5-5,2,anker|jbl,anker,2,techradar.com|theurbanlist.com,1,1,405
+item_0051,headphones,4,2026-07-20,gpt-5-5,4,sony|bose|sennheiser|anker,sony,1,rtings.com,1,1,529
+item_0117,headphones,4,2026-07-20,gpt-5-5,4,bose|sennheiser|sony|anker,bose,1,rtings.com,1,1,508
+item_0223,headphones,4,2026-07-20,gpt-5-5,4,sony|bose|sennheiser|anker,sony,3,stuff.tv|tomsguide.com|travelandleisure.com,1,1,340
+item_0178,headphones,4,2026-07-20,gpt-5-5,5,apple|sony|bose|sennheiser|anker,apple,2,rtings.com|techradar.com,1,1,603
+item_0155,headphones,4,2026-07-20,gpt-5-5,4,sennheiser|sony|bose|anker,sennheiser,2,rtings.com|whathifi.com,1,1,430
+item_0205,headphones,4,2026-07-20,gpt-5-5,4,sony|bose|sennheiser|anker,sony,2,rtings.com|techradar.com,1,1,369
+item_0103,headphones,4,2026-07-20,gpt-5-5,4,sennheiser|anker|apple|sony,sennheiser,1,rtings.com,1,1,354
+item_0098,headphones,4,2026-07-20,gpt-5-5,5,sony|bose|sennheiser|jbl|shokz,sony,1,rtings.com,1,1,340
+item_0126,headphones,4,2026-07-20,gpt-5-5,3,sony|jbl|anker,sony,1,techadvisor.com,1,1,511
+item_0075,headphones,5,2026-07-21,gpt-5-5,7,sennheiser|sony|bose|apple|anker|skullcandy|sonos,sennheiser,1,rtings.com,1,1,412
+item_0153,headphones,5,2026-07-21,gpt-5-5,4,sony|bose|anker|sennheiser,sony,1,rtings.com,1,1,315
+item_0095,headphones,5,2026-07-21,gpt-5-5,5,sony|sennheiser|anker|apple|bose,sony,2,rtings.com|soundguys.com,1,1,617
+item_0179,headphones,5,2026-07-21,gpt-5-5,5,sony|bose|sennheiser|apple|anker,sony,4,johnlewis.com|techradar.com|whathifi.com|which.co.uk,1,1,432
+item_0164,headphones,5,2026-07-21,gpt-5-5,4,sony|bose|sennheiser|apple,sony,2,consumerreports.org|rtings.com,1,1,487
+item_0137,headphones,5,2026-07-21,gpt-5-5,4,sony|bose|anker|sennheiser,sony,2,rtings.com|techradar.com,1,1,211
+item_0160,headphones,5,2026-07-21,gpt-5-5,0,,,3,gamesradar.com|pcworld.com|tomsguide.com,1,1,528
+item_0086,headphones,5,2026-07-21,gpt-5-5,5,sennheiser|apple|bose|sony|anker,sennheiser,2,rtings.com|techradar.com,1,1,435
+item_0001,headphones,5,2026-07-21,gpt-5-5,4,sennheiser|sony|bose|anker,sennheiser,3,reddit.com|redditrecs.com|soundguys.com,1,1,540
+item_0046,headphones,5,2026-07-21,gpt-5-5,5,sony|bose|sennheiser|anker|apple,sony,3,cntraveller.com|rtings.com|tomsguide.com,1,1,290
+item_0040,headphones,5,2026-07-21,gpt-5-5,4,anker|apple|sennheiser|sony,anker,1,rtings.com,1,1,348
+item_0043,headphones,5,2026-07-21,gpt-5-5,6,sony|bose|sennheiser|anker|google|apple,sony,4,rtings.com|stuff.tv|techradar.com|travelandleisure.com,1,1,503
+item_0208,headphones,5,2026-07-21,gpt-5-5,4,sony|anker|bose|sennheiser,sony,0,,1,1,375
+item_0228,headphones,5,2026-07-21,gpt-5-5,0,,,0,,1,1,211
+item_0161,headphones,5,2026-07-21,gpt-5-5,5,sennheiser|sony|bose|audio-technica|beyerdynamic,sennheiser,2,reddit.com|rtings.com,1,1,258
+item_0124,headphones,5,2026-07-21,gpt-5-5,4,sony|bose|sennheiser|anker,sony,3,reddit.com|rtings.com|tomsguide.com,1,1,390
+item_0108,headphones,5,2026-07-21,gpt-5-5,5,sony|bose|sennheiser|sonos|anker,sony,3,rtings.com|stuff.tv|techradar.com,1,1,757
+item_0264,headphones,5,2026-07-21,gpt-5-5,3,anker|sony|apple,anker,1,rtings.com,1,1,208
+item_0136,headphones,5,2026-07-21,gpt-5-5,5,sony|bose|sennheiser|anker|apple,sony,4,rtings.com|tomsguide.com|whathifi.com|wsj.com,1,1,498
+item_0222,headphones,5,2026-07-21,gpt-5-5,4,anker|sennheiser|sony|jbl,anker,2,rtings.com|techradar.com,1,1,599
+item_0003,headphones,5,2026-07-21,gpt-5-5,4,bose|sony|apple|sennheiser,bose,2,rtings.com|travelandleisure.com,1,1,390
+item_0218,headphones,5,2026-07-21,gpt-5-5,6,sennheiser|bose|jbl|sony|sonos|apple,sennheiser,4,allgoodsreviewed.com|rtings.com|techadvisor.com|techradar.com,1,1,379
+item_0015,headphones,5,2026-07-21,gpt-5-5,5,apple|sony|bose|sennheiser|sonos,apple,1,techradar.com,1,1,734
+item_0023,headphones,5,2026-07-21,gpt-5-5,5,sony|jbl|bose|samsung|sennheiser,sony,0,,1,1,245
+item_0257,headphones,5,2026-07-21,gpt-5-5,5,sony|sennheiser|bose|apple|samsung,sony,0,,1,1,221
+item_0225,headphones,5,2026-07-21,gpt-5-5,3,sony|bose|apple,sony,2,euronics.ee|photopoint.ee,4,1,407
+item_0110,headphones,5,2026-07-21,gpt-5-5,4,sony|bose|sennheiser|anker,sony,2,rtings.com|stuff.tv,1,1,382
+item_0247,headphones,5,2026-07-21,gpt-5-5,3,anker|bose|sony,anker,2,news.com.au|rtings.com,1,1,366
+item_0117,headphones,5,2026-07-21,gpt-5-5,5,bose|sony|sennheiser|anker|jbl,bose,1,rtings.com,1,1,571
+item_0011,headphones,5,2026-07-21,gpt-5-5,6,sony|bose|sennheiser|apple|sonos|anker,sony,2,rtings.com|whathifi.com,1,1,579
+item_0106,headphones,5,2026-07-21,gpt-5-5,4,sony|bose|sennheiser|apple,sony,1,rtings.com,1,1,618
+item_0152,headphones,5,2026-07-21,gpt-5-5,4,sennheiser|sony|technics|apple,sennheiser,2,rtings.com|whathifi.com,1,1,465
+item_0081,headphones,5,2026-07-21,gpt-5-5,4,sony|bose|sennheiser|anker,sony,1,rtings.com,1,1,525
+item_0252,headphones,5,2026-07-21,gpt-5-5,6,bose|sony|sennheiser|apple|anker|jbl,bose,5,forbes.com|rtings.com|techgearlab.com|theverge.com|whathifi.com,1,1,216
+item_0214,headphones,5,2026-07-21,gpt-5-5,4,sennheiser|bose|sony|anker,sennheiser,1,rtings.com,1,1,319
+item_0036,headphones,5,2026-07-21,gpt-5-5,4,anker|sennheiser|sony|bose,anker,1,rtings.com,1,1,692
+item_0133,headphones,5,2026-07-21,gpt-5-5,4,sony|bose|sennheiser|anker,sony,1,rtings.com,1,1,270
+item_0138,headphones,5,2026-07-21,gpt-5-5,4,sony|bose|sennheiser|anker,sony,2,rtings.com|techradar.com,1,1,359
+item_0148,headphones,5,2026-07-21,gpt-5-5,4,anker|sony|sennheiser|bose,anker,3,rtings.com|soundguys.com|tomsguide.com,1,1,551
+item_0155,headphones,5,2026-07-21,gpt-5-5,3,sony|bose|anker,sony,2,rtings.com|soundguys.com,1,1,350
+item_0200,headphones,5,2026-07-21,gpt-5-5,4,sony|bose|anker|sennheiser,sony,2,rtings.com|techradar.com,1,1,445
+item_0077,headphones,5,2026-07-21,gpt-5-5,4,sennheiser|anker|sony|jbl,sennheiser,2,reddit.com|whathifi.com,1,1,370
+item_0201,headphones,5,2026-07-21,gpt-5-5,5,sony|bose|sennheiser|anker|technics,sony,1,rtings.com,1,1,468
+item_0251,headphones,5,2026-07-21,gpt-5-5,4,bose|sony|sennheiser|anker,bose,3,reddit.com|rtings.com|soundguys.com,1,1,688
+item_0008,headphones,5,2026-07-21,gpt-5-5,3,sennheiser|anker|sony,sennheiser,2,rtings.com|soundguys.com,1,1,509
+item_0233,headphones,5,2026-07-21,gpt-5-5,3,sony|sennheiser|bose,sony,3,soundguys.com|techradar.com|whathifi.com,1,1,163
+item_0253,headphones,5,2026-07-21,gpt-5-5,4,sony|bose|sennheiser|anker,sony,1,rtings.com,1,1,383
+item_0240,headphones,5,2026-07-21,gpt-5-5,3,sony|bose|sennheiser,sony,2,rtings.com|soundguys.com,1,1,655
+item_0132,headphones,5,2026-07-21,gpt-5-5,4,sony|bose|anker|sennheiser,sony,1,rtings.com,1,1,411
+item_0082,headphones,5,2026-07-21,gpt-5-5,5,sony|anker|sennheiser|bose|apple,sony,10,amazon.co.uk|argos.co.uk|currys.co.uk|expertreviews.co.uk|johnlewis.com|reddit.com|richersounds.com|theverge.com|whathifi.com|which.co.uk,1,1,995
+item_0112,headphones,5,2026-07-21,gpt-5-5,5,anker|bose|sony|sennheiser|apple,anker,2,forbes.com|techradar.com,1,1,749
+item_0083,headphones,5,2026-07-21,gpt-5-5,4,jbl|philips|sony|anker,jbl,2,reddit.com|smartprix.com,1,1,531
+item_0186,headphones,5,2026-07-21,gpt-5-5,7,sony|bose|sennheiser|apple|bowers & wilkins|anker|focal,sony,2,rtings.com|soundguys.com,1,1,896
+item_0230,headphones,5,2026-07-21,gpt-5-5,3,bose|sony|sennheiser,bose,1,rtings.com,1,1,353
+item_0067,headphones,5,2026-07-21,gpt-5-5,0,,,0,,1,1,144
+item_0103,headphones,5,2026-07-21,gpt-5-5,4,sennheiser|anker|sony|jbl,sennheiser,1,rtings.com,1,1,415
+item_0021,headphones,5,2026-07-21,gpt-5-5,4,sony|bose|sennheiser|apple,sony,2,rtings.com|soundguys.com,1,1,1012
+item_0109,headphones,5,2026-07-21,gpt-5-5,4,sony|bose|sennheiser|anker,sony,3,rtings.com|stuff.tv|techradar.com,1,1,455
+item_0128,headphones,5,2026-07-21,gpt-5-5,7,apple|bose|anker|audio-technica|sony|jbl|skullcandy,apple,1,soundguys.com,1,1,419
+item_0139,headphones,5,2026-07-21,gpt-5-5,4,sennheiser|beyerdynamic|audio-technica|philips,sennheiser,1,rtings.com,1,1,340
+item_0052,headphones,5,2026-07-21,gpt-5-5,4,sennheiser|bose|sony|anker,sennheiser,1,rtings.com,1,1,413
+item_0223,headphones,5,2026-07-21,gpt-5-5,4,sony|bose|sennheiser|anker,sony,3,rtings.com|stuff.tv|techradar.com,1,1,311
+item_0202,headphones,5,2026-07-21,gpt-5-5,3,anker|bose|sony,anker,2,rtings.com|soundguys.com,1,1,330
+item_0212,headphones,5,2026-07-21,gpt-5-5,4,anker|sony|jbl|shokz,anker,0,,1,1,540
+item_0281,headphones,5,2026-07-21,gpt-5-5,4,sony|bose|sennheiser|anker,sony,1,rtings.com,1,1,435
+item_0260,headphones,5,2026-07-21,gpt-5-5,4,sennheiser|sony|bose|sonos,sennheiser,2,medium.com|rtings.com,1,1,240
+item_0045,headphones,5,2026-07-21,gpt-5-5,4,bose|sony|anker|apple,bose,2,forbes.com|techradar.com,2,1,362
+item_0275,headphones,5,2026-07-21,gpt-5-5,4,sony|bose|sennheiser|anker,sony,2,packhacker.com|rtings.com,1,1,344
+item_0116,headphones,5,2026-07-21,gpt-5-5,5,sony|sennheiser|anker|technics|bose,sony,1,rtings.com,1,1,266
+item_0280,headphones,5,2026-07-21,gpt-5-5,4,sony|bose|apple|sennheiser,sony,3,consumerreports.org|rtings.com|techradar.com,1,1,395
+item_0203,headphones,5,2026-07-21,gpt-5-5,5,sony|bose|sennheiser|anker|apple,sony,4,rtings.com|tomsguide.com|whathifi.com|wsj.com,1,1,226
+item_0157,headphones,5,2026-07-21,gpt-5-5,3,anker|edifier|sony,anker,2,rtings.com|soundguys.com,1,1,422
+item_0229,headphones,5,2026-07-21,gpt-5-5,5,anker|apple|sennheiser|sony|bose,anker,1,rtings.com,1,1,503
+item_0141,headphones,5,2026-07-21,gpt-5-5,4,anker|sony|sennheiser|bose,anker,1,rtings.com,1,1,542
+item_0176,headphones,5,2026-07-21,gpt-5-5,4,sony|bose|sennheiser|anker,sony,1,rtings.com,1,1,386
+item_0245,headphones,5,2026-07-21,gpt-5-5,3,apple|samsung|google,apple,1,techradar.com,1,1,365
+item_0169,headphones,5,2026-07-21,gpt-5-5,4,sony|bose|sennheiser|anker,sony,2,rtings.com|techradar.com,1,1,365
+item_0195,headphones,5,2026-07-21,gpt-5-5,4,bose|sennheiser|sony|anker,bose,1,rtings.com,1,1,457
+item_0085,headphones,5,2026-07-21,gpt-5-5,0,,,0,,1,1,125
+item_0177,headphones,5,2026-07-21,gpt-5-5,4,sony|bose|anker|technics,sony,1,rtings.com,1,1,288
+item_0162,headphones,5,2026-07-21,gpt-5-5,3,anker|sennheiser|sony,anker,1,rtings.com,1,1,204
+item_0263,headphones,5,2026-07-21,gpt-5-5,4,sony|bose|sennheiser|anker,sony,1,rtings.com,1,1,378
+item_0044,headphones,5,2026-07-21,gpt-5-5,6,sony|bose|sennheiser|anker|apple|technics,sony,1,rtings.com,1,1,321
+item_0012,headphones,5,2026-07-21,gpt-5-5,5,bose|sennheiser|apple|sony|anker,bose,1,soundguys.com,1,1,479
+item_0130,headphones,5,2026-07-21,gpt-5-5,6,sony|bose|sennheiser|anker|technics|apple,sony,2,rtings.com|techradar.com,1,1,302
+item_0115,headphones,5,2026-07-21,gpt-5-5,3,sony|bose|sennheiser,sony,2,bestbuy.com|rtings.com,1,1,169
+item_0134,headphones,5,2026-07-21,gpt-5-5,0,,,0,,1,1,102
+item_0070,headphones,5,2026-07-21,gpt-5-5,4,sennheiser|bose|sony|apple,sennheiser,2,rtings.com|soundguys.com,1,1,505
+item_0145,headphones,5,2026-07-21,gpt-5-5,4,sony|bose|sennheiser|anker,sony,1,rtings.com,1,1,394
+item_0111,headphones,5,2026-07-21,gpt-5-5,4,sony|bose|sennheiser|anker,sony,2,rtings.com|soundguys.com,1,1,592
+item_0037,headphones,5,2026-07-21,gpt-5-5,5,sony|bose|sennheiser|apple|bowers & wilkins,sony,1,whathifi.com,1,1,492
+item_0042,headphones,5,2026-07-21,gpt-5-5,6,sony|bose|sennheiser|sonos|anker|apple,sony,4,soundguys.com|techradar.com|upgradedpoints.com|whathifi.com,1,1,510
+item_0242,headphones,5,2026-07-21,gpt-5-5,4,sony|bose|sennheiser|anker,sony,1,rtings.com,1,1,278
+item_0178,headphones,5,2026-07-21,gpt-5-5,5,sony|bose|sennheiser|apple|anker,sony,2,rtings.com|techradar.com,1,1,641
+item_0180,headphones,5,2026-07-21,gpt-5-5,4,sony|bose|sennheiser|anker,sony,4,rtings.com|soundguys.com|techradar.com|whathifi.com,1,1,537
+item_0098,headphones,5,2026-07-21,gpt-5-5,5,jabra|jbl|bose|anker|shokz,jabra,2,rtings.com|techradar.com,1,1,356
+item_0168,headphones,5,2026-07-21,gpt-5-5,7,anker|jbl|sony|sennheiser|bose|focal|apple,anker,3,crutchfield.com|rtings.com|whathifi.com,1,1,947
+item_0270,headphones,5,2026-07-21,gpt-5-5,8,anker|apple|skullcandy|sony|bose|sennheiser|sonos|focal,anker,6,esquire.com|forbes.com|reddit.com|rtings.com|soundguys.com|techradar.com,1,1,913
+item_0174,headphones,5,2026-07-21,gpt-5-5,5,sony|bose|sennheiser|anker|apple,sony,2,rtings.com|techradar.com,1,1,306
+item_0205,headphones,5,2026-07-21,gpt-5-5,4,sony|bose|sennheiser|anker,sony,2,rtings.com|soundguys.com,1,1,434
+item_0002,headphones,5,2026-07-21,gpt-5-5,0,,,1,openai.com,1,1,516
+item_0227,headphones,5,2026-07-21,gpt-5-5,4,sennheiser|bose|anker|sony,sennheiser,1,rtings.com,1,1,353
+item_0244,headphones,5,2026-07-21,gpt-5-5,4,sennheiser|sony|anker|apple,sennheiser,2,rtings.com|whathifi.com,1,1,516
+item_0135,headphones,5,2026-07-21,gpt-5-5,1,apple,apple,0,,1,1,170
+item_0248,headphones,5,2026-07-21,gpt-5-5,4,sony|sennheiser|bose|anker,sony,1,rtings.com,1,1,495
+item_0024,headphones,5,2026-07-21,gpt-5-5,4,sony|bose|sennheiser|apple,sony,1,rtings.com,1,1,448
+item_0027,headphones,5,2026-07-21,gpt-5-5,6,bose|sony|sennheiser|bowers & wilkins|apple|google,bose,2,rtings.com|travelandleisure.com,1,1,451
+item_0065,headphones,5,2026-07-21,gpt-5-5,5,sony|bose|sennheiser|anker|apple,sony,0,,1,1,366
+item_0031,headphones,5,2026-07-21,gpt-5-5,4,sennheiser|bose|sony|anker,sennheiser,2,rtings.com|tomsguide.com,1,1,496
+item_0051,headphones,5,2026-07-21,gpt-5-5,4,sony|bose|sennheiser|anker,sony,1,rtings.com,1,1,502
+item_0276,headphones,5,2026-07-21,gpt-5-5,1,earfun,earfun,4,babygearlab.com|reddit.com|slickdeals.net|techadvisor.com,1,1,559
+item_0104,headphones,5,2026-07-21,gpt-5-5,5,sony|bose|sennheiser|apple|jbl,sony,1,rtings.com,1,1,537
+item_0163,headphones,5,2026-07-21,gpt-5-5,5,sennheiser|bose|sony|anker|apple,sennheiser,3,reddit.com|rtings.com|soundguys.com,1,1,723
+item_0084,headphones,5,2026-07-21,gpt-5-5,0,,,0,,1,1,107
+item_0234,headphones,5,2026-07-21,gpt-5-5,5,sony|apple|bose|sennheiser|anker,sony,0,,1,1,399
+item_0206,headphones,5,2026-07-21,gpt-5-5,5,sony|bose|sennheiser|anker|apple,sony,2,techradar.com|wired.com,1,1,692
+item_0096,headphones,5,2026-07-21,gpt-5-5,4,sony|sennheiser|bose|anker,sony,3,nbcnews.com|rtings.com|soundguys.com,1,1,463
+item_0099,headphones,5,2026-07-21,gpt-5-5,4,sennheiser|sony|apple|anker,sennheiser,2,reddit.com|tomsguide.com,1,1,432
+item_0119,headphones,5,2026-07-21,gpt-5-5,4,sony|sennheiser|bose|bowers & wilkins,sony,3,soundguys.com|techgearlab.com|whathifi.com,1,1,580
+item_0093,headphones,5,2026-07-21,gpt-5-5,5,anker|bose|sennheiser|sony|apple,anker,5,consumerreports.org|forbes.com|rtings.com|soundguys.com|whathifi.com,1,1,600
+item_0066,headphones,5,2026-07-21,gpt-5-5,4,anker|sony|bose|sennheiser,anker,1,rtings.com,1,1,358
+item_0053,headphones,5,2026-07-21,gpt-5-5,5,anker|sony|bose|edifier|sennheiser,anker,2,rtings.com|techradar.com,1,1,702
+item_0005,headphones,5,2026-07-21,gpt-5-5,4,sony|bose|sennheiser|anker,sony,1,rtings.com,1,1,393
+item_0149,headphones,5,2026-07-21,gpt-5-5,4,apple|sony|bose|sennheiser,apple,2,rtings.com|wsj.com,1,1,677
+item_0006,headphones,5,2026-07-21,gpt-5-5,5,sony|bose|sennheiser|anker|apple,sony,4,reddit.com|rtings.com|stuff.tv|whathifi.com,1,1,335
+item_0118,headphones,5,2026-07-21,gpt-5-5,0,,,0,,1,1,71
+item_0127,headphones,5,2026-07-21,gpt-5-5,5,sony|bose|sennheiser|apple|anker,sony,3,rtings.com|tomsguide.com|whathifi.com,1,1,385
+item_0249,headphones,5,2026-07-21,gpt-5-5,6,sennheiser|bose|sony|anker|apple|edifier,sennheiser,2,rtings.com|soundguys.com,1,1,586
+item_0154,headphones,5,2026-07-21,gpt-5-5,4,sony|sennheiser|bose|anker,sony,1,rtings.com,1,1,369
+item_0009,headphones,5,2026-07-21,gpt-5-5,5,sony|bose|sennheiser|anker|apple,sony,2,rtings.com|techradar.com,1,1,409
+item_0056,headphones,5,2026-07-21,gpt-5-5,4,sony|bose|sennheiser|anker,sony,4,rtings.com|soundguys.com|stuff.tv|tomsguide.com,1,1,272
+item_0016,headphones,5,2026-07-21,gpt-5-5,4,sony|bose|sennheiser|anker,sony,1,rtings.com,1,1,360
+item_0126,headphones,5,2026-07-21,gpt-5-5,3,jbl|sony|anker,jbl,3,reddit.com|techadvisor.com|truthful.reviews,1,1,497
+item_0091,headphones,5,2026-07-21,gpt-5-5,4,sony|bose|sennheiser|apple,sony,2,rtings.com|techradar.com,1,1,483
+item_0241,headphones,5,2026-07-21,gpt-5-5,5,bose|sony|sennheiser|anker|apple,bose,3,reddit.com|rtings.com|soundguys.com,1,1,341
+item_0221,headphones,5,2026-07-21,gpt-5-5,6,apple|sennheiser|anker|sony|jbl|edifier,apple,1,rtings.com,1,1,518
+item_0018,headphones,5,2026-07-21,gpt-5-5,4,sony|bose|sennheiser|apple,sony,2,rtings.com|soundguys.com,1,1,574
+item_0123,headphones,5,2026-07-21,gpt-5-5,7,sony|bose|sennheiser|anker|apple|technics|samsung,sony,3,forbes.com|reddit.com|techradar.com,1,1,1070
+item_0159,headphones,5,2026-07-21,gpt-5-5,4,sony|sennheiser|bose|anker,sony,4,forbes.com|soundguys.com|techradar.com|whathifi.com,1,1,221
+item_0210,headphones,5,2026-07-21,gpt-5-5,4,bose|sony|sennheiser|anker,bose,1,rtings.com,1,1,272
+item_0055,headphones,5,2026-07-21,gpt-5-5,4,sony|bose|anker|sennheiser,sony,1,rtings.com,1,1,371
+item_0158,headphones,5,2026-07-21,gpt-5-5,3,anker|sennheiser|bose,anker,1,rtings.com,1,1,498
+item_0107,headphones,5,2026-07-21,gpt-5-5,6,sony|bose|sennheiser|anker|technics|apple,sony,1,rtings.com,1,1,635
+item_0118,headphones,6,2026-07-22,gpt-5-5,0,,,0,,1,1,85
+item_0251,headphones,6,2026-07-22,gpt-5-5,4,sony|bose|sennheiser|anker,sony,3,reddit.com|rtings.com|soundguys.com,1,1,648
+item_0257,headphones,6,2026-07-22,gpt-5-5,6,sony|sennheiser|bose|anker|samsung|apple,sony,2,rtings.com|techradar.com,1,1,301
+item_0135,headphones,6,2026-07-22,gpt-5-5,1,apple,apple,0,,1,1,170
+item_0123,headphones,6,2026-07-22,gpt-5-5,5,sony|bose|sennheiser|anker|apple,sony,1,rtings.com,1,1,1187
+item_0152,headphones,6,2026-07-22,gpt-5-5,4,sennheiser|bose|apple|sony,sennheiser,2,rtings.com|whathifi.com,1,1,536
+item_0253,headphones,6,2026-07-22,gpt-5-5,4,bose|sony|apple|sennheiser,bose,2,rtings.com|soundguys.com,1,1,414
+item_0065,headphones,6,2026-07-22,gpt-5-5,4,sony|bose|sennheiser|anker,sony,3,rtings.com|techradar.com|whathifi.com,1,1,433
+item_0160,headphones,6,2026-07-22,gpt-5-5,0,,,1,rtings.com,1,1,535
+item_0178,headphones,6,2026-07-22,gpt-5-5,5,sony|bose|sennheiser|apple|anker,sony,3,rtings.com|soundguys.com|techradar.com,1,1,601
+item_0056,headphones,6,2026-07-22,gpt-5-5,4,sony|bose|apple|sennheiser,sony,4,rtings.com|soundguys.com|whathifi.com|wsj.com,1,1,288
+item_0214,headphones,6,2026-07-22,gpt-5-5,4,sony|bose|sennheiser|apple,sony,0,,2,1,353
+item_0031,headphones,6,2026-07-22,gpt-5-5,4,sony|bose|sennheiser|anker,sony,2,rtings.com|stuff.tv,1,1,413
+item_0164,headphones,6,2026-07-22,gpt-5-5,4,sony|bose|sennheiser|anker,sony,2,rtings.com|travelandleisure.com,1,1,467
+item_0179,headphones,6,2026-07-22,gpt-5-5,5,sony|bose|sennheiser|anker|jbl,sony,3,rtings.com|techradar.com|whathifi.com,1,1,402
+item_0205,headphones,6,2026-07-22,gpt-5-5,4,sony|bose|sennheiser|anker,sony,1,rtings.com,1,1,363
+item_0109,headphones,6,2026-07-22,gpt-5-5,4,sony|bose|sennheiser|anker,sony,1,rtings.com,1,1,422
+item_0225,headphones,6,2026-07-22,gpt-5-5,5,sony|jbl|anker|sennheiser|bose,sony,2,euronics.ee|kaup24.ee,1,1,356
+item_0222,headphones,6,2026-07-22,gpt-5-5,5,anker|sony|jbl|edifier|bose,anker,2,redditrecs.com|techradar.com,1,1,683
+item_0043,headphones,6,2026-07-22,gpt-5-5,4,sony|bose|sennheiser|apple,sony,1,rtings.com,1,1,535
+item_0248,headphones,6,2026-07-22,gpt-5-5,5,sony|bose|sennheiser|apple|anker,sony,1,rtings.com,1,1,440
+item_0133,headphones,6,2026-07-22,gpt-5-5,3,sony|bose|apple,sony,2,rtings.com|travelandleisure.com,1,1,327
+item_0247,headphones,6,2026-07-22,gpt-5-5,2,anker|apple,anker,3,cubey.com.au|reddit.com|top7.au,1,1,358
+item_0052,headphones,6,2026-07-22,gpt-5-5,3,sony|bose|apple,sony,1,rtings.com,1,1,333
+item_0023,headphones,6,2026-07-22,gpt-5-5,3,sony|jbl|samsung,sony,1,techradar.com,1,1,220
+item_0067,headphones,6,2026-07-22,gpt-5-5,0,,,1,rtings.com,1,1,232
+item_0085,headphones,6,2026-07-22,gpt-5-5,0,,,1,rtings.com,1,1,150
+item_0174,headphones,6,2026-07-22,gpt-5-5,4,bose|sennheiser|sony|anker,bose,2,rtings.com|whathifi.com,1,1,401
+item_0141,headphones,6,2026-07-22,gpt-5-5,5,anker|jbl|sennheiser|sony|bose,anker,0,,1,1,424
+item_0270,headphones,6,2026-07-22,gpt-5-5,6,anker|sony|bose|jbl|sennheiser|apple,anker,2,rtings.com|soundguys.com,1,1,866
+item_0229,headphones,6,2026-07-22,gpt-5-5,4,anker|sony|bose|sennheiser,anker,2,esquire.com|forbes.com,1,1,541
+item_0149,headphones,6,2026-07-22,gpt-5-5,4,apple|sony|bose|sennheiser,apple,2,rtings.com|wsj.com,1,1,712
+item_0036,headphones,6,2026-07-22,gpt-5-5,4,anker|sony|sennheiser|bose,anker,2,rtings.com|whathifi.com,1,1,695
+item_0099,headphones,6,2026-07-22,gpt-5-5,4,sennheiser|anker|sony|bose,sennheiser,3,reddit.com|rtings.com|soundguys.com,2,1,570
+item_0218,headphones,6,2026-07-22,gpt-5-5,6,sony|bose|sennheiser|jbl|apple|sonos,sony,3,crutchfield.com|rtings.com|techgearlab.com,1,1,384
+item_0070,headphones,6,2026-07-22,gpt-5-5,5,sennheiser|sony|bose|apple|anker,sennheiser,2,rtings.com|whathifi.com,1,1,518
+item_0127,headphones,6,2026-07-22,gpt-5-5,5,sony|bose|sennheiser|apple|anker,sony,3,rtings.com|tomsguide.com|whathifi.com,1,1,409
+item_0045,headphones,6,2026-07-22,gpt-5-5,5,bose|sony|sennheiser|anker|apple,bose,3,forbes.com|reddit.com|techradar.com,2,1,443
+item_0155,headphones,6,2026-07-22,gpt-5-5,4,sennheiser|sony|bose|anker,sennheiser,3,reddit.com|rtings.com|soundguys.com,1,1,406
+item_0103,headphones,6,2026-07-22,gpt-5-5,5,anker|sennheiser|sony|jbl|bose,anker,1,rtings.com,1,1,379
+item_0139,headphones,6,2026-07-22,gpt-5-5,2,philips|sennheiser,philips,1,rtings.com,1,1,360
+item_0180,headphones,6,2026-07-22,gpt-5-5,5,bose|sony|sennheiser|apple|anker,bose,3,reddit.com|soundguys.com|wired.com,2,1,821
+item_0148,headphones,6,2026-07-22,gpt-5-5,4,anker|sony|sennheiser|bose,anker,2,rtings.com|techradar.com,1,1,468
+item_0093,headphones,6,2026-07-22,gpt-5-5,4,sennheiser|bose|sony|anker,sennheiser,1,rtings.com,1,1,577
+item_0107,headphones,6,2026-07-22,gpt-5-5,7,sony|bose|sennheiser|anker|jbl|apple|technics,sony,1,rtings.com,1,1,651
+item_0169,headphones,6,2026-07-22,gpt-5-5,4,sony|bose|sennheiser|anker,sony,1,rtings.com,1,1,398
+item_0053,headphones,6,2026-07-22,gpt-5-5,4,anker|sony|1more|bose,anker,3,rtings.com|soundguys.com|techradar.com,2,1,684
+item_0003,headphones,6,2026-07-22,gpt-5-5,4,sony|bose|sennheiser|anker,sony,2,reddit.com|rtings.com,1,1,378
+item_0095,headphones,6,2026-07-22,gpt-5-5,5,apple|sony|sennheiser|anker|bose,apple,1,rtings.com,1,1,515
+item_0018,headphones,6,2026-07-22,gpt-5-5,4,sony|bose|sennheiser|anker,sony,1,rtings.com,1,1,599
+item_0221,headphones,6,2026-07-22,gpt-5-5,7,anker|sennheiser|sony|bose|apple|jbl|edifier,anker,1,rtings.com,1,1,622
+item_0104,headphones,6,2026-07-22,gpt-5-5,4,sony|bose|sennheiser|apple,sony,2,rtings.com|soundguys.com,1,1,429
+item_0009,headphones,6,2026-07-22,gpt-5-5,4,sony|bose|sennheiser|anker,sony,1,rtings.com,1,1,431
+item_0055,headphones,6,2026-07-22,gpt-5-5,3,sony|anker|bose,sony,2,reddit.com|rtings.com,1,1,404
+item_0040,headphones,6,2026-07-22,gpt-5-5,5,anker|sennheiser|sony|apple|bose,anker,2,reddit.com|rtings.com,1,1,500
+item_0106,headphones,6,2026-07-22,gpt-5-5,4,sony|bose|sennheiser|apple,sony,3,rtings.com|soundguys.com|travelandleisure.com,1,1,588
+item_0206,headphones,6,2026-07-22,gpt-5-5,4,sony|bose|sennheiser|anker,sony,4,news.com.au|rtings.com|soundguys.com|techradar.com,1,1,786
+item_0203,headphones,6,2026-07-22,gpt-5-5,5,sony|bose|sennheiser|anker|apple,sony,4,rtings.com|soundguys.com|techradar.com|whathifi.com,1,1,252
+item_0137,headphones,6,2026-07-22,gpt-5-5,6,anker|audio-technica|edifier|sony|bose|sennheiser,anker,2,rtings.com|techradar.com,1,1,253
+item_0233,headphones,6,2026-07-22,gpt-5-5,3,sony|bose|sennheiser,sony,1,rtings.com,1,1,276
+item_0012,headphones,6,2026-07-22,gpt-5-5,3,sony|bose|apple,sony,5,androidcentral.com|apple.com|rtings.com|sony.com|tomsguide.com,1,1,534
+item_0075,headphones,6,2026-07-22,gpt-5-5,6,sennheiser|bose|sony|anker|apple|jbl,sennheiser,2,rtings.com|soundguys.com,1,1,354
+item_0006,headphones,6,2026-07-22,gpt-5-5,7,sony|bose|sennheiser|anker|jbl|apple|samsung,sony,2,rtings.com|techradar.com,1,1,339
+item_0042,headphones,6,2026-07-22,gpt-5-5,5,sony|bose|sennheiser|anker|jbl,sony,1,rtings.com,1,1,449
+item_0083,headphones,6,2026-07-22,gpt-5-5,2,jbl|anker,jbl,3,ndtvshopping.com|reddit.com|smartprix.com,1,1,586
+item_0176,headphones,6,2026-07-22,gpt-5-5,5,sony|bose|sennheiser|anker|apple,sony,3,soundguys.com|techradar.com|whathifi.com,1,1,379
+item_0134,headphones,6,2026-07-22,gpt-5-5,0,,,1,pewresearch.org,1,1,142
+item_0260,headphones,6,2026-07-22,gpt-5-5,4,sony|sennheiser|bose|apple,sony,2,getpodcast.com|rtings.com,1,1,304
+item_0126,headphones,6,2026-07-22,gpt-5-5,3,jbl|sony|anker,jbl,2,reddit.com|soundly.com,1,1,430
+item_0200,headphones,6,2026-07-22,gpt-5-5,4,sony|bose|sennheiser|anker,sony,1,rtings.com,1,1,473
+item_0263,headphones,6,2026-07-22,gpt-5-5,4,sony|bose|sennheiser|anker,sony,2,rtings.com|techradar.com,1,1,385
+item_0186,headphones,6,2026-07-22,gpt-5-5,6,sony|bose|sennheiser|bowers & wilkins|apple|anker,sony,3,rtings.com|soundguys.com|techradar.com,1,1,749
+item_0280,headphones,6,2026-07-22,gpt-5-5,4,sony|sennheiser|bose|apple,sony,5,rtings.com|techradar.com|tomsguide.com|whathifi.com|wsj.com,1,1,380
+item_0208,headphones,6,2026-07-22,gpt-5-5,4,sony|anker|bose|sennheiser,sony,2,rtings.com|techradar.com,1,1,481
+item_0066,headphones,6,2026-07-22,gpt-5-5,4,sony|bose|sennheiser|anker,sony,1,rtings.com,1,1,402
+item_0234,headphones,6,2026-07-22,gpt-5-5,5,sony|bose|apple|sennheiser|anker,sony,3,nbcnews.com|rtings.com|techradar.com,1,1,441
+item_0252,headphones,6,2026-07-22,gpt-5-5,5,bose|sennheiser|sony|anker|jbl,bose,1,rtings.com,1,1,245
+item_0002,headphones,6,2026-07-22,gpt-5-5,0,,,1,openai.com,1,1,540
+item_0245,headphones,6,2026-07-22,gpt-5-5,3,apple|samsung|google,apple,1,androidcentral.com,1,1,338
+item_0117,headphones,6,2026-07-22,gpt-5-5,6,bose|sennheiser|sony|jbl|anker|apple,bose,2,forbes.com|rtings.com,1,1,517
+item_0005,headphones,6,2026-07-22,gpt-5-5,4,sony|bose|sennheiser|anker,sony,1,rtings.com,1,1,358
+item_0227,headphones,6,2026-07-22,gpt-5-5,4,sony|sennheiser|bose|anker,sony,2,rtings.com|techradar.com,1,1,386
+item_0158,headphones,6,2026-07-22,gpt-5-5,3,anker|sony|bose,anker,3,soundguys.com|tomsguide.com|whathifi.com,1,1,441
+item_0281,headphones,6,2026-07-22,gpt-5-5,4,sony|bose|sennheiser|anker,sony,1,rtings.com,1,1,469
+item_0098,headphones,6,2026-07-22,gpt-5-5,4,shokz|jbl|sony|bose,shokz,2,rtings.com|techradar.com,1,1,362
+item_0015,headphones,6,2026-07-22,gpt-5-5,4,apple|sony|bose|sennheiser,apple,2,rtings.com|whathifi.com,1,1,869
+item_0116,headphones,6,2026-07-22,gpt-5-5,3,sony|bose|apple,sony,3,reddit.com|rtings.com|travelandleisure.com,1,1,280
+item_0024,headphones,6,2026-07-22,gpt-5-5,3,sennheiser|bose|sony,sennheiser,1,rtings.com,1,1,418
+item_0228,headphones,6,2026-07-22,gpt-5-5,5,sony|sennheiser|bose|bowers & wilkins|focal,sony,1,rtings.com,1,1,344
+item_0177,headphones,6,2026-07-22,gpt-5-5,5,sony|bose|sennheiser|anker|apple,sony,1,rtings.com,1,1,291
+item_0110,headphones,6,2026-07-22,gpt-5-5,4,sony|bose|sennheiser|anker,sony,1,rtings.com,1,1,413
+item_0081,headphones,6,2026-07-22,gpt-5-5,4,sony|bose|sennheiser|anker,sony,1,rtings.com,1,1,614
+item_0249,headphones,6,2026-07-22,gpt-5-5,4,sennheiser|anker|sony|edifier,sennheiser,2,rtings.com|soundguys.com,1,1,551
+item_0154,headphones,6,2026-07-22,gpt-5-5,4,sony|bose|sennheiser|anker,sony,1,rtings.com,1,1,348
+item_0119,headphones,6,2026-07-22,gpt-5-5,5,sony|sennheiser|bowers & wilkins|bose|jbl,sony,2,majorhifi.com|rtings.com,1,1,462
+item_0241,headphones,6,2026-07-22,gpt-5-5,5,sony|bose|anker|sennheiser|apple,sony,2,rtings.com|soundguys.com,1,1,337
+item_0051,headphones,6,2026-07-22,gpt-5-5,3,bose|sennheiser|anker,bose,0,,1,1,432
+item_0201,headphones,6,2026-07-22,gpt-5-5,6,sony|bose|anker|sennheiser|technics|apple,sony,2,rtings.com|techradar.com,1,1,419
+item_0275,headphones,6,2026-07-22,gpt-5-5,4,sony|bose|sennheiser|anker,sony,1,rtings.com,1,1,328
+item_0011,headphones,6,2026-07-22,gpt-5-5,5,sony|bose|sennheiser|sonos|apple,sony,3,rtings.com|soundguys.com|whathifi.com,1,1,550
+item_0130,headphones,6,2026-07-22,gpt-5-5,4,sony|bose|sennheiser|anker,sony,1,rtings.com,1,1,295
+item_0086,headphones,6,2026-07-22,gpt-5-5,5,sony|apple|jbl|bose|anker,sony,1,rtings.com,1,1,395
+item_0202,headphones,6,2026-07-22,gpt-5-5,2,anker|1more,anker,2,rtings.com|soundguys.com,1,1,343
+item_0159,headphones,6,2026-07-22,gpt-5-5,4,sennheiser|sony|bowers & wilkins|technics,sennheiser,2,rtings.com|whathifi.com,1,1,539
+item_0112,headphones,6,2026-07-22,gpt-5-5,5,anker|bose|sony|sennheiser|apple,anker,0,,1,1,669
+item_0145,headphones,6,2026-07-22,gpt-5-5,5,sony|bose|sennheiser|anker|apple,sony,2,rtings.com|soundguys.com,1,1,385
+item_0168,headphones,6,2026-07-22,gpt-5-5,10,anker|jbl|philips|edifier|sennheiser|sony|bose|apple|bowers & wilkins|focal,anker,1,rtings.com,1,1,890
+item_0223,headphones,6,2026-07-22,gpt-5-5,5,sony|bose|sennheiser|anker|apple,sony,1,rtings.com,1,1,332
+item_0244,headphones,6,2026-07-22,gpt-5-5,5,anker|sennheiser|sony|bose|jbl,anker,1,rtings.com,1,1,543
+item_0264,headphones,6,2026-07-22,gpt-5-5,3,anker|jbl|sony,anker,1,rtings.com,1,1,218
+item_0037,headphones,6,2026-07-22,gpt-5-5,5,sony|bose|sennheiser|apple|bowers & wilkins,sony,1,proaudiovideo.in,1,1,505
+item_0124,headphones,6,2026-07-22,gpt-5-5,3,bose|sony|apple,bose,1,soundguys.com,1,1,187
+item_0021,headphones,6,2026-07-22,gpt-5-5,6,sony|bose|sennheiser|bowers & wilkins|focal|apple,sony,1,rtings.com,1,1,941
+item_0157,headphones,6,2026-07-22,gpt-5-5,2,anker|sennheiser,anker,2,rtings.com|soundguys.com,1,1,390
+item_0001,headphones,6,2026-07-22,gpt-5-5,5,sennheiser|bose|sony|anker|apple,sennheiser,3,reddit.com|redditrecs.com|soundguys.com,1,1,529
+item_0240,headphones,6,2026-07-22,gpt-5-5,4,sony|bose|sennheiser|anker,sony,1,rtings.com,1,1,625
+item_0162,headphones,6,2026-07-22,gpt-5-5,3,anker|sony|sennheiser,anker,1,rtings.com,1,1,237
+item_0046,headphones,6,2026-07-22,gpt-5-5,4,sony|bose|sennheiser|anker,sony,1,rtings.com,1,1,297
+item_0230,headphones,6,2026-07-22,gpt-5-5,5,sennheiser|bose|anker|sony|jbl,sennheiser,2,rtings.com|techradar.com,1,1,286
+item_0276,headphones,6,2026-07-22,gpt-5-5,1,earfun,earfun,4,babygearlab.com|bestreviews.guide|slickdeals.net|techadvisor.com,1,1,623
+item_0138,headphones,6,2026-07-22,gpt-5-5,4,bose|sony|apple|sennheiser,bose,3,reddit.com|rtings.com|techradar.com,1,1,450
+item_0242,headphones,6,2026-07-22,gpt-5-5,4,sony|bose|sennheiser|anker,sony,1,rtings.com,1,1,271
+item_0212,headphones,6,2026-07-22,gpt-5-5,5,anker|sony|bose|jbl|shokz,anker,2,nbcnews.com|rtings.com,1,1,552
+item_0082,headphones,6,2026-07-22,gpt-5-5,5,sony|anker|bose|sennheiser|apple,sony,13,amazon.co.uk|ao.com|argos.co.uk|bose.co.uk|currys.co.uk|expertreviews.co.uk|johnlewis.com|reddit.com|richersounds.com|sennheiser-hearing.com|sony.co.uk|which.co.uk|wsj.com,1,1,744
+item_0077,headphones,6,2026-07-22,gpt-5-5,4,sennheiser|anker|sony|jbl,sennheiser,0,,1,1,320
+item_0044,headphones,6,2026-07-22,gpt-5-5,5,sony|bose|sennheiser|anker|apple,sony,2,rtings.com|techradar.com,1,1,259
+item_0132,headphones,6,2026-07-22,gpt-5-5,4,bose|sony|sennheiser|anker,bose,1,rtings.com,1,1,362
+item_0008,headphones,6,2026-07-22,gpt-5-5,4,anker|sennheiser|sony|jbl,anker,1,rtings.com,1,1,487
+item_0161,headphones,6,2026-07-22,gpt-5-5,6,sony|sennheiser|bose|audio-technica|beyerdynamic|focal,sony,3,headphonesty.com|reddit.com|rtings.com,1,1,246
+item_0027,headphones,6,2026-07-22,gpt-5-5,4,bose|sony|sennheiser|apple,bose,1,rtings.com,1,1,470
+item_0115,headphones,6,2026-07-22,gpt-5-5,3,bose|sony|sennheiser,bose,3,forbes.com|tomsguide.com|whathifi.com,1,1,142
+item_0096,headphones,6,2026-07-22,gpt-5-5,4,sony|bose|sennheiser|anker,sony,4,rtings.com|soundguys.com|techradar.com|whathifi.com,1,1,448
+item_0111,headphones,6,2026-07-22,gpt-5-5,5,sennheiser|bose|anker|sony|apple,sennheiser,2,rtings.com|soundguys.com,1,1,563
+item_0210,headphones,6,2026-07-22,gpt-5-5,4,sony|bose|apple|sennheiser,sony,2,rtings.com|travelandleisure.com,1,1,356
+item_0016,headphones,6,2026-07-22,gpt-5-5,5,sony|bose|sennheiser|anker|apple,sony,1,rtings.com,1,1,347
+item_0084,headphones,6,2026-07-22,gpt-5-5,0,,,0,,1,1,129
+item_0163,headphones,6,2026-07-22,gpt-5-5,6,sennheiser|sony|bose|anker|apple|jbl,sennheiser,2,rtings.com|soundguys.com,1,1,633
+item_0128,headphones,6,2026-07-22,gpt-5-5,6,bose|apple|anker|jbl|skullcandy|sony,bose,1,rtings.com,1,1,469
+item_0195,headphones,6,2026-07-22,gpt-5-5,4,sony|bose|sennheiser|anker,sony,2,soundguys.com|techradar.com,1,1,419
+item_0153,headphones,6,2026-07-22,gpt-5-5,4,sony|bose|sennheiser|anker,sony,1,rtings.com,1,1,326
+item_0136,headphones,6,2026-07-22,gpt-5-5,5,sony|bose|sennheiser|apple|anker,sony,4,rtings.com|soundguys.com|tomsguide.com|wsj.com,1,1,432
+item_0091,headphones,6,2026-07-22,gpt-5-5,4,sony|bose|sennheiser|anker,sony,2,rtings.com|whathifi.com,1,1,459
+item_0108,headphones,6,2026-07-22,gpt-5-5,4,sony|bose|sennheiser|apple,sony,3,rtings.com|soundguys.com|techradar.com,1,1,663
+item_0021,headphones,7,2026-07-23,gpt-5-5,4,sony|bose|sennheiser|anker,sony,3,reddit.com|rtings.com|soundguys.com,1,1,796
+item_0162,headphones,7,2026-07-23,gpt-5-5,2,sony|bose,sony,2,reddit.com|rtings.com,1,1,273
+item_0124,headphones,7,2026-07-23,,0,,,0,,0,0,123
+item_0205,headphones,7,2026-07-23,gpt-5-5,2,sony|bose,sony,1,rtings.com,1,1,96
+item_0016,headphones,7,2026-07-23,gpt-5-5,4,bose|sony|apple|sennheiser,bose,2,rtings.com|whathifi.com,1,1,341
+item_0067,headphones,7,2026-07-23,,0,,,0,,0,0,199
+item_0229,headphones,7,2026-07-23,,4,anker|bose|sony|sennheiser,anker,4,esquire.com|forbes.com|reddit.com|soundguys.com,0,1,555
+item_0141,headphones,7,2026-07-23,,4,anker|sennheiser|sony|bose,anker,3,rtings.com|soundguys.com|techradar.com,0,1,617
+item_0280,headphones,7,2026-07-23,,5,sony|sennheiser|bose|apple|anker,sony,6,nbcnews.com|rtings.com|soundguys.com|techradar.com|tomsguide.com|whathifi.com,0,1,388
+item_0066,headphones,7,2026-07-23,,4,anker|sony|sennheiser|bose,anker,4,reddit.com|rtings.com|soundguys.com|techradar.com,0,1,442
+item_0002,headphones,7,2026-07-23,,0,,,1,openai.com,0,1,518
+item_0044,headphones,7,2026-07-23,gpt-5-5,3,sony|bose|apple,sony,3,rtings.com|stuff.tv|techradar.com,1,1,284
+item_0208,headphones,7,2026-07-23,gpt-5-5,4,sony|anker|sennheiser|bose,sony,1,rtings.com,1,1,509
+item_0083,headphones,7,2026-07-23,gpt-5-5,3,jbl|sony|anker,jbl,4,croma.com|indiatimes.com|reddit.com|smartprix.com,1,1,532
+item_0138,headphones,7,2026-07-23,,4,sony|bose|sennheiser|anker,sony,2,rtings.com|techradar.com,0,1,487
+item_0043,headphones,7,2026-07-23,,4,bose|sony|apple|sennheiser,bose,3,rtings.com|tomsguide.com|whathifi.com,0,1,492
+item_0137,headphones,7,2026-07-23,gpt-5-5,8,anker|sony|jbl|skullcandy|marshall|edifier|bose|sennheiser,anker,1,rtings.com,1,1,321
+item_0186,headphones,7,2026-07-23,gpt-5-5,7,sony|bose|sennheiser|apple|bowers & wilkins|jbl|anker,sony,5,reddit.com|rtings.com|soundguys.com|techradar.com|youtube.com,1,1,631
+item_0045,headphones,7,2026-07-23,gpt-5-5,4,sony|bose|sennheiser|anker,sony,3,loudnwireless.com|reddit.com|rtings.com,1,1,256
+item_0178,headphones,7,2026-07-23,gpt-5-5,5,apple|sony|bose|sennheiser|anker,apple,5,rtings.com|soundguys.com|techradar.com|tomsguide.com|whathifi.com,1,1,529
+item_0161,headphones,7,2026-07-23,gpt-5-5,7,sennheiser|focal|beyerdynamic|audio-technica|sony|bose|bowers & wilkins,sennheiser,1,rtings.com,1,1,336
+item_0139,headphones,7,2026-07-23,gpt-5-5,2,sennheiser|philips,sennheiser,2,rtings.com|whathifi.com,1,1,394
+item_0018,headphones,7,2026-07-23,,4,sony|bose|sennheiser|apple,sony,3,rtings.com|techradar.com|whathifi.com,0,1,797
+item_0176,headphones,7,2026-07-23,gpt-5-5,4,sony|bose|sennheiser|anker,sony,1,rtings.com,1,1,398
+item_0281,headphones,7,2026-07-23,,4,sony|bose|sennheiser|apple,sony,2,rtings.com|soundguys.com,0,1,565
+item_0203,headphones,7,2026-07-23,,3,sony|bose|sennheiser,sony,4,rtings.com|soundguys.com|techradar.com|tomsguide.com,0,1,235
+item_0008,headphones,7,2026-07-23,,4,anker|sony|sennheiser|jbl,anker,2,rtings.com|soundguys.com,0,1,577
+item_0212,headphones,7,2026-07-23,,6,anker|bose|sony|jbl|audio-technica|shokz,anker,4,rtings.com|soundguys.com|tomsguide.com|whathifi.com,0,1,437
+item_0136,headphones,7,2026-07-23,,5,sony|bose|sennheiser|apple|anker,sony,5,consumerreports.org|rtings.com|techradar.com|tomsguide.com|whathifi.com,0,1,427
+item_0112,headphones,7,2026-07-23,gpt-5-5,5,sony|bose|sennheiser|anker|apple,sony,1,rtings.com,1,1,668
+item_0134,headphones,7,2026-07-23,gpt-5-5,0,,,0,,1,1,71
+item_0108,headphones,7,2026-07-23,gpt-5-5,5,sony|bose|sennheiser|apple|anker,sony,5,forbes.com|packhacker.com|rtings.com|techradar.com|whathifi.com,1,1,822
+item_0152,headphones,7,2026-07-23,gpt-5-5,4,sennheiser|bose|sony|apple,sennheiser,2,rtings.com|soundguys.com,1,1,460
+item_0275,headphones,7,2026-07-23,gpt-5-5,5,sony|bose|sennheiser|anker|jbl,sony,2,rtings.com|techradar.com,1,1,348
+item_0126,headphones,7,2026-07-23,,2,jbl|sony,jbl,4,babygearlab.com|tomsguide.com|travelandleisure.com|whathifi.com,0,1,456
+item_0222,headphones,7,2026-07-23,gpt-5-5,5,anker|sony|bose|sennheiser|jbl,anker,3,rtings.com|techradar.com|whathifi.com,1,1,709
+item_0245,headphones,7,2026-07-23,gpt-5-5,3,apple|google|samsung,apple,1,techradar.com,1,1,325
+item_0040,headphones,7,2026-07-23,,4,sennheiser|anker|sony|jbl,sennheiser,2,rtings.com|soundguys.com,0,1,434
+item_0130,headphones,7,2026-07-23,gpt-5-5,5,sony|bose|sennheiser|anker|apple,sony,4,cntraveller.com|rtings.com|techradar.com|travelandleisure.com,1,1,287
+item_0009,headphones,7,2026-07-23,gpt-5-5,4,sony|bose|sennheiser|anker,sony,2,reddit.com|rtings.com,1,1,438
+item_0096,headphones,7,2026-07-23,,4,sony|sennheiser|bose|anker,sony,5,rtings.com|soundguys.com|techgearlab.com|techradar.com|whathifi.com,0,1,451
+item_0015,headphones,7,2026-07-23,,4,sony|bose|sennheiser|apple,sony,4,rtings.com|soundguys.com|techradar.com|whathifi.com,0,1,869
+item_0247,headphones,7,2026-07-23,gpt-5-5,4,anker|jbl|sony|sennheiser,anker,2,choice.com.au|rtings.com,1,1,486
+item_0075,headphones,7,2026-07-23,gpt-5-5,6,sennheiser|apple|audio-technica|anker|bose|sony,sennheiser,2,rtings.com|whathifi.com,1,1,353
+item_0145,headphones,7,2026-07-23,,4,sony|bose|sennheiser|apple,sony,1,rtings.com,0,1,422
+item_0159,headphones,7,2026-07-23,,3,sony|bose|apple,sony,3,forbes.com|rtings.com|soundguys.com,0,1,184
+item_0160,headphones,7,2026-07-23,gpt-5-5,0,,,3,rtings.com|thetechsearch.com|tomshardware.com,1,1,544
+item_0248,headphones,7,2026-07-23,,5,sony|sennheiser|bose|anker|jbl,sony,2,rtings.com|techradar.com,0,1,497
+item_0210,headphones,7,2026-07-23,gpt-5-5,4,sony|bose|sennheiser|apple,sony,2,rtings.com|tomsguide.com,1,1,482
+item_0251,headphones,7,2026-07-23,,5,sony|bose|sennheiser|apple|anker,sony,5,reddit.com|rtings.com|techradar.com|tomsguide.com|whathifi.com,0,1,629
+item_0109,headphones,7,2026-07-23,gpt-5-5,4,sony|bose|sennheiser|anker,sony,2,rtings.com|tomsguide.com,1,1,465
+item_0116,headphones,7,2026-07-23,,5,sony|bose|sennheiser|anker|technics,sony,3,reddit.com|rtings.com|techradar.com,0,1,321
+item_0168,headphones,7,2026-07-23,,9,sony|sennheiser|focal|anker|bose|jbl|audio-technica|apple|bowers & wilkins,sony,2,rtings.com|whathifi.com,0,1,2337
+item_0117,headphones,7,2026-07-23,,4,bose|sennheiser|anker|sony,bose,5,forbes.com|reddit.com|rtings.com|soundguys.com|techradar.com,0,1,557
+item_0180,headphones,7,2026-07-23,,4,sony|sennheiser|bose|anker,sony,5,gummysearch.com|headphonesty.com|reddit.com|redditrecs.com|rtings.com,0,1,531
+item_0091,headphones,7,2026-07-23,gpt-5-5,5,sony|bose|apple|sennheiser|anker,sony,2,rtings.com|techradar.com,1,1,476
+item_0249,headphones,7,2026-07-23,gpt-5-5,6,sennheiser|bose|sony|anker|jbl|edifier,sennheiser,2,rtings.com|soundguys.com,1,1,462
+item_0214,headphones,7,2026-07-23,gpt-5-5,5,sony|bose|apple|sennheiser|bowers & wilkins,sony,1,rtings.com,2,1,185
+item_0257,headphones,7,2026-07-23,gpt-5-5,4,sony|sennheiser|apple|samsung,sony,3,rtings.com|techradar.com|whathifi.com,1,1,320
+item_0031,headphones,7,2026-07-23,,4,bose|sennheiser|sony|anker,bose,2,rtings.com|techradar.com,0,1,493
+item_0149,headphones,7,2026-07-23,,5,apple|sony|bose|sennheiser|sonos,apple,4,nbcnews.com|rtings.com|tomsguide.com|whathifi.com,0,1,691
+item_0169,headphones,7,2026-07-23,,5,sony|bose|sennheiser|anker|apple,sony,2,rtings.com|techradar.com,0,1,459
+item_0077,headphones,7,2026-07-23,,4,sennheiser|sony|jbl|anker,sennheiser,4,loudersound.com|reddit.com|whathifi.com|wired.it,0,1,356
+item_0157,headphones,7,2026-07-23,gpt-5-5,2,anker|jbl,anker,2,rtings.com|soundguys.com,1,1,389
+item_0230,headphones,7,2026-07-23,gpt-5-5,1,sony,sony,0,,1,1,54
+item_0225,headphones,7,2026-07-23,,3,sony|bose|sennheiser,sony,2,hind.ee|sony.ee,0,1,402
+item_0177,headphones,7,2026-07-23,,5,sony|bose|anker|sennheiser|apple,sony,2,rtings.com|techradar.com,0,1,355
+item_0098,headphones,7,2026-07-23,gpt-5-5,4,shokz|jbl|sony|bose,shokz,1,techradar.com,1,1,316
+item_0148,headphones,7,2026-07-23,gpt-5-5,5,anker|jbl|sony|sennheiser|bose,anker,3,rtings.com|soundguys.com|techradar.com,1,1,495
+item_0084,headphones,7,2026-07-23,gpt-5-5,0,,,0,,1,1,127
+item_0158,headphones,7,2026-07-23,gpt-5-5,3,anker|bose|sony,anker,2,crutchfield.com|rtings.com,1,1,496
+item_0042,headphones,7,2026-07-23,gpt-5-5,4,sony|bose|sennheiser|anker,sony,2,rtings.com|whathifi.com,1,1,459
+item_0240,headphones,7,2026-07-23,,4,bose|sony|sennheiser|anker,bose,4,rtings.com|soundguys.com|techradar.com|travelandleisure.com,0,1,734
+item_0233,headphones,7,2026-07-23,,5,sennheiser|sony|anker|skullcandy|apple,sennheiser,0,,0,0,302
+item_0111,headphones,7,2026-07-23,gpt-5-5,4,sony|sennheiser|bose|anker,sony,2,rtings.com|soundguys.com,1,1,538
+item_0065,headphones,7,2026-07-23,gpt-5-5,5,sony|bose|sennheiser|anker|apple,sony,5,cntraveller.com|reddit.com|rtings.com|techradar.com|travelandleisure.com,1,1,377
+item_0005,headphones,7,2026-07-23,gpt-5-5,4,sony|bose|sennheiser|anker,sony,4,rtings.com|soundguys.com|techradar.com|whathifi.com,1,1,347
+item_0051,headphones,7,2026-07-23,gpt-5-5,4,sony|bose|sennheiser|anker,sony,2,rtings.com|techradar.com,1,1,466
+item_0241,headphones,7,2026-07-23,gpt-5-5,5,bose|sony|sennheiser|anker|apple,bose,3,reddit.com|rtings.com|soundguys.com,1,1,306
+item_0103,headphones,7,2026-07-23,,3,sennheiser|sony|anker,sennheiser,4,rtings.com|soundguys.com|techradar.com|whathifi.com,0,1,441
+item_0200,headphones,7,2026-07-23,,4,sony|bose|sennheiser|anker,sony,3,rtings.com|soundguys.com|techradar.com,0,1,427
+item_0263,headphones,7,2026-07-23,,4,sony|bose|sennheiser|anker,sony,2,rtings.com|techradar.com,0,1,413
+item_0218,headphones,7,2026-07-23,,6,jbl|skullcandy|sony|bose|sonos|sennheiser,jbl,7,babygearlab.com|bestbuy.com|nypost.com|seniorstrong.org|techadvisor.com|tomsguide.com|whathifi.com,0,1,338
+item_0024,headphones,7,2026-07-23,,6,sennheiser|anker|technics|apple|samsung|sony,sennheiser,1,rtings.com,0,1,456
+item_0085,headphones,7,2026-07-23,,0,,,0,,0,0,162
+item_0227,headphones,7,2026-07-23,gpt-5-5,4,sony|bose|sennheiser|anker,sony,2,rtings.com|soundguys.com,1,1,345
+item_0174,headphones,7,2026-07-23,,4,sony|bose|sennheiser|anker,sony,2,rtings.com|techradar.com,0,1,409
+item_0012,headphones,7,2026-07-23,,5,bose|sennheiser|sony|anker|apple,bose,3,reddit.com|rtings.com|techradar.com,0,1,634
+item_0093,headphones,7,2026-07-23,gpt-5-5,6,sony|bose|anker|sennheiser|apple|jbl,sony,2,rtings.com|soundguys.com,1,1,542
+item_0201,headphones,7,2026-07-23,gpt-5-5,6,sony|bose|sennheiser|anker|jbl|technics,sony,4,packhacker.com|popsci.com|reddit.com|rtings.com,1,1,406
+item_0270,headphones,7,2026-07-23,gpt-5-5,8,anker|apple|sony|bose|sennheiser|bowers & wilkins|focal|bang & olufsen,anker,2,rtings.com|soundguys.com,1,1,925
+item_0046,headphones,7,2026-07-23,,4,sony|bose|sennheiser|anker,sony,2,rtings.com|techradar.com,0,1,260
+item_0110,headphones,7,2026-07-23,,5,sony|bose|sennheiser|apple|anker,sony,3,rtings.com|tomsguide.com|whathifi.com,0,1,543
+item_0056,headphones,7,2026-07-23,,4,sony|bose|sennheiser|anker,sony,3,rtings.com|techradar.com|whathifi.com,0,1,345
+item_0099,headphones,7,2026-07-23,,3,sennheiser|sony|anker,sennheiser,5,reddit.com|rtings.com|soundguys.com|techradar.com|tomsguide.com,0,1,474
+item_0132,headphones,7,2026-07-23,,4,sony|sennheiser|anker|bose,sony,3,rtings.com|soundguys.com|techradar.com,0,1,391
+item_0179,headphones,7,2026-07-23,,4,bose|sony|sennheiser|apple,bose,4,argos.co.uk|currys.co.uk|johnlewis.com|whathifi.com,0,1,450
+item_0006,headphones,7,2026-07-23,gpt-5-5,5,sony|bose|sennheiser|anker|apple,sony,2,rtings.com|techradar.com,1,1,366
+item_0252,headphones,7,2026-07-23,,4,sennheiser|sony|anker|apple,sennheiser,2,rtings.com|soundguys.com,0,1,289
+item_0081,headphones,7,2026-07-23,,5,sennheiser|sony|bose|jbl|anker,sennheiser,1,rtings.com,0,1,527
+item_0128,headphones,7,2026-07-23,,5,bose|apple|sony|anker|jbl,bose,7,av.com|errorempire.com|loudersound.com|reddit.com|rtings.com|soundcore.com|whathifi.com,0,1,505
+item_0264,headphones,7,2026-07-23,,4,sony|anker|jbl|sennheiser,sony,3,reddit.com|rtings.com|tomsguide.com,0,1,351
+item_0001,headphones,7,2026-07-23,gpt-5-5,5,sennheiser|sony|bose|anker|jbl,sennheiser,2,redditrecs.com|soundguys.com,1,1,616
+item_0228,headphones,7,2026-07-23,gpt-5-5,0,,,0,,1,1,50
+item_0223,headphones,7,2026-07-23,,5,sennheiser|sony|bose|anker|apple,sennheiser,2,rtings.com|techradar.com,0,1,397
+item_0095,headphones,7,2026-07-23,gpt-5-5,6,apple|sony|sennheiser|jbl|samsung|bose,apple,1,soundguys.com,1,1,581
+item_0119,headphones,7,2026-07-23,gpt-5-5,5,sennheiser|sony|bowers & wilkins|focal|bose,sennheiser,2,soundguys.com|whathifi.com,1,1,656
+item_0242,headphones,7,2026-07-23,,5,sony|bose|sennheiser|anker|apple,sony,2,rtings.com|techradar.com,0,1,330
+item_0155,headphones,7,2026-07-23,,6,sony|sennheiser|bose|anker|apple|technics,sony,3,reddit.com|rtings.com|soundguys.com,0,1,483
+item_0127,headphones,7,2026-07-23,gpt-5-5,6,sony|bose|sennheiser|apple|anker|jbl,sony,3,consumerreports.org|rtings.com|tomsguide.com,1,1,383
+item_0023,headphones,7,2026-07-23,,2,samsung|google,samsung,0,,0,0,284
+item_0206,headphones,7,2026-07-23,gpt-5-5,4,sony|sennheiser|bose|anker,sony,3,digitaltrends.com|rtings.com|tomsguide.com,1,1,795
+item_0037,headphones,7,2026-07-23,gpt-5-5,5,sony|bose|sennheiser|sonos|focal,sony,1,whathifi.com,1,1,539
+item_0154,headphones,7,2026-07-23,gpt-5-5,4,sony|bose|sennheiser|anker,sony,2,rtings.com|techradar.com,1,1,401
+item_0052,headphones,7,2026-07-23,gpt-5-5,4,sony|bose|sennheiser|anker,sony,1,rtings.com,1,1,341
+item_0221,headphones,7,2026-07-23,,6,sennheiser|sony|anker|apple|jbl|edifier,sennheiser,2,rtings.com|whathifi.com,0,1,729
+item_0164,headphones,7,2026-07-23,,5,sony|bose|sennheiser|anker|apple,sony,3,reddit.com|rtings.com|techradar.com,0,1,556
+item_0253,headphones,7,2026-07-23,gpt-5-5,4,sony|bose|sennheiser|anker,sony,2,rtings.com|techradar.com,1,1,428
+item_0260,headphones,7,2026-07-23,gpt-5-5,4,jbl|sony|sennheiser|bose,jbl,1,muckrack.com,1,1,229
+item_0163,headphones,7,2026-07-23,,5,sony|anker|sennheiser|jbl|bose,sony,2,rtings.com|soundguys.com,0,1,908
+item_0003,headphones,7,2026-07-23,,4,sony|bose|sennheiser|anker,sony,4,bose.com|reddit.com|techradar.com|usersrated.com,0,1,375
+item_0086,headphones,7,2026-07-23,,8,jbl|puro|sony|apple|sennheiser|bose|beyerdynamic|sonos,jbl,3,nbcnews.com|rtings.com|techradar.com,0,1,529
+item_0107,headphones,7,2026-07-23,,7,sony|bose|sennheiser|anker|apple|google|jbl,sony,4,rtings.com|soundguys.com|travelandleisure.com|whathifi.com,0,1,668
+item_0153,headphones,7,2026-07-23,,4,sony|bose|sennheiser|anker,sony,1,rtings.com,0,1,386
+item_0011,headphones,7,2026-07-23,,5,sony|sennheiser|bose|anker|sonos,sony,3,rtings.com|soundguys.com|techradar.com,0,1,630
+item_0118,headphones,7,2026-07-23,gpt-5-5,0,,,0,,1,1,73
+item_0123,headphones,7,2026-07-23,,6,sony|bose|sennheiser|anker|apple|samsung,sony,0,,0,0,1560
+item_0195,headphones,7,2026-07-23,gpt-5-5,4,sennheiser|sony|bose|anker,sennheiser,1,rtings.com,1,1,450
+item_0234,headphones,7,2026-07-23,gpt-5-5,5,sony|apple|bose|sennheiser|anker,sony,2,rtings.com|tomsguide.com,1,1,452
+item_0106,headphones,7,2026-07-23,gpt-5-5,5,sony|bose|sennheiser|anker|technics,sony,1,rtings.com,1,1,571
+item_0055,headphones,7,2026-07-23,gpt-5-5,3,sony|bose|anker,sony,1,rtings.com,1,1,379
+item_0082,headphones,7,2026-07-23,gpt-5-5,4,sony|bose|sennheiser|anker,sony,4,expertreviews.co.uk|reddit.com|whathifi.com|which.co.uk,1,1,807
+item_0276,headphones,7,2026-07-23,,1,earfun,earfun,2,babygearlab.com|travelandleisure.com,0,1,426
+item_0104,headphones,7,2026-07-23,,5,sony|bose|sennheiser|bowers & wilkins|apple,sony,3,rtings.com|soundguys.com|techradar.com,0,1,496
+item_0135,headphones,7,2026-07-23,,0,,,0,,0,0,169
+item_0027,headphones,7,2026-07-23,,4,bose|sony|sennheiser|apple,bose,3,nbcnews.com|rtings.com|tomsguide.com,0,1,459
+item_0202,headphones,7,2026-07-23,gpt-5-5,2,anker|jbl,anker,1,rtings.com,1,1,360
+item_0244,headphones,7,2026-07-23,,5,sennheiser|sony|bose|anker|jbl,sennheiser,2,rtings.com|whathifi.com,0,1,592
+item_0115,headphones,7,2026-07-23,,3,sony|bose|sennheiser,sony,2,bestbuy.com|rtings.com,0,1,163
+item_0053,headphones,7,2026-07-23,gpt-5-5,4,anker|sony|bose|sennheiser,anker,2,rtings.com|soundguys.com,1,1,737
+item_0070,headphones,7,2026-07-23,,4,apple|sennheiser|sony|bose,apple,2,rtings.com|soundguys.com,0,1,549
+item_0036,headphones,7,2026-07-23,,5,sony|bose|sennheiser|anker|focal,sony,3,reddit.com|rtings.com|soundguys.com,0,1,734
+item_0133,headphones,7,2026-07-23,gpt-5-5,5,sony|bose|sennheiser|anker|apple,sony,2,rtings.com|soundguys.com,1,1,294

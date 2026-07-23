@@ -1,0 +1,2370 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="612pt" height="396pt" viewBox="0 0 612 396" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-07-23T07:16:14.985080</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.11.0, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 396 
+L 612 396 
+L 612 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 47.24 312.0928 
+L 601.2 312.0928 
+L 601.2 30.1 
+L 47.24 30.1 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1">
+      <defs>
+       <path id="m813706403b" d="M 0 0 
+L 0 3.5 
+" style="stroke: #6b7280; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#m813706403b" x="72.42" y="312.0928" style="fill: #6b7280; stroke: #6b7280; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_1">
+      <!-- 5 -->
+      <g style="fill: #6b7280" transform="translate(69.545 328.5928) scale(0.1 -0.1)">
+       <defs>
+        <path id="Figtree-Regular-113" d="M 1856 -77 
+Q 1587 -77 1308 3 
+Q 1030 83 784 249 
+Q 538 416 378 678 
+L 813 928 
+Q 1037 646 1299 518 
+Q 1562 390 1843 390 
+Q 2285 390 2563 662 
+Q 2842 934 2842 1376 
+Q 2842 1811 2573 2086 
+Q 2304 2362 1869 2362 
+Q 1632 2362 1401 2256 
+Q 1171 2150 1043 1997 
+L 557 2112 
+L 774 4480 
+L 3162 4480 
+L 3162 3994 
+L 1254 3994 
+L 1120 2566 
+Q 1299 2675 1516 2739 
+Q 1734 2803 1958 2803 
+Q 2368 2803 2688 2624 
+Q 3008 2445 3193 2125 
+Q 3379 1805 3379 1389 
+Q 3379 954 3184 624 
+Q 2989 294 2646 108 
+Q 2304 -77 1856 -77 
+z
+" transform="scale(0.015625)"/>
+       </defs>
+       <use xlink:href="#Figtree-Regular-113"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_2">
+      <g>
+       <use xlink:href="#m813706403b" x="98.925263" y="312.0928" style="fill: #6b7280; stroke: #6b7280; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_2">
+      <!-- 10 -->
+      <g style="fill: #6b7280" transform="translate(93.655732 328.5928) scale(0.1 -0.1)">
+       <defs>
+        <path id="Figtree-Regular-10f" d="M 1389 0 
+L 1389 4192 
+L 1434 4480 
+L 1920 4480 
+L 1920 0 
+L 1389 0 
+z
+M 384 3328 
+L 384 3821 
+Q 518 3814 704 3910 
+Q 890 4006 1088 4160 
+Q 1286 4314 1434 4480 
+L 1766 4115 
+Q 1555 3891 1324 3712 
+Q 1094 3533 857 3427 
+Q 621 3322 384 3328 
+z
+" transform="scale(0.015625)"/>
+        <path id="Figtree-Regular-10e" d="M 2048 -77 
+Q 1536 -77 1139 220 
+Q 742 518 518 1040 
+Q 294 1562 294 2240 
+Q 294 2918 518 3440 
+Q 742 3962 1136 4259 
+Q 1530 4557 2048 4557 
+Q 2566 4557 2960 4259 
+Q 3354 3962 3581 3440 
+Q 3808 2918 3808 2240 
+Q 3808 1562 3584 1040 
+Q 3360 518 2963 220 
+Q 2566 -77 2048 -77 
+z
+M 2048 410 
+Q 2406 410 2684 646 
+Q 2963 883 3120 1292 
+Q 3277 1702 3277 2240 
+Q 3277 2778 3120 3190 
+Q 2963 3603 2684 3836 
+Q 2406 4070 2048 4070 
+Q 1690 4070 1414 3836 
+Q 1139 3603 982 3190 
+Q 826 2778 826 2240 
+Q 826 1702 982 1292 
+Q 1139 883 1417 646 
+Q 1696 410 2048 410 
+z
+" transform="scale(0.015625)"/>
+       </defs>
+       <use xlink:href="#Figtree-Regular-10f"/>
+       <use xlink:href="#Figtree-Regular-10e" transform="translate(41.296875 0)"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_3">
+     <g id="line2d_3">
+      <g>
+       <use xlink:href="#m813706403b" x="125.430526" y="312.0928" style="fill: #6b7280; stroke: #6b7280; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_3">
+      <!-- 15 -->
+      <g style="fill: #6b7280" transform="translate(120.490683 328.5928) scale(0.1 -0.1)">
+       <use xlink:href="#Figtree-Regular-10f"/>
+       <use xlink:href="#Figtree-Regular-113" transform="translate(41.296875 0)"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_4">
+     <g id="line2d_4">
+      <g>
+       <use xlink:href="#m813706403b" x="178.441053" y="312.0928" style="fill: #6b7280; stroke: #6b7280; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_4">
+      <!-- 25 -->
+      <g style="fill: #6b7280" transform="translate(172.77074 328.5928) scale(0.1 -0.1)">
+       <defs>
+        <path id="Figtree-Regular-110" d="M 365 0 
+L 365 448 
+Q 365 659 451 867 
+Q 538 1075 701 1280 
+Q 864 1485 1101 1664 
+L 2029 2362 
+Q 2195 2477 2320 2627 
+Q 2445 2778 2515 2941 
+Q 2586 3104 2586 3258 
+Q 2586 3482 2477 3664 
+Q 2368 3846 2169 3955 
+Q 1971 4064 1702 4064 
+Q 1440 4064 1241 3965 
+Q 1043 3866 915 3702 
+Q 787 3539 730 3354 
+L 179 3462 
+Q 256 3750 457 4000 
+Q 659 4250 972 4403 
+Q 1286 4557 1670 4557 
+Q 2118 4557 2444 4387 
+Q 2771 4218 2953 3926 
+Q 3136 3635 3136 3264 
+Q 3136 2912 2944 2598 
+Q 2752 2285 2387 1990 
+L 1510 1325 
+Q 1254 1133 1116 921 
+Q 979 710 960 480 
+L 3200 480 
+L 3200 0 
+L 365 0 
+z
+" transform="scale(0.015625)"/>
+       </defs>
+       <use xlink:href="#Figtree-Regular-110"/>
+       <use xlink:href="#Figtree-Regular-113" transform="translate(55.90625 0)"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_5">
+     <g id="line2d_5">
+      <g>
+       <use xlink:href="#m813706403b" x="257.956842" y="312.0928" style="fill: #6b7280; stroke: #6b7280; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_5">
+      <!-- 40 -->
+      <g style="fill: #6b7280" transform="translate(251.647467 328.5928) scale(0.1 -0.1)">
+       <defs>
+        <path id="Figtree-Regular-112" d="M 2342 0 
+L 2342 1088 
+L 275 1088 
+L 275 1504 
+L 2317 4480 
+L 2867 4480 
+L 2867 1568 
+L 3782 1568 
+L 3782 1088 
+L 2867 1088 
+L 2867 0 
+L 2342 0 
+z
+M 896 1568 
+L 2342 1568 
+L 2342 3693 
+L 896 1568 
+z
+" transform="scale(0.015625)"/>
+       </defs>
+       <use xlink:href="#Figtree-Regular-112"/>
+       <use xlink:href="#Figtree-Regular-10e" transform="translate(62.09375 0)"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_6">
+     <g id="line2d_6">
+      <g>
+       <use xlink:href="#m813706403b" x="416.988421" y="312.0928" style="fill: #6b7280; stroke: #6b7280; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_6">
+      <!-- 70 -->
+      <g style="fill: #6b7280" transform="translate(411.098577 328.5928) scale(0.1 -0.1)">
+       <defs>
+        <path id="Figtree-Regular-115" d="M 525 0 
+L 2739 4147 
+L 3245 4032 
+L 1120 0 
+L 525 0 
+z
+M 269 3987 
+L 269 4480 
+L 3245 4480 
+L 3245 4032 
+L 2829 3987 
+L 269 3987 
+z
+" transform="scale(0.015625)"/>
+       </defs>
+       <use xlink:href="#Figtree-Regular-115"/>
+       <use xlink:href="#Figtree-Regular-10e" transform="translate(53.703125 0)"/>
+      </g>
+     </g>
+    </g>
+    <g id="xtick_7">
+     <g id="line2d_7">
+      <g>
+       <use xlink:href="#m813706403b" x="576.02" y="312.0928" style="fill: #6b7280; stroke: #6b7280; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_7">
+      <!-- 100 -->
+      <g style="fill: #6b7280" transform="translate(567.545781 328.5928) scale(0.1 -0.1)">
+       <use xlink:href="#Figtree-Regular-10f"/>
+       <use xlink:href="#Figtree-Regular-10e" transform="translate(41.296875 0)"/>
+       <use xlink:href="#Figtree-Regular-10e" transform="translate(105.390625 0)"/>
+      </g>
+     </g>
+    </g>
+    <g id="text_8">
+     <!-- Number of distinct phrasings in the panel -->
+     <g style="fill: #222222" transform="translate(222.704609 345.5428) scale(0.11 -0.11)">
+      <defs>
+       <path id="Figtree-Regular-3e" d="M 595 0 
+L 595 4480 
+L 1146 4480 
+L 3814 883 
+L 3814 4480 
+L 4358 4480 
+L 4358 0 
+L 3814 0 
+L 1139 3616 
+L 1139 0 
+L 595 0 
+z
+" transform="scale(0.015625)"/>
+       <path id="Figtree-Regular-e2" d="M 2643 0 
+L 2611 589 
+L 2611 3200 
+L 3123 3200 
+L 3123 0 
+L 2643 0 
+z
+M 365 1562 
+L 365 3200 
+L 877 3200 
+L 877 1562 
+L 365 1562 
+z
+M 877 1562 
+Q 877 1088 985 838 
+Q 1094 589 1289 496 
+Q 1485 403 1728 403 
+Q 2144 403 2377 704 
+Q 2611 1005 2611 1542 
+L 2861 1542 
+Q 2861 1037 2713 672 
+Q 2566 307 2288 115 
+Q 2010 -77 1606 -77 
+Q 1235 -77 953 73 
+Q 672 224 518 553 
+Q 365 883 365 1408 
+L 365 1562 
+L 877 1562 
+z
+" transform="scale(0.015625)"/>
+       <path id="Figtree-Regular-c0" d="M 448 0 
+L 448 3200 
+L 928 3200 
+L 954 2752 
+Q 1101 3008 1331 3142 
+Q 1562 3277 1869 3277 
+Q 2253 3277 2525 3097 
+Q 2797 2918 2918 2554 
+Q 3053 2906 3312 3091 
+Q 3571 3277 3930 3277 
+Q 4467 3277 4777 2918 
+Q 5088 2560 5082 1830 
+L 5082 0 
+L 4570 0 
+L 4570 1638 
+Q 4570 2112 4470 2361 
+Q 4371 2611 4204 2704 
+Q 4038 2797 3821 2797 
+Q 3443 2797 3232 2499 
+Q 3021 2202 3021 1658 
+L 3021 0 
+L 2509 0 
+L 2509 1638 
+Q 2509 2112 2409 2361 
+Q 2310 2611 2140 2704 
+Q 1971 2797 1754 2797 
+Q 1382 2797 1171 2499 
+Q 960 2202 960 1658 
+L 960 0 
+L 448 0 
+z
+" transform="scale(0.015625)"/>
+       <path id="Figtree-Regular-8e" d="M 448 0 
+L 448 4480 
+L 960 4480 
+L 960 595 
+L 934 0 
+L 448 0 
+z
+M 2042 -77 
+Q 1638 -77 1334 134 
+Q 1030 346 864 726 
+Q 698 1107 698 1600 
+Q 698 2099 864 2476 
+Q 1030 2854 1334 3065 
+Q 1638 3277 2042 3277 
+Q 2470 3277 2796 3065 
+Q 3123 2854 3305 2476 
+Q 3488 2099 3488 1600 
+Q 3488 1107 3305 726 
+Q 3123 346 2796 134 
+Q 2470 -77 2042 -77 
+z
+M 1926 390 
+Q 2227 390 2460 544 
+Q 2694 698 2832 973 
+Q 2970 1248 2970 1600 
+Q 2970 1952 2838 2227 
+Q 2707 2502 2470 2656 
+Q 2234 2810 1933 2810 
+Q 1651 2810 1430 2656 
+Q 1210 2502 1085 2227 
+Q 960 1952 960 1600 
+Q 960 1248 1085 973 
+Q 1210 698 1427 544 
+Q 1645 390 1926 390 
+z
+" transform="scale(0.015625)"/>
+       <path id="Figtree-Regular-99" d="M 1850 -77 
+Q 1382 -77 1024 137 
+Q 666 352 464 729 
+Q 262 1107 262 1600 
+Q 262 2093 464 2470 
+Q 666 2848 1021 3062 
+Q 1376 3277 1837 3277 
+Q 2285 3277 2611 3056 
+Q 2938 2835 3117 2438 
+Q 3296 2042 3296 1504 
+L 653 1504 
+L 781 1613 
+Q 781 1229 918 953 
+Q 1056 678 1305 534 
+Q 1555 390 1875 390 
+Q 2214 390 2448 550 
+Q 2682 710 2810 973 
+L 3251 749 
+Q 3130 499 2928 313 
+Q 2726 128 2454 25 
+Q 2182 -77 1850 -77 
+z
+M 813 1830 
+L 678 1933 
+L 2886 1933 
+L 2752 1824 
+Q 2752 2131 2630 2355 
+Q 2509 2579 2304 2700 
+Q 2099 2822 1830 2822 
+Q 1568 2822 1334 2700 
+Q 1101 2579 957 2358 
+Q 813 2138 813 1830 
+z
+" transform="scale(0.015625)"/>
+       <path id="Figtree-Regular-d4" d="M 730 1734 
+Q 730 2253 928 2576 
+Q 1126 2899 1436 3056 
+Q 1747 3213 2093 3213 
+L 2093 2733 
+Q 1811 2733 1552 2640 
+Q 1293 2547 1126 2336 
+Q 960 2125 960 1760 
+L 730 1734 
+z
+M 448 0 
+L 448 3200 
+L 960 3200 
+L 960 0 
+L 448 0 
+z
+" transform="scale(0.015625)"/>
+       <path id="Figtree-Regular-154" transform="scale(0.015625)"/>
+       <path id="Figtree-Regular-c7" d="M 1862 -77 
+Q 1395 -77 1033 137 
+Q 672 352 467 729 
+Q 262 1107 262 1600 
+Q 262 2093 464 2470 
+Q 666 2848 1027 3062 
+Q 1389 3277 1850 3277 
+Q 2323 3277 2684 3062 
+Q 3046 2848 3248 2470 
+Q 3450 2093 3450 1600 
+Q 3450 1107 3248 729 
+Q 3046 352 2688 137 
+Q 2330 -77 1862 -77 
+z
+M 1862 397 
+Q 2182 397 2419 550 
+Q 2656 704 2793 973 
+Q 2931 1242 2931 1600 
+Q 2931 1958 2793 2227 
+Q 2656 2496 2413 2649 
+Q 2170 2803 1850 2803 
+Q 1536 2803 1296 2649 
+Q 1056 2496 918 2227 
+Q 781 1958 781 1600 
+Q 781 1248 918 976 
+Q 1056 704 1302 550 
+Q 1549 397 1862 397 
+z
+" transform="scale(0.015625)"/>
+       <path id="Figtree-Regular-a2" d="M 768 0 
+L 768 3565 
+Q 768 4064 1001 4317 
+Q 1235 4570 1715 4570 
+Q 1843 4570 2003 4525 
+Q 2163 4480 2342 4397 
+L 2150 3994 
+Q 2003 4051 1900 4083 
+Q 1798 4115 1728 4115 
+Q 1504 4115 1392 3971 
+Q 1280 3827 1280 3526 
+L 1280 0 
+L 768 0 
+z
+M 179 2758 
+L 179 3200 
+L 2208 3200 
+L 2208 2758 
+L 179 2758 
+z
+" transform="scale(0.015625)"/>
+       <path id="Figtree-Regular-95" d="M 2816 0 
+L 2790 595 
+L 2790 4480 
+L 3302 4480 
+L 3302 0 
+L 2816 0 
+z
+M 1709 -77 
+Q 1280 -77 953 134 
+Q 627 346 444 726 
+Q 262 1107 262 1600 
+Q 262 2099 444 2476 
+Q 627 2854 953 3065 
+Q 1280 3277 1709 3277 
+Q 2112 3277 2416 3065 
+Q 2720 2854 2886 2476 
+Q 3053 2099 3053 1600 
+Q 3053 1107 2886 726 
+Q 2720 346 2416 134 
+Q 2112 -77 1709 -77 
+z
+M 1824 390 
+Q 2106 390 2323 544 
+Q 2541 698 2665 973 
+Q 2790 1248 2790 1600 
+Q 2790 1952 2665 2227 
+Q 2541 2502 2323 2656 
+Q 2106 2810 1818 2810 
+Q 1517 2810 1283 2656 
+Q 1050 2502 915 2227 
+Q 781 1952 781 1600 
+Q 781 1248 915 973 
+Q 1050 698 1286 544 
+Q 1523 390 1824 390 
+z
+" transform="scale(0.015625)"/>
+       <path id="Figtree-Regular-ab" d="M 480 0 
+L 480 3200 
+L 992 3200 
+L 992 0 
+L 480 0 
+z
+M 742 3942 
+Q 614 3942 518 4038 
+Q 422 4134 422 4262 
+Q 422 4397 518 4489 
+Q 614 4582 742 4582 
+Q 876 4582 969 4489 
+Q 1062 4397 1062 4262 
+Q 1062 4134 969 4038 
+Q 876 3942 742 3942 
+z
+" transform="scale(0.015625)"/>
+       <path id="Figtree-Regular-d8" d="M 1568 -77 
+Q 1216 -77 953 28 
+Q 691 134 515 307 
+Q 339 480 262 685 
+L 710 870 
+Q 819 653 1036 518 
+Q 1254 384 1517 384 
+Q 1818 384 2022 502 
+Q 2227 621 2227 838 
+Q 2227 1037 2076 1158 
+Q 1926 1280 1632 1357 
+L 1325 1440 
+Q 890 1555 646 1788 
+Q 403 2022 403 2317 
+Q 403 2771 700 3024 
+Q 998 3277 1587 3277 
+Q 1869 3277 2099 3193 
+Q 2330 3110 2496 2960 
+Q 2662 2810 2739 2605 
+L 2291 2406 
+Q 2208 2624 2016 2720 
+Q 1824 2816 1549 2816 
+Q 1254 2816 1088 2691 
+Q 922 2566 922 2342 
+Q 922 2214 1059 2102 
+Q 1197 1990 1466 1920 
+L 1786 1837 
+Q 2099 1760 2310 1609 
+Q 2522 1459 2630 1267 
+Q 2739 1075 2739 858 
+Q 2739 570 2585 358 
+Q 2432 147 2169 35 
+Q 1907 -77 1568 -77 
+z
+" transform="scale(0.015625)"/>
+       <path id="Figtree-Regular-df" d="M 1651 -77 
+Q 1184 -77 928 166 
+Q 672 410 672 851 
+L 672 4198 
+L 1184 4198 
+L 1184 902 
+Q 1184 659 1315 528 
+Q 1446 397 1683 397 
+Q 1760 397 1833 419 
+Q 1907 442 2029 531 
+L 2227 115 
+Q 2061 6 1926 -35 
+Q 1792 -77 1651 -77 
+z
+M 115 2746 
+L 115 3200 
+L 2144 3200 
+L 2144 2746 
+L 115 2746 
+z
+" transform="scale(0.015625)"/>
+       <path id="Figtree-Regular-c1" d="M 448 0 
+L 448 3200 
+L 928 3200 
+L 960 2611 
+L 960 0 
+L 448 0 
+z
+M 2694 0 
+L 2694 1638 
+L 3206 1638 
+L 3206 0 
+L 2694 0 
+z
+M 2694 1638 
+Q 2694 2112 2585 2361 
+Q 2477 2611 2285 2704 
+Q 2093 2797 1850 2797 
+Q 1427 2797 1193 2499 
+Q 960 2202 960 1658 
+L 710 1658 
+Q 710 2163 857 2528 
+Q 1005 2893 1286 3085 
+Q 1568 3277 1965 3277 
+Q 2342 3277 2620 3126 
+Q 2899 2976 3056 2649 
+Q 3213 2323 3206 1792 
+L 3206 1638 
+L 2694 1638 
+z
+" transform="scale(0.015625)"/>
+       <path id="Figtree-Regular-8f" d="M 1875 -77 
+Q 1402 -77 1037 137 
+Q 672 352 467 729 
+Q 262 1107 262 1600 
+Q 262 2093 464 2470 
+Q 666 2848 1030 3062 
+Q 1395 3277 1862 3277 
+Q 2323 3277 2688 3065 
+Q 3053 2854 3245 2470 
+L 2778 2259 
+Q 2650 2515 2406 2659 
+Q 2163 2803 1850 2803 
+Q 1536 2803 1296 2649 
+Q 1056 2496 918 2224 
+Q 781 1952 781 1600 
+Q 781 1248 918 976 
+Q 1056 704 1302 550 
+Q 1549 397 1862 397 
+Q 2176 397 2422 557 
+Q 2669 717 2797 1005 
+L 3264 794 
+Q 3072 384 2707 153 
+Q 2342 -77 1875 -77 
+z
+" transform="scale(0.015625)"/>
+       <path id="Figtree-Regular-d1" d="M 480 -1280 
+L 480 3200 
+L 960 3200 
+L 992 2611 
+L 992 -1280 
+L 480 -1280 
+z
+M 2074 -77 
+Q 1670 -77 1366 134 
+Q 1062 346 896 726 
+Q 730 1107 730 1600 
+Q 730 2099 896 2476 
+Q 1062 2854 1366 3065 
+Q 1670 3277 2074 3277 
+Q 2502 3277 2828 3065 
+Q 3155 2854 3337 2476 
+Q 3520 2099 3520 1600 
+Q 3520 1107 3337 726 
+Q 3155 346 2828 134 
+Q 2502 -77 2074 -77 
+z
+M 1958 390 
+Q 2259 390 2492 544 
+Q 2726 698 2864 973 
+Q 3002 1248 3002 1600 
+Q 3002 1952 2870 2227 
+Q 2739 2502 2502 2656 
+Q 2266 2810 1965 2810 
+Q 1683 2810 1462 2656 
+Q 1242 2502 1117 2227 
+Q 992 1952 992 1600 
+Q 992 1248 1117 973 
+Q 1242 698 1459 544 
+Q 1677 390 1958 390 
+z
+" transform="scale(0.015625)"/>
+       <path id="Figtree-Regular-a8" d="M 448 0 
+L 448 4480 
+L 960 4480 
+L 960 0 
+L 448 0 
+z
+M 2701 0 
+L 2701 1638 
+L 3213 1638 
+L 3213 0 
+L 2701 0 
+z
+M 2701 1638 
+Q 2701 2112 2589 2361 
+Q 2477 2611 2285 2704 
+Q 2093 2797 1850 2797 
+Q 1427 2797 1193 2499 
+Q 960 2202 960 1658 
+L 710 1658 
+Q 710 2163 860 2528 
+Q 1011 2893 1292 3085 
+Q 1574 3277 1971 3277 
+Q 2342 3277 2624 3126 
+Q 2906 2976 3062 2649 
+Q 3219 2323 3213 1792 
+L 3213 1638 
+L 2701 1638 
+z
+" transform="scale(0.015625)"/>
+       <path id="Figtree-Regular-82" d="M 2419 0 
+L 2394 525 
+L 2394 1690 
+Q 2394 2067 2310 2313 
+Q 2227 2560 2048 2688 
+Q 1869 2816 1581 2816 
+Q 1318 2816 1129 2710 
+Q 941 2605 819 2374 
+L 358 2554 
+Q 480 2778 653 2941 
+Q 826 3104 1056 3190 
+Q 1286 3277 1581 3277 
+Q 2029 3277 2320 3101 
+Q 2611 2925 2758 2582 
+Q 2906 2240 2899 1734 
+L 2893 0 
+L 2419 0 
+z
+M 1459 -77 
+Q 896 -77 579 182 
+Q 262 442 262 902 
+Q 262 1389 585 1648 
+Q 909 1907 1491 1907 
+L 2406 1907 
+L 2406 1478 
+L 1606 1478 
+Q 1158 1478 969 1331 
+Q 781 1184 781 909 
+Q 781 659 966 515 
+Q 1152 371 1485 371 
+Q 1760 371 1965 489 
+Q 2170 608 2282 829 
+Q 2394 1050 2394 1350 
+L 2611 1350 
+Q 2611 698 2316 310 
+Q 2022 -77 1459 -77 
+z
+" transform="scale(0.015625)"/>
+       <path id="Figtree-Regular-a3" d="M 1728 -1357 
+Q 1421 -1357 1168 -1296 
+Q 915 -1235 739 -1161 
+Q 563 -1088 486 -1037 
+L 678 -621 
+Q 762 -666 915 -733 
+Q 1069 -800 1277 -848 
+Q 1485 -896 1722 -896 
+Q 2029 -896 2275 -771 
+Q 2522 -646 2659 -380 
+Q 2797 -115 2797 301 
+L 2797 3200 
+L 3309 3200 
+L 3309 307 
+Q 3309 -243 3104 -614 
+Q 2899 -986 2540 -1171 
+Q 2182 -1357 1728 -1357 
+z
+M 1709 26 
+Q 1280 26 953 230 
+Q 627 435 444 803 
+Q 262 1171 262 1645 
+Q 262 2131 444 2499 
+Q 627 2867 953 3072 
+Q 1280 3277 1709 3277 
+Q 2112 3277 2413 3072 
+Q 2714 2867 2883 2499 
+Q 3053 2131 3053 1645 
+Q 3053 1165 2883 800 
+Q 2714 435 2413 230 
+Q 2112 26 1709 26 
+z
+M 1830 467 
+Q 2112 467 2329 620 
+Q 2547 774 2668 1040 
+Q 2790 1306 2790 1658 
+Q 2790 1997 2665 2262 
+Q 2541 2528 2326 2678 
+Q 2112 2829 1824 2829 
+Q 1523 2829 1289 2678 
+Q 1056 2528 925 2262 
+Q 794 1997 794 1658 
+Q 794 1306 928 1040 
+Q 1062 774 1296 620 
+Q 1530 467 1830 467 
+z
+" transform="scale(0.015625)"/>
+       <path id="Figtree-Regular-bb" d="M 448 0 
+L 448 4480 
+L 960 4480 
+L 960 0 
+L 448 0 
+z
+" transform="scale(0.015625)"/>
+      </defs>
+      <use xlink:href="#Figtree-Regular-3e"/>
+      <use xlink:href="#Figtree-Regular-e2" transform="translate(77.40625 0)"/>
+      <use xlink:href="#Figtree-Regular-c0" transform="translate(133.203125 0)"/>
+      <use xlink:href="#Figtree-Regular-8e" transform="translate(218.296875 0)"/>
+      <use xlink:href="#Figtree-Regular-99" transform="translate(276.890625 0)"/>
+      <use xlink:href="#Figtree-Regular-d4" transform="translate(331.484375 0)"/>
+      <use xlink:href="#Figtree-Regular-154" transform="translate(365.28125 0)"/>
+      <use xlink:href="#Figtree-Regular-c7" transform="translate(389.984375 0)"/>
+      <use xlink:href="#Figtree-Regular-a2" transform="translate(447.984375 0)"/>
+      <use xlink:href="#Figtree-Regular-154" transform="translate(484.890625 0)"/>
+      <use xlink:href="#Figtree-Regular-95" transform="translate(509.59375 0)"/>
+      <use xlink:href="#Figtree-Regular-ab" transform="translate(568.1875 0)"/>
+      <use xlink:href="#Figtree-Regular-d8" transform="translate(591.390625 0)"/>
+      <use xlink:href="#Figtree-Regular-df" transform="translate(637.984375 0)"/>
+      <use xlink:href="#Figtree-Regular-ab" transform="translate(675.78125 0)"/>
+      <use xlink:href="#Figtree-Regular-c1" transform="translate(698.984375 0)"/>
+      <use xlink:href="#Figtree-Regular-8f" transform="translate(754.78125 0)"/>
+      <use xlink:href="#Figtree-Regular-df" transform="translate(808.875 0)"/>
+      <use xlink:href="#Figtree-Regular-154" transform="translate(846.671875 0)"/>
+      <use xlink:href="#Figtree-Regular-d1" transform="translate(871.375 0)"/>
+      <use xlink:href="#Figtree-Regular-a8" transform="translate(930.46875 0)"/>
+      <use xlink:href="#Figtree-Regular-d4" transform="translate(986.265625 0)"/>
+      <use xlink:href="#Figtree-Regular-82" transform="translate(1020.0625 0)"/>
+      <use xlink:href="#Figtree-Regular-d8" transform="translate(1071.0625 0)"/>
+      <use xlink:href="#Figtree-Regular-ab" transform="translate(1117.65625 0)"/>
+      <use xlink:href="#Figtree-Regular-c1" transform="translate(1140.859375 0)"/>
+      <use xlink:href="#Figtree-Regular-a3" transform="translate(1196.65625 0)"/>
+      <use xlink:href="#Figtree-Regular-d8" transform="translate(1255.359375 0)"/>
+      <use xlink:href="#Figtree-Regular-154" transform="translate(1301.953125 0)"/>
+      <use xlink:href="#Figtree-Regular-ab" transform="translate(1326.65625 0)"/>
+      <use xlink:href="#Figtree-Regular-c1" transform="translate(1349.859375 0)"/>
+      <use xlink:href="#Figtree-Regular-154" transform="translate(1405.65625 0)"/>
+      <use xlink:href="#Figtree-Regular-df" transform="translate(1430.359375 0)"/>
+      <use xlink:href="#Figtree-Regular-a8" transform="translate(1468.15625 0)"/>
+      <use xlink:href="#Figtree-Regular-99" transform="translate(1523.953125 0)"/>
+      <use xlink:href="#Figtree-Regular-154" transform="translate(1578.546875 0)"/>
+      <use xlink:href="#Figtree-Regular-d1" transform="translate(1603.25 0)"/>
+      <use xlink:href="#Figtree-Regular-82" transform="translate(1662.34375 0)"/>
+      <use xlink:href="#Figtree-Regular-c1" transform="translate(1713.34375 0)"/>
+      <use xlink:href="#Figtree-Regular-99" transform="translate(1769.140625 0)"/>
+      <use xlink:href="#Figtree-Regular-bb" transform="translate(1823.734375 0)"/>
+     </g>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_8">
+      <path d="M 47.24 312.0928 
+L 601.2 312.0928 
+" clip-path="url(#p37fc91af3e)" style="fill: none; stroke: #d9dde3; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_9">
+      <defs>
+       <path id="m6464ded2db" d="M 0 0 
+L -3.5 0 
+" style="stroke: #6b7280; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#m6464ded2db" x="47.24" y="312.0928" style="fill: #6b7280; stroke: #6b7280; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_9">
+      <!-- 0 -->
+      <g style="fill: #6b7280" transform="translate(33.830625 316.8428) scale(0.1 -0.1)">
+       <use xlink:href="#Figtree-Regular-10e"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_10">
+      <path d="M 47.24 261.484115 
+L 601.2 261.484115 
+" clip-path="url(#p37fc91af3e)" style="fill: none; stroke: #d9dde3; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_11">
+      <g>
+       <use xlink:href="#m6464ded2db" x="47.24" y="261.484115" style="fill: #6b7280; stroke: #6b7280; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_10">
+      <!-- 5 -->
+      <g style="fill: #6b7280" transform="translate(34.49 266.234115) scale(0.1 -0.1)">
+       <use xlink:href="#Figtree-Regular-113"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_3">
+     <g id="line2d_12">
+      <path d="M 47.24 210.875429 
+L 601.2 210.875429 
+" clip-path="url(#p37fc91af3e)" style="fill: none; stroke: #d9dde3; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_13">
+      <g>
+       <use xlink:href="#m6464ded2db" x="47.24" y="210.875429" style="fill: #6b7280; stroke: #6b7280; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_11">
+      <!-- 10 -->
+      <g style="fill: #6b7280" transform="translate(29.700938 215.625429) scale(0.1 -0.1)">
+       <use xlink:href="#Figtree-Regular-10f"/>
+       <use xlink:href="#Figtree-Regular-10e" transform="translate(41.296875 0)"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_4">
+     <g id="line2d_14">
+      <path d="M 47.24 160.266744 
+L 601.2 160.266744 
+" clip-path="url(#p37fc91af3e)" style="fill: none; stroke: #d9dde3; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_15">
+      <g>
+       <use xlink:href="#m6464ded2db" x="47.24" y="160.266744" style="fill: #6b7280; stroke: #6b7280; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_12">
+      <!-- 15 -->
+      <g style="fill: #6b7280" transform="translate(30.360313 165.016744) scale(0.1 -0.1)">
+       <use xlink:href="#Figtree-Regular-10f"/>
+       <use xlink:href="#Figtree-Regular-113" transform="translate(41.296875 0)"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_5">
+     <g id="line2d_16">
+      <path d="M 47.24 109.658058 
+L 601.2 109.658058 
+" clip-path="url(#p37fc91af3e)" style="fill: none; stroke: #d9dde3; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_17">
+      <g>
+       <use xlink:href="#m6464ded2db" x="47.24" y="109.658058" style="fill: #6b7280; stroke: #6b7280; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_13">
+      <!-- 20 -->
+      <g style="fill: #6b7280" transform="translate(28.24 114.408058) scale(0.1 -0.1)">
+       <use xlink:href="#Figtree-Regular-110"/>
+       <use xlink:href="#Figtree-Regular-10e" transform="translate(55.90625 0)"/>
+      </g>
+     </g>
+    </g>
+    <g id="ytick_6">
+     <g id="line2d_18">
+      <path d="M 47.24 59.049373 
+L 601.2 59.049373 
+" clip-path="url(#p37fc91af3e)" style="fill: none; stroke: #d9dde3; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_19">
+      <g>
+       <use xlink:href="#m6464ded2db" x="47.24" y="59.049373" style="fill: #6b7280; stroke: #6b7280; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_14">
+      <!-- 25 -->
+      <g style="fill: #6b7280" transform="translate(28.899375 63.799373) scale(0.1 -0.1)">
+       <use xlink:href="#Figtree-Regular-110"/>
+       <use xlink:href="#Figtree-Regular-113" transform="translate(55.90625 0)"/>
+      </g>
+     </g>
+    </g>
+    <g id="text_15">
+     <!-- 90% margin of error on mention rate (percentage points) -->
+     <g style="fill: #222222" transform="translate(21.49 310.731088) rotate(-90) scale(0.11 -0.11)">
+      <defs>
+       <path id="Figtree-Regular-117" d="M 1709 4557 
+Q 2182 4557 2489 4381 
+Q 2797 4205 2985 3904 
+Q 3174 3603 3254 3209 
+Q 3334 2816 3334 2374 
+Q 3334 1798 3212 1344 
+Q 3091 890 2867 573 
+Q 2643 256 2326 89 
+Q 2010 -77 1606 -77 
+Q 1274 -77 944 28 
+Q 614 134 352 320 
+L 653 704 
+Q 858 563 1098 483 
+Q 1338 403 1555 403 
+Q 2208 403 2550 953 
+Q 2893 1504 2848 2618 
+L 2963 2509 
+Q 2810 2118 2470 1888 
+Q 2131 1658 1670 1658 
+Q 1235 1658 902 1846 
+Q 570 2035 381 2361 
+Q 192 2688 192 3117 
+Q 192 3539 384 3862 
+Q 576 4186 918 4371 
+Q 1261 4557 1709 4557 
+z
+M 1709 4083 
+Q 1427 4083 1203 3958 
+Q 979 3834 854 3613 
+Q 730 3392 730 3104 
+Q 730 2816 854 2595 
+Q 979 2374 1203 2249 
+Q 1427 2125 1709 2125 
+Q 2003 2125 2224 2249 
+Q 2445 2374 2569 2595 
+Q 2694 2816 2694 3104 
+Q 2694 3392 2569 3613 
+Q 2445 3834 2224 3958 
+Q 2003 4083 1709 4083 
+z
+" transform="scale(0.015625)"/>
+       <path id="Figtree-Regular-1a0" d="M 621 0 
+L 3802 4480 
+L 4397 4480 
+L 1197 0 
+L 621 0 
+z
+M 3725 -102 
+Q 3437 -102 3209 35 
+Q 2982 173 2857 413 
+Q 2733 653 2733 960 
+Q 2733 1274 2857 1510 
+Q 2982 1747 3209 1884 
+Q 3437 2022 3725 2022 
+Q 4019 2022 4243 1884 
+Q 4467 1747 4595 1510 
+Q 4723 1274 4723 960 
+Q 4723 653 4595 413 
+Q 4467 173 4243 35 
+Q 4019 -102 3725 -102 
+z
+M 3725 307 
+Q 3974 307 4128 492 
+Q 4282 678 4282 960 
+Q 4282 1242 4128 1427 
+Q 3974 1613 3725 1613 
+Q 3488 1613 3331 1427 
+Q 3174 1242 3174 960 
+Q 3174 678 3331 492 
+Q 3488 307 3725 307 
+z
+M 1299 2458 
+Q 1005 2458 781 2595 
+Q 557 2733 429 2973 
+Q 301 3213 301 3520 
+Q 301 3834 429 4070 
+Q 557 4307 781 4444 
+Q 1005 4582 1299 4582 
+Q 1594 4582 1818 4444 
+Q 2042 4307 2170 4070 
+Q 2298 3834 2298 3520 
+Q 2298 3213 2170 2973 
+Q 2042 2733 1818 2595 
+Q 1594 2458 1299 2458 
+z
+M 1299 2867 
+Q 1542 2867 1696 3052 
+Q 1850 3238 1850 3520 
+Q 1850 3802 1696 3987 
+Q 1542 4173 1299 4173 
+Q 1062 4173 905 3987 
+Q 749 3802 749 3520 
+Q 749 3238 905 3052 
+Q 1062 2867 1299 2867 
+z
+" transform="scale(0.015625)"/>
+       <path id="Figtree-Regular-16c" d="M 1427 -640 
+Q 1133 -250 889 208 
+Q 646 666 505 1178 
+Q 365 1690 365 2240 
+Q 365 2797 505 3305 
+Q 646 3814 889 4272 
+Q 1133 4730 1427 5120 
+L 1952 5120 
+Q 1658 4710 1414 4243 
+Q 1171 3776 1030 3273 
+Q 890 2771 890 2240 
+Q 890 1715 1030 1209 
+Q 1171 704 1414 240 
+Q 1658 -224 1952 -640 
+L 1427 -640 
+z
+" transform="scale(0.015625)"/>
+       <path id="Figtree-Regular-16d" d="M 826 -640 
+L 301 -640 
+Q 602 -224 842 240 
+Q 1082 704 1222 1209 
+Q 1363 1715 1363 2240 
+Q 1363 2771 1222 3273 
+Q 1082 3776 842 4243 
+Q 602 4710 301 5120 
+L 826 5120 
+Q 1126 4730 1366 4272 
+Q 1606 3814 1747 3305 
+Q 1888 2797 1888 2240 
+Q 1888 1690 1747 1178 
+Q 1606 666 1366 208 
+Q 1126 -250 826 -640 
+z
+" transform="scale(0.015625)"/>
+      </defs>
+      <use xlink:href="#Figtree-Regular-117"/>
+      <use xlink:href="#Figtree-Regular-10e" transform="translate(56.59375 0)"/>
+      <use xlink:href="#Figtree-Regular-1a0" transform="translate(120.6875 0)"/>
+      <use xlink:href="#Figtree-Regular-154" transform="translate(199.28125 0)"/>
+      <use xlink:href="#Figtree-Regular-c0" transform="translate(223.984375 0)"/>
+      <use xlink:href="#Figtree-Regular-82" transform="translate(309.078125 0)"/>
+      <use xlink:href="#Figtree-Regular-d4" transform="translate(360.078125 0)"/>
+      <use xlink:href="#Figtree-Regular-a3" transform="translate(393.875 0)"/>
+      <use xlink:href="#Figtree-Regular-ab" transform="translate(452.578125 0)"/>
+      <use xlink:href="#Figtree-Regular-c1" transform="translate(475.78125 0)"/>
+      <use xlink:href="#Figtree-Regular-154" transform="translate(531.578125 0)"/>
+      <use xlink:href="#Figtree-Regular-c7" transform="translate(556.28125 0)"/>
+      <use xlink:href="#Figtree-Regular-a2" transform="translate(614.28125 0)"/>
+      <use xlink:href="#Figtree-Regular-154" transform="translate(651.1875 0)"/>
+      <use xlink:href="#Figtree-Regular-99" transform="translate(675.890625 0)"/>
+      <use xlink:href="#Figtree-Regular-d4" transform="translate(730.484375 0)"/>
+      <use xlink:href="#Figtree-Regular-d4" transform="translate(764.28125 0)"/>
+      <use xlink:href="#Figtree-Regular-c7" transform="translate(798.078125 0)"/>
+      <use xlink:href="#Figtree-Regular-d4" transform="translate(856.078125 0)"/>
+      <use xlink:href="#Figtree-Regular-154" transform="translate(889.875 0)"/>
+      <use xlink:href="#Figtree-Regular-c7" transform="translate(914.578125 0)"/>
+      <use xlink:href="#Figtree-Regular-c1" transform="translate(972.578125 0)"/>
+      <use xlink:href="#Figtree-Regular-154" transform="translate(1028.375 0)"/>
+      <use xlink:href="#Figtree-Regular-c0" transform="translate(1053.078125 0)"/>
+      <use xlink:href="#Figtree-Regular-99" transform="translate(1138.171875 0)"/>
+      <use xlink:href="#Figtree-Regular-c1" transform="translate(1192.765625 0)"/>
+      <use xlink:href="#Figtree-Regular-df" transform="translate(1248.5625 0)"/>
+      <use xlink:href="#Figtree-Regular-ab" transform="translate(1286.359375 0)"/>
+      <use xlink:href="#Figtree-Regular-c7" transform="translate(1309.5625 0)"/>
+      <use xlink:href="#Figtree-Regular-c1" transform="translate(1367.5625 0)"/>
+      <use xlink:href="#Figtree-Regular-154" transform="translate(1423.359375 0)"/>
+      <use xlink:href="#Figtree-Regular-d4" transform="translate(1448.0625 0)"/>
+      <use xlink:href="#Figtree-Regular-82" transform="translate(1481.859375 0)"/>
+      <use xlink:href="#Figtree-Regular-df" transform="translate(1532.859375 0)"/>
+      <use xlink:href="#Figtree-Regular-99" transform="translate(1570.359375 0)"/>
+      <use xlink:href="#Figtree-Regular-154" transform="translate(1624.953125 0)"/>
+      <use xlink:href="#Figtree-Regular-16c" transform="translate(1649.65625 0)"/>
+      <use xlink:href="#Figtree-Regular-d1" transform="translate(1684.65625 0)"/>
+      <use xlink:href="#Figtree-Regular-99" transform="translate(1743.75 0)"/>
+      <use xlink:href="#Figtree-Regular-d4" transform="translate(1798.34375 0)"/>
+      <use xlink:href="#Figtree-Regular-8f" transform="translate(1832.140625 0)"/>
+      <use xlink:href="#Figtree-Regular-99" transform="translate(1886.234375 0)"/>
+      <use xlink:href="#Figtree-Regular-c1" transform="translate(1940.828125 0)"/>
+      <use xlink:href="#Figtree-Regular-df" transform="translate(1996.625 0)"/>
+      <use xlink:href="#Figtree-Regular-82" transform="translate(2034.125 0)"/>
+      <use xlink:href="#Figtree-Regular-a3" transform="translate(2085.125 0)"/>
+      <use xlink:href="#Figtree-Regular-99" transform="translate(2143.828125 0)"/>
+      <use xlink:href="#Figtree-Regular-154" transform="translate(2198.421875 0)"/>
+      <use xlink:href="#Figtree-Regular-d1" transform="translate(2223.125 0)"/>
+      <use xlink:href="#Figtree-Regular-c7" transform="translate(2282.21875 0)"/>
+      <use xlink:href="#Figtree-Regular-ab" transform="translate(2340.21875 0)"/>
+      <use xlink:href="#Figtree-Regular-c1" transform="translate(2363.421875 0)"/>
+      <use xlink:href="#Figtree-Regular-df" transform="translate(2419.21875 0)"/>
+      <use xlink:href="#Figtree-Regular-d8" transform="translate(2457.015625 0)"/>
+      <use xlink:href="#Figtree-Regular-16d" transform="translate(2503.609375 0)"/>
+     </g>
+    </g>
+   </g>
+   <g id="line2d_20">
+    <path d="M 72.42 42.179811 
+L 98.925263 101.223278 
+L 125.430526 148.73921 
+L 178.441053 177.136306 
+L 257.956842 212.87869 
+L 416.988421 237.324492 
+L 576.02 252.205856 
+" clip-path="url(#p37fc91af3e)" style="fill: none; stroke: #5887da; stroke-width: 2; stroke-linecap: square"/>
+    <defs>
+     <path id="med1c929cf2" d="M 0 4 
+C 1.060812 4 2.078319 3.578535 2.828427 2.828427 
+C 3.578535 2.078319 4 1.060812 4 0 
+C 4 -1.060812 3.578535 -2.078319 2.828427 -2.828427 
+C 2.078319 -3.578535 1.060812 -4 0 -4 
+C -1.060812 -4 -2.078319 -3.578535 -2.828427 -2.828427 
+C -3.578535 -2.078319 -4 -1.060812 -4 0 
+C -4 1.060812 -3.578535 2.078319 -2.828427 2.828427 
+C -2.078319 3.578535 -1.060812 4 0 4 
+z
+" style="stroke: #5887da"/>
+    </defs>
+    <g clip-path="url(#p37fc91af3e)">
+     <use xlink:href="#med1c929cf2" x="72.42" y="42.179811" style="fill: #5887da; stroke: #5887da"/>
+     <use xlink:href="#med1c929cf2" x="98.925263" y="101.223278" style="fill: #5887da; stroke: #5887da"/>
+     <use xlink:href="#med1c929cf2" x="125.430526" y="148.73921" style="fill: #5887da; stroke: #5887da"/>
+     <use xlink:href="#med1c929cf2" x="178.441053" y="177.136306" style="fill: #5887da; stroke: #5887da"/>
+     <use xlink:href="#med1c929cf2" x="257.956842" y="212.87869" style="fill: #5887da; stroke: #5887da"/>
+     <use xlink:href="#med1c929cf2" x="416.988421" y="237.324492" style="fill: #5887da; stroke: #5887da"/>
+     <use xlink:href="#med1c929cf2" x="576.02" y="252.205856" style="fill: #5887da; stroke: #5887da"/>
+    </g>
+   </g>
+   <g id="line2d_21">
+    <path d="M 72.42 95.198434 
+L 98.925263 157.856806 
+L 125.430526 186.776055 
+L 178.441053 219.527104 
+L 257.956842 243.409584 
+L 416.988421 267.681096 
+L 576.02 283.776036 
+" clip-path="url(#p37fc91af3e)" style="fill: none; stroke: #c95920; stroke-width: 2; stroke-linecap: square"/>
+    <defs>
+     <path id="m4e7b1c18ea" d="M -4 4 
+L 4 4 
+L 4 -4 
+L -4 -4 
+z
+" style="stroke: #c95920; stroke-linejoin: miter"/>
+    </defs>
+    <g clip-path="url(#p37fc91af3e)">
+     <use xlink:href="#m4e7b1c18ea" x="72.42" y="95.198434" style="fill: #c95920; stroke: #c95920; stroke-linejoin: miter"/>
+     <use xlink:href="#m4e7b1c18ea" x="98.925263" y="157.856806" style="fill: #c95920; stroke: #c95920; stroke-linejoin: miter"/>
+     <use xlink:href="#m4e7b1c18ea" x="125.430526" y="186.776055" style="fill: #c95920; stroke: #c95920; stroke-linejoin: miter"/>
+     <use xlink:href="#m4e7b1c18ea" x="178.441053" y="219.527104" style="fill: #c95920; stroke: #c95920; stroke-linejoin: miter"/>
+     <use xlink:href="#m4e7b1c18ea" x="257.956842" y="243.409584" style="fill: #c95920; stroke: #c95920; stroke-linejoin: miter"/>
+     <use xlink:href="#m4e7b1c18ea" x="416.988421" y="267.681096" style="fill: #c95920; stroke: #c95920; stroke-linejoin: miter"/>
+     <use xlink:href="#m4e7b1c18ea" x="576.02" y="283.776036" style="fill: #c95920; stroke: #c95920; stroke-linejoin: miter"/>
+    </g>
+   </g>
+   <g id="patch_3">
+    <path d="M 47.24 312.0928 
+L 47.24 30.1 
+" style="fill: none; stroke: #6b7280; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 47.24 312.0928 
+L 601.2 312.0928 
+" style="fill: none; stroke: #6b7280; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_16">
+    <!-- Average over six focal brands; sampled from the observed 143×7 grid -->
+    <g style="fill: #6b7280" transform="translate(333.452666 303.633016) scale(0.085 -0.085)">
+     <defs>
+      <path id="Figtree-Regular-1" d="M 3699 0 
+L 1901 4480 
+L 2445 4480 
+L 4269 0 
+L 3699 0 
+z
+M 58 0 
+L 1882 4480 
+L 2432 4480 
+L 634 0 
+L 58 0 
+z
+M 922 1274 
+L 922 1760 
+L 3411 1760 
+L 3411 1274 
+L 922 1274 
+z
+" transform="scale(0.015625)"/>
+      <path id="Figtree-Regular-ec" d="M 1427 0 
+L 2733 3200 
+L 3270 3200 
+L 1933 0 
+L 1427 0 
+z
+M 1395 0 
+L 58 3200 
+L 589 3200 
+L 1894 0 
+L 1395 0 
+z
+" transform="scale(0.015625)"/>
+      <path id="Figtree-Regular-f2" d="M 64 0 
+L 1370 1837 
+L 2291 3200 
+L 2899 3200 
+L 1683 1472 
+L 685 0 
+L 64 0 
+z
+M 2362 0 
+L 1376 1472 
+L 147 3200 
+L 755 3200 
+L 1683 1837 
+L 2976 0 
+L 2362 0 
+z
+" transform="scale(0.015625)"/>
+      <path id="Figtree-Regular-15a" d="M 781 2496 
+Q 640 2496 534 2601 
+Q 429 2707 429 2848 
+Q 429 2995 534 3100 
+Q 640 3206 781 3206 
+Q 928 3206 1033 3100 
+Q 1139 2995 1139 2848 
+Q 1139 2707 1033 2601 
+Q 928 2496 781 2496 
+z
+M 269 -736 
+L 634 614 
+L 1203 614 
+L 710 -736 
+L 269 -736 
+z
+" transform="scale(0.015625)"/>
+      <path id="Figtree-Regular-111" d="M 1722 -77 
+Q 1395 -77 1129 22 
+Q 864 122 675 282 
+Q 486 442 378 621 
+L 826 870 
+Q 896 781 1001 669 
+Q 1107 557 1273 480 
+Q 1440 403 1683 403 
+Q 2118 403 2380 652 
+Q 2643 902 2643 1280 
+Q 2643 1568 2486 1766 
+Q 2330 1965 2035 2067 
+Q 1741 2170 1331 2170 
+L 1210 2170 
+L 1210 2592 
+L 1318 2592 
+Q 1722 2592 2061 2502 
+Q 2400 2413 2653 2240 
+Q 2906 2067 3043 1817 
+Q 3181 1568 3181 1242 
+Q 3181 845 2985 547 
+Q 2790 250 2457 86 
+Q 2125 -77 1722 -77 
+z
+M 1210 2214 
+L 1210 2630 
+L 1331 2630 
+Q 1882 2630 2205 2819 
+Q 2528 3008 2528 3360 
+Q 2528 3552 2425 3715 
+Q 2323 3878 2128 3977 
+Q 1933 4077 1677 4077 
+Q 1504 4077 1353 4029 
+Q 1203 3981 1078 3888 
+Q 954 3795 851 3654 
+L 429 3898 
+Q 550 4096 739 4243 
+Q 928 4390 1171 4473 
+Q 1414 4557 1702 4557 
+Q 2093 4557 2403 4403 
+Q 2714 4250 2893 3984 
+Q 3072 3718 3072 3386 
+Q 3072 3104 2937 2886 
+Q 2803 2669 2563 2515 
+Q 2323 2362 2006 2288 
+Q 1690 2214 1318 2214 
+L 1210 2214 
+z
+" transform="scale(0.015625)"/>
+      <path id="Figtree-Regular-193" d="M 2918 666 
+L 755 2829 
+L 1062 3149 
+L 3238 979 
+L 2918 666 
+z
+M 1062 666 
+L 755 979 
+L 2918 3149 
+L 3238 2829 
+L 1062 666 
+z
+" transform="scale(0.015625)"/>
+     </defs>
+     <use xlink:href="#Figtree-Regular-1"/>
+     <use xlink:href="#Figtree-Regular-ec" transform="translate(66.5 0)"/>
+     <use xlink:href="#Figtree-Regular-99" transform="translate(117.296875 0)"/>
+     <use xlink:href="#Figtree-Regular-d4" transform="translate(171.890625 0)"/>
+     <use xlink:href="#Figtree-Regular-82" transform="translate(205.6875 0)"/>
+     <use xlink:href="#Figtree-Regular-a3" transform="translate(256.6875 0)"/>
+     <use xlink:href="#Figtree-Regular-99" transform="translate(315.390625 0)"/>
+     <use xlink:href="#Figtree-Regular-154" transform="translate(369.984375 0)"/>
+     <use xlink:href="#Figtree-Regular-c7" transform="translate(394.6875 0)"/>
+     <use xlink:href="#Figtree-Regular-ec" transform="translate(451.390625 0)"/>
+     <use xlink:href="#Figtree-Regular-99" transform="translate(502.1875 0)"/>
+     <use xlink:href="#Figtree-Regular-d4" transform="translate(556.78125 0)"/>
+     <use xlink:href="#Figtree-Regular-154" transform="translate(590.578125 0)"/>
+     <use xlink:href="#Figtree-Regular-d8" transform="translate(615.28125 0)"/>
+     <use xlink:href="#Figtree-Regular-ab" transform="translate(661.875 0)"/>
+     <use xlink:href="#Figtree-Regular-f2" transform="translate(685.078125 0)"/>
+     <use xlink:href="#Figtree-Regular-154" transform="translate(732.578125 0)"/>
+     <use xlink:href="#Figtree-Regular-a2" transform="translate(757.28125 0)"/>
+     <use xlink:href="#Figtree-Regular-c7" transform="translate(793.890625 0)"/>
+     <use xlink:href="#Figtree-Regular-8f" transform="translate(851.890625 0)"/>
+     <use xlink:href="#Figtree-Regular-82" transform="translate(905.984375 0)"/>
+     <use xlink:href="#Figtree-Regular-bb" transform="translate(956.984375 0)"/>
+     <use xlink:href="#Figtree-Regular-154" transform="translate(978.984375 0)"/>
+     <use xlink:href="#Figtree-Regular-8e" transform="translate(1003.6875 0)"/>
+     <use xlink:href="#Figtree-Regular-d4" transform="translate(1062.28125 0)"/>
+     <use xlink:href="#Figtree-Regular-82" transform="translate(1096.078125 0)"/>
+     <use xlink:href="#Figtree-Regular-c1" transform="translate(1147.078125 0)"/>
+     <use xlink:href="#Figtree-Regular-95" transform="translate(1202.875 0)"/>
+     <use xlink:href="#Figtree-Regular-d8" transform="translate(1261.46875 0)"/>
+     <use xlink:href="#Figtree-Regular-15a" transform="translate(1308.0625 0)"/>
+     <use xlink:href="#Figtree-Regular-154" transform="translate(1333.96875 0)"/>
+     <use xlink:href="#Figtree-Regular-d8" transform="translate(1358.671875 0)"/>
+     <use xlink:href="#Figtree-Regular-82" transform="translate(1405.265625 0)"/>
+     <use xlink:href="#Figtree-Regular-c0" transform="translate(1456.265625 0)"/>
+     <use xlink:href="#Figtree-Regular-d1" transform="translate(1541.359375 0)"/>
+     <use xlink:href="#Figtree-Regular-bb" transform="translate(1600.453125 0)"/>
+     <use xlink:href="#Figtree-Regular-99" transform="translate(1622.453125 0)"/>
+     <use xlink:href="#Figtree-Regular-95" transform="translate(1677.046875 0)"/>
+     <use xlink:href="#Figtree-Regular-154" transform="translate(1735.640625 0)"/>
+     <use xlink:href="#Figtree-Regular-a2" transform="translate(1760.34375 0)"/>
+     <use xlink:href="#Figtree-Regular-d4" transform="translate(1797.25 0)"/>
+     <use xlink:href="#Figtree-Regular-c7" transform="translate(1831.046875 0)"/>
+     <use xlink:href="#Figtree-Regular-c0" transform="translate(1889.046875 0)"/>
+     <use xlink:href="#Figtree-Regular-154" transform="translate(1974.140625 0)"/>
+     <use xlink:href="#Figtree-Regular-df" transform="translate(1998.84375 0)"/>
+     <use xlink:href="#Figtree-Regular-a8" transform="translate(2036.640625 0)"/>
+     <use xlink:href="#Figtree-Regular-99" transform="translate(2092.4375 0)"/>
+     <use xlink:href="#Figtree-Regular-154" transform="translate(2147.03125 0)"/>
+     <use xlink:href="#Figtree-Regular-c7" transform="translate(2171.734375 0)"/>
+     <use xlink:href="#Figtree-Regular-8e" transform="translate(2229.734375 0)"/>
+     <use xlink:href="#Figtree-Regular-d8" transform="translate(2288.328125 0)"/>
+     <use xlink:href="#Figtree-Regular-99" transform="translate(2334.921875 0)"/>
+     <use xlink:href="#Figtree-Regular-d4" transform="translate(2389.515625 0)"/>
+     <use xlink:href="#Figtree-Regular-ec" transform="translate(2423.3125 0)"/>
+     <use xlink:href="#Figtree-Regular-99" transform="translate(2474.109375 0)"/>
+     <use xlink:href="#Figtree-Regular-95" transform="translate(2528.703125 0)"/>
+     <use xlink:href="#Figtree-Regular-154" transform="translate(2587.296875 0)"/>
+     <use xlink:href="#Figtree-Regular-10f" transform="translate(2612 0)"/>
+     <use xlink:href="#Figtree-Regular-112" transform="translate(2653.296875 0)"/>
+     <use xlink:href="#Figtree-Regular-111" transform="translate(2715.390625 0)"/>
+     <use xlink:href="#Figtree-Regular-193" transform="translate(2769.796875 0)"/>
+     <use xlink:href="#Figtree-Regular-115" transform="translate(2832.09375 0)"/>
+     <use xlink:href="#Figtree-Regular-154" transform="translate(2885.796875 0)"/>
+     <use xlink:href="#Figtree-Regular-a3" transform="translate(2910.5 0)"/>
+     <use xlink:href="#Figtree-Regular-d4" transform="translate(2969.203125 0)"/>
+     <use xlink:href="#Figtree-Regular-ab" transform="translate(3003 0)"/>
+     <use xlink:href="#Figtree-Regular-95" transform="translate(3026.203125 0)"/>
+    </g>
+   </g>
+   <g id="text_17">
+    <!-- Phrasing variety, not repetition, buys accuracy -->
+    <g style="fill: #222222" transform="translate(47.24 24.1) scale(0.14 -0.14)">
+     <defs>
+      <path id="Figtree-Medium-4e" d="M 570 0 
+L 570 4480 
+L 2080 4480 
+Q 2528 4480 2870 4297 
+Q 3213 4115 3408 3792 
+Q 3603 3469 3603 3040 
+Q 3603 2624 3424 2297 
+Q 3245 1971 2928 1785 
+Q 2611 1600 2202 1600 
+L 1197 1600 
+L 1197 0 
+L 570 0 
+z
+M 1197 2182 
+L 2195 2182 
+Q 2534 2182 2752 2422 
+Q 2970 2662 2970 3040 
+Q 2970 3430 2717 3667 
+Q 2464 3904 2074 3904 
+L 1197 3904 
+L 1197 2182 
+z
+" transform="scale(0.015625)"/>
+      <path id="Figtree-Medium-a8" d="M 429 0 
+L 429 4480 
+L 1030 4480 
+L 1030 0 
+L 429 0 
+z
+M 2643 0 
+L 2643 1638 
+L 3245 1638 
+L 3245 0 
+L 2643 0 
+z
+M 2643 1638 
+Q 2643 2074 2540 2301 
+Q 2438 2528 2262 2617 
+Q 2086 2707 1862 2714 
+Q 1466 2714 1248 2438 
+Q 1030 2163 1030 1664 
+L 774 1664 
+Q 774 2170 924 2531 
+Q 1075 2893 1353 3085 
+Q 1632 3277 2016 3277 
+Q 2394 3277 2669 3123 
+Q 2944 2970 3097 2646 
+Q 3251 2323 3245 1798 
+L 3245 1638 
+L 2643 1638 
+z
+" transform="scale(0.015625)"/>
+      <path id="Figtree-Medium-d4" d="M 794 1722 
+Q 794 2240 992 2566 
+Q 1190 2893 1504 3053 
+Q 1818 3213 2163 3213 
+L 2163 2637 
+Q 1875 2637 1616 2550 
+Q 1357 2464 1193 2269 
+Q 1030 2074 1030 1741 
+L 794 1722 
+z
+M 422 0 
+L 422 3200 
+L 1030 3200 
+L 1030 0 
+L 422 0 
+z
+" transform="scale(0.015625)"/>
+      <path id="Figtree-Medium-82" d="M 2387 0 
+L 2362 557 
+L 2362 1670 
+Q 2362 2022 2282 2259 
+Q 2202 2496 2038 2617 
+Q 1875 2739 1606 2739 
+Q 1357 2739 1174 2636 
+Q 992 2534 870 2317 
+L 333 2522 
+Q 448 2739 621 2908 
+Q 794 3078 1037 3177 
+Q 1280 3277 1606 3277 
+Q 2061 3277 2361 3097 
+Q 2662 2918 2812 2579 
+Q 2963 2240 2957 1741 
+L 2950 0 
+L 2387 0 
+z
+M 1446 -77 
+Q 877 -77 560 182 
+Q 243 442 243 902 
+Q 243 1395 572 1654 
+Q 902 1914 1491 1914 
+L 2381 1914 
+L 2381 1434 
+L 1658 1434 
+Q 1216 1434 1037 1296 
+Q 858 1158 858 915 
+Q 858 691 1027 566 
+Q 1197 442 1498 442 
+Q 1760 442 1952 554 
+Q 2144 666 2253 870 
+Q 2362 1075 2362 1338 
+L 2573 1338 
+Q 2573 685 2294 304 
+Q 2016 -77 1446 -77 
+z
+" transform="scale(0.015625)"/>
+      <path id="Figtree-Medium-d8" d="M 1568 -77 
+Q 1229 -77 963 25 
+Q 698 128 515 301 
+Q 333 474 243 691 
+L 768 922 
+Q 870 723 1075 595 
+Q 1280 467 1530 467 
+Q 1805 467 1984 569 
+Q 2163 672 2163 858 
+Q 2163 1037 2028 1139 
+Q 1894 1242 1638 1306 
+L 1338 1382 
+Q 890 1504 643 1747 
+Q 397 1990 397 2298 
+Q 397 2765 697 3021 
+Q 998 3277 1587 3277 
+Q 1875 3277 2115 3193 
+Q 2355 3110 2524 2956 
+Q 2694 2803 2765 2592 
+L 2253 2362 
+Q 2176 2554 1990 2646 
+Q 1805 2739 1555 2739 
+Q 1299 2739 1152 2627 
+Q 1005 2515 1005 2317 
+Q 1005 2208 1129 2109 
+Q 1254 2010 1498 1946 
+L 1843 1862 
+Q 2157 1786 2361 1629 
+Q 2566 1472 2668 1277 
+Q 2771 1082 2771 870 
+Q 2771 582 2614 368 
+Q 2458 154 2186 38 
+Q 1914 -77 1568 -77 
+z
+" transform="scale(0.015625)"/>
+      <path id="Figtree-Medium-ab" d="M 461 0 
+L 461 3200 
+L 1069 3200 
+L 1069 0 
+L 461 0 
+z
+M 768 3878 
+Q 621 3878 512 3990 
+Q 403 4102 403 4250 
+Q 403 4403 512 4508 
+Q 621 4614 768 4614 
+Q 921 4614 1027 4508 
+Q 1133 4403 1133 4250 
+Q 1133 4102 1027 3990 
+Q 921 3878 768 3878 
+z
+" transform="scale(0.015625)"/>
+      <path id="Figtree-Medium-c1" d="M 422 0 
+L 422 3200 
+L 992 3200 
+L 1030 2611 
+L 1030 0 
+L 422 0 
+z
+M 2637 0 
+L 2637 1638 
+L 3245 1638 
+L 3245 0 
+L 2637 0 
+z
+M 2637 1638 
+Q 2637 2074 2537 2301 
+Q 2438 2528 2262 2617 
+Q 2086 2707 1856 2714 
+Q 1466 2714 1248 2438 
+Q 1030 2163 1030 1664 
+L 768 1664 
+Q 768 2170 918 2531 
+Q 1069 2893 1347 3085 
+Q 1626 3277 2010 3277 
+Q 2387 3277 2665 3123 
+Q 2944 2970 3094 2646 
+Q 3245 2323 3245 1798 
+L 3245 1638 
+L 2637 1638 
+z
+" transform="scale(0.015625)"/>
+      <path id="Figtree-Medium-a3" d="M 1747 -1363 
+Q 1427 -1363 1164 -1302 
+Q 902 -1242 723 -1165 
+Q 544 -1088 454 -1030 
+L 685 -538 
+Q 768 -589 921 -656 
+Q 1075 -723 1280 -771 
+Q 1485 -819 1734 -819 
+Q 2029 -819 2259 -700 
+Q 2490 -582 2621 -332 
+Q 2752 -83 2752 307 
+L 2752 3200 
+L 3360 3200 
+L 3360 320 
+Q 3360 -230 3152 -604 
+Q 2944 -979 2582 -1171 
+Q 2221 -1363 1747 -1363 
+z
+M 1690 45 
+Q 1254 45 931 246 
+Q 608 448 425 809 
+Q 243 1171 243 1645 
+Q 243 2138 425 2502 
+Q 608 2867 931 3072 
+Q 1254 3277 1690 3277 
+Q 2086 3277 2384 3072 
+Q 2682 2867 2845 2499 
+Q 3008 2131 3008 1638 
+Q 3008 1165 2845 803 
+Q 2682 442 2384 243 
+Q 2086 45 1690 45 
+z
+M 1843 557 
+Q 2112 557 2310 701 
+Q 2509 845 2624 1091 
+Q 2739 1338 2739 1658 
+Q 2739 1978 2624 2221 
+Q 2509 2464 2307 2601 
+Q 2106 2739 1837 2739 
+Q 1555 2739 1340 2601 
+Q 1126 2464 1004 2221 
+Q 883 1978 883 1658 
+Q 883 1338 1008 1091 
+Q 1133 845 1347 701 
+Q 1562 557 1843 557 
+z
+" transform="scale(0.015625)"/>
+      <path id="Figtree-Medium-154" transform="scale(0.015625)"/>
+      <path id="Figtree-Medium-ec" d="M 1427 0 
+L 2707 3200 
+L 3341 3200 
+L 2003 0 
+L 1427 0 
+z
+M 1389 0 
+L 58 3200 
+L 678 3200 
+L 1958 0 
+L 1389 0 
+z
+" transform="scale(0.015625)"/>
+      <path id="Figtree-Medium-99" d="M 1837 -77 
+Q 1370 -77 1011 137 
+Q 653 352 448 729 
+Q 243 1107 243 1600 
+Q 243 2093 448 2470 
+Q 653 2848 1014 3062 
+Q 1376 3277 1843 3277 
+Q 2285 3277 2617 3056 
+Q 2950 2835 3139 2428 
+Q 3328 2022 3328 1472 
+L 742 1472 
+L 858 1568 
+Q 858 1229 992 979 
+Q 1126 730 1356 598 
+Q 1587 467 1882 467 
+Q 2202 467 2416 617 
+Q 2630 768 2752 998 
+L 3277 755 
+Q 3149 506 2944 317 
+Q 2739 128 2460 25 
+Q 2182 -77 1837 -77 
+z
+M 896 1856 
+L 774 1952 
+L 2797 1952 
+L 2682 1856 
+Q 2682 2138 2566 2339 
+Q 2451 2541 2259 2646 
+Q 2067 2752 1830 2752 
+Q 1600 2752 1385 2646 
+Q 1171 2541 1033 2342 
+Q 896 2144 896 1856 
+z
+" transform="scale(0.015625)"/>
+      <path id="Figtree-Medium-df" d="M 1658 -77 
+Q 1178 -77 915 169 
+Q 653 416 653 877 
+L 653 4198 
+L 1261 4198 
+L 1261 966 
+Q 1261 730 1379 605 
+Q 1498 480 1722 480 
+Q 1786 480 1862 505 
+Q 1939 531 2048 608 
+L 2278 134 
+Q 2112 26 1961 -25 
+Q 1811 -77 1658 -77 
+z
+M 109 2675 
+L 109 3200 
+L 2170 3200 
+L 2170 2675 
+L 109 2675 
+z
+" transform="scale(0.015625)"/>
+      <path id="Figtree-Medium-f3" d="M 813 -1357 
+Q 672 -1357 502 -1305 
+Q 333 -1254 154 -1171 
+L 378 -672 
+Q 518 -736 624 -768 
+Q 730 -800 794 -800 
+Q 954 -800 1066 -710 
+Q 1178 -621 1248 -461 
+L 1619 416 
+L 2758 3200 
+L 3411 3200 
+L 1894 -397 
+Q 1773 -691 1638 -908 
+Q 1504 -1126 1309 -1241 
+Q 1114 -1357 813 -1357 
+z
+M 1453 0 
+L 51 3200 
+L 698 3200 
+L 1856 422 
+L 2042 0 
+L 1453 0 
+z
+" transform="scale(0.015625)"/>
+      <path id="Figtree-Medium-158" d="M 237 -736 
+L 608 659 
+L 1267 659 
+L 730 -736 
+L 237 -736 
+z
+" transform="scale(0.015625)"/>
+      <path id="Figtree-Medium-c7" d="M 1869 -77 
+Q 1389 -77 1024 137 
+Q 659 352 451 729 
+Q 243 1107 243 1600 
+Q 243 2093 448 2470 
+Q 653 2848 1017 3062 
+Q 1382 3277 1856 3277 
+Q 2330 3277 2694 3062 
+Q 3059 2848 3264 2470 
+Q 3469 2093 3469 1600 
+Q 3469 1107 3264 729 
+Q 3059 352 2697 137 
+Q 2336 -77 1869 -77 
+z
+M 1869 480 
+Q 2157 480 2381 624 
+Q 2605 768 2729 1017 
+Q 2854 1267 2854 1600 
+Q 2854 1933 2729 2182 
+Q 2605 2432 2374 2576 
+Q 2144 2720 1856 2720 
+Q 1562 2720 1338 2576 
+Q 1114 2432 986 2182 
+Q 858 1933 858 1600 
+Q 858 1267 986 1017 
+Q 1114 768 1344 624 
+Q 1574 480 1869 480 
+z
+" transform="scale(0.015625)"/>
+      <path id="Figtree-Medium-d1" d="M 454 -1280 
+L 454 3200 
+L 1024 3200 
+L 1062 2611 
+L 1062 -1280 
+L 454 -1280 
+z
+M 2112 -77 
+Q 1709 -77 1411 134 
+Q 1114 346 954 723 
+Q 794 1101 794 1600 
+Q 794 2106 954 2480 
+Q 1114 2854 1411 3065 
+Q 1709 3277 2112 3277 
+Q 2541 3277 2867 3065 
+Q 3194 2854 3376 2480 
+Q 3558 2106 3558 1600 
+Q 3558 1101 3376 723 
+Q 3194 346 2867 134 
+Q 2541 -77 2112 -77 
+z
+M 1965 474 
+Q 2253 474 2470 618 
+Q 2688 762 2813 1014 
+Q 2938 1267 2938 1600 
+Q 2938 1933 2816 2185 
+Q 2694 2438 2476 2582 
+Q 2259 2726 1971 2726 
+Q 1709 2726 1501 2582 
+Q 1293 2438 1177 2182 
+Q 1062 1926 1062 1600 
+Q 1062 1267 1177 1014 
+Q 1293 762 1497 618 
+Q 1702 474 1965 474 
+z
+" transform="scale(0.015625)"/>
+      <path id="Figtree-Medium-8e" d="M 422 0 
+L 422 4480 
+L 1030 4480 
+L 1030 595 
+L 998 0 
+L 422 0 
+z
+M 2080 -77 
+Q 1677 -77 1379 134 
+Q 1082 346 922 723 
+Q 762 1101 762 1600 
+Q 762 2106 922 2480 
+Q 1082 2854 1379 3065 
+Q 1677 3277 2080 3277 
+Q 2509 3277 2835 3065 
+Q 3162 2854 3344 2480 
+Q 3526 2106 3526 1600 
+Q 3526 1101 3344 723 
+Q 3162 346 2835 134 
+Q 2509 -77 2080 -77 
+z
+M 1933 474 
+Q 2221 474 2438 618 
+Q 2656 762 2781 1014 
+Q 2906 1267 2906 1600 
+Q 2906 1933 2784 2185 
+Q 2662 2438 2444 2582 
+Q 2227 2726 1939 2726 
+Q 1677 2726 1469 2582 
+Q 1261 2438 1145 2182 
+Q 1030 1926 1030 1600 
+Q 1030 1267 1145 1014 
+Q 1261 762 1465 618 
+Q 1670 474 1933 474 
+z
+" transform="scale(0.015625)"/>
+      <path id="Figtree-Medium-e2" d="M 2598 0 
+L 2560 589 
+L 2560 3200 
+L 3162 3200 
+L 3162 0 
+L 2598 0 
+z
+M 346 1562 
+L 346 3200 
+L 954 3200 
+L 954 1562 
+L 346 1562 
+z
+M 954 1562 
+Q 954 1133 1053 902 
+Q 1152 672 1331 582 
+Q 1510 493 1734 486 
+Q 2125 486 2342 761 
+Q 2560 1037 2560 1536 
+L 2822 1536 
+Q 2822 1030 2672 668 
+Q 2522 307 2246 115 
+Q 1971 -77 1574 -77 
+Q 1203 -77 924 76 
+Q 646 230 496 556 
+Q 346 883 346 1402 
+L 346 1562 
+L 954 1562 
+z
+" transform="scale(0.015625)"/>
+      <path id="Figtree-Medium-8f" d="M 1882 -77 
+Q 1402 -77 1030 137 
+Q 659 352 451 729 
+Q 243 1107 243 1600 
+Q 243 2093 451 2470 
+Q 659 2848 1027 3062 
+Q 1395 3277 1869 3277 
+Q 2336 3277 2710 3059 
+Q 3085 2842 3270 2438 
+L 2720 2208 
+Q 2598 2445 2371 2579 
+Q 2144 2714 1850 2714 
+Q 1562 2714 1338 2573 
+Q 1114 2432 986 2179 
+Q 858 1926 858 1600 
+Q 858 1274 986 1024 
+Q 1114 774 1344 630 
+Q 1574 486 1862 486 
+Q 2157 486 2387 636 
+Q 2618 787 2733 1043 
+L 3290 819 
+Q 3104 397 2729 160 
+Q 2355 -77 1882 -77 
+z
+" transform="scale(0.015625)"/>
+     </defs>
+     <use xlink:href="#Figtree-Medium-4e"/>
+     <use xlink:href="#Figtree-Medium-a8" transform="translate(58.59375 0)"/>
+     <use xlink:href="#Figtree-Medium-d4" transform="translate(114.6875 0)"/>
+     <use xlink:href="#Figtree-Medium-82" transform="translate(149.59375 0)"/>
+     <use xlink:href="#Figtree-Medium-d8" transform="translate(201.1875 0)"/>
+     <use xlink:href="#Figtree-Medium-ab" transform="translate(247.78125 0)"/>
+     <use xlink:href="#Figtree-Medium-c1" transform="translate(271.78125 0)"/>
+     <use xlink:href="#Figtree-Medium-a3" transform="translate(327.875 0)"/>
+     <use xlink:href="#Figtree-Medium-154" transform="translate(386.96875 0)"/>
+     <use xlink:href="#Figtree-Medium-ec" transform="translate(411.375 0)"/>
+     <use xlink:href="#Figtree-Medium-82" transform="translate(463.078125 0)"/>
+     <use xlink:href="#Figtree-Medium-d4" transform="translate(514.671875 0)"/>
+     <use xlink:href="#Figtree-Medium-ab" transform="translate(549.578125 0)"/>
+     <use xlink:href="#Figtree-Medium-99" transform="translate(573.578125 0)"/>
+     <use xlink:href="#Figtree-Medium-df" transform="translate(628.375 0)"/>
+     <use xlink:href="#Figtree-Medium-f3" transform="translate(666.78125 0)"/>
+     <use xlink:href="#Figtree-Medium-158" transform="translate(720.78125 0)"/>
+     <use xlink:href="#Figtree-Medium-154" transform="translate(744.28125 0)"/>
+     <use xlink:href="#Figtree-Medium-c1" transform="translate(768.6875 0)"/>
+     <use xlink:href="#Figtree-Medium-c7" transform="translate(824.78125 0)"/>
+     <use xlink:href="#Figtree-Medium-df" transform="translate(882.78125 0)"/>
+     <use xlink:href="#Figtree-Medium-154" transform="translate(921.1875 0)"/>
+     <use xlink:href="#Figtree-Medium-d4" transform="translate(945.59375 0)"/>
+     <use xlink:href="#Figtree-Medium-99" transform="translate(980.5 0)"/>
+     <use xlink:href="#Figtree-Medium-d1" transform="translate(1035.296875 0)"/>
+     <use xlink:href="#Figtree-Medium-99" transform="translate(1094.703125 0)"/>
+     <use xlink:href="#Figtree-Medium-df" transform="translate(1149.5 0)"/>
+     <use xlink:href="#Figtree-Medium-ab" transform="translate(1187.90625 0)"/>
+     <use xlink:href="#Figtree-Medium-df" transform="translate(1211.90625 0)"/>
+     <use xlink:href="#Figtree-Medium-ab" transform="translate(1250.3125 0)"/>
+     <use xlink:href="#Figtree-Medium-c7" transform="translate(1274.3125 0)"/>
+     <use xlink:href="#Figtree-Medium-c1" transform="translate(1332.3125 0)"/>
+     <use xlink:href="#Figtree-Medium-158" transform="translate(1388.40625 0)"/>
+     <use xlink:href="#Figtree-Medium-154" transform="translate(1411.90625 0)"/>
+     <use xlink:href="#Figtree-Medium-8e" transform="translate(1436.3125 0)"/>
+     <use xlink:href="#Figtree-Medium-e2" transform="translate(1495.21875 0)"/>
+     <use xlink:href="#Figtree-Medium-f3" transform="translate(1551.3125 0)"/>
+     <use xlink:href="#Figtree-Medium-d8" transform="translate(1605.3125 0)"/>
+     <use xlink:href="#Figtree-Medium-154" transform="translate(1651.90625 0)"/>
+     <use xlink:href="#Figtree-Medium-82" transform="translate(1676.3125 0)"/>
+     <use xlink:href="#Figtree-Medium-8f" transform="translate(1727.90625 0)"/>
+     <use xlink:href="#Figtree-Medium-8f" transform="translate(1782.109375 0)"/>
+     <use xlink:href="#Figtree-Medium-e2" transform="translate(1836.3125 0)"/>
+     <use xlink:href="#Figtree-Medium-d4" transform="translate(1892.40625 0)"/>
+     <use xlink:href="#Figtree-Medium-82" transform="translate(1927.3125 0)"/>
+     <use xlink:href="#Figtree-Medium-8f" transform="translate(1978.90625 0)"/>
+     <use xlink:href="#Figtree-Medium-f3" transform="translate(2031.515625 0)"/>
+    </g>
+   </g>
+   <g id="legend_1">
+    <g id="line2d_22">
+     <path d="M 352.19375 45.1 
+L 362.19375 45.1 
+L 372.19375 45.1 
+" style="fill: none; stroke: #5887da; stroke-width: 2; stroke-linecap: square"/>
+     <g>
+      <use xlink:href="#med1c929cf2" x="362.19375" y="45.1" style="fill: #5887da; stroke: #5887da"/>
+     </g>
+    </g>
+    <g id="text_18">
+     <!-- Each phrasing run once -->
+     <g style="fill: #222222" transform="translate(380.19375 48.6) scale(0.1 -0.1)">
+      <defs>
+       <path id="Figtree-Regular-18" d="M 595 0 
+L 595 4480 
+L 3245 4480 
+L 3245 3987 
+L 1139 3987 
+L 1139 2541 
+L 3059 2541 
+L 3059 2054 
+L 1139 2054 
+L 1139 493 
+L 3258 493 
+L 3258 0 
+L 595 0 
+z
+" transform="scale(0.015625)"/>
+      </defs>
+      <use xlink:href="#Figtree-Regular-18"/>
+      <use xlink:href="#Figtree-Regular-82" transform="translate(59.203125 0)"/>
+      <use xlink:href="#Figtree-Regular-8f" transform="translate(110.203125 0)"/>
+      <use xlink:href="#Figtree-Regular-a8" transform="translate(164.296875 0)"/>
+      <use xlink:href="#Figtree-Regular-154" transform="translate(220.09375 0)"/>
+      <use xlink:href="#Figtree-Regular-d1" transform="translate(244.796875 0)"/>
+      <use xlink:href="#Figtree-Regular-a8" transform="translate(303.890625 0)"/>
+      <use xlink:href="#Figtree-Regular-d4" transform="translate(359.6875 0)"/>
+      <use xlink:href="#Figtree-Regular-82" transform="translate(393.484375 0)"/>
+      <use xlink:href="#Figtree-Regular-d8" transform="translate(444.484375 0)"/>
+      <use xlink:href="#Figtree-Regular-ab" transform="translate(491.078125 0)"/>
+      <use xlink:href="#Figtree-Regular-c1" transform="translate(514.28125 0)"/>
+      <use xlink:href="#Figtree-Regular-a3" transform="translate(570.078125 0)"/>
+      <use xlink:href="#Figtree-Regular-154" transform="translate(628.78125 0)"/>
+      <use xlink:href="#Figtree-Regular-d4" transform="translate(653.484375 0)"/>
+      <use xlink:href="#Figtree-Regular-e2" transform="translate(687.28125 0)"/>
+      <use xlink:href="#Figtree-Regular-c1" transform="translate(743.078125 0)"/>
+      <use xlink:href="#Figtree-Regular-154" transform="translate(798.875 0)"/>
+      <use xlink:href="#Figtree-Regular-c7" transform="translate(823.578125 0)"/>
+      <use xlink:href="#Figtree-Regular-c1" transform="translate(881.578125 0)"/>
+      <use xlink:href="#Figtree-Regular-8f" transform="translate(937.375 0)"/>
+      <use xlink:href="#Figtree-Regular-99" transform="translate(991.46875 0)"/>
+     </g>
+    </g>
+    <g id="line2d_23">
+     <path d="M 352.19375 62.1 
+L 362.19375 62.1 
+L 372.19375 62.1 
+" style="fill: none; stroke: #c95920; stroke-width: 2; stroke-linecap: square"/>
+     <g>
+      <use xlink:href="#m4e7b1c18ea" x="362.19375" y="62.1" style="fill: #c95920; stroke: #c95920; stroke-linejoin: miter"/>
+     </g>
+    </g>
+    <g id="text_19">
+     <!-- Each phrasing run daily for a week (7× the runs) -->
+     <g style="fill: #222222" transform="translate(380.19375 65.6) scale(0.1 -0.1)">
+      <defs>
+       <path id="Figtree-Regular-f3" d="M 736 -1357 
+Q 614 -1357 454 -1309 
+Q 294 -1261 115 -1184 
+L 307 -755 
+Q 454 -819 566 -851 
+Q 678 -883 742 -883 
+Q 915 -883 1027 -790 
+Q 1139 -698 1216 -525 
+L 1581 346 
+L 2765 3200 
+L 3315 3200 
+L 1779 -448 
+Q 1658 -730 1526 -934 
+Q 1395 -1139 1209 -1248 
+Q 1024 -1357 736 -1357 
+z
+M 1440 0 
+L 58 3200 
+L 602 3200 
+L 1792 352 
+L 1946 0 
+L 1440 0 
+z
+" transform="scale(0.015625)"/>
+       <path id="Figtree-Regular-ed" d="M 3354 0 
+L 4435 3200 
+L 4954 3200 
+L 3866 0 
+L 3354 0 
+z
+M 1178 0 
+L 2259 3200 
+L 2739 3200 
+L 1670 0 
+L 1178 0 
+z
+M 1152 0 
+L 64 3200 
+L 582 3200 
+L 1651 0 
+L 1152 0 
+z
+M 3354 0 
+L 2285 3200 
+L 2771 3200 
+L 3840 0 
+L 3354 0 
+z
+" transform="scale(0.015625)"/>
+       <path id="Figtree-Regular-b9" d="M 947 1030 
+L 621 1382 
+L 2323 3200 
+L 2970 3200 
+L 947 1030 
+z
+M 448 0 
+L 448 4480 
+L 960 4480 
+L 960 0 
+L 448 0 
+z
+M 2464 0 
+L 1248 1837 
+L 1581 2195 
+L 3098 0 
+L 2464 0 
+z
+" transform="scale(0.015625)"/>
+      </defs>
+      <use xlink:href="#Figtree-Regular-18"/>
+      <use xlink:href="#Figtree-Regular-82" transform="translate(59.203125 0)"/>
+      <use xlink:href="#Figtree-Regular-8f" transform="translate(110.203125 0)"/>
+      <use xlink:href="#Figtree-Regular-a8" transform="translate(164.296875 0)"/>
+      <use xlink:href="#Figtree-Regular-154" transform="translate(220.09375 0)"/>
+      <use xlink:href="#Figtree-Regular-d1" transform="translate(244.796875 0)"/>
+      <use xlink:href="#Figtree-Regular-a8" transform="translate(303.890625 0)"/>
+      <use xlink:href="#Figtree-Regular-d4" transform="translate(359.6875 0)"/>
+      <use xlink:href="#Figtree-Regular-82" transform="translate(393.484375 0)"/>
+      <use xlink:href="#Figtree-Regular-d8" transform="translate(444.484375 0)"/>
+      <use xlink:href="#Figtree-Regular-ab" transform="translate(491.078125 0)"/>
+      <use xlink:href="#Figtree-Regular-c1" transform="translate(514.28125 0)"/>
+      <use xlink:href="#Figtree-Regular-a3" transform="translate(570.078125 0)"/>
+      <use xlink:href="#Figtree-Regular-154" transform="translate(628.78125 0)"/>
+      <use xlink:href="#Figtree-Regular-d4" transform="translate(653.484375 0)"/>
+      <use xlink:href="#Figtree-Regular-e2" transform="translate(687.28125 0)"/>
+      <use xlink:href="#Figtree-Regular-c1" transform="translate(743.078125 0)"/>
+      <use xlink:href="#Figtree-Regular-154" transform="translate(798.875 0)"/>
+      <use xlink:href="#Figtree-Regular-95" transform="translate(823.578125 0)"/>
+      <use xlink:href="#Figtree-Regular-82" transform="translate(882.171875 0)"/>
+      <use xlink:href="#Figtree-Regular-ab" transform="translate(933.171875 0)"/>
+      <use xlink:href="#Figtree-Regular-bb" transform="translate(956.375 0)"/>
+      <use xlink:href="#Figtree-Regular-f3" transform="translate(978.375 0)"/>
+      <use xlink:href="#Figtree-Regular-154" transform="translate(1030.96875 0)"/>
+      <use xlink:href="#Figtree-Regular-a2" transform="translate(1055.671875 0)"/>
+      <use xlink:href="#Figtree-Regular-c7" transform="translate(1092.28125 0)"/>
+      <use xlink:href="#Figtree-Regular-d4" transform="translate(1150.28125 0)"/>
+      <use xlink:href="#Figtree-Regular-154" transform="translate(1184.078125 0)"/>
+      <use xlink:href="#Figtree-Regular-82" transform="translate(1208.78125 0)"/>
+      <use xlink:href="#Figtree-Regular-154" transform="translate(1259.78125 0)"/>
+      <use xlink:href="#Figtree-Regular-ed" transform="translate(1284.484375 0)"/>
+      <use xlink:href="#Figtree-Regular-99" transform="translate(1361.6875 0)"/>
+      <use xlink:href="#Figtree-Regular-99" transform="translate(1416.28125 0)"/>
+      <use xlink:href="#Figtree-Regular-b9" transform="translate(1470.875 0)"/>
+      <use xlink:href="#Figtree-Regular-154" transform="translate(1519.375 0)"/>
+      <use xlink:href="#Figtree-Regular-16c" transform="translate(1544.078125 0)"/>
+      <use xlink:href="#Figtree-Regular-115" transform="translate(1579.28125 0)"/>
+      <use xlink:href="#Figtree-Regular-193" transform="translate(1632.984375 0)"/>
+      <use xlink:href="#Figtree-Regular-154" transform="translate(1695.28125 0)"/>
+      <use xlink:href="#Figtree-Regular-df" transform="translate(1719.984375 0)"/>
+      <use xlink:href="#Figtree-Regular-a8" transform="translate(1757.78125 0)"/>
+      <use xlink:href="#Figtree-Regular-99" transform="translate(1813.578125 0)"/>
+      <use xlink:href="#Figtree-Regular-154" transform="translate(1868.171875 0)"/>
+      <use xlink:href="#Figtree-Regular-d4" transform="translate(1892.875 0)"/>
+      <use xlink:href="#Figtree-Regular-e2" transform="translate(1926.671875 0)"/>
+      <use xlink:href="#Figtree-Regular-c1" transform="translate(1982.46875 0)"/>
+      <use xlink:href="#Figtree-Regular-d8" transform="translate(2038.265625 0)"/>
+      <use xlink:href="#Figtree-Regular-16d" transform="translate(2084.859375 0)"/>
+     </g>
+    </g>
+   </g>
+  </g>
+  <g id="text_20">
+   <!-- Source: Spyglasses Research · research.spyglasses.io -->
+   <g style="fill: #6b7280" transform="translate(7.344 380.6964) scale(0.09 -0.09)">
+    <defs>
+     <path id="Figtree-Regular-55" d="M 2029 -77 
+Q 1658 -77 1370 3 
+Q 1082 83 870 227 
+Q 659 371 524 547 
+Q 390 723 326 922 
+L 845 1101 
+Q 941 819 1232 611 
+Q 1523 403 1946 403 
+Q 2464 403 2758 608 
+Q 3053 813 3053 1152 
+Q 3053 1466 2790 1661 
+Q 2528 1856 2099 1965 
+L 1606 2093 
+Q 1306 2170 1053 2320 
+Q 800 2470 649 2704 
+Q 499 2938 499 3264 
+Q 499 3872 892 4214 
+Q 1286 4557 2029 4557 
+Q 2470 4557 2790 4413 
+Q 3110 4269 3312 4048 
+Q 3514 3827 3597 3571 
+L 3085 3392 
+Q 2963 3712 2675 3894 
+Q 2387 4077 1978 4077 
+Q 1549 4077 1296 3869 
+Q 1043 3661 1043 3302 
+Q 1043 2995 1241 2832 
+Q 1440 2669 1760 2592 
+L 2253 2470 
+Q 2906 2317 3254 1961 
+Q 3603 1606 3603 1197 
+Q 3603 845 3424 553 
+Q 3245 262 2896 92 
+Q 2547 -77 2029 -77 
+z
+" transform="scale(0.015625)"/>
+     <path id="Figtree-Regular-159" d="M 806 2502 
+Q 659 2502 553 2604 
+Q 448 2707 448 2854 
+Q 448 3002 553 3107 
+Q 659 3213 806 3213 
+Q 947 3213 1052 3107 
+Q 1158 3002 1158 2854 
+Q 1158 2707 1052 2604 
+Q 947 2502 806 2502 
+z
+M 813 -13 
+Q 666 -13 563 92 
+Q 461 198 461 346 
+Q 461 493 563 595 
+Q 666 698 813 698 
+Q 960 698 1065 595 
+Q 1171 493 1171 346 
+Q 1171 198 1065 92 
+Q 960 -13 813 -13 
+z
+" transform="scale(0.015625)"/>
+     <path id="Figtree-Regular-51" d="M 595 0 
+L 595 4480 
+L 2054 4480 
+Q 2490 4480 2826 4307 
+Q 3162 4134 3350 3827 
+Q 3539 3520 3539 3123 
+Q 3539 2726 3334 2419 
+Q 3130 2112 2778 1936 
+Q 2426 1760 1984 1760 
+L 1139 1760 
+L 1139 0 
+L 595 0 
+z
+M 3123 0 
+L 2048 1837 
+L 2477 2118 
+L 3718 0 
+L 3123 0 
+z
+M 1139 2259 
+L 2131 2259 
+Q 2374 2259 2566 2371 
+Q 2758 2483 2876 2678 
+Q 2995 2874 2995 3123 
+Q 2995 3507 2729 3747 
+Q 2464 3987 2042 3987 
+L 1139 3987 
+L 1139 2259 
+z
+" transform="scale(0.015625)"/>
+     <path id="Figtree-Regular-160" d="M 813 1728 
+Q 665 1728 559 1834 
+Q 454 1940 454 2080 
+Q 454 2228 559 2333 
+Q 665 2439 813 2439 
+Q 960 2439 1062 2333 
+Q 1165 2228 1165 2080 
+Q 1165 1940 1062 1834 
+Q 960 1728 813 1728 
+z
+" transform="scale(0.015625)"/>
+     <path id="Figtree-Regular-157" d="M 666 -90 
+Q 518 -90 412 16 
+Q 307 122 307 262 
+Q 307 410 412 515 
+Q 518 621 666 621 
+Q 813 621 915 515 
+Q 1018 410 1018 262 
+Q 1018 122 915 16 
+Q 813 -90 666 -90 
+z
+" transform="scale(0.015625)"/>
+    </defs>
+    <use xlink:href="#Figtree-Regular-55"/>
+    <use xlink:href="#Figtree-Regular-c7" transform="translate(61.40625 0)"/>
+    <use xlink:href="#Figtree-Regular-e2" transform="translate(119.40625 0)"/>
+    <use xlink:href="#Figtree-Regular-d4" transform="translate(175.203125 0)"/>
+    <use xlink:href="#Figtree-Regular-8f" transform="translate(209 0)"/>
+    <use xlink:href="#Figtree-Regular-99" transform="translate(263.09375 0)"/>
+    <use xlink:href="#Figtree-Regular-159" transform="translate(317.6875 0)"/>
+    <use xlink:href="#Figtree-Regular-154" transform="translate(342.984375 0)"/>
+    <use xlink:href="#Figtree-Regular-55" transform="translate(367.6875 0)"/>
+    <use xlink:href="#Figtree-Regular-d1" transform="translate(429.09375 0)"/>
+    <use xlink:href="#Figtree-Regular-f3" transform="translate(486.890625 0)"/>
+    <use xlink:href="#Figtree-Regular-a3" transform="translate(538.28125 0)"/>
+    <use xlink:href="#Figtree-Regular-bb" transform="translate(596.984375 0)"/>
+    <use xlink:href="#Figtree-Regular-82" transform="translate(618.984375 0)"/>
+    <use xlink:href="#Figtree-Regular-d8" transform="translate(669.984375 0)"/>
+    <use xlink:href="#Figtree-Regular-d8" transform="translate(716.578125 0)"/>
+    <use xlink:href="#Figtree-Regular-99" transform="translate(763.171875 0)"/>
+    <use xlink:href="#Figtree-Regular-d8" transform="translate(817.765625 0)"/>
+    <use xlink:href="#Figtree-Regular-154" transform="translate(864.359375 0)"/>
+    <use xlink:href="#Figtree-Regular-51" transform="translate(889.0625 0)"/>
+    <use xlink:href="#Figtree-Regular-99" transform="translate(951.65625 0)"/>
+    <use xlink:href="#Figtree-Regular-d8" transform="translate(1006.25 0)"/>
+    <use xlink:href="#Figtree-Regular-99" transform="translate(1052.84375 0)"/>
+    <use xlink:href="#Figtree-Regular-82" transform="translate(1107.4375 0)"/>
+    <use xlink:href="#Figtree-Regular-d4" transform="translate(1158.4375 0)"/>
+    <use xlink:href="#Figtree-Regular-8f" transform="translate(1192.234375 0)"/>
+    <use xlink:href="#Figtree-Regular-a8" transform="translate(1246.328125 0)"/>
+    <use xlink:href="#Figtree-Regular-154" transform="translate(1302.125 0)"/>
+    <use xlink:href="#Figtree-Regular-160" transform="translate(1326.828125 0)"/>
+    <use xlink:href="#Figtree-Regular-154" transform="translate(1352.234375 0)"/>
+    <use xlink:href="#Figtree-Regular-d4" transform="translate(1376.9375 0)"/>
+    <use xlink:href="#Figtree-Regular-99" transform="translate(1410.734375 0)"/>
+    <use xlink:href="#Figtree-Regular-d8" transform="translate(1465.328125 0)"/>
+    <use xlink:href="#Figtree-Regular-99" transform="translate(1511.921875 0)"/>
+    <use xlink:href="#Figtree-Regular-82" transform="translate(1566.515625 0)"/>
+    <use xlink:href="#Figtree-Regular-d4" transform="translate(1617.515625 0)"/>
+    <use xlink:href="#Figtree-Regular-8f" transform="translate(1651.3125 0)"/>
+    <use xlink:href="#Figtree-Regular-a8" transform="translate(1705.40625 0)"/>
+    <use xlink:href="#Figtree-Regular-157" transform="translate(1761.203125 0)"/>
+    <use xlink:href="#Figtree-Regular-d8" transform="translate(1782 0)"/>
+    <use xlink:href="#Figtree-Regular-d1" transform="translate(1828.59375 0)"/>
+    <use xlink:href="#Figtree-Regular-f3" transform="translate(1886.390625 0)"/>
+    <use xlink:href="#Figtree-Regular-a3" transform="translate(1937.78125 0)"/>
+    <use xlink:href="#Figtree-Regular-bb" transform="translate(1996.484375 0)"/>
+    <use xlink:href="#Figtree-Regular-82" transform="translate(2018.484375 0)"/>
+    <use xlink:href="#Figtree-Regular-d8" transform="translate(2069.484375 0)"/>
+    <use xlink:href="#Figtree-Regular-d8" transform="translate(2116.078125 0)"/>
+    <use xlink:href="#Figtree-Regular-99" transform="translate(2162.671875 0)"/>
+    <use xlink:href="#Figtree-Regular-d8" transform="translate(2217.265625 0)"/>
+    <use xlink:href="#Figtree-Regular-157" transform="translate(2263.859375 0)"/>
+    <use xlink:href="#Figtree-Regular-ab" transform="translate(2284.65625 0)"/>
+    <use xlink:href="#Figtree-Regular-c7" transform="translate(2307.859375 0)"/>
+   </g>
+  </g>
+  <image xlink:href="data:image/png;base64,
+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" id="image10da743559" transform="scale(1 -1) translate(0 -27.36)" x="537.12" y="-363.96" width="67.32" height="27.36"/>
+ </g>
+ <defs>
+  <clipPath id="p37fc91af3e">
+   <rect x="47.24" y="30.1" width="553.96" height="281.9928"/>
+  </clipPath>
+ </defs>
+</svg>

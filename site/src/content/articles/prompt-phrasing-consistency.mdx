@@ -1,0 +1,223 @@
+---
+title: "We pre-registered 'prompt phrasing barely matters.' ChatGPT proved us wrong."
+description: "Extending SparkToro's prompt-diversity study: we pre-registered the hypothesis that prompt wording doesn't matter when intent matches, then re-ran their 143 de-identified survey prompts against one platform — ChatGPT — every day for a week. The leading brands held, but rewording moved the shortlist, the cited sources, and the searches underneath, well beyond run-to-run noise."
+pubDate: 2026-07-23
+authors:
+  - name: "Spyglasses Research"
+    url: "https://spyglasses.io"
+experiment: "002-prompt-consistency"
+heroFigure: "/figures/002-prompt-consistency/brand-share.png"
+ogImage: "/figures/002-prompt-consistency/hero.webp"
+datasets:
+  - title: "Prompt-phrasing consistency of ChatGPT recommendations (derived features)"
+    path: "/datasets/002-prompt-consistency/prompt-consistency-chatgpt.csv"
+    license: "CC BY 4.0"
+    rows: 1144
+tags: ["chatgpt", "prompts", "brand-visibility", "consistency", "sparktoro", "methodology"]
+draft: false
+---
+
+## Key findings
+
+- **The market leaders are phrasing-proof.** Sony appeared in 90% of answers, Bose in 82%, Sennheiser in 80% — across 143 differently-worded prompts asking the same thing, every day for a week. This replicates SparkToro's headline result on a single platform.
+- **But rewording the question costs real overlap.** Two runs of the *same* prompt agree on 74% of recommended brands (Jaccard 0.74); two *differently-worded* prompts with the same intent agree on only 54%. The gap — about one brand swapped per answer — is twice our pre-registered "too small to matter" bound. We pre-registered the opposite expectation and are reporting the reversal.
+- **The retrieval layer moves even more than the answers.** Rewording shifts the grounding searches ChatGPT runs (token overlap 0.51 → 0.25) and the sources it cites (domain overlap 0.43 → 0.30) — yet the citation *pool* is tiny and shared: six review domains absorb 78% of all citation slots in this study.
+- **Much of the "phrasing effect" is really sub-intent.** Naming a specific dollar budget swings Bose −36 points and JBL +31; music framing lifts Sennheiser +23; travel framing lifts Anker +23 (all 90% CIs exclude zero; exploratory).
+- **For anyone measuring AI visibility: variety beats repetition.** In simulation on our grid, 70 phrasings run once estimate a brand's true mention rate about twice as accurately as 10 phrasings run daily for a week — the same total cost.
+
+## Why we asked
+
+In January, SparkToro ran [a clever study](https://sparktoro.com/blog/new-research-ais-are-highly-inconsistent-when-recommending-brands-or-products-marketers-should-take-care-when-tracking-ai-visibility/). Instead of guessing what "the typical prompt" looks like, they surveyed 142+ real people for the prompt each would personally use to ask an AI for headphone recommendations, ran each one, and found the same top brands in 55–77% of answers despite the prompts sharing almost no wording. Their question was existential for the AI-visibility category: **if AI answers are nondeterministic and everyone words their prompts differently, can a tool that tracks a sample of prompts produce data that generalizes at all?**
+
+Their design had one confound they acknowledged: each prompt ran **once**, spread across **seven different LLMs**. Phrasing variation and platform variation were mixed together, and with a single run per prompt, there was no way to measure the baseline — how much the *same* prompt varies when you simply ask again.
+
+So we re-ran their instrument with the confound removed, in the other direction: **one platform, repeated over time**. SparkToro generously shared their de-identified survey prompts, and we ran each usable headphone prompt (143 evaluated in this study) against ChatGPT once a day for seven days, plus their second intent — 143 prompts seeking a coffee-shop brand-design agency — once, as a cross-intent control. That design separates three things their study couldn't: run-to-run noise (same prompt, different day), phrasing effects (different prompt, same intent, same day), and intent effects (different intent entirely).
+
+We also measured a layer they couldn't see. ChatGPT with web search answers commercial questions by rewriting the prompt into search queries, retrieving sources, and composing over them. Our scraper exposes those grounding queries and citations, so we could test whether the *pipeline between* prompt and answer is stable even when wording varies. Our pre-registered prediction — the mechanistic bet the whole study was built around — was that query rewriting *normalizes* phrasing: differently-worded prompts would funnel into the same searches, the same sources, and therefore the same brands, with rephrasing costing no more overlap than the model's own noise.
+
+That is not what we found.
+
+## Methods in brief
+
+The unit of analysis is one ChatGPT run: **1,144 runs evaluated in this study** (143 headphone prompts × 7 daily waves, plus 143 coffee-agency prompts × 1 wave), collected 16–23 July 2026 via DataForSEO's LLM scraper (en-US, web search forced, model `gpt-5-5` throughout). From each answer we extracted the recommended brands (frozen alias lexicon), the cited source domains, and the grounding-query token set.
+
+For every pair of runs we computed set overlap (Jaccard), in three pre-registered conditions: **within-prompt** (same prompt, different days), **between-prompt** (different prompts, same intent, same day), and **cross-intent** (headphones × coffee). The pre-registered test is equivalence (TOST logic): is the within-vs-between gap smaller than 0.10 Jaccard — roughly one brand swapped in half of pairs — the smallest difference we judged a marketer would act on? Inference is by prompt-level cluster bootstrap (90% CIs); a positive control (same-intent pairs must overlap far more than cross-intent pairs) gated the analysis, and a placebo split checked the bootstrap. Everything in this paragraph was frozen before any response data was collected: full [pre-registered spec](https://github.com/orchestra-code/aeo-experiments/blob/2ee335a/experiments/002-prompt-consistency/spec.md) and [analysis code](https://github.com/orchestra-code/aeo-experiments/tree/main/experiments/002-prompt-consistency).
+
+The gate passed decisively (same-intent pairs cite vastly more similar domains than cross-intent pairs, Δ = 0.289 [0.257, 0.320], permutation p = 0.0002) and the placebo came back exactly null (−0.002 [−0.008, 0.007]) — the instrument works; the results below are not artifacts of a broken pipeline.
+
+## Result 1: the leaders don't care how you ask
+
+<figure>
+  <img
+    src="/figures/002-prompt-consistency/brand-share.svg"
+    alt="Horizontal bar chart of brand mention shares across all headphone answers: Sony 90%, Bose 82%, Sennheiser 80%, Anker 68%, Apple 45%, JBL 17%, with a long tail below 5%."
+    width="1900"
+    height="1300"
+  />
+  <figcaption>
+    Share of the 1,001 headphone answers evaluated in this study that mention
+    each brand, across 143 differently-worded prompts and 7 daily runs.
+  </figcaption>
+</figure>
+
+SparkToro found their top brands in 55–77% of answers across seven platforms. On one platform, with each prompt run seven times, we see the same shape, slightly stronger: Sony 90%, Bose 82%, Sennheiser 80%. However 143 different people worded the question, the podium barely moves. This is the part of the consistency story that fully survives our stricter design — and for the leading brands, it survives *per phrasing*, not just on average: Sony appears essentially every day for 87% of individual phrasings.
+
+## Result 2: but rephrasing costs real overlap — we predicted otherwise
+
+<figure>
+  <img
+    src="/figures/002-prompt-consistency/brand-jaccard-ecdf.svg"
+    alt="ECDF curves of pairwise brand-set Jaccard for three conditions. Same-prompt repeated-run pairs sit far right (high overlap), different-prompt same-intent pairs sit clearly left of them, and different-intent pairs sit at zero."
+    width="1900"
+    height="1040"
+  />
+  <figcaption>
+    Cumulative distribution of pairwise brand overlap. Repeated runs of the
+    same prompt (blue) agree far more than differently-worded same-intent
+    prompts (orange); different intents (green) share nothing. If phrasing
+    didn't matter, blue and orange would coincide.
+  </figcaption>
+</figure>
+
+Two runs of the same prompt on different days share a mean brand Jaccard of **0.736**. Two differently-worded prompts on the same day share **0.537**. The gap, Δ = 0.200 [0.162, 0.239], is double our pre-registered equivalence bound of 0.10 and the confidence interval sits entirely outside it: by the decision rule we froze before collection, this is a **real phrasing effect**, not equivalence and not noise. At the typical four-brand answer, it amounts to roughly one brand swapped in or out because the question was worded differently.
+
+We want to be plain about this: we designed this study expecting to publish the opposite — "prompts vary, answers vary, but the recommendation set holds." The equivalence machinery was built to make that null *meaningful* ("we could have detected a 0.10 shift and found none"). Instead it detected a shift of 0.20, and the same machinery makes the reversal just as rigorous. Every robustness check agrees: rank-sensitive overlap (Δ = 0.191), dropping the first wave (0.205), deduplicating near-identical prompts (0.203).
+
+Where does the change land? Not on the podium — on the shortlist's back half. Apple is the cleanest example: 22% of phrasings include it essentially every day, 31% exclude it every day, and 47% flicker. Whether a mid-tier brand appears at all is, to a striking degree, a stable property of *how the question is worded* — which is why the effect can be large for individual brands while the leaderboard looks serene.
+
+## Result 3: the pipeline underneath moves even more
+
+Our mechanistic prediction was that ChatGPT's query rewriting would *normalize* phrasing before retrieval. The retrieval data says otherwise:
+
+- **Grounding searches**: same prompt re-run, token overlap 0.511; reworded prompt, 0.245. Δ = 0.266 [0.237, 0.295] — the largest phrasing effect in the study, and it *strengthens* (0.335) when restricted to runs with complete fan-out data. The user's wording visibly leaks into the searches the model runs.
+- **Cited domains**: 0.429 within vs 0.298 between, Δ = 0.132 [0.104, 0.160]. Cited URLs are noisier still (0.282 vs 0.119).
+- **Answer text** (descriptive): TF-IDF cosine 0.381 within vs 0.224 between — wording churns freely at every layer.
+
+<figure>
+  <img
+    src="/figures/002-prompt-consistency/domain-concentration.svg"
+    alt="Horizontal bar chart of the share of answers citing each domain: rtings.com 77%, techradar.com 22%, soundguys.com 22%, whathifi.com 15%, reddit.com 12%, tomsguide.com 7%, then a long tail under 3%."
+    width="1900"
+    height="1400"
+  />
+  <figcaption>
+    The citation pool is small and shared: rtings.com appears in 77% of
+    answers, and six domains absorb 78% of all citation slots in this study.
+  </figcaption>
+</figure>
+
+Hold both of these at once and the picture resolves: the citation *universe* is an intent-level fact — six review domains take 78% of all citation slots, and cross-intent overlap is ~0.01 — but each answer cites only about two sources sampled from it. Rewording the prompt changes the grounding searches, which changes *which* members of the same small pool surface. Phrasing doesn't change where ChatGPT looks; it changes what ChatGPT picks.
+
+One thing did hold perfectly steady: time. Same-prompt overlap is flat across the week (0.74 at a one-day gap, 0.72 at six), and between-prompt domain overlap measured across different days (0.292) matches the same-day figure (0.298). Within this week, on this intent, there was no day-to-day drift for a tracker to chase — the variance lives in phrasing, not in the calendar.
+
+## Exploratory: the phrasing effect is largely *sub-intent* — and you can name the levers
+
+Everything from here down is **post-hoc, exploratory, and labelled as such** — coded after we saw the pre-registered results, tested without multiplicity correction, on slices of 16–30 prompts. Treat it as strong hypothesis generation, not settled fact.
+
+Reading the prompts (which are SparkToro's survey data and stay private), the phrasings differ in legible ways: some name a dollar budget, some describe the recipient, some specify a use case or form factor. We regex-coded seven such attributes and asked whether they explain *which* brands swap in and out.
+
+<figure>
+  <img
+    src="/figures/002-prompt-consistency/budget-flip.svg"
+    alt="Grouped bar chart comparing brand mention rates for prompts with and without a specific dollar budget. Bose drops from 88% to 52% and Sennheiser from 83% to 66% when a budget is stated, while JBL rises from 12% to 43%."
+    width="1900"
+    height="1230"
+  />
+  <figcaption>
+    Mention rates for prompts with vs without a specific dollar budget
+    (24 of 143 phrasings state one). Error bars are 90% prompt-cluster
+    bootstrap intervals. Exploratory.
+  </figcaption>
+</figure>
+
+Naming a specific dollar amount is the single strongest lever we found: Bose drops 36 points [−50, −23], Sennheiser 17 [−32, −2], while JBL gains 31 [+19, +43]. The premium default gives way to a value shortlist — same intent, same product category, different market. Naming a gift recipient moves the same direction (Bose −19, JBL +14). Use-case wording picks favorites: music framing lifts Sennheiser +23 and Sony +15; travel framing lifts Anker +23.
+
+<figure>
+  <img
+    src="/figures/002-prompt-consistency/subintent-deltas.svg"
+    alt="Dot-and-interval chart of thirteen prompt-attribute-to-brand effects with 90% confidence intervals, sorted by effect size. Filled dots mark effects whose intervals exclude zero; hollow grey dots mark unsubstantiated ones including noise-cancelling and movie-usage effects."
+    width="1900"
+    height="1380"
+  />
+  <figcaption>
+    Thirteen attribute → brand contrasts with 90% prompt-cluster bootstrap
+    intervals. Filled = interval excludes zero; hollow grey = tested and not
+    substantiated. Exploratory; no multiplicity correction.
+  </figcaption>
+</figure>
+
+Honesty about the hollow dots matters as much as the filled ones: mentioning noise-cancelling moved no brand detectably (it's table stakes for this intent), movie-vs-music usage did nothing for Apple, and the output-format attributes (asking for a table, "give me 5 options") were too rare in this survey to test at all. And a structural check says sub-intent is *most* of the phrasing story, not all of it: prompts whose attribute profiles match overlap at 0.57 — recovering roughly half to two-thirds of the 0.20 within-vs-between gap — but still short of the 0.74 same-prompt ceiling. Wording retains some irreducible influence beyond what it *says*.
+
+Why this matters: "phrasing matters" sounds like bad news you can't act on — you can't survey every customer's inner monologue. Sub-intent is different. Budget-framed, recipient-framed, use-case-framed queries are *enumerable segments* with their own leaderboards, and a brand can know exactly which segments include it and which shut it out.
+
+## The pulse model: how to measure without fooling yourself
+
+The practical question underneath SparkToro's study — and underneath every AI-visibility tool, ours included — is a sampling problem: **what can a finite prompt panel tell you about your brand's true presence?** Our grid (143 phrasings × 7 days) lets us answer by simulation: draw a panel of k phrasings, run it for d days, and see how far its estimate lands from the whole-grid truth.
+
+<figure>
+  <img
+    src="/figures/002-prompt-consistency/panel-moe.svg"
+    alt="Line chart of the 90% margin of error on estimated mention rate versus number of distinct phrasings, for panels run once versus daily for a week. Both curves fall steeply with phrasing count; the daily curve sits only modestly below the run-once curve despite seven times the runs."
+    width="1900"
+    height="1230"
+  />
+  <figcaption>
+    Margin of error on a brand's mention rate by panel design, simulated from
+    the observed grid (average over six focal brands). Adding phrasings moves
+    you down the curve fast; re-running the same phrasings all week (orange,
+    7× the cost) buys surprisingly little extra accuracy. Exploratory.
+  </figcaption>
+</figure>
+
+The curve shape follows from Result 2: because a phrasing's inclusion propensities are largely *stable across days*, re-running a fixed panel averages away only run-to-run noise — between a third and two-thirds of the variance (depending on the brand) is phrasing-level and never shrinks. At equal cost of 70 runs, 70 phrasings once beats 10 phrasings daily, roughly ±7 points to ±15. A small fixed panel run daily converges quickly, confidently — on *its own* rate, which is not necessarily the market's.
+
+The same simulation says the fixed panel is the right tool for the other job: since day-to-day drift was absent all week, a small consistent panel is a clean yardstick for *change* — exactly what repetition can measure and a one-shot sweep cannot. Two instruments, two questions. That suggests a **pulse** design:
+
+<figure>
+  <img
+    src="/figures/002-prompt-consistency/pulse-model.jpg"
+    alt="Workflow illustration: a small looping daily panel of identical prompt cards feeds a drift line chart; a wide periodic sweep fan of many varied prompt cards feeds a true-rate bar chart; a calibrate arrow connects the true rate back to the drift line."
+    width="2000"
+    height="1116"
+  />
+  <figcaption>
+    The pulse model: a small fixed panel tracks drift daily; a broad,
+    phrasing-diverse sweep periodically measures the true rate; the sweep
+    calibrates the panel. (Illustration.)
+  </figcaption>
+</figure>
+
+- **The daily panel** — a small, fixed, deliberately stable set of phrasings — tracks *drift*: did a model update, a competitor's content push, or your own work move anything? Its absolute level is not the point.
+- **The periodic sweep** — a large, phrasing-diverse set, stratified across the sub-intent axes above (price-framed, recipient-framed, use-case-framed…), run once — measures your *true mention rate*, per segment, at a fraction of the cost of tracking those prompts continuously.
+- **The sweep calibrates the panel.** If the sweep says 45% and your panel says 60%, your panel runs 15 points hot — a known offset you apply to every subsequent daily reading. And because sub-intent effects are near-deterministic, the sweep doubles as a discovery instrument: the phrasing segments that reliably *exclude* you are your content and PR target list, and the panel then tells you whether the interventions moved the needle.
+
+Repeat the sweep when the model version changes or the panel's drift line jumps — not on a calendar.
+
+## What we can and cannot claim
+
+- **Scope, always:** one intent (headphones-as-travel-gift), one platform (ChatGPT via DataForSEO's LLM scraper — not the logged-in consumer product), one locale (en-US), one week, web search forced. The coffee arm exists only as a control. None of this licenses claims about Gemini, AI Overviews, other intents, or personalized ChatGPT.
+- **The pre-registered results are the reversal of our stated expectation, reported under the decision rule we froze in advance.** We could have detected a within-vs-between gap of 0.10 Jaccard; we measured 0.20 for brands, 0.13 for cited domains, 0.27 for grounding searches, each with its 90% CI wholly beyond the band.
+- **"Phrasing effect" ≠ "chaos."** The same data shows leader-brand presence is phrasing-robust and the citation pool is intent-level. The effect concentrates in mid-tier shortlist membership and source selection.
+- **Everything sub-intent and pulse-model is exploratory.** Post-hoc coding, small slices, no multiplicity correction, simulation on a single observed grid. The budget→Bose/JBL flip is large enough that we'd bet on its direction; the exact magnitudes need a pre-registered follow-up.
+- **Run-to-run baseline is composite.** We cannot separate ChatGPT's own nondeterminism from scraper-infrastructure variation; that composite *is* our baseline, and it is the same baseline the phrasing effect beat.
+- **One collection artifact:** on the final night, 74 of 143 responses returned without model-version and grounding-query metadata (answers and citations intact). All grounding analyses handle this under the pre-registered missing-data policy, and the restricted refit strengthens rather than weakens the grounding result. Logged in the spec's deviations.
+
+## What this means if you track a brand in AI answers
+
+- **If you're the category leader, breathe.** Your presence is the most phrasing-robust fact in this dataset. Track drift; don't chase individual answers.
+- **If you're mid-tier, phrasing segments are your battleground.** Somewhere between "appears for every phrasing" and "appears for none" there are enumerable sub-intents — price-framed, recipient-framed, use-case-framed — each with its own leaderboard. Find the ones that exclude you; that's the work list.
+- **Get into the citation pool before worrying about any single answer.** Six domains carried 78% of citation slots in this study. Presence on the RTINGS-tier sources for your category is an intent-level asset that individual answer variance can't take away — and expecting to appear in every answer is unrealistic even for the same prompt asked twice (0.74 self-overlap).
+- **Judge any tracking tool — including ours — by its phrasing diversity, not its run frequency.** A mention rate from a handful of fixed prompts is a precise measurement of those prompts. The pulse design above is how we'd spend a fixed budget: a small panel for drift, a broad stratified sweep for truth, and the offset between them made explicit.
+
+## Data and reproducibility
+
+This study exists because **SparkToro (Rand Fishkin)** designed the original survey and shared their de-identified prompts — the rare dataset of *real people's own words* for a commercial intent. Read [their original study](https://sparktoro.com/blog); our prompts are theirs and are not ours to publish. Researchers who want them should contact SparkToro directly.
+
+- **Dataset:** [Prompt-phrasing consistency of ChatGPT recommendations (derived features)](/datasets/002-prompt-consistency/prompt-consistency-chatgpt.csv) (CC BY 4.0) — one row per run evaluated in this study: brands, cited domains, counts. No prompt text, no answer text, no grounding-query text. Column dictionary in the [datasheet](/datasets/002-prompt-consistency/prompt-consistency-chatgpt.datasheet.md).
+- **Pre-registered spec:** [frozen at `2ee335a`](https://github.com/orchestra-code/aeo-experiments/blob/2ee335a/experiments/002-prompt-consistency/spec.md), including all deviations logged during collection.
+- **Analysis code:** [experiments/002-prompt-consistency/](https://github.com/orchestra-code/aeo-experiments/tree/main/experiments/002-prompt-consistency) — pipeline stages `00`–`05` are the pre-registered analysis; `90`–`92` are the labelled exploratory extensions.
+- **Methodology:** how we design and report every study — [research.spyglasses.io/methodology](/methodology)
+
+## Changelog
+
+- 2026-07-23: published.
