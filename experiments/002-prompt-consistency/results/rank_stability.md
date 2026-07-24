@@ -20,3 +20,9 @@ computed post-publication in response to a reader question.
 - top-slot agreement from the empirical first-brand mix: 39.9%
 - most common opener: sony (59.9% of answers)
 
+## Robustness checks (reader-raised selection concerns)
+
+- Same prompt, repeated runs: excluded pairs with exactly 2 shared brands (n=238) are concordant 76.1% (chance 50%) — less ordered than included pairs, not chaotic; mean tau by shared-set size {3: 0.601, 4: 0.654, 5: 0.698, 6: 0.623, 7: 0.635, 8: 0.554}
+- Different prompts, same intent: excluded pairs with exactly 2 shared brands (n=7642) are concordant 59.4% (chance 50%) — less ordered than included pairs, not chaotic; mean tau by shared-set size {3: 0.271, 4: 0.417, 5: 0.473, 6: 0.416, 7: 0.471, 8: 0.0}
+- within-prompt zero-or-negative pairs (295) are spread across 63 prompts; prompts whose MEAN within-prompt tau <= 0: 2 of 136; per-prompt mean tau 10th pct +0.22, median +0.68
+

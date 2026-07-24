@@ -14,12 +14,12 @@ datasets:
     license: "CC BY 4.0"
     rows: 1144
 tags: ["chatgpt", "rank-stability", "brand-visibility", "consistency", "methodology", "follow-up"]
-draft: true
+draft: false
 ---
 
 ## Key findings
 
-- **Order, conditional on membership, is not chaos.** When the same prompt is re-run on different days, the brands both answers share appear in the same relative order at a mean Kendall's tau of **+0.64** [+0.62, +0.67] — and in 46% of pairs, in *exactly* the same order. Full reversals occur in under 1% of pairs.
+- **The instability is in the membership, not the ranking.** Between runs of the same prompt, roughly a quarter of the recommended-brand set turns over (set overlap 0.74, from the parent study) — but among the brands that survive both runs, relative order holds at a mean Kendall's tau of **+0.64** [+0.62, +0.67]. In 46% of pairs the shared brands come back in *exactly* the same order; full reversals occur in under 1%.
 - **Even across differently-worded prompts, order agreement stays well above zero**: mean tau **+0.36** [+0.31, +0.41], with 31% of pairs in perfect agreement.
 - **The top slot is the exception — rewording resets it to a coin flip.** Two runs of the same prompt open with the same brand 68% of the time; two differently-worded prompts agree only 40% of the time, which is *exactly* the chance rate implied by the market's first-mention mix (39.9%, driven by one brand opening 60% of answers).
 - **This is, to our knowledge, the first public coefficient on AI recommendation rank stability.** Prior evidence — including the SparkToro study ours extends — mixed platforms and single runs, where set churn and platform differences dominate whatever rank is doing.
@@ -28,7 +28,7 @@ draft: true
 
 After we published [our prompt-phrasing study](/articles/prompt-phrasing-consistency), a reader asked a question we couldn't answer with a number: when we said brand *rank* in AI answers isn't stable, was that a computed statistic or an eyeball read?
 
-It was an eyeball read — inherited, honestly, from the January 2026 [SparkToro study](https://sparktoro.com/blog/new-research-ais-are-highly-inconsistent-when-recommending-brands-or-products-marketers-should-take-care-when-tracking-ai-visibility/) our experiment replicated and extended. Their data showed ordering bouncing around freely. But their design ran each prompt once across seven different platforms, which means observed rank variation bundled together three things: genuine rank instability, brands entering and leaving the answer entirely (set churn), and platform-to-platform differences. Our replication data — one platform, 143 phrasings, each run daily for a week — can separate them. The reader was right that nobody had published the number, and right that this dataset could produce it. Everything below is a post-hoc analysis of the [frozen experiment 002 data](https://github.com/orchestra-code/aeo-experiments/tree/main/experiments/002-prompt-consistency), labeled exploratory throughout.
+It was an eyeball read, inherited from the January 2026 [SparkToro study](https://sparktoro.com/blog/new-research-ais-are-highly-inconsistent-when-recommending-brands-or-products-marketers-should-take-care-when-tracking-ai-visibility/) our experiment replicated and extended. Their data showed ordering bouncing around freely. But their design ran each prompt once across seven different platforms, which means observed rank variation bundled together three things: genuine rank instability, brands entering and leaving the answer entirely (set churn), and platform-to-platform differences. Our replication data — one platform, 143 phrasings, each run daily for a week — can separate them. The reader was right that nobody had published the number, and right that this dataset could produce it. Everything below is a post-hoc analysis of the [frozen experiment 002 data](https://github.com/orchestra-code/aeo-experiments/tree/main/experiments/002-prompt-consistency), labeled exploratory throughout.
 
 ## Methods in brief
 
@@ -80,6 +80,8 @@ So if your interest is "who gets mentioned first," phrasing genuinely scrambles 
 
 ## What this refines about the folklore
 
+The two statistics are designed to be complements: the parent study's set overlap measures whether a brand *survives* from one answer to the next, and tau measures order *among the survivors*. The same reader, on seeing the numbers, phrased the combination more sharply than we had: **the instability isn't in the ranking, it's in the membership.** Roughly a quarter of the set turns over between same-prompt runs; the ordering of what remains mostly holds. That's a more precise claim than either "rank is useless" or "rank is stable," and as far as any of us can tell, it hadn't been made with numbers attached before.
+
 The "AI rank is chaos" impression comes from real observations, but our decomposition suggests it was mostly measuring other things:
 
 1. **Set churn, not rank churn.** Brands entering and leaving the answer (our main study's headline effect) destroys apparent rankings without any reordering of what remains. Tau conditions that away and finds order beneath the churn.
@@ -88,11 +90,19 @@ The "AI rank is chaos" impression comes from real observations, but our decompos
 
 To be clear about the relationship to SparkToro's work: their conclusion was sound at their design's scope, and their study is the reason this dataset exists. This result doesn't overturn it; it decomposes it, on one platform, into a stable component (relative order among shared brands) and an unstable one (lead position across phrasings).
 
+## Two ways these numbers could flatter us — checked
+
+The same reader flagged two selection effects that could make tau look better than it is. Both are checkable, so we checked (the numbers are in the [analysis output](https://github.com/orchestra-code/aeo-experiments/blob/main/experiments/002-prompt-consistency/results/rank_stability.md)).
+
+**Are the excluded pairs the unstable ones?** Tau requires 3+ shared brands, which drops 18% of within-prompt pairs — plausibly the least stable, since low overlap and disorder could travel together. The largest excluded group, pairs sharing exactly two brands, permits one order comparison each: within-prompt, those pairs are concordant 76.1% of the time against a 50% coin — equivalent to tau ≈ +0.52. Between-prompt, 59.4% (tau ≈ +0.19). So the direction of the concern is right — the dropped tail *is* less ordered than the included pairs — but the size is small: the excluded pairs are diluted, not chaotic, and no headline changes if you fold them in. Within included pairs, mean tau is also nearly flat across shared-set sizes (+0.60 at three shared brands, +0.65 at four, +0.70 at five), so there's no gradient suggesting the tail below the cutoff falls off a cliff.
+
+**Is the 12% of zero-or-negative pairs "total chaos if you're one of them"?** Only if the chaos concentrated in particular prompts — and it doesn't. The 295 zero-or-negative within-prompt pairs are scattered across 63 different prompts; the five worst prompts account for just 54 of them. At the prompt level, exactly 2 of 136 prompts have a *mean* within-prompt tau at or below zero, and the 10th-percentile prompt still averages +0.22. Ordering stability is heterogeneous — the median prompt averages +0.68 and the bottom decile is mediocre rather than inverted — but essentially no prompt lives in the chaotic regime. A negative-tau pair is an event that happens *to* a stable prompt occasionally, not a property some prompts *have*.
+
 ## What we can and cannot claim
 
 - **Everything here is post-hoc and exploratory** — computed after publication, in response to a reader question, with no pre-registration and no multiplicity correction. The CIs are honest but the hypothesis was chosen after seeing the main results.
 - **First-mention order is a proxy for rank.** Answers are prose; "mentioned earlier" is not always "recommended more strongly," though in list-style answers they usually coincide. We did not parse explicit numbered rankings separately.
-- **Tau is conditional on shared membership (3+ brands).** It says nothing about the brands that churned out of the pair — that's the main study's territory. The two statistics are complements, not substitutes; use both.
+- **Tau is conditional on shared membership (3+ brands).** It says nothing about the brands that churned out of the pair — that's the main study's territory. The two statistics are complements, not substitutes; use both. The selection effects this creates are quantified in the section above: real, small, headline-preserving.
 - **Same scope as the parent study:** one intent (headphones as a travel gift), ChatGPT via DataForSEO's scraper (anonymous, free-tier, no personalization), en-US, one week, web search forced. The chance-baseline result depends on this market's concentration; a category with a less dominant opener would have a lower chance rate.
 - **"First public coefficient" is a claim about our awareness**, not a literature review. If someone has published a rank-stability coefficient for AI recommendations, we'd genuinely like to see it and will link it here.
 
@@ -111,4 +121,4 @@ To be clear about the relationship to SparkToro's work: their conclusion was sou
 
 ## Changelog
 
-- 2026-07-24: draft.
+- 2026-07-24: published, incorporating reader-raised robustness checks (excluded-pair concordance, per-prompt concentration) before release.

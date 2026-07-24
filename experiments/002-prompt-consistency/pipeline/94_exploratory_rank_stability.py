@@ -37,22 +37,28 @@ def pair_stats(la: list[str], lb: list[str]):
     rb = {b: i for i, b in enumerate(lb)}
     shared = [b for b in la if b in rb]
     top = (la[0] == lb[0]) if (la and lb) else None
+    conc2 = None
+    if len(shared) == 2:
+        # excluded from tau, but their single order comparison is checkable:
+        # concordant (same relative order in both answers) vs chance 50%
+        ra = {b: i for i, b in enumerate(la)}
+        conc2 = (ra[shared[0]] < ra[shared[1]]) == (rb[shared[0]] < rb[shared[1]])
     if len(shared) < MIN_SHARED:
-        return None, len(shared), top
+        return None, len(shared), top, conc2
     t, _ = kendalltau(list(range(len(shared))), [rb[b] for b in shared])
-    return t, len(shared), top
+    return t, len(shared), top, conc2
 
 
 def build_pairs(hp: pd.DataFrame) -> dict[str, pd.DataFrame]:
+    cols = ["a", "b", "tau", "n_shared", "top", "conc2"]
     out = {}
     rows = []
     for item, sub in hp.groupby("item_id"):
         ls = list(sub["blist"])
         for i in range(len(ls)):
             for j in range(i + 1, len(ls)):
-                t, ns, top = pair_stats(ls[i], ls[j])
-                rows.append((item, item, t, ns, top))
-    out["within"] = pd.DataFrame(rows, columns=["a", "b", "tau", "n_shared", "top"])
+                rows.append((item, item, *pair_stats(ls[i], ls[j])))
+    out["within"] = pd.DataFrame(rows, columns=cols)
 
     rows = []
     for _, sub in hp.groupby("wave"):
@@ -62,9 +68,8 @@ def build_pairs(hp: pd.DataFrame) -> dict[str, pd.DataFrame]:
         for i in range(len(sub)):
             for j in range(i + 1, len(sub)):
                 if ids[i] != ids[j]:
-                    t, ns, top = pair_stats(ls[i], ls[j])
-                    rows.append((ids[i], ids[j], t, ns, top))
-    out["between"] = pd.DataFrame(rows, columns=["a", "b", "tau", "n_shared", "top"])
+                    rows.append((ids[i], ids[j], *pair_stats(ls[i], ls[j])))
+    out["between"] = pd.DataFrame(rows, columns=cols)
     return out
 
 
@@ -126,6 +131,33 @@ def main() -> None:
         "## Chance baseline",
         f"- top-slot agreement from the empirical first-brand mix: {chance_top:.1%}",
         f"- most common opener: {p_first.index[0]} ({p_first.iloc[0]:.1%} of answers)",
+        "",
+        "## Robustness checks (reader-raised selection concerns)",
+        "",
+    ]
+    # (a) The excluded 2-shared pairs: is the dropped tail chaotic?
+    for cond, dfp in pairs.items():
+        two = dfp[dfp["n_shared"] == 2]
+        by_ns = (
+            dfp.dropna(subset=["tau"]).groupby("n_shared")["tau"]
+            .mean().round(3).to_dict()
+        )
+        lines += [
+            f"- {COND_LABELS[cond]}: excluded pairs with exactly 2 shared brands"
+            f" (n={len(two)}) are concordant {two['conc2'].mean():.1%}"
+            " (chance 50%) — less ordered than included pairs, not chaotic;"
+            f" mean tau by shared-set size {by_ns}",
+        ]
+    # (b) Is the zero-or-negative within-prompt mass concentrated?
+    d = pairs["within"].dropna(subset=["tau"])
+    per = d.groupby("a")["tau"].mean()
+    neg_pairs = d[d["tau"] <= 0]
+    lines += [
+        f"- within-prompt zero-or-negative pairs ({len(neg_pairs)}) are spread"
+        f" across {neg_pairs['a'].nunique()} prompts; prompts whose MEAN"
+        f" within-prompt tau <= 0: {(per <= 0).sum()} of {len(per)};"
+        f" per-prompt mean tau 10th pct {per.quantile(0.10):+.2f},"
+        f" median {per.median():+.2f}",
         "",
     ]
     RESULTS.mkdir(parents=True, exist_ok=True)
