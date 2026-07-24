@@ -56,7 +56,7 @@ Re-run the same prompt on different days and the shared brands come back in the 
 
 Across differently-worded prompts the agreement drops but doesn't collapse: mean tau +0.358 [+0.311, +0.410], with 31.2% of pairs still in perfect agreement. Rewording the question costs about as much ordering agreement as it costs set membership — but in neither case does it approach randomness.
 
-The mechanism is no mystery in hindsight: the order of first mention tracks the same popularity gradient that drives membership. Sony doesn't just appear in 90% of answers; it *opens* 60% of them. Order inherits stability from the market structure the answers reflect.
+The mechanism is no mystery in hindsight: the order of first mention tracks the same popularity gradient that drives membership. Sony doesn't just appear in 90% of answers; it *opens* 60% of them. Order inherits stability from the same skewed mention frequencies that make the leaderboard stable.
 
 ## Result 2: the top slot is the genuinely unstable part
 
@@ -74,7 +74,7 @@ The mechanism is no mystery in hindsight: the order of first mention tracks the 
   </figcaption>
 </figure>
 
-Whether two answers *open* with the same brand is a different story, and it's where the instability intuition survives. The same prompt re-run keeps its opener 68.3% of the time [65.4%, 71.1%] — far above chance. But two differently-worded prompts agree on the opener 39.7% of the time [36.0%, 43.7%], and the chance baseline computed from the empirical first-brand mix is 39.9%. The match is almost embarrassing: with respect to the lead position, rewording the prompt is statistically indistinguishable from drawing an opener at random from the market-share-weighted deck.
+Whether two answers *open* with the same brand is a different story, and it's where the instability intuition survives. The same prompt re-run keeps its opener 68.3% of the time [65.4%, 71.1%] — far above chance. But two differently-worded prompts agree on the opener 39.7% of the time [36.0%, 43.7%], and the chance baseline computed from the empirical first-brand mix is 39.9%. The match is almost embarrassing: with respect to the lead position, rewording the prompt is statistically indistinguishable from drawing an opener at random in proportion to how often each brand opens answers overall. (Answer share within this study, to be clear — we measured nothing about real-world market share, however correlated the two may be.)
 
 So if your interest is "who gets mentioned first," phrasing genuinely scrambles it. If your interest is "does the ordering of the list mean anything," it does — and it means the same thing across phrasings much more often than chance.
 
@@ -108,7 +108,7 @@ The same reader flagged two selection effects that could make tau look better th
 
 ## What this means if you track a brand
 
-- **Read ordered AI answers as meaningful, but read the top slot as weather.** The middle of the ordering carries real signal about how the model sorts the market. The lead position, across the phrasings your customers actually use, is close to a market-share-weighted coin flip.
+- **Read ordered AI answers as meaningful, but read the top slot as weather.** The middle of the ordering carries real signal about how the model sorts the market. The lead position, across the phrasings your customers actually use, is close to a coin flip weighted by each brand's overall share of first mentions.
 - **"We dropped from #1 to #3" is usually not news.** Unless it's the same prompt, same platform, and it persists across runs, a lead-slot change is consistent with pure phrasing noise. A brand *leaving the set* is news — that's the stable layer changing.
 - **Rank-tracking dashboards inherit both properties.** Averaged over a diverse panel, mean position is informative; any single prompt's #1 is not. This is the same variety-over-repetition logic as the parent study's pulse model, applied one level down.
 
