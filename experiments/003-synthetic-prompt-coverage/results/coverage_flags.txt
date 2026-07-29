@@ -1,0 +1,55 @@
+# Experiment 003 — H4 phrasing coverage (exploratory)
+
+## Flag prevalence per panel (share of prompts)
+                    hum  spy_a  spy_b   neu
+f_budget_specific  0.16   0.00   0.03  0.05
+f_value_language   0.03   0.05   0.05  0.02
+f_recipient_named  0.15   0.00   0.00  0.72
+f_age_mentioned    0.10   0.00   0.00  0.00
+f_noise_cancel     0.20   0.24   0.14  0.08
+f_form_factor      0.11   0.30   0.78  0.02
+f_wireless         0.11   0.35   0.38  0.02
+f_battery          0.12   0.14   0.11  0.10
+f_comfort          0.12   0.08   0.19  0.12
+f_output_count     0.09   0.00   0.00  0.00
+f_output_format    0.04   0.00   0.00  0.00
+f_reviews_stars    0.15   0.00   0.05  0.00
+f_usage_movies     0.31   0.00   0.00  0.00
+f_usage_music      0.71   0.14   0.05  0.02
+f_travel_context   0.81   0.16   0.22  0.75
+
+## Prevalence delta vs the human panel (synthetic - human)
+                   spy_a  spy_b   neu
+f_budget_specific  -0.16  -0.13 -0.11
+f_value_language    0.03   0.03 -0.00
+f_recipient_named  -0.15  -0.15  0.57
+f_age_mentioned    -0.10  -0.10 -0.10
+f_noise_cancel      0.04  -0.07 -0.13
+f_form_factor       0.19   0.67 -0.09
+f_wireless          0.24   0.27 -0.09
+f_battery           0.02  -0.01 -0.02
+f_comfort          -0.04   0.07  0.01
+f_output_count     -0.09  -0.09 -0.09
+f_output_format    -0.04  -0.04 -0.04
+f_reviews_stars    -0.15  -0.09 -0.15
+f_usage_movies     -0.31  -0.31 -0.31
+f_usage_music      -0.58  -0.66 -0.69
+f_travel_context   -0.65  -0.59 -0.06
+
+## Human phrasing behaviors a panel NEVER emits
+spy_a: ['f_budget_specific', 'f_recipient_named', 'f_age_mentioned', 'f_output_count', 'f_output_format', 'f_reviews_stars', 'f_usage_movies']
+spy_b: ['f_recipient_named', 'f_age_mentioned', 'f_output_count', 'f_output_format', 'f_usage_movies']
+neu: ['f_age_mentioned', 'f_output_count', 'f_output_format', 'f_reviews_stars', 'f_usage_movies']
+
+## Prompt length (words)
+       min  median  max   std
+arm                          
+hum      3    30.0  274  38.1
+spy_a    9    13.0   19   3.4
+spy_b    7    11.0   18   3.4
+neu      7    16.0   24   3.4
+
+## Profile coverage: share of distinct human flag-profiles reproduced
+spy_a: 0.08 (18 distinct profiles vs 79 human)
+spy_b: 0.06 (21 distinct profiles vs 79 human)
+neu: 0.05 (18 distinct profiles vs 79 human)

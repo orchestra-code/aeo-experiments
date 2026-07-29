@@ -1,0 +1,73 @@
+# Experiment 003 — model results (SYNTHETIC)
+SESOI=0.1 (absolute Jaccard) / 0.05 (share MAD), alpha=0.1, n_boot=2000
+
+H_pos (gate): between:hum minus cross-intent domain Jaccard = 0.351 [0.349, 0.354], perm p = 0.0002 -> PASS
+H_pla (placebo): parity split = 0.001 [-0.003, 0.005] -> NULL
+H1_spy_a (brands): cross:hum|spy_a - between:hum = 0.008 [0.002, 0.014] (n_pairs 77220, NaN 0) -> NEGLIGIBLE
+H1_spy_a (domains): cross:hum|spy_a - between:hum = -0.000 [-0.004, 0.003] (n_pairs 77220, NaN 0) -> NULL
+H1_spy_a (grounding_tokens): cross:hum|spy_a - between:hum = 0.011 [0.005, 0.016] (n_pairs 77220, NaN 0) -> NEGLIGIBLE
+H1_spy_b (brands): cross:hum|spy_b - between:hum = 0.003 [-0.004, 0.011] (n_pairs 77220, NaN 0) -> NULL
+H1_spy_b (domains): cross:hum|spy_b - between:hum = -0.001 [-0.005, 0.002] (n_pairs 77220, NaN 0) -> NULL
+H1_spy_b (grounding_tokens): cross:hum|spy_b - between:hum = 0.007 [-0.001, 0.015] (n_pairs 77220, NaN 0) -> NULL
+H1_neu (brands): cross:hum|neu - between:hum = -0.002 [-0.009, 0.005] (n_pairs 79365, NaN 0) -> NULL
+H1_neu (domains): cross:hum|neu - between:hum = -0.002 [-0.005, 0.002] (n_pairs 79365, NaN 0) -> NULL
+H1_neu (grounding_tokens): cross:hum|neu - between:hum = -0.000 [-0.009, 0.007] (n_pairs 79365, NaN 0) -> NULL
+
+H2 basket: 26 brands with human-panel share >= 5%
+H2 (spy_a): mean |share diff| = 0.054 [0.060, 0.094] (one-sided band 0.05), rank tau = 0.624 -> REAL
+H2 (spy_b): mean |share diff| = 0.063 [0.067, 0.099] (one-sided band 0.05), rank tau = 0.528 -> REAL
+H2 (neu): mean |share diff| = 0.047 [0.053, 0.083] (one-sided band 0.05), rank tau = 0.569 -> REAL
+H3 (own_vs_hum:spy_a): +0.252 [+0.127, +0.374] -> anchor bias detected
+H3 (own_vs_hum:spy_b): +0.366 [+0.242, +0.481] -> anchor bias detected
+H3 (did): +0.730 [+0.508, +0.951] -> anchor bias detected
+
+level (brands, between:hum): 0.129 [0.123, 0.135]
+level (brands, within:hum): 0.733 [0.719, 0.748]
+level (brands, between:spy_a): 0.151 [0.135, 0.169]
+level (brands, cross:hum|spy_a): 0.136 [0.130, 0.143]
+level (brands, between:spy_b): 0.152 [0.136, 0.170]
+level (brands, cross:hum|spy_b): 0.132 [0.126, 0.139]
+level (brands, between:neu): 0.125 [0.114, 0.136]
+level (brands, cross:hum|neu): 0.127 [0.121, 0.133]
+level (domains, between:hum): 0.351 [0.349, 0.353]
+level (domains, within:hum): 0.350 [0.343, 0.356]
+level (domains, between:spy_a): 0.349 [0.342, 0.356]
+level (domains, cross:hum|spy_a): 0.351 [0.348, 0.354]
+level (domains, between:spy_b): 0.346 [0.339, 0.354]
+level (domains, cross:hum|spy_b): 0.350 [0.348, 0.353]
+level (domains, between:neu): 0.351 [0.344, 0.360]
+level (domains, cross:hum|neu): 0.350 [0.347, 0.352]
+level (urls, between:hum): 0.351 [0.349, 0.353]
+level (urls, within:hum): 0.350 [0.343, 0.356]
+level (urls, between:spy_a): 0.349 [0.342, 0.356]
+level (urls, cross:hum|spy_a): 0.351 [0.348, 0.354]
+level (urls, between:spy_b): 0.346 [0.339, 0.354]
+level (urls, cross:hum|spy_b): 0.350 [0.348, 0.353]
+level (urls, between:neu): 0.351 [0.344, 0.360]
+level (urls, cross:hum|neu): 0.350 [0.347, 0.352]
+level (grounding_tokens, between:hum): 0.584 [0.576, 0.591]
+level (grounding_tokens, within:hum): 0.886 [0.872, 0.901]
+level (grounding_tokens, between:spy_a): 0.611 [0.596, 0.628]
+level (grounding_tokens, cross:hum|spy_a): 0.595 [0.588, 0.601]
+level (grounding_tokens, between:spy_b): 0.601 [0.583, 0.621]
+level (grounding_tokens, cross:hum|spy_b): 0.591 [0.582, 0.600]
+level (grounding_tokens, between:neu): 0.577 [0.563, 0.592]
+level (grounding_tokens, cross:hum|neu): 0.583 [0.575, 0.591]
+
+-- robustness --
+R1_rbo_spy_a (brands_rbo): cross:hum|spy_a - between:hum = 0.011 [0.004, 0.017] (n_pairs 77220, NaN 0) -> NEGLIGIBLE
+R1_rbo_spy_b (brands_rbo): cross:hum|spy_b - between:hum = 0.006 [-0.003, 0.015] (n_pairs 77220, NaN 0) -> NULL
+R1_rbo_neu (brands_rbo): cross:hum|neu - between:hum = 0.001 [-0.006, 0.008] (n_pairs 79365, NaN 0) -> NULL
+R2_no_w1_spy_a (brands): cross:hum|spy_a - between:hum = 0.008 [0.002, 0.014] (n_pairs 61776, NaN 0) -> NEGLIGIBLE
+R2_no_w1_spy_b (brands): cross:hum|spy_b - between:hum = 0.004 [-0.004, 0.011] (n_pairs 61776, NaN 0) -> NULL
+R2_no_w1_neu (brands): cross:hum|neu - between:hum = -0.002 [-0.010, 0.004] (n_pairs 63492, NaN 0) -> NULL
+R3_dedup_spy_a (brands): cross:hum|spy_a - between:hum = 0.008 [0.001, 0.014] (n_pairs 72795, NaN 0) -> NEGLIGIBLE
+R3_dedup_spy_b (brands): cross:hum|spy_b - between:hum = 0.003 [-0.004, 0.010] (n_pairs 72795, NaN 0) -> NULL
+R3_dedup_neu (brands): cross:hum|neu - between:hum = -0.002 [-0.009, 0.005] (n_pairs 74865, NaN 0) -> NULL
+R4_nonempty_grounding_spy_a (grounding_tokens): cross:hum|spy_a - between:hum = 0.011 [0.005, 0.016] (n_pairs 77220, NaN 0) -> NEGLIGIBLE
+R4_nonempty_grounding_spy_b (grounding_tokens): cross:hum|spy_b - between:hum = 0.007 [-0.001, 0.015] (n_pairs 77220, NaN 0) -> NULL
+R4_nonempty_grounding_neu (grounding_tokens): cross:hum|neu - between:hum = -0.000 [-0.009, 0.007] (n_pairs 79365, NaN 0) -> NULL
+R5_within_repeat_spy_a (brands): within:spy_a - within:hum = 0.015 [-0.018, 0.044] (n_pairs 1800, NaN 0) -> NULL
+R5_within_repeat_spy_b (brands): within:spy_b - within:hum = 0.013 [-0.019, 0.046] (n_pairs 1800, NaN 0) -> NULL
+R5_within_repeat_neu (brands): within:neu - within:hum = -0.017 [-0.045, 0.010] (n_pairs 1830, NaN 0) -> NULL
+R6: single model across all waves — no subgroup refit needed

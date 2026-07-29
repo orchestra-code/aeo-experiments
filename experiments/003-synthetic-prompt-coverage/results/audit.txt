@@ -1,0 +1,122 @@
+# Experiment 003 — data-quality audits
+
+## Audit A — collection completeness and degenerate responses
+
+(no ledger — synthetic run)
+
+Degenerate-response rates (mean per arm/wave):
+             empty_reply  no_brands  no_fanout  no_sources  had_web_search
+arm    wave                                                               
+coffee 1             0.0        0.0        0.0         0.0             1.0
+hum    1             0.0        0.0        0.0         0.0             1.0
+       2             0.0        0.0        0.0         0.0             1.0
+       3             0.0        0.0        0.0         0.0             1.0
+       4             0.0        0.0        0.0         0.0             1.0
+       5             0.0        0.0        0.0         0.0             1.0
+neu    1             0.0        0.0        0.0         0.0             1.0
+       2             0.0        0.0        0.0         0.0             1.0
+       3             0.0        0.0        0.0         0.0             1.0
+       4             0.0        0.0        0.0         0.0             1.0
+       5             0.0        0.0        0.0         0.0             1.0
+spy_a  1             0.0        0.0        0.0         0.0             1.0
+       2             0.0        0.0        0.0         0.0             1.0
+       3             0.0        0.0        0.0         0.0             1.0
+       4             0.0        0.0        0.0         0.0             1.0
+       5             0.0        0.0        0.0         0.0             1.0
+spy_b  1             0.0        0.0        0.0         0.0             1.0
+       2             0.0        0.0        0.0         0.0             1.0
+       3             0.0        0.0        0.0         0.0             1.0
+       4             0.0        0.0        0.0         0.0             1.0
+       5             0.0        0.0        0.0         0.0             1.0
+
+Empty fan-out rate per arm: {'coffee': 0.0, 'hum': 0.0, 'neu': 0.0, 'spy_a': 0.0, 'spy_b': 0.0} (spec §6: if >0.30 for any headphone arm, that arm's grounding claims are INCONCLUSIVE territory)
+
+## Audit B — outcome-label meaning
+
+- 'brand recommended' = canonical brand whose alias matches the cleaned answer
+  markdown (URLs stripped, word-boundary, longest-alias-first) — brands.py::extract_brands
+  (verbatim copy of 002's post-curation extraction).
+- 'domain cited' = registered domain of a normalized URL in result.sources[]
+  (search_results[] are SERP extras and are EXCLUDED) — 01_features.py.
+- 'grounding tokens' = stopword-filtered token union over result.fan_out_queries
+  — aeo_research.overlap.token_set.
+- 'panel share' (H2/H3) = fraction of an arm's responses whose brand set
+  contains the brand — 03_model.py::brand_share.
+
+## Audit C — independence and clustering
+
+{'coffee': 40, 'hum': 143, 'neu': 40, 'spy_a': 37, 'spy_b': 37} prompts; duplicate-text groups: {'coffee': 1, 'hum': 5} (['c016', 'h011', 'h016', 'h044', 'h101', 'h111'])
+Note: h016/c016 is the same respondent's refusal text pasted into both
+survey questions — a valid human behavior, kept; R3 refits without dups.
+Pair counts by condition (each response participates in many pairs — all
+inference is prompt-level cluster bootstrap, never pair-level SEs):
+condition
+between:hum           50765
+cross:hum|neu         28600
+cross:hum|spy_a       26455
+cross:hum|spy_b       26455
+cross:neu|spy_a        7400
+cross:neu|spy_b        7400
+cross:spy_a|spy_b      6845
+cross:coffee|hum       5720
+between:neu            3900
+between:spy_a          3330
+between:spy_b          3330
+cross:coffee|neu       1600
+cross:coffee|spy_a     1480
+cross:coffee|spy_b     1480
+within:hum             1430
+between:coffee          780
+within:neu              400
+within:spy_a            370
+within:spy_b            370
+
+## Audit D — extraction validity and drift
+
+Model version by arm/wave:
+arm     wave  model          
+coffee  1     gpt-5-synthetic     40
+hum     1     gpt-5-synthetic    143
+        2     gpt-5-synthetic    143
+        3     gpt-5-synthetic    143
+        4     gpt-5-synthetic    143
+        5     gpt-5-synthetic    143
+neu     1     gpt-5-synthetic     40
+        2     gpt-5-synthetic     40
+        3     gpt-5-synthetic     40
+        4     gpt-5-synthetic     40
+        5     gpt-5-synthetic     40
+spy_a   1     gpt-5-synthetic     37
+        2     gpt-5-synthetic     37
+        3     gpt-5-synthetic     37
+        4     gpt-5-synthetic     37
+        5     gpt-5-synthetic     37
+spy_b   1     gpt-5-synthetic     37
+        2     gpt-5-synthetic     37
+        3     gpt-5-synthetic     37
+        4     gpt-5-synthetic     37
+        5     gpt-5-synthetic     37
+
+Share of responses mentioning each brand, per arm (top 12 by hum share):
+                    hum    neu  spy_a  spy_b
+sennheiser        0.333  0.295  0.200  0.189
+apple             0.319  0.245  0.432  0.319
+bose              0.310  0.250  0.562  0.216
+sony              0.292  0.220  0.341  0.303
+anker             0.277  0.210  0.259  0.643
+audio-technica    0.274  0.310  0.346  0.216
+jabra             0.243  0.190  0.205  0.222
+1more             0.238  0.230  0.141  0.076
+bowers & wilkins  0.220  0.245  0.178  0.259
+bang & olufsen    0.197  0.245  0.205  0.173
+jbl               0.193  0.280  0.114  0.254
+beyerdynamic      0.189  0.185  0.189  0.168
+
+002 anchor (gpt-5-5, July 2026) for the hum arm — drift is reportable,
+not a failure: {'sony': 0.897, 'bose': 0.82, 'sennheiser': 0.802, 'anker': 0.683, 'apple': 0.448, 'jbl': 0.167}
+
+Entity cross-check: no DataForSEO brand entities in this frame.
+
+Spot-check sample of 30 responses written to /Users/jcw/projects/aeo-experiments/experiments/003-synthetic-prompt-coverage/data/interim/spotcheck_sample.md (gitignored).
+Manually list recommended brands per response; require precision >= 0.95 and
+recall >= 0.90 vs the extractor, else refine the lexicon (log in Deviations).

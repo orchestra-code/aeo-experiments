@@ -172,6 +172,51 @@ def condition_pairs(
     return pairs
 
 
+def arm_condition_pairs(
+    df: pd.DataFrame,
+    *,
+    arm_col: str = "arm",
+    prompt_col: str = "item_id",
+    wave_col: str = "wave",
+) -> pd.DataFrame:
+    """Enumerate response pairs for multi-arm panel designs (experiment 003+).
+
+    Generalizes :func:`condition_pairs` from the two-intent case to any number
+    of panels ("arms" — e.g. human prompts vs several synthetic generators):
+
+    - ``within:<arm>``: same prompt, same arm, different waves.
+    - ``between:<arm>``: different prompts, same arm, same wave (same-wave
+      keeps day effects out of the panel contrast).
+    - ``cross:<a>|<b>``: different arms (labels sorted), same wave.
+
+    Returns the same shape as :func:`condition_pairs`: ``i, j`` positional
+    indices, ``condition``, ``cluster_i, cluster_j`` (prompt ids). ``df`` must
+    have a unique RangeIndex. All inference downstream stays prompt-level
+    (:func:`cluster_boot`); this function only labels pairs.
+    """
+    idx = np.arange(len(df))
+    prompts = df[prompt_col].to_numpy()
+    waves = df[wave_col].to_numpy()
+    arms = df[arm_col].to_numpy()
+
+    out: list[tuple[int, int, str]] = []
+    for i, j in itertools.combinations(idx, 2):
+        same_wave = waves[i] == waves[j]
+        if arms[i] == arms[j]:
+            if prompts[i] == prompts[j] and not same_wave:
+                out.append((i, j, f"within:{arms[i]}"))
+            elif prompts[i] != prompts[j] and same_wave:
+                out.append((i, j, f"between:{arms[i]}"))
+        elif same_wave:
+            a, b = sorted((str(arms[i]), str(arms[j])))
+            out.append((i, j, f"cross:{a}|{b}"))
+
+    pairs = pd.DataFrame(out, columns=["i", "j", "condition"])
+    pairs["cluster_i"] = prompts[pairs["i"]]
+    pairs["cluster_j"] = prompts[pairs["j"]]
+    return pairs
+
+
 def pair_values(
     pairs: pd.DataFrame, values: list, metric: Callable
 ) -> pd.Series:

@@ -19,6 +19,7 @@ from aeo_research.dataforseo import (
 )
 from aeo_research.overlap import (
     BootResult,
+    arm_condition_pairs,
     cluster_boot,
     condition_pairs,
     jaccard,
@@ -81,6 +82,7 @@ __all__ = [
     "Verdict",
     "cluster_boot",
     "collinearity_report",
+    "arm_condition_pairs",
     "condition_pairs",
     "cover_crop",
     "decile_plot",

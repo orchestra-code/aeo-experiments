@@ -5,6 +5,7 @@ import pandas as pd
 import pytest
 
 from aeo_research.overlap import (
+    arm_condition_pairs,
     cluster_boot,
     condition_pairs,
     jaccard,
@@ -75,6 +76,84 @@ def test_condition_pairs_counts():
     assert counts == {"within_prompt": 4, "between_prompt": 12, "cross_intent": 12}
     within = pairs[pairs["condition"] == "within_prompt"]
     assert (within["cluster_i"] == within["cluster_j"]).all()
+
+
+def make_arm_responses(arms: dict[str, tuple[int, int]]) -> pd.DataFrame:
+    """arms: name -> (n_prompts, n_waves); item ids prefixed by arm initial."""
+    rows = []
+    for arm, (n_prompts, waves) in arms.items():
+        for p in range(n_prompts):
+            for w in range(1, waves + 1):
+                rows.append(
+                    {"item_id": f"{arm[0]}{p:03d}", "arm": arm, "wave": w}
+                )
+    return pd.DataFrame(rows)
+
+
+def test_arm_condition_pairs_counts():
+    df = make_arm_responses({"hum": (4, 2), "syn": (3, 2), "coffee": (2, 1)})
+    pairs = arm_condition_pairs(df)
+    counts = pairs["condition"].value_counts().to_dict()
+    assert counts == {
+        # within: hum 4xC(2,2)=4, syn 3x1=3; between: hum 2 waves x C(4,2)=12,
+        # syn 2 x C(3,2)=6, coffee 1 x C(2,2)=1; cross same-wave products.
+        "within:hum": 4,
+        "within:syn": 3,
+        "between:hum": 12,
+        "between:syn": 6,
+        "between:coffee": 1,
+        "cross:hum|syn": 24,   # 4x3 prompts x 2 waves
+        "cross:coffee|hum": 8,  # 2x4, wave 1 only
+        "cross:coffee|syn": 6,  # 2x3, wave 1 only
+    }
+    within = pairs[pairs["condition"].str.startswith("within:")]
+    assert (within["cluster_i"] == within["cluster_j"]).all()
+
+
+def test_arm_condition_pairs_labels_are_order_invariant():
+    df = make_arm_responses({"zeta": (2, 1), "alpha": (2, 1)})
+    pairs = arm_condition_pairs(df)
+    crosses = pairs[pairs["condition"].str.startswith("cross:")]["condition"].unique()
+    assert list(crosses) == ["cross:alpha|zeta"]
+
+
+def synth_arm_pairs(delta: float, n_prompts: int = 60, noise: float = 0.1,
+                    base: float = 0.5) -> pd.DataFrame:
+    """Cross-arm pairs vs between-arm pairs, mirroring synth_pairs: a true
+    shift of ``delta`` in cross-panel overlap relative to the within-panel
+    between-prompt baseline."""
+    rng = np.random.default_rng(7)
+    rows = []
+    for p in range(n_prompts):
+        for q in range(p + 1, min(p + 6, n_prompts)):
+            rows.append(
+                {"condition": "between:hum", "cluster_i": f"h{p}", "cluster_j": f"h{q}",
+                 "value": np.clip(base + rng.normal(0, noise), 0, 1)}
+            )
+        for q in range(min(p + 3, n_prompts)):
+            rows.append(
+                {"condition": "cross:hum|syn", "cluster_i": f"h{p}", "cluster_j": f"s{q}",
+                 "value": np.clip(base + delta + rng.normal(0, noise), 0, 1)}
+            )
+    return pd.DataFrame(rows)
+
+
+def test_arm_power_sim_null_when_panels_exchangeable():
+    res = cluster_boot(
+        synth_arm_pairs(0.0), contrast=("cross:hum|syn", "between:hum"),
+        sesoi=0.10, n_boot=500,
+    )
+    assert res.verdict in (Verdict.NULL, Verdict.NEGLIGIBLE)
+    assert abs(res.estimate) < 0.05
+
+
+def test_arm_power_sim_real_when_panel_differs():
+    res = cluster_boot(
+        synth_arm_pairs(-0.30), contrast=("cross:hum|syn", "between:hum"),
+        sesoi=0.10, n_boot=500,
+    )
+    assert res.verdict == Verdict.REAL
+    assert res.estimate == pytest.approx(-0.30, abs=0.05)
 
 
 def test_pair_values_applies_metric():
