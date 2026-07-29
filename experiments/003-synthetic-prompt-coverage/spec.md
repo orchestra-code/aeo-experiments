@@ -344,4 +344,19 @@ cluster count (37–40 synthetic prompts), which the INCONCLUSIVE row guards.
 
 ## Deviations from the frozen spec
 
-(none yet — spec not frozen)
+- **2026-07-29 (wave 1):** wave 1 submitted and collected same day — 297/297
+  tasks (257 headphone-panel + 40 coffee), zero failures, $0.71.
+- **2026-07-29 (wave 1):** the H_pos gate was run EARLY, on wave-1 data only
+  (Δ = 0.296 [0.257, 0.335], perm p = 0.0002, PASS — vs 002's 0.289), to
+  avoid spending four more collection days on a broken pipeline; 002
+  precedent. Extra discipline required here because, unlike 002, H1 *is*
+  computable from wave-1 alone (cross-arm pairs are same-wave): a gate-only
+  script (`results/early_gate_wave1.txt`) imported the frozen `h_pos_gate`
+  and computed/printed nothing else. No other hypothesis was evaluated. The
+  gate re-runs in its pre-registered position after wave 5.
+- **2026-07-29 (wave 1):** lexicon candidate mining per §8 step 6 ran over
+  wave-1 markdown (aggregate mention counts only, no per-arm shares): no
+  unmatched brand candidates at the ≥5-mention threshold in either intent —
+  every hit is a formatting artifact (Pros/Cons, star glyphs, prices). The
+  002-seeded lexicon enters analysis UNCHANGED; the Audit-D 30-response
+  manual spot-check still runs at analysis time.

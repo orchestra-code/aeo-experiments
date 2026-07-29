@@ -1,0 +1,2 @@
+# Early H_pos gate on wave-1 data only (see spec Deviations)
+H_pos (gate): between:hum minus cross-intent domain Jaccard = 0.296 [0.257, 0.335], perm p = 0.0002 -> PASS
