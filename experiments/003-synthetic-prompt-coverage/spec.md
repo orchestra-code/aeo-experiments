@@ -1,7 +1,7 @@
 # Synthetic prompt panels don't see the market human prompts see — study spec
 
-**Status:** draft (awaiting review — freeze BEFORE wave-1 submission)
-**Frozen commit:** <record after review, before wave 1>
+**Status:** frozen (2026-07-29, before wave-1 submission)
+**Frozen commit:** 8ab4519 (spec + pipeline + harness + toolkit, this repo)
 **Experiment slug:** `003-synthetic-prompt-coverage`
 
 > Freeze rule: everything in §4 (hypotheses) and §5 (model + decision rule) is
@@ -314,7 +314,7 @@ cluster count (37–40 synthetic prompts), which the INCONCLUSIVE row guards.
 3. 90_coverage_flags dry look allowed pre-freeze (prompt-side only)
 4. Pipeline dry run: 01 --synthetic → 02 → 03 (gate must PASS, planted H3
    must be detected) → 04
-5. **Review + freeze spec (record commit hash above)**, then wave 1:
+5. Review + freeze spec (DONE 2026-07-29, hash above), then wave 1:
    `submit --intent headphones --wave 1` + `submit --intent coffee --wave 1`
    (tags `aeo-exp003-w1`), collect same day
 6. Re-curate lexicon from wave-1 mining; Audit D spot-check
