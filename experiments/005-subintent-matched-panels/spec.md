@@ -1,10 +1,7 @@
 # Can a sub-intent-matched synthetic panel mirror human prompts? — study spec
 
-**Status: DRAFT — freeze pending review.** Panels are generated and frozen
-as data; no response data has been collected. On approval, this header
-changes to frozen + commit hash, `data/raw/FROZEN` is written (the nightly
-runner refuses to submit without it), and wave 1 submits on the next
-launchd firing.
+**Status:** frozen (2026-08-02, approved by Jim before any collection)
+**Frozen commit:** recorded in the follow-up commit per house convention
 **Experiment slug:** `005-subintent-matched-panels`
 
 > Freeze rule: everything in §4 (hypotheses) and §5 (model + decision rule)
