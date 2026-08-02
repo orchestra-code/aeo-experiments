@@ -360,3 +360,10 @@ cluster count (37–40 synthetic prompts), which the INCONCLUSIVE row guards.
   every hit is a formatting artifact (Pros/Cons, star glyphs, prices). The
   002-seeded lexicon enters analysis UNCHANGED; the Audit-D 30-response
   manual spot-check still runs at analysis time.
+- **2026-08-02 (analysis):** no deviations. Waves 2–5 collected on schedule
+  (2026-07-30 → 2026-08-02, 257/257 each, launchd job self-removed after
+  wave 5). Pipeline 01→05 + 90 run as pre-registered; the gate re-ran in
+  its pre-registered position and PASSED (0.295 [0.262, 0.327],
+  perm p = 0.0002, consistent with the early wave-1 gate). Lexicon
+  unchanged. Results in `results/summary.md`; Audit-D manual spot-check
+  and release-checklist sign-off pending.

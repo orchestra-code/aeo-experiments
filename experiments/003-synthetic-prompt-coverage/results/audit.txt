@@ -2,34 +2,56 @@
 
 ## Audit A — collection completeness and degenerate responses
 
-(no ledger — synthetic run)
+Ledger status counts:
+arm     wave  status   
+coffee  1     collected     40
+hum     1     collected    143
+        2     collected    143
+        3     collected    143
+        4     collected    143
+        5     collected    143
+neu     1     collected     40
+        2     collected     40
+        3     collected     40
+        4     collected     40
+        5     collected     40
+spy_a   1     collected     37
+        2     collected     37
+        3     collected     37
+        4     collected     37
+        5     collected     37
+spy_b   1     collected     37
+        2     collected     37
+        3     collected     37
+        4     collected     37
+        5     collected     37
 
 Degenerate-response rates (mean per arm/wave):
              empty_reply  no_brands  no_fanout  no_sources  had_web_search
 arm    wave                                                               
-coffee 1             0.0        0.0        0.0         0.0             1.0
-hum    1             0.0        0.0        0.0         0.0             1.0
-       2             0.0        0.0        0.0         0.0             1.0
-       3             0.0        0.0        0.0         0.0             1.0
-       4             0.0        0.0        0.0         0.0             1.0
-       5             0.0        0.0        0.0         0.0             1.0
-neu    1             0.0        0.0        0.0         0.0             1.0
-       2             0.0        0.0        0.0         0.0             1.0
-       3             0.0        0.0        0.0         0.0             1.0
-       4             0.0        0.0        0.0         0.0             1.0
-       5             0.0        0.0        0.0         0.0             1.0
-spy_a  1             0.0        0.0        0.0         0.0             1.0
-       2             0.0        0.0        0.0         0.0             1.0
-       3             0.0        0.0        0.0         0.0             1.0
-       4             0.0        0.0        0.0         0.0             1.0
-       5             0.0        0.0        0.0         0.0             1.0
-spy_b  1             0.0        0.0        0.0         0.0             1.0
-       2             0.0        0.0        0.0         0.0             1.0
-       3             0.0        0.0        0.0         0.0             1.0
-       4             0.0        0.0        0.0         0.0             1.0
-       5             0.0        0.0        0.0         0.0             1.0
+coffee 1             0.0      0.325      0.100       0.075           0.975
+hum    1             0.0      0.049      0.063       0.063           0.986
+       2             0.0      0.056      0.063       0.084           0.993
+       3             0.0      0.049      0.070       0.056           1.000
+       4             0.0      0.056      0.000       0.056           1.000
+       5             0.0      0.077      0.000       0.091           1.000
+neu    1             0.0      0.025      0.075       0.050           1.000
+       2             0.0      0.025      0.100       0.025           0.975
+       3             0.0      0.050      0.200       0.075           0.975
+       4             0.0      0.025      0.000       0.000           1.000
+       5             0.0      0.025      0.000       0.025           1.000
+spy_a  1             0.0      0.270      0.054       0.000           1.000
+       2             0.0      0.216      0.216       0.000           1.000
+       3             0.0      0.216      0.108       0.027           1.000
+       4             0.0      0.270      0.000       0.000           1.000
+       5             0.0      0.297      0.000       0.000           1.000
+spy_b  1             0.0      0.027      0.189       0.000           1.000
+       2             0.0      0.000      0.162       0.000           1.000
+       3             0.0      0.054      0.108       0.000           1.000
+       4             0.0      0.027      0.000       0.054           1.000
+       5             0.0      0.027      0.000       0.027           1.000
 
-Empty fan-out rate per arm: {'coffee': 0.0, 'hum': 0.0, 'neu': 0.0, 'spy_a': 0.0, 'spy_b': 0.0} (spec §6: if >0.30 for any headphone arm, that arm's grounding claims are INCONCLUSIVE territory)
+Empty fan-out rate per arm: {'coffee': 0.1, 'hum': 0.039, 'neu': 0.075, 'spy_a': 0.076, 'spy_b': 0.092} (spec §6: if >0.30 for any headphone arm, that arm's grounding claims are INCONCLUSIVE territory)
 
 ## Audit B — outcome-label meaning
 
@@ -53,69 +75,70 @@ inference is prompt-level cluster bootstrap, never pair-level SEs):
 condition
 between:hum           50765
 cross:hum|neu         28600
-cross:hum|spy_a       26455
 cross:hum|spy_b       26455
-cross:neu|spy_a        7400
+cross:hum|spy_a       26455
 cross:neu|spy_b        7400
+cross:neu|spy_a        7400
 cross:spy_a|spy_b      6845
 cross:coffee|hum       5720
 between:neu            3900
-between:spy_a          3330
 between:spy_b          3330
+between:spy_a          3330
 cross:coffee|neu       1600
-cross:coffee|spy_a     1480
 cross:coffee|spy_b     1480
+cross:coffee|spy_a     1480
 within:hum             1430
 between:coffee          780
 within:neu              400
-within:spy_a            370
 within:spy_b            370
+within:spy_a            370
 
 ## Audit D — extraction validity and drift
 
 Model version by arm/wave:
-arm     wave  model          
-coffee  1     gpt-5-synthetic     40
-hum     1     gpt-5-synthetic    143
-        2     gpt-5-synthetic    143
-        3     gpt-5-synthetic    143
-        4     gpt-5-synthetic    143
-        5     gpt-5-synthetic    143
-neu     1     gpt-5-synthetic     40
-        2     gpt-5-synthetic     40
-        3     gpt-5-synthetic     40
-        4     gpt-5-synthetic     40
-        5     gpt-5-synthetic     40
-spy_a   1     gpt-5-synthetic     37
-        2     gpt-5-synthetic     37
-        3     gpt-5-synthetic     37
-        4     gpt-5-synthetic     37
-        5     gpt-5-synthetic     37
-spy_b   1     gpt-5-synthetic     37
-        2     gpt-5-synthetic     37
-        3     gpt-5-synthetic     37
-        4     gpt-5-synthetic     37
-        5     gpt-5-synthetic     37
+arm     wave  model  
+coffee  1     gpt-5-5     36
+hum     1     gpt-5-5    134
+        2     gpt-5-5    134
+        3     gpt-5-5    133
+        4     gpt-5-5    143
+        5     gpt-5-5    143
+neu     1     gpt-5-5     37
+        2     gpt-5-5     36
+        3     gpt-5-5     32
+        4     gpt-5-5     40
+        5     gpt-5-5     40
+spy_a   1     gpt-5-5     35
+        2     gpt-5-5     29
+        3     gpt-5-5     33
+        4     gpt-5-5     37
+        5     gpt-5-5     37
+spy_b   1     gpt-5-5     30
+        2     gpt-5-5     31
+        3     gpt-5-5     33
+        4     gpt-5-5     37
+        5     gpt-5-5     37
 
 Share of responses mentioning each brand, per arm (top 12 by hum share):
                     hum    neu  spy_a  spy_b
-sennheiser        0.333  0.295  0.200  0.189
-apple             0.319  0.245  0.432  0.319
-bose              0.310  0.250  0.562  0.216
-sony              0.292  0.220  0.341  0.303
-anker             0.277  0.210  0.259  0.643
-audio-technica    0.274  0.310  0.346  0.216
-jabra             0.243  0.190  0.205  0.222
-1more             0.238  0.230  0.141  0.076
-bowers & wilkins  0.220  0.245  0.178  0.259
-bang & olufsen    0.197  0.245  0.205  0.173
-jbl               0.193  0.280  0.114  0.254
-beyerdynamic      0.189  0.185  0.189  0.168
+sony              0.877  0.825  0.584  0.335
+bose              0.824  0.745  0.551  0.568
+sennheiser        0.776  0.560  0.486  0.162
+anker             0.729  0.765  0.346  0.773
+apple             0.485  0.325  0.395  0.470
+jbl               0.241  0.110  0.081  0.146
+technics          0.039  0.025  0.086  0.011
+bowers & wilkins  0.035  0.000  0.038  0.000
+edifier           0.025  0.025  0.005  0.005
+samsung           0.024  0.020  0.189  0.178
+audio-technica    0.024  0.010  0.000  0.016
+focal             0.022  0.005  0.032  0.016
 
 002 anchor (gpt-5-5, July 2026) for the hum arm — drift is reportable,
 not a failure: {'sony': 0.897, 'bose': 0.82, 'sennheiser': 0.802, 'anker': 0.683, 'apple': 0.448, 'jbl': 0.167}
 
-Entity cross-check: no DataForSEO brand entities in this frame.
+Entity cross-check: 180/1285 responses carry DataForSEO
+brand/product entities; extractor recovers 1.000 of entity-derived brands on average.
 
 Spot-check sample of 30 responses written to /Users/jcw/projects/aeo-experiments/experiments/003-synthetic-prompt-coverage/data/interim/spotcheck_sample.md (gitignored).
 Manually list recommended brands per response; require precision >= 0.95 and
