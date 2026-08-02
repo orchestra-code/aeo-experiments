@@ -1,7 +1,7 @@
 # Can a sub-intent-matched synthetic panel mirror human prompts? — study spec
 
 **Status:** frozen (2026-08-02, approved by Jim before any collection)
-**Frozen commit:** recorded in the follow-up commit per house convention
+**Frozen commit:** `80e6c09` (spec + pipeline + harness + frozen panels, this repo)
 **Experiment slug:** `005-subintent-matched-panels`
 
 > Freeze rule: everything in §4 (hypotheses) and §5 (model + decision rule)
