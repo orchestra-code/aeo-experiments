@@ -103,9 +103,10 @@ and we published our number. Ask other vendors for theirs.
       totals anywhere.
 - [ ] SparkToro credited in the body and the acknowledgments; raw human
       prompts directed to Rand Fishkin, never republished.
-- [ ] Synthetic prompt text: per data-policy decision (pending — see
-      summary.md remaining steps); if released, note it in the article and
-      datasheet; if withheld, describe panels by method + aggregate stats.
+- [ ] Synthetic prompt text is RELEASED (decided 2026-08-02, data-policy
+      "Synthetic study prompts" exemption) as
+      `synthetic-prompt-coverage-prompts.csv`; link it in the article and
+      note that reproducers can re-run the panels verbatim.
 - [ ] Equivalence bounds stated in prose (0.10 Jaccard / 5 share points).
 - [ ] Post-hoc analyses (funnel subset, raking, home turf) explicitly
       labelled exploratory, separate from the pre-registered verdicts.
@@ -126,5 +127,5 @@ and we published our number. Ask other vendors for theirs.
 1. Audit-D spot-check sign-off (Jim) — blocks release checklist.
 2. Release checklist sign-off (Jim) — blocks committing `data/public/` and
    publishing the dataset link in the article.
-3. Decision on releasing synthetic prompt text (policy amendment + gate
-   path if yes).
+3. ~~Decision on releasing synthetic prompt text~~ — decided 2026-08-02:
+   released via the data-policy "Synthetic study prompts" exemption.

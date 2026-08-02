@@ -15,6 +15,11 @@ of the completed checklist lives in `experiments/<slug>/results/`.
       Grouping keys are pseudonymized (`item_0001`) per release.
 - [ ] Free-text columns marked `public_fact=True` were reviewed value-by-value
       (or verified to come from a public source like YouTube category names).
+- [ ] Synthetic prompt text ships only under the data policy's "Synthetic
+      study prompts" exemption: study-generated, non-customer brands
+      (Bose/Soundcore are test anchors, not customers), styles publicly
+      reproducible via the free spyglasses.io prompt generator; columns
+      flagged `synthetic_study_text=True`; anchor-leak guard passed.
 
 ## Phrasing
 

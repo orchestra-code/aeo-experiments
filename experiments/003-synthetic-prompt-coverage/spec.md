@@ -377,3 +377,12 @@ cluster count (37–40 synthetic prompts), which the INCONCLUSIVE row guards.
   product"); (b) how much of the share gap is the panel measuring the
   anchor's claimed territory (raking hum to the panels' H4-flag mixes). No
   pre-registered verdict changed; findings are descriptive.
+- **2026-08-02 (release policy):** synthetic prompt text (spy_a/spy_b/neu)
+  is RELEASED, amending §3's "never" row for the synthetic panels (Jim's
+  decision). Basis: docs/data-policy.md "Synthetic study prompts" —
+  study-generated, non-customer anchor brands, and the generation styles
+  are publicly reproducible via the free spyglasses.io prompt generator.
+  Shipped as `data/public/synthetic-prompt-coverage-prompts.csv` through a
+  `synthetic_study_text` gate path with an anchor-leak guard. Human prompt
+  text (SparkToro's, incl. the coffee panel) and all response/fan-out text
+  remain withheld.

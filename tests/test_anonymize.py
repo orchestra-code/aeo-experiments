@@ -78,6 +78,26 @@ def test_long_text_allowed_when_public_fact(tmp_path):
     assert paths["csv"].exists()
 
 
+def test_synthetic_study_text_allows_prompt_column(tmp_path):
+    df = ok_frame()
+    df["prompt_text"] = ["best travel headphones for a long flight " * 8, "short prompt"]
+    cols = ok_columns() + [
+        ColumnSpec("prompt_text", "study-generated synthetic prompt", synthetic_study_text=True)
+    ]
+    paths = release_dataset(df, cols, tmp_path, SHEET)
+    assert paths["csv"].exists()
+
+
+def test_synthetic_study_text_still_scans_cuids(tmp_path):
+    df = ok_frame()
+    df["prompt_text"] = ["cm4xk2p9d0000abcdefghijkl", "ok"]
+    cols = ok_columns() + [
+        ColumnSpec("prompt_text", "synthetic", synthetic_study_text=True)
+    ]
+    with pytest.raises(ReleaseError, match="cuid"):
+        release_dataset(df, cols, tmp_path, SHEET)
+
+
 def test_missing_column_raises(tmp_path):
     cols = ok_columns() + [ColumnSpec("nope", "missing")]
     with pytest.raises(ReleaseError, match="missing"):

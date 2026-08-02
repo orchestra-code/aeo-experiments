@@ -7,7 +7,10 @@ templates/release-checklist.md still applies on top.
 Hard rules enforced here:
 - Explicit allow-list: only columns you name (with a description) are written.
 - Deny-list: column names matching customer-data patterns are refused even if
-  allow-listed — the gate errs on the side of not shipping.
+  allow-listed — the gate errs on the side of not shipping. One narrow
+  exemption: ``synthetic_study_text`` columns (STUDY-GENERATED prompt
+  material over non-customer brands, cleared by docs/data-policy.md
+  "Synthetic study prompts"); the cuid scan still applies to them.
 - Content scans: string cells are scanned for Prisma cuid identifiers and for
   long free text (which is how prompt/response text sneaks out inside an
   innocuously named column).
@@ -68,6 +71,12 @@ class ColumnSpec:
     #: (e.g. a YouTube category name). Exempts the long-text scan, not the
     #: cuid scan.
     public_fact: bool = False
+    #: Set True ONLY for study-generated synthetic prompt material over
+    #: non-customer brands, per docs/data-policy.md "Synthetic study
+    #: prompts" (all three conditions must hold, and the release checklist
+    #: records it). Exempts the forbidden-name check and the long-text scan;
+    #: the cuid scan still runs. Never valid for customer-derived text.
+    synthetic_study_text: bool = False
 
 
 @dataclass
@@ -90,6 +99,8 @@ def pseudonymize(series: pd.Series, prefix: str) -> pd.Series:
 
 def _check_column_names(specs: list[ColumnSpec]) -> None:
     for spec in specs:
+        if spec.synthetic_study_text:
+            continue
         lowered = spec.name.lower()
         for bad in FORBIDDEN_SUBSTRINGS:
             if bad in lowered:
@@ -113,7 +124,7 @@ def _scan_values(df: pd.DataFrame, specs: list[ColumnSpec]) -> None:
                 f"Column '{col}' contains cuid-like identifiers "
                 f"(e.g. {hits.iloc[0][:40]!r}). Pseudonymize before release."
             )
-        if not by_name[col].public_fact:
+        if not (by_name[col].public_fact or by_name[col].synthetic_study_text):
             long = values[values.str.len() > MAX_TEXT_LEN]
             if len(long):
                 raise ReleaseError(
