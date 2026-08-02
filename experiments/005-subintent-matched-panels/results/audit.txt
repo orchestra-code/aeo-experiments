@@ -1,0 +1,126 @@
+# Experiment 005 — data-quality audits
+
+## Audit A — collection completeness and degenerate responses
+
+(no ledger — synthetic run)
+
+Degenerate-response rates (mean per arm/wave):
+             empty_reply  no_brands  no_fanout  no_sources  had_web_search
+arm    wave                                                               
+coffee 1             0.0        0.0        0.0         0.0             1.0
+hum    1             0.0        0.0        0.0         0.0             1.0
+       2             0.0        0.0        0.0         0.0             1.0
+       3             0.0        0.0        0.0         0.0             1.0
+       4             0.0        0.0        0.0         0.0             1.0
+       5             0.0        0.0        0.0         0.0             1.0
+mat    1             0.0        0.0        0.0         0.0             1.0
+       2             0.0        0.0        0.0         0.0             1.0
+       3             0.0        0.0        0.0         0.0             1.0
+       4             0.0        0.0        0.0         0.0             1.0
+       5             0.0        0.0        0.0         0.0             1.0
+neu2   1             0.0        0.0        0.0         0.0             1.0
+       2             0.0        0.0        0.0         0.0             1.0
+       3             0.0        0.0        0.0         0.0             1.0
+       4             0.0        0.0        0.0         0.0             1.0
+       5             0.0        0.0        0.0         0.0             1.0
+
+Empty fan-out rate per arm: {'coffee': 0.0, 'hum': 0.0, 'mat': 0.0, 'neu2': 0.0} (spec §6: if >0.30 for any headphone arm, that arm's grounding claims are INCONCLUSIVE territory)
+
+## Audit B — outcome-label meaning
+
+- 'brand recommended' = canonical brand whose alias matches the cleaned answer
+  markdown (URLs stripped, word-boundary, longest-alias-first) — brands.py::extract_brands
+  (verbatim copy of 002's post-curation extraction).
+- 'domain cited' = registered domain of a normalized URL in result.sources[]
+  (search_results[] are SERP extras and are EXCLUDED) — 01_features.py.
+- 'grounding tokens' = stopword-filtered token union over result.fan_out_queries
+  — aeo_research.overlap.token_set.
+- 'panel share' (H2/H3) = fraction of an arm's responses whose brand set
+  contains the brand — 03_model.py::brand_share.
+
+## Audit C — independence and clustering
+
+{'coffee': 40, 'hum': 143, 'mat': 55, 'neu2': 40} prompts; duplicate-text groups: {'coffee': 1, 'hum': 5} (['c016', 'h011', 'h016', 'h044', 'h101', 'h111'])
+Note: h016/c016 is the same respondent's refusal text pasted into both
+survey questions — a valid human behavior, kept; R3 refits without dups.
+Pair counts by condition (each response participates in many pairs — all
+inference is prompt-level cluster bootstrap, never pair-level SEs):
+condition
+between:hum          50765
+cross:hum|mat        39325
+cross:hum|neu2       28600
+cross:mat|neu2       11000
+between:mat           7425
+cross:coffee|hum      5720
+between:neu2          3900
+cross:coffee|mat      2200
+cross:coffee|neu2     1600
+within:hum            1430
+between:coffee         780
+within:mat             550
+within:neu2            400
+
+## Audit D — extraction validity and drift
+
+Model version by arm/wave:
+arm     wave  model          
+coffee  1     gpt-5-synthetic     40
+hum     1     gpt-5-synthetic    143
+        2     gpt-5-synthetic    143
+        3     gpt-5-synthetic    143
+        4     gpt-5-synthetic    143
+        5     gpt-5-synthetic    143
+mat     1     gpt-5-synthetic     55
+        2     gpt-5-synthetic     55
+        3     gpt-5-synthetic     55
+        4     gpt-5-synthetic     55
+        5     gpt-5-synthetic     55
+neu2    1     gpt-5-synthetic     40
+        2     gpt-5-synthetic     40
+        3     gpt-5-synthetic     40
+        4     gpt-5-synthetic     40
+        5     gpt-5-synthetic     40
+
+Share of responses mentioning each brand, per arm (top 12 by hum share):
+                    hum    mat   neu2
+jabra             0.350  0.287  0.080
+sony              0.337  0.342  0.020
+anker             0.317  0.298  0.065
+bose              0.295  0.309  0.065
+bowers & wilkins  0.256  0.258  0.135
+apple             0.249  0.356  0.105
+bang & olufsen    0.249  0.113  0.210
+audio-technica    0.248  0.229  0.100
+shure             0.224  0.182  0.200
+sennheiser        0.207  0.295  0.045
+skullcandy        0.204  0.109  0.185
+philips           0.192  0.236  0.135
+
+003 anchor (gpt-5-5, 29 Jul - 2 Aug 2026) for the hum arm — drift is
+reportable, not a failure: {'sony': 0.877, 'bose': 0.824, 'sennheiser': 0.776, 'anker': 0.729, 'apple': 0.485, 'jbl': 0.241}
+
+Entity cross-check: no DataForSEO brand entities in this frame.
+
+Spot-check sample of 30 responses written to /Users/jcw/projects/aeo-experiments/experiments/005-subintent-matched-panels/data/interim/spotcheck_sample.md (gitignored).
+Manually list recommended brands per response; require precision >= 0.95 and
+recall >= 0.90 vs the extractor, else refine the lexicon (log in Deviations).
+
+## Audit E — mat stratification manipulation check
+
+                               target  achieved
+travel+music                       22        22
+travel                              7         7
+travel+music+recipient              5         5
+music                               4         4
+plain                               4         4
+travel+music+budget                 3         3
+travel+music+form                   3         3
+travel+music+budget+recipient       2         2
+travel+wireless                     2         2
+travel+budget                       1         1
+travel+music+wireless               1         1
+music+wireless                      1         1
+Exact cell match (regex re-validation): True
+Any mismatch here means the measured object is a mis-stratified panel; H2_mat's verdict must be reported against the ACHIEVED distribution and logged in Deviations.
+
+Achieved length bands: {'medium': 0.564, 'long': 0.309, 'short': 0.127} (target marginal: {'medium': 0.5105, 'long': 0.2867, 'short': 0.2028})
