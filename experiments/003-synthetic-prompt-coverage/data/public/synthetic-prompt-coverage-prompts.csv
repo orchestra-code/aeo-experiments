@@ -1,0 +1,115 @@
+item_code,panel,generation_framework,generation_query_type,n_words,prompt_text
+item_0289,spy_a,original,category_best,13,What are the best wireless headphones with active noise cancelling for frequent travelers?
+item_0287,spy_a,original,use_case_solution,13,Which headphones offer the best spatial audio and long battery life for professionals?
+item_0225,spy_a,original,budget_constrained,9,Budget-friendly wireless earbuds with good noise cancellation for students
+item_0135,spy_a,original,solution_comparison,11,Compare premium wireless headphones and earbuds for sound quality and features
+item_0068,spy_a,original,use_case_solution,11,What audio products have the best app customization and listening modes?
+item_0234,spy_a,category_entry_points,category_entry_point,18,I travel constantly and need headphones that block out plane noise — what should I be looking for?
+item_0293,spy_a,category_entry_points,category_entry_point,19,My wireless earbuds keep dying after a few hours — how long should good earbuds last on a charge?
+item_0042,spy_a,category_entry_points,category_entry_point,17,I'm buying expensive headphones online and worried about fitting and returns — what's a reasonable return policy?
+item_0117,spy_a,category_entry_points,category_entry_point,16,What's the difference between noise-canceling headphones and regular ones — is it worth the extra cost?
+item_0047,spy_a,category_entry_points,category_entry_point,14,I get distracted by notifications while working — can headphones help me focus better?
+item_0072,spy_a,category_entry_points,category_entry_point,15,My headphones keep falling out when I exercise — what features should I look for?
+item_0137,spy_a,category_entry_points,category_entry_point,15,Should I buy in-store or online for premium headphones? What are the pros and cons?
+item_0257,spy_a,category_entry_points,category_entry_point,17,High-end speakers are expensive — how do I know if I'm really getting what I'm paying for?
+item_0146,spy_a,jobs_to_be_done,jobs_to_be_done,18,How can I find noise-cancelling headphones that will actually block out airplane cabin noise without breaking the bank?
+item_0276,spy_a,jobs_to_be_done,jobs_to_be_done,19,What's the best way to choose premium earbuds for commuting when I'm worried about picking the wrong model online?
+item_0036,spy_a,jobs_to_be_done,jobs_to_be_done,19,How can I get wireless earbuds with excellent sound quality and all-day battery life for my busy professional schedule?
+item_0100,spy_a,jobs_to_be_done,jobs_to_be_done,17,What help is available when I'm anxious about overpaying for premium headphones online compared to other retailers?
+item_0250,spy_a,jobs_to_be_done,jobs_to_be_done,18,I need premium audio equipment with easy app controls for customizing my listening experience—how do I find that?
+item_0180,spy_a,jobs_to_be_done,jobs_to_be_done,14,How can I avoid expensive shipping and returns when buying premium wireless audio online?
+item_0142,spy_a,jobs_to_be_done,jobs_to_be_done,17,What features should premium noise-cancelling headphones have for both air travel and office work throughout my day?
+item_0256,spy_a,jobs_to_be_done,jobs_to_be_done,19,I want wireless earbuds that deliver premium sound quality—how do I compare options and feel confident in my choice?
+item_0249,spy_a,buyers_journey,buyers_journey_awareness,12,What causes hearing fatigue with headphones and how do I prevent it
+item_0084,spy_a,buyers_journey,buyers_journey_awareness,12,How do noise cancelling headphones work and are they worth the investment
+item_0292,spy_a,buyers_journey,buyers_journey_awareness,13,What features should I look for in wireless earbuds for running and workouts
+item_0274,spy_a,buyers_journey,buyers_journey_consideration,12,"What are the differences between wireless earbuds, over-ear headphones, and portable speakers"
+item_0203,spy_a,buyers_journey,buyers_journey_consideration,10,Noise cancelling headphones vs. regular headphones: pros and cons comparison
+item_0125,spy_a,buyers_journey,buyers_journey_consideration,13,How do I choose between earbuds with different sound profiles and customization options
+item_0153,spy_a,buyers_journey,buyers_journey_decision,10,Best premium headphones for long battery life and all-day comfort
+item_0288,spy_a,buyers_journey,buyers_journey_decision,13,Which wireless earbuds offer the best noise cancellation and spatial audio for music
+item_0139,spy_a,stakeholder_perspectives,category_best,9,best noise cancelling headphones for long flights and commutes
+item_0226,spy_a,stakeholder_perspectives,jobs_to_be_done,10,wireless earbuds with all-day battery life and premium sound quality
+item_0156,spy_a,stakeholder_perspectives,buyers_journey_awareness,13,how to choose the right premium headphones for my listening style and needs
+item_0183,spy_a,stakeholder_perspectives,use_case_solution,11,premium speaker system for home with spatial audio and wireless connectivity
+item_0200,spy_a,stakeholder_perspectives,buyers_journey_consideration,10,are premium headphones worth the investment compared to budget options
+item_0218,spy_a,stakeholder_perspectives,buyers_journey_decision,9,headphones with guaranteed price match and easy return policy
+item_0171,spy_a,stakeholder_perspectives,use_case_solution,11,how to customize audio settings and listening modes for different activities
+item_0185,spy_a,stakeholder_perspectives,category_entry_point,9,wireless headphones compatible with multiple devices and easy switching
+item_0024,spy_b,original,category_best,12,What are the best wireless earbuds for working out and outdoor activities?
+item_0020,spy_b,original,use_case_solution,11,Which platform helps with comfortable open-ear audio without blocking my ears?
+item_0007,spy_b,original,budget_constrained,10,Budget-friendly wireless earbuds with noise cancellation and long battery life
+item_0098,spy_b,original,solution_comparison,10,Compare different wireless earbuds for sleep and light snoring environments
+item_0070,spy_b,original,segment_focused,9,Best truly wireless earbuds for frequent travelers and commuters
+item_0166,spy_b,category_entry_points,category_entry_point,17,I need earbuds that won't fall out during workouts — what options are designed for active people?
+item_0090,spy_b,category_entry_points,category_entry_point,16,What kind of earbuds should I use if I need to sleep in a noisy environment?
+item_0077,spy_b,category_entry_points,category_entry_point,16,I'm traveling on long flights and my ears hurt with regular earbuds — what's more comfortable?
+item_0254,spy_b,category_entry_points,category_entry_point,15,I want earbuds that don't go in my ear canal — what are open-ear alternatives?
+item_0109,spy_b,category_entry_points,category_entry_point,18,My earbuds died and I'm looking for something reliable with good battery life — what should I consider?
+item_0099,spy_b,category_entry_points,category_entry_point,17,I need earbuds with noise cancellation because my office is too loud — how does that work?
+item_0210,spy_b,category_entry_points,category_entry_point,16,What's the best audio solution for someone who wants to hear surroundings while listening to music?
+item_0140,spy_b,category_entry_points,category_entry_point,17,I'm commuting every day and need reliable earbuds that won't cut out — what's durable and stable?
+item_0130,spy_b,jobs_to_be_done,jobs_to_be_done,17,What's the best way to block airplane cabin noise so I can actually sleep on long flights?
+item_0105,spy_b,jobs_to_be_done,jobs_to_be_done,13,How can I get quality audio during workouts without earbuds constantly falling out?
+item_0124,spy_b,jobs_to_be_done,jobs_to_be_done,11,What audio solution works best for side sleepers in noisy bedrooms?
+item_0116,spy_b,jobs_to_be_done,jobs_to_be_done,14,How do I stay connected during my commute without blocking out all ambient sound?
+item_0096,spy_b,jobs_to_be_done,jobs_to_be_done,15,What's a reliable audio brand that actually stands behind their products with a good warranty?
+item_0128,spy_b,jobs_to_be_done,jobs_to_be_done,11,How can I get premium wireless earbuds without spending a fortune?
+item_0266,spy_b,jobs_to_be_done,jobs_to_be_done,16,What audio option lets me hear calls and music while still being aware of my surroundings?
+item_0063,spy_b,jobs_to_be_done,jobs_to_be_done,14,How do I choose between speaker types when I need audio for multiple settings?
+item_0041,spy_b,buyers_journey,buyers_journey_awareness,13,What are the best wireless earbuds for blocking out airplane noise during flights
+item_0002,spy_b,buyers_journey,buyers_journey_awareness,13,How do open-ear earbuds work and are they better than traditional in-ear models
+item_0263,spy_b,buyers_journey,buyers_journey_awareness,9,What wireless earbuds are comfortable for wearing while sleeping
+item_0296,spy_b,buyers_journey,buyers_journey_consideration,11,What's the difference between noise-canceling and open-ear earbuds for outdoor workouts
+item_0281,spy_b,buyers_journey,buyers_journey_consideration,11,Best wireless earbuds for long battery life and durability during commuting
+item_0069,spy_b,buyers_journey,buyers_journey_decision,9,Wireless earbuds with 30-day return policy and warranty coverage
+item_0051,spy_b,buyers_journey,buyers_journey_decision,8,Most durable open-ear earbuds for athletes under $100
+item_0049,spy_b,buyers_journey,buyers_journey_decision,13,Which wireless earbuds have the best customer reviews for comfort and noise isolation
+item_0182,spy_b,stakeholder_perspectives,category_entry_point,8,best open-ear clip-on earbuds for comfort all day
+item_0155,spy_b,stakeholder_perspectives,use_case_solution,7,noise-canceling earbuds for sleeping in noisy environments
+item_0283,spy_b,stakeholder_perspectives,budget_constrained,7,affordable wireless earbuds with all-day battery life
+item_0233,spy_b,stakeholder_perspectives,use_case_solution,7,waterproof sports earbuds for workouts and running
+item_0087,spy_b,stakeholder_perspectives,buyers_journey_consideration,8,wireless earbuds with hassle-free warranty and easy returns
+item_0037,spy_b,stakeholder_perspectives,use_case_solution,9,best travel earbuds for long flights with noise cancellation
+item_0213,spy_b,stakeholder_perspectives,buyers_journey_decision,8,reliable Bluetooth earbuds with fast shipping and delivery
+item_0016,spy_b,stakeholder_perspectives,buyers_journey_consideration,9,popular wireless earbuds with best user reviews and ratings
+item_0053,neu,neutral,,14,I need headphones for my dad who travels a lot for work. What's good?
+item_0181,neu,neutral,,13,"shopping for headphones - my sister flies constantly, what should I get her?"
+item_0235,neu,neutral,,11,Best headphones for someone who travels? Need it as a gift
+item_0224,neu,neutral,,23,"Hi, my mom loves traveling and always complains her headphones break or get uncomfortable. Can you help me find something durable and comfy?"
+item_0123,neu,neutral,,11,what headphones dont fall off during flights? asking for my brother
+item_0045,neu,neutral,,19,Looking for travel headphones gift. Budget is around $200. My husband has a long commute and takes flights monthly.
+item_0220,neu,neutral,,7,noise canceling headphones recommendations for frequent flyer?
+item_0046,neu,neutral,,16,My teenage daughter travels a lot and wants new headphones. Something with good battery life please
+item_0282,neu,neutral,,13,need gift idea for traveler - headphones that wont tangle in a bag
+item_0159,neu,neutral,,15,Can you suggest headphones that are lightweight and packable? Buying for my cousin who backpacks
+item_0061,neu,neutral,,13,What headphones have the best noise isolation for planes? Gift for my partner
+item_0057,neu,neutral,,14,"headphones for travel - wireless, good sound, portable. my uncle travels every week almost"
+item_0013,neu,neutral,,15,im buying headphones for someone who takes 3-4 flights a month. what features matter most?
+item_0115,neu,neutral,,19,My nephew is always on planes for his job. He needs new headphones. Should I get noise canceling ones?
+item_0133,neu,neutral,,11,traveling constantly - which headphones won't hurt ears on long flights?
+item_0252,neu,neutral,,16,Can I get recommendations for headphones that fold up small? My sister's suitcase is always packed
+item_0216,neu,neutral,,9,gift headphones for frequent business traveler - any suggestions?
+item_0295,neu,neutral,,15,What are the best lightweight headphones? My friend travels internationally and doesn't want anything heavy
+item_0196,neu,neutral,,16,Looking for headphones that are good for both flights AND working in hotels. For my mom
+item_0221,neu,neutral,,16,Does anyone know good headphones that don't drain your phone battery? My cousin travels for work
+item_0152,neu,neutral,,17,My dad hates how his current headphones feel after wearing them for hours. He's always flying. Help?
+item_0279,neu,neutral,,17,need headphones that work across different devices - my partner uses both phone and laptop while traveling
+item_0114,neu,neutral,,18,What about ones with good ambient mode? My sister likes to stay aware of her surroundings in airports
+item_0199,neu,neutral,,17,Buying headphones for my wife. She travels monthly. Needs to be durable because she's rough on stuff
+item_0206,neu,neutral,,15,"headphones recommendation - long battery, good sound quality, compact design. gift for brother in law"
+item_0010,neu,neutral,,18,My grandpa travels to visit family. He's not tech savvy so he needs really easy to use headphones
+item_0223,neu,neutral,,19,Can you help me pick headphones that dont get too hot on your ears? My cousin travels somewhere hot
+item_0121,neu,neutral,,16,What's the difference between different noise canceling types? My mom travels on red eyes a lot
+item_0209,neu,neutral,,24,I want to get my friend headphones but they need to work well with glasses since they wear them all the time while flying
+item_0228,neu,neutral,,15,Headphones that are water resistant? My son travels a lot and is kind of messy
+item_0195,neu,neutral,,18,Should I get over ear or on ear or earbuds for a frequent traveler? What's best for planes?
+item_0284,neu,neutral,,19,My sister says her headphones make her ear sweat. She travels a lot. What should I look for instead?
+item_0211,neu,neutral,,20,looking for headphones with amazing call quality - my uncle travels for work and takes lots of calls on planes
+item_0291,neu,neutral,,16,Gift headphones for someone who loses things easily - something that comes with a good case
+item_0248,neu,neutral,,20,Can you recommend headphones that stay charged for like 24+ hours? My cousin is gone for days at a time
+item_0032,neu,neutral,,17,What headphones are best if someone has sensitive ears? My nephew travels monthly and complains about discomfort
+item_0011,neu,neutral,,19,I need something that can handle being thrown in a carry on. Durability is key. Gift for my dad
+item_0214,neu,neutral,,16,Headphones for travel that aren't too expensive - around $100-150 range. What are my best options?
+item_0019,neu,neutral,,16,My partner travels and uses headphones for work calls and music. Should I prioritize different features?
+item_0144,neu,neutral,,19,looking for a gift - compact travel headphones but also sounds really good. doesn't have to be the cheapest

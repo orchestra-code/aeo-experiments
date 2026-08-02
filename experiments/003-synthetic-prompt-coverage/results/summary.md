@@ -186,12 +186,11 @@ configuration — conclusions are about "a panel this generator produced."
 
 ## Remaining steps to close the project
 
-1. **Jim: label the Audit-D spot-check** (30 responses,
-   `data/interim/spotcheck_sample.md`) → write
-   `results/audit-d-signoff.md`. If thresholds fail, refine lexicon, log a
-   deviation, re-run 01→04.
-2. **Jim: sign `results/release-checklist.md`**, then commit
-   `data/public/` (CSV + datasheet).
+1. ~~Audit-D spot-check~~ — signed 2026-08-02
+   (`results/audit-d-signoff.md`), thresholds met, lexicon stays frozen.
+2. ~~Release checklist~~ — signed 2026-08-02; `data/public/` committed
+   (runs + prompts CSVs and datasheets; synthetic prompt text released
+   under the data policy's "Synthetic study prompts" exemption).
 3. Research article + companion blog post (EN/DE) — full outline with
    narrative arc, figure map, and compliance checklist in
    `results/article-outline.md`.
