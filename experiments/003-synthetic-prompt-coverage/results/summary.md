@@ -165,6 +165,25 @@ vendors' generators, prompt-weighting schemes, logged-in behavior, or
 whether any synthetic panel *could* match humans. One draw per generator
 configuration — conclusions are about "a panel this generator produced."
 
+## Post-hoc interpretation layer (added 2026-08-02, exploratory)
+
+`results/exploratory_content_mix.md` (`pipeline/91_content_mix.py`; figures
+`content-mix-reweight` F5, `panel-rank-swing` F6):
+
+- **Funnel stage:** restricting the spy panels to decision-stage prompts
+  (the subset the product scores for share of voice) shrinks spy_a's H2 MAD
+  0.248 → 0.162, leaves spy_b's unchanged (0.261 → 0.280), and *grows* the
+  anchor DiD to +0.571 — the pre-registered verdicts are not a funnel-stage
+  artifact.
+- **Content mix:** raking the human panel to each spy panel's phrasing-flag
+  mix explains **72%** of spy_a's share gap (eff. n 15) and 37% of spy_b's
+  (eff. n 7): an anchored panel largely measures the anchor's own claimed
+  territory. 002's budget flip (Bose −0.25 / JBL +0.32) replicates.
+- **Home turf:** Bose ranks 2nd on every panel including its own (the
+  instrument does not flatter its anchor); Anker swings 1st ↔ 5th purely by
+  anchor choice. Supports the conditional-share-of-voice reading: winning
+  on your own panel needs context, losing on it is the signal.
+
 ## Remaining steps to close the project
 
 1. **Jim: label the Audit-D spot-check** (30 responses,
@@ -173,7 +192,6 @@ configuration — conclusions are about "a panel this generator produced."
    deviation, re-run 01→04.
 2. **Jim: sign `results/release-checklist.md`**, then commit
    `data/public/` (CSV + datasheet).
-3. Article EN/DE + companion blog post — cite the 31-questions article's
-   Q3 (H1), Q6 (H3), Q7 (H2), Q17 (H4) by number; credit SparkToro for the
-   human prompts; lead figure F1 (share dot-plot), H3 carrier F4
-   (anchor-bias bars); publish the equivalence bounds explicitly.
+3. Research article + companion blog post (EN/DE) — full outline with
+   narrative arc, figure map, and compliance checklist in
+   `results/article-outline.md`.

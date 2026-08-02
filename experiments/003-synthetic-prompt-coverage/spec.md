@@ -367,3 +367,13 @@ cluster count (37–40 synthetic prompts), which the INCONCLUSIVE row guards.
   perm p = 0.0002, consistent with the early wave-1 gate). Lexicon
   unchanged. Results in `results/summary.md`; Audit-D manual spot-check
   and release-checklist sign-off pending.
+- **2026-08-02 (post-hoc, labelled):** exploratory content-mix and
+  funnel-stage analysis added AFTER the pre-registered results were read
+  (`pipeline/91_content_mix.py` → `results/exploratory_content_mix.md`,
+  figures F5/F6), to test two interpretation hypotheses raised in review:
+  (a) whether the anchored panels' divergence is a funnel-stage artifact
+  (the product excludes awareness-stage prompts from share of voice — note
+  this corrects §1's parenthetical "all prompts count equally, as in the
+  product"); (b) how much of the share gap is the panel measuring the
+  anchor's claimed territory (raking hum to the panels' H4-flag mixes). No
+  pre-registered verdict changed; findings are descriptive.
