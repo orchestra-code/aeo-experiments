@@ -1,7 +1,7 @@
 # Experiment 005 — results summary
 
-**Matching the sub-intent mix buys exchangeable responses, not an
-exchangeable market**
+**A sub-intent-matched panel reproduces which brands compete and roughly
+their order — not how often each one appears**
 Analysis run 2026-08-06 on the complete dataset, per the frozen spec
 (commit `80e6c09`, 2026-08-02). 1,230 runs evaluated in this study
 (143 hum + 55 mat + 40 neu2 prompts × 5 daily waves, plus 40 coffee
@@ -21,14 +21,37 @@ and the central one did not.
 | P4 | neu2 fails H2 | **CONFIRMED** — MAD 0.137 [0.100, 0.184] |
 | P5 | H3′ NULL for mat's qualifying flags | **CONFIRMED** — travel −0.009, music −0.038, both NULL |
 
-**The headline is P2.** Stratifying a synthetic panel to the human panel's
-joint sub-intent profile made its responses individually indistinguishable
-from human ones — marginally (H1) *and* inside matched strata (H3′) — and
-still missed the human brand-share vector by 8.9 points against a 5-point
-band. Sub-intent mix was **necessary but not sufficient**: it cut the gap
-from neu2's 13.7 points to 8.9 (003's unstratified neu measured 11.2), and
-it bought exchangeability that 003's anchored panels never had, but it did
-not reach equivalence.
+**P2 is the falsified prediction; it is not the whole finding.** Stratifying
+a synthetic panel to the human panel's joint sub-intent profile made its
+responses individually indistinguishable from human ones — marginally (H1,
+−0.001 on brands) *and* inside matched strata (H3′) — and still missed the
+human brand-share vector by 8.9 points against a 5-point band. Sub-intent
+mix was **necessary but not sufficient**: it cut the gap from neu2's 13.7
+points to 8.9 (003's unstratified neu measured 11.2) and bought
+exchangeability that 003's anchored panels never had, without reaching
+equivalence.
+
+**What "fails H2" actually means here** (post-hoc layer, §
+[exploratory](exploratory_subintent_residual.md)): the two panels agree on
+**which brands compete** and largely on **their order** (rank τ 0.867), and
+disagree on **how often each one appears**. Within the travel sub-intent,
+82% of human prompts and 72% of stratified-synthetic prompts surface Apple
+at least once — but 9.5% vs 0% surface it in all five runs. Two further
+results constrain how much weight the failed layer can bear:
+
+1. **Conditioning on sub-intent does not shrink the gap** (0.085 within
+   travel, 0.110 within music, vs 0.089 unconditional). The residual is
+   therefore not primarily a mix artifact, and a client supplying its own
+   sub-intents would not rescue the share number.
+2. **The share metric has a noise floor the human panel does not clear
+   against itself.** Apple flips run-to-run within 68% of human prompts;
+   only 12% return it in all five runs. A 45% share that is unstable within
+   most prompts is a coin flip being averaged, not a stable brand fact that
+   the synthetic panel failed to reproduce.
+
+So the defensible reading is narrower than "synthetic panels can't measure
+the market" and broader than "the recipe works": **the pool and the ranking
+transfer; the frequency does not.**
 
 ## Gate and placebo
 
@@ -249,18 +272,24 @@ indistinguishable** from human-prompt responses — 0.516 vs 0.517 brand
 Jaccard, 0.306 vs 0.308 on cited domains, and equivalent inside matched
 travel and music strata (band 0.10) — while still measuring a brand-share
 vector **8.9 points off** the human panel's on average (band 5.0), where an
-unstratified panel from the same generator missed by 13.7. The residual
+unstratified panel from the same generator missed by 13.7. That share gap
+is a **frequency** disagreement, not a membership one: both panels surface
+the same brands (all six basket brands clear the 5% floor in both, within
+each well-powered sub-intent) in nearly the same order (τ 0.867), and
+diverge on how consistently each returns across repeated runs. The residual
 concentrates in sub-intent dimensions outside the stratification target:
 the stratified panel reproduces 13% of distinct human phrasing profiles,
 never asks about movie use, recipient age, output count or format, and
 over-emits comfort language 4×.
 
 Not claimed: that a richer stratification would close the gap (untested);
-anything about other intents, platforms, locales, or vendors' generators;
-that the recipe transfers to intents lacking a human panel to stratify
-*from* — that dependency is the recipe's stated cost. One draw per
-generator configuration: conclusions are about "a panel this generator
-produced," not the generator's distribution.
+that the frequency layer is *recoverable at all*, given that the human
+panel does not reproduce its own frequencies run-to-run; anything about
+other intents, platforms, locales, or vendors' generators; that the recipe
+transfers to intents lacking a human panel to stratify *from* — that
+dependency is the recipe's stated cost. One draw per generator
+configuration: conclusions are about "a panel this generator produced,"
+not the generator's distribution.
 
 ## Post-hoc interpretation layer (added 2026-08-06, exploratory)
 
@@ -300,13 +329,32 @@ verdict depends on it.
 
 ## What this means for the program
 
-003 asked whether synthetic panels see the market humans see, and found
-they do not. 005 asked whether matching the sub-intent mix fixes it, and
-answers: it fixes the *prompt-level* problem completely and the
-*panel-level* problem only partway. The measurable object that remains is
-the joint profile — 13% coverage of human phrasing profiles is now the
-number to beat, and the next design question is whether quota-boosting the
-uncovered strata can close H2 without breaking the mix match H2 requires.
+003 asked whether synthetic panels see the market humans see, found they do
+not, and bet publicly that stratifying to the human sub-intent profile
+would fix it at **both** the response and share layers. 005 settles that
+bet: the response layer passed decisively (−0.001, better than predicted),
+the share layer did not (0.089 vs a 0.05 band).
+
+The more useful result is what the failure turned out to be. It is a
+disagreement about **frequency**, not about **membership or order** — and
+part of the frequency layer is noise no panel can reproduce, because the
+human panel does not reproduce it either. That splits the program's next
+question in two:
+
+- **Is the remaining frequency gap recoverable?** Before chasing it,
+  establish how much of it is signal: a repeatability floor for the human
+  panel (how far apart are two independent human panels on the same
+  intent?) would tell us what "matching" can even mean at this layer.
+- **Does the recipe generalize past a category with a human panel to copy?**
+  The stratification targets came *from* a survey. A neutral, non-client
+  source of sub-intent mix (public Q&A venues) is the obvious candidate and
+  is sketched as a 006 design — a 2×2 on intent-source × prompt-format,
+  gated on Reddit access being solvable.
+
+For the product, the defensible line is now specific: a sub-intent-matched
+panel answers *"which brands am I competing with for this use case, and
+roughly where do I stand?"* — and should not be read as a share-of-voice
+percentage.
 
 ## Remaining steps to close the project
 
