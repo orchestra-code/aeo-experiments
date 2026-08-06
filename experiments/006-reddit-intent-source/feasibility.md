@@ -1,13 +1,41 @@
 # 006 — feasibility probe: can a public Q&A venue supply a neutral sub-intent panel?
 
-> **OUTCOME (2026-08-06): NOT VIABLE — stopped at the gate.** The
-> intent-matched tier yields an estimated **6** qualifying posts against a
-> floor of 20. The general-category tier passes (332) but has no matching
-> human baseline, so a panel built from it would confound source with
-> intent. Full numbers in `results/feasibility-counts.md`. Per the frozen
-> rule and Jim's standing instruction, **no follow-up study is designed or
-> announced.** Access is solved and the harness works, so this can be
-> revived cheaply if a denser category or a new human baseline appears.
+> **OUTCOME — SUPERSEDED. The first stop decision was wrong.**
+>
+> **First reading (2026-08-06, WITHDRAWN):** "NOT VIABLE — the
+> intent-matched tier yields an estimated 6 qualifying posts against a
+> floor of 20."
+>
+> **Why it was wrong:** the frozen Tier A *query* required the literal word
+> "recommendation". Recommendation intent is already enforced by frozen
+> criterion 5 against the post body, so the query word was a redundant
+> second filter — and it cut the pool **74×**:
+>
+> | Query | Matching items |
+> |---|---|
+> | `headphones travel site:reddit.com` | **9,676** |
+> | `headphones travel recommendation site:reddit.com` | 130 |
+>
+> The stated reason for stopping — "people do not post travel-gift
+> headphone questions to Reddit in volume" — **is not supported.** The
+> same artifact produced the apparent B2B thinness (`helpdesk` 10,000+ raw
+> vs 23 with the word "recommendation").
+>
+> **Revised outcome (D3): VIABLE.** Re-measured on the same intent with
+> comments excluded at retrieval — `headphones travel site:reddit.com
+> type:post` — the pool is **3,773 posts**, of which 3 of 100 sampled
+> qualify (3.0%), giving an estimated **113** against a floor of 50. The
+> plausible range is roughly 23–320, so the point estimate clears the bar
+> while the lower bound sits in the reduced-panel band. Full numbers in
+> `results/feasibility-counts.md`.
+>
+> **Lesson, recorded because it nearly shipped:** a frozen protocol
+> protects against tuning criteria after seeing results. It does not
+> protect against a *retrieval* query that never surfaced the material in
+> the first place. Low counts were read as evidence of absence when they
+> were evidence of a bad query. Any future feasibility gate must sanity-
+> check its queries against a deliberately broader form before a null is
+> allowed to mean anything.
 
 **Status:** protocol frozen 2026-08-06, before any query was run.
 **This is not a study.** It is the count-only gate that decides whether a

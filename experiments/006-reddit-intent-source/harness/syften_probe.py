@@ -47,6 +47,15 @@ TIERS = {
     # Tier A — intent-matched, comparable to the 002/003/005 human panel.
     # Three separate frames because OR precedence without parentheses is
     # unreliable; they overlap and are reported separately, not summed.
+    # A0 added 2026-08-06 (deviation D3): the same intent WITHOUT requiring the
+    # literal word "recommendation" at retrieval. Recommendation intent is
+    # already enforced by frozen criterion 5 against the post body, so
+    # demanding the word in the query was a redundant filter that cut the
+    # pool 74x (9,676 -> 130) and drove a false negative.
+    "A0_travel_broad": "headphones travel site:reddit.com",
+    # A0b — the decisive form: broad intent, comments excluded at retrieval so
+    # the sample is not 60% wasted on comment chatter.
+    "A0b_travel_posts": "headphones travel site:reddit.com type:post",
     "A1_travel": "headphones travel recommendation site:reddit.com",
     "A2_gift": "headphones gift recommendation site:reddit.com",
     "A3_flight": "headphones flight recommendation site:reddit.com",
