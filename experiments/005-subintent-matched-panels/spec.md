@@ -241,4 +241,16 @@ planted effects before any spend.
 
 ## Deviations from the frozen spec
 
-(none yet — spec not frozen)
+None. The full analysis ran 2026-08-06 on the complete 5-wave dataset with
+§4/§5 exactly as frozen at `80e6c09`; no pipeline code changed after the
+freeze. Results in `results/summary.md`.
+
+Two items reported rather than deviated:
+
+- The mat panel's frozen length-band draw (31 medium / 17 long / 7 short)
+  under-represents short prompts relative to the human band marginal
+  (0.127 vs 0.203). The allocation was drawn and frozen pre-collection;
+  it is reported as a named residual suspect for H2, not a deviation.
+- H1's grounding contrasts returned NEGLIGIBLE (inside the SESOI band,
+  CI excluding zero) rather than NULL for both arms — a reportable
+  decision-table outcome, per §5.

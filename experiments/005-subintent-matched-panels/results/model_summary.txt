@@ -1,58 +1,58 @@
-# Experiment 005 — model results (SYNTHETIC)
+# Experiment 005 — model results
 SESOI=0.1 (absolute Jaccard) / 0.05 (share MAD), alpha=0.1, n_boot=2000
 
-H_pos (gate): between:hum minus cross-intent domain Jaccard = 0.348 [0.347, 0.350], perm p = 0.0002 -> PASS
-H_pla (placebo): parity split = 0.000 [-0.004, 0.004] -> NULL
-H1_mat (brands): cross:hum|mat - between:hum = -0.000 [-0.008, 0.006] (n_pairs 90090, NaN 0) -> NULL
-H1_mat (domains): cross:hum|mat - between:hum = 0.002 [-0.001, 0.004] (n_pairs 90090, NaN 0) -> NULL
-H1_mat (grounding_tokens): cross:hum|mat - between:hum = 0.005 [-0.003, 0.011] (n_pairs 90090, NaN 0) -> NULL
-H1_neu2 (brands): cross:hum|neu2 - between:hum = -0.047 [-0.056, -0.037] (n_pairs 79365, NaN 0) -> NEGLIGIBLE
-H1_neu2 (domains): cross:hum|neu2 - between:hum = 0.003 [0.000, 0.005] (n_pairs 79365, NaN 0) -> NEGLIGIBLE
-H1_neu2 (grounding_tokens): cross:hum|neu2 - between:hum = -0.006 [-0.016, 0.003] (n_pairs 79365, NaN 0) -> NULL
+H_pos (gate): between:hum minus cross-intent domain Jaccard = 0.306 [0.274, 0.338], perm p = 0.0002 -> PASS
+H_pla (placebo): parity split = -0.003 [-0.008, 0.005] -> NULL
+H1_mat (brands): cross:hum|mat - between:hum = -0.001 [-0.038, 0.037] (n_pairs 89902, NaN 188) -> NULL
+H1_mat (domains): cross:hum|mat - between:hum = -0.001 [-0.030, 0.026] (n_pairs 89806, NaN 284) -> NULL
+H1_mat (grounding_tokens): cross:hum|mat - between:hum = -0.054 [-0.082, -0.028] (n_pairs 90090, NaN 0) -> NEGLIGIBLE
+H1_neu2 (brands): cross:hum|neu2 - between:hum = -0.055 [-0.106, -0.006] (n_pairs 79074, NaN 291) -> REAL
+H1_neu2 (domains): cross:hum|neu2 - between:hum = 0.011 [-0.022, 0.041] (n_pairs 79120, NaN 245) -> NULL
+H1_neu2 (grounding_tokens): cross:hum|neu2 - between:hum = -0.045 [-0.076, -0.016] (n_pairs 79365, NaN 0) -> NEGLIGIBLE
 
-H2 basket: 27 brands with human-panel share >= 5%
-H2 (mat): mean |share diff| = 0.043 [0.049, 0.076] (one-sided band 0.05), rank tau = 0.631 -> INCONCLUSIVE
-H2 (neu2): mean |share diff| = 0.128 [0.121, 0.156] (one-sided band 0.05), rank tau = -0.498 -> REAL
+H2 basket: 6 brands with human-panel share >= 5%
+H2 (mat): mean |share diff| = 0.089 [0.071, 0.125] (one-sided band 0.05), rank tau = 0.867 -> REAL
+H2 (neu2): mean |share diff| = 0.137 [0.100, 0.184] (one-sided band 0.05), rank tau = 0.733 -> REAL
 
-H3' (mat, travel_context, n=46): +0.002 [-0.006, +0.009] -> NULL
-H3' (mat, usage_music, n=41): -0.001 [-0.009, +0.006] -> NULL
-H3' (neu2, travel_context, n=32): -0.042 [-0.052, -0.031] -> NEGLIGIBLE
-H3' (neu2, recipient_named, n=17): -0.037 [-0.068, -0.010] -> NEGLIGIBLE
+H3' (mat, travel_context, n=46): -0.009 [-0.051, +0.030] -> NULL
+H3' (mat, usage_music, n=41): -0.038 [-0.088, +0.009] -> NULL
+H3' (neu2, travel_context, n=32): -0.079 [-0.141, -0.024] -> REAL
+H3' (neu2, recipient_named, n=17): +0.074 [+0.019, +0.122] -> REAL
 
-level (brands, between:hum): 0.131 [0.125, 0.137]
-level (brands, within:hum): 0.747 [0.734, 0.760]
-level (brands, between:mat): 0.130 [0.120, 0.141]
-level (brands, cross:hum|mat): 0.130 [0.124, 0.137]
-level (brands, between:neu2): 0.115 [0.098, 0.134]
-level (brands, cross:hum|neu2): 0.084 [0.078, 0.090]
-level (domains, between:hum): 0.348 [0.347, 0.350]
-level (domains, within:hum): 0.354 [0.347, 0.361]
-level (domains, between:mat): 0.349 [0.345, 0.354]
-level (domains, cross:hum|mat): 0.350 [0.348, 0.352]
-level (domains, between:neu2): 0.351 [0.345, 0.359]
-level (domains, cross:hum|neu2): 0.351 [0.349, 0.353]
-level (urls, between:hum): 0.348 [0.347, 0.350]
-level (urls, within:hum): 0.354 [0.347, 0.361]
-level (urls, between:mat): 0.349 [0.345, 0.354]
-level (urls, cross:hum|mat): 0.350 [0.348, 0.352]
-level (urls, between:neu2): 0.351 [0.345, 0.359]
-level (urls, cross:hum|neu2): 0.351 [0.349, 0.353]
-level (grounding_tokens, between:hum): 0.583 [0.574, 0.591]
-level (grounding_tokens, within:hum): 0.891 [0.877, 0.905]
-level (grounding_tokens, between:mat): 0.591 [0.579, 0.604]
-level (grounding_tokens, cross:hum|mat): 0.587 [0.580, 0.595]
-level (grounding_tokens, between:neu2): 0.582 [0.563, 0.601]
-level (grounding_tokens, cross:hum|neu2): 0.576 [0.568, 0.585]
+level (brands, between:hum): 0.517 [0.471, 0.559]
+level (brands, within:hum): 0.704 [0.679, 0.726]
+level (brands, between:mat): 0.539 [0.478, 0.607]
+level (brands, cross:hum|mat): 0.516 [0.477, 0.553]
+level (brands, between:neu2): 0.438 [0.364, 0.516]
+level (brands, cross:hum|neu2): 0.461 [0.412, 0.507]
+level (domains, between:hum): 0.308 [0.276, 0.340]
+level (domains, within:hum): 0.406 [0.382, 0.428]
+level (domains, between:mat): 0.315 [0.276, 0.357]
+level (domains, cross:hum|mat): 0.306 [0.279, 0.332]
+level (domains, between:neu2): 0.338 [0.289, 0.388]
+level (domains, cross:hum|neu2): 0.319 [0.288, 0.350]
+level (urls, between:hum): 0.112 [0.090, 0.135]
+level (urls, within:hum): 0.269 [0.245, 0.291]
+level (urls, between:mat): 0.143 [0.110, 0.180]
+level (urls, cross:hum|mat): 0.126 [0.105, 0.147]
+level (urls, between:neu2): 0.133 [0.100, 0.171]
+level (urls, cross:hum|neu2): 0.121 [0.099, 0.143]
+level (grounding_tokens, between:hum): 0.288 [0.260, 0.316]
+level (grounding_tokens, within:hum): 0.635 [0.611, 0.658]
+level (grounding_tokens, between:mat): 0.229 [0.203, 0.256]
+level (grounding_tokens, cross:hum|mat): 0.233 [0.212, 0.256]
+level (grounding_tokens, between:neu2): 0.225 [0.189, 0.266]
+level (grounding_tokens, cross:hum|neu2): 0.243 [0.216, 0.271]
 
 -- robustness --
-R1_rbo_mat (brands_rbo): cross:hum|mat - between:hum = -0.002 [-0.010, 0.006] (n_pairs 90090, NaN 0) -> NULL
-R1_rbo_neu2 (brands_rbo): cross:hum|neu2 - between:hum = -0.044 [-0.055, -0.033] (n_pairs 79365, NaN 0) -> NEGLIGIBLE
-R2_no_w1_mat (brands): cross:hum|mat - between:hum = -0.000 [-0.008, 0.007] (n_pairs 72072, NaN 0) -> NULL
-R2_no_w1_neu2 (brands): cross:hum|neu2 - between:hum = -0.047 [-0.057, -0.037] (n_pairs 63492, NaN 0) -> NEGLIGIBLE
-R3_dedup_mat (brands): cross:hum|mat - between:hum = -0.000 [-0.007, 0.007] (n_pairs 85215, NaN 0) -> NULL
-R3_dedup_neu2 (brands): cross:hum|neu2 - between:hum = -0.046 [-0.055, -0.036] (n_pairs 74865, NaN 0) -> NEGLIGIBLE
-R4_nonempty_grounding_mat (grounding_tokens): cross:hum|mat - between:hum = 0.005 [-0.003, 0.011] (n_pairs 90090, NaN 0) -> NULL
-R4_nonempty_grounding_neu2 (grounding_tokens): cross:hum|neu2 - between:hum = -0.006 [-0.016, 0.003] (n_pairs 79365, NaN 0) -> NULL
-R5_within_repeat_mat (brands): within:mat - within:hum = -0.011 [-0.042, 0.017] (n_pairs 1980, NaN 0) -> NULL
-R5_within_repeat_neu2 (brands): within:neu2 - within:hum = -0.017 [-0.050, 0.014] (n_pairs 1830, NaN 0) -> NULL
+R1_rbo_mat (brands_rbo): cross:hum|mat - between:hum = -0.060 [-0.101, -0.019] (n_pairs 81683, NaN 8407) -> REAL
+R1_rbo_neu2 (brands_rbo): cross:hum|neu2 - between:hum = -0.051 [-0.093, -0.011] (n_pairs 69802, NaN 9563) -> NEGLIGIBLE
+R2_no_w1_mat (brands): cross:hum|mat - between:hum = -0.001 [-0.040, 0.037] (n_pairs 71938, NaN 134) -> NULL
+R2_no_w1_neu2 (brands): cross:hum|neu2 - between:hum = -0.064 [-0.118, -0.016] (n_pairs 63273, NaN 219) -> REAL
+R3_dedup_mat (brands): cross:hum|mat - between:hum = -0.001 [-0.040, 0.036] (n_pairs 85067, NaN 148) -> NULL
+R3_dedup_neu2 (brands): cross:hum|neu2 - between:hum = -0.056 [-0.109, -0.007] (n_pairs 74627, NaN 238) -> REAL
+R4_nonempty_grounding_mat (grounding_tokens): cross:hum|mat - between:hum = -0.054 [-0.082, -0.028] (n_pairs 90090, NaN 0) -> NEGLIGIBLE
+R4_nonempty_grounding_neu2 (grounding_tokens): cross:hum|neu2 - between:hum = -0.045 [-0.076, -0.016] (n_pairs 79365, NaN 0) -> NEGLIGIBLE
+R5_within_repeat_mat (brands): within:mat - within:hum = -0.038 [-0.086, 0.009] (n_pairs 1926, NaN 54) -> NULL
+R5_within_repeat_neu2 (brands): within:neu2 - within:hum = -0.018 [-0.060, 0.029] (n_pairs 1744, NaN 86) -> NULL
 R6: single model across all waves — no subgroup refit needed

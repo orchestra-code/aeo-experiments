@@ -2,27 +2,44 @@
 
 ## Audit A — collection completeness and degenerate responses
 
-(no ledger — synthetic run)
+Ledger status counts:
+arm     wave  status   
+coffee  1     collected     40
+hum     1     collected    143
+        2     collected    143
+        3     collected    143
+        4     collected    143
+        5     collected    143
+mat     1     collected     55
+        2     collected     55
+        3     collected     55
+        4     collected     55
+        5     collected     55
+neu2    1     collected     40
+        2     collected     40
+        3     collected     40
+        4     collected     40
+        5     collected     40
 
 Degenerate-response rates (mean per arm/wave):
              empty_reply  no_brands  no_fanout  no_sources  had_web_search
 arm    wave                                                               
-coffee 1             0.0        0.0        0.0         0.0             1.0
-hum    1             0.0        0.0        0.0         0.0             1.0
-       2             0.0        0.0        0.0         0.0             1.0
-       3             0.0        0.0        0.0         0.0             1.0
-       4             0.0        0.0        0.0         0.0             1.0
-       5             0.0        0.0        0.0         0.0             1.0
-mat    1             0.0        0.0        0.0         0.0             1.0
-       2             0.0        0.0        0.0         0.0             1.0
-       3             0.0        0.0        0.0         0.0             1.0
-       4             0.0        0.0        0.0         0.0             1.0
-       5             0.0        0.0        0.0         0.0             1.0
-neu2   1             0.0        0.0        0.0         0.0             1.0
-       2             0.0        0.0        0.0         0.0             1.0
-       3             0.0        0.0        0.0         0.0             1.0
-       4             0.0        0.0        0.0         0.0             1.0
-       5             0.0        0.0        0.0         0.0             1.0
+coffee 1             0.0      0.325        0.0       0.075             1.0
+hum    1             0.0      0.063        0.0       0.063             1.0
+       2             0.0      0.063        0.0       0.077             1.0
+       3             0.0      0.049        0.0       0.070             1.0
+       4             0.0      0.035        0.0       0.056             1.0
+       5             0.0      0.070        0.0       0.070             1.0
+mat    1             0.0      0.036        0.0       0.018             1.0
+       2             0.0      0.000        0.0       0.036             1.0
+       3             0.0      0.018        0.0       0.018             1.0
+       4             0.0      0.018        0.0       0.055             1.0
+       5             0.0      0.018        0.0       0.018             1.0
+neu2   1             0.0      0.100        0.0       0.025             1.0
+       2             0.0      0.100        0.0       0.025             1.0
+       3             0.0      0.075        0.0       0.000             1.0
+       4             0.0      0.100        0.0       0.050             1.0
+       5             0.0      0.075        0.0       0.000             1.0
 
 Empty fan-out rate per arm: {'coffee': 0.0, 'hum': 0.0, 'mat': 0.0, 'neu2': 0.0} (spec §6: if >0.30 for any headphone arm, that arm's grounding claims are INCONCLUSIVE territory)
 
@@ -63,43 +80,44 @@ within:neu2            400
 ## Audit D — extraction validity and drift
 
 Model version by arm/wave:
-arm     wave  model          
-coffee  1     gpt-5-synthetic     40
-hum     1     gpt-5-synthetic    143
-        2     gpt-5-synthetic    143
-        3     gpt-5-synthetic    143
-        4     gpt-5-synthetic    143
-        5     gpt-5-synthetic    143
-mat     1     gpt-5-synthetic     55
-        2     gpt-5-synthetic     55
-        3     gpt-5-synthetic     55
-        4     gpt-5-synthetic     55
-        5     gpt-5-synthetic     55
-neu2    1     gpt-5-synthetic     40
-        2     gpt-5-synthetic     40
-        3     gpt-5-synthetic     40
-        4     gpt-5-synthetic     40
-        5     gpt-5-synthetic     40
+arm     wave  model  
+coffee  1     gpt-5-5     40
+hum     1     gpt-5-5    143
+        2     gpt-5-5    143
+        3     gpt-5-5    143
+        4     gpt-5-5    143
+        5     gpt-5-5    143
+mat     1     gpt-5-5     55
+        2     gpt-5-5     55
+        3     gpt-5-5     55
+        4     gpt-5-5     55
+        5     gpt-5-5     55
+neu2    1     gpt-5-5     40
+        2     gpt-5-5     40
+        3     gpt-5-5     40
+        4     gpt-5-5     40
+        5     gpt-5-5     40
 
 Share of responses mentioning each brand, per arm (top 12 by hum share):
                     hum    mat   neu2
-jabra             0.350  0.287  0.080
-sony              0.337  0.342  0.020
-anker             0.317  0.298  0.065
-bose              0.295  0.309  0.065
-bowers & wilkins  0.256  0.258  0.135
-apple             0.249  0.356  0.105
-bang & olufsen    0.249  0.113  0.210
-audio-technica    0.248  0.229  0.100
-shure             0.224  0.182  0.200
-sennheiser        0.207  0.295  0.045
-skullcandy        0.204  0.109  0.185
-philips           0.192  0.236  0.135
+sony              0.890  0.833  0.795
+bose              0.808  0.804  0.720
+sennheiser        0.766  0.665  0.485
+anker             0.698  0.782  0.765
+apple             0.463  0.251  0.280
+jbl               0.234  0.156  0.125
+bowers & wilkins  0.038  0.000  0.000
+edifier           0.034  0.011  0.000
+sonos             0.031  0.000  0.000
+samsung           0.025  0.004  0.005
+focal             0.024  0.000  0.000
+audio-technica    0.024  0.004  0.025
 
 003 anchor (gpt-5-5, 29 Jul - 2 Aug 2026) for the hum arm — drift is
 reportable, not a failure: {'sony': 0.877, 'bose': 0.824, 'sennheiser': 0.776, 'anker': 0.729, 'apple': 0.485, 'jbl': 0.241}
 
-Entity cross-check: no DataForSEO brand entities in this frame.
+Entity cross-check: 287/1190 responses carry DataForSEO
+brand/product entities; extractor recovers 1.000 of entity-derived brands on average.
 
 Spot-check sample of 30 responses written to /Users/jcw/projects/aeo-experiments/experiments/005-subintent-matched-panels/data/interim/spotcheck_sample.md (gitignored).
 Manually list recommended brands per response; require precision >= 0.95 and
