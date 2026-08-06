@@ -241,11 +241,43 @@ planted effects before any spend.
 
 ## Deviations from the frozen spec
 
-None. The full analysis ran 2026-08-06 on the complete 5-wave dataset with
-§4/§5 exactly as frozen at `80e6c09`; no pipeline code changed after the
-freeze. Results in `results/summary.md`.
+The full analysis ran 2026-08-06 on the complete 5-wave dataset with §4/§5
+exactly as frozen at `80e6c09`; no pipeline code changed after the freeze
+and **no pre-registered verdict moved**. Results in `results/summary.md`.
 
-Two items reported rather than deviated:
+### Extraction defects found by Audit D (2026-08-06)
+
+The first independent blind labelling pass (`results/audit-d-signoff.md`,
+PASS at precision 0.974 / recall 0.919) surfaced four defects in the frozen
+lexicon. Per the frozen-instrument rule the lexicon was **not** refitted —
+tuning the instrument after seeing responses is exactly the degree of
+freedom the freeze exists to prevent. The frozen result stands as primary;
+each correction is reported here as a remedy check.
+
+- **D1 — brand-as-platform false positives.** The lexicon matches a brand
+  used as a platform/service reference rather than a product ("such as
+  Apple Music, Tidal, or Qobuz"; "What phone does he use? – Samsung Galaxy
+  – Google Pixel"). Restricting Apple to product aliases (airpods/beats)
+  narrows the Apple gap (mat − hum) from −0.212 to −0.173 and moves mat's
+  H2 MAD 0.0893 → 0.0827, neu2's 0.1372 → 0.1313. **Verdicts unchanged.**
+  The bias is differential — human answers carry platform-only Apple
+  references at 5.0% vs mat's 1.1% — and therefore flatters the headline.
+- **D2 — JLab untracked, above the basket floor.** JLab appears in 6.7% of
+  human responses, over the 5% threshold; the H2 basket should have held 7
+  brands. With JLab included: mat 0.0893 → 0.0783, neu2 0.1372 → 0.1186.
+  **Verdicts unchanged.**
+- **D3 — niche brands untracked, human-panel-only.** HiFiMAN (6), iClever
+  (13), Belkin (8), BuddyPhones (5), eKids (3) — every occurrence across
+  the full dataset is in `hum`. Strengthens rather than threatens the
+  finding that human prompts reach brands synthetic panels do not.
+- **D4 — two gaps not cleanly fixable.** boAt and Noise collide with common
+  English words (a bare `noise` alias matches 96% of responses); `Nothing`
+  is only catchable as `nothing ear`. These need multi-word aliases.
+
+D1 and D2 push in the same direction; combined they leave mat's MAD near
+0.073, still well above the 0.05 band.
+
+### Reported rather than deviated
 
 - The mat panel's frozen length-band draw (31 medium / 17 long / 7 short)
   under-represents short prompts relative to the human band marginal

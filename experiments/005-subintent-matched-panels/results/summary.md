@@ -206,11 +206,34 @@ the phrasing-effect baseline replicates a third time.
 - **C:** 89.9k mat×hum and 79.1k neu2×hum pairs; inference is prompt-level
   cluster bootstrap throughout (55/40 clusters is the binding constraint,
   guarded by the INCONCLUSIVE row — which no primary test hit).
-- **D:** extractor recovered **100%** of DataForSEO's own brand-entity
-  annotations (287/1,190 responses carried them). Lexicon entered unchanged
-  from 003's Audit-D-validated state. **Manual 30-response spot-check
-  OWED** — sample at `data/interim/spotcheck_sample.md`; requires
-  precision ≥ 0.95 / recall ≥ 0.90 sign-off before release.
+- **D: PASS, signed 2026-08-06** (`results/audit-d-signoff.md`) — precision
+  0.974, recall 0.919 on the program's first *independent blind* labelling
+  pass (003's was a verification pass, which is anchored and weak on
+  recall). The extractor also recovered **100%** of DataForSEO's own
+  brand-entity annotations (287/1,190 responses carried them).
+  Four extraction defects were found, quantified, and logged as deviations
+  rather than refitted — the lexicon stays frozen:
+  - **Apple's share is inflated by platform references** ("Apple Music",
+    "Apple ecosystem"), differentially: 5.0% of human responses vs 1.1% of
+    mat's. Restricting to product aliases narrows the Apple gap −0.212 →
+    −0.173 and mat's H2 MAD to 0.0827. **~18% of the single largest
+    per-brand deviation is an extraction artifact** — and it biases toward
+    the headline, so it is stated in the article, not buried.
+  - **JLab is untracked at 6.7% of human responses** — above the 5% floor,
+    so the basket should have held 7 brands. Including it: mat 0.0783,
+    neu2 0.1186. Verdicts unchanged.
+  - HiFiMAN, iClever, Belkin, BuddyPhones and eKids are untracked and
+    appear **only in the human arm** across all 1,190 responses —
+    strengthening the finding that human prompts reach brands synthetic
+    panels never do.
+  - boAt, Noise and Nothing cannot be added safely (common English words);
+    they need multi-word aliases.
+
+  Both corrections push the same direction and neither moves a verdict off
+  REAL; combined they leave mat near 0.073 against the 0.05 band. Audit
+  power: 30 responses detects a 10%-prevalence brand ~96% of the time, 5%
+  ~79%, 2% ~45% — deep-tail gaps likely remain, and recall is measured
+  against what a human spotted, so it is an upper bound.
 - **E (stratification manipulation check): PASS, exact cell match.** All 12
   strata hit their frozen targets exactly. Achieved length bands match the
   drawn allocation exactly; the draw itself under-represents short prompts
@@ -251,19 +274,31 @@ uncovered strata can close H2 without breaking the mix match H2 requires.
 
 ## Remaining steps to close the project
 
-1. **Audit-D spot-check** — Jim labels the 30-response sample
-   (`data/interim/spotcheck_sample.md`), sign-off into
-   `results/audit-d-signoff.md`.
-2. **Release checklist** — copy `templates/release-checklist.md` into
-   `results/`, sign, then commit `data/public/` (runs CSV + mat/neu2 prompt
-   text under the data policy's synthetic-study-prompts exemption; human
-   and coffee prompt text never ship).
-3. **Decide the post-hoc layer** — whether to promote the residual probe
-   and a 003-style raking analysis into `pipeline/91_*.py` for the article.
-4. **Article (EN) + companion blog post (EN/DE)** — the 003 article
+1. ~~**Audit-D spot-check**~~ — PASS, signed 2026-08-06
+   (`results/audit-d-signoff.md`); four defects logged as deviations, no
+   verdict moved.
+2. **Release checklist** — `results/release-checklist.md` staged with the
+   gate already green (`05_release.py` exit 0, brand-leak scan clean across
+   204 aliases × 95 released prompts); needs Jim's review + signature, then
+   `data/public/` can be committed (runs CSV + mat/neu2 prompt text under
+   the data policy's synthetic-study-prompts exemption; human and coffee
+   prompt text never ship).
+3. **Decide the post-hoc layer** — whether to promote the residual probe,
+   the within-sub-intent share cut, and the binary decomposition into
+   `pipeline/91_*.py` for the article.
+4. **Revise this summary's framing before drafting.** It currently leads
+   with "H2 fails". The post-hoc work showed the panels agree on *pool
+   membership* (82% vs 72% of travel prompts ever surfacing Apple; within a
+   few points on the other five head brands) and largely on ranking
+   (τ 0.73–0.87), and that the share metric has a noise floor the human
+   panel does not clear against itself — Apple flips run-to-run within 68%
+   of human prompts, and only 9.5% return it in all five runs. The honest
+   lead is "the pool and ranking transfer; the consistency does not."
+5. **Article (EN) + companion blog post (EN/DE)** — the 003 article
    pre-announced this study; score the five registered predictions
    explicitly, lead with the share dot-plot (F1) and carry H3′ on the
-   matched-strata bars (F4).
+   matched-strata bars (F4). State the Apple extraction artifact explicitly
+   (it flatters our own headline).
 
 ## Deviations from the frozen spec
 
