@@ -108,10 +108,18 @@ def load_key() -> str:
 _RETRY_AFTER = re.compile(r"try again in\s*(?:(\d+)m)?\s*(?:(\d+)s)?", re.I)
 
 
-def search(key: str, query: str, limit: int) -> dict:
+def search(key: str, query: str, limit: int, after: str | None = None,
+           before: str | None = None) -> dict:
     """POST one archive query. A 429 is waited out rather than swallowed —
-    a rate-limited response must never be mistaken for a zero result."""
-    body = json.dumps({"query": query, "after": AFTER, "limit": limit}).encode()
+    a rate-limited response must never be mistaken for a zero result.
+
+    `after`/`before` bound the window; the archive returns newest-first, so
+    slicing is the only way to sample across the whole period rather than
+    just its most recent days."""
+    payload = {"query": query, "after": after or AFTER, "limit": limit}
+    if before:
+        payload["before"] = before
+    body = json.dumps(payload).encode()
     for attempt in range(5):
         req = urllib.request.Request(
             ENDPOINT,
