@@ -262,6 +262,42 @@ that the recipe transfers to intents lacking a human panel to stratify
 generator configuration: conclusions are about "a panel this generator
 produced," not the generator's distribution.
 
+## Post-hoc interpretation layer (added 2026-08-06, exploratory)
+
+`results/exploratory_subintent_residual.md`
+(`pipeline/91_subintent_residual.py`; figures F5 `pool-vs-consistency`,
+F6 `conditioning-mad`). Labelled per the 9× convention — no pre-registered
+verdict depends on it.
+
+- **Conditioning on sub-intent does not close the gap.** Comparing human
+  and synthetic prompts that carry the *same* flag — the commercial framing
+  in which a client names its own sub-intents — the share MAD is 0.085
+  within travel, 0.110 within music, 0.110 within comfort, against an
+  unconditional 0.089. The H2 failure is therefore **not primarily a mix
+  artifact**; synthetic phrasing shifts the proportions in a consistent
+  direction inside every stratum.
+- **The gap is consistency, not pool membership.** Splitting panel share
+  into "prompts that *ever* surface a brand" vs "prompts that surface it in
+  *all five* runs": within travel, human and synthetic agree closely on
+  pool (Apple 82% vs 72%; the other five head brands within a few points)
+  and diverge on consistency (Apple 9.5% vs 0%, rate-given-ever 0.55 vs
+  0.37). The panels agree on **which** brands belong to a sub-intent and
+  disagree on **how often** they return.
+- **The share metric has a noise floor the human panel does not clear.**
+  Apple flips run-to-run within 68% of human prompts and only 12% of human
+  prompts return it in all five runs. No tail brand is returned in all five
+  runs by any meaningful share of human prompts (Bowers & Wilkins 0.0%,
+  Sonos 0.0%, Edifier 0.7%, Focal 0.7%). Tail instability is a property of
+  the medium, not of synthetic panels — and a 45% share that flips within
+  most prompts is a coin flip being averaged, not a stable brand fact.
+- **Brand-naming is ruled out as the Apple mechanism.** Only 7 of 143 human
+  prompts name the Apple ecosystem; dropping all of them moves mat's MAD
+  0.0893 → 0.0869.
+
+**Defensible reframe:** a sub-intent-matched panel is a valid instrument for
+*which brands belong to a use case, and roughly in what order* — not for
+*what percent of the time*.
+
 ## What this means for the program
 
 003 asked whether synthetic panels see the market humans see, and found
@@ -283,9 +319,9 @@ uncovered strata can close H2 without breaking the mix match H2 requires.
    `data/public/` can be committed (runs CSV + mat/neu2 prompt text under
    the data policy's synthetic-study-prompts exemption; human and coffee
    prompt text never ship).
-3. **Decide the post-hoc layer** — whether to promote the residual probe,
-   the within-sub-intent share cut, and the binary decomposition into
-   `pipeline/91_*.py` for the article.
+3. ~~**Decide the post-hoc layer**~~ — promoted 2026-08-06 to
+   `pipeline/91_subintent_residual.py` →
+   `results/exploratory_subintent_residual.md` + figures F5/F6.
 4. **Revise this summary's framing before drafting.** It currently leads
    with "H2 fails". The post-hoc work showed the panels agree on *pool
    membership* (82% vs 72% of travel prompts ever surfacing Apple; within a
