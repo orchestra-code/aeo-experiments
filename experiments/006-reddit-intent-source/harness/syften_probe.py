@@ -168,11 +168,47 @@ def qualifies(inner: dict) -> tuple[bool, str]:
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--counts-only", action="store_true")
+    ap.add_argument("--sample-tier", help="measure the qualifying rate for one "
+                                          "named tier directly, skipping the counts")
+    ap.add_argument("--probe-type-post", action="store_true",
+                    help="check whether the archive honours a type:post filter")
     args = ap.parse_args()
 
     RAW.mkdir(parents=True, exist_ok=True)
     RESULTS.mkdir(parents=True, exist_ok=True)
     key = load_key()
+
+    if args.probe_type_post:
+        base = TIERS["B_category_advice"]
+        for q in (base, f"{base} type:post"):
+            r = search(key, q, 1)
+            print(f"{r.get('total'):>8} {r.get('total_relation','')}  <- {q}")
+            time.sleep(PACE_SECONDS)
+        return
+
+    if args.sample_tier:
+        name = args.sample_tier
+        if name not in TIERS:
+            raise SystemExit(f"unknown tier {name}; choose from {list(TIERS)}")
+        r = search(key, TIERS[name], SAMPLE_N)
+        items = r.get("items", [])
+        (RAW / f"sample_{name}.json").write_text(json.dumps(items, indent=2))
+        reasons: dict[str, int] = {}
+        ok = 0
+        for it in items:
+            good, why = qualifies(it.get("item", it))
+            if good:
+                ok += 1
+            else:
+                reasons[why] = reasons.get(why, 0) + 1
+        rate = ok / len(items) if items else 0.0
+        total = r.get("total", 0)
+        print(f"tier {name}: sampled {len(items)} of {total}, "
+              f"qualifying {ok} ({rate:.1%}) -> est {total * rate:.0f}")
+        for why, n in sorted(reasons.items(), key=lambda kv: -kv[1]):
+            print(f"   {why}: {n}")
+        print(f"quota: {r.get('quota')}")
+        return
     out = ["# 006 feasibility probe — counts", "",
            "Count-only, per the frozen protocol in `feasibility.md`.",
            "No post text appears here; raw payloads stay in gitignored data/raw/.", ""]

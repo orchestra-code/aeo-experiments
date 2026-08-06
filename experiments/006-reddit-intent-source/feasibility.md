@@ -1,5 +1,14 @@
 # 006 — feasibility probe: can a public Q&A venue supply a neutral sub-intent panel?
 
+> **OUTCOME (2026-08-06): NOT VIABLE — stopped at the gate.** The
+> intent-matched tier yields an estimated **6** qualifying posts against a
+> floor of 20. The general-category tier passes (332) but has no matching
+> human baseline, so a panel built from it would confound source with
+> intent. Full numbers in `results/feasibility-counts.md`. Per the frozen
+> rule and Jim's standing instruction, **no follow-up study is designed or
+> announced.** Access is solved and the harness works, so this can be
+> revived cheaply if a denser category or a new human baseline appears.
+
 **Status:** protocol frozen 2026-08-06, before any query was run.
 **This is not a study.** It is the count-only gate that decides whether a
 study is possible, per `docs/workflow.md` §2. No response data is
