@@ -274,8 +274,8 @@ each correction is reported here as a remedy check.
   English words (a bare `noise` alias matches 96% of responses); `Nothing`
   is only catchable as `nothing ear`. These need multi-word aliases.
 
-D1 and D2 push in the same direction; combined they leave mat's MAD near
-0.073, still well above the 0.05 band.
+D1 and D2 push in the same direction; applied together they leave mat's MAD
+at **0.0727** and neu2's at **0.1135**, both still well above the 0.05 band.
 
 ### Reported rather than deviated
 

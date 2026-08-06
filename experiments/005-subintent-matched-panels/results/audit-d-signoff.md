@@ -74,6 +74,7 @@ result stands as primary and these are reported as remedy checks.
 | As frozen (primary) | 0.0893 | 0.1372 | REAL |
 | D2: 7-brand basket incl. JLab | 0.0783 | 0.1186 | REAL, unchanged |
 | D1: product-only Apple aliases | 0.0827 | 0.1313 | REAL, unchanged |
+| **D1 + D2 combined** | **0.0727** | **0.1135** | REAL, unchanged |
 
 D1 also narrows the Apple gap (mat − hum) from −0.212 to −0.173: roughly
 **18% of the single largest per-brand deviation is an extraction artifact**,
