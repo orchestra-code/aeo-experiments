@@ -13,7 +13,7 @@ draft: false
 ---
 
 > **This is a methodology note, not a study.** There is no pre-registered
-> hypothesis, no equivalence testing, and no response collection. It is a
+> hypothesis, no equivalence testing, and no response collection. It's a
 > feasibility investigation into whether a data source is usable at all,
 > published because the answer turned out to be more interesting than the
 > study we were scoping. Everything below is one product category, one
@@ -21,7 +21,7 @@ draft: false
 
 ## Key findings
 
-- **Volume is not the problem.** For a specific commercial sub-intent — headphones for travel — a listening archive surfaced 3,773 Reddit posts in seven months. We had earlier concluded the opposite, and were wrong.
+- **Volume isn't the problem.** For a specific commercial sub-intent — headphones for travel — a listening archive surfaced 3,773 Reddit posts in seven months. We had earlier concluded the opposite, and were wrong.
 - **The funnel from that pool to usable prompts is steep.** Of 500 posts retrieved, 31 passed our criteria, 29 were unique, and only 6 were usable as prompts unedited — about 1 in 80, or roughly 45 posts once scaled to the pool above. The rest carry HTML markup, forum greetings, or brand names that would contaminate the very measurement they are meant to feed.
 - **Clipping posts at sentence boundaries fixes format for 93% of them** — a mechanical edit that preserves the author's exact words and never requires rewriting.
 - **But even the most charitable clipping rule strips at least one of the six load-bearing sub-intent dimensions from 59–63% of posts**, and only a third of clips preserve the author's full profile. Brand mentions and context share sentences, so a brand-free clip is frequently a context-free clip.
@@ -37,7 +37,7 @@ Public Q&A venues are the obvious candidate, and there is a live argument in thi
 
 ## What we did
 
-We used a commercial social-listening archive (Syften) that returns Reddit post bodies in full, which matters because Reddit's own endpoints are not reachable for us directly. We froze a protocol before running anything: a date window of 2026 onward, English only, no hand-picked subreddit list, and eight mechanical inclusion criteria — is it a post rather than a comment, is it question-shaped, is it product-recommendation intent, is it within a length band, is it not deleted, and so on.
+We used a commercial social-listening archive (Syften) that returns Reddit post bodies in full, which matters because Reddit's own endpoints aren't reachable for us directly. We froze a protocol before running anything: a date window of 2026 onward, English only, no hand-picked subreddit list, and eight mechanical inclusion criteria — is it a post rather than a comment, is it question-shaped, is it product-recommendation intent, is it within a length band, is it not deleted, and so on.
 
 We also froze a kill criterion in advance: fewer than 20 estimated qualifying posts and we would stop and design nothing.
 
@@ -45,7 +45,7 @@ The three criteria most vulnerable to being tuned after seeing results — the l
 
 ## The answer we got first was wrong
 
-Our frozen Tier A query was `headphones travel recommendation site:reddit.com`. It returned 130 items. Of 100 sampled, five passed the criteria. That extrapolates to roughly **six** qualifying posts in seven months, far below the floor we had set, and we recorded the study as not viable with a tidy explanation attached: people simply do not post travel-gift headphone questions in volume.
+Our frozen Tier A query was `headphones travel recommendation site:reddit.com`. It returned 130 items. Of 100 sampled, five passed the criteria. That extrapolates to roughly **six** qualifying posts in seven months, far below the floor we had set, and we recorded the study as not viable with a tidy explanation attached: people simply don't post travel-gift headphone questions in volume.
 
 That explanation was false, and the number was an artifact of our own query.
 
@@ -69,13 +69,13 @@ The same artifact had already produced a second false conclusion. We had checked
 | EHR | **10,000+** | 85 |
 | `salesforce hubspot` (comparison phrasing) | **6,774** | — |
 
-B2B is not thinner than consumer. It is phrased differently — B2B buyers compare named products rather than asking for a "recommendation." We had measured our own query template and mistaken it for the world.
+B2B isn't thinner than consumer. It's phrased differently — B2B buyers compare named products rather than asking for a "recommendation." We had measured our own query template and mistaken it for the world.
 
 **This is the part worth dwelling on.** We froze a protocol specifically to prevent motivated reasoning, and it worked exactly as designed on the dimension it covered: we never touched the inclusion criteria. It offered no protection at all on the dimension that actually mattered, because a retrieval query that never surfaces the material makes every downstream criterion irrelevant. A null result is only evidence of absence if your search was capable of finding presence, and we had not checked that our search was.
 
 Anyone told to "just source your prompts from real conversations" is one query-design decision away from the same error, in either direction.
 
-## What is actually there
+## What's actually available from this source
 
 Re-run properly — comments excluded at retrieval, and sampled across five date slices rather than taking the most recent hundred, since the archive returns newest-first — the picture changes completely.
 
@@ -88,27 +88,27 @@ Re-run properly — comments excluded at retrieval, and sampled across five date
   />
   <figcaption>
     Attrition from retrieved forum posts to prompts usable without editing,
-    across the 500 posts sampled in this note.
+    across the 500 posts sampled in thisn'te.
   </figcaption>
 </figure>
 
-Of 500 posts sampled across the window, 31 passed the criteria — a 6.2% qualifying rate, roughly double what the recency-biased sample had suggested. Extrapolated across the pool, that is about **234 qualifying posts**, comfortably enough to build a panel from.
+Of 500 posts sampled across the window, 31 passed the criteria — a 6.2% qualifying rate, roughly double what the recency-biased sample had suggested. Extrapolated across the pool, that's about **234 qualifying posts**, comfortably enough to build a panel from.
 
 Then the problems start.
 
 **Cross-posting inflates the count.** Twenty-nine of the 31 were unique. The same groovebox question appeared in three different subreddits; one post appeared in two. Naive counting overstates the available material by 7–17%, and a hash-based deduplication misses it entirely when one copy carries a "Flair: Question" prefix that changes the hash.
 
-**Most posts are not prompts.** Only 6 of the 29 unique posts — **21%** — could be submitted as-is. The rest carried HTML markup (`<p>`, `&#39;`) in 72% of cases, opened with a forum greeting in 22%, or named brands in 40%.
+**Most posts aren't prompts.** Only 6 of the 29 unique posts — **21%** — could be submitted as-is. The rest carried HTML markup (`<p>`, `&#39;`) in 72% of cases, opened with a forum greeting in 22%, or named brands in 40%.
 
-**Some qualifying posts are not even on topic.** One was a small-form-factor PC build listing that mentioned headphones and travel incidentally and satisfied every regex we had written.
+**Some qualifying posts aren't even on topic.** One was a small-form-factor PC build listing that mentioned headphones and travel incidentally and satisfied every regex we had written.
 
 ## The obvious fix, and what it costs
 
-There is a strong objection to all of this. You do not have to *rewrite* a forum post to use it. You can clip it at sentence boundaries, keeping the author's exact words. Take a real example of the shape we found repeatedly — someone explaining that they fly every fortnight, that engines are noisy, that they want headphones to block it out, and then, three sentences later, that they currently own a specific brand. Clip the first two sentences and you have a usable, brand-free prompt made entirely of one human's own words.
+There is a strong objection to all of this. You don't have to *rewrite* a forum post to use it. You can clip it at sentence boundaries, keeping the author's exact words. Take a real example of the shape we found repeatedly; someone explaining that they fly every fortnight, that engines are noisy, that they want headphones to block it out, and then, three sentences later, that they currently own a specific brand. Clip the first two sentences and you have a usable, brand-free prompt made entirely of one human's own words.
 
 That objection is correct, and we tested it with a mechanical rule applied identically to every post: strip markup, drop a leading greeting, then take a contiguous sentence window that contains the ask, names no brands, stays inside a word budget, and does not open with a dangling connective.
 
-**It works, for format.** 93% of unique qualifying posts yield a viable prompt this way — stable across every variant we tried. Nobody has to write anything.
+**It works, for format.** 93% of unique qualifying posts yield a viable prompt this way. Stable across every variant we tried. Nobody has to write anything.
 
 <figure>
   <img
@@ -132,28 +132,28 @@ We tested three rules, deliberately including the ones most favourable to the ob
 | Longest clean window | 93% | 63 | 30% |
 | Longest, 150-word budget | 93% | 73 | 33% |
 
-Even at its most generous, **only a third of clips preserve the author's full sub-intent**, and 59% lose at least one of the six dimensions our previous study found were load-bearing. Travel context — the defining intent of this category — is stripped from 9 of 27 clips under the charitable rule, and from 25 of 27 under the tight one.
+Even at its most generous, **only a third of clips preserve the author's full sub-intent**, and 59% lose at least one of the six dimensions our previous study found were load-bearing. Travel context, the defining intent of this category, is stripped from 9 of 27 clips under the charitable rule, and from 25 of 27 under the tight one.
 
-**The mechanism is entanglement.** Brand mentions and sub-intent occupy the same sentences. "I have Bose QuietComfort for my flights" carries the brand *and* the travel context in one breath. Excise the brand and you excise the context. The contaminant and the signal are not separable by clipping, because they were never in separate sentences to begin with.
+**The mechanism is entanglement.** Brand mentions and sub-intent occupy the same sentences. "I have Bose QuietComfort for my flights" carries the brand *and* the travel context in one breath. Excise the brand and you excise the context. The contaminant and the signal aren't separable by clipping, because they were never in separate sentences to begin with.
 
-This is the old paradox about the ship whose planks are replaced one at a time. Every word in a clipped prompt is the author's own, and the thing you end up holding is still not quite the thing they wrote — because what made it theirs was not only which words they used but which of them stood next to each other.
+This is the old paradox about the ship whose planks are replaced one at a time. Every word in a clipped prompt is the author's own, and the thing you end up holding is still not quite the thing they wrote — because what made it theirs wasn't only which words they used but which of them stood next to each other.
 
-This is why it matters rather than being a technicality. Our previous study established that **sub-intent mix is what determines which brands come back**. A clipped forum panel therefore inherits precisely the defect that made synthetic panels fall short: the words are human, and the sub-intent profile is not the profile of the humans who wrote them. Clipping preserves the wording and loses the mix, and the mix is the part that moves the measurement.
+This is why it matters rather than being a technicality. Our previous study established that **sub-intent mix is what determines which brands come back**. A clipped forum panel therefore inherits precisely the defect that made synthetic panels fall short: the words are human, and the sub-intent profile isn't the profile of the humans who wrote them. Clipping preserves the wording and loses the mix, and the mix is the part that moves the measurement.
 
-Clipped prompts also run 63–73 words at the median, against 30 for the human survey panel we have been benchmarking against — roughly twice as long as people actually phrase things.
+Clipped prompts also run 63–73 words at the median, against 30 for the human survey panel we have been benchmarking against. Roughly twice as long as people actually phrase things.
 
-## The residual, and why it is not a way out
+## The residual, and why it isn't a way out
 
-About a third of clips do preserve the full sub-intent profile. Scaled to the pool, that is roughly 65 prompts — nominally enough to build a panel.
+About a third of clips do preserve the full sub-intent profile. Scaled to the pool, that's roughly 65 prompts — nominally enough to build a panel.
 
-But that third is not a random subset. It is exactly the posts whose brand mentions happened not to overlap their context sentences, which is a property of how a particular author chose to write. Building a panel from them means selecting on writing style, which is a new representativeness problem substituted for the old one rather than a solution to it.
+But that third isn't a random subset. It's exactly the posts whose brand mentions happened not to overlap their context sentences, which is a property of how a particular author chose to write. Building a panel from them means selecting on writing style, which is a new representativeness problem substituted for the old one rather than a solution to it.
 
-## What we can and cannot claim
+## What we can and can't claim
 
 - **Scope.** One product category, one commercial sub-intent, one listening tool, English, Reddit only, posts from 2026 onward. Nothing here generalizes to other categories without measurement, which is the whole lesson of the wrong answer above.
-- **We measured a tool, not a platform.** Every count describes what one commercial archive surfaced. We did not establish what fraction of Reddit it indexes, so "we could not source it" is the claim, never "it does not exist." A practitioner following this advice would be using a comparable tool and facing a comparable ceiling, which is what makes the measurement decision-relevant, but it is not a claim about Reddit itself.
+- **We measured a tool, not a platform.** Every count describes what one commercial archive surfaced. We did not establish what fraction of Reddit it indexes, so "we could not source it" is the claim, never "it does not exist." A practitioner following this advice would be using a comparable tool and facing a comparable ceiling, which is what makes the measurement decision-relevant, but it isn't a claim about Reddit itself.
 - **We did not test Quora**, and we looked at Google's People Also Ask data only briefly. What we saw there is that PAA questions are short, formulaic, and frequently not purchase-intent at all — "Does TSA allow headphones?" sits alongside "What are the best headphones to take on a plane?" PAA is algorithmically generated, so treating it as a source of *human* phrasing deserves its own scrutiny. We have not done that work.
-- **We did not collect a single AI response.** Whether a clipped forum panel actually produces different answers than a survey panel is a response-level question this note does not touch. We are claiming that the sourcing step is harder than it looks, not that the resulting panel would fail.
+- **We did not collect a single AI response.** Whether a clipped forum panel actually produces different answers than a survey panel is a response-level question thisn'te does not touch. We are claiming that the sourcing step is harder than it looks, not that the resulting panel would fail.
 - **The samples are small.** 29 unique qualifying posts underpin the viability percentages. Treat them as orders of magnitude, not point estimates.
 
 ## What to ask if someone tells you they source prompts from real conversations
@@ -161,14 +161,14 @@ But that third is not a random subset. It is exactly the posts whose brand menti
 - **Which tool, and what does it index?** Every number in this space is bounded by an archive's coverage. "From Reddit" usually means "from whatever our vendor surfaced."
 - **What was the retrieval query, and was it sanity-checked against a broader one?** This is where we went wrong, and the failure is silent in both directions. A query can under-surface material and look like scarcity, or over-surface it and look like abundance.
 - **Were cross-posts collapsed?** The same question posted to three subreddits is one data point, not three.
-- **Were the posts edited, and how?** If the answer is "clipped, not rewritten," that is a real and defensible answer on format. Then ask what the clipping did to the sub-intent distribution, because on our numbers it removes at least one load-bearing dimension from most posts.
+- **Were the posts edited, and how?** If the answer is "clipped, not rewritten," that's a real and defensible answer on format. Then ask what the clipping did to the sub-intent distribution, because on our numbers it removes at least one load-bearing dimension from most posts.
 - **What happened to posts that named a brand?** Keeping them contaminates the measurement. Removing the brand usually removes the context with it. There is no third option, and a vendor who has not hit this problem probably has not looked.
 
 ## Data and reproducibility
 
 - **Protocol, deviations, and results:** [experiments/006-reddit-intent-source/](https://github.com/orchestra-code/aeo-experiments/tree/main/experiments/006-reddit-intent-source), including the frozen feasibility protocol, the deviation log recording the wrong answer and its correction, and both results files.
 - **Analysis code:** the [probe harness](https://github.com/orchestra-code/aeo-experiments/blob/main/experiments/006-reddit-intent-source/harness/syften_probe.py), the [prompt-viability audit](https://github.com/orchestra-code/aeo-experiments/blob/main/experiments/006-reddit-intent-source/harness/audit_candidates.py), and the [clip-rule comparison](https://github.com/orchestra-code/aeo-experiments/blob/main/experiments/006-reddit-intent-source/harness/compare_clip_rules.py).
-- **No dataset ships with this note.** The material is third-party user content, and we did not build a panel from it. Only counts and aggregates are published.
+- **No dataset ships with thisn'te.** The material is third-party user content, and we did not build a panel from it. Only counts and aggregates are published.
 
 ## Changelog
 
