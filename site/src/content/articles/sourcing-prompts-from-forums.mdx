@@ -1,12 +1,13 @@
 ---
 title: "We tried sourcing prompts from real human conversations. The material is abundant. Using it is the hard part."
-description: "A methodology note, not a study. The advice to source AI-visibility prompts from Reddit and similar venues sounds like it dissolves the synthetic-prompt problem. We ran it properly for one product category: volume was never the obstacle. Only 21% of qualifying posts are usable as prompts unedited; clipping them at sentence boundaries fixes that for 93% and strips the author's sub-intent from most of them. Includes the wrong answer we reached first, and why our own frozen protocol did not catch it."
-pubDate: 2026-08-06
+description: "A methodology note, not a study. The advice to source AI-visibility prompts from Reddit and similar venues sounds like it dissolves the synthetic-prompt problem. We ran it properly for one product category: volume was never the obstacle, but only about 1 post in 80 is usable as a prompt unedited. Clipping them at sentence boundaries fixes that for 93% and strips the author's sub-intent from most of them. Includes the wrong answer we reached first, and why our own frozen protocol did not catch it."
+pubDate: 2026-08-07
 authors:
   - name: "Spyglasses Research"
     url: "https://spyglasses.io"
 experiment: "006-reddit-intent-source"
 heroFigure: "/figures/006-reddit-intent-source/clip-tradeoff.png"
+ogImage: "/figures/006-reddit-intent-source/hero.webp"
 tags: ["methodology", "synthetic-prompts", "prompt-panels", "reddit", "sourcing", "negative-result"]
 draft: false
 ---
@@ -21,7 +22,7 @@ draft: false
 ## Key findings
 
 - **Volume is not the problem.** For a specific commercial sub-intent — headphones for travel — a listening archive surfaced 3,773 Reddit posts in seven months. We had earlier concluded the opposite, and were wrong.
-- **Only 21% of qualifying posts are usable as prompts unedited.** The rest carry HTML markup, forum greetings, or brand names that would contaminate the very measurement they are meant to feed.
+- **The funnel from that pool to usable prompts is steep.** Of 500 posts retrieved, 31 passed our criteria, 29 were unique, and only 6 were usable as prompts unedited — about 1 in 80, or roughly 45 posts once scaled to the pool above. The rest carry HTML markup, forum greetings, or brand names that would contaminate the very measurement they are meant to feed.
 - **Clipping posts at sentence boundaries fixes format for 93% of them** — a mechanical edit that preserves the author's exact words and never requires rewriting.
 - **But even the most charitable clipping rule strips at least one of the six load-bearing sub-intent dimensions from 59–63% of posts**, and only a third of clips preserve the author's full profile. Brand mentions and context share sentences, so a brand-free clip is frequently a context-free clip.
 - **Our own frozen protocol produced a confidently wrong answer.** One redundant word in a retrieval query cut the apparent population 74-fold, and the pre-registered inclusion criteria did nothing to catch it.
@@ -134,6 +135,8 @@ We tested three rules, deliberately including the ones most favourable to the ob
 Even at its most generous, **only a third of clips preserve the author's full sub-intent**, and 59% lose at least one of the six dimensions our previous study found were load-bearing. Travel context — the defining intent of this category — is stripped from 9 of 27 clips under the charitable rule, and from 25 of 27 under the tight one.
 
 **The mechanism is entanglement.** Brand mentions and sub-intent occupy the same sentences. "I have Bose QuietComfort for my flights" carries the brand *and* the travel context in one breath. Excise the brand and you excise the context. The contaminant and the signal are not separable by clipping, because they were never in separate sentences to begin with.
+
+This is the old paradox about the ship whose planks are replaced one at a time. Every word in a clipped prompt is the author's own, and the thing you end up holding is still not quite the thing they wrote — because what made it theirs was not only which words they used but which of them stood next to each other.
 
 This is why it matters rather than being a technicality. Our previous study established that **sub-intent mix is what determines which brands come back**. A clipped forum panel therefore inherits precisely the defect that made synthetic panels fall short: the words are human, and the sub-intent profile is not the profile of the humans who wrote them. Clipping preserves the wording and loses the mix, and the mix is the part that moves the measurement.
 
