@@ -36,6 +36,17 @@ ledger under the experiment's gitignored `data/raw/`.
 `.env.local` — pass `--env-file /path/to/spyglasses/.env.local` (same pattern
 as the brand-og-image skill). Never write it into this repo.
 
+## Platforms
+
+`submit --platform {chatgpt,gemini}` (default `chatgpt`) picks the scraper
+endpoint. The platform is stamped into each ledger record and `collect` polls
+each task against the platform it was submitted to, so one ledger can mix
+platforms. Pre-platform ledgers collect as `chatgpt`.
+
+**Gemini caveat (unverified):** Spyglasses production evidence says DataForSEO's
+Gemini scraper exposes NO fan-out field — smoke-test `.fan_out_queries` on a
+couple of Gemini tasks before committing any study arm to it.
+
 ## Cost model (ChatGPT scraper, per task)
 
 - Priority queue (`--priority 2`, default): ~$0.0024, results in ~5 min.

@@ -39,6 +39,7 @@ from pathlib import Path
 import pandas as pd
 
 from aeo_research.dataforseo import (
+    PLATFORM_PATHS,
     Ledger,
     TaskSpec,
     get_task,
@@ -95,7 +96,7 @@ def cmd_submit(a: argparse.Namespace) -> None:
     specs = [
         TaskSpec(keyword=r.text, tag=tag, priority=a.priority) for r in todo.itertuples()
     ]
-    submitted = post_tasks(api_key, specs)
+    submitted = post_tasks(api_key, specs, platform=a.platform)
 
     accepted = rejected = 0
     for row, sub in zip(todo.itertuples(), submitted):
@@ -108,6 +109,7 @@ def cmd_submit(a: argparse.Namespace) -> None:
                     "wave": a.wave,
                     "item_id": row.item_id,
                     "intent": a.intent,
+                    "platform": a.platform,
                     "keyword_sha256": sha256(row.text),
                     "status": "submitted",
                     "submitted_at": now_iso(),
@@ -129,13 +131,17 @@ def collect_once(a: argparse.Namespace, ledger: Ledger, api_key: str) -> int:
     out_dir = Path(a.out_dir)
     still = 0
     for row in pending.itertuples():
-        outcome = get_task(api_key, row.task_id)
+        # Pre-platform ledgers have no column (or NaN in mixed frames) — default chatgpt.
+        raw_platform = getattr(row, "platform", None)
+        platform = raw_platform if isinstance(raw_platform, str) and raw_platform else "chatgpt"
+        outcome = get_task(api_key, row.task_id, platform=platform)
         base = {
             "task_id": row.task_id,
             "tag": row.tag,
             "wave": row.wave,
             "item_id": row.item_id,
             "intent": row.intent,
+            "platform": platform,
             "keyword_sha256": row.keyword_sha256,
             "submitted_at": row.submitted_at,
             "cost": row.cost,
@@ -215,6 +221,8 @@ def main() -> None:
     s.add_argument("--env-file", default=None)
     s.add_argument("--tag-prefix", default="aeo-exp002")
     s.add_argument("--tag", default=None, help="override the derived tag (e.g. smoke tests)")
+    s.add_argument("--platform", default="chatgpt", choices=sorted(PLATFORM_PATHS),
+                   help="LLM scraper endpoint (default chatgpt)")
     s.add_argument("--priority", type=int, default=2, choices=[1, 2],
                    help="2 = priority queue ~5min (default), 1 = standard ~45min, half cost")
     s.add_argument("--limit", type=int, default=None, help="submit only the first N prompts")
