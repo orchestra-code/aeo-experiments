@@ -300,3 +300,24 @@ Editorial decisions from Jim (2026-09-01) — binding for the article:
   article says which platforms' data it shows, and does not discuss what is
   absent or why. The spec (this file) remains the honest internal record of
   coverage.
+
+---
+
+## Deviations from the frozen spec
+
+- **D1 (2026-09-01) — shuffle placebo failed under the frozen pooled logit;
+  estimator repaired to execution-conditioned logit.** The §5 within-answer
+  label shuffle returned non-null on M1 (OR 0.907, CI90 0.838–0.982) and M2
+  (1.072, 1.031–1.115) under the pooled estimator: with 363k rows, pooled
+  logit picks up answer-level composition (answers differ in category mix,
+  pool size, and consulted count), which the within-answer shuffle
+  preserves. This is exactly the failure mode the gate exists to catch, and
+  it means part of the pooled ORs (M1 2.141, M2 1.147, M3 1.339) is
+  between-answer confounding rather than within-answer domain choice — the
+  estimand §1 describes. Repair (`pipeline/05b_conditional_model.py`):
+  conditional logit grouped by answer eliminates every answer intercept;
+  same predictors, SESOIs, seed; shuffle placebo re-run under the
+  conditional estimator must be null; uncertainty via 200-draw
+  domain-cluster bootstrap. The pooled run is retained in
+  `results/model_results.csv` for the record; the conditional estimates are
+  the reported ones, and the article states the placebo catch explicitly.

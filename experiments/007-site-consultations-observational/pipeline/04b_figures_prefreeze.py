@@ -47,7 +47,7 @@ KIND_LABELS = {
 SHOWN_KINDS = 10  # rest folds into "Everything else"
 
 
-def f6v2(tp: pd.DataFrame) -> None:
+def f6v2(tp: pd.DataFrame, *, og: bool = False) -> None:
     raw = tp["kind"].value_counts(normalize=True) * 100
     sector_kind = (
         tp.groupby("trigger_sector")["kind"]
@@ -84,7 +84,8 @@ def f6v2(tp: pd.DataFrame) -> None:
     ax.grid(axis="x", alpha=0.6)
     ax.grid(axis="y", visible=False)
     ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.11), ncol=2)
-    save_figure(fig, FIGURES, "f6v2-consultation-kinds")
+    name = "hero-consultation-kinds" if og else "f6v2-consultation-kinds"
+    save_figure(fig, FIGURES, name, og=og)
 
 
 def f5(pool: pd.DataFrame) -> None:
@@ -130,6 +131,7 @@ def main() -> None:
     pool = pd.read_csv(INTERIM / "pool_with_metrics.csv",
                        keep_default_na=False, na_values=[""])
     f6v2(tp)
+    f6v2(tp, og=True)  # 1200×630 hero/OG variant
     f5(pool)
     print(f"figures -> {FIGURES}")
 
