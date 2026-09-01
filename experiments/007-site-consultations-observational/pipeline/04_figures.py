@@ -139,7 +139,7 @@ def f2_named_brand_timeline(df: pd.DataFrame) -> None:
             continue
         ax.plot(months, pct.values, color=PLATFORM_COLORS[platform],
                 label=PLATFORM_LABELS[platform], marker="o", ms=6)
-    ax.set_title("Naming a brand in the search predates the site: operator — on every platform")
+    ax.set_title("Naming a brand in the search came before the site: operator, on every platform")
     ax.set_ylabel("share of open-web grounding searches\nnaming a brand  (%)")
     ax.set_xlabel("")
     ax.set_ylim(0)

@@ -1,6 +1,6 @@
 ---
-title: "When AI consults a website directly, it is usually not the brand you asked about — and the sites it picks form a measurable authority club."
-description: "Experiment 007: we classified the sites ChatGPT consults directly with site:-scoped grounding searches instead of searching the open web. 81% of direct consultations go to third parties, the list leans institutional even after correcting for panel mix, and consulted domains sit far above merely-cited ones on web-graph centrality and AI Placement Value. Comparison prompts, not brand-identity prompts, are the trigger."
+title: "When AI consults a website directly, it is usually not the brand you asked about. The sites it picks form a measurable authority club."
+description: "Experiment 007: we classified the sites ChatGPT consults directly with site:-scoped grounding searches. 81% of direct consultations go to third parties. The list leans institutional even after correcting for panel mix. Consulted domains sit far above merely-cited ones on web-graph centrality and AI Placement Value, and comparison prompts, not brand-identity prompts, are the trigger."
 pubDate: 2026-09-01
 authors:
   - name: "Spyglasses Research"
@@ -8,30 +8,30 @@ authors:
 experiment: "007-site-consultations-observational"
 heroFigure: "/figures/007-site-consultations-observational/hero-consultation-kinds.png"
 tags: ["chatgpt", "grounding-searches", "site-consultations", "trusted-sources", "aipvs", "harmonic-centrality", "citations", "observational"]
-draft: true
+draft: false
 ---
 
 ## Key findings
 
-- **When ChatGPT consults a site directly, it is usually not the brand being asked about.** Of 6,923 `site:`-scoped grounding searches evaluated in this study, 81% targeted third-party sites, 11% a tracked competitor of the brand whose prompts triggered them, and 8% the brand's own site.
-- **The trusted-source list is institutional, not social.** Government and court sites receive 23% of third-party consultations; bar and professional associations another 9%. Reddit accounts for 0.14%. Re-weighting every client sector equally moves government to 22% — the institutional lean is a property of the model's behavior, not of our panel's industry mix.
-- **Consulted domains are a measurably different population from cited-but-never-consulted domains.** Median Common Crawl graph rank #485,000 vs #2.3 million; 63% vs 43% ranked in the graph at all; median AI Placement Value Score 60 vs 44, with Premium+Strong tiers covering 62% vs 41%. Within an answer, being ranked in the web graph at all carries a consultation odds ratio of 3.4 (90% CI 2.9–3.9); being AIPVS Premium or Strong carries 1.5 (1.2–1.8). Among already-ranked domains, finer rank differences are statistically equivalent to no effect within our pre-set band — visibility in the graph is the gate, not marginal rank.
-- **Comparison prompts are the trigger.** 20% of brand-comparison answers included at least one direct consultation, versus 9% for brand-identity prompts and 8% for category-level prompts. The widespread assumption that asking about a brand sends AI to the brand's site is not what the data shows.
-- The practical consequences: factual product-vs-competitor comparison pages are the content most directly tied to consultation behavior, and placements on directly-consulted publishers carry structural influence on AI answers.
+- **When ChatGPT consults a site directly, it is usually not the brand being asked about.** We evaluated 6,923 `site:`-scoped grounding searches in this study. 81% targeted third-party sites. 11% targeted a tracked competitor of the brand whose prompts triggered them. Only 8% targeted the brand's own site.
+- **The trusted-source list is institutional, not social.** Government and court sites receive 23% of third-party consultations. Bar and professional associations receive another 9%. Reddit accounts for 0.14%. When we re-weight every client sector equally, government still holds 22%. The institutional lean comes from the model's behavior, not from our panel's industry mix.
+- **Consulted domains are a different population from domains that only get cited.** Their median Common Crawl graph rank is #485,000, against #2.3 million for cited-only domains. 63% are ranked in the graph at all, against 43%. Their median AI Placement Value Score is 60, against 44. Within a single answer, being ranked in the web graph at all raises the odds of consultation 3.4 times (90% CI 2.9 to 3.9). Being AIPVS Premium or Strong raises them 1.5 times (1.2 to 1.8). Among domains that are already ranked, finer rank differences add almost nothing. Visibility in the graph is the gate; marginal rank is not.
+- **Comparison prompts are the trigger.** 20% of brand-comparison answers included at least one direct consultation. Brand-identity prompts sat at 9% and category-level prompts at 8%. The common assumption that asking about a brand sends AI to the brand's site is not what the data shows.
+- **Two practical consequences.** Factual product-vs-competitor comparison pages are the content most directly tied to consultation behavior. And placements on directly-consulted publishers carry structural influence on AI answers.
 
 ## Why we asked
 
-Since late July 2026, ChatGPT's grounding searches sometimes carry an explicit `site:domain.com` operator: the model electing to consult one specific site before, or instead of, searching the open web. The arrival of the behavior has been widely noted in the AI-visibility community. What had not been examined is the question that matters for anyone deciding where to spend content and PR effort: **who receives these consultations, and what do the chosen sites have in common?**
+Since late July 2026, ChatGPT's grounding searches sometimes carry an explicit `site:domain.com` operator. That is the model electing to consult one specific site rather than search the open web. The arrival of this behavior has been widely noted in the AI-visibility community. What had not been examined is the question that matters for anyone deciding where to spend content and PR effort: **who receives these consultations, and what do the chosen sites have in common?**
 
-Our mechanistic prior: a direct consultation skips open-web ranking entirely, so the choice of site must come from the model's prior about who is authoritative — which predicts the consulted list should skew toward training-visible authority (web-graph centrality) rather than tracking current SERP strength alone.
+We had a prediction going in. A direct consultation skips open-web ranking entirely, so the model must choose the site from its own prior sense of who is authoritative. If that is right, the consulted list should skew toward authority the model saw in training, such as position in the web's link graph, rather than simply tracking current search rankings.
 
 ## Methods in brief
 
-We evaluated 97,377 grounding-search executions recorded for ChatGPT in this study, of which 6,923 carried a `site:` scope. Each scoped search was classified at read time against the triggering brand's current identity as *own*, *competitor*, or *third-party*; every consulted domain (2,934 including brand-panel domains) was additionally classified into a fourteen-kind taxonomy (AI-assisted, from the bare domain only, with the highest-volume domains reviewed by hand; the classification cache is committed for reproducibility).
+We evaluated 97,377 grounding-search executions recorded for ChatGPT in this study. 6,923 of them carried a `site:` scope. We classified each scoped search against the triggering brand's current identity as *own*, *competitor*, or *third-party*. We also classified every consulted domain into a fourteen-kind taxonomy (2,934 domains including brand-panel domains). That classification was AI-assisted, worked from the bare domain only, and the highest-volume domains were reviewed by hand. The full mapping is committed for reproducibility.
 
-For the authority contrast we built, per answer on category-level prompts, the pool of third-party domains the model either consulted directly or cited without consulting — 363,028 (answer, domain) pairs across 70,090 distinct domains evaluated in this study — and compared the two classes on Common Crawl harmonic-centrality rank and on the [AI Placement Value Score](https://www.spyglasses.io/en/docs/placements/ai-placement-value-score), computed with the production scorer. Cited-only AIPVS coverage comes from a seeded 5,000-domain random sample; sampling controls on the outcome side leaves odds ratios consistent and biases only the intercept.
+For the authority contrast, we built a pool per answer on category-level prompts: every third-party domain the model either consulted directly or cited without consulting. That gave us 363,028 (answer, domain) pairs across 70,090 distinct domains evaluated in this study. We compared the two classes on Common Crawl harmonic-centrality rank and on the [AI Placement Value Score](https://www.spyglasses.io/en/docs/methodology/ai-placement-value-score), computed with the production scorer. AIPVS coverage for the cited-only class comes from a seeded random sample of 5,000 domains. Sampling the control class this way leaves odds ratios consistent; it only shifts the intercept.
 
-Model estimates come from a conditional logit that compares domains only within the same answer, with domain-cluster bootstrap intervals — an estimator repair forced by our own placebo gate and documented as deviation D1 (the Results section tells that story). The full pre-registration is in the [frozen spec](https://github.com/orchestra-code/aeo-experiments) (commit `065e37d`). Because predictor selection examined the joint distributions before the freeze, we label the model results **exploratory with a disclosed selection step**, not clean confirmatory pre-registration.
+Model estimates come from a conditional logit that compares domains within the same answer, with bootstrap intervals clustered by domain. We landed on that estimator because our own placebo gate forced a repair; the Results section tells that story, and the spec records it as deviation D1. The full pre-registration is in the [frozen spec](https://github.com/orchestra-code/aeo-experiments) (commit `065e37d`). One label up front: we examined the joint distributions before the freeze to select predictors, so we report the model results as **exploratory with a disclosed selection step**, not as clean confirmatory pre-registration.
 
 ## Results
 
@@ -41,7 +41,9 @@ Model estimates come from a conditional logit that compares domains only within 
   <img src="/figures/007-site-consultations-observational/f6v2-consultation-kinds.png" alt="Paired horizontal bars comparing observed vs sector-balanced shares of third-party consultations by kind. Government and courts lead at 23% observed, 22% sector-balanced." />
 </figure>
 
-Government & courts lead the third-party list, followed by ordinary businesses (many of them competitors the asking brand does not track), AI & software vendors, law firms, and professional associations. Our client panel is law-heavy — law-firm clients trigger 30% of third-party consultations — so the orange series re-weights every client sector equally. Law firms halve (10% → 5%); **government & courts barely move (23% → 22%)**. The institutional skew survives the panel correction.
+Government and court sites lead the third-party list. Ordinary businesses come next, and many of those are competitors the asking brand does not track. AI and software vendors, law firms, and professional associations follow.
+
+Our client panel is law-heavy. Law-firm clients trigger 30% of third-party consultations. So the orange series re-weights every client sector equally. Under that balancing, law firms drop from 10% to 5%. **Government and courts barely move, from 23% to 22%.** The institutional skew survives the panel correction.
 
 ### The authority contrast
 
@@ -56,13 +58,13 @@ Government & courts lead the third-party list, followed by ordinary businesses (
 | Median AIPVS | 60 | 44 |
 | AIPVS Premium + Strong | 62.4% | 41.0% |
 
-Our controls earned their keep here, and we report that plainly: the label-shuffle placebo came back non-null under the pooled estimator we froze, revealing that part of the pooled association leaked in from answer-level composition rather than domain choice. Per the gate, we stopped and repaired the estimator to a conditional logit that compares domains only **within the same answer** (deviation D1 in the spec; the pooled run is retained in the repository). Under the repaired estimator every placebo is null, and the within-answer results are:
+Our controls earned their keep here, and we report that plainly. The label-shuffle placebo came back non-null under the pooled estimator we froze. That told us part of the pooled association was leaking in from differences between answers, not from the model's choice of domain within an answer. Per the gate, we stopped. We repaired the estimator to a conditional logit that compares domains only **within the same answer**. The spec records this as deviation D1, and the pooled run stays in the repository. Under the repaired estimator every placebo is null. The within-answer results:
 
-- **Being ranked in the Common Crawl graph at all: OR 3.37 (90% CI 2.95–3.90) — a real effect,** well beyond our 1.5 equivalence band.
-- **Among ranked domains, each 10× improvement in graph rank: OR 1.17 (1.07–1.25) — statistically equivalent to no effect** within our pre-registered 1.30 band. Graph *visibility* is the gate; once a domain is in the graph, marginal rank adds little.
-- **AIPVS Premium or Strong tier: OR 1.51 (1.18–1.79) — a real effect** whose interval reaches past the 1.5 band.
+- **Being ranked in the Common Crawl graph at all: odds ratio 3.37 (90% CI 2.95 to 3.90). A real effect,** well beyond our 1.5 equivalence band.
+- **Among ranked domains, each 10× improvement in graph rank: odds ratio 1.17 (1.07 to 1.25). Statistically equivalent to no effect** within our pre-registered 1.30 band. Graph *visibility* is the gate. Once a domain is in the graph, marginal rank adds little.
+- **AIPVS Premium or Strong tier: odds ratio 1.51 (1.18 to 1.79). A real effect** whose interval reaches past the 1.5 band.
 
-The positive control passed (the government/professional-association cohort consults at 9.9× the pool base rate; gate ≥3×), and the domain-name-length-parity placebo was null.
+The positive control passed: the government and professional-association cohort consults at 9.9 times the pool base rate, against a gate of 3. The domain-name-length placebo was null.
 
 ### What triggers a consultation
 
@@ -70,7 +72,7 @@ The positive control passed (the government/professional-association cohort cons
   <img src="/figures/007-site-consultations-observational/f4-consult-rate-by-prompt-class.png" alt="Bar chart: share of answers with a direct site consultation. Brand-comparison prompts 20%, brand-identity 9%, category-level 8%." />
 </figure>
 
-Brand-comparison prompts consulted a site directly in 20% of answers; brand-identity prompts in 9%; category-level prompts in 8%. When the model weighs one brand against another is when it goes to primary sources — which makes factual, non-superlative comparison pages the content format most directly tied to consultation behavior.
+Brand-comparison prompts consulted a site directly in 20% of answers. Brand-identity prompts did so in 9%, and category-level prompts in 8%. The model goes to primary sources when it weighs one brand against another. That makes factual, non-superlative comparison pages the content format most directly tied to consultation behavior.
 
 ### The precursor behavior
 
@@ -78,22 +80,22 @@ Brand-comparison prompts consulted a site directly in 20% of answers; brand-iden
   <img src="/figures/007-site-consultations-observational/f2-named-brand-share.png" alt="Monthly lines: share of open-web grounding searches naming a brand, ChatGPT, Gemini and Claude, rising from about 3% in February to 11-15% in August 2026." />
 </figure>
 
-Before the operator existed, models did the same thing by naming a brand inside an open-web search. That behavior appears on every platform in this study, reaches back to at least February 2026 on Gemini, and roughly tripled over the summer to 11–15% of open-web grounding searches in August.
+Before the operator existed, models did the same thing by naming a brand inside an open-web search. That behavior appears on every platform in this study. It reaches back to at least February 2026 on Gemini, and it roughly tripled over the summer, to 11% to 15% of open-web grounding searches in August.
 
 ## What we can and cannot claim
 
-**This design measures a conditional association, not a cause.** Among domains the model retrieved or cited for category-level prompts, the ones it consults directly sit higher on public authority metrics. No one assigned authority at random; we cannot say that raising a domain's centrality or AIPVS causes consultations.
+**This design measures a conditional association, not a cause.** Among domains the model retrieved or cited for category-level prompts, the ones it consults directly sit higher on public authority metrics. No one assigned authority at random. We cannot say that raising a domain's centrality or AIPVS causes consultations.
 
-**The pool conditions on retrieval.** Every domain in the contrast was already surfaced by the model for that prompt. Domains the model never retrieves are invisible to this design, so nothing here describes the marginal probability that an arbitrary site gets consulted.
+**The pool conditions on retrieval.** Every domain in the contrast was already surfaced by the model for that prompt. Domains the model never retrieves are invisible to this design. Nothing here describes the chance that an arbitrary site gets consulted.
 
-**The taxonomy is AI-assisted.** Domain kinds were classified by a language model from the bare domain name, with the highest-volume domains reviewed by hand and the full mapping committed. Residual classification error exists and predominantly blurs the boundary between the business categories, not the institutional ones.
+**The taxonomy is AI-assisted.** A language model classified domain kinds from the bare domain name. We reviewed the highest-volume domains by hand and committed the full mapping. Residual classification error exists. It mostly blurs the boundaries between the business categories, not the institutional ones.
 
-**Panel mix shapes the raw shares.** Our clients skew toward certain industries; we publish the sector-balanced series alongside the observed one, and every headline claim above survives the balancing.
+**Panel mix shapes the raw shares.** Our clients skew toward certain industries. We publish the sector-balanced series alongside the observed one, and every headline claim above survives the balancing.
 
-**The model results carry a disclosed selection step.** Predictors were chosen after examining joint distributions (pre-freeze), so the odds ratios are exploratory-with-disclosure rather than confirmatory. The direction and rough size of every reported effect were stable across the selection process.
+**The model results carry a disclosed selection step.** We chose predictors after examining joint distributions, before the freeze. The odds ratios are exploratory with disclosure, not confirmatory. The direction of every reported effect was stable throughout.
 
-Sample sizes throughout are counts evaluated in this study, not statements about the Spyglasses database.
+Sample sizes throughout are counts evaluated in this study. They are not statements about the Spyglasses database.
 
 ## Data and reproducibility
 
-The extraction SQL, classification pipeline, frozen spec (commit `065e37d`), model code, and figure code are in the experiment directory `007-site-consultations-observational` of our research repository. Figures carry their provenance; raw grounding-search text is customer data and is never published. A derived-features dataset release is under review.
+The extraction SQL, classification pipeline, frozen spec (commit `065e37d`), model code, and figure code live in the experiment directory `007-site-consultations-observational` of our research repository. Figures carry their provenance. Raw grounding-search text is customer data and is never published. A derived-features dataset release is under review.

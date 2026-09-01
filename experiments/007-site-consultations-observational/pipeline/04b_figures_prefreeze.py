@@ -80,7 +80,7 @@ def f6v2(tp: pd.DataFrame, *, og: bool = False) -> None:
     ax.set_yticks(y, labels)
     ax.invert_yaxis()
     ax.set_xlabel("share of third-party site consultations  (%)")
-    ax.set_title("Who AI consults directly — with the client-mix skew shown honestly")
+    ax.set_title("Who AI consults directly, before and after balancing our client mix")
     ax.grid(axis="x", alpha=0.6)
     ax.grid(axis="y", visible=False)
     ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.11), ncol=2)
