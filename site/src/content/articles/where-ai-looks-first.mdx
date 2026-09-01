@@ -15,7 +15,7 @@ draft: true
 
 - **When ChatGPT consults a site directly, it is usually not the brand being asked about.** Of 6,923 `site:`-scoped grounding searches evaluated in this study, 81% targeted third-party sites, 11% a tracked competitor of the brand whose prompts triggered them, and 8% the brand's own site.
 - **The trusted-source list is institutional, not social.** Government and court sites receive 23% of third-party consultations; bar and professional associations another 9%. Reddit accounts for 0.14%. Re-weighting every client sector equally moves government to 22% — the institutional lean is a property of the model's behavior, not of our panel's industry mix.
-- **Consulted domains are a measurably different population from cited-but-never-consulted domains.** Median Common Crawl graph rank #485,000 vs #2.3 million; 63% vs 43% ranked in the graph at all; median AI Placement Value Score 60 vs 44, with Premium+Strong tiers covering 62% vs 41%. The frozen models put the ranked-at-all odds ratio at [[OR_M1]] and the Premium/Strong odds ratio at [[OR_M3]].
+- **Consulted domains are a measurably different population from cited-but-never-consulted domains.** Median Common Crawl graph rank #485,000 vs #2.3 million; 63% vs 43% ranked in the graph at all; median AI Placement Value Score 60 vs 44, with Premium+Strong tiers covering 62% vs 41%. Within an answer, being ranked in the web graph at all carries a consultation odds ratio of 3.4 (90% CI 2.9–3.9); being AIPVS Premium or Strong carries 1.5 (1.2–1.8). Among already-ranked domains, finer rank differences are statistically equivalent to no effect within our pre-set band — visibility in the graph is the gate, not marginal rank.
 - **Comparison prompts are the trigger.** 20% of brand-comparison answers included at least one direct consultation, versus 9% for brand-identity prompts and 8% for category-level prompts. The widespread assumption that asking about a brand sends AI to the brand's site is not what the data shows.
 - The practical consequences: factual product-vs-competitor comparison pages are the content most directly tied to consultation behavior, and placements on directly-consulted publishers carry structural influence on AI answers.
 
@@ -31,7 +31,7 @@ We evaluated 97,377 grounding-search executions recorded for ChatGPT in this stu
 
 For the authority contrast we built, per answer on category-level prompts, the pool of third-party domains the model either consulted directly or cited without consulting — 363,028 (answer, domain) pairs across 70,090 distinct domains evaluated in this study — and compared the two classes on Common Crawl harmonic-centrality rank and on the [AI Placement Value Score](https://www.spyglasses.io/en/docs/placements/ai-placement-value-score), computed with the production scorer. Cited-only AIPVS coverage comes from a seeded 5,000-domain random sample; sampling controls on the outcome side leaves odds ratios consistent and biases only the intercept.
 
-The full pre-registration, including a disclosed pre-freeze predictor-selection step, is in the [frozen spec](https://github.com/orchestra-code/aeo-experiments) (commit `065e37d`). Because predictor selection examined the joint distributions before the freeze, we label the model results **exploratory with a disclosed selection step**, not clean confirmatory pre-registration.
+Model estimates come from a conditional logit that compares domains only within the same answer, with domain-cluster bootstrap intervals — an estimator repair forced by our own placebo gate and documented as deviation D1 (the Results section tells that story). The full pre-registration is in the [frozen spec](https://github.com/orchestra-code/aeo-experiments) (commit `065e37d`). Because predictor selection examined the joint distributions before the freeze, we label the model results **exploratory with a disclosed selection step**, not clean confirmatory pre-registration.
 
 ## Results
 
@@ -56,7 +56,13 @@ Government & courts lead the third-party list, followed by ordinary businesses (
 | Median AIPVS | 60 | 44 |
 | AIPVS Premium + Strong | 62.4% | 41.0% |
 
-The frozen models (logit, domain-clustered uncertainty, 90% CIs): being ranked in the Common Crawl graph at all carries an odds ratio of [[OR_M1_FULL]] for being consulted; among ranked domains, each 10× improvement in graph rank carries [[OR_M2_FULL]]; being AIPVS Premium or Strong carries [[OR_M3_FULL]]. [[VERDICTS_SENTENCE]] A positive control (the government/professional-association cohort consults at [[HPOS]]× the pool base rate) and two placebos (domain-name-length parity; a within-answer label shuffle) behaved as required.
+Our controls earned their keep here, and we report that plainly: the label-shuffle placebo came back non-null under the pooled estimator we froze, revealing that part of the pooled association leaked in from answer-level composition rather than domain choice. Per the gate, we stopped and repaired the estimator to a conditional logit that compares domains only **within the same answer** (deviation D1 in the spec; the pooled run is retained in the repository). Under the repaired estimator every placebo is null, and the within-answer results are:
+
+- **Being ranked in the Common Crawl graph at all: OR 3.37 (90% CI 2.95–3.90) — a real effect,** well beyond our 1.5 equivalence band.
+- **Among ranked domains, each 10× improvement in graph rank: OR 1.17 (1.07–1.25) — statistically equivalent to no effect** within our pre-registered 1.30 band. Graph *visibility* is the gate; once a domain is in the graph, marginal rank adds little.
+- **AIPVS Premium or Strong tier: OR 1.51 (1.18–1.79) — a real effect** whose interval reaches past the 1.5 band.
+
+The positive control passed (the government/professional-association cohort consults at 9.9× the pool base rate; gate ≥3×), and the domain-name-length-parity placebo was null.
 
 ### What triggers a consultation
 
