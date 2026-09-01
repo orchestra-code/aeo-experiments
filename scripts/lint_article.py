@@ -24,6 +24,12 @@ DENY = [
     # Proprietary content markers that should never appear.
     (r"(?i)\bthe customer('s)? prompt\b", "references customer prompt content"),
     (r"(?i)\bfan[- ]?out quer(y|ies) (was|were|reads?|says?)\b", "quotes fan-out queries"),
+    # House style (2026-09-01): no em/en dashes; ranges use 'to'.
+    (r"—", "em dash — use a comma, colon, semicolon, or a shorter sentence"),
+    (r"–", "en dash — write ranges with 'to' (e.g. '2.9 to 3.9')"),
+    # Banned copy words (AI tells) — also check figure titles in pipeline code.
+    (r"(?i)\bhonest(ly)?\b", "banned word ('honest/honestly')"),
+    (r"(?i)\bgenuine(ly)?\b", "banned word ('genuine/genuinely')"),
 ]
 
 # "N = 5,500" style without study framing nearby (±160 chars).
