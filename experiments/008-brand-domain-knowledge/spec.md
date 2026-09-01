@@ -25,9 +25,10 @@ run — a lookup that is miswired) or like a **per-run generative guess**
 (morphologically plausible `brandname.com`-style errors that flip between
 runs and "self-correct" the next day). 48 real brands in four tiers
 (guessable / non-obvious domain / recently-migrated / obscure) × 2 prompt
-templates × ChatGPT (+ Gemini if the pilot shows fan-outs) × 14 daily waves,
-with 3-per-day spaced replicates on waves 1–4 to separate within-day
-stochasticity from day-over-day drift. All claims are rates with CIs — a
+templates, run against the direct OpenAI Responses API (the Gemini arm died
+in the pilot, §8b) across 10 daily waves, with 3-per-day spaced replicates
+on wave 1 to separate within-day stochasticity from day-over-day drift
+(allocation C, §7). All claims are rates with CIs — a
 quiet week is an upper bound, never proof of impossibility.
 
 ## 1. The claim we can and cannot make
