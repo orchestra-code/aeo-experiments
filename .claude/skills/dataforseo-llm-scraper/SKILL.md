@@ -43,9 +43,17 @@ endpoint. The platform is stamped into each ledger record and `collect` polls
 each task against the platform it was submitted to, so one ledger can mix
 platforms. Pre-platform ledgers collect as `chatgpt`.
 
-**Gemini caveat (unverified):** Spyglasses production evidence says DataForSEO's
-Gemini scraper exposes NO fan-out field — smoke-test `.fan_out_queries` on a
-couple of Gemini tasks before committing any study arm to it.
+**Gemini caveat (CONFIRMED 2026-09-01):** the Gemini endpoint rejects the
+`force_web_search` field's presence (40501) — the client omits it for Gemini —
+and returns no fan-out surface at all.
+
+**ChatGPT search-phase regression (observed 2026-09-01):** `fan_out_queries`,
+`search_results`, and `model` came back EMPTY/null on every task in exp 008's
+pilot (brand AND exp-005-style category prompts), while `sources` stayed
+populated. Exp 005 (2026-08-05) had 100% fan-out coverage from the same
+payload shape. Until DataForSEO restores search-phase extraction, this
+scraper cannot support fan-out/grounding-query studies — smoke-test
+`.fan_out_queries` before designing any study around it.
 
 ## Cost model (ChatGPT scraper, per task)
 

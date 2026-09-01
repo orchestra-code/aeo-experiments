@@ -219,6 +219,52 @@ both before any real collection is scored.
 5. Template wording sanity: spot-read 10 answers for wrong-entity responses;
    tighten category anchors if needed (allowed pre-freeze only).
 
+## 8b. Pilot wave 0 findings (2026-09-01 — 31 tasks, $0.07; pre-freeze)
+
+The pilot ran §8 items 1–4 and **killed the planned instrument**:
+
+1. **DataForSEO ChatGPT scraper no longer exposes the search phase.** All 26
+   ChatGPT tasks (10 brands × 2 templates, 3 cache replicates, 3 exp-005-style
+   category probes) returned `fan_out_queries: []`, `search_results: []`,
+   `se_results_count: 0`, `model: null` — while `sources` stayed populated
+   (3–15 per answer), so web search clearly ran. Exp 005 (2026-08-05, same
+   payload shape) had 100% fan-out coverage and `model: "gpt-5-5"`. The
+   scraper's search-phase extraction changed/broke between 2026-08-05 and
+   2026-09-01 — plausibly tracking the same ChatGPT UI change that introduced
+   `site:` searches. The primary outcome as designed (§5) is currently
+   unobservable through DataForSEO.
+2. **Gemini arm is dead, twice over:** the endpoint rejects the
+   `force_web_search` field's presence (40501), and its responses carry no
+   fan-out surface (harness now omits the field for Gemini). ChatGPT-only,
+   as §8.1 anticipated.
+3. **No same-day batch caching:** three identical batch-submitted prompts
+   returned three distinct answers (distinct markdown hashes/lengths). The
+   spaced half of the probe is moot pending the instrument decision.
+4. **Sources-accuracy preview** (exploratory, n=10 brands): ChatGPT's cited
+   sources contained the brand's canonical domain for 10/10 brand-identity
+   prompts (usually top-ranked; `notion.com` not `.so`, `usemotion.com`,
+   `linear.app`, `hellobonsai.com`); the comparison template 8/10. Gemini
+   (via its scraper): 2/5, with third-party review sites dominating. No
+   old-domain or morphological-guess domains surfaced anywhere.
+5. **Instrument decision (PENDING a valid OpenAI API key):** the replacement
+   collector is the direct OpenAI Responses API with the `web_search` tool —
+   the exact path Spyglasses production harvests `web_search_call.action.query`
+   from (site: operators included), and the model prod pins (gpt-5.6-terra).
+   This makes 008's instrument IDENTICAL to the pipeline that produces 007's
+   observational corpus — a coherence gain, at the cost of measuring the API
+   surface rather than the consumer UI (state this in §1).
+   `harness/probe_openai_direct.py` is ready; the local spyglasses
+   OPENAI_API_KEY is invalid (`invalid_api_key`) so the probe has not run.
+6. **Production-side flag (outside this study):** if nightly ChatGPT prompt
+   runs ingest grounding from DataForSEO `fan_out_queries`, that ingest may
+   have thinned/flatlined since the scraper change — check openai-platform
+   grounding-row volume by week on the replica.
+
+Consequences for the design if the direct-API probe succeeds: allocation
+(§7) is re-costed for Responses-API pricing at freeze; H1 emission rates are
+calibrated on the new instrument before freeze; everything in §4's structure
+stands.
+
 ## 9. Deliverables and sequence
 
 1. Pilot wave 0 → decisions recorded in this file
