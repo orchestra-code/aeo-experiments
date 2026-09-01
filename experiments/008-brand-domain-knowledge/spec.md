@@ -1,7 +1,7 @@
 # AI models KNOW brand domains rather than guessing them per run — study spec
 
 **Status:** frozen
-**Frozen commit:** <recorded in the follow-up commit, per docs/workflow.md §3>
+**Frozen commit:** 891a5ab
 **Frozen date:** 2026-09-01 (seed 20260901; waves start 2026-09-02)
 **Experiment slug:** `008-brand-domain-knowledge`
 
