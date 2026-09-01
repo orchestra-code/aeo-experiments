@@ -53,18 +53,12 @@ def load_url() -> tuple[str, str | None]:
     raise SystemExit(f"No usable PROD_REPLICA_URL in {ENV_FILES}")
 
 
-def main() -> None:
-    # Optional: --tenant <id> rewrites the pooler username's tenant suffix
-    # (postgres.<ref> -> postgres.<id>). Supabase read replicas are routed by
-    # the pooler via a replica-suffixed tenant id; the db.<ref>-rr-* host is
-    # IPv6-only and unreachable without an IPv6 route.
-    tenant = None
-    argv = sys.argv[1:]
-    if argv and argv[0] == "--tenant":
-        tenant = argv[1]
-        del argv[:2]
-    sys.argv[1:] = argv
+def pg_env(tenant: str | None = None) -> dict[str, str]:
+    """Environment for psql/libpq pointed read-only at the replica.
 
+    Importable by extraction scripts (e.g. experiments/007 pipeline/00_extract)
+    so credentials are parsed in exactly one place and never printed.
+    """
     url, harvested_tenant = load_url()
     tenant = tenant or harvested_tenant
     scheme, _, rest = url.partition("://")
@@ -92,8 +86,23 @@ def main() -> None:
         # Belt and braces: this tool exists for read-only analysis.
         PGOPTIONS="-c default_transaction_read_only=on",
     )
+    return env
+
+
+def main() -> None:
+    # Optional: --tenant <id> rewrites the pooler username's tenant suffix
+    # (postgres.<ref> -> postgres.<id>). Supabase read replicas are routed by
+    # the pooler via a replica-suffixed tenant id; the db.<ref>-rr-* host is
+    # IPv6-only and unreachable without an IPv6 route.
+    tenant = None
+    argv = sys.argv[1:]
+    if argv and argv[0] == "--tenant":
+        tenant = argv[1]
+        del argv[:2]
+    sys.argv[1:] = argv
+
     raise SystemExit(
-        subprocess.run(["psql", "-X", *sys.argv[1:]], env=env).returncode
+        subprocess.run(["psql", "-X", *sys.argv[1:]], env=pg_env(tenant)).returncode
     )
 
 
