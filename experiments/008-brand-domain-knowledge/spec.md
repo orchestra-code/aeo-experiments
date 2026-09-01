@@ -246,15 +246,28 @@ The pilot ran §8 items 1–4 and **killed the planned instrument**:
    `linear.app`, `hellobonsai.com`); the comparison template 8/10. Gemini
    (via its scraper): 2/5, with third-party review sites dominating. No
    old-domain or morphological-guess domains surfaced anywhere.
-5. **Instrument decision (PENDING a valid OpenAI API key):** the replacement
-   collector is the direct OpenAI Responses API with the `web_search` tool —
-   the exact path Spyglasses production harvests `web_search_call.action.query`
-   from (site: operators included), and the model prod pins (gpt-5.6-terra).
+5. **Instrument decision (RESOLVED 2026-09-01): direct OpenAI Responses API
+   with the `web_search` tool** — the exact path Spyglasses production
+   harvests `web_search_call.action.query` from, on the model prod pins
+   (gpt-5.6-terra). Probe (`harness/probe_openai_direct.py`, 3 prompts)
+   confirmed the collector AND previewed the phenomenon:
+   - `motion_p1` → 4 web_search_call items incl. `site:usemotion.com pricing …`
+     and `site:usemotion.com/pricing …` — the model used the TRUE non-obvious
+     tier-B domain, not the motion.com morphological guess;
+   - `notion_p1` → `site:notion.com/help …` — the NEW tier-C domain, not
+     notion.so;
+   - even the category probe emitted one `site:` search
+     (`site:sennheiser-hearing.com …`).
+   site:-emission on brand-identity prompts looks strong (2/2 brands) —
+   viable power for §4. Collector refinements for the real harness: some
+   `web_search_call` items carry no `action.query` (record `action.type`;
+   likely open_page/find-style actions), and `action.sources` came back
+   empty — try the Responses API `include` parameter for
+   `web_search_call.action.sources` before deciding sources are unavailable.
    This makes 008's instrument IDENTICAL to the pipeline that produces 007's
    observational corpus — a coherence gain, at the cost of measuring the API
-   surface rather than the consumer UI (state this in §1).
-   `harness/probe_openai_direct.py` is ready; the local spyglasses
-   OPENAI_API_KEY is invalid (`invalid_api_key`) so the probe has not run.
+   surface rather than the consumer UI (state this in §1). Allocation (§7)
+   re-costs at Responses-API pricing at freeze.
 6. **Production-side flag (outside this study):** if nightly ChatGPT prompt
    runs ingest grounding from DataForSEO `fan_out_queries`, that ingest may
    have thinned/flatlined since the scraper change — check openai-platform

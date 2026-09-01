@@ -100,10 +100,19 @@ would be wrong and "AI consultation" would just be SERP ranking in disguise.
   domains. Report coverage per class — if consulted domains are ranked at 95%
   and retrieved-only at 60%, say so prominently, because that gap is itself
   the effect.
-- **Audit E — weekly-harvest inflation.** `prompt_runs.runType =
-  'weekly_grounding'` rows exist only to harvest Gemini fan-outs and would
-  inflate Gemini's share; they are flagged in the extract and excluded from
-  platform-mix figures (kept, flagged, for the pooled model).
+- **Audit E — capture artifacts.** Two known, verified discontinuities that
+  are properties of the CAPTURE pipeline, not of model behavior:
+  1. `prompt_runs.runType = 'weekly_grounding'` rows exist only to harvest
+     Gemini fan-outs and inflate Gemini's share; flagged in the extract,
+     excluded from platform-mix figures (kept, flagged, for the pooled model).
+  2. **The nightly DataForSEO ChatGPT feed stopped carrying fan-outs on
+     2026-08-25** (verified on the replica 2026-09-01: daily openai ingest
+     fell ~95% while the report-path direct API and the gemini/claude
+     controls were unaffected; independently confirmed by exp 008's pilot
+     and in the DataForSEO playground). Timeline figures end at 2026-08-24
+     or normalize per capture path. An ingest step-UP around 2026-08-08 must
+     also be understood before the emergence timeline is published.
+     See `results/prefreeze-counts.md`.
 
 Do not fit anything until A–E are answered in this file.
 
