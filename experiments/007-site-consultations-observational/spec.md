@@ -1,7 +1,7 @@
 # AI assistants consult high-authority domains directly instead of searching the open web — study spec
 
 **Status:** frozen
-**Frozen commit:** <recorded in the follow-up commit, per docs/workflow.md §3>
+**Frozen commit:** 065e37d
 **Frozen date:** 2026-09-01 (seed 20260901)
 **Experiment slug:** `007-site-consultations-observational`
 
