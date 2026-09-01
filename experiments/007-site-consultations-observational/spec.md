@@ -20,6 +20,16 @@
 >   first inevitably shows us marginal distributions — that is disclosed in the
 >   write-up, and it is why the correlational hypotheses are stated in terms of
 >   a conditional contrast the marginals do not reveal.
+>
+> **DISCLOSED PRE-FREEZE DEVIATION (2026-09-01, study owner's direction):**
+> before the freeze, `pipeline/03_prefreeze_explore.py` examined the joint
+> consulted-vs-cited × authority-metric distributions to SELECT the frozen
+> model's predictors (harmonic centrality and AIPVS tier certain; PageRank /
+> ETV percentiles only if materially different from those two). The
+> correlational layer is therefore published as **exploratory with a
+> disclosed selection step**, not as clean confirmatory pre-registration.
+> The selection run is committed; its seed (20260901) and sample rules are
+> recorded in `pipeline/02b_aipvs.py`.
 
 ---
 
@@ -239,8 +249,26 @@ real extract is modeled.
 
 ## 9. Notes for the write-up
 
-- Lead figure: F5 (consulted vs retrieved-only centrality contrast); F1 is
-  the news hook (site: emergence timeline).
+Editorial decisions from Jim (2026-09-01) — binding for the article:
+- **No emergence visual, passing mention only.** The arrival of site: is
+  already covered by other voices; it is not our story. F1 stays an internal
+  figure.
+- **Never mention the capture-path split** (API vs UI-scrape, the Aug-25
+  DataForSEO loss) — client-sensitive; must not get ahead of corporate
+  messaging. The article's methods note says which platform's data is shown
+  and nothing about pipeline internals.
+- **No platform-coverage discussion** (why Perplexity/AIO/Claude data is or
+  isn't present). Scope claims positively to the data shown.
+- **The differentiator is WHO gets consulted** (F3/F6 + refined taxonomy) —
+  nobody else has classified the recipients. Lead there.
+- **F4's operator takeaway:** publish factual (non-superlative)
+  product-vs-competitor comparison pages — comparison questions are what
+  send AI to a site directly.
+- **Panel-mix skew is named honestly**: the client mix (law-heavy) shapes the
+  third-party list; show the sector-balanced view alongside the raw one.
+
+- Lead figure: refined consultation-taxonomy chart (F6 v2), then the
+  authority contrast (F5).
 - Framing: "AI keeps a short list of sites it trusts enough to ask directly —
   here's what gets a site on it" — constructive, matches the conditional
   design.
@@ -251,6 +279,7 @@ real extract is modeled.
   a sub-10-percentile difference changes no roadmap.
 - Sample sizes phrased "N grounding searches evaluated in this study"; never
   DB totals or property counts.
-- Platform coverage limitation stated verbatim: no Perplexity, no Google AI
-  Overview grounding is captured by this pipeline; Claude only for a small
-  add-on subset.
+- Platform scope handled positively (per the §9 editorial decisions): the
+  article says which platforms' data it shows, and does not discuss what is
+  absent or why. The spec (this file) remains the honest internal record of
+  coverage.
