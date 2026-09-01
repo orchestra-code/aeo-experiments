@@ -1,9 +1,8 @@
 # AI models KNOW brand domains rather than guessing them per run — study spec
 
-**Status:** draft (freeze AFTER pilot wave 0 — pilot calibrates emission rates
-and the Gemini arm; panel + domain map freeze WITH the spec)
-**Frozen commit:** <record before wave 1 submits; `data/raw/FROZEN` sentinel
-gates `run_wave.py`>
+**Status:** frozen
+**Frozen commit:** <recorded in the follow-up commit, per docs/workflow.md §3>
+**Frozen date:** 2026-09-01 (seed 20260901; waves start 2026-09-02)
 **Experiment slug:** `008-brand-domain-knowledge`
 
 > Freeze rule: §4 (hypotheses) and §5 (decision rules) are fixed before wave 1.
@@ -190,19 +189,25 @@ both before any real collection is scored.
 - **The 1500-task CLI cap**: allocation below exceeds it; `--max-total-tasks
   3600` is set deliberately per study (never blanket `--force`).
 
-## 7. Allocation and cost (draft — final numbers at freeze, after pilot)
+## 7. Allocation and cost (FROZEN — option C, picked by the study owner
+## 2026-09-01 after the §8c calibration)
 
-48 brands × 2 templates = 96 items/pass.
-- ChatGPT: waves 1–4 at R=3 spaced sub-slots (≈08:00/14:00/20:00 local) =
-  1,152 tasks; waves 5–14 at R=1 = 960. Subtotal 2,112 ≈ $5.07.
-- Gemini (only if pilot shows fan_out_queries): R=1 × 14 waves = 1,344 ≈
-  $3.23.
-- Total ≤ 3,456 tasks ≈ $8.30 on the priority queue, 14 days wall-clock.
-- Power sketch: waves 1–4 give ≥288 within-day replicate pairs per tier;
-  the 13-step daily chains give ≥312 day-over-day transitions per tier.
-  Effective n for H2 is brands-with-≥2-wrong — if the pilot's error rate
-  implies < 8 such brands per contrast tier, bump R or extend tier B/C at
-  freeze (recorded).
+48 brands × 2 templates = 96 items/pass. Instrument: direct OpenAI
+Responses API (gpt-5.6-terra + web_search), `harness/collect_openai.py`.
+- **Wave 1: R=3** — core (r0) at ~10:30, rep1 at ~14:30, rep2 at ~18:30
+  local, spaced by the launchd triggers = 288 calls.
+- **Waves 2–10: R=1** (core only) = 864 calls.
+- **Total 1,152 calls ≈ 30M input + 2M output tokens** at the measured
+  26.1k in / 1.7k out per call (§8c). 10 days wall-clock, start 2026-09-02.
+- Power: 100% site: emission (§8c) means every call yields domain
+  observations. 96 within-day replicate pairs ×2 on wave 1; 9-step
+  day-over-day chains per item. Zero-error cells get rule-of-three (3/n)
+  upper bounds: ≈240 wave-observations per tier → bound ≈1.3%.
+- Replicate mechanics: replicate encoded in `item_id`
+  (`{brand}_{p1|p2}_r{0,1,2}`) under intents core/rep1/rep2; the
+  collector's (intent, item_id, wave) idempotence gives each slot one
+  shot. Spacing via `run_wave.py` + launchd (3 triggers/day, one intent
+  per trigger; self-destructs after wave 10 collects).
 
 ## 8. Pilot wave 0 checklist (~50 tasks, before freeze)
 
