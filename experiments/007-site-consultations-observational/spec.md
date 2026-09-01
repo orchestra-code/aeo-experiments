@@ -1,7 +1,8 @@
 # AI assistants consult high-authority domains directly instead of searching the open web — study spec
 
-**Status:** draft
-**Frozen commit:** <record BEFORE running the §5 model on the joined extract — see freeze rule note below>
+**Status:** frozen
+**Frozen commit:** <recorded in the follow-up commit, per docs/workflow.md §3>
+**Frozen date:** 2026-09-01 (seed 20260901)
 **Experiment slug:** `007-site-consultations-observational`
 
 > Freeze rule: everything in §4 (hypotheses) and §5 (model + decision rule) is
@@ -162,43 +163,59 @@ commit `3f6c332c` / PR #198).
   the prompt-execution.
 - `pool`: union of consulted + cited domains for the same prompt-execution.
 
-## 4. Pre-registered hypotheses
+## 4. Pre-registered hypotheses (FROZEN form — predictors selected in the
+## disclosed pre-freeze step; percentile forms replaced by rank forms because
+## Common Crawl ranks only the top ~10M of a 121M-node graph, compressing
+## every ranked domain into a 92–100 percentile ceiling)
 
-- **H1 (primary):** among pool domains on discovery-class prompts, consulted
-  domains have higher harmonic-centrality percentile than non-consulted ones.
-  Direction: positive; SESOI: 10 percentile points (median contrast).
-- **H2:** the association survives conditioning on organic-ETV percentile
-  (centrality is not just SERP strength in disguise). Directional, secondary.
-- **H3 (descriptive, no gate):** brand-class prompts (brand_identity /
-  brand_comparison) consult directly at a higher per-execution rate than
-  discovery-class prompts. (Expected strongly true; motivates 008.)
-- **H_pos (positive control):** reddit.com and the .gov/major-review cohort
-  (top third-party consulted domains known from production calibration) must
-  show consultation rates far above the pool base rate. If the extract can't
+Unit: (discovery-class execution × third-party domain) pool rows —
+"consulted" vs "cited but never consulted", own/competitor domains excluded
+on both sides via the property context.
+
+- **H1a (graph visibility):** consulted domains are more likely to be ranked
+  in the Common Crawl graph at all. OR(ranked) SESOI: 1.5.
+- **H1b (graph rank, ranked subset):** consulted domains rank higher.
+  OR per 10× rank improvement (−1 unit of log10 rank) SESOI: 1.30.
+- **H2 (AIPVS, scored subset):** consulted domains are more likely
+  Premium/Strong tier. OR(Premium+Strong vs Moderate+Limited) SESOI: 1.5.
+- **H3 (descriptive, no gate):** brand-comparison prompts consult directly
+  at a higher per-answer rate than brand-identity and discovery prompts.
+- **H_pos (positive control):** the government/bar-association cohort's
+  consultation rate exceeds the pool base rate by ≥3×. If the extract can't
   reproduce what the production dashboard already shows, the join is broken —
   stop.
-- **H_pla (placebo control):** the parity of the domain's string length
-  (even/odd) must show no effect. If it does, the clustering is wrong.
+- **H_pla (placebo control):** parity of the domain's string length
+  (even/odd) shows OR CI covering 1.0. If it doesn't, the clustering is
+  wrong — stop.
 
-## 5. Model and decision rule
+Dropped in the disclosed selection step (recorded, not tested as headline
+claims): PageRank rank (duplicates the Common Crawl signal), organic-ETV
+percentile (an AIPVS input at 40% weight).
 
-**Model:** logit `consulted ~ hc_percentile + etv_percentile` on pool domains
-of discovery-class prompts, cluster-robust SEs two-way (prompt, domain); one
-focal size-variable per model where collinearity is high (report VIF; HC and
-ETV percentiles may share a latent factor — if VIF > 5 run them in separate
-models and report both).
+## 5. Model and decision rule (FROZEN)
 
-**SESOI:** odds ratio 1.5 per 25 percentile points of HC (below that, nobody
-changes behavior — see §9), equivalently ~10 percentile points on the median
-contrast for H1.
+**Models** (one focal predictor each — the predictors are correlated by
+construction, and equivalence power dies under collinearity):
+- **M1:** logit `consulted ~ ranked_in_cc`, all pool rows.
+- **M2:** logit `consulted ~ z(log10 hc_rank)`, ranked rows only; OR
+  reported per 10× rank improvement.
+- **M3:** logit `consulted ~ premium_or_strong`, AIPVS-scored rows. The
+  cited-only side is a seeded 5,000-domain random sample (seed 20260901) —
+  outcome-side control subsampling leaves ORs consistent and biases only the
+  intercept (case-control result); stated in the write-up.
 
-**Decision rule (TOST at 90% CI):** standard house table — CI inside band =
-publishable null; excludes 1.0 beyond band = real; excludes 1.0 inside band =
-negligible; wider than band including 1.0 = **inconclusive, no null claim**.
+**Uncertainty:** cluster-robust SEs by domain (the dominant repeat unit),
+plus a 500-draw domain-cluster bootstrap as a check; report whichever CI is
+wider. Seed 20260901.
 
-**Power:** synthetic dry-run via `01_features.py --synthetic` with planted
-OR ∈ {1.0, 2.0}: the chain must return NULL and REAL respectively before the
-real extract is modeled.
+**Decision rule (TOST at 90% CI):** standard house table — CI inside the
+SESOI band = publishable null; excludes 1.0 beyond band = real; excludes 1.0
+inside band = negligible; wider than band including 1.0 = **inconclusive, no
+null claim**.
+
+**Sanity gate before interpretation:** a synthetic shuffle run (consulted
+labels permuted within execution, seed 20260901) must return null on every
+model — the pipeline's own placebo.
 
 ## 6. Known traps for this design
 
