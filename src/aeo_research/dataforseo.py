@@ -122,16 +122,21 @@ class TaskSpec:
     priority: int = 2  # priority queue (~5 min vs ~45 min)
 
     def to_payload(self) -> dict:
-        return {
+        payload = {
             "language_code": self.language_code,
             "location_code": self.location_code,
             "keyword": self.keyword,
-            "force_web_search": self.force_web_search,
             "device": self.device,
             "os": self.os,
             "tag": self.tag,
             "priority": self.priority,
         }
+        # The Gemini scraper rejects the field's mere presence (40501
+        # "does not support 'force_web_search'", observed 2026-09-01), so it
+        # is only sent when set — ChatGPT's default True is unchanged.
+        if self.force_web_search:
+            payload["force_web_search"] = self.force_web_search
+        return payload
 
 
 @dataclass

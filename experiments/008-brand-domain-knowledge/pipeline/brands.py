@@ -42,8 +42,8 @@ class BrandEntry:
 
 DRAFT_PANEL: tuple[BrandEntry, ...] = (
     # ---- Tier A — guessable (brandname.com), high prominence ----
-    BrandEntry("Sony", "A", "sony.com", "consumer electronics", domain_guessable=True),
-    BrandEntry("Bose", "A", "bose.com", "audio equipment", domain_guessable=True),
+    BrandEntry("Sony", "A", "sony.com", "consumer electronics company", domain_guessable=True),
+    BrandEntry("Bose", "A", "bose.com", "audio equipment company", domain_guessable=True),
     BrandEntry("Asana", "A", "asana.com", "project management software", domain_guessable=True,
                ambiguity="yoga asana — anchor needed in category prompts"),
     BrandEntry("Shopify", "A", "shopify.com", "e-commerce platform", domain_guessable=True),
@@ -194,7 +194,7 @@ DRAFT_TEMPLATES: dict[str, str] = {
     # site by default.
     "p1": "What is {brand}, the {category}? What does it offer and how is it priced?",
     # p2 — brand-named category question: the older named-consultation shape.
-    "p2": "Is {brand} a good {category} for a small team? What do reviews say?",
+    "p2": "How does {brand}, the {category}, compare to its main competitors?",
 }
 
 

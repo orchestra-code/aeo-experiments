@@ -94,7 +94,15 @@ def cmd_submit(a: argparse.Namespace) -> None:
 
     api_key = load_api_key(a.env_file)
     specs = [
-        TaskSpec(keyword=r.text, tag=tag, priority=a.priority) for r in todo.itertuples()
+        TaskSpec(
+            keyword=r.text,
+            tag=tag,
+            priority=a.priority,
+            # Gemini's endpoint rejects the field's presence (40501); ChatGPT
+            # requires it for fan_out_queries + sources.
+            force_web_search=a.platform != "gemini",
+        )
+        for r in todo.itertuples()
     ]
     submitted = post_tasks(api_key, specs, platform=a.platform)
 
