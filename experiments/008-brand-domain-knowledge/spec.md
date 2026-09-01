@@ -278,6 +278,37 @@ Consequences for the design if the direct-API probe succeeds: allocation
 calibrated on the new instrument before freeze; everything in §4's structure
 stands.
 
+### §8c — Direct-API calibration (2026-09-01, 23 calls, panel verified)
+
+- **Emission is 100%** on the new instrument: 13/13 brand-identity (p1) and
+  10/10 comparison (p2) calls emitted ≥1 `site:` query. The low-emission
+  power worry is gone; replicate/wave counts can shrink.
+- **First domain scoring: 26 TRUE, 0 STALE, 0 GUESS, 10 other** — and every
+  "other" is the model consulting a COMPETITOR's site on a comparison
+  prompt (ClickUp for Asana, Adobe for Figma, Obsidian for Notion, Apple
+  and Nintendo for Sony), replicating 007's comparison-trigger finding on a
+  second instrument. No wrong domain for an asked brand yet; the pilot
+  brands skew famous, so tiers B/C/D carry the study.
+- **Identical-prompt probe** (Figma p1 ×3, one batch): stable emission,
+  stable TRUE domain, distinct responses — no caching, usable within-day
+  variance.
+- **Panel verified** (`harness/verify_panel.py`): two dead tier-B brands
+  replaced (Tome→Granola/granola.ai, Height→Amie/amie.so); Paymo's
+  canonical corrected to paymoapp.com (paymo.biz redirects there;
+  paymo.com is dead — a natural morphological-guess trap);
+  Gamma/GoTo/Meta 403/400 scripted fetches noted as WAF, domains verified.
+- **Measured cost basis**: 26.1k input + 1.7k output tokens per call
+  (median 26.9k in, p90 38.3k). Allocation options at freeze, in calls
+  (price per M tokens supplied at decision time):
+  - **A — frozen plan as drafted**: 2,112 calls ≈ 55M in / 3.6M out.
+  - **B — trimmed replicates**: R1 × 14 waves × 96 items, plus R3 on waves
+    1–2 for tiers B/C/D only = 1,632 calls ≈ 43M in.
+  - **C — lean**: 10 waves × R1 × 96 + day-1 R3 = 1,152 calls ≈ 30M in.
+  - **D — p1-weighted**: p1 all 14 waves, p2 on waves 1/7/14 = 816 calls
+    ≈ 21M in.
+  Given 100% emission, rule-of-three bounds stay under ~1% wrong-rate per
+  tier even under C/D. Study owner picks before FROZEN is set.
+
 ## 9. Deliverables and sequence
 
 1. Pilot wave 0 → decisions recorded in this file
