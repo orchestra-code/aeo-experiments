@@ -113,7 +113,7 @@ def f1_tier_accuracy(calls: pd.DataFrame) -> None:
     ax.set_xlabel(
         "Calls whose first site: search named the brand's own site rather than "
         "a competitor's\n(comparison prompts that only ever opened competitors "
-        "are out of the frame — see the H1 funnel)"
+        "are out of the frame; see the H1 funnel)"
     )
     ax.legend(loc="lower left", fontsize=9)
     save_figure(fig, FIGURES, "tier-accuracy")

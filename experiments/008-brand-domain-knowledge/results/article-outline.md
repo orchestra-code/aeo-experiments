@@ -150,5 +150,8 @@ flat line is the finding. `tier-c-persistence.png` carries section 6.
 - [x] Jim: release checklist signed.
 - [x] Wave 10 collected 2026-09-11 10:42 ET; pipeline re-run 10:44; no
       conclusion moved.
-- [ ] Date the "Release gate run" line in the checklist (exit 0, 2026-09-11).
-- [ ] Commit pipeline + results + data/public together.
+- [x] Committed bdeb821 (pipeline, results, data/public) and the article
+      draft + site assets in the follow-up commit, 2026-09-11.
+- [ ] Jim: review the draft, flip `draft: false`, push (Vercel deploys main).
+- [ ] Blog post EN + DE from `results/blog-post-outline.md` in the
+      spyglasses repo.

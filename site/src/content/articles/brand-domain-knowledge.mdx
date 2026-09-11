@@ -1,0 +1,123 @@
+---
+title: "ChatGPT knows your domain. It is not guessing."
+description: "Experiment 008, pre-registered: 48 brands in four tiers, asked about daily for ten days through the OpenAI Responses API with web search, recording the site: operator the model types. When it consulted a brand's own site it used the canonical domain in 98.5% to 100% of calls in every tier, including the tier whose domains cannot be derived from the name. A brand that changed domains still gets its old one consulted alongside the new one."
+pubDate: 2026-09-11
+authors:
+  - name: "Spyglasses Research"
+    url: "https://spyglasses.io"
+experiment: "008-brand-domain-knowledge"
+heroFigure: "/figures/008-brand-domain-knowledge/tier-accuracy.png"
+datasets:
+  - title: "Brand domain knowledge, ChatGPT (1,152 calls evaluated in this study)"
+    path: "/datasets/008-brand-domain-knowledge/brand-domain-knowledge-chatgpt.csv"
+    license: "CC BY 4.0"
+tags: ["chatgpt", "grounding-searches", "site-consultations", "brand-domains", "domain-migration", "pre-registered"]
+draft: true
+---
+
+## Key findings
+
+- **When ChatGPT scopes a search to a brand's own site, it types the right domain.** We evaluated 1,152 calls in this study, 48 brands asked about twice a day for ten days. When the model committed to a domain for the brand it was asked about, that domain was the canonical one in 100% of calls for guessable brands, 98.6% for brands with non-obvious domains, 98.5% for brands that changed domains, and 100% for obscure brands.
+- **It is a stored fact, not a prediction from the name.** The tiers built to trap a guesser did not trap one. Brands whose domain cannot be derived from their name (linear.app, usemotion.com, culturedcode.com) were consulted at the right domain every time on brand-identity prompts. Across 7,117 site-scoped searches evaluated in this study, the model typed a name-shaped guess twice, both times for one brand on one comparison call.
+- **A changed domain leaves a second entry.** For brands that migrated, the model kept consulting the old real domain alongside the new one, day after day. Meta's facebook.com came back on all ten days. GoTo's logmein.com came back on six. In every one of those calls the canonical domain was consulted too. The old domain is additive, never a substitute.
+- **Four calls out of 1,152 committed to a wrong company's site.** Three went to amieapp.com while answering about Amie (amie.so), and one went to clockwise.com while answering about Clockwise (getclockwise.com). All four were comparison prompts. Every other non-canonical consultation was either the brand's previous domain or another site the brand owns.
+- **Nothing self-corrects, because almost nothing is wrong.** A brand consulted at a wrong domain today was consulted at the right one tomorrow 89% of the time, against 91% for brands that were right today. That gap is indistinguishable from zero on 18 transitions evaluated in this study.
+
+## Why we asked
+
+Our previous study, [experiment 007](/articles/where-ai-looks-first), showed that ChatGPT sometimes consults a specific site directly by adding a `site:domain.com` operator to its grounding search. When the target is the brand the user asked about, the model has committed to a belief about which domain belongs to that brand. Practitioners have reported seeing that belief go wrong.
+
+The mechanism matters more than the anecdote. If the domain is a stored association, a lookup the model learned in training, a brand can check it once, fix any miswiring, and expect the fix to hold. If the domain is generated fresh on each run from the shape of the brand's name, nothing a brand does to its own site changes the odds, and every company whose domain is not brandname.com is permanently exposed to being confused with whoever owns brandname.com.
+
+The two mechanisms predict different errors, and we wrote those predictions down before collecting anything. A stored association fails where the world moved after training: brands that changed domains, with the error being the old real domain, stable from run to run. A generative guess fails where the name misleads: brands with non-obvious domains, with the error being a brandname.com-style token that flips between runs. Several of those tokens are real sites owned by unrelated companies (bear.com is a mattress company; motion.com is an industrial supplier), which is exactly the trap the design needed.
+
+## Methods in brief
+
+We built a panel of 48 non-customer brands in four tiers of twelve. Tier A brands own brandname.com (Sony, Stripe, Figma). Tier B brands have non-obvious domains (Linear at linear.app, Motion at usemotion.com, Things at culturedcode.com). Tier C brands changed domains (Notion from notion.so, Meta from facebook.com, GoTo from logmein.com). Tier D brands are real but obscure business tools (Plutio, SuiteDash, Avaza), the pure-guess condition. Every canonical domain, old domain, and expected guess was verified and frozen before the first wave.
+
+Each brand ran under two prompt shapes: a brand-identity question ("What is X, the category? What does it offer and how is it priced?") and a comparison question ("How does X, the category, compare to its main competitors?"). Every prompt carries a category anchor so the model answers about the intended company rather than the animal, the yoga pose, or the French given name.
+
+The instrument is the direct OpenAI Responses API with the web search tool, the same path Spyglasses harvests grounding searches from in production. The observable is the model's own typed search, including any `site:` operator, not a scraped interface. We ran all 96 prompts once a day for ten days, with two extra spaced replicates on day one to separate same-day variation from day-over-day drift. That is 1,152 calls evaluated in this study, all on one model version, gpt-5.6-terra.
+
+The primary outcome is the first site-scoped search in a call that targets the asked brand: the model's first commitment to a domain for that brand. Comparison prompts open on a competitor's site by design (adyen.com while answering about Stripe, vrbo.com while answering about Airbnb), and 23 calls in this study never consulted the asked brand at all. Those are not domain errors, so they leave the frame rather than counting as wrong. Every rate below is conditioned on the model having consulted the brand's own site, and every zero cell carries a rule-of-three upper bound. The full pre-registration is in the [frozen spec](https://github.com/orchestra-code/aeo-experiments/blob/main/experiments/008-brand-domain-knowledge/spec.md) at commit `891a5ab`; analysis-time definitions are recorded in its deviations section.
+
+## Results
+
+### A flat line at the ceiling
+
+<figure>
+  <img src="/figures/008-brand-domain-knowledge/tier-accuracy.png" alt="Dot plot with confidence whiskers. Share of calls whose first site-scoped search used the brand's canonical domain, by tier and prompt shape. Brand-identity prompts sit at 100% in all four tiers. Comparison prompts sit between 97% and 100%." />
+</figure>
+
+| tier | calls with a brand commitment | canonical domain |
+|---|---|---|
+| A, guessable | 279 | 100% |
+| B, non-obvious | 286 | 98.6% |
+| C, migrated | 271 | 98.5% |
+| D, obscure | 281 | 100% |
+
+The positive control passed at 100%: tier A brands, whose domain is their name, were never consulted anywhere else. The placebo control also held: within each tier, a brand's position in the alphabet does not predict its accuracy.
+
+The tiers that were supposed to separate the mechanisms did not separate. All 576 brand-identity calls evaluated in this study, across every tier, consulted the true domain. Tier D, the obscure brands the model would have to guess if it guessed at all, was perfect. Tier B, where a guess would land on a real site owned by someone else, produced two name-shaped guesses in ten days: Clockwise consulted clockwise.com twice within a single comparison call and never reached getclockwise.com. That is the entire morphological-guess class. On brand-identity prompts, a guess rate above roughly 0.5% to 1.1% per tier would have been detected in this study and was not.
+
+### What the few errors are
+
+<figure>
+  <img src="/figures/008-brand-domain-knowledge/error-content.png" alt="Stacked bars by tier of non-canonical consultations that were about the asked brand. Tier C carries 96, almost all the brand's old domain. Tiers A and B carry a handful, mostly other sites the brand owns. Tier D has none." />
+</figure>
+
+Of the 7,117 site-scoped searches evaluated in this study, 109 targeted a non-canonical domain for the brand being asked about. 78 were a migrated brand's previous real domain. 29 carried the brand's name but were not its canonical site; after review, 26 of those are properties the brand itself owns (Meta's investor site at atmeta.com, GoTo's gotomypc.com, Shopify's shopify.dev, Sony's sony.co.jp) and 3 belong to a different company (amieapp.com). 2 were the Clockwise guesses. None pointed at a domain that does not resolve.
+
+So the study's unambiguously wrong first commitments, the calls where the model's first search for the brand went to a site that is not the brand's, number four out of 1,152: Amie three times and Clockwise once, all on comparison prompts. The old-domain share of errors is far higher in the migrated tier than in the non-obvious tier, a difference of 0.81 with a 95% interval from 0.77 to 1.00. That is the error content a stored association predicts, on the tier it predicts, and the opposite of what per-run guessing predicts.
+
+### The pre-registered repeat test, and why we do not report a verdict on it
+
+Our spec asked a specific question: among brands with at least two wrong consultations, do the wrong domains repeat more often than an independence baseline computed from each brand's own distribution of wrong domains? Writing the analysis code showed that this test cannot work on any data. Under any per-run guessing model, the observed agreement between two wrong consultations is an unbiased estimate of that same baseline. The contrast has an expected value of zero whether the model is guessing or looking up, so it cannot tell the two apart.
+
+We report the test as not identifiable and keep the pre-registered decision bands unchanged. The mechanism claim in this article rests on the two tests that do identify it: what the errors are (above) and how they behave over time (below). A post-hoc alternative, comparing observed repeats against a uniform draw over each brand's frozen set of candidate wrong domains, is identifying only when a brand has two or more candidates. The panel gave that property to two of the eight brands that erred, so it is reported but supports no conclusion. For a brand whose only plausible wrong domain is its old one, a repeated stored error and a repeated guess are the same observation. We state that as a limit of the instrument.
+
+### A changed domain leaves a second entry
+
+<figure>
+  <img src="/figures/008-brand-domain-knowledge/tier-c-persistence.png" alt="Heatmap of three migrated brands by day. Meta's old domain appears in 31% to 58% of its site-scoped searches every day. GoTo's appears on six of ten days, between 5% and 27%. Zoom's appears once, on day eight." />
+</figure>
+
+This is the secondary finding, and it is the practical one. Meta consulted facebook.com or fb.com in 31% to 58% of its daily site-scoped searches, on all ten days (52 consultations evaluated in this study). GoTo consulted logmein.com on six of ten days (24 consultations). Zoom consulted zoom.us once (2 consultations). Notion, X, Front, Sketch, Freshworks, Limitless, Shortcut, and Bitly never consulted their old domains at all.
+
+In every one of those calls the canonical domain was also consulted. The model did not send Meta's question to facebook.com instead of meta.com; it consulted both. That is the signature of a list with two entries for one brand, not a coin flip between them. For anyone who has migrated domains, the implication is direct: the old domain will keep receiving direct consultations from the model, so keep it resolving and redirecting to the new one.
+
+### Nothing self-corrects, because almost nothing is wrong
+
+<figure>
+  <img src="/figures/008-brand-domain-knowledge/transitions.png" alt="Two-by-two grid. Among brands that erred at least once, a brand consulted at the right domain today was right the next day 91% of the time; a brand consulted at a wrong domain today was right the next day 89% of the time." />
+</figure>
+
+Among the eleven brands that erred at least once, a brand consulted at a wrong domain today was consulted at the right one tomorrow 89% of the time, against 91% for brands that were right today. The difference is 0.02 with a 95% interval from -0.10 to 0.21, on 18 wrong-today transitions evaluated in this study. Per-run guessing predicts transitions near-independent of yesterday; a stored association predicts that wrong stays wrong. With so few wrong days, neither prediction can be rejected from this test alone.
+
+The same-day replicates say more. On day one, every prompt ran three times, spaced four hours apart. Two replicates of the same prompt agreed on whether the first commitment was correct 96.5% of the time and agreed on the exact first domain 96.2% of the time, across 286 pairs evaluated in this study. Three identical prompts submitted together returned three distinct answers, so this is not caching. The domain the model types for a brand is stable within a day and across ten days, and it is stable at the right value.
+
+### Exploratory: the comparison prompt goes to the competitor first
+
+Comparison prompts opened on a competitor's or a review site before reaching the asked brand in 8% to 24% of calls depending on tier, and 23 calls never reached it. That replicates experiment 007's finding, on a controlled panel of non-customer brands, that brand-comparison prompts are what send the model to primary sources, and that the sources are often not the brand in the question. It was not pre-registered here and we report it only as a replication.
+
+## What we can and cannot claim
+
+**Every rate is conditional on consultation.** The outcome exists only when the model elected to scope a search to the brand's own site. We measured what the model types when it does that. We did not measure whether it knows a domain it never chose to consult, and nothing here reads "the model believes".
+
+**One model, one surface.** All 1,152 calls evaluated in this study ran on gpt-5.6-terra through the Responses API with web search. That is the same path our production grounding data comes from, but it is not the consumer interface, and it says nothing about Perplexity, Gemini, or Google AI Overviews.
+
+**Absence is an upper bound.** A guess-free ten days does not mean guessing cannot happen. Every zero cell in the results carries a rule-of-three bound; on brand-identity prompts the bound on a guess rate is about 0.5% to 1.1% per tier.
+
+**Our prompts are not your traffic.** Two prompt shapes over 48 brands measure the model's domain knowledge under controlled conditions. They do not estimate how often real users are sent to a wrong site.
+
+**The pre-registered repeat test was not identifiable.** We say so above rather than substituting a test that would have passed. The mechanism claim rests on error content and temporal structure, and the panel gave the identifying post-hoc test only two brands.
+
+**Name-bearing domains were attributed by hand.** Whether atmeta.com is Meta's or amieapp.com is Amie's is a human judgment, recorded and dated in the study's audit sign-off and applied as a labelled robustness layer. The primary outcome does not depend on it; with the brand-owned sites counted as correct, the migrated tier moves from 98.5% to 100% and nothing else changes.
+
+**No brand is being called out.** Meta, GoTo and Zoom appear because they are the migrated tier, and their old domains still redirect. Amie appears because it is the one case where a name-bearing consultation went to a different company. These are observed examples, not a scorecard.
+
+Sample sizes throughout are counts evaluated in this study. They are not statements about the Spyglasses database.
+
+## Data and reproducibility
+
+The frozen spec (commit `891a5ab`), the brand panel with every verified domain, the collection harness, the scoring code, the audits, the model, and the figure code live in the experiment directory `008-brand-domain-knowledge` of our research repository. The synthetic dry run that plants a pure-lookup world and a pure-guess world, and requires the model to return the matching verdict on each, is included. The released dataset carries one row per call with derived features only: tier, prompt shape, wave, replicate, the registered domain of the first brand commitment and its label, and counts. The search-query text, the answer text, and the lists of consulted and cited domains are not released.
