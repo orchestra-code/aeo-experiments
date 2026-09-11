@@ -15,8 +15,8 @@ Hard rules enforced here:
   long free text (which is how prompt/response text sneaks out inside an
   innocuously named column).
 - Grouping keys are pseudonymized to sequential per-release codes.
-- The datasheet states row counts as "rows evaluated in this study" — never
-  as, or alongside, any database total.
+- The datasheet states row counts as "N <unit> evaluated in this study"
+  (unit defaults to "citations") — never as, or alongside, any database total.
 """
 
 from __future__ import annotations
@@ -86,6 +86,10 @@ class Datasheet:
     study: str
     license: str = "CC BY 4.0"
     notes: list[str] = field(default_factory=list)
+    #: What one row IS, for the mandated "N <unit> evaluated in this study"
+    #: phrasing (docs/data-policy.md "Always required"). Studies whose row is
+    #: not a citation pass their own noun — "calls", "runs", "pages".
+    unit: str = "citations"
 
 
 def pseudonymize(series: pd.Series, prefix: str) -> pd.Series:
@@ -165,7 +169,7 @@ def release_dataset(
         f"# {datasheet.title}",
         "",
         f"- **Study:** {datasheet.study}",
-        f"- **Rows:** {len(out):,} (citations evaluated in this study)",
+        f"- **Rows:** {len(out):,} ({datasheet.unit} evaluated in this study)",
         f"- **License:** {datasheet.license}",
         f"- **Released:** {date.today().isoformat()}",
         "",

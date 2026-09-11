@@ -1,0 +1,178 @@
+# Experiment 008 — model results
+alpha=0.05 (95% intervals), n_boot=2000, n_perm=5000, seed=20260901
+1152 study calls, 7117 site: observations, 48 brands, waves 1-10
+error-kind resolution: resolution file present (13 domains), none unresolvable
+
+H_pos (gate): tier-A call-level accuracy = 279/279 = 1.000 [0.986, 1.000] -> PASS
+        observation level, every site: query = 704/1807 = 0.390 [0.367, 0.412] — most of the shortfall is the comparison template consulting
+        competitors on purpose; excluding third-party consultations = 704/712 = 0.989 [0.978, 0.994]
+H_pla (placebo): within-tier slope of accuracy on alphabetical rank = +0.0044 [-0.0025, +0.0135], Spearman +0.118 -> null as required
+
+-- H1: site:-emission rate (descriptive, no gate) --
+  brand-identity prompt (pilot §8c: 13/13):
+    tier A: any site: 144/144 = 1.000 [0.974, 1.000] | brand-attributable 144/144 = 1.000 [0.974, 1.000]
+    tier B: any site: 144/144 = 1.000 [0.974, 1.000] | brand-attributable 144/144 = 1.000 [0.974, 1.000]
+    tier C: any site: 144/144 = 1.000 [0.974, 1.000] | brand-attributable 144/144 = 1.000 [0.974, 1.000]
+    tier D: any site: 144/144 = 1.000 [0.974, 1.000] | brand-attributable 144/144 = 1.000 [0.974, 1.000]
+  comparison prompt (pilot §8c: 10/10):
+    tier A: any site: 140/144 = 0.972 [0.931, 0.989] | brand-attributable 135/144 = 0.938 [0.885, 0.967]
+    tier B: any site: 144/144 = 1.000 [0.974, 1.000] | brand-attributable 142/144 = 0.986 [0.951, 0.996]
+    tier C: any site: 137/144 = 0.951 [0.903, 0.976] | brand-attributable 127/144 = 0.882 [0.819, 0.925]
+    tier D: any site: 143/144 = 0.993 [0.962, 0.999] | brand-attributable 137/144 = 0.951 [0.903, 0.976]
+  all calls, any site: query: 1140/1152 = 0.990 [0.982, 0.994]
+  all calls, brand-attributable site: query: 1117/1152 = 0.970 [0.958, 0.978]
+  funnel (calls -> >=1 search action -> >=1 site: query -> >=1 BRAND-ATTRIBUTABLE site: query):
+               calls  with_search  with_site  with_brand_site
+tier template                                                
+A    p1          144          144        144              144
+     p2          144          144        140              135
+B    p1          144          144        144              144
+     p2          144          144        144              142
+C    p1          144          144        144              144
+     p2          144          144        137              127
+D    p1          144          144        144              144
+     p2          144          144        143              137
+  23 call(s) ran site: searches that named ONLY third-party sites — the comparison template opens on a competitor's or a review site by design (adyen.com while answering about Stripe, vrbo.com about Airbnb). Those calls never committed to a domain for the brand they were asked about, so they are non-emitting for this outcome rather than wrong; every rate below is conditioned on the last stage of this funnel.
+
+-- H2 (observation level): repeat structure of wrong domains --
+  109 own-domain error observations over 8 brands; 8 brands with >= 2 enter (Audit C effective sample)
+  VERDICT: NOT IDENTIFIABLE as pre-registered — see note
+  observed same-wrong-domain agreement = 0.423; the spec's plug-in Sigma p_hat^2 baseline = 0.432 (reported for transparency only — the difference is not interpretable)
+
+  Why: the quantity H2 asks for is not identified by this design.
+  (1) Estimator. Under ANY model in which a call's wrong domain is drawn
+      independently from that brand's own distribution p — which is exactly
+      what "per-run guessing" means — the observed pairwise agreement is an
+      UNBIASED estimator of Sigma p^2. The plug-in Sigma p_hat^2 computed from
+      the same observations is its biased twin and is always >= it. So
+      observed - baseline has expectation 0 under the guessing hypothesis and
+      is bounded above by 0 in the plug-in form: it cannot separate the two
+      mechanisms, and cannot reach the systemic band on any data set.
+  (2) Substitution. Shuffling wrong-domain labels ACROSS brands (reported
+      below as exploratory) tests whether wrong domains are brand-specific.
+      They are, near-tautologically: Meta's old domain is facebook.com and
+      GoTo's is logmein.com, and a per-run guesser generating from the brand's
+      own name would be just as brand-specific. That test answers a different
+      question and is not evidence for either mechanism.
+  What carries the mechanism claim instead, both pre-registered:
+      H3 — error CONTENT by tier (stale vs morphological), and
+      H4 — temporal structure (day-over-day transitions, and the within-day
+           vs across-day agreement of the wrong domain itself).
+  A post-hoc sensitivity with an EXTERNAL baseline (uniform over the frozen
+  candidate set) is reported after them, clearly labelled post-hoc.
+
+-- EXPLORATORY (observation level) — brand-specificity of wrong domains (NOT the pre-registered H2) --
+  within-brand agreement 0.423 vs 0.188 when wrong domains are shuffled across brands (difference +0.235, permutation p = 0.0002). Reads as: a brand's wrong domains are its own. Both mechanisms predict this, so it decides nothing.
+
+-- H3: error content by tier --
+  own-domain error kinds by tier (name_bearing split by the signed Audit D attribution — own_property is the brand's own orbit, other_company is objectively wrong, unreviewed reopens Audit D):
+kind  morphological_guess  name_bearing:other_company  name_bearing:own_property  stale_old_domain
+tier                                                                                              
+A                       0                           0                          8                 0
+B                       2                           3                          0                 0
+C                       0                           0                         18                78
+D                       0                           0                          0                 0
+  stale_old_domain share, tier C (96 errors) vs B (5): +0.812 [+0.765, +1.000] -> directional, CI excludes 0
+  morphological_guess share, tier B (5 errors) vs C (96): +0.400 [+0.000, +1.000] -> CI includes 0
+
+-- H4: day-over-day self-correction (first_site_correct) --
+  all brands:
+    P(correct at t+1 | wrong at t)   = 16/18 = 0.889 [0.672, 0.969]
+    P(correct at t+1 | correct at t) = 810/826 = 0.981 [0.969, 0.988]
+    gap = +0.092 [-0.025, +0.296] (brand cluster bootstrap, 48 brands)
+  brands that erred at least once (composition-matched):
+    P(correct at t+1 | wrong at t)   = 16/18 = 0.889 [0.672, 0.969]
+    P(correct at t+1 | correct at t) = 162/178 = 0.910 [0.859, 0.944]
+    gap = +0.021 [-0.102, +0.209] (brand cluster bootstrap, 11 brands)
+
+-- H4 companion: agreement of the WRONG DOMAIN, within day vs across days --
+  calls whose FIRST commitment was wrong (8 calls):
+    within-day, all brands: 1/1 = 1.000 [0.207, 1.000] over 1 brand(s); a uniform guess over the frozen sets would give 0.500
+    within-day, K >= 2: 1/1 = 1.000 [0.207, 1.000] over 1 brand(s); a uniform guess over the frozen sets would give 0.500
+    across-day, all brands: 0 qualifying pairs — NOT ESTIMABLE
+    across-day, K >= 2: 0 qualifying pairs — NOT ESTIMABLE
+  calls naming a wrong domain for this brand anywhere in the call (40 calls):
+    within-day, all brands: 5/7 = 0.714 [0.359, 0.918], brand-clustered [0.500, 1.000] over 2 brand(s); a uniform guess over the frozen sets would give 0.714
+    within-day, K >= 2: 2/4 = 0.500 [0.150, 0.850] over 1 brand(s); a uniform guess over the frozen sets would give 0.500
+    across-day, all brands: 8/12 = 0.667 [0.391, 0.862], brand-clustered [0.556, 1.000] over 2 brand(s); a uniform guess over the frozen sets would give 0.625
+    across-day, K >= 2: 5/9 = 0.556 [0.267, 0.811] over 1 brand(s); a uniform guess over the frozen sets would give 0.500
+  A stored association predicts both agreements near 1 and equal to each other; a per-run guess predicts both near the 1/K figure beside them. For K = 1 brands the two predictions coincide, which is why the K >= 2 rows are the ones that carry the contrast.
+  within-day (wave 1, 286 replicate pairs), same correct/wrong label: 276/286 = 0.965 [0.937, 0.981]
+  within-day (wave 1, 286 replicate pairs), same first site: domain: 275/286 = 0.962 [0.932, 0.978]
+
+-- POST-HOC SENSITIVITY (not pre-registered): agreement vs a uniform draw from the frozen candidate set --
+    brand tier  K_frozen  n_wrong  agreement  baseline
+     Amie    B         2        3      1.000       0.5
+     Bose    A         0        2      1.000       NaN
+Clockwise    B         1        2      1.000       1.0
+     GoTo    C         1       26      0.849       1.0
+     Meta    C         2       68      0.360       0.5
+  Shopify    A         0        3      1.000       NaN
+     Sony    A         0        3      0.333       NaN
+     Zoom    C         1        2      1.000       1.0
+  6 brand(s) excluded as NOT SEPARABLE BY DESIGN (Bose, Clockwise, GoTo, Shopify, Sony, Zoom): the frozen panel gives them K <= 1 candidate wrong domains, so a repeated stored error and a repeated guess are the same observation. This is a limitation of the instrument, not a finding about the model.
+  ** INCONCLUSIVE — too few brands: only 2 brand(s) where the test is identifying (K >= 2 and >= 2 wrong observations). **
+
+-- H5: call-level accuracy by tier (descriptive, no gate) --
+  tier A: 279/279 = 1.000 [0.986, 1.000] (brand-clustered [1.000, 1.000])
+  tier B: 282/286 = 0.986 [0.965, 0.995] (brand-clustered [0.961, 1.000])
+  tier C: 267/271 = 0.985 [0.963, 0.994] (brand-clustered [0.952, 1.000])
+  tier D: 281/281 = 1.000 [0.987, 1.000] (brand-clustered [1.000, 1.000])
+  A - B = +0.014 [+0.000, +0.038] -> ordering A >= B not separated by the CI
+  A - C = +0.015 [+0.000, +0.052] -> ordering A >= C not separated by the CI
+
+-- error kinds by tier x template, with rule-of-three bounds --
+  (denominator = all site: observations in the cell)
+error_kind     stale_old_domain  morphological_guess  name_bearing_other  nonexistent  third_party
+tier template                                                                                     
+A    p1                       0                    0                   2            0           24
+     p2                       0                    0                   6            0         1071
+B    p1                       0                    0                   0            0           10
+     p2                       0                    2                   3            0         1247
+C    p1                      75                    0                  12            0           35
+     p2                       3                    0                   6            0         1029
+D    p1                       0                    0                   0            0            0
+     p2                       0                    0                   0            0         1038
+  zero cells (3/n upper bound on the rate):
+    tier A/p1 stale_old_domain: 0/485 -> upper bound 0.0062
+    tier A/p1 morphological_guess: 0/485 -> upper bound 0.0062
+    tier A/p1 nonexistent: 0/485 -> upper bound 0.0062
+    tier A/p2 stale_old_domain: 0/1322 -> upper bound 0.0023
+    tier A/p2 morphological_guess: 0/1322 -> upper bound 0.0023
+    tier A/p2 nonexistent: 0/1322 -> upper bound 0.0023
+    tier B/p1 stale_old_domain: 0/415 -> upper bound 0.0072
+    tier B/p1 morphological_guess: 0/415 -> upper bound 0.0072
+    tier B/p1 name_bearing_other: 0/415 -> upper bound 0.0072
+    tier B/p1 nonexistent: 0/415 -> upper bound 0.0072
+    tier B/p2 stale_old_domain: 0/1561 -> upper bound 0.0019
+    tier B/p2 nonexistent: 0/1561 -> upper bound 0.0019
+    tier C/p1 morphological_guess: 0/555 -> upper bound 0.0054
+    tier C/p1 nonexistent: 0/555 -> upper bound 0.0054
+    tier C/p2 morphological_guess: 0/1232 -> upper bound 0.0024
+    tier C/p2 nonexistent: 0/1232 -> upper bound 0.0024
+    tier D/p1 stale_old_domain: 0/287 -> upper bound 0.0105
+    tier D/p1 morphological_guess: 0/287 -> upper bound 0.0105
+    tier D/p1 name_bearing_other: 0/287 -> upper bound 0.0105
+    tier D/p1 nonexistent: 0/287 -> upper bound 0.0105
+    tier D/p1 third_party: 0/287 -> upper bound 0.0105
+    tier D/p2 stale_old_domain: 0/1260 -> upper bound 0.0024
+    tier D/p2 morphological_guess: 0/1260 -> upper bound 0.0024
+    tier D/p2 name_bearing_other: 0/1260 -> upper bound 0.0024
+    tier D/p2 nonexistent: 0/1260 -> upper bound 0.0024
+
+-- robustness --
+  (a) accuracy using 'no own-domain error anywhere in the call': A 0.971, B 0.986, C 0.897, D 1.000
+  (b) core series only (wave-1 replicates dropped): A 1.000, B 0.987, C 0.987, D 1.000
+  (c) stale counted as correct: A 1.000, B 0.986, C 0.985, D 1.000
+  (d) observation level, all site: queries: A 0.390, B 0.361, C 0.351, D 0.329; excluding third-party consultations: A 0.989, B 0.993, C 0.867, D 1.000
+  (e) first site: query of ANY kind (third-party consultations count as not-canonical): A 0.944, B 0.958, C 0.900, D 0.965 — the difference from H5 is the comparison template opening on competitors, not domain error.
+  (f) own-property first commitments counted as correct (Audit D sign-off, labelled layer — the primary is unchanged): A 1.000, B 0.986, C 1.000, D 1.000
+  GENUINELY wrong first commitments (stale + morphological guess + another company + unreviewed; own-property excluded): A 0/279 (3/n bound 0.0108); B 4/286 = 0.0140; C 0/271 (3/n bound 0.0111); D 0/281 (3/n bound 0.0107)
+    by kind: name_bearing:other_company 3, morphological_guess 1
+
+-- H2 (call level, first commitment): repeat structure of wrong domains --
+  8 own-domain error observations over 3 brands; 2 brands with >= 2 enter (Audit C effective sample)
+  ** INCONCLUSIVE — too few brands: 2 brand(s) with >= 2 wrong observations. Nothing is estimable here — an upper-bound situation, not evidence of absence. **
+
+-- EXPLORATORY (call level, first commitment) — brand-specificity of wrong domains (NOT the pre-registered H2) --
+  INCONCLUSIVE — too few brands (2 brands)

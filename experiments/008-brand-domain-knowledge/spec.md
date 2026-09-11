@@ -342,3 +342,48 @@ stands.
 - Cross-reference experiment 007: 007 shows the behavior in the wild
   (observational, customer corpus, derived aggregates only); 008 is the
   controlled instrument over non-customer brands.
+
+## 11. Deviations (post-freeze; the only section that may change)
+
+Analysis-time definitions and deviations are recorded in full, with
+rationale, in `results/audit.txt` § "Deviations / analysis-time
+definitions" (written by `pipeline/02_audit.py`). Headlines, 2026-09-11:
+
+1. **`other_real` split** into `name_bearing_other` (a domain carrying the
+   brand's name: atmeta.com, gotomypc.com) and `third_party` (competitor or
+   reference sites, which the comparison template invites). Only the former
+   is a claim about the asked brand's domain. The four frozen labels stay
+   derivable.
+2. **Primary call-level outcome = first brand-attributable `site:` query**,
+   per the §5 wording ("naming the brand"). Calls whose only `site:` queries
+   are third-party are non-emitting for this outcome (fourth funnel stage in
+   H1), not wrong. Raw first `site:` of any kind kept as robustness (e) and
+   released as `first_search_domain_any`.
+3. **H2 is not identifiable as pre-registered.** Under any per-run guessing
+   model the observed pairwise agreement is an unbiased estimator of the
+   Σp² baseline itself, so the contrast has expectation zero under the
+   guessing hypothesis regardless of mechanism. No verdict is reported.
+   The mechanism claim rests on H3 (error content) and H4 (temporal
+   structure). Two labelled supplements: an exploratory cross-brand
+   permutation (brand-specificity, near-tautological) and a post-hoc
+   sensitivity against a uniform draw over the frozen candidate set
+   (identifying only where K ≥ 2; most tier-C brands have K = 1 — an
+   instrument limitation to state in the write-up). Bands unchanged.
+4. **H4 companion**: wrong-domain agreement within day vs across days over
+   pairs where both calls were wrong, pooled and K ≥ 2.
+5. H4 transitions reported pooled and composition-matched (brands that
+   erred at least once); the matched version is the one to read.
+6. `nonexistent` assigned only by the dated resolution check in stage 02,
+   merged at stage 03; interim frames are never rewritten.
+7. Name-bearing tokens need 3+ characters (brand "X" contributes via its
+   Twitter alias only).
+8. **Audit D entity attribution (signed 2026-09-11)** is applied as a
+   labelled robustness layer, never to the primary: every name-bearing
+   domain in the review table is the brand's own property except
+   Amie/amieapp.com (a different company). Recorded in
+   `pipeline/annotations.py` and `results/audit-d-signoff.md`; a name-bearing
+   domain absent from that table is reported as UNREVIEWED and reopens the
+   review.
+9. Release column naming avoids gate-forbidden substrings; the shared
+   `Datasheet` gained a `unit` field so this dataset's row count reads
+   "calls evaluated in this study".

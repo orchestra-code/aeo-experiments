@@ -1,0 +1,664 @@
+# Experiment 008 — data-quality audits
+generated 2026-09-11; 1152 study calls, 7117 site: observations, waves 1-10
+
+## Audit A — emission conditioning and collection completeness
+--------------------------------------------------------------
+Ledger status by wave x intent (study waves only):
+wave  intent  status   
+1     core    collected    96
+      rep1    collected    96
+      rep2    collected    96
+2     core    collected    96
+3     core    collected    96
+4     core    collected    96
+5     core    collected    96
+6     core    collected    96
+7     core    collected    96
+8     core    collected    96
+9     core    collected    96
+10    core    collected    96
+
+Pre-freeze pilot (wave 0, intent 'pilot'): 23 calls, status {'collected': 23} — reported here only; excluded from every study frame (spec §8b/§8c).
+Non-collected study rows: 0
+
+prompts.csv items per intent: {'core': 96, 'rep1': 96, 'rep2': 96}
+Collected calls per intent x wave (expect 96 per cell that ran):
+wave    1   2   3   4   5   6   7   8   9   10
+intent                                        
+core    96  96  96  96  96  96  96  96  96  96
+rep1    96   0   0   0   0   0   0   0   0   0
+rep2    96   0   0   0   0   0   0   0   0   0
+Waves present: [np.int64(1), np.int64(2), np.int64(3), np.int64(4), np.int64(5), np.int64(6), np.int64(7), np.int64(8), np.int64(9), np.int64(10)]. All 10 waves present.
+
+Emission funnel by tier x template (all calls -> >=1 search action -> >=1 site: query -> >=1 BRAND-ATTRIBUTABLE site: query):
+               calls  with_search  with_site  with_brand_site  site_rate  brand_site_rate
+tier template                                                                            
+A    p1          144          144        144              144     1.0000           1.0000
+     p2          144          144        140              135     0.9722           0.9375
+B    p1          144          144        144              144     1.0000           1.0000
+     p2          144          144        144              142     1.0000           0.9861
+C    p1          144          144        144              144     1.0000           1.0000
+     p2          144          144        137              127     0.9514           0.8819
+D    p1          144          144        144              144     1.0000           1.0000
+     p2          144          144        143              137     0.9931           0.9514
+
+The analysis set conditions on emission (spec §1): every claim reads 'when the model consulted a site directly', never 'the model believes'. The fourth stage conditions further on the consultation being ABOUT the asked brand — a comparison prompt that only ever opens competitors' sites made no claim about the brand's domain.
+
+Calls whose site: searches named ONLY third-party sites (23) — non-emitting for the primary outcome:
+        item_id tier template  wave intent first_search_domain_any
+clockwise_p2_r0    B       p2     1   core              reclaim.ai
+ alphabet_p2_r0    C       p2     1   core             justice.gov
+   stripe_p2_r1    A       p2     1   rep1               adyen.com
+   airbnb_p2_r1    A       p2     1   rep1        expediagroup.com
+   airbnb_p2_r2    A       p2     1   rep2        expediagroup.com
+suitedash_p2_r0    D       p2     2   core             copilot.com
+    figma_p2_r0    A       p2     3   core               uxpin.com
+     meta_p2_r0    C       p2     3   core           bytedance.com
+ alphabet_p2_r0    C       p2     3   core             justice.gov
+suitedash_p2_r0    D       p2     3   core             copilot.com
+     bose_p2_r0    A       p2     4   core                sony.com
+suitedash_p2_r0    D       p2     4   core             copilot.app
+    front_p2_r0    C       p2     5   core          missiveapp.com
+    scoro_p2_r0    D       p2     5   core           productive.io
+     meta_p2_r0    C       p2     6   core                 sec.gov
+ alphabet_p2_r0    C       p2     6   core               apple.com
+        x_p2_r0    C       p2     7   core                  fb.com
+    front_p2_r0    C       p2     7   core             gorgias.com
+limitless_p2_r0    C       p2     7   core                  omi.me
+    avaza_p2_r0    D       p2     9   core          harvestapp.com
+clockwise_p2_r0    B       p2    10   core           usemotion.com
+ alphabet_p2_r0    C       p2    10   core                 sec.gov
+suitedash_p2_r0    D       p2    10   core             copilot.com
+
+Calls with no site: query (12):
+       item_id tier template  wave intent
+    meta_p2_r1    C       p2     1   rep1
+    meta_p2_r0    C       p2     2   core
+   paymo_p2_r0    D       p2     2   core
+    sony_p2_r0    A       p2     3   core
+  airbnb_p2_r0    A       p2     3   core
+    sony_p2_r0    A       p2     4   core
+    meta_p2_r0    C       p2     4   core
+    meta_p2_r0    C       p2     5   core
+alphabet_p2_r0    C       p2     5   core
+    meta_p2_r0    C       p2     7   core
+  airbnb_p2_r0    A       p2     8   core
+    meta_p2_r0    C       p2     9   core
+
+Malformed site: tokens (operator typed with no host, e.g. 'site:productguide?'): 3 — dropped before scoring.
+
+## Audit B — outcome label (the scoring code, quoted)
+-----------------------------------------------------
+Outcome scoring for experiment 008 — the definitions Audit B quotes.
+
+Everything the study measures is derived here, from the raw OpenAI Responses
+payload, so there is exactly one definition of each label and stages 01-05
+and the unit tests all exercise the same code path.
+
+Extraction
+----------
+``output[]`` items of type ``web_search_call`` carry an ``action``. For
+``action.type == "search"`` the model's own search strings are in
+``action.queries`` (a list); ``action.query`` repeats the FIRST of them, so
+using both would double count — ``search_queries`` uses ``queries`` when
+present and falls back to ``[query]``. ``action.sources[]`` (present when the
+``include`` parameter worked) are the URLs the search returned; message
+annotations of type ``url_citation`` are the URLs the answer cited.
+
+Labels (spec §2 Audit B)
+------------------------
+For one consulted host, against the frozen panel entry for the brand asked
+about:
+
+- ``correct``  registered domain == registered domain of ``true_domain``
+- ``stale``    the host, or its registered domain, is one of ``old_domains``
+               (Meta lists ``about.fb.com``, so the whole ``fb.com`` family
+               counts as stale, not as a wrong other domain)
+- ``wrong``    anything else
+
+and for a non-correct host, an ``error_kind``:
+
+- ``stale_old_domain``    label == stale
+- ``morphological_guess`` registered domain in the frozen ``expected_guess``
+                          token set (``brandname.com``-style)
+- ``name_bearing_other``  the registered domain's leftmost label contains the
+                          brand's name or one of its aliases, letters and
+                          digits only (gotomypc.com and logmeinrescue.com for
+                          GoTo, atmeta.com for Meta, boseprofessional.com for
+                          Bose) — a real site in the brand's own orbit
+- ``third_party``         a domain that does not carry the brand's name at all
+                          (a competitor or a reference site). The comparison
+                          template produces these BY DESIGN; they are not
+                          errors about the asked brand and are excluded from
+                          the own-domain error set that H2/H3 analyse.
+- ``nonexistent``         assigned at audit time only, to stale / guess /
+                          name-bearing domains that fail to resolve, with the
+                          check date recorded (02_audit.py --resolve).
+
+``name_bearing_other`` + ``third_party`` together are the frozen spec's
+``other_real`` bucket; the split is an analysis-time refinement recorded in
+the Deviations section of results/audit.txt.
+
+Call-level outcome (spec §5: "the domain of a site: fan-out naming the brand")
+------------------------------------------------------------------------------
+The primary outcome is the first BRAND-ATTRIBUTABLE ``site:`` query — the
+first one whose target is a claim about the asked brand's own domain
+(``correct``, ``stale``, ``morphological_guess``, ``name_bearing_other``).
+A ``third_party`` ``site:`` query is definitionally not about the asked
+brand, so it cannot be the call's commitment: the comparison template makes
+the model open on a competitor's site by design (adyen.com while answering
+about Stripe, vrbo.com about Airbnb), and counting that as a wrong domain
+would measure the template, not the model's belief.
+
+``first_site_label`` is therefore the label of the first brand-attributable
+``site:`` query, or ``"none"`` when the call emitted only third-party ones;
+such calls are NON-emitting for this outcome and drop out of the analysis
+set, which H1 reports as a fourth funnel stage. The raw first ``site:``
+query of any kind is kept as ``first_search_domain_any`` /
+``first_any_label`` for robustness (e) and for the released dataset, so both
+readings are reconstructable.
+
+``any_*`` and ``n_site_*`` counters range over every ``site:`` query.
+
+    def label(self, host: str) -> str:
+        host = normalize_host(host)
+        if registered_domain(host) == self.truth:
+            return "correct"
+        if host in self.old_hosts or registered_domain(host) in self.old_domains:
+            return "stale"
+        return "wrong"
+
+    def error_kind(self, host: str, label: str | None = None) -> str:
+        label = label or self.label(host)
+        if label == "correct":
+            return ""
+        if label == "stale":
+            return "stale_old_domain"
+        domain = registered_domain(host)
+        if domain in self.guesses:
+            return "morphological_guess"
+        leftmost = alnum(domain.split(".")[0])
+        if any(token in leftmost for token in self.name_tokens):
+            return "name_bearing_other"
+        return "third_party"
+
+def scorer_for(entry: BrandEntry) -> BrandScorer:
+    truth = registered_domain(entry.true_domain)
+    old_hosts = {normalize_host(d) for d in entry.old_domains}
+    tokens = {alnum(entry.canonical), *(alnum(a) for a in entry.aliases)}
+    return BrandScorer(
+        brand_slug=slug(entry.canonical),
+        canonical=entry.canonical,
+        tier=entry.tier,
+        truth=truth,
+        old_hosts=frozenset(old_hosts),
+        old_domains=frozenset(registered_domain(d) for d in old_hosts),
+        guesses=frozenset(registered_domain(g) for g in entry.expected_guess),
+        name_tokens=tuple(sorted(t for t in tokens if len(t) >= MIN_NAME_TOKEN)),
+    )
+
+def search_queries(response: dict) -> list[str]:
+    """Every search string the model typed, in output order, counted once.
+
+    ``action.query`` is the first element of ``action.queries``; when both are
+    present only ``queries`` is read, so a parallel search of four queries
+    counts as four, not five.
+    """
+    out: list[str] = []
+    for action in search_actions(response):
+        if action.get("type") != "search":
+            continue
+        queries = action.get("queries")
+        if queries is None:
+            query = action.get("query")
+            queries = [query] if query else []
+        out.extend(q for q in queries if q)
+    return out
+
+def site_hosts(response: dict) -> tuple[list[str], list[str]]:
+    """Hosts named by ``site:`` operators, in emission order.
+
+    Returns (scorable hosts, malformed tokens) — the model occasionally types
+    a ``site:`` operator with no host at all (``site:productguide?``), which
+    is reported in Audit A rather than silently scored.
+    """
+    hosts: list[str] = []
+    malformed: list[str] = []
+    for query in search_queries(response):
+        for token in SITE_RE.findall(query):
+            host = normalize_host(token.strip("\"'"))
+            (hosts if HOST_RE.match(host) else malformed).append(host or token)
+    return hosts, malformed
+
+Label counts (all site: observations):
+label  correct  stale  wrong
+tier                        
+A          704      0   1103
+B          714      0   1262
+C          627     78   1082
+D          509      0   1038
+
+Error kinds by tier:
+error_kind       morphological_guess  name_bearing_other  stale_old_domain  third_party
+tier                                                                                   
+A           704                    0                   8                 0         1095
+B           714                    2                   3                 0         1257
+C           627                    0                  18                78         1064
+D           509                    0                   0                 0         1038
+
+Error kinds by template:
+error_kind        morphological_guess  name_bearing_other  stale_old_domain  third_party
+template                                                                                
+p1          1584                    0                  14                75           69
+p2           970                    2                  15                 3         4385
+
+Resolution check (live), 13 distinct stale / guess / name-bearing domains. Unreachable domains are reassigned to `nonexistent` by 03_model via error_kind_resolved.csv; the interim frames are never rewritten.
+   registered_domain observed_error_kind  n_observations                brands checked_on         host_checked                                                     check_detail resolved_error_kind
+         amieapp.com  name_bearing_other               3                  Amie 2026-09-11          amieapp.com                                                         http 200  name_bearing_other
+          atmeta.com  name_bearing_other              28         Alphabet|Meta 2026-09-11  investor.atmeta.com apex dns: nodename nor servname provided, or not known; http 200  name_bearing_other
+boseprofessional.com  name_bearing_other               2                  Bose 2026-09-11 boseprofessional.com                                                         http 200  name_bearing_other
+       clockwise.com         third_party              24 Amie|Clockwise|Motion 2026-09-11        clockwise.com                                                         http 200         third_party
+        facebook.com    stale_old_domain              33                  Meta 2026-09-11         facebook.com                                                         http 400    stale_old_domain
+              fb.com         third_party              39      Limitless|Meta|X 2026-09-11               fb.com                                                         http 400         third_party
+        gotomypc.com  name_bearing_other               1                  GoTo 2026-09-11         gotomypc.com                                                         http 403  name_bearing_other
+         logmein.com    stale_old_domain              24                  GoTo 2026-09-11          logmein.com                                                         http 403    stale_old_domain
+   logmeinrescue.com  name_bearing_other               1                  GoTo 2026-09-11    logmeinrescue.com                                                         http 403  name_bearing_other
+         shopify.dev  name_bearing_other               3               Shopify 2026-09-11          shopify.dev                                                         http 200  name_bearing_other
+    sony-semicon.com  name_bearing_other               2                  Sony 2026-09-11     sony-semicon.com                                                         http 404  name_bearing_other
+          sony.co.jp  name_bearing_other               1                  Sony 2026-09-11           sony.co.jp                                                         http 200  name_bearing_other
+             zoom.us    stale_old_domain               2                  Zoom 2026-09-11              zoom.us                                                         http 200    stale_old_domain
+
+## Audit C — independence, clustering, and the effective sample
+---------------------------------------------------------------
+Own-domain wrong observations per brand (observation level):
+brand      tier
+Meta       C       68
+GoTo       C       26
+Amie       B        3
+Shopify    A        3
+Sony       A        3
+Bose       A        2
+Clockwise  B        2
+Zoom       C        2
+
+Brands with >= 2 wrong observations (observation level): 8 of 48
+Brands with >= 2 wrong observations (call level, first site: query): 2
+
+This count IS the effective sample for H2 (spec §2 Audit C). Below 3 brands the repeat-structure test is reported INCONCLUSIVE rather than given a verdict.
+
+Within-day replicate structure (wave 1, spec §7): 288 within-day pairs over 96 brand x template items (3 slots per item).
+Day-over-day chains: 10 waves x 48 brands x 2 templates on the core series.
+
+Every rate in stage 03 that pools calls clusters on brand (brands are the independent units; replicates and waves within a brand are correlated by design).
+
+## Audit D — panel validity (frozen instrument)
+-----------------------------------------------
+The panel resolved and was corrected at freeze by `harness/verify_panel.py` (spec §8c): two dead tier-B brands replaced (Tome -> Granola, Height -> Amie), Paymo's canonical corrected to paymoapp.com (paymo.biz redirects there, paymo.com is dead — a natural morphological-guess trap), and Gamma/GoTo/Meta's scripted-fetch 403/400 responses recorded as WAF behaviour with the domains verified by hand. Nothing in brands.py has changed since; it is part of the frozen instrument.
+
+     brand tier      true_domain               old_domains                  expected_guess  domain_guessable                                                              ambiguity
+      Sony    A         sony.com                                                                        True                                                                       
+      Bose    A         bose.com                                                                        True                                                                       
+     Asana    A        asana.com                                                                        True                         yoga asana — anchor needed in category prompts
+   Shopify    A      shopify.com                                                                        True                                                                       
+    Stripe    A       stripe.com                                                                        True                                                                       
+     Figma    A        figma.com                                                                        True                                                                       
+     Slack    A        slack.com                                                                        True                                                                       
+   Dropbox    A      dropbox.com                                                                        True                                                                       
+    Airbnb    A       airbnb.com                                                                        True                                                                       
+   Spotify    A      spotify.com                                                                        True                                                                       
+  Duolingo    A     duolingo.com                                                                        True                                                                       
+     Canva    A        canva.com                                                                        True                                                                       
+    Linear    B       linear.app                                                linear.com             False                                    common English word — anchor needed
+      Bear    B         bear.app                                                  bear.com             False                  bear.com is an unrelated mattress company; the animal
+     Craft    B         craft.do                                        craft.com|craft.io             False                   common English word; craft.co is a company-data firm
+    Things    B culturedcode.com                                     things.com|things.app             False                          maximally generic name — strong anchor needed
+    Motion    B    usemotion.com                           motion.com|motion.app|motion.ai             False                    motion.com is Motion Industries (industrial supply)
+ Clockwise    B getclockwise.com                                             clockwise.com             False                                                                       
+     Otter    B         otter.ai                                                 otter.com             False                                              the animal; anchor needed
+ Fireflies    B     fireflies.ai                                             fireflies.com             False                                                                       
+     Gamma    B        gamma.app                                        gamma.com|gamma.io             False greek letter; multiple gamma-named companies; site 403s scripted fetch
+   Granola    B       granola.ai                                               granola.com             False                                               the food — anchor needed
+      Amie    B          amie.so                                         amie.com|amie.app             False                                      French given name — anchor needed
+     Mural    B         mural.co                                                 mural.com             False                                                    common English word
+    Notion    C       notion.com                 notion.so                      notion.com              True                notion.so was canonical until ~2023 and still redirects
+         X    C            x.com               twitter.com               x.com|twitter.com             False                       single letter; the Twitter alias is load-bearing
+      Zoom    C         zoom.com                   zoom.us                zoom.com|zoom.us              True                verify which of zoom.com/zoom.us is canonical at freeze
+     Front    C        front.com              frontapp.com          front.com|frontapp.com              True                                    common English word — anchor needed
+      GoTo    C         goto.com               logmein.com                        goto.com              True                      site 403s scripted fetches (WAF); domain verified
+    Sketch    C       sketch.com             sketchapp.com        sketch.com|sketchapp.com              True                                                    common English word
+Freshworks    C   freshworks.com             freshdesk.com                  freshworks.com              True freshdesk.com still live as a product domain — verify treatment at fre
+ Limitless    C     limitless.ai                 rewind.ai      limitless.com|limitless.ai             False                  common English word; the Rewind alias is load-bearing
+      Meta    C         meta.com facebook.com|about.fb.com           meta.com|facebook.com              True corporate vs product domains — score corporate asks only; site 400s sc
+  Shortcut    C     shortcut.com              clubhouse.io                    shortcut.com              True                    Clubhouse collides with the audio app clubhouse.com
+     Bitly    C        bitly.com                    bit.ly                bitly.com|bit.ly              True bit.ly is still the live short domain — verify canonical-site treatmen
+  Alphabet    C          abc.xyz                                              alphabet.com             False alphabet.com belongs to BMW's fleet-management brand — a real other_re
+    Bonsai    D  hellobonsai.com                                      bonsai.com|bonsai.io             False                the tree; bonsai.io is an unrelated search-hosting firm
+ HoneyBook    D    honeybook.com                                                                        True                                                                       
+   Dubsado    D      dubsado.com                                                                        True                                                                       
+    17hats    D       17hats.com                                                                        True                                                                       
+    Plutio    D       plutio.com                                                                        True                                                                       
+ SuiteDash    D    suitedash.com                                                                        True                                                                       
+    Accelo    D       accelo.com                                                                        True                                                                       
+     Scoro    D        scoro.com                                                                        True                                                                       
+     Avaza    D        avaza.com                                                                        True                                                                       
+     Paymo    D     paymoapp.com                                       paymo.com|paymo.biz             False canonical verified 2026-09-01: paymo.biz redirects to paymoapp.com; pa
+      Moxo    D         moxo.com                moxtra.com                                              True       rebranded from Moxtra — arguably C; kept D for prominence, noted
+  Nutshell    D     nutshell.com                                                                        True                                    common English word — anchor needed
+
+REVIEW TABLE — entity attribution, for human sign-off. Every stale, name-bearing-other and morphological-guess domain the model consulted, per brand, with counts and the template that produced it. These are judgment calls the pipeline must NOT make on its own (atmeta.com is Meta's own investor domain; playstation.com is Sony's own product domain; both are scored name_bearing_other, which is not the same as an error about the brand's canonical domain). Annotate by hand before the write-up.
+    brand tier          error_kind    registered_domain template  n
+     Bose    A  name_bearing_other boseprofessional.com       p1  2
+  Shopify    A  name_bearing_other          shopify.dev       p2  3
+     Sony    A  name_bearing_other     sony-semicon.com       p2  2
+     Sony    A  name_bearing_other           sony.co.jp       p2  1
+     Amie    B  name_bearing_other          amieapp.com       p2  3
+Clockwise    B morphological_guess        clockwise.com       p2  2
+     GoTo    C    stale_old_domain          logmein.com       p1 21
+     GoTo    C    stale_old_domain          logmein.com       p2  3
+     GoTo    C  name_bearing_other         gotomypc.com       p1  1
+     GoTo    C  name_bearing_other    logmeinrescue.com       p1  1
+     Meta    C    stale_old_domain         facebook.com       p1 33
+     Meta    C    stale_old_domain               fb.com       p1 19
+     Meta    C  name_bearing_other           atmeta.com       p1 10
+     Meta    C  name_bearing_other           atmeta.com       p2  6
+     Zoom    C    stale_old_domain              zoom.us       p1  2
+
+SIGNED ATTRIBUTION — Jim Wrubel, 2026-09-11 (results/audit-d-signoff.md). A domain carrying the brand's name may be the brand's OWN property (a product, regional, developer or investor site) or a different company that shares the name; the pipeline cannot tell which, so a person ruled on each and the rulings are frozen in pipeline/annotations.py. The primary outcome is NOT changed by them — they enter as the H3 split, robustness (f), and the genuinely-wrong counts.
+  brand    registered_domain   attribution  n_observations
+   Bose boseprofessional.com  own_property               2
+Shopify          shopify.dev  own_property               3
+   Sony           sony.co.jp  own_property               1
+   Sony     sony-semicon.com  own_property               2
+   GoTo         gotomypc.com  own_property               1
+   GoTo    logmeinrescue.com  own_property               1
+   Meta           atmeta.com  own_property              16
+   Amie          amieapp.com other_company               3
+
+  ACTION ITEMS: none — every name-bearing domain in this frame carries a signed attribution.
+
+## Audit E — model drift
+------------------------
+model  gpt-5.6-terra
+wave                
+1                288
+2                 96
+3                 96
+4                 96
+5                 96
+6                 96
+7                 96
+8                 96
+9                 96
+10                96
+
+Single model across every wave: gpt-5.6-terra.
+
+## EXPLORATORY (not pre-registered) — third-party consultations on p2
+---------------------------------------------------------------------
+The comparison template makes the model consult other companies' sites by design; these are not errors about the asked brand. Reported because it replicates experiment 007's comparison-trigger finding on a second instrument. Top 5 third-party domains per brand, comparison prompts only.
+tier      brand   registered_domain  n
+   A     Airbnb            vrbo.com 17
+   A     Airbnb         booking.com 16
+   A     Airbnb    expediagroup.com 10
+   A     Airbnb             sec.gov  4
+   A     Airbnb bookingholdings.com  1
+   A      Asana         clickup.com 21
+   A      Asana          monday.com 20
+   A      Asana      smartsheet.com 14
+   A      Asana       atlassian.com 12
+   A      Asana           wrike.com 11
+   A       Bose           sonos.com 20
+   A       Bose           apple.com 18
+   A       Bose             jbl.com 14
+   A       Bose            sony.com 11
+   A       Bose          rtings.com 10
+   A      Canva           adobe.com 28
+   A      Canva           figma.com 17
+   A      Canva       microsoft.com 14
+   A      Canva           vista.com 12
+   A      Canva           serif.com  3
+   A    Dropbox       microsoft.com 25
+   A    Dropbox          google.com 23
+   A    Dropbox             box.com 18
+   A    Dropbox           apple.com 17
+   A    Dropbox           proton.me  8
+   A   Duolingo    rosettastone.com 20
+   A   Duolingo         memrise.com 14
+   A   Duolingo          babbel.com 13
+   A   Duolingo           busuu.com 13
+   A   Duolingo        pimsleur.com  7
+   A      Figma          penpot.app 17
+   A      Figma          framer.com 16
+   A      Figma          sketch.com 15
+   A      Figma           adobe.com 11
+   A      Figma           axure.com 10
+   A    Shopify             wix.com 23
+   A    Shopify     bigcommerce.com 21
+   A    Shopify           adobe.com 18
+   A    Shopify     squarespace.com 18
+   A    Shopify      salesforce.com 15
+   A      Slack       microsoft.com 28
+   A      Slack          google.com 27
+   A      Slack      mattermost.com 17
+   A      Slack         discord.com 16
+   A      Slack            zoom.com 11
+   A       Sony           apple.com  8
+   A       Sony      nintendo.co.jp  8
+   A       Sony       microsoft.com  7
+   A       Sony         samsung.com  7
+   A       Sony           canon.com  3
+   A    Spotify          google.com 27
+   A    Spotify         youtube.com 26
+   A    Spotify          amazon.com 20
+   A    Spotify           tidal.com 19
+   A    Spotify           apple.com 18
+   A     Stripe        checkout.com 28
+   A     Stripe           adyen.com 24
+   A     Stripe          paypal.com 18
+   A     Stripe        squareup.com 15
+   A     Stripe        worldpay.com 14
+   B       Amie       usemotion.com 17
+   B       Amie          reclaim.ai 15
+   B       Amie         sunsama.com 12
+   B       Amie         akiflow.com 11
+   B       Amie      superhuman.com 11
+   B       Bear         obsidian.md 30
+   B       Bear        evernote.com 25
+   B       Bear          notion.com 24
+   B       Bear            craft.do 21
+   B       Bear           apple.com 19
+   B  Clockwise       usemotion.com 24
+   B  Clockwise          reclaim.ai 18
+   B  Clockwise        calendly.com 13
+   B  Clockwise         sunsama.com 13
+   B  Clockwise         akiflow.com  3
+   B      Craft         obsidian.md 40
+   B      Craft             coda.io 23
+   B      Craft          notion.com 23
+   B      Craft          google.com 12
+   B      Craft            bear.app 11
+   B  Fireflies             tldv.io 18
+   B  Fireflies            otter.ai 14
+   B  Fireflies        fathom.video 12
+   B  Fireflies          granola.ai 12
+   B  Fireflies             read.ai 12
+   B      Gamma           canva.com 25
+   B      Gamma        beautiful.ai 22
+   B      Gamma           pitch.com 17
+   B      Gamma          google.com 15
+   B      Gamma       microsoft.com 12
+   B    Granola            otter.ai 17
+   B    Granola        fireflies.ai 16
+   B    Granola        fathom.video  7
+   B    Granola             tldv.io  7
+   B    Granola          notion.com  6
+   B     Linear        shortcut.com 30
+   B     Linear         clickup.com 21
+   B     Linear           asana.com 16
+   B     Linear       atlassian.com 16
+   B     Linear          github.com 13
+   B     Motion          reclaim.ai 28
+   B     Motion         sunsama.com 26
+   B     Motion         akiflow.com 22
+   B     Motion       clockwise.com 21
+   B     Motion    getclockwise.com  9
+   B      Mural            lucid.co 40
+   B      Mural            miro.com 22
+   B      Mural       microsoft.com 16
+   B      Mural           figma.com 15
+   B      Mural      stormboard.com  1
+   B      Otter             tldv.io 28
+   B      Otter        fireflies.ai 23
+   B      Otter        fathom.video 17
+   B      Otter           grain.com 17
+   B      Otter       microsoft.com  7
+   B     Things           apple.com 34
+   B     Things        ticktick.com 27
+   B     Things       omnigroup.com 16
+   B     Things         todoist.com 15
+   B     Things       microsoft.com 12
+   C   Alphabet     aboutamazon.com 14
+   C   Alphabet           apple.com 12
+   C   Alphabet          atmeta.com 12
+   C   Alphabet       microsoft.com  8
+   C   Alphabet             sec.gov  7
+   C      Bitly         tinyurl.com 35
+   C      Bitly            short.io 15
+   C      Bitly       rebrandly.com 12
+   C      Bitly              dub.co 11
+   C      Bitly              bl.ink  9
+   C Freshworks         zendesk.com 31
+   C Freshworks        intercom.com 18
+   C Freshworks         hubspot.com 13
+   C Freshworks            zoho.com 13
+   C Freshworks      salesforce.com 12
+   C      Front       helpscout.com 26
+   C      Front      missiveapp.com 16
+   C      Front         zendesk.com 16
+   C      Front         hiverhq.com 14
+   C      Front        intercom.com 13
+   C       GoTo     connectwise.com 27
+   C       GoTo       splashtop.com 27
+   C       GoTo        ninjaone.com 21
+   C       GoTo      teamviewer.com 16
+   C       GoTo            zoom.com 11
+   C  Limitless            plaud.ai 26
+   C  Limitless              omi.me 24
+   C  Limitless        bee.computer 14
+   C  Limitless            otter.ai  7
+   C  Limitless          granola.ai  5
+   C       Meta             abc.xyz  5
+   C       Meta    pinterestinc.com  5
+   C       Meta       redditinc.com  3
+   C       Meta            snap.com  3
+   C       Meta          tiktok.com  3
+   C     Notion         clickup.com 23
+   C     Notion             coda.io 23
+   C     Notion         obsidian.md 18
+   C     Notion           asana.com 13
+   C     Notion       atlassian.com 12
+   C   Shortcut          linear.app 22
+   C   Shortcut         clickup.com 17
+   C   Shortcut           asana.com 14
+   C   Shortcut       atlassian.com 12
+   C   Shortcut          github.com  9
+   C     Sketch          penpot.app 30
+   C     Sketch          framer.com 28
+   C     Sketch           figma.com 24
+   C     Sketch           adobe.com 13
+   C     Sketch           axure.com  7
+   C          X              fb.com 15
+   C          X       redditinc.com 10
+   C          X         bsky.social  7
+   C          X    joinmastodon.org  7
+   C          X       instagram.com  6
+   C       Zoom          google.com 28
+   C       Zoom       microsoft.com 20
+   C       Zoom           webex.com 12
+   C       Zoom           slack.com  6
+   C       Zoom            goto.com  1
+   D     17hats     hellobonsai.com 18
+   D     17hats       honeybook.com 15
+   D     17hats         dubsado.com 13
+   D     17hats              g2.com  5
+   D     17hats      studioninja.co  4
+   D     Accelo         bigtime.net 22
+   D     Accelo       productive.io 22
+   D     Accelo         kantata.com 21
+   D     Accelo           scoro.com 15
+   D     Accelo        certinia.com  8
+   D      Avaza        teamwork.com 23
+   D      Avaza         clickup.com 15
+   D      Avaza          monday.com 12
+   D      Avaza           scoro.com 12
+   D      Avaza       productive.io 10
+   D     Bonsai         dubsado.com 15
+   D     Bonsai       honeybook.com 15
+   D     Bonsai      freshbooks.com 12
+   D     Bonsai          intuit.com  7
+   D     Bonsai            indy.com  5
+   D    Dubsado          17hats.com 19
+   D    Dubsado       honeybook.com 19
+   D    Dubsado     hellobonsai.com 15
+   D    Dubsado       withmoxie.com 12
+   D    Dubsado      studioninja.co 10
+   D  HoneyBook     hellobonsai.com 24
+   D  HoneyBook          17hats.com 20
+   D  HoneyBook         dubsado.com 15
+   D  HoneyBook      studioninja.co  9
+   D  HoneyBook       withmoxie.com  3
+   D       Moxo        assembly.com 16
+   D       Moxo         guidecx.com 11
+   D       Moxo      rocketlane.com 11
+   D       Moxo       suitedash.com 11
+   D       Moxo         clinked.com  5
+   D   Nutshell       pipedrive.com 20
+   D   Nutshell            zoho.com 15
+   D   Nutshell         hubspot.com 12
+   D   Nutshell      freshworks.com 11
+   D   Nutshell      salesforce.com  7
+   D      Paymo         clockify.me 16
+   D      Paymo      getharvest.com 16
+   D      Paymo           toggl.com 13
+   D      Paymo        teamwork.com  9
+   D      Paymo        hubstaff.com  7
+   D     Plutio       honeybook.com 22
+   D     Plutio     hellobonsai.com 21
+   D     Plutio         dubsado.com 15
+   D     Plutio       suitedash.com 13
+   D     Plutio          17hats.com  7
+   D      Scoro       productive.io 20
+   D      Scoro          accelo.com 17
+   D      Scoro         kantata.com 15
+   D      Scoro        teamwork.com 14
+   D      Scoro          monday.com  8
+   D  SuiteDash         copilot.com 17
+   D  SuiteDash       honeybook.com 15
+   D  SuiteDash          plutio.com 11
+   D  SuiteDash         dubsado.com 10
+   D  SuiteDash         copilot.app  9
+
+Share of p2 site: observations that are third-party, by tier: {'A': 0.81, 'B': 0.799, 'C': 0.835, 'D': 0.824}
+
+## Deviations / analysis-time definitions
+-----------------------------------------
+The frozen spec fixes the hypotheses and decision rules; these are the definitions it left open, resolved at analysis time and recorded here.
+
+1. `other_real` is split into `name_bearing_other` and `third_party`.
+   Spec §2 Audit B names four error kinds. In the data the 'other real domain' bucket holds two very different things: domains that carry the brand's own name (atmeta.com, gotomypc.com, boseprofessional.com — the brand's own orbit) and domains that do not (clickup.com consulted while answering about Asana — a competitor the comparison template invites). Only the first is a claim about the asked brand's domain, so H2/H3 analyse own-domain errors and exclude third_party. The frozen four-way labels stay derivable: name_bearing_other + third_party = other_real.
+
+2. The primary call-level outcome is the first BRAND-ATTRIBUTABLE site: query. Spec §5 defines it as 'the domain of a site: fan-out naming the brand's prompt-run', and a third-party site: query does not name the asked brand at all: the comparison template makes the model open on a competitor by design (adyen.com while answering about Stripe, vrbo.com about Airbnb), which would otherwise be scored as a wrong domain and would make the template, not the model's belief, the thing being measured. So the outcome is the first site: query whose target is about this brand (correct / stale / morphological_guess / name_bearing_other); calls with only third-party site: queries get first_site_label = 'none' and are NON-EMITTING for this outcome — reported as the fourth stage of the H1 funnel, by tier x template. The raw first site: query of any kind survives as first_search_domain_any (released) and as robustness (e); `any_wrong_incl_stale` — any non-correct, non-third-party site: query anywhere in the call — remains robustness (a).
+
+3. H2 IS NOT IDENTIFIABLE AS PRE-REGISTERED, and no verdict is reported for it. Spec §4 asks whether the observed same-wrong-domain agreement exceeds 'the independence baseline ... expected agreement Sigma p^2'. Under any model where a call's wrong domain is drawn independently from the brand's own distribution — which is precisely what per-run guessing means — the observed pairwise agreement IS an unbiased estimator of Sigma p^2, and the plug-in Sigma p_hat^2 is its biased twin, always >= it. The contrast therefore has expectation zero under the guessing hypothesis and is bounded above by zero in the plug-in form: it cannot separate the mechanisms on any data. Stage 03 prints the observed agreement and the plug-in for transparency, states NOT IDENTIFIABLE, and rests the mechanism claim on the pre-registered H3 (error content) and H4 (temporal structure). Two supporting analyses are reported and labelled: an EXPLORATORY permutation of wrong-domain labels across brands (which tests brand-specificity — near-tautological, since a per-run guesser generating from the brand's own name is also brand-specific), and a POST-HOC sensitivity whose baseline is EXTERNAL to the observations: uniform choice over the brand's frozen candidate set (old_domains + expected_guess minus the truth, K domains), which predicts agreement 1/K under guessing and 1 under a stored association. That one is identifying, but only where K >= 2; the frozen panel gives most tier-C brands K = 1 (GoTo's only candidate is logmein.com), where the two mechanisms make the SAME prediction and the brand is reported as not separable by design. The 0.25 / 0.05 bands are unchanged and were never widened.
+
+4. H4 gains an identifying companion (still temporal, still pre-registered in substance): the agreement of the WRONG DOMAIN within a day (wave-1 replicate pairs) versus across days (consecutive core waves), over pairs where BOTH calls were wrong. A stored association predicts both near 1 and equal; a per-run guess predicts both near 1/K. Reported pooled and restricted to K >= 2 brands, with brand-clustered CIs and pair counts.
+
+5. H4's transition test is reported twice: pooled over all brands, and restricted to brands that erred at least once (composition-matched). Pooling all brands puts the never-erring brands entirely into the P(correct | correct) arm, which inflates the gap for reasons that have nothing to do with self-correction; the matched version is the one to read.
+
+6. `nonexistent` is assigned only by this stage's resolution check, with its date, and only to stale / morphological-guess / name-bearing domains. It is written to interim/error_kind_resolved.csv and merged by stage 03 rather than rewritten into the interim frames, so the scored frames stay reproducible from the raw responses alone.
+
+7. Name-bearing matching uses name tokens of 3+ characters, so tier-C brand 'X' contributes only its 'Twitter' alias — a one-character token would make every domain containing an x name-bearing.
+
+8. Audit D's entity attribution is applied as a LABELLED ROBUSTNESS LAYER, never to the primary. A consulted domain that carries the brand's name may be the brand's own property (atmeta.com is Meta's investor site, sony.co.jp Sony's Japanese site) or a different company that shares the name (amieapp.com is not Amie). No rule the pipeline could apply separates those, so a person ruled on each of the 8 name-bearing domains in waves 1-9 and the rulings are frozen, dated and signed in pipeline/annotations.py (Jim Wrubel, 2026-09-11; prose record in results/audit-d-signoff.md). They surface as the `attribution` column, the H3 error-kind split, robustness (f) (own-property first commitments recounted as correct; Amie stays wrong) and the genuinely-wrong counts. first_site_label is untouched: a name-bearing consultation is still not the canonical domain. A name-bearing domain with no signed ruling attributes as `unreviewed`, counts as genuinely wrong, and is printed in capitals as an Audit D action item — so a wave-10 domain reopens the review rather than silently passing.
+
+9. Release column names avoid the substrings the release gate forbids (`emitted_site_search`, not `emitted_site_query`); see 05_release.py. `Datasheet` grew a `unit` field (default 'citations', unchanged for every other study) so this dataset's row count reads 'calls evaluated in this study' — the only edit outside this experiment.
