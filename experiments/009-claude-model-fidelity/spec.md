@@ -1,7 +1,7 @@
 # Cheaper Claude API calls reproduce what a claude.ai subscriber sees in B2B software research: study spec
 
 **Status:** FROZEN
-**Frozen commit:** (recorded at freeze, per docs/workflow.md §3)
+**Frozen commit:** `1730d38`
 **Frozen date / seed:** 2026-09-26 / 20260926
 **Experiment slug:** `009-claude-model-fidelity`
 
