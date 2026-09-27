@@ -299,6 +299,30 @@ def test_export_matching_by_name_then_prompt_text():
     assert matched[("ui_default", "b2b_02")]["uuid"] == "d" and not ambiguous
 
 
+def test_clarifying_questions_score_the_first_reply_only():
+    ingest = importlib.import_module("ingest_claude_export")
+
+    def reply(text):
+        return {"sender": "assistant", "content": [{"type": "text", "text": text}]}
+
+    conv = {"uuid": "q", "name": "w1-ui_think-b2b_28", "chat_messages": [
+        {"sender": "human", "text": "best sso?"},
+        reply("Okta or Entra, depending on your stack."),
+        {"sender": "human", "text": "Q: Platform?\nA: Microsoft 365"},
+        reply("Use Entra ID."),
+    ]}
+    norm = ingest.normalize(conv)
+    assert norm["clarifying_questions"] is True
+    assert norm["answer_text"] == "Okta or Entra, depending on your stack."
+    assert norm["full_chat"]["answer_text"].endswith("Use Entra ID.")
+    assert "clarifying questions: scored the first reply only" in norm["warnings"]
+    assert len(conv["chat_messages"]) == 4  # the stored conversation is untouched
+
+    single = {"uuid": "s", "chat_messages": conv["chat_messages"][:2]}
+    norm = ingest.normalize(single)
+    assert norm["clarifying_questions"] is False and "full_chat" not in norm
+
+
 def test_voided_chats_are_never_matched():
     ingest = importlib.import_module("ingest_claude_export")
     prompts = {"b2b_01": {"text": "best crm?"}}

@@ -495,4 +495,19 @@ D validates it.
 
 ## Deviations from the frozen spec
 
-(none; the spec is not frozen)
+1. **Clarifying questions in UI chats (2026-09-27, wave 1).** In 3 of 80
+   wave 1 chats, claude.ai asked clarifying questions with its
+   `ask_user_input_v0` widget: `ui_default/b2b_28`, `ui_think/b2b_28` and
+   `ui_think/b2b_36`. The collector answered them, and the questions,
+   options and selections are recorded in `data/raw/ui_sheets/w1_notes.md`.
+   The spec did not cover this. The API arms cannot ask and never get the
+   extra context, so only the first reply is scored, up to the second human
+   message. The full chat is kept as `normalized.full_chat`, and each
+   response carries `normalized.clarifying_questions`. These chats are
+   flagged in the collector notes, so R7 is the sensitivity check that drops
+   them. The same rule applies to waves 2 and 3. Decided by Jim before any
+   confirmatory metric was computed.
+2. **Wave 1 UI chat out of order (2026-09-27).** Sheet row 63,
+   `ui_think/b2b_09`, was skipped during the session. It was run at 17:17
+   ET, after row 80, on the same day and account, and the export was
+   redone.

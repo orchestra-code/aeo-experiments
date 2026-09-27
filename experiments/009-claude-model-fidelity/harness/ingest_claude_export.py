@@ -78,6 +78,32 @@ def load_conversations(export_dir: Path) -> list[dict]:
     return unique
 
 
+def first_exchange(conv: dict) -> tuple[dict, bool]:
+    """The chat up to (not including) the second human message.
+
+    When claude.ai asks clarifying questions (``ask_user_input_v0``), the
+    collector's answers arrive as a second human message and a second reply.
+    The API arms never get that context, so only the first reply is scored
+    (deviation 1, 2026-09-27). Returns (conversation copy, truncated?).
+    """
+    messages = conv.get("chat_messages") or []
+    humans = [i for i, m in enumerate(messages) if m.get("sender") == "human"]
+    if len(humans) < 2:
+        return conv, False
+    return {**conv, "chat_messages": messages[: humans[1]]}, True
+
+
+def normalize(conv: dict) -> dict:
+    """``from_claude_export`` on the first exchange; the full chat kept alongside."""
+    first, truncated = first_exchange(conv)
+    norm = from_claude_export(first)
+    norm["clarifying_questions"] = truncated
+    if truncated:
+        norm["warnings"].append("clarifying questions: scored the first reply only")
+        norm["full_chat"] = from_claude_export(conv)
+    return norm
+
+
 def match(convs: list[dict], prompts: dict[str, dict], wave: int, arms: list[str]):
     """Return (matched {(arm, item): conv}, duplicates, ambiguous, ignored count)."""
     by_key: dict[tuple[str, str], list[dict]] = defaultdict(list)
@@ -144,7 +170,7 @@ def main() -> None:
     out_dir = Path(a.out_dir) / f"w{a.wave}"
     warn_counts: Counter = Counter()
     for (arm, item), conv in sorted(matched.items()):
-        norm = from_claude_export(conv)
+        norm = normalize(conv)
         if _norm(first_human_text(conv)) != _norm(prompts[item]["text"]):
             norm["warnings"].append("first human message differs from the prompt text")
         for w in norm["warnings"]:
@@ -173,7 +199,7 @@ def main() -> None:
           f"{ignored} other conversations ignored")
     for arm in arms:
         got = [matched[(arm, i)] for i in prompts if (arm, i) in matched]
-        norms = [from_claude_export(c) for c in got]
+        norms = [normalize(c) for c in got]
         with_cites = sum(1 for n in norms if n["cited_urls"])
         with_search = sum(1 for n in norms if n["n_searches"])
         print(f"  {arm}: {len(got)} chats, {with_search} with searches, "
