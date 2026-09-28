@@ -412,3 +412,14 @@ def test_lexicon_extract_longest_first_case_modes_and_drops(tmp_path):
     amap = pilot_report.lexicon_alias_map(lex)
     assert pilot_report.haiku_via_lexicon(["PaySys", "Acme Cloud Suite", "Acme"], "CRM",
                                           amap) == ["acme"]
+
+
+def test_strip_sources_drops_labelled_source_lists_only():
+    strip = pilot_report.strip_sources
+    listed = "Pick Acme.\n\n### Sources referenced:\n- beta.com review\n\n- Gamma blog\nNext step: call Acme."
+    assert strip(listed) == "Pick Acme.\n\n\nNext step: call Acme."
+    assert strip("Pick Acme.\n**Sources Referenced:** beta.com, Gamma\nDone.") == "Pick Acme.\n\nDone."
+    assert strip("Pick Acme.\n## Sources\n1. beta.com") == "Pick Acme.\n"
+    # Prose that starts with "Sources" is not a sources block.
+    prose = "Sources for the table: Acme at $10.\nSources say Acme is fast."
+    assert strip(prose) == prose

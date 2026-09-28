@@ -377,8 +377,35 @@ def load_lexicon(path: Path = LEXICON_V0) -> dict[str, list[tuple[re.Pattern, st
     return out
 
 
+#: A "Sources" / "Sources referenced" label (heading, bold or plain) that ends
+#: its line or is followed by a colon. The production discovery prompt asks
+#: for the sources consulted, so sonnet5_prod answers end with one (deviation 3).
+_SOURCES_LABEL = re.compile(
+    r"^[ \t]*(?:#{1,6}[ \t]*)?\**[ \t]*sources?(?:[ \t]+(?:referenced|consulted|cited|used))?"
+    r"[ \t]*(?::\**|\**:|\**[ \t]*$)",
+    re.I | re.M,
+)
+_LIST_ITEM = re.compile(r"^[ \t]*(?:[-*+•]|\d+[.)])[ \t]")
+
+
+def strip_sources(text: str) -> str:
+    """Drop each sources block: the label line and the list items after it."""
+    lines = text.split("\n")
+    out, i = [], 0
+    while i < len(lines):
+        if _SOURCES_LABEL.match(lines[i]):
+            i += 1
+            while i < len(lines) and (not lines[i].strip() or _LIST_ITEM.match(lines[i])):
+                i += 1
+            out.append("")
+            continue
+        out.append(lines[i])
+        i += 1
+    return "\n".join(out)
+
+
 def lexicon_extract(text: str, patterns) -> list[str]:
-    text = _MD_MARKUP.sub(" ", _MD_URL.sub(" ", text))
+    text = _MD_MARKUP.sub(" ", _MD_URL.sub(" ", strip_sources(text)))
     taken = np.zeros(len(text) + 1, dtype=bool)
     first: dict[str, int] = {}
     for pattern, canon, keep in patterns:

@@ -21,44 +21,58 @@ records only the rules. It names no brand.
    (vendor, prompt category): `canonical, aliases, category, decision
    (keep|drop), reason, match (ci|cs), n_answers`.
 4. **Extraction.** Deterministic, as in experiment 003's
-   `brands.extract_brands`: markdown link targets, bare URLs and markup are
-   stripped; the category's aliases are matched longest first on word
+   `brands.extract_brands`: labelled sources blocks (a "Sources" or "Sources
+   referenced" label and the list after it; deviation 3), markdown link
+   targets, bare URLs and markup are stripped; the category's aliases are matched longest first on word
    boundaries; order is first mention. Matched spans are consumed, so a longer
    alias shadows a shorter one inside it. Drop rows consume their spans but are
    not counted. Only the rows for the answer's own prompt category are used.
 
 ## Curation rules
 
-- **Unit is the vendor.** Product lines, editions, modules, renamed products
-  and acquired products merge into the vendor that sells them today. A
-  rebrand merges into the current name.
-- **Suites.** A vendor that sells in many categories is one canonical name.
-  Whether it counts is decided per category (next rule).
+- **Unit is the brand the answer names** (amended 2026-09-27, deviation 3).
+  A product with its own distinctive name is its own row, whoever owns it and
+  even when written with the parent company's prefix. Ownership and
+  acquisitions never merge rows.
+- **What still merges:** a renamed product (the old name is no longer sold)
+  into its current name; editions, tiers, modules and descriptively named
+  product lines written with the company's name into the company's row.
+- **Bare company names** stay on the company's own row. It is kept when the
+  company name is itself the brand in the category; when the company has its
+  own product row in the category, the bare name is a drop row, so one vendor
+  is not counted twice. One company can therefore have several rows in a
+  category, one per named product. Whether each counts is decided per
+  category (next rule).
 - **Keep** a vendor in a category when it sells a product in that category,
   even if the answer mentions it briefly or as an alternative.
 - **Drop in one category only** when the brand is plainly a different kind of
   product there: the buyer's other systems (accounting, ERP, billing,
   payments, policy administration, device management), integration
   platforms, BI tools in a warehouse answer, design tools in a project
-  management answer. The reason column says which. When it is unclear whether
+  management answer. The reason column says which. A vendor named only as a
+  system to integrate with is dropped; when the answer presents that vendor's
+  own in-category product, that product's row is kept and the vendor's other
+  names go on a drop row. When it is unclear whether
   the vendor sells in the category, keep it and mark the reason for review.
+- **Open-source tools** count as brands when the answer presents them as an
+  option in the category (amended 2026-09-28 at review). An open-source
+  project named only as a component, engine or source system is dropped.
 - **Drop everywhere:** standards, protocols, regulations and certifications;
-  open-source projects that no company sells as a product in the category
-  (projects that a vendor sells as a hosted product merge into that vendor);
   publishers, review sites, analysts and forums; general AI assistants and
   office suites; names too ambiguous to attribute.
 - **Matching mode.** Aliases that are ordinary English words are matched
   case-sensitively (`cs`); everything else is case-insensitive (`ci`).
   Aliases too generic to match safely are left out of the alias list.
-- **Coverage.** v0 covers only the 10 categories in the pilot. The
-  confirmatory panel has 20, so the lexicon is extended from wave 1
-  candidates for all 40 prompts before it is frozen.
+- **Coverage.** v0 covered only the 10 pilot categories. v1
+  (`data/raw/lexicon_v1.csv`) covers all 20, built from wave 1 candidates
+  (`harness/lexicon_candidates.py`) for all 40 prompts.
 
 ## Freezing
 
 The lexicon is frozen after wave 1 answers are in and before any
 confirmatory metric is computed: candidates from wave 1 (all arms) are merged
-into the table, a person reviews every row, and the file's sha256 is recorded
-in the spec. Audit D then checks extraction on a 30-response spot check
+into the table, a person reviews the rows, and the file's sha256 is recorded
+in the spec. For v1, the review covered every flagged row and every row that
+matched five or more wave 1 answers (deviation 4). Audit D then checks extraction on a 30-response spot check
 (brand precision at least 0.95, recall at least 0.90). Changes after the
 freeze are logged as deviations.

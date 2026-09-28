@@ -426,6 +426,13 @@ boundaries, first-mention order, per-category rows). This happens after
 wave 1 answers are in and before any confirmatory metric is computed. Audit
 D validates it.
 
+**Lexicon v1, frozen 2026-09-28:** `data/raw/lexicon_v1.csv`, sha256
+`9425a4d3f2d393b59eb925c96a2b69dc8be9aa639d1f8446465815866bc263e3`.
+950 rows (600 keep, 350 drop) across all 20 categories. Candidates came from
+`harness/lexicon_candidates.py --wave 1` (360 answers, $0.62). The rows
+were curated under deviation 3 and reviewed by Jim (deviation 4). No
+confirmatory metric had been computed.
+
 ## 6. Known traps for this design
 
 - **The UI is one account.** Results describe a fresh, depersonalized Pro
@@ -472,7 +479,7 @@ D validates it.
    are recovered; `03_model.py` exits non-zero when H_pos fails.
 4. Freeze (two commits), record hash and seed.
 5. Waves 1 to 3 (API batch during each UI session; export and ingest after).
-6. Lexicon extension from wave 1 candidates, review, freeze (sha256 here).
+6. Lexicon extension from wave 1 candidates, review, freeze (DONE 2026-09-28; sha256 under the lexicon protocol in §5).
 7. `01_features` to `04_figures`, Audit D (signed), robustness suite.
 8. STOP for results review (`results/model_summary.txt`, figures, cost per
    arm).
@@ -511,3 +518,36 @@ D validates it.
    `ui_think/b2b_09`, was skipped during the session. It was run at 17:17
    ET, after row 80, on the same day and account, and the export was
    redone.
+3. **Lexicon unit and sources blocks (2026-09-27, before the lexicon
+   freeze and before any confirmatory metric).** Three changes, decided by
+   Jim during wave 1 curation:
+   - *Unit is the brand the answer names.* `harness/lexicon_rules.md`
+     merged acquired products and product lines into the vendor that owns
+     them. Curation showed that this rests on ownership facts that often came
+     from the answers themselves and could not be verified, and it hides
+     which brand the buyer was shown. The unit is now the brand as named: a
+     product with its own distinctive name is its own row, and only renames
+     and descriptively named product lines merge. A bare company name counts
+     only when the company name is itself the brand; where the company has
+     its own product row in the category, the bare name is a drop row, so
+     one vendor is not counted twice.
+   - *The buyer's other systems* are dropped in every category, including
+     vendors v0 had kept when they were named only as integration targets.
+   - *Sources blocks are stripped before extraction.* The production
+     discovery prompt asks for the sources consulted, so 33 of 40 wave 1
+     `sonnet5_prod` answers end with a labelled list of publishers and vendor
+     sites. `pilot_report.strip_sources` removes the label and its list for
+     every arm; in wave 1 it changes only those 33 answers.
+   - *Open-source tools* count as brands when the answer presents them as
+     an option in the category. They are dropped only when named as a
+     component, engine or source system. The rules had dropped open-source
+     projects everywhere; Jim changed this at review (2026-09-28).
+4. **Lexicon review scope (2026-09-28).** The protocol says a person
+   reviews every row. Jim reviewed 416 of 950 rows by hand. They are every
+   row the curators flagged (131; Jim changed 9 decisions) and every other
+   row that matched five or more wave 1 answers (285; no changes). Together
+   they cover 81% of the kept brand matches in wave 1. The other 534 rows
+   each match four or fewer answers and were curated by model only. Audit D's
+   30-response spot check covers them. Three further open-source rows,
+   matching four answers in all, were switched to keep to apply Jim's
+   open-source call consistently.
