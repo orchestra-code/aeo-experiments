@@ -460,7 +460,7 @@ confirmatory metric had been computed.
 ## 7. Robustness checks
 
 1. H_pos first; if it fails, stop.
-2. H_pla must be NULL or NEGLIGIBLE.
+2. H_pla is reported for every primary arm and does not gate the analysis (deviation 8).
 3. R1: top-10 brands instead of all brands (H1b).
 4. R2: RBO on brand order instead of set Jaccard.
 5. R3: exclude answers with no search (domain tests).
@@ -551,3 +551,63 @@ confirmatory metric had been computed.
    30-response spot check covers them. Three further open-source rows,
    matching four answers in all, were switched to keep to apply Jim's
    open-source call consistently.
+5. **Wave 2 API batch finished the next day (2026-09-30).** The batch was
+   submitted at 17:40 EDT on 2026-09-29, during the second UI session.
+   The UI chats ran from 12:24 to 18:59 EDT. At 23:44 EDT none of its 280
+   requests had finished, and it ended at 04:20 EDT on 2026-09-30. The
+   answers were therefore generated about 5 to 10 hours after the UI chats,
+   on the next calendar day, beyond the "hours" of lag the batch-vs-realtime
+   caveat anticipates. The run_date and the date in the leak prompt stay
+   2026-09-29. Wave 1's batch ended within the UI day. Wave 3's batch is
+   submitted at the start of the first UI session to reduce the gap. R5
+   (drop one wave at a time) shows whether wave 2 moves the results.
+6. **Pipeline and domain map built after collection (2026-10-01).** §8
+   steps 2 and 3 placed the move of extraction to `pipeline/`, the analysis
+   scripts and the synthetic dry run before the freeze. They were not done
+   then. The pipeline (`01_features` to `04_figures`) and the synthetic dry
+   run were built after wave 3 was collected. The source-class domain map
+   (§3) was drafted then too, for review by a person. Before any
+   confirmatory metric was computed on real data, the synthetic dry run had
+   to pass, Audit D had to pass, and the domain map had to be frozen.
+   `03_model.py` was first run on real data only after all three.
+7. **Lexicon extended with waves 2 and 3 (2026-10-01, before any
+   confirmatory metric).** Lexicon v1 was built from wave 1 candidates only.
+   Haiku candidates for waves 2 and 3 showed it missed 6.9% and 8.1% of
+   their brand names (0.3% in wave 1), mostly long-tail vendors. Missing
+   names drop out of every arm's brand set. That censors the long tail and
+   biases the brand comparison toward equivalence. The wave 2 and 3
+   candidates (434 uncovered category-brand rows) were curated into lexicon
+   v2 under the same rules. v1 decisions were left unchanged except
+   where Jim corrected them at review. That covered nine bare company
+   names that the bare-company rule should already have dropped, one
+   keep, and two renames or mergers folded into one brand. Otherwise only
+   aliases and new rows were added. Jim reviewed every flagged new row and
+   every new row matching five or more answers. v2 replaces v1 for all
+   extraction, and Audit D runs on v2. Lexicon v2, frozen 2026-10-01:
+   `data/raw/lexicon_v2.csv`, sha256
+   `a2745081980cb819b7de7e0dc698d0fecb001fc7a677259e68d57bf5c744e1eb`,
+   1,324 rows (788 keep, 536 drop). 0.3% of Haiku brand names have no
+   alias, in every wave.
+8. **The placebo does not block (2026-10-01).** §7 says H_pla must be NULL
+   or NEGLIGIBLE. The synthetic dry run showed the odd/even split roughly
+   doubles the CI width: with no planted effect, 2 of 3 primary arms came
+   out INCONCLUSIVE. H_pla is reported for every primary arm and never stops
+   or gates the analysis. A REAL placebo gap is reported as a caveat on
+   H1b.
+9. **Panel shares are descriptive (2026-10-01).** The noise-corrected RMSD
+   for H1s/H1d failed the synthetic dry run, so the reported statistic
+   changed. It subtracts a sampling-noise term that treats an arm's 6
+   answers in a category as independent. They are 2 prompts asked 3 times,
+   and answers to one prompt are highly consistent. The correction
+   therefore over-subtracts, and arms planted to match the UI scored about
+   -0.20. Its prompt-level bootstrap interval also failed to cover its own
+   estimate. In its place, each API arm's within-category vendor ranking is
+   compared with `ui_default`'s and averaged over categories, with a 90%
+   category-level bootstrap interval and no verdict. Two questions are
+   answered: (a) same vendors in the same order (RBO of share-ranked
+   lists, Kendall tau over the pooled basket) and (b) same vendors
+   regardless of order (Jaccard of vendors named in at least 2 of 6
+   answers, and of all vendors named). Cited domains get the same
+   treatment, and `ui_think` vs `ui_default` is shown as a reference. The
+   per-answer tests are unchanged: H1b (primary) answers (b) per answer and
+   the RBO gap answers (a).

@@ -39,6 +39,7 @@ import argparse
 import concurrent.futures as cf
 import csv
 import hashlib
+import importlib.util
 import json
 import re
 import sys
@@ -47,7 +48,6 @@ import unicodedata
 from collections import defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
-from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
 import numpy as np
 import pandas as pd
@@ -66,6 +66,38 @@ from aeo_research.stats import Verdict  # noqa: E402
 from shares import build_cells, share_excess  # noqa: E402
 from shares import power as share_power  # noqa: E402
 
+
+def _pipeline_module(name: str):
+    """Load ``pipeline/<name>.py`` by path under a unique module name.
+
+    Other experiments also have ``brands`` / ``common`` modules, so a plain
+    sibling import could pick up the wrong one when several are on sys.path
+    (the test suite imports 008's first).
+    """
+    key = f"exp009_{name}"
+    if key not in sys.modules:
+        spec = importlib.util.spec_from_file_location(key, EXP / "pipeline" / f"{name}.py")
+        module = importlib.util.module_from_spec(spec)
+        sys.modules[key] = module
+        spec.loader.exec_module(module)
+    return sys.modules[key]
+
+
+# Extraction and URL normalization moved to pipeline/ at freeze (spec §8
+# step 2); re-exported here so the pilot report's behavior is unchanged.
+_brands = _pipeline_module("brands")
+_common = _pipeline_module("common")
+ordered_unique = _brands.ordered_unique
+load_lexicon = _brands.load_lexicon
+strip_sources = _brands.strip_sources
+lexicon_extract = _brands.lexicon_extract
+haiku_via_lexicon = _brands.haiku_via_lexicon
+lexicon_alias_map = _brands.lexicon_alias_map
+TRACKING_PARAMS = _common.TRACKING_PARAMS
+normalize_url = _common.normalize_url
+registered_domain = _common.registered_domain
+domains = _common.domains
+
 RESPONSES = RAW / "pilot_responses"
 LEDGER = RAW / "pilot_ledger.jsonl"
 CACHE = RAW / "pilot_brand_candidates.jsonl"
@@ -79,37 +111,6 @@ REPEAT_WAVE = 90
 SESOI = 0.10
 ALPHA = 0.10
 TOP_K = 10
-
-# ------------------------------------------------------------ URL normalization
-# Same rules as the 002/003/005 pipelines' common.py (normalize_url,
-# registered_domain), copied because experiment pipelines are scripts, not
-# importable library code.
-
-TRACKING_PARAMS = re.compile(r"^(utm_\w+|gclid|fbclid|msclkid|ref|ref_src|src|si|feature)$", re.I)
-_SECOND_LEVEL = {"co", "com", "org", "net", "ac", "gov", "edu"}
-
-
-def normalize_url(url: str) -> str:
-    parts = urlsplit(url.strip())
-    query = urlencode([(k, v) for k, v in parse_qsl(parts.query) if not TRACKING_PARAMS.match(k)])
-    netloc = parts.netloc.lower().removeprefix("www.")
-    return urlunsplit((parts.scheme.lower(), netloc, parts.path.rstrip("/"), query, ""))
-
-
-def registered_domain(url_or_host: str) -> str:
-    host = url_or_host
-    if "//" in host:
-        host = urlsplit(host).netloc
-    host = host.lower().removeprefix("www.").split(":")[0]
-    labels = [p for p in host.split(".") if p]
-    if len(labels) >= 3 and labels[-2] in _SECOND_LEVEL and len(labels[-1]) == 2:
-        return ".".join(labels[-3:])
-    return ".".join(labels[-2:]) if len(labels) >= 2 else host
-
-
-def domains(urls: list[str]) -> set[str]:
-    return {registered_domain(normalize_url(u)) for u in urls if u}
-
 
 # ------------------------------------------------------------ brand canon
 
@@ -181,15 +182,6 @@ def canonical_brand(name: str) -> str:
         if s == parent or s.startswith(parent + " "):
             return ALIASES.get(parent, parent)
     return s
-
-
-def ordered_unique(items):
-    seen, out = set(), []
-    for x in items:
-        if x and x not in seen:
-            seen.add(x)
-            out.append(x)
-    return out
 
 
 # ------------------------------------------------------------ loading
@@ -351,91 +343,9 @@ def write_lexicon(df: pd.DataFrame) -> int:
 # links and markup stripped, longest alias first, word boundaries, order of
 # first mention. Matched spans are consumed (so a longer alias shadows a
 # shorter one inside it), and drop rows consume their spans without counting.
+# The matching functions live in pipeline/brands.py (imported above).
 
 LEXICON_V0 = RAW / "lexicon_v0.csv"
-_MD_URL = re.compile(r"\((?:https?|www)[^)]*\)|https?://\S+")
-_MD_MARKUP = re.compile(r"[*_#>`]")
-
-
-def load_lexicon(path: Path = LEXICON_V0) -> dict[str, list[tuple[re.Pattern, str, bool]]]:
-    """category -> [(pattern, canonical, keep)], longest alias first."""
-    by_cat: dict[str, list[tuple[str, str, bool, bool]]] = defaultdict(list)
-    with path.open(newline="") as f:
-        for row in csv.DictReader(f):
-            for alias in row["aliases"].split("|"):
-                if alias.strip():
-                    by_cat[row["category"]].append(
-                        (alias.strip(), row["canonical"], row["decision"] == "keep",
-                         row["match"] == "cs"))
-    out = {}
-    for cat, entries in by_cat.items():
-        entries = sorted(set(entries), key=lambda e: len(e[0]), reverse=True)
-        out[cat] = [
-            (re.compile(rf"(?<![\w&]){re.escape(a)}(?![\w&])", 0 if cs else re.I), canon, keep)
-            for a, canon, keep, cs in entries
-        ]
-    return out
-
-
-#: A "Sources" / "Sources referenced" label (heading, bold or plain) that ends
-#: its line or is followed by a colon. The production discovery prompt asks
-#: for the sources consulted, so sonnet5_prod answers end with one (deviation 3).
-_SOURCES_LABEL = re.compile(
-    r"^[ \t]*(?:#{1,6}[ \t]*)?\**[ \t]*sources?(?:[ \t]+(?:referenced|consulted|cited|used))?"
-    r"[ \t]*(?::\**|\**:|\**[ \t]*$)",
-    re.I | re.M,
-)
-_LIST_ITEM = re.compile(r"^[ \t]*(?:[-*+•]|\d+[.)])[ \t]")
-
-
-def strip_sources(text: str) -> str:
-    """Drop each sources block: the label line and the list items after it."""
-    lines = text.split("\n")
-    out, i = [], 0
-    while i < len(lines):
-        if _SOURCES_LABEL.match(lines[i]):
-            i += 1
-            while i < len(lines) and (not lines[i].strip() or _LIST_ITEM.match(lines[i])):
-                i += 1
-            out.append("")
-            continue
-        out.append(lines[i])
-        i += 1
-    return "\n".join(out)
-
-
-def lexicon_extract(text: str, patterns) -> list[str]:
-    text = _MD_MARKUP.sub(" ", _MD_URL.sub(" ", strip_sources(text)))
-    taken = np.zeros(len(text) + 1, dtype=bool)
-    first: dict[str, int] = {}
-    for pattern, canon, keep in patterns:
-        for m in pattern.finditer(text):
-            if taken[m.start():m.end()].any():
-                continue
-            taken[m.start():m.end()] = True
-            if keep and (canon not in first or m.start() < first[canon]):
-                first[canon] = m.start()
-    return sorted(first, key=first.get)
-
-
-def haiku_via_lexicon(raw_names: list[str], category: str, alias_map) -> list[str]:
-    """Haiku candidates mapped through lexicon v0 (merges and drops applied)."""
-    out = []
-    for name in raw_names:
-        hit = alias_map.get((category, name.strip().lower()))
-        if hit and hit[1]:
-            out.append(hit[0])
-    return ordered_unique(out)
-
-
-def lexicon_alias_map(path: Path = LEXICON_V0) -> dict[tuple[str, str], tuple[str, bool]]:
-    amap = {}
-    with path.open(newline="") as f:
-        for row in csv.DictReader(f):
-            for alias in row["aliases"].split("|"):
-                amap[(row["category"], alias.strip().lower())] = (
-                    row["canonical"], row["decision"] == "keep")
-    return amap
 
 
 def brand_versions(df: pd.DataFrame) -> dict[str, pd.DataFrame]:
@@ -443,7 +353,7 @@ def brand_versions(df: pd.DataFrame) -> dict[str, pd.DataFrame]:
     versions = {"haiku_draft": df}
     if not LEXICON_V0.exists():
         return versions
-    pats, amap = load_lexicon(), lexicon_alias_map()
+    pats, amap = load_lexicon(LEXICON_V0), lexicon_alias_map(LEXICON_V0)
     via = df.copy()
     via["brands"] = [haiku_via_lexicon(r["brands_raw"], r["category"], amap)
                      for r in df.to_dict("records")]

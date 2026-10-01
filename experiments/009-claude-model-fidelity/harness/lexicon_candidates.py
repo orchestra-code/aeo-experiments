@@ -40,8 +40,12 @@ from pilot_report import (
     canonical_brand,
     cost_from_usage,
     extract_brands,
-    lexicon_alias_map,
 )
+
+# The lexicon code lives in pipeline/brands.py (spec §8 step 2); importing
+# pilot_report above registered it as ``exp009_brands`` (path-loaded, so it
+# cannot collide with another experiment's ``brands`` module).
+from exp009_brands import lexicon_alias_map  # noqa: E402
 
 CACHE = RAW / "brand_candidates.jsonl"
 DEFAULT_LEXICON = RAW / "lexicon_v0.csv"
