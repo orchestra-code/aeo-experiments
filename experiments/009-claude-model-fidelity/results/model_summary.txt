@@ -1,0 +1,308 @@
+# Experiment 009: model results
+seed 20260926, 2000 bootstrap draws, 90% percentile CIs, SESOI 0.1 (Jaccard gaps), share reference line 0.05; 1080 answers, 40 prompts, 20 categories, waves [1, 2, 3]. Aggregates only.
+Gap = mean(within:ui_default) - mean(cross:arm|ui_default); positive = the arm is further from the UI than the UI is from itself across days.
+
+Reading guide: the two questions and where they are answered
+  (a) Same vendors in the same order? Per answer: the RBO gap on brand order (secondary test). Per category panel: panel RBO and Kendall tau (descriptive).
+  (b) Same vendors regardless of order? Per answer: the H1b brand-set Jaccard gap (primary test). Per category panel: panel Jaccard (descriptive).
+  Cited domains are answered the same way (cited-domain gap; H1d panel).
+
+No-search rates: {'haiku45_leak': 0.042, 'opus55_leak': 0.0, 'opus55_plain': 0.0, 'sonnet5_leak_low': 0.175, 'sonnet5_leak_think': 0.008, 'sonnet5_plain': 0.008, 'sonnet5_prod': 0.0, 'ui_default': 0.175, 'ui_think': 0.025} (> 30% makes an arm's domain claims INCONCLUSIVE).
+
+## H_pos (positive control; the study stops if it fails)
+  same-prompt minus cross-category cross-arm brand Jaccard (all API arms vs ui_default, same wave) = +0.514 [+0.483, +0.545]; need >= 0.10 with the CI excluding 0 -> PASS
+  (pairs 32760, NaN 0, prompts 40)
+
+## Descriptive gradient (cross-arm brand Jaccard, API arms vs ui_default, same wave; no test)
+  same prompt                    0.523 [0.493, 0.551] (pairs 840)
+  same category, other intent    0.351 [0.267, 0.430] (pairs 840)
+  different category             0.008 [0.004, 0.014] (pairs 31920)
+
+## H_pla (placebo): H1b gap on odd minus even prompts, TOST +/-0.10
+  H_pla sonnet5_plain                brand-set Jaccard          -0.019 [-0.097, +0.060] -> NULL  (pairs 240, NaN 0)
+  H_pla sonnet5_leak_think           brand-set Jaccard          -0.003 [-0.085, +0.082] -> NULL  (pairs 240, NaN 0)
+  H_pla haiku45_leak                 brand-set Jaccard          +0.057 [-0.039, +0.155] -> INCONCLUSIVE  (pairs 240, NaN 0)  ** WARNING: placebo not null **
+
+## H1b primary family (brand-set Jaccard gap = within:ui_default - cross:arm|ui_default; TOST +/-0.10; Holm over 3)
+  H1b sonnet5_leak_think             brand-set Jaccard          +0.097 [+0.044, +0.150] -> REAL  (pairs 240, NaN 0)  [rank 1, 0.9667 CI, bootstrap TOST p 0.4295, Holm p 1.0000]
+  H1b sonnet5_plain                  brand-set Jaccard          +0.119 [+0.073, +0.164] -> REAL  (pairs 240, NaN 0)  [rank 2, 0.9500 CI, bootstrap TOST p 0.7850, Holm p 1.0000]
+  H1b haiku45_leak                   brand-set Jaccard          +0.224 [+0.175, +0.274] -> REAL  (pairs 240, NaN 0)  [rank 3, 0.9000 CI, bootstrap TOST p 0.9995, Holm p 1.0000]
+
+## H1b secondary (no multiplicity correction)
+  H1b sonnet5_leak_low               brand-set Jaccard          +0.128 [+0.087, +0.167] -> REAL  (pairs 240, NaN 0)
+  H1b sonnet5_prod                   brand-set Jaccard          +0.165 [+0.131, +0.198] -> REAL  (pairs 240, NaN 0)
+
+## H1-ref (ceiling): H1b for the Opus arms
+  H1b opus55_plain                   brand-set Jaccard          +0.067 [+0.034, +0.099] -> NEGLIGIBLE  (pairs 240, NaN 0)
+  H1b opus55_leak                    brand-set Jaccard          +0.042 [+0.011, +0.077] -> NEGLIGIBLE  (pairs 240, NaN 0)
+  At least one Opus arm reaches equivalence on H1b; the fallback reference is not triggered.
+
+## Per-answer domain gaps, every API arm (secondary; TOST +/-0.10; the pilot simulation puts false equivalence at 0.16 to 0.33, so a pass carries that caveat)
+  gap opus55_plain                   cited-domain Jaccard       +0.019 [-0.019, +0.060] -> NULL  (pairs 227, NaN 13)
+  gap opus55_leak                    cited-domain Jaccard       +0.041 [+0.007, +0.077] -> NEGLIGIBLE  (pairs 227, NaN 13)
+  gap sonnet5_plain                  cited-domain Jaccard       +0.055 [+0.019, +0.094] -> NEGLIGIBLE  (pairs 226, NaN 14)
+  gap sonnet5_leak_think             cited-domain Jaccard       +0.066 [+0.028, +0.107] -> REAL  (pairs 226, NaN 14)
+  gap sonnet5_leak_low               cited-domain Jaccard       +0.076 [+0.035, +0.119] -> REAL  (pairs 219, NaN 21)
+  gap sonnet5_prod                   cited-domain Jaccard       +0.055 [+0.018, +0.092] -> NEGLIGIBLE  (pairs 227, NaN 13)
+  gap haiku45_leak                   cited-domain Jaccard       +0.073 [+0.034, +0.113] -> REAL  (pairs 225, NaN 15)
+  gap opus55_plain                   evaluated-domain Jaccard   +0.034 [-0.006, +0.073] -> NULL  (pairs 227, NaN 13)
+  gap opus55_leak                    evaluated-domain Jaccard   +0.054 [+0.017, +0.093] -> NEGLIGIBLE  (pairs 227, NaN 13)
+  gap sonnet5_plain                  evaluated-domain Jaccard   +0.072 [+0.032, +0.114] -> REAL  (pairs 226, NaN 14)
+  gap sonnet5_leak_think             evaluated-domain Jaccard   +0.081 [+0.043, +0.121] -> REAL  (pairs 227, NaN 13)
+  gap sonnet5_leak_low               evaluated-domain Jaccard   +0.074 [+0.031, +0.118] -> REAL  (pairs 219, NaN 21)
+  gap sonnet5_prod                   evaluated-domain Jaccard   +0.080 [+0.042, +0.120] -> REAL  (pairs 227, NaN 13)
+  gap haiku45_leak                   evaluated-domain Jaccard   +0.098 [+0.060, +0.137] -> REAL  (pairs 225, NaN 15)
+
+## RBO gap on brand order, every API arm (secondary; also robustness R2)
+  gap opus55_plain                   brand-order RBO            +0.097 [+0.065, +0.130] -> REAL  (pairs 240, NaN 0)
+  gap opus55_leak                    brand-order RBO            +0.044 [+0.010, +0.081] -> NEGLIGIBLE  (pairs 240, NaN 0)
+  gap sonnet5_plain                  brand-order RBO            +0.162 [+0.117, +0.211] -> REAL  (pairs 240, NaN 0)
+  gap sonnet5_leak_think             brand-order RBO            +0.136 [+0.094, +0.181] -> REAL  (pairs 240, NaN 0)
+  gap sonnet5_leak_low               brand-order RBO            +0.176 [+0.130, +0.227] -> REAL  (pairs 240, NaN 0)
+  gap sonnet5_prod                   brand-order RBO            +0.162 [+0.110, +0.217] -> REAL  (pairs 240, NaN 0)
+  gap haiku45_leak                   brand-order RBO            +0.253 [+0.203, +0.307] -> REAL  (pairs 240, NaN 0)
+
+## H1s panel, brands (descriptive; per category, arm vs ui_default, mean over categories, 90% category-bootstrap interval)
+  rbo = share-ranked lists, p 0.9; kendall = tau-b over the pooled-share basket; jaccard_third = items named in >= 1/3 of each arm's answers; jaccard_all = items named at least once
+  opus55_plain         rbo 0.790 [0.755, 0.827]; kendall 0.529 [0.455, 0.605]; jaccard_third 0.669 [0.617, 0.720]; jaccard_all 0.607 [0.579, 0.635] (20 cat.)
+  opus55_leak          rbo 0.767 [0.733, 0.801]; kendall 0.603 [0.524, 0.683]; jaccard_third 0.710 [0.653, 0.766]; jaccard_all 0.612 [0.560, 0.666] (20 cat.)
+  sonnet5_plain        rbo 0.723 [0.684, 0.762]; kendall 0.459 [0.380, 0.545]; jaccard_third 0.579 [0.530, 0.629]; jaccard_all 0.552 [0.501, 0.603] (20 cat.)
+  sonnet5_leak_think   rbo 0.740 [0.702, 0.780]; kendall 0.546 [0.480, 0.614]; jaccard_third 0.622 [0.568, 0.677]; jaccard_all 0.586 [0.546, 0.628] (20 cat.)
+  sonnet5_leak_low     rbo 0.731 [0.697, 0.767]; kendall 0.454 [0.363, 0.545]; jaccard_third 0.613 [0.562, 0.665]; jaccard_all 0.548 [0.516, 0.581] (20 cat.)
+  sonnet5_prod         rbo 0.710 [0.670, 0.753]; kendall 0.414 [0.332, 0.506]; jaccard_third 0.547 [0.497, 0.601]; jaccard_all 0.502 [0.463, 0.542] (20 cat.)
+  haiku45_leak         rbo 0.641 [0.601, 0.682]; kendall 0.333 [0.232, 0.429]; jaccard_third 0.533 [0.483, 0.582]; jaccard_all 0.520 [0.470, 0.571] (20 cat.)
+  reference, same surface (claude.ai High vs Medium):
+  ui_think             rbo 0.807 [0.775, 0.840]; kendall 0.634 [0.573, 0.697]; jaccard_third 0.818 [0.767, 0.869]; jaccard_all 0.701 [0.650, 0.750] (20 cat.)
+
+## H1d panel, cited domains (descriptive; per category, arm vs ui_default, mean over categories, 90% category-bootstrap interval)
+  rbo = share-ranked lists, p 0.9; kendall = tau-b over the pooled-share basket; jaccard_third = items named in >= 1/3 of each arm's answers; jaccard_all = items named at least once
+  opus55_plain         rbo 0.279 [0.232, 0.324]; kendall -0.408 [-0.628, -0.171]; jaccard_third 0.163 [0.113, 0.216]; jaccard_all 0.232 [0.192, 0.273] (19 cat.)
+  opus55_leak          rbo 0.252 [0.213, 0.293]; kendall -0.319 [-0.513, -0.094]; jaccard_third 0.134 [0.097, 0.171]; jaccard_all 0.206 [0.173, 0.239] (19 cat.)
+  sonnet5_plain        rbo 0.217 [0.179, 0.258]; kendall -0.540 [-0.692, -0.381]; jaccard_third 0.138 [0.093, 0.185]; jaccard_all 0.178 [0.148, 0.209] (19 cat.)
+  sonnet5_leak_think   rbo 0.227 [0.190, 0.265]; kendall -0.541 [-0.811, -0.229]; jaccard_third 0.155 [0.112, 0.201]; jaccard_all 0.181 [0.152, 0.211] (19 cat.)
+  sonnet5_leak_low     rbo 0.212 [0.167, 0.259]; kendall -0.574 [-0.874, -0.216]; jaccard_third 0.143 [0.098, 0.189]; jaccard_all 0.185 [0.152, 0.220] (19 cat.)
+  sonnet5_prod         rbo 0.196 [0.161, 0.231]; kendall -0.549 [-0.669, -0.426]; jaccard_third 0.108 [0.068, 0.151]; jaccard_all 0.182 [0.151, 0.214] (19 cat.)
+  haiku45_leak         rbo 0.184 [0.138, 0.233]; kendall -0.659 [-0.805, -0.489]; jaccard_third 0.112 [0.074, 0.151]; jaccard_all 0.151 [0.124, 0.179] (19 cat.)
+  reference, same surface (claude.ai High vs Medium):
+  ui_think             rbo 0.302 [0.241, 0.362]; kendall -0.398 [-0.665, -0.103]; jaccard_third 0.210 [0.149, 0.271]; jaccard_all 0.242 [0.204, 0.280] (19 cat.)
+
+## H2 (reasoning): mean of the two within-arm floors minus the cross-arm mean (same prompt, same wave); TOST +/-0.10
+  H2 sonnet5_leak_think vs sonnet5_leak_low brand-set Jaccard          -0.003 [-0.027, +0.019] -> NULL  (pairs 360, NaN 0)
+  H2 sonnet5_leak_think vs sonnet5_leak_low cited-domain Jaccard       -0.005 [-0.027, +0.019] -> NULL  (pairs 342, NaN 18)
+  H2 ui_default vs ui_think          brand-set Jaccard          -0.014 [-0.034, +0.008] -> NULL  (pairs 360, NaN 0)
+  H2 ui_default vs ui_think          cited-domain Jaccard       +0.013 [-0.014, +0.039] -> NULL  (pairs 342, NaN 18)
+
+## H3 (API vs subscription, same model): the Opus gaps (rows above under H1-ref and the domain gaps)
+  H3 opus55_plain                    brand-set Jaccard          +0.067 [+0.034, +0.099] -> NEGLIGIBLE  (pairs 240, NaN 0)
+  H3 opus55_leak                     brand-set Jaccard          +0.042 [+0.011, +0.077] -> NEGLIGIBLE  (pairs 240, NaN 0)
+  H3 opus55_plain                    cited-domain Jaccard       +0.019 [-0.019, +0.060] -> NULL  (pairs 227, NaN 13)
+  H3 opus55_leak                     cited-domain Jaccard       +0.041 [+0.007, +0.077] -> NEGLIGIBLE  (pairs 227, NaN 13)
+
+## H3b: gap(opus55_plain) - gap(opus55_leak); TOST +/-0.10 (a positive REAL result means the leak moves the API closer to the UI; instrument divergence only)
+  H3b plain - leak                   brand-set Jaccard          +0.025 [+0.000, +0.051] -> NEGLIGIBLE  (pairs 240, NaN 0)
+  H3b plain - leak                   cited-domain Jaccard       -0.022 [-0.045, -0.001] -> NEGLIGIBLE  (pairs 240, NaN 0)
+
+## Fair model comparison (descriptive): gap(sonnet5_plain) - gap(opus55_plain)
+  sonnet5_plain - opus55_plain       brand-set Jaccard          +0.052 [+0.022, +0.081]  (pairs 240, NaN 0)
+  sonnet5_plain - opus55_plain       cited-domain Jaccard       +0.036 [+0.015, +0.059]  (pairs 239, NaN 1)
+
+## Levels (same-prompt Jaccard; the lead figure)
+  brand-set Jaccard          within:ui_default                  0.643 [0.602, 0.680]
+  brand-set Jaccard          cross:opus55_plain|ui_default      0.575 [0.544, 0.607]
+  brand-set Jaccard          cross:opus55_leak|ui_default       0.601 [0.563, 0.637]
+  brand-set Jaccard          cross:sonnet5_plain|ui_default     0.524 [0.488, 0.560]
+  brand-set Jaccard          cross:sonnet5_leak_think|ui_default 0.546 [0.511, 0.583]
+  brand-set Jaccard          cross:sonnet5_leak_low|ui_default  0.515 [0.477, 0.552]
+  brand-set Jaccard          cross:sonnet5_prod|ui_default      0.478 [0.446, 0.509]
+  brand-set Jaccard          cross:haiku45_leak|ui_default      0.419 [0.380, 0.459]
+  cited-domain Jaccard       within:ui_default                  0.145 [0.113, 0.179]
+  cited-domain Jaccard       cross:opus55_plain|ui_default      0.126 [0.101, 0.153]
+  cited-domain Jaccard       cross:opus55_leak|ui_default       0.104 [0.088, 0.122]
+  cited-domain Jaccard       cross:sonnet5_plain|ui_default     0.090 [0.073, 0.108]
+  cited-domain Jaccard       cross:sonnet5_leak_think|ui_default 0.079 [0.062, 0.097]
+  cited-domain Jaccard       cross:sonnet5_leak_low|ui_default  0.069 [0.049, 0.091]
+  cited-domain Jaccard       cross:sonnet5_prod|ui_default      0.090 [0.074, 0.106]
+  cited-domain Jaccard       cross:haiku45_leak|ui_default      0.072 [0.051, 0.094]
+
+## Descriptive outcomes (no test)
+  $/call = ledger batch-priced mean (cache effects included); `no_cw` excludes the calls that paid a 1-hour cache write (the batch's 'first calls': requests in a batch run concurrently, so several per arm pay the write).
+               arm  answers  searches  no_search_rate  cited_urls  cited_domains  evaluated_urls    chars  brands  usd_call  usd_call_no_cache_write  cache_write_calls
+        ui_default      120     1.217           0.175       4.667          4.350          11.283 3651.083   8.292       NaN                      NaN                  0
+          ui_think      120     2.525           0.025       7.575          6.792          23.492 3981.483   8.133       NaN                      NaN                  0
+      opus55_plain      120     1.508           0.000       7.175          6.692          13.892 3965.300   9.550     0.071                    0.071                  0
+       opus55_leak      120     2.925           0.000      10.167          9.033          26.875 3962.933   8.575     0.128                    0.110                 18
+     sonnet5_plain      120     2.342           0.008       9.250          8.292          20.617 5676.775   7.867     0.065                    0.065                  0
+sonnet5_leak_think      120     2.625           0.008       7.033          6.450          23.392 4568.458   7.525     0.078                    0.073                 18
+  sonnet5_leak_low      120     1.617           0.175       4.925          4.550          14.175 3886.767   6.875     0.047                    0.045                  9
+      sonnet5_prod      120     2.658           0.000      10.983          9.992          23.408 6900.883   9.383     0.081                    0.081                  0
+      haiku45_leak      120     2.908           0.042       7.508          6.775          25.183 2963.017   5.550     0.047                    0.043                 22
+
+  per wave:
+               arm  wave  answers  searches  no_search_rate  cited_domains  brands  usd_call  usd_call_no_cache_write  cache_write_calls
+        ui_default     1       40     1.325           0.150          4.450   8.250       NaN                      NaN                  0
+        ui_default     2       40     1.150           0.200          4.125   8.325       NaN                      NaN                  0
+        ui_default     3       40     1.175           0.175          4.475   8.300       NaN                      NaN                  0
+          ui_think     1       40     2.500           0.025          6.900   8.050       NaN                      NaN                  0
+          ui_think     2       40     2.350           0.025          6.200   8.075       NaN                      NaN                  0
+          ui_think     3       40     2.725           0.025          7.275   8.275       NaN                      NaN                  0
+      opus55_plain     1       40     1.650           0.000          6.825   9.125     0.077                    0.077                  0
+      opus55_plain     2       40     1.525           0.000          7.025   9.400     0.071                    0.071                  0
+      opus55_plain     3       40     1.350           0.000          6.225  10.125     0.065                    0.065                  0
+       opus55_leak     1       40     3.150           0.000          9.450   8.150     0.152                    0.115                 14
+       opus55_leak     2       40     2.925           0.000          9.625   8.475     0.122                    0.110                  3
+       opus55_leak     3       40     2.700           0.000          8.025   9.100     0.110                    0.106                  1
+     sonnet5_plain     1       40     2.300           0.025          8.125   7.750     0.064                    0.064                  0
+     sonnet5_plain     2       40     2.575           0.000          8.925   7.650     0.070                    0.070                  0
+     sonnet5_plain     3       40     2.150           0.000          7.825   8.200     0.060                    0.060                  0
+sonnet5_leak_think     1       40     2.775           0.000          7.075   7.475     0.078                    0.076                  2
+sonnet5_leak_think     2       40     2.575           0.025          7.150   7.750     0.074                    0.072                  3
+sonnet5_leak_think     3       40     2.525           0.000          5.125   7.350     0.082                    0.072                 13
+  sonnet5_leak_low     1       40     1.675           0.150          4.625   6.900     0.046                    0.045                  1
+  sonnet5_leak_low     2       40     1.450           0.250          4.525   7.100     0.043                    0.040                  2
+  sonnet5_leak_low     3       40     1.725           0.125          4.500   6.625     0.052                    0.049                  6
+      sonnet5_prod     1       40     2.850           0.000         10.525   9.425     0.087                    0.087                  0
+      sonnet5_prod     2       40     2.625           0.000         10.125   9.325     0.081                    0.081                  0
+      sonnet5_prod     3       40     2.500           0.000          9.325   9.400     0.074                    0.074                  0
+      haiku45_leak     1       40     2.950           0.050          6.825   5.650     0.047                    0.044                  8
+      haiku45_leak     2       40     2.925           0.050          6.850   5.400     0.048                    0.044                 10
+      haiku45_leak     3       40     2.850           0.025          6.650   5.600     0.045                    0.043                  4
+
+  Source-class mix of cited domains (share of cited-domain occurrences):
+                    vendor  review marketplace  community  publisher  analyst  other
+ui_default           0.299               0.040      0.000      0.657    0.004  0.000
+ui_think             0.355               0.031      0.000      0.606    0.005  0.004
+opus55_plain         0.399               0.020      0.000      0.574    0.006  0.001
+opus55_leak          0.398               0.026      0.000      0.567    0.006  0.004
+sonnet5_plain        0.434               0.018      0.000      0.540    0.007  0.001
+sonnet5_leak_think   0.404               0.023      0.000      0.567    0.005  0.000
+sonnet5_leak_low     0.445               0.024      0.000      0.526    0.004  0.002
+sonnet5_prod         0.399               0.026      0.000      0.567    0.007  0.001
+haiku45_leak         0.440               0.022      0.000      0.533    0.004  0.001
+
+## Robustness (spec §7; unadjusted 90% CIs, labelled)
+
+R1 top-10 brands instead of all brands (H1b gap):
+  R1 opus55_plain                    top-10 brand Jaccard       +0.057 [+0.024, +0.087] -> NEGLIGIBLE  (pairs 240, NaN 0)
+  R1 opus55_leak                     top-10 brand Jaccard       +0.032 [+0.000, +0.065] -> NEGLIGIBLE  (pairs 240, NaN 0)
+  R1 sonnet5_plain                   top-10 brand Jaccard       +0.114 [+0.077, +0.150] -> REAL  (pairs 240, NaN 0)
+  R1 sonnet5_leak_think              top-10 brand Jaccard       +0.089 [+0.049, +0.128] -> REAL  (pairs 240, NaN 0)
+  R1 sonnet5_leak_low                top-10 brand Jaccard       +0.121 [+0.083, +0.157] -> REAL  (pairs 240, NaN 0)
+  R1 sonnet5_prod                    top-10 brand Jaccard       +0.153 [+0.120, +0.185] -> REAL  (pairs 240, NaN 0)
+  R1 haiku45_leak                    top-10 brand Jaccard       +0.214 [+0.166, +0.261] -> REAL  (pairs 240, NaN 0)
+
+R2 RBO on brand order instead of set Jaccard: see 'RBO gap' above.
+
+R3 answers with no search excluded (domain gaps, H1d):
+  R3 opus55_plain                    cited-domain Jaccard       +0.018 [-0.028, +0.063] -> NULL  (pairs 190, NaN 0)
+  R3 opus55_leak                     cited-domain Jaccard       +0.044 [+0.007, +0.084] -> NEGLIGIBLE  (pairs 190, NaN 0)
+  R3 sonnet5_plain                   cited-domain Jaccard       +0.063 [+0.023, +0.106] -> REAL  (pairs 190, NaN 0)
+  R3 sonnet5_leak_think              cited-domain Jaccard       +0.075 [+0.031, +0.118] -> REAL  (pairs 189, NaN 0)
+  R3 sonnet5_leak_low                cited-domain Jaccard       +0.081 [+0.037, +0.124] -> REAL  (pairs 177, NaN 0)
+  R3 sonnet5_prod                    cited-domain Jaccard       +0.061 [+0.023, +0.102] -> REAL  (pairs 190, NaN 0)
+  R3 haiku45_leak                    cited-domain Jaccard       +0.082 [+0.039, +0.122] -> REAL  (pairs 187, NaN 0)
+  R3 opus55_plain                    evaluated-domain Jaccard   +0.034 [-0.007, +0.076] -> NULL  (pairs 190, NaN 0)
+  R3 opus55_leak                     evaluated-domain Jaccard   +0.059 [+0.020, +0.098] -> NEGLIGIBLE  (pairs 190, NaN 0)
+  R3 sonnet5_plain                   evaluated-domain Jaccard   +0.082 [+0.041, +0.123] -> REAL  (pairs 190, NaN 0)
+  R3 sonnet5_leak_think              evaluated-domain Jaccard   +0.089 [+0.051, +0.130] -> REAL  (pairs 189, NaN 0)
+  R3 sonnet5_leak_low                evaluated-domain Jaccard   +0.072 [+0.031, +0.118] -> REAL  (pairs 177, NaN 0)
+  R3 sonnet5_prod                    evaluated-domain Jaccard   +0.090 [+0.050, +0.130] -> REAL  (pairs 190, NaN 0)
+  R3 haiku45_leak                    evaluated-domain Jaccard   +0.110 [+0.071, +0.150] -> REAL  (pairs 187, NaN 0)
+  H1d panel (descriptive), no-search answers excluded:
+  opus55_plain         rbo 0.279 [0.232, 0.324]; kendall -0.414 [-0.626, -0.179]; jaccard_third 0.190 [0.140, 0.239]; jaccard_all 0.245 [0.206, 0.281] (19 cat.)
+  opus55_leak          rbo 0.252 [0.213, 0.293]; kendall -0.431 [-0.543, -0.300]; jaccard_third 0.162 [0.126, 0.199]; jaccard_all 0.217 [0.187, 0.247] (19 cat.)
+  sonnet5_plain        rbo 0.217 [0.179, 0.258]; kendall -0.534 [-0.670, -0.395]; jaccard_third 0.160 [0.114, 0.205]; jaccard_all 0.187 [0.160, 0.215] (19 cat.)
+  sonnet5_leak_think   rbo 0.227 [0.190, 0.265]; kendall -0.667 [-0.843, -0.454]; jaccard_third 0.176 [0.138, 0.216]; jaccard_all 0.190 [0.163, 0.219] (19 cat.)
+  sonnet5_leak_low     rbo 0.212 [0.167, 0.259]; kendall -0.523 [-0.775, -0.222]; jaccard_third 0.158 [0.114, 0.202]; jaccard_all 0.195 [0.164, 0.228] (19 cat.)
+  sonnet5_prod         rbo 0.196 [0.161, 0.231]; kendall -0.577 [-0.690, -0.461]; jaccard_third 0.129 [0.087, 0.171]; jaccard_all 0.191 [0.163, 0.221] (19 cat.)
+  haiku45_leak         rbo 0.184 [0.138, 0.233]; kendall -0.614 [-0.755, -0.471]; jaccard_third 0.142 [0.101, 0.185]; jaccard_all 0.159 [0.133, 0.185] (19 cat.)
+
+R4 Haiku candidates mapped through the frozen lexicon instead of lexicon matching (H1b, H1s):
+  candidate coverage by wave: {1: 1.0, 2: 1.0, 3: 1.0}
+  R4 opus55_plain                    brand-set Jaccard          +0.070 [+0.039, +0.100] -> REAL  (pairs 240, NaN 0)
+  R4 opus55_leak                     brand-set Jaccard          +0.044 [+0.011, +0.078] -> NEGLIGIBLE  (pairs 240, NaN 0)
+  R4 sonnet5_plain                   brand-set Jaccard          +0.122 [+0.082, +0.159] -> REAL  (pairs 240, NaN 0)
+  R4 sonnet5_leak_think              brand-set Jaccard          +0.096 [+0.055, +0.138] -> REAL  (pairs 240, NaN 0)
+  R4 sonnet5_leak_low                brand-set Jaccard          +0.131 [+0.089, +0.172] -> REAL  (pairs 240, NaN 0)
+  R4 sonnet5_prod                    brand-set Jaccard          +0.157 [+0.120, +0.195] -> REAL  (pairs 240, NaN 0)
+  R4 haiku45_leak                    brand-set Jaccard          +0.232 [+0.183, +0.282] -> REAL  (pairs 240, NaN 0)
+  H1s panel (descriptive) on the Haiku-candidate brands:
+  opus55_plain         rbo 0.792 [0.756, 0.827]; kendall 0.533 [0.459, 0.608]; jaccard_third 0.663 [0.612, 0.713]; jaccard_all 0.615 [0.587, 0.643] (20 cat.)
+  opus55_leak          rbo 0.783 [0.748, 0.817]; kendall 0.603 [0.527, 0.681]; jaccard_third 0.700 [0.640, 0.759]; jaccard_all 0.608 [0.556, 0.661] (20 cat.)
+  sonnet5_plain        rbo 0.731 [0.692, 0.769]; kendall 0.478 [0.413, 0.549]; jaccard_third 0.589 [0.536, 0.640]; jaccard_all 0.542 [0.491, 0.591] (20 cat.)
+  sonnet5_leak_think   rbo 0.753 [0.716, 0.795]; kendall 0.581 [0.513, 0.648]; jaccard_third 0.618 [0.560, 0.675]; jaccard_all 0.579 [0.543, 0.616] (20 cat.)
+  sonnet5_leak_low     rbo 0.726 [0.692, 0.759]; kendall 0.477 [0.387, 0.564]; jaccard_third 0.611 [0.559, 0.664]; jaccard_all 0.530 [0.498, 0.563] (20 cat.)
+  sonnet5_prod         rbo 0.701 [0.660, 0.745]; kendall 0.464 [0.381, 0.554]; jaccard_third 0.542 [0.480, 0.608]; jaccard_all 0.502 [0.462, 0.542] (20 cat.)
+  haiku45_leak         rbo 0.656 [0.618, 0.694]; kendall 0.373 [0.279, 0.463]; jaccard_third 0.520 [0.469, 0.568]; jaccard_all 0.511 [0.458, 0.560] (20 cat.)
+
+R5 drop one wave at a time (H1b, H1d):
+  R5 -w1 opus55_plain                brand-set Jaccard          +0.062 [+0.026, +0.096] -> NEGLIGIBLE  (pairs 120, NaN 0)
+  R5 -w1 opus55_leak                 brand-set Jaccard          +0.035 [-0.002, +0.073] -> NULL  (pairs 120, NaN 0)
+  R5 -w1 sonnet5_plain               brand-set Jaccard          +0.118 [+0.072, +0.161] -> REAL  (pairs 120, NaN 0)
+  R5 -w1 sonnet5_leak_think          brand-set Jaccard          +0.095 [+0.050, +0.135] -> REAL  (pairs 120, NaN 0)
+  R5 -w1 sonnet5_leak_low            brand-set Jaccard          +0.127 [+0.081, +0.167] -> REAL  (pairs 120, NaN 0)
+  R5 -w1 sonnet5_prod                brand-set Jaccard          +0.164 [+0.123, +0.201] -> REAL  (pairs 120, NaN 0)
+  R5 -w1 haiku45_leak                brand-set Jaccard          +0.206 [+0.151, +0.257] -> REAL  (pairs 120, NaN 0)
+  H1d panel (descriptive) without wave 1:
+  opus55_plain         rbo 0.213 [0.181, 0.245]; kendall -0.723 [-0.839, -0.604]; jaccard_third 0.085 [0.042, 0.134]; jaccard_all 0.197 [0.154, 0.241] (19 cat.)
+  opus55_leak          rbo 0.216 [0.170, 0.260]; kendall -0.540 [-0.657, -0.399]; jaccard_third 0.090 [0.052, 0.131]; jaccard_all 0.154 [0.125, 0.185] (19 cat.)
+  sonnet5_plain        rbo 0.180 [0.149, 0.213]; kendall -0.666 [-0.778, -0.539]; jaccard_third 0.106 [0.068, 0.148]; jaccard_all 0.151 [0.120, 0.184] (19 cat.)
+  sonnet5_leak_think   rbo 0.166 [0.135, 0.198]; kendall -0.826 [-0.934, -0.707]; jaccard_third 0.070 [0.030, 0.114]; jaccard_all 0.157 [0.132, 0.182] (19 cat.)
+  sonnet5_leak_low     rbo 0.163 [0.125, 0.206]; kendall -0.689 [-0.903, -0.381]; jaccard_third 0.069 [0.029, 0.120]; jaccard_all 0.163 [0.130, 0.197] (19 cat.)
+  sonnet5_prod         rbo 0.191 [0.154, 0.229]; kendall -0.631 [-0.758, -0.497]; jaccard_third 0.076 [0.046, 0.107]; jaccard_all 0.132 [0.106, 0.159] (19 cat.)
+  haiku45_leak         rbo 0.151 [0.120, 0.183]; kendall -0.681 [-0.822, -0.516]; jaccard_third 0.081 [0.048, 0.116]; jaccard_all 0.126 [0.102, 0.151] (19 cat.)
+  R5 -w2 opus55_plain                brand-set Jaccard          +0.082 [+0.033, +0.132] -> REAL  (pairs 120, NaN 0)
+  R5 -w2 opus55_leak                 brand-set Jaccard          +0.054 [+0.006, +0.106] -> REAL  (pairs 120, NaN 0)
+  R5 -w2 sonnet5_plain               brand-set Jaccard          +0.126 [+0.072, +0.178] -> REAL  (pairs 120, NaN 0)
+  R5 -w2 sonnet5_leak_think          brand-set Jaccard          +0.090 [+0.033, +0.146] -> REAL  (pairs 120, NaN 0)
+  R5 -w2 sonnet5_leak_low            brand-set Jaccard          +0.128 [+0.075, +0.179] -> REAL  (pairs 120, NaN 0)
+  R5 -w2 sonnet5_prod                brand-set Jaccard          +0.159 [+0.105, +0.213] -> REAL  (pairs 120, NaN 0)
+  R5 -w2 haiku45_leak                brand-set Jaccard          +0.231 [+0.170, +0.295] -> REAL  (pairs 120, NaN 0)
+  H1d panel (descriptive) without wave 2:
+  opus55_plain         rbo 0.291 [0.222, 0.361]; kendall -0.505 [-0.777, -0.191]; jaccard_third 0.138 [0.070, 0.217]; jaccard_all 0.224 [0.173, 0.278] (19 cat.)
+  opus55_leak          rbo 0.277 [0.221, 0.338]; kendall -0.332 [-0.594, -0.004]; jaccard_third 0.104 [0.060, 0.150]; jaccard_all 0.190 [0.157, 0.224] (19 cat.)
+  sonnet5_plain        rbo 0.226 [0.180, 0.275]; kendall -0.569 [-0.767, -0.332]; jaccard_third 0.075 [0.041, 0.116]; jaccard_all 0.152 [0.123, 0.181] (19 cat.)
+  sonnet5_leak_think   rbo 0.195 [0.143, 0.249]; kendall -0.565 [-0.808, -0.286]; jaccard_third 0.076 [0.029, 0.129]; jaccard_all 0.172 [0.135, 0.212] (19 cat.)
+  sonnet5_leak_low     rbo 0.190 [0.138, 0.242]; kendall -0.466 [-0.741, -0.145]; jaccard_third 0.075 [0.036, 0.115]; jaccard_all 0.165 [0.131, 0.204] (19 cat.)
+  sonnet5_prod         rbo 0.189 [0.146, 0.234]; kendall -0.704 [-0.843, -0.539]; jaccard_third 0.045 [0.023, 0.069]; jaccard_all 0.170 [0.134, 0.209] (19 cat.)
+  haiku45_leak         rbo 0.173 [0.129, 0.220]; kendall -0.607 [-0.798, -0.396]; jaccard_third 0.070 [0.035, 0.108]; jaccard_all 0.133 [0.106, 0.162] (19 cat.)
+  R5 -w3 opus55_plain                brand-set Jaccard          +0.059 [+0.019, +0.099] -> NEGLIGIBLE  (pairs 120, NaN 0)
+  R5 -w3 opus55_leak                 brand-set Jaccard          +0.037 [-0.003, +0.082] -> NULL  (pairs 120, NaN 0)
+  R5 -w3 sonnet5_plain               brand-set Jaccard          +0.114 [+0.065, +0.163] -> REAL  (pairs 120, NaN 0)
+  R5 -w3 sonnet5_leak_think          brand-set Jaccard          +0.105 [+0.055, +0.156] -> REAL  (pairs 120, NaN 0)
+  R5 -w3 sonnet5_leak_low            brand-set Jaccard          +0.129 [+0.080, +0.179] -> REAL  (pairs 120, NaN 0)
+  R5 -w3 sonnet5_prod                brand-set Jaccard          +0.172 [+0.131, +0.215] -> REAL  (pairs 120, NaN 0)
+  R5 -w3 haiku45_leak                brand-set Jaccard          +0.236 [+0.183, +0.289] -> REAL  (pairs 120, NaN 0)
+  H1d panel (descriptive) without wave 3:
+  opus55_plain         rbo 0.254 [0.207, 0.297]; kendall -0.356 [-0.577, -0.097]; jaccard_third 0.147 [0.098, 0.194]; jaccard_all 0.191 [0.154, 0.228] (19 cat.)
+  opus55_leak          rbo 0.236 [0.191, 0.283]; kendall -0.383 [-0.608, -0.132]; jaccard_third 0.100 [0.067, 0.133]; jaccard_all 0.177 [0.138, 0.214] (19 cat.)
+  sonnet5_plain        rbo 0.192 [0.153, 0.232]; kendall -0.639 [-0.775, -0.497]; jaccard_third 0.083 [0.050, 0.118]; jaccard_all 0.164 [0.133, 0.193] (19 cat.)
+  sonnet5_leak_think   rbo 0.239 [0.187, 0.293]; kendall -0.377 [-0.647, -0.053]; jaccard_third 0.122 [0.071, 0.177]; jaccard_all 0.157 [0.126, 0.190] (19 cat.)
+  sonnet5_leak_low     rbo 0.189 [0.128, 0.253]; kendall -0.668 [-0.907, -0.389]; jaccard_third 0.129 [0.050, 0.221]; jaccard_all 0.156 [0.112, 0.203] (19 cat.)
+  sonnet5_prod         rbo 0.185 [0.139, 0.237]; kendall -0.656 [-0.777, -0.537]; jaccard_third 0.072 [0.039, 0.107]; jaccard_all 0.162 [0.132, 0.195] (19 cat.)
+  haiku45_leak         rbo 0.178 [0.120, 0.237]; kendall -0.583 [-0.792, -0.358]; jaccard_third 0.082 [0.039, 0.131]; jaccard_all 0.120 [0.090, 0.151] (19 cat.)
+
+R6 category-level cluster bootstrap (H1b; the H1s panel statistics already use the category-level bootstrap):
+  R6 opus55_plain                    brand-set Jaccard          +0.067 [+0.034, +0.098] -> NEGLIGIBLE  (pairs 240, NaN 0)
+  R6 opus55_leak                     brand-set Jaccard          +0.042 [+0.009, +0.078] -> NEGLIGIBLE  (pairs 240, NaN 0)
+  R6 sonnet5_plain                   brand-set Jaccard          +0.119 [+0.076, +0.160] -> REAL  (pairs 240, NaN 0)
+  R6 sonnet5_leak_think              brand-set Jaccard          +0.097 [+0.055, +0.135] -> REAL  (pairs 240, NaN 0)
+  R6 sonnet5_leak_low                brand-set Jaccard          +0.128 [+0.090, +0.164] -> REAL  (pairs 240, NaN 0)
+  R6 sonnet5_prod                    brand-set Jaccard          +0.165 [+0.128, +0.203] -> REAL  (pairs 240, NaN 0)
+  R6 haiku45_leak                    brand-set Jaccard          +0.224 [+0.176, +0.269] -> REAL  (pairs 240, NaN 0)
+
+R7 UI chats flagged in the collector notes excluded (H1b, cited-domain gap):
+  10 UI answers excluded
+  R7 opus55_plain                    brand-set Jaccard          +0.067 [+0.034, +0.099] -> NEGLIGIBLE  (pairs 231, NaN 0)
+  R7 opus55_leak                     brand-set Jaccard          +0.040 [+0.009, +0.076] -> NEGLIGIBLE  (pairs 231, NaN 0)
+  R7 sonnet5_plain                   brand-set Jaccard          +0.120 [+0.081, +0.159] -> REAL  (pairs 231, NaN 0)
+  R7 sonnet5_leak_think              brand-set Jaccard          +0.094 [+0.053, +0.134] -> REAL  (pairs 231, NaN 0)
+  R7 sonnet5_leak_low                brand-set Jaccard          +0.128 [+0.087, +0.169] -> REAL  (pairs 231, NaN 0)
+  R7 sonnet5_prod                    brand-set Jaccard          +0.162 [+0.127, +0.197] -> REAL  (pairs 231, NaN 0)
+  R7 haiku45_leak                    brand-set Jaccard          +0.229 [+0.181, +0.276] -> REAL  (pairs 231, NaN 0)
+  R7 opus55_plain                    cited-domain Jaccard       +0.015 [-0.024, +0.056] -> NULL  (pairs 219, NaN 12)
+  R7 opus55_leak                     cited-domain Jaccard       +0.038 [+0.003, +0.073] -> NEGLIGIBLE  (pairs 219, NaN 12)
+  R7 sonnet5_plain                   cited-domain Jaccard       +0.054 [+0.017, +0.093] -> NEGLIGIBLE  (pairs 218, NaN 13)
+  R7 sonnet5_leak_think              cited-domain Jaccard       +0.065 [+0.024, +0.105] -> REAL  (pairs 219, NaN 12)
+  R7 sonnet5_leak_low                cited-domain Jaccard       +0.075 [+0.035, +0.114] -> REAL  (pairs 213, NaN 18)
+  R7 sonnet5_prod                    cited-domain Jaccard       +0.052 [+0.015, +0.089] -> NEGLIGIBLE  (pairs 219, NaN 12)
+  R7 haiku45_leak                    cited-domain Jaccard       +0.071 [+0.033, +0.109] -> REAL  (pairs 219, NaN 12)
