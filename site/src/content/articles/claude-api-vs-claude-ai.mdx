@@ -1,0 +1,260 @@
+---
+title: "Sonnet is not a stand-in for claude.ai. Opus 5.5 through the API is close."
+description: "Experiment 009, pre-registered: 40 B2B software buying prompts asked on three days in claude.ai, which now defaults to Opus 5.5, and through seven Claude API configurations. Every Sonnet 5 and Haiku 4.5 configuration named a measurably different set of brands from claude.ai. Opus 5.5 through the API came within our equivalence band, and adding the leaked claude.ai system prompt raised its cost by about 80% without a meaningful gain in which brands it named. The claude.ai reasoning level did not change which brands were named."
+pubDate: 2026-10-02
+authors:
+  - name: "Spyglasses Research"
+    url: "https://spyglasses.io"
+experiment: "009-claude-model-fidelity"
+heroFigure: "/figures/009-claude-model-fidelity/gap-vs-cost.png"
+figures:
+  - "/figures/009-claude-model-fidelity/gap-vs-cost.png"
+  - "/figures/009-claude-model-fidelity/brand-gap.png"
+  - "/figures/009-claude-model-fidelity/panel-agreement.png"
+  - "/figures/009-claude-model-fidelity/reasoning-level.png"
+datasets:
+  - title: "Claude API vs claude.ai, brands named and domains cited (derived features, brands as codes)"
+    path: "/datasets/009-claude-model-fidelity/claude-api-vs-claude-ai-answers.csv"
+    license: "CC BY 4.0"
+    rows: 1080
+  - title: "Claude API vs claude.ai, the 40 synthetic B2B software prompts"
+    path: "/datasets/009-claude-model-fidelity/claude-api-vs-claude-ai-prompts.csv"
+    license: "CC BY 4.0"
+    rows: 40
+tags: ["claude", "claude-ai", "anthropic-api", "brand-mentions", "model-choice", "ai-visibility-tracking", "pre-registered"]
+draft: false
+---
+
+## Key findings
+
+- **Sonnet 5 through the API is not a proxy for a claude.ai user.** claude.ai now answers on Opus 5.5 by default. We asked it 40 B2B software buying questions on three days and asked the same questions through the API. Every Sonnet 5 configuration we tested named a different set of brands than claude.ai did on the same question, by more than our pre-registered tolerance. Their gaps ran from 0.10 to 0.17 on a 0 to 1 scale. Haiku 4.5 was further off, at 0.22.
+- **Opus 5.5 through the API is a reasonable substitute.** With no system prompt, its gap to claude.ai was 0.067. With a leaked copy of the claude.ai system prompt, it was 0.042. Both sit inside the tolerance band. The two do not differ in any meaningful way on brands, and the version without the leaked prompt matched the cited sources slightly better.
+- **The leaked system prompt mostly adds cost.** It raised the measured cost of an Opus call from $0.071 to $0.128, about 80% more. It did help Opus put brands in an order closer to claude.ai's.
+- **Opus 5.5 is not the expensive option here.** With no system prompt, it cost $0.071 per call in this study. Sonnet 5 with no system prompt cost $0.065, and our own production Sonnet request cost $0.081. Only the low-effort Sonnet and the Haiku setups were clearly cheaper, at $0.047.
+- **The claude.ai reasoning setting did not change the brands.** Switching claude.ai from Medium (the default) to High reasoning doubled the searches per answer, from 1.2 to 2.5. It named the same brands. The difference was equivalent to zero within our band.
+- **We are changing our own tracking.** One of the configurations we tested reproduces the Claude request Spyglasses used in production, on Sonnet 5. It was among the furthest from claude.ai. We are switching our Claude tracking to Opus 5.5 because of these results.
+
+## Why we asked
+
+Anyone who tracks how Claude talks about brands has to call the Anthropic API. A tracker cannot log in to claude.ai thousands of times a day. So every Claude visibility number rests on a choice: which model, with which settings, stands in for a real person typing into claude.ai?
+
+Smaller models are usually assumed to be much cheaper, so they make an attractive stand-in. On 2026-09-22, claude.ai made Opus 5.5 its default model. Sonnet is now a different model from the one claude.ai uses by default.
+
+We wanted a measured answer, with costs, to one question. For B2B software research, does a cheaper API call name the same brands and cite the same sources as claude.ai does for a subscriber on the default model?
+
+Spyglasses had a stake in the answer. Our own Claude tracking ran on Sonnet 5 with our own system prompt. We included that exact request as one of the configurations, so the study would grade our own setup too.
+
+Before collecting anything, we wrote down what we expected. Two forces pull in different directions. Web search should pull answers together, because the same question and the same search tool should surface similar pages. The model decides how much to search and how to write the answer, and that should pull answers apart. Smaller models name fewer brands, and in our pilot they searched differently. We expected the cheaper models to fail the brand test. We expected Opus through the API to come closest, because it searched about as often as claude.ai did.
+
+## Methods in brief
+
+**The prompts.** We generated 40 buying questions with a small model, two for each of 20 software categories, such as CRM, payroll, product analytics and endpoint security. One of each pair asks for a shortlist for a described company. The other asks how the top options compare for a described need. No prompt names a vendor, a location or a year. A person reviewed every prompt, and all 40 are published with this article.
+
+**The configurations.** We call each configuration an arm. There were nine.
+
+| Arm | Where | Model and setting | System prompt |
+|---|---|---|---|
+| claude.ai, Medium (the reference) | claude.ai, by hand | Opus 5.5, Medium reasoning, the default | claude.ai's own |
+| claude.ai, High | claude.ai, by hand | Opus 5.5, High reasoning | claude.ai's own |
+| Opus 5.5, no prompt | API | Opus 5.5, medium effort | none |
+| Opus 5.5, leaked prompt | API | Opus 5.5, medium effort | leaked claude.ai prompt, trimmed |
+| Sonnet 5, no prompt | API | Sonnet 5, thinking on | none |
+| Sonnet 5, leaked prompt | API | Sonnet 5, thinking on | leaked claude.ai prompt, trimmed |
+| Sonnet 5, leaked prompt, low effort | API | Sonnet 5, thinking at low effort | leaked claude.ai prompt, trimmed |
+| Sonnet 5, production request | API | Sonnet 5 | the Spyglasses production prompt |
+| Haiku 4.5, leaked prompt | API | Haiku 4.5, no thinking | leaked claude.ai prompt, trimmed |
+
+The leaked prompt is a copy of claude.ai's Opus 5.5 system prompt from [system_prompts_leaks](https://github.com/asgeirtj/system_prompts_leaks), a popular open-source collection of AI system prompts. We used the version at commit `17200e1`. Neither we nor the collection can verify that it is claude.ai's actual or current prompt. Most of it covers tools the API arms do not have, such as memory and file handling, so we trimmed it from about 159,000 tokens to about 18,000 by rules we publish. We release the [trimmed version we used](/datasets/009-claude-model-fidelity/claude-opus-5.5-trimmed-system-prompt.md) so the study can be reproduced. The full version is in the source repository. The production request is the exact call Spyglasses made at the time of the study. We do not publish or describe the production prompt.
+
+**Collection.** Each prompt ran once in every arm on each of three days: 2026-09-27, 2026-09-29 and 2026-10-01. One person ran the claude.ai chats by hand from a fresh Pro account. Memory, chat search, preferences, styles, projects and connectors were all off, and the account signed in from Pittsburgh. The API arms used Anthropic's web search tool with Pittsburgh as the user location, through the Batches API, on the same days. The production arm kept its own settings: no location and at most five searches. In total, 1,080 answers were evaluated in this study, 240 from claude.ai and 840 from the API.
+
+**What we measured.** We matched the brands each answer named against a fixed list of vendor names for its category. We also recorded which website domains each answer cited.
+
+To compare two answers, we used two overlap scores:
+
+- **Jaccard overlap** is the number of brands two answers share, divided by the number of brands either one names. It runs from 0 (nothing in common) to 1 (the same brands). It ignores order.
+- **Rank-biased overlap (RBO)** also runs from 0 to 1, but it cares about order. It gives more weight to the brands named first.
+
+**The gap.** claude.ai does not give the same answer twice. So we first measured how much claude.ai agrees with itself: the same prompt, asked on two different days. Its brand overlap with itself was 0.643. Then we measured how much each API arm agrees with claude.ai: the same prompt, asked on the same day. The gap is the first number minus the second. A gap of 0 means the API arm is as close to claude.ai as claude.ai is to itself. A positive gap means it is further away.
+
+**The tolerance band.** Before collecting data, we set the smallest gap that would matter to a reader. Statisticians call this the smallest effect size of interest. We set it at 0.10 on the Jaccard scale. For two answers that together name about ten brands, that is roughly one brand swapped for a different one.
+
+**Equivalence testing.** We used two one-sided tests (TOST), a standard way to test whether a difference is small enough to ignore rather than only whether it is zero. Every estimate comes with a 90% confidence interval, the range of values the data supports. We built the intervals by resampling whole prompts 2,000 times, because answers to the same prompt are related. Each result then gets one of four labels:
+
+| Label | What the interval shows | What it means |
+|---|---|---|
+| Equivalent | Entirely inside the band, and it includes 0 | No difference that matters |
+| Small, inside the band | Inside the band, but it excludes 0 | A real difference too small to matter |
+| Real gap | Excludes 0 and reaches past the band | A difference that may matter |
+| Inconclusive | Wider than the band and includes 0 | The data cannot tell; this is not evidence of no difference |
+
+The three main tests, for the Sonnet 5 no-prompt, Sonnet 5 leaked-prompt and Haiku 4.5 arms, were pre-registered as one family. We widened their intervals with the Holm method so the chance of a false alarm across the three stays at 10%.
+
+The full plan is in the [pre-registered spec](https://github.com/orchestra-code/aeo-experiments/blob/1730d38/experiments/009-claude-model-fidelity/spec.md), frozen at commit `1730d38` on 2026-09-26, before the first day of collection. Changes made after the freeze are listed below under "Changes to the plan".
+
+## Results
+
+### The lead chart: closeness to claude.ai against cost
+
+<figure>
+  <img src="/figures/009-claude-model-fidelity/gap-vs-cost.png" alt="Two scatter panels, brands named and domains cited. Each API configuration is a point: measured cost per call on the horizontal axis, its same-day overlap with claude.ai on the vertical axis. A gray band marks claude.ai's overlap with itself across days, and a dashed line sits 0.10 below it. On brands, both Opus 5.5 points sit near the band, the Sonnet 5 points sit near or below the dashed line, and Haiku 4.5 sits well below. On cited domains, every point is low, including claude.ai's own band." />
+</figure>
+
+The chart reads from left to right as price and from bottom to top as closeness to claude.ai. On brands, the two Opus 5.5 arms sit closest to claude.ai's own day-to-day agreement. The Sonnet 5 arms cluster around the edge of the tolerance band. Haiku 4.5 is cheapest and furthest away. Opus with no system prompt is not much more expensive than the Sonnet arms.
+
+### Story 1: Sonnet names different brands from claude.ai
+
+<figure>
+  <img src="/figures/009-claude-model-fidelity/brand-gap.png" alt="Two dot plots, one row per API configuration, each with an interval and a shaded band from -0.10 to 0.10. Left, which brands are named: both Opus 5.5 arms sit inside the band; all four Sonnet 5 arms and Haiku 4.5 reach past it. Right, the order of the brands: only Opus 5.5 with the leaked prompt stays inside the band." />
+</figure>
+
+| Arm | Brand gap to claude.ai | 90% interval | Label |
+|---|---|---|---|
+| Opus 5.5, leaked prompt | +0.042 | +0.011 to +0.077 | small, inside the band |
+| Opus 5.5, no prompt | +0.067 | +0.034 to +0.099 | small, inside the band |
+| Sonnet 5, leaked prompt | +0.097 | +0.044 to +0.150 (Holm, 96.7%) | real gap |
+| Sonnet 5, no prompt | +0.119 | +0.073 to +0.164 (Holm, 95%) | real gap |
+| Sonnet 5, leaked prompt, low effort | +0.128 | +0.087 to +0.167 | real gap |
+| Sonnet 5, production request | +0.165 | +0.131 to +0.198 | real gap |
+| Haiku 4.5, leaked prompt | +0.224 | +0.175 to +0.274 | real gap |
+
+Every Sonnet 5 setup we tried named a measurably different set of brands from claude.ai on the same question. That includes no system prompt, the leaked claude.ai prompt with thinking on, the same prompt with low effort, and a real production request. Haiku 4.5 was further off still.
+
+The closest Sonnet arm needs care. With the leaked prompt and thinking on, its gap is 0.097, right at the band's edge. Its interval runs from 0.044 to 0.150. So we cannot show that it matches claude.ai, and it may differ by up to 0.15. That is a failure to match, not proof of a large gap.
+
+The order of the brands tells the same story more strongly. On rank-biased overlap, the Sonnet arms' gaps run from +0.136 to +0.176, and Haiku's is +0.253. Every one is a real gap. Order matters for tracking, because a brand named first is read differently from a brand named sixth.
+
+A same-request comparison isolates the model. Sonnet 5 and Opus 5.5 with no system prompt received identical requests. Sonnet's brand overlap with claude.ai was lower by 0.052 (interval 0.022 to 0.081). The model alone accounts for a measurable part of the gap.
+
+**Our own request.** The Sonnet 5 production arm is the Claude request Spyglasses used to track brands. Its brand gap to claude.ai, +0.165, was the largest of the Sonnet arms. It also cost more per call than Opus 5.5 with no system prompt. We are switching our Claude tracking to Opus 5.5 because of these results.
+
+### Story 2: Opus 5.5 through the API is close, and the leaked prompt adds cost
+
+Both Opus 5.5 arms landed inside the tolerance band on brands. The gap was 0.067 with no system prompt and 0.042 with the leaked prompt. We pre-registered a direct test of whether the leaked prompt closes the gap. It did not do so in any meaningful way:
+
+- On brands, the leaked prompt narrowed the gap by 0.025 (interval 0.000 to 0.051). That is small and inside the band.
+- On cited domains, it widened the gap by 0.022 (interval 0.001 to 0.045). The version with no system prompt matched claude.ai's sources slightly better.
+
+The leaked prompt is expensive. It raised the measured cost of an Opus call from $0.071 to $0.128, about 80% more, counting the cost of caching the long prompt. It also doubled the searches per answer, from 1.5 to 2.9, while claude.ai's own default averaged 1.2.
+
+Where the leaked prompt did help was order. On rank-biased overlap, Opus with no system prompt had a gap of +0.097, with an interval reaching 0.130. That is a real gap, right at the edge. With the leaked prompt, the gap was +0.044, small and inside the band.
+
+Three checks keep this result at "reasonable substitute" rather than "identical":
+
+- **Dropping the second day.** On day two, the API batch finished 5 to 10 hours after the claude.ai chats (see "Changes to the plan"). With that day removed, both Opus gaps move past the band: +0.082 (interval 0.033 to 0.132) with no system prompt and +0.054 (0.006 to 0.106) with the leaked prompt. The estimates stay between 0.05 and 0.08. With fewer days, the intervals are wider.
+- **A second brand matcher.** When brands are read by a model pass instead of the fixed vendor list, the Opus no-prompt gap is +0.070 with an interval reaching 0.100, just past the band's edge.
+- **Category-level lists.** Within each category, take the vendors an arm names in at least two of its six answers. The overlap between Opus's list and claude.ai's is 0.67 to 0.71. claude.ai at High overlaps claude.ai at Medium at 0.82 (next section).
+
+### Two practical questions, at the category level
+
+Two practical questions matter to anyone tracking brands. Does an API stand-in name (a) the same vendors in the same order, and (b) the same vendors regardless of order? A single answer is noisy, so we also compared each category's six answers per arm as a whole list. This comparison was added after the freeze and has no pass or fail verdict. As a yardstick, we compare claude.ai at High with claude.ai at Medium: the same product, one setting apart.
+
+<figure>
+  <img src="/figures/009-claude-model-fidelity/panel-agreement.png" alt="Two dot plots, one row per API configuration. Left, same vendors in the same order: the two Opus 5.5 arms reach the gray reference band of claude.ai High against Medium; the Sonnet arms sit lower and Haiku lowest. Right, same vendors in any order: every API arm sits below the reference band, Opus closest, then Sonnet, then Haiku." />
+</figure>
+
+| Arm | (a) Same order, rank-biased overlap | (b) Same vendors, named in 2 or more of 6 answers |
+|---|---|---|
+| claude.ai High vs Medium (yardstick) | 0.81 (0.78 to 0.84) | 0.82 (0.77 to 0.87) |
+| Opus 5.5, no prompt | 0.79 (0.76 to 0.83) | 0.67 (0.62 to 0.72) |
+| Opus 5.5, leaked prompt | 0.77 (0.73 to 0.80) | 0.71 (0.65 to 0.77) |
+| Sonnet 5, leaked prompt | 0.74 (0.70 to 0.78) | 0.62 (0.57 to 0.68) |
+| Sonnet 5, no prompt | 0.72 (0.68 to 0.76) | 0.58 (0.53 to 0.63) |
+| Sonnet 5, leaked prompt, low effort | 0.73 (0.70 to 0.77) | 0.61 (0.56 to 0.67) |
+| Sonnet 5, production request | 0.71 (0.67 to 0.75) | 0.55 (0.50 to 0.60) |
+| Haiku 4.5, leaked prompt | 0.64 (0.60 to 0.68) | 0.53 (0.48 to 0.58) |
+
+On order, Opus 5.5 is nearly as close to claude.ai as claude.ai's own High setting is. On the set of vendors, every API arm falls short of that yardstick, and Opus falls short least. The Sonnet arms sit 0.05 to 0.16 below the Opus arms.
+
+### Story 3: the claude.ai reasoning setting does not change the brands
+
+<figure>
+  <img src="/figures/009-claude-model-fidelity/reasoning-level.png" alt="Left, a dot plot of four gaps inside a shaded band from -0.10 to 0.10: claude.ai High against Medium on brands and on cited domains, and Sonnet 5 default against low effort on brands and on cited domains. All four sit near zero and are labeled equivalent. Right, bars of searches per answer: claude.ai Medium 1.2, High 2.5, Sonnet 5 low effort 1.6, default 2.6." />
+</figure>
+
+For these B2B software questions, moving claude.ai from Medium to High reasoning did not change which brands were named. The gap between the two settings was -0.014 (interval -0.034 to +0.008) on brands and +0.013 (-0.014 to +0.039) on cited domains. Both are equivalent to zero within the band.
+
+The higher setting did work harder. It ran 2.5 searches per answer against 1.2, and it cited 6.8 domains per answer against 4.4. It still landed on the same brands.
+
+The same held on the API side. Sonnet 5 with the leaked prompt at its default effort and at low effort was equivalent on brands (-0.003, interval -0.027 to +0.019) and on cited domains (-0.005, -0.027 to +0.019). A tracker does not need to match claude.ai's reasoning setting to match its brands. It does need to match the model.
+
+### Cited sources move a lot, for every model
+
+claude.ai does not cite the same sources from one day to the next. For the same prompt on two different days, its cited domains overlapped only 0.145. That is low, and it sets a low ceiling for every arm. Opus with no system prompt overlapped claude.ai's same-day sources at 0.126, and the Sonnet and Haiku arms at 0.069 to 0.090.
+
+On the gap scale, Opus with no system prompt was equivalent to claude.ai on cited domains (+0.019, interval -0.019 to +0.060). Opus with the leaked prompt and Sonnet with no prompt or the production request were small and inside the band. Sonnet with the leaked prompt, at either effort, and Haiku were real gaps, each just past the band's edge. Our pilot showed that an equivalence test on cited domains can pass falsely 16% to 33% of the time at this sample size. Read the domain results as directional.
+
+The practical point does not depend on the model. Any single run tells you little about which sources Claude cites. Source tracking needs repeated runs.
+
+### Cost per call
+
+| Arm | Searches per answer | Brands per answer | Measured cost per call (USD) |
+|---|---|---|---|
+| claude.ai, Medium | 1.2 | 8.3 | subscription |
+| claude.ai, High | 2.5 | 8.1 | subscription |
+| Opus 5.5, no prompt | 1.5 | 9.6 | 0.071 |
+| Opus 5.5, leaked prompt | 2.9 | 8.6 | 0.128 |
+| Sonnet 5, no prompt | 2.3 | 7.9 | 0.065 |
+| Sonnet 5, leaked prompt | 2.6 | 7.5 | 0.078 |
+| Sonnet 5, leaked prompt, low effort | 1.6 | 6.9 | 0.047 |
+| Sonnet 5, production request | 2.7 | 9.4 | 0.081 |
+| Haiku 4.5, leaked prompt | 2.9 | 5.6 | 0.047 |
+
+Costs are the mean measured per call at Batches API prices, including web search fees and the cost of caching the leaked prompt. Without the calls that paid to write the cache, the Opus leaked-prompt arm cost $0.110. claude.ai reports subscription usage only as a share of plan limits, so it has no per-chat price.
+
+### Checks on the pipeline
+
+- **Positive control.** Brand overlap with claude.ai was 0.514 higher for the same prompt than for prompts in different categories (interval 0.483 to 0.545). This check exists to catch a broken matcher or answers joined to the wrong prompt. It passed easily, as expected.
+- **Placebo.** We split the prompts into odd and even numbers and recomputed each main gap on both halves. The halves should agree. For the two Sonnet arms they did. For Haiku the result was inconclusive (+0.057, interval -0.039 to +0.155). We report it as a caveat on the size of Haiku's gap.
+- **Robustness.** The labels held when we used only each answer's first ten brands, resampled whole categories instead of prompts, and dropped the 10 claude.ai chats the collector flagged. Dropping any one day kept every Sonnet and Haiku arm a real gap. Dropping day one or day three kept both Opus arms inside the band. The day-two and model-matcher changes to the Opus labels are described in Story 2.
+- **Brand matching was checked by hand.** A reviewer read 30 answers chosen at random across all nine arms, without knowing which arm wrote them. The matcher found 238 brands correctly, listed 0 wrongly and missed 2. That is a precision of 1.00 and a recall of 0.99, against pre-set minimums of 0.95 and 0.90.
+- **Data quality.** No API request failed. All 240 claude.ai chats were matched to their prompts, and none ran on the wrong model or setting. 21 of claude.ai's 120 default-setting answers ran no web search (17.5%), under the 30% limit we set for domain claims.
+
+## Changes to the plan
+
+We froze the plan before collection. These eleven changes were made afterwards, and the spec's deviation log records each one.
+
+1. **Clarifying questions.** claude.ai sometimes asked a clarifying question before answering, in 9 of 240 chats. The collector answered it. The API arms cannot ask, so for these chats we score only claude.ai's first reply. A robustness check drops them.
+2. **One chat out of order.** On day one, one claude.ai chat was skipped and run later the same day, on the same account.
+3. **What counts as a brand.** While building the vendor list, we decided to count the brand an answer names rather than the company that owns it. We dropped the buyer's other software (for example, an accounting tool the buyer already uses). We removed lists of sources at the end of answers before matching, because some answers ended with such a list. Open-source tools count when an answer offers them as an option.
+4. **Review of the vendor list.** The plan said a person would review every row. The reviewer checked 416 of 950 rows: every flagged row and every row that matched five or more answers. Together they cover 81% of the brand matches in day one. When the list was extended from days two and three (change 7), the reviewer again checked every flagged new row and every new row that matched five or more answers. A model curated the rest, and the hand check (above) covers them.
+5. **Day two ran late.** On day two, the API batch finished 5 to 10 hours after the claude.ai chats, early the next morning. The robustness check that drops one day at a time shows its effect.
+6. **Analysis code written after collection.** The plan put the analysis code and a dry run on made-up data before the freeze. We wrote them after the third day. The dry run, the hand check and the frozen domain list all had to pass before any result was computed.
+7. **Vendor list extended.** The first vendor list, built from day one, missed about 7% to 8% of the brand names in days two and three. Missing names would have made every arm look more alike. We extended the list from days two and three under the same rules before computing any result.
+8. **The placebo does not block.** The dry run showed that splitting prompts in half doubles the interval width, so the placebo often comes out inconclusive by chance. We report it as a caveat and do not let it stop the analysis.
+9. **Category-level lists are descriptive.** The pre-registered category-share statistic failed the dry run. It treated a category's six answers as independent, but they are two prompts asked three times. We replaced it with the order and overlap comparisons in the category table, with no verdict.
+10. **Final fixes after the hand check.** The reviewer's notes from the hand check merged a few rows that named one product twice, folded two vendors' built-in AI features into the vendor, added one missed row and switched one row to keep. On the checked answers, this resolved exactly the reviewer's two misses and four notes and changed nothing else. The hand check was not rescored. The source-type list for cited domains was reviewed and frozen at the same time.
+11. **The trimmed prompt is released.** The plan said neither system prompt would be released. We later decided to release the trimmed leaked prompt, which is a public text with a public source, so others can reproduce the leaked-prompt arms. The production prompt stays unreleased.
+
+## What we can and cannot claim
+
+**We can claim:** across 1,080 answers evaluated in this study, Sonnet 5 and Haiku 4.5 through the API named a different set of brands from claude.ai on Opus 5.5, beyond claude.ai's own day-to-day variation plus 0.10. Opus 5.5 through the API stayed within that band. The leaked system prompt did not improve brand matching in any meaningful way, and it raised cost by about 80%. claude.ai's High and Medium settings named equivalent brands.
+
+**The equivalence bound.** In our pilot simulation, a true brand gap of 0.10 was wrongly called equivalent only 4% to 8% of the time, so the study could detect a gap of that size. Where we report "small, inside the band" or "equivalent", the gap is under 0.10 at 90% confidence. The closest Sonnet arm is the edge case: its estimate is 0.097, and we can only say it may differ by up to 0.15. Six answers per category cannot certify agreement, so the category-level numbers come with no verdict.
+
+**The claude.ai side is one fresh account.** Memory and personalization were off, and it signed in from one city, Pittsburgh. Real subscribers have history, and claude.ai may run experiments on some accounts that we cannot see. We make no claim about personalized sessions.
+
+**B2B software questions only.** We tested 40 synthetic buying questions in 20 software categories, written by a model and reviewed by a person. They are not real buyer phrasing, and the results may not hold for consumer products, local services, other languages or other kinds of question.
+
+**Three days.** Each prompt ran once per arm on three days. A longer run could show more drift on either side. On day two, the API answers came 5 to 10 hours after the claude.ai chats.
+
+**The leaked prompt measures a difference in setup, not the true effect of claude.ai's prompt.** It comes from an open-source collection whose source we cannot verify, we trimmed it, and claude.ai's search tools differ from the API's web search tool. We do not claim that this prompt causes anything inside claude.ai.
+
+**The search tools differ.** claude.ai has search and fetch tools that the API arms did not use. Some of the gap on cited domains is a tool difference.
+
+**The brand list was built from the answers.** We built the vendor list from the study's own answers, and one person reviewed it. The same list applies to every arm, so it cannot favor one arm by design. A hand check of 30 answers found precision 1.00 and recall 0.99.
+
+**The analysis code came after collection.** We wrote the pipeline after the third day, then required a dry run on made-up data, the hand check and a frozen domain list to pass before computing any result.
+
+**No brand is being judged.** This study compares ways of calling Claude. It names no brand from any answer.
+
+## Data and reproducibility
+
+- **Datasets:** [answers](/datasets/009-claude-model-fidelity/claude-api-vs-claude-ai-answers.csv) (CC BY 4.0, 1,080 answers evaluated in this study) and [prompts](/datasets/009-claude-model-fidelity/claude-api-vs-claude-ai-prompts.csv) (CC BY 4.0, the 40 prompts). Each has a datasheet with the column dictionary. Brands appear as codes, so every overlap score in this article can be recomputed without naming a brand. Vendor websites in the cited and searched domain lists appear as codes for the same reason. Answer text, search queries, full URLs and the production prompt are not released.
+- **Trimmed system prompt:** [the trimmed leaked prompt](/datasets/009-claude-model-fidelity/claude-opus-5.5-trimmed-system-prompt.md) used by the leaked-prompt arms, with its source, commit, trimming rules and the date and location values filled in for each call. The text is Anthropic's, as circulated by [system_prompts_leaks](https://github.com/asgeirtj/system_prompts_leaks). We claim no rights in it. The full version is in that repository.
+- **Pre-registered spec:** [frozen at `1730d38`](https://github.com/orchestra-code/aeo-experiments/blob/1730d38/experiments/009-claude-model-fidelity/spec.md) on 2026-09-26. The [current spec](https://github.com/orchestra-code/aeo-experiments/blob/main/experiments/009-claude-model-fidelity/spec.md) adds the deviation log.
+- **Analysis code:** [experiments/009-claude-model-fidelity/](https://github.com/orchestra-code/aeo-experiments/tree/main/experiments/009-claude-model-fidelity), including the collection harness, the dry run on made-up data, the audits and the figure code.
+
+## Changelog
+
+- 2026-10-02: draft.

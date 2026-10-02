@@ -636,3 +636,15 @@ confirmatory metric had been computed.
     suggested classes. It is frozen as `data/raw/domain_map_v1.csv`, sha256
     `a69595e8943229467e9d89f72ddbe5e796a4b99fd61d9f20ad7b9c06ef551399`
     (1,580 domains).
+11. **Trimmed leaked prompt released (2026-10-02, at publication).** §3
+    marked the leaked and trimmed prompts "never" publishable. Jim decided to
+    release the trimmed template the API arms used, so others can reproduce
+    the leaked-prompt arms. It is released as
+    `data/public/claude-opus-5.5-trimmed-system-prompt.md`, byte for byte the
+    template (sha256 `b6a898b0e05b1e04f7894025863563f2eb757480666ff266172696cb34250e16`),
+    under a header that names the source (`asgeirtj/system_prompts_leaks`,
+    `Anthropic/claude-opus-5.5.md` at commit `17200e14`). The header also
+    lists the removed sections and how the date and location slots were
+    filled, and states that its provenance cannot be verified and that
+    Spyglasses claims no rights in it. The full text is left to the source
+    repository. The Spyglasses production prompt is still never released.
