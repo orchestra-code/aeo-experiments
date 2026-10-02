@@ -167,8 +167,8 @@ def test_shared_canonical_across_cs_and_ci_rows(tmp_path):
 
 
 def test_frozen_lexicon_is_v2():
-    assert brands.LEXICON.name == "lexicon_v2.csv"
-    assert brands.LEXICON_SHA256.startswith("a2745081")
+    assert brands.LEXICON.name == "lexicon_v2_1.csv"
+    assert brands.LEXICON_SHA256.startswith("9756071e")
 
 
 # ------------------------------------------------------------- panel

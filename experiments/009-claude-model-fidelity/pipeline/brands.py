@@ -5,7 +5,7 @@ function bodies are unchanged, and ``pilot_report`` re-exports them so the
 pilot report and ``harness/lexicon_candidates.py`` keep their behavior byte
 for byte.
 
-The lexicon (``data/raw/lexicon_v2.csv``, gitignored: it is built from AI
+The lexicon (``data/raw/lexicon_v2_1.csv``, gitignored: it is built from AI
 answers) has one row per (brand, prompt category): ``canonical``, ``aliases``
 (``|``-separated), ``category``, ``decision`` (keep|drop), ``match`` (ci|cs).
 Extraction follows experiment 003's ``brands.extract_brands``: labelled
@@ -41,8 +41,8 @@ RAW = EXP / "data" / "raw"
 #: same canonical). Extraction keys matches by canonical, so either row's
 #: alias counts as that one brand; nothing here keys rows by
 #: (category, canonical).
-LEXICON = RAW / "lexicon_v2.csv"
-LEXICON_SHA256 = "a2745081980cb819b7de7e0dc698d0fecb001fc7a677259e68d57bf5c744e1eb"
+LEXICON = RAW / "lexicon_v2_1.csv"
+LEXICON_SHA256 = "9756071e76b418b5e7cef023e263bad07bb44c391d137e1bf9792069e423530a"
 
 
 def ordered_unique(items):

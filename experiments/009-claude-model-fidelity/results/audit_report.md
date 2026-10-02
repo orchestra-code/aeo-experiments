@@ -1,6 +1,6 @@
 # Experiment 009: data-quality audits
 
-Generated 2026-10-01 by `pipeline/02_audit.py` from `data/interim/features.jsonl` (1080 answers). Aggregates only: no brand, domain, prompt, answer or query text.
+Generated 2026-10-02 by `pipeline/02_audit.py` from `data/interim/features.jsonl` (1080 answers). Aggregates only: no brand, domain, prompt, answer or query text.
 
 ## Audit A: degenerate responses
 
@@ -113,7 +113,7 @@ Run dates per wave x surface: {(1, 'api'): ['2026-09-27'], (1, 'ui'): ['2026-09-
 
 ## Audit B: what the labels mean (quoted from code)
 
-- **brand named** = a keep-row alias of the frozen lexicon v2 (sha256 `a2745081980cb819b7de7e0dc698d0fecb001fc7a677259e68d57bf5c744e1eb`) matched in the answer text for the prompt's category, after the sources block, link targets, bare URLs and markup are stripped; longest alias first, word boundaries, matched spans consumed, first-mention order. For a claude.ai chat that asked clarifying questions the answer text is the first reply only (deviation 1).
+- **brand named** = a keep-row alias of the frozen lexicon v2 (sha256 `9756071e76b418b5e7cef023e263bad07bb44c391d137e1bf9792069e423530a`) matched in the answer text for the prompt's category, after the sources block, link targets, bare URLs and markup are stripped; longest alias first, word boundaries, matched spans consumed, first-mention order. For a claude.ai chat that asked clarifying questions the answer text is the first reply only (deviation 1).
 
 `experiments/009-claude-model-fidelity/pipeline/brands.py::strip_sources` (lines 94-107)
 
@@ -329,7 +329,21 @@ Every answer joins several pairs, so pairs are not independent. All inference is
 
 Arm-blind spot check, 30 answers stratified across the 9 arms, drawn with seed 20260926, shuffled into A01-A30. The reviewer edits `data/raw/audit_d_sheet.csv` (audit_id, category, extracted brands, reviewer columns) and reads `data/raw/audit_d_answers.md` (each answer as extraction reads it, sources block stripped); neither names the arm, prompt or wave. `data/raw/audit_d_key.csv` maps audit_id to arm, item and wave for the scorer. All three are gitignored. `missed_brands` = in-category brands the answer presents that extraction missed; `wrong_brands` = extracted brands that are not real in-category mentions in that answer (names separated by `; `).
 
-Not scored yet. After review: `02_audit.py --score-audit-d --signed-by "<name>"`. 03_model refuses to run on real data until the score passes and is signed.
+Score (2026-10-02, 30 rows): precision 1.000 (gate >= 0.95), recall 0.992 (gate >= 0.9); TP 238, FP 0, FN 2; wrong names that match no extracted brand: 1. **PASS**, signed by Jim Wrubel.
+
+Per arm:
+
+| arm | answers | true_positive | false_positive | false_negative | precision | recall |
+|---|---|---|---|---|---|---|
+| ui_default | 3 | 21 | 0 | 0 | 1.000 | 1.000 |
+| ui_think | 3 | 24 | 0 | 0 | 1.000 | 1.000 |
+| opus55_plain | 3 | 25 | 0 | 0 | 1.000 | 1.000 |
+| opus55_leak | 3 | 23 | 0 | 0 | 1.000 | 1.000 |
+| sonnet5_plain | 3 | 26 | 0 | 0 | 1.000 | 1.000 |
+| sonnet5_leak_think | 4 | 33 | 0 | 1 | 1.000 | 0.971 |
+| sonnet5_leak_low | 4 | 38 | 0 | 1 | 1.000 | 0.974 |
+| sonnet5_prod | 3 | 22 | 0 | 0 | 1.000 | 1.000 |
+| haiku45_leak | 4 | 26 | 0 | 0 | 1.000 | 1.000 |
 
 Haiku candidate cache coverage (R4 needs every wave; the extraction for waves 2 and 3 is `harness/lexicon_candidates.py --wave N`):
 
@@ -343,13 +357,13 @@ Agreement, lexicon extraction vs Haiku candidates mapped through the frozen lexi
 
 | arm | answers | mean_jaccard | identical | lexicon_brands | haiku_brands | both_empty |
 |---|---|---|---|---|---|---|
-| ui_default | 120 | 0.964 | 0.775 | 8.425 | 8.083 | 0 |
-| ui_think | 120 | 0.965 | 0.758 | 8.225 | 7.933 | 0 |
-| opus55_plain | 120 | 0.947 | 0.650 | 9.617 | 9.092 | 0 |
-| opus55_leak | 120 | 0.953 | 0.692 | 8.692 | 8.300 | 0 |
-| sonnet5_plain | 120 | 0.947 | 0.708 | 8.000 | 7.508 | 0 |
-| sonnet5_leak_think | 120 | 0.953 | 0.725 | 7.633 | 7.225 | 0 |
-| sonnet5_leak_low | 120 | 0.960 | 0.792 | 6.933 | 6.617 | 0 |
-| sonnet5_prod | 120 | 0.910 | 0.525 | 9.475 | 8.550 | 0 |
-| haiku45_leak | 120 | 0.941 | 0.725 | 5.625 | 5.275 | 0 |
-| all | 1080 | 0.949 | 0.706 | 8.069 | 7.620 | 0 |
+| ui_default | 120 | 0.978 | 0.825 | 8.292 | 8.083 | 0 |
+| ui_think | 120 | 0.972 | 0.792 | 8.133 | 7.908 | 0 |
+| opus55_plain | 120 | 0.951 | 0.667 | 9.550 | 9.067 | 0 |
+| opus55_leak | 120 | 0.959 | 0.717 | 8.575 | 8.250 | 0 |
+| sonnet5_plain | 120 | 0.954 | 0.725 | 7.867 | 7.467 | 0 |
+| sonnet5_leak_think | 120 | 0.957 | 0.742 | 7.525 | 7.150 | 0 |
+| sonnet5_leak_low | 120 | 0.962 | 0.808 | 6.875 | 6.575 | 0 |
+| sonnet5_prod | 120 | 0.918 | 0.567 | 9.383 | 8.533 | 0 |
+| haiku45_leak | 120 | 0.946 | 0.750 | 5.550 | 5.233 | 0 |
+| all | 1080 | 0.955 | 0.732 | 7.972 | 7.585 | 0 |

@@ -44,7 +44,7 @@ CANDIDATES = RAW / "brand_candidates.jsonl"
 #: in DOMAIN_MAP_SHA256 at freeze.
 DOMAIN_MAP_DRAFT = RAW / "domain_map_draft.csv"
 DOMAIN_MAP = RAW / "domain_map_v1.csv"
-DOMAIN_MAP_SHA256: str | None = None
+DOMAIN_MAP_SHA256: str | None = "a69595e8943229467e9d89f72ddbe5e796a4b99fd61d9f20ad7b9c06ef551399"
 
 #: Audit D (spec §2): the spot-check sheet a person fills, and the scored
 #: aggregate 03_model checks before it will touch real data.

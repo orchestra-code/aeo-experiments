@@ -611,3 +611,28 @@ confirmatory metric had been computed.
    treatment, and `ui_think` vs `ui_default` is shown as a reference. The
    per-answer tests are unchanged: H1b (primary) answers (b) per answer and
    the RBO gap answers (a).
+10. **Audit D, lexicon v2.1 and the domain map (2026-10-02, before the
+    model was run on real data).** Audit D was scored on lexicon v2 and
+    signed by Jim. Over 30 arm-blind answers it found 238 correct brands,
+    0 wrong and 2 missed: precision 1.00, recall 0.99. It passes (gates
+    0.95 / 0.90). One reviewer entry named a brand that was not on that
+    answer's list; the answer that does list it presents it as an option,
+    so it was ignored. Jim's notes were applied as lexicon v2.1
+    (`data/raw/lexicon_v2_1.csv`, sha256
+    `9756071e76b418b5e7cef023e263bad07bb44c391d137e1bf9792069e423530a`):
+    - two rows for one vendor's e-signature products merged into one brand;
+    - two open-source projects that the vendor sells inside its hosted
+      platform folded into that vendor, plus the vendor's two other
+      projects of the same kind, for consistency;
+    - two vendors' built-in AI features folded into the vendor, in the
+      three categories where they appeared;
+    - one construction platform switched to keep, the same call as a
+      similar platform kept at review;
+    - one ERP vendor's native AP module added as an in-category row (the
+      buyer's-other-systems rule).
+    On the audited answers, v2.1 resolves exactly the reviewer's two misses
+    and four notes and changes nothing else. Audit D was not re-scored.
+    The source-class domain map was reviewed by Jim, who accepted the
+    suggested classes. It is frozen as `data/raw/domain_map_v1.csv`, sha256
+    `a69595e8943229467e9d89f72ddbe5e796a4b99fd61d9f20ad7b9c06ef551399`
+    (1,580 domains).
