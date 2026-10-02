@@ -1,7 +1,7 @@
 """Stage 04 — watermarked figures (spec §9) -> results/figures/*.{svg,png}.
 
 F1 gap-vs-cost  LEAD. Two panels (brands named, domains cited). Each API arm
-   is a point: x = measured $/call (ledger, batch-priced, cache effects
+   is a point: x = estimated $/call (ledger, batch-priced, cache effects
    included), y = its same-prompt, same-day Jaccard with claude.ai
    (``cross:arm|ui_default``) with the 90% cluster-bootstrap CI. The shaded
    band is claude.ai's own day-to-day floor (``within:ui_default``, 90% CI)
@@ -127,7 +127,7 @@ def f1_gap_vs_cost(results: dict, outdir, synthetic: str | None) -> None:
                         mfc="white" if hollow else color, mec=color)
         ax.set_title(title)
         ax.set_xlim(0, x_max)
-        ax.set_xlabel("Measured cost per API call (USD, batch pricing)")
+        ax.set_xlabel("Estimated cost per API call (USD, list prices, Batches API)")
     axes[0].set_ylabel("Same-prompt, same-day Jaccard with claude.ai")
     axes[0].set_ylim(0, 1)
     handles = [plt.Line2D([], [], marker=ARM_MARKER[a], ls="", ms=8,

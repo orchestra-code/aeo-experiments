@@ -438,7 +438,8 @@ def main() -> None:
                 "no mapping is published.",
                 "For the 9 claude.ai chats that asked clarifying questions, "
                 "only the first reply is scored (spec deviation 1).",
-                "Mean measured cost per API call, batch pricing, 1-hour cache "
+                "Mean estimated cost per API call (token and search counts priced "
+                "at list prices; not reconciled with billing), batch pricing, 1-hour cache "
                 "writes included (USD): "
                 + ", ".join(f"{a} {cost[a]:.3f}" for a in cost.index)
                 + ". claude.ai reports subscription usage only as a share of "
