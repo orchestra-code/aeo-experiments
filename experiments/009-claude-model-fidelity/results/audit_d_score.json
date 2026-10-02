@@ -1,0 +1,92 @@
+{
+ "rows": 30,
+ "complete": true,
+ "true_positive": 238,
+ "false_positive": 0,
+ "false_negative": 2,
+ "wrong_names_not_extracted": 1,
+ "precision": 1.0,
+ "recall": 0.9916666666666667,
+ "per_arm": {
+  "ui_default": {
+   "answers": 3,
+   "true_positive": 21,
+   "false_positive": 0,
+   "false_negative": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  },
+  "ui_think": {
+   "answers": 3,
+   "true_positive": 24,
+   "false_positive": 0,
+   "false_negative": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  },
+  "opus55_plain": {
+   "answers": 3,
+   "true_positive": 25,
+   "false_positive": 0,
+   "false_negative": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  },
+  "opus55_leak": {
+   "answers": 3,
+   "true_positive": 23,
+   "false_positive": 0,
+   "false_negative": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  },
+  "sonnet5_plain": {
+   "answers": 3,
+   "true_positive": 26,
+   "false_positive": 0,
+   "false_negative": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  },
+  "sonnet5_leak_think": {
+   "answers": 4,
+   "true_positive": 33,
+   "false_positive": 0,
+   "false_negative": 1,
+   "precision": 1.0,
+   "recall": 0.9705882352941176
+  },
+  "sonnet5_leak_low": {
+   "answers": 4,
+   "true_positive": 38,
+   "false_positive": 0,
+   "false_negative": 1,
+   "precision": 1.0,
+   "recall": 0.9743589743589743
+  },
+  "sonnet5_prod": {
+   "answers": 3,
+   "true_positive": 22,
+   "false_positive": 0,
+   "false_negative": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  },
+  "haiku45_leak": {
+   "answers": 4,
+   "true_positive": 26,
+   "false_positive": 0,
+   "false_negative": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  }
+ },
+ "gate_precision": 0.95,
+ "gate_recall": 0.9,
+ "passes": true,
+ "sheet_sha256": "72dc37909e09057025038bf39ec94276e59dbdc9c3ccf3760258489f38b551e4",
+ "key_sha256": "e07b65887320d8beb64886bf55f5f8c4e1dc0c7ab4c1ae2143a889b8dea5e718",
+ "lexicon_sha256": "a2745081980cb819b7de7e0dc698d0fecb001fc7a677259e68d57bf5c744e1eb",
+ "scored_on": "2026-10-02",
+ "signed_by": "Jim Wrubel"
+}
