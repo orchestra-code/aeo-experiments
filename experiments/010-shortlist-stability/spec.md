@@ -1,8 +1,8 @@
 # Being shortlisted by AI is stable when rank is not: study spec
 
-**Status:** DRAFT (not frozen)
-**Frozen commit:** (recorded at freeze)
-**Frozen date / seed:** (freeze date as YYYYMMDD)
+**Status:** FROZEN
+**Frozen commit:** (recorded in the next commit)
+**Frozen date / seed:** 2026-10-03 / 20261003
 **Experiment slug:** `010-shortlist-stability`
 
 > Freeze rule: §4 (hypotheses) and §5 (model and decision rules) are fixed
@@ -83,8 +83,8 @@ runs of the same buyer question a few days apart, does a vendor the answer
 recommends get recommended again, far more reliably than it holds its exact
 position? Stage 2 (over time): does that hold over five weeks? The instrument
 is the Spyglasses recommendation judge, unchanged. The data: a new collection
-of 40 B2B software prompts on ChatGPT and Gemini (7 daily waves for Stage 1,
-then 4 weekly waves for Stage 2), and the untouched two thirds of existing
+of 40 B2B software prompts on ChatGPT, Gemini and Claude (7 daily waves for
+Stage 1, then 4 weekly waves for Stage 2), and the untouched two thirds of existing
 answers from experiments 002, 003, 005 (ChatGPT, consumer headphones and
 design agencies) and 009 (claude.ai, B2B software). Expected, from the
 exploration: shortlist retention near 0.8, 30 to 40 points above exact
@@ -138,6 +138,7 @@ top picks change, but they stay on the list.
 |---|---|---|---|---|---|
 | `chatgpt_b2b` | new, DataForSEO | ChatGPT (`gpt-5-6` at smoke) | 40 | 7 (Stage 1), 11 (Stage 2) | primary |
 | `gemini_b2b` | new, DataForSEO | Gemini app (`3.5 Flash-Lite` at smoke) | 40 | 7 (Stage 1), 11 (Stage 2) | primary |
+| `claude_api_b2b` | new, Anthropic API | Claude, `opus55_plain` (Opus 5.5) | 40 | 7 (Stage 1), 11 (Stage 2) | primary |
 | `claude_b2b` | 009 holdout, `ui_default` | claude.ai, Opus 5.5 default | 26 (13 categories) | 3 | primary |
 | `chatgpt_consumer` | 002+003+005 holdout | ChatGPT (`gpt-5-5`) | 95 | 17 | secondary |
 | `chatgpt_agency` | 002+003+005 holdout | ChatGPT (`gpt-5-5`) | 27 | 3 | secondary (low power) |
@@ -145,23 +146,31 @@ top picks change, but they stay on the list.
 `claude_b2b` holdout also carries `ui_think` and `opus55_plain` answers
 (robustness and the cross-arm comparison).
 
-If open decision 1 is yes, `claude_api_b2b` (new, Anthropic API,
-`opus55_plain`, the same 40 prompts and schedule, 7 then 11 runs) joins both
-stages as a primary dataset: the H1 family becomes 4 tests and the H5 family 3.
+`claude_api_b2b` uses experiment 009's collector and arm `opus55_plain`
+unchanged (Opus 5.5, effort medium, no system prompt, web search tool
+`20250305`, user location Pittsburgh): the request shape Spyglasses tracks
+Claude discovery with, which 009 found close to claude.ai. Smoke call
+2026-10-03: one search, three citations, $0.11 in real time.
 
 **New collection.** The 40 prompts of experiment 009 (20 B2B software
 categories, one "shortlist" and one "evaluate" prompt each), unchanged, on
-both platforms, through `scripts/llm_scraper.py` (priority queue, US location,
-`force_web_search` on ChatGPT; the Gemini endpoint rejects it). Waves on days
-0 to 6 (daily) and 13, 20, 27, 34 from the start date in
-`collection_schedule.json` (proposed: Tuesday 2026-10-06, so waves run
-Oct 6 to 12, Oct 19, Oct 26, Nov 2, Nov 9). `run_wave.py`, run daily at 20:00
-local time by launchd, submits each wave on both platforms the same evening
-and collects; one ledger per platform. A wave submitted after its date is
-logged LATE and recorded as a deviation; it stays in the analysis with its
-true lag. Cost: 880 tasks at about $0.0024 plus judging, under $5. Fourteen
-of the 40 prompts were in the Claude exploration set; their ChatGPT and
-Gemini answers are new data, and no exploration result was computed on them.
+all three platforms. ChatGPT and Gemini go through `scripts/llm_scraper.py`
+(priority queue, US location, `force_web_search` on ChatGPT; the Gemini
+endpoint rejects it); Claude through 009's `collect_anthropic.py` (Batches
+API). Waves on days 0 to 6 (daily) and 13, 20, 27, 34 from the start date in
+`collection_schedule.json` (2026-10-03, so waves run Oct 3 to 9, Oct 16,
+Oct 23, Oct 30, Nov 6). `run_wave.py`, run daily at 20:00 local time by
+launchd, submits each wave the same evening on all three platforms (Claude's
+batch first), collects the DataForSEO tasks after the queue wait, and
+collects the Claude batch on its next run; one ledger per platform. A
+Claude answer's run date is its batch submission date. A wave submitted after
+its date is logged LATE and recorded as a deviation; it stays in the analysis
+with its true lag. Cost: 880 DataForSEO tasks at about $0.0024, 440 Claude
+calls at about $0.07 (009's batch estimate, not yet reconciled with
+Anthropic billing), plus judging: about $38. Fourteen
+of the 40 prompts were in the Claude exploration set; their new ChatGPT,
+Gemini and Claude API answers are new runs, and no result has been computed
+on them.
 
 **Holdout judging.** Immediately after freeze: `build_tasks.py --split holdout
 --allow-holdout`, then `judge_runner.mts --split holdout` (about 1,930
@@ -172,11 +181,11 @@ answers, about $2).
 | | Stage 1: run to run | Stage 2: over time |
 |---|---|---|
 | Question | Is being shortlisted stable from run to run, compared with position and the top pick? | Does it hold over five weeks? |
-| New data | waves 1 to 7 (daily, proposed Oct 6 to 12) | waves 1 to 11 (adds Oct 19, Oct 26, Nov 2, Nov 9) |
+| New data | waves 1 to 7 (daily, Oct 3 to 9) | waves 1 to 11 (adds Oct 16, Oct 23, Oct 30, Nov 6) |
 | Holdout data | all holdout datasets | `chatgpt_consumer` lags (0 to 21 days) |
-| Primary family | H1 | H5 |
+| Primary family | H1 (4 datasets) | H5 (3 datasets) |
 | Analysis | after wave 7 and the STOP 2 freezes | after wave 11 |
-| Report | article 1, about Oct 14 | article 2, about Nov 11 |
+| Report | article 1, about Oct 12 | article 2, about Nov 9 |
 
 Firewall rules:
 1. Stage 1 uses only waves 1 to 7 of the new collection. Waves 8 to 11 are
@@ -193,8 +202,8 @@ Firewall rules:
 
 ## 2. Data-quality audits (run before the model)
 
-- **Audit A, collection completeness.** Per platform and wave, at least 38 of
-  40 tasks collected with a non-empty answer. Missing tasks are resubmitted
+- **Audit A, collection completeness.** Per platform (ChatGPT, Gemini,
+  Claude) and wave, at least 38 of 40 tasks collected with a non-empty answer. Missing tasks are resubmitted
   the same day by the driver. A wave below 36 of 40 on a platform is excluded
   from H5's lag bins for that platform (kept elsewhere) and logged. Refusals
   and empty answers are flagged and excluded.
@@ -220,8 +229,8 @@ Firewall rules:
   reused) is judged twice. Category agreement at least 90% (exploration:
   96%). Below that, the retention figures carry an instrument-noise caveat
   and R4 is promoted to the main text.
-- **Audit F, model drift.** The reported model of every DataForSEO answer is
-  recorded. A model change mid-collection is reported as a finding; R2
+- **Audit F, model drift.** The reported model of every answer is recorded
+  (DataForSEO's `model` field; the Claude API's model id). A model change mid-collection is reported as a finding; R2
   restricts to the modal model.
 - **Audit G, best-for classifier.** Segment test-retest on all distinct
   phrases at least 90% (exploration: 95%).
@@ -266,14 +275,14 @@ between the two answers' run dates.
 
 ### Stage 1: run to run (new waves 1 to 7, holdouts)
 
-**Stage 1 primary family** (Holm across its 3 tests):
+**Stage 1 primary family** (Holm across its 4 tests):
 
-- **H1 (the shortlist beats position)**, for `chatgpt_b2b`, `gemini_b2b`
-  and `claude_b2b`: within-prompt retention of R exceeds within-prompt
+- **H1 (the shortlist beats position)**, for `chatgpt_b2b`, `gemini_b2b`,
+  `claude_api_b2b` and `claude_b2b`: within-prompt retention of R exceeds within-prompt
   retention of Pk by more than 0.10. Test: one-sided, H0: R - Pk <= 0.10.
 
 **Stage 1 secondary** (no multiplicity correction, labeled as such), for the
-three B2B datasets unless noted:
+four B2B datasets unless noted:
 
 - **H2 (the shortlist beats the top pick):** R - T > 0.10 (one-sided,
   H0: R - T <= 0.10).
@@ -294,8 +303,8 @@ headline number); the share of shortlisted brand-prompt pairs shortlisted in
 at least 80% of a prompt's runs; between-prompt baselines; answers with a top
 choice, with a caution, raw top choices demoted; cautioned-status retention
 where there are at least 30 appearances; caveat reason mix; cross-platform
-shortlist agreement (ChatGPT vs Gemini, same prompt, same wave); `claude_b2b`
-arm comparison (ui_default vs ui_think vs opus55_plain).
+shortlist agreement (ChatGPT vs Gemini vs Claude API, same prompt, same
+wave); `claude_b2b` arm comparison (ui_default vs ui_think vs opus55_plain).
 
 **Stage 1 H_pos (positive control; the study stops if it fails):** for each
 dataset, within-prompt R retention exceeds cross-category R retention by at
@@ -310,9 +319,10 @@ primary dataset.
 
 ### Stage 2: over time (new waves 1 to 11)
 
-**Stage 2 primary family** (Holm across its 2 tests):
+**Stage 2 primary family** (Holm across its 3 tests):
 
-- **H5 (the shortlist does not drift)**, for `chatgpt_b2b` and `gemini_b2b`:
+- **H5 (the shortlist does not drift)**, for `chatgpt_b2b`, `gemini_b2b` and
+  `claude_api_b2b`:
   retention of R over within-prompt pairs at least 27 days apart minus
   retention over pairs 1 to 2 days apart is equivalent to 0 within +/-0.05
   (TOST). Pairs per prompt: 8 far, 11 near.
@@ -325,9 +335,10 @@ primary dataset.
 
 **Stage 2 descriptive (no test):** retention by days apart for R, T, P1, Pk,
 WS (the curve); H1 to H4 recomputed on all 11 waves (descriptive only,
-firewall rule 3); the platform model reported on every wave; if decision 1 is
-yes, Claude API answers compared with 009's `opus55_plain` answers to the same
-holdout prompts (Sep 27 to Oct 1, a further 1 to 6 weeks of lag).
+firewall rule 3); the platform model reported on every wave; `claude_api_b2b`
+answers compared with 009's `opus55_plain` answers to the 26 holdout prompts
+(same arm, Sep 27 to Oct 1, so 2 to 6 weeks of extra lag; the 14 exploration
+prompts are left out of this comparison).
 
 **Stage 2 H_pos:** as Stage 1, on all 11 waves.
 
@@ -441,18 +452,18 @@ All checks run at both stages except R7 (Stage 2 only).
 
 ## 8. Deliverables and sequence
 
-1. Jim reviews this draft and the open decisions below. **STOP 1.**
+1. Jim reviews the draft and the decisions. **STOP 1** (done 2026-10-03).
 2. Freeze: two commits (spec, then the hash), pushed. Install the launchd job.
 3. Holdout judging and the Audit E sample (same day as freeze).
 4. Waves 1 and 2, then lexicon v3 candidates and curation; Jim reviews the
    flagged rows and does the Audit D sheet. **STOP 2.** Freeze lexicon v3 and
    the 20 B2B taxonomies.
-5. Wave 7 (proposed Oct 12): judge waves 1 to 7, Stage 1 pipeline
+5. Wave 7 (Oct 9; Claude batch collected Oct 10): judge waves 1 to 7, Stage 1 pipeline
    (`pipeline/20_` to `24_`, `--stage 1`) on the new data and the holdouts,
    robustness. **STOP 3** for Jim's Stage 1 results review.
 6. Article 1 (pre-announcing Stage 2), anonymized Stage 1 dataset through the
    release gate, companion blog post (EN and DE).
-7. Wave 11 (proposed Nov 9): judge waves 8 to 11, Stage 2 pipeline
+7. Wave 11 (Nov 6; Claude batch collected Nov 7): judge waves 8 to 11, Stage 2 pipeline
    (`--stage 2`). **STOP 4** for Jim's Stage 2 results review.
 8. Article 2, dataset update, companion blog post (EN and DE).
 
@@ -473,22 +484,14 @@ All checks run at both stages except R7 (Stage 2 only).
   number; top-choice share needs many runs; "Where AI picks you" phrases need
   grouping by use case.
 
-## Open decisions for Jim (before freeze)
+## Decisions (Jim, 2026-10-03)
 
-1. **Add Claude to the five-week collection?** `opus55_plain` through the
-   API (the configuration Spyglasses now tracks for Claude discovery),
-   same 40 prompts and schedule. That gives Claude a drift test and makes the
-   B2B result three-platform. 440 calls through 009's collector
-   (`collect_anthropic.py submit --arms opus55_plain` with this study's
-   prompt file, ledger and output folder; Batches API, submitted at the start
-   of each wave evening). About $31 at 009's estimated $0.071 per call, an
-   estimate not yet reconciled with Anthropic billing. Recommended: yes.
-2. **Start date and the launchd job** (proposed Tuesday Oct 6, 20:00). Your
-   machine needs to be awake at 8pm ET on wave days; a missed evening
-   submits the next time it runs and is logged as late.
-3. **Audit D** (30 answers, about 30 minutes) after wave 2.
-4. **Push the frozen spec** to the public repo at freeze (the
-   pre-registration timestamp), as for 008 and 009.
+1. Claude added to the collection (`claude_api_b2b`, both stages).
+2. Start 2026-10-03 (Saturday) rather than Tuesday; wave 1 fires from the
+   20:00 launchd run that evening, so every wave runs at the same hour. The
+   launchd job is installed at freeze.
+3. Jim does the Audit D sheet after wave 2.
+4. The frozen spec is pushed to the public repo at freeze.
 
 ## Deviations from the frozen spec
 

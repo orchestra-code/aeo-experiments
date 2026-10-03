@@ -194,14 +194,17 @@ def claude_tasks(split: dict[tuple[str, str], str], wanted: set[str]) -> list[di
     return out
 
 
-COLLECTION_PLATFORMS = ("chatgpt", "gemini")
+COLLECTION_PLATFORMS = ("chatgpt", "gemini", "claude")
+CLAUDE_COLLECTION_ARM = "opus55_plain"
 
 
 def collection_tasks(tag: str) -> list[dict]:
-    """Judge tasks for 010's own B2B collection (ChatGPT and Gemini via DataForSEO).
+    """Judge tasks for 010's own B2B collection: ChatGPT and Gemini (DataForSEO),
+    Claude (Anthropic API, 009's collector, arm ``opus55_plain``).
 
     One ledger and one response tree per platform: ``ledger_<tag>_<platform>.jsonl``
-    and ``responses_<tag>_<platform>/w<wave>/<task_id>.json``. Brands = 009's
+    and ``responses_<tag>_<platform>/w<wave>/<task_id>.json`` (Claude:
+    ``w<wave>/opus55_plain/<item_id>.json``). Brands = 009's
     frozen lexicon over the prompt's category rows (the lexicon protocol in
     spec.md extends it before any confirmatory metric).
     """
@@ -226,22 +229,36 @@ def collection_tasks(tag: str) -> list[dict]:
                 r = json.loads(line)
                 recs.setdefault(r["task_id"], {}).update(r)
         for tid, r in sorted(recs.items()):
-            path = RAW / f"responses_{tag}_{platform}" / f"w{r['wave']}" / f"{tid}.json"
-            if not path.exists():
+            if r.get("status") != "collected":
                 continue
-            resp = json.loads(path.read_text())
             p = prompts[r["item_id"]]
-            if (resp.get("keyword") or "").strip() != p["text"].strip():
-                raise SystemExit(f"prompt mismatch: {platform} {tid}")
-            answer = resp.get("markdown") or ""
+            if platform == "claude":
+                path = (RAW / f"responses_{tag}_{platform}" / f"w{r['wave']}"
+                        / CLAUDE_COLLECTION_ARM / f"{r['item_id']}.json")
+                resp = json.loads(path.read_text())
+                if r.get("keyword_sha256") != hashlib.sha256(p["text"].encode()).hexdigest():
+                    raise SystemExit(f"prompt mismatch: {platform} {tid}")
+                answer = (resp.get("normalized") or {}).get("answer_text") or ""
+                run_date = r.get("run_date") or (r.get("submitted_at") or "")[:10]
+                model = (resp.get("normalized") or {}).get("model")
+            else:
+                path = RAW / f"responses_{tag}_{platform}" / f"w{r['wave']}" / f"{tid}.json"
+                if not path.exists():
+                    continue
+                resp = json.loads(path.read_text())
+                if (resp.get("keyword") or "").strip() != p["text"].strip():
+                    raise SystemExit(f"prompt mismatch: {platform} {tid}")
+                answer = resp.get("markdown") or ""
+                run_date = (resp.get("datetime") or "")[:10]
+                model = resp.get("model")
             found = b9.lexicon_extract(answer, patterns.get(p["category"], []))
+            dataset = "claude_api_b2b" if platform == "claude" else f"{platform}_b2b"
             out.append({
-                "task_id": f"{platform}_b2b|010|{platform}|{r['item_id']}|w{r['wave']}",
-                "dataset": f"{platform}_b2b", "source_exp": "010", "arm": platform,
+                "task_id": f"{dataset}|010|{platform}|{r['item_id']}|w{r['wave']}",
+                "dataset": dataset, "source_exp": "010", "arm": platform,
                 "item_id": r["item_id"], "category": p["category"], "split": tag,
-                "wave": int(r["wave"]), "run_date": (resp.get("datetime") or "")[:10],
-                "model": resp.get("model"),
-                "platform": "openai" if platform == "chatgpt" else "gemini",
+                "wave": int(r["wave"]), "run_date": run_date, "model": model,
+                "platform": {"chatgpt": "openai"}.get(platform, platform),
                 "question": p["text"], "answer": answer, "brands": found,
                 "tracked": [{"canonical": b,
                              "aliases": sorted(aliases.get((p["category"], b), set()))}
