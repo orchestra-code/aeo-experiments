@@ -1,0 +1,16 @@
+{
+  "sha256": "34db50c5f32291eb8866e59b69c8df50f721af62c49e1971f437ee3152c43e78",
+  "files": {
+    "src/services/mention-assessment-judge.ts": "94859488047d9709d8cc6d06b3dd27468f96f7a5f89799f12bc950bb05de5e20",
+    "src/config/utility-models.ts": "c1e9f576e536e564b381eca2b837baa390a9b1cfe2b37ed5f0bf0da8000488d3",
+    "src/types/recommendation-categories.ts": "9f9fbc8ac03e497a68985f997cb7851b3dff6e7a198afc6003cccddde7d3cb38",
+    "src/utils/brand-key.ts": "2ad58b22f530a5fb6d1dc8430f3ec7282612a46d886520a15262e4502d1383e4",
+    "src/utils/brand-mention-match.ts": "9ca49c6af5a272ebeae568f8c377a46fe670f7188fdd7b1880134475e406a23e",
+    "src/utils/brand-name-canonicalization.ts": "9970a80a505e37c379784ed2a28187aa98775c956bc8fe87e2957b4a2635077a",
+    "src/utils/phrase-normalize.ts": "6ea410819b254988d0953ff59cff730fd44eb9ed97f2c9fe6fa6bfc3a04bdaae"
+  },
+  "commit": "5e8f813ebb2d0f40cb363d8b6b3e6e0dfcc89dd3",
+  "model": "gpt-5.6-luna",
+  "reasoningEffort": "none",
+  "pinnedAt": "2026-10-03T14:41:38.281Z"
+}

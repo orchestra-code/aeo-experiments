@@ -24,8 +24,13 @@ Sources, read in place from the source experiments' gitignored raw data:
 Building holdout tasks needs ``--allow-holdout``: the holdout stays
 unclassified until a confirmatory spec is frozen.
 
+``--rejudge N`` writes ``tasks_explore_rejudge.jsonl``: a seeded sample of N
+exploration tasks, judged a second time to measure the judge's own
+test-retest agreement on identical text (the instrument's noise floor).
+
 Usage:
   uv run python experiments/010-shortlist-stability/harness/build_tasks.py
+  uv run python .../build_tasks.py --rejudge 200
   uv run python .../build_tasks.py --check   # verify split.csv, write nothing
 """
 
@@ -204,6 +209,8 @@ def main() -> None:
     ap.add_argument("--split", choices=["explore", "holdout", "all"], default="explore")
     ap.add_argument("--allow-holdout", action="store_true")
     ap.add_argument("--check", action="store_true", help="verify split.csv only")
+    ap.add_argument("--rejudge", type=int, default=0,
+                    help="also write a seeded sample of N exploration tasks to re-judge")
     args = ap.parse_args()
 
     rows = build_split()
@@ -238,6 +245,12 @@ def main() -> None:
     with out.open("w") as f:
         for t in tasks:
             f.write(json.dumps(t) + "\n")
+    if args.rejudge and args.split == "explore":
+        sample = sorted(tasks, key=lambda t: rank_key("rejudge:" + t["task_id"]))[:args.rejudge]
+        with (RAW / "tasks_explore_rejudge.jsonl").open("w") as f:
+            for t in sample:
+                f.write(json.dumps(t) + "\n")
+        print(f"wrote {len(sample)} re-judge tasks")
     by = {}
     for t in tasks:
         by[t["dataset"]] = by.get(t["dataset"], 0) + 1
