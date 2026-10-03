@@ -1,7 +1,8 @@
 # 010: Is the AI shortlist stable when rank is not? (design sketch)
 
-**Status:** sketch, NOT a spec, nothing frozen. Written 2026-10-03, before any
-answer was classified. This file fixes the exploration split, the metrics and
+**Status:** superseded by `spec.md` (the evaluation said go, 2026-10-03).
+Kept as the record of what was fixed before classification. Written
+2026-10-03, before any answer was classified. This file fixes the exploration split, the metrics and
 the go/no-go criteria for the initial evaluation; `spec.md` follows only if
 the evaluation says the study is worth running.
 

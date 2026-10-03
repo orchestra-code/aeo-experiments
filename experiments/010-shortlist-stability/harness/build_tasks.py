@@ -194,6 +194,62 @@ def claude_tasks(split: dict[tuple[str, str], str], wanted: set[str]) -> list[di
     return out
 
 
+COLLECTION_PLATFORMS = ("chatgpt", "gemini")
+
+
+def collection_tasks(tag: str) -> list[dict]:
+    """Judge tasks for 010's own B2B collection (ChatGPT and Gemini via DataForSEO).
+
+    One ledger and one response tree per platform: ``ledger_<tag>_<platform>.jsonl``
+    and ``responses_<tag>_<platform>/w<wave>/<task_id>.json``. Brands = 009's
+    frozen lexicon over the prompt's category rows (the lexicon protocol in
+    spec.md extends it before any confirmatory metric).
+    """
+    sys.path.insert(0, str(SRC_009 / "pipeline"))
+    b9 = _load(SRC_009 / "pipeline/brands.py", "exp009_brands")
+    patterns, _alias_map, _sha = b9.frozen_lexicon()
+    aliases = {}
+    for cat, rows in b9.lexicon_categories(b9.LEXICON).items():
+        for row in rows:
+            if row["decision"] == "keep":
+                aliases.setdefault((cat, row["canonical"]), set()).update(
+                    a.strip() for a in row["aliases"].split("|") if a.strip())
+    prompts = {p["item_id"]: p for p in read_csv(RAW / "prompts_b2b.csv")}
+    out = []
+    for platform in COLLECTION_PLATFORMS:
+        ledger = RAW / f"ledger_{tag}_{platform}.jsonl"
+        if not ledger.exists():
+            continue
+        recs = {}
+        for line in ledger.read_text().splitlines():
+            if line.strip():
+                r = json.loads(line)
+                recs.setdefault(r["task_id"], {}).update(r)
+        for tid, r in sorted(recs.items()):
+            path = RAW / f"responses_{tag}_{platform}" / f"w{r['wave']}" / f"{tid}.json"
+            if not path.exists():
+                continue
+            resp = json.loads(path.read_text())
+            p = prompts[r["item_id"]]
+            if (resp.get("keyword") or "").strip() != p["text"].strip():
+                raise SystemExit(f"prompt mismatch: {platform} {tid}")
+            answer = resp.get("markdown") or ""
+            found = b9.lexicon_extract(answer, patterns.get(p["category"], []))
+            out.append({
+                "task_id": f"{platform}_b2b|010|{platform}|{r['item_id']}|w{r['wave']}",
+                "dataset": f"{platform}_b2b", "source_exp": "010", "arm": platform,
+                "item_id": r["item_id"], "category": p["category"], "split": tag,
+                "wave": int(r["wave"]), "run_date": (resp.get("datetime") or "")[:10],
+                "model": resp.get("model"),
+                "platform": "openai" if platform == "chatgpt" else "gemini",
+                "question": p["text"], "answer": answer, "brands": found,
+                "tracked": [{"canonical": b,
+                             "aliases": sorted(aliases.get((p["category"], b), set()))}
+                            for b in found],
+            })
+    return out
+
+
 def claude_run_dates() -> dict[tuple[str, str, int], str]:
     """(arm, item, wave) -> run_date from 009's interim features."""
     out = {}
@@ -209,6 +265,8 @@ def main() -> None:
     ap.add_argument("--split", choices=["explore", "holdout", "all"], default="explore")
     ap.add_argument("--allow-holdout", action="store_true")
     ap.add_argument("--check", action="store_true", help="verify split.csv only")
+    ap.add_argument("--collection", default=None, metavar="TAG",
+                    help="build tasks for 010's own collection (smoke | main) instead")
     ap.add_argument("--rejudge", type=int, default=0,
                     help="also write a seeded sample of N exploration tasks to re-judge")
     args = ap.parse_args()
@@ -224,6 +282,14 @@ def main() -> None:
         write_split(rows)
     if args.check:
         print("split.csv matches the seeded split")
+        return
+    if args.collection:
+        tasks = collection_tasks(args.collection)
+        out = RAW / f"tasks_b2b_{args.collection}.jsonl"
+        with out.open("w") as f:
+            for t in tasks:
+                f.write(json.dumps(t) + "\n")
+        print(f"wrote {len(tasks)} tasks to {out.relative_to(EXP)}")
         return
 
     if args.split != "explore" and not args.allow_holdout:
