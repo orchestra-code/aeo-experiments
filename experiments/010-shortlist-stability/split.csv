@@ -1,0 +1,225 @@
+dataset,unit,item_id,split
+chatgpt_consumer,h001,h001,explore
+chatgpt_consumer,h002,h002,holdout
+chatgpt_consumer,h003,h003,explore
+chatgpt_consumer,h004,h004,holdout
+chatgpt_consumer,h005,h005,holdout
+chatgpt_consumer,h006,h006,holdout
+chatgpt_consumer,h007,h007,holdout
+chatgpt_consumer,h008,h008,explore
+chatgpt_consumer,h009,h009,holdout
+chatgpt_consumer,h010,h010,holdout
+chatgpt_consumer,h011,h011,holdout
+chatgpt_consumer,h012,h012,explore
+chatgpt_consumer,h013,h013,holdout
+chatgpt_consumer,h014,h014,holdout
+chatgpt_consumer,h015,h015,holdout
+chatgpt_consumer,h016,h016,holdout
+chatgpt_consumer,h017,h017,explore
+chatgpt_consumer,h018,h018,explore
+chatgpt_consumer,h019,h019,explore
+chatgpt_consumer,h020,h020,explore
+chatgpt_consumer,h021,h021,explore
+chatgpt_consumer,h022,h022,explore
+chatgpt_consumer,h023,h023,holdout
+chatgpt_consumer,h024,h024,holdout
+chatgpt_consumer,h025,h025,holdout
+chatgpt_consumer,h026,h026,explore
+chatgpt_consumer,h027,h027,holdout
+chatgpt_consumer,h028,h028,explore
+chatgpt_consumer,h029,h029,holdout
+chatgpt_consumer,h030,h030,holdout
+chatgpt_consumer,h031,h031,explore
+chatgpt_consumer,h032,h032,holdout
+chatgpt_consumer,h033,h033,explore
+chatgpt_consumer,h034,h034,holdout
+chatgpt_consumer,h035,h035,explore
+chatgpt_consumer,h036,h036,explore
+chatgpt_consumer,h037,h037,holdout
+chatgpt_consumer,h038,h038,holdout
+chatgpt_consumer,h039,h039,explore
+chatgpt_consumer,h040,h040,holdout
+chatgpt_consumer,h041,h041,holdout
+chatgpt_consumer,h042,h042,explore
+chatgpt_consumer,h043,h043,holdout
+chatgpt_consumer,h044,h044,explore
+chatgpt_consumer,h045,h045,holdout
+chatgpt_consumer,h046,h046,holdout
+chatgpt_consumer,h047,h047,holdout
+chatgpt_consumer,h048,h048,holdout
+chatgpt_consumer,h049,h049,holdout
+chatgpt_consumer,h050,h050,holdout
+chatgpt_consumer,h051,h051,holdout
+chatgpt_consumer,h052,h052,holdout
+chatgpt_consumer,h053,h053,holdout
+chatgpt_consumer,h054,h054,holdout
+chatgpt_consumer,h055,h055,holdout
+chatgpt_consumer,h056,h056,holdout
+chatgpt_consumer,h057,h057,explore
+chatgpt_consumer,h058,h058,holdout
+chatgpt_consumer,h059,h059,explore
+chatgpt_consumer,h060,h060,holdout
+chatgpt_consumer,h061,h061,holdout
+chatgpt_consumer,h062,h062,holdout
+chatgpt_consumer,h063,h063,holdout
+chatgpt_consumer,h064,h064,explore
+chatgpt_consumer,h065,h065,holdout
+chatgpt_consumer,h066,h066,holdout
+chatgpt_consumer,h067,h067,holdout
+chatgpt_consumer,h068,h068,holdout
+chatgpt_consumer,h069,h069,explore
+chatgpt_consumer,h070,h070,explore
+chatgpt_consumer,h071,h071,holdout
+chatgpt_consumer,h072,h072,explore
+chatgpt_consumer,h073,h073,holdout
+chatgpt_consumer,h074,h074,holdout
+chatgpt_consumer,h075,h075,holdout
+chatgpt_consumer,h076,h076,holdout
+chatgpt_consumer,h077,h077,holdout
+chatgpt_consumer,h078,h078,explore
+chatgpt_consumer,h079,h079,explore
+chatgpt_consumer,h080,h080,holdout
+chatgpt_consumer,h081,h081,explore
+chatgpt_consumer,h082,h082,holdout
+chatgpt_consumer,h083,h083,holdout
+chatgpt_consumer,h084,h084,explore
+chatgpt_consumer,h085,h085,holdout
+chatgpt_consumer,h086,h086,holdout
+chatgpt_consumer,h087,h087,holdout
+chatgpt_consumer,h088,h088,holdout
+chatgpt_consumer,h089,h089,holdout
+chatgpt_consumer,h090,h090,holdout
+chatgpt_consumer,h091,h091,holdout
+chatgpt_consumer,h092,h092,explore
+chatgpt_consumer,h093,h093,holdout
+chatgpt_consumer,h094,h094,explore
+chatgpt_consumer,h095,h095,explore
+chatgpt_consumer,h096,h096,holdout
+chatgpt_consumer,h097,h097,holdout
+chatgpt_consumer,h098,h098,holdout
+chatgpt_consumer,h099,h099,holdout
+chatgpt_consumer,h100,h100,holdout
+chatgpt_consumer,h101,h101,holdout
+chatgpt_consumer,h102,h102,explore
+chatgpt_consumer,h103,h103,holdout
+chatgpt_consumer,h104,h104,holdout
+chatgpt_consumer,h105,h105,holdout
+chatgpt_consumer,h106,h106,holdout
+chatgpt_consumer,h107,h107,holdout
+chatgpt_consumer,h108,h108,explore
+chatgpt_consumer,h109,h109,holdout
+chatgpt_consumer,h110,h110,holdout
+chatgpt_consumer,h111,h111,holdout
+chatgpt_consumer,h112,h112,explore
+chatgpt_consumer,h113,h113,explore
+chatgpt_consumer,h114,h114,holdout
+chatgpt_consumer,h115,h115,explore
+chatgpt_consumer,h116,h116,holdout
+chatgpt_consumer,h117,h117,explore
+chatgpt_consumer,h118,h118,holdout
+chatgpt_consumer,h119,h119,holdout
+chatgpt_consumer,h120,h120,explore
+chatgpt_consumer,h121,h121,holdout
+chatgpt_consumer,h122,h122,holdout
+chatgpt_consumer,h123,h123,explore
+chatgpt_consumer,h124,h124,holdout
+chatgpt_consumer,h125,h125,holdout
+chatgpt_consumer,h126,h126,explore
+chatgpt_consumer,h127,h127,holdout
+chatgpt_consumer,h128,h128,holdout
+chatgpt_consumer,h129,h129,holdout
+chatgpt_consumer,h130,h130,holdout
+chatgpt_consumer,h131,h131,holdout
+chatgpt_consumer,h132,h132,explore
+chatgpt_consumer,h133,h133,holdout
+chatgpt_consumer,h134,h134,holdout
+chatgpt_consumer,h135,h135,explore
+chatgpt_consumer,h136,h136,explore
+chatgpt_consumer,h137,h137,holdout
+chatgpt_consumer,h138,h138,explore
+chatgpt_consumer,h139,h139,holdout
+chatgpt_consumer,h140,h140,explore
+chatgpt_consumer,h141,h141,holdout
+chatgpt_consumer,h142,h142,holdout
+chatgpt_consumer,h143,h143,explore
+chatgpt_consumer,h144,h144,explore
+chatgpt_agency,c001,c001,holdout
+chatgpt_agency,c002,c002,holdout
+chatgpt_agency,c003,c003,explore
+chatgpt_agency,c004,c004,holdout
+chatgpt_agency,c005,c005,holdout
+chatgpt_agency,c006,c006,explore
+chatgpt_agency,c007,c007,holdout
+chatgpt_agency,c008,c008,holdout
+chatgpt_agency,c009,c009,explore
+chatgpt_agency,c010,c010,holdout
+chatgpt_agency,c011,c011,holdout
+chatgpt_agency,c012,c012,holdout
+chatgpt_agency,c013,c013,holdout
+chatgpt_agency,c014,c014,explore
+chatgpt_agency,c015,c015,holdout
+chatgpt_agency,c016,c016,explore
+chatgpt_agency,c017,c017,holdout
+chatgpt_agency,c018,c018,holdout
+chatgpt_agency,c019,c019,holdout
+chatgpt_agency,c020,c020,explore
+chatgpt_agency,c021,c021,explore
+chatgpt_agency,c022,c022,holdout
+chatgpt_agency,c023,c023,holdout
+chatgpt_agency,c024,c024,explore
+chatgpt_agency,c025,c025,holdout
+chatgpt_agency,c026,c026,holdout
+chatgpt_agency,c027,c027,holdout
+chatgpt_agency,c028,c028,holdout
+chatgpt_agency,c029,c029,holdout
+chatgpt_agency,c030,c030,holdout
+chatgpt_agency,c031,c031,explore
+chatgpt_agency,c032,c032,holdout
+chatgpt_agency,c033,c033,holdout
+chatgpt_agency,c034,c034,holdout
+chatgpt_agency,c035,c035,explore
+chatgpt_agency,c036,c036,holdout
+chatgpt_agency,c037,c037,explore
+chatgpt_agency,c038,c038,explore
+chatgpt_agency,c039,c039,explore
+chatgpt_agency,c040,c040,holdout
+claude_b2b,CRM,b2b_01,explore
+claude_b2b,CRM,b2b_02,explore
+claude_b2b,marketing automation,b2b_03,explore
+claude_b2b,marketing automation,b2b_04,explore
+claude_b2b,customer support helpdesk,b2b_05,holdout
+claude_b2b,customer support helpdesk,b2b_06,holdout
+claude_b2b,HRIS,b2b_07,holdout
+claude_b2b,HRIS,b2b_08,holdout
+claude_b2b,payroll,b2b_09,holdout
+claude_b2b,payroll,b2b_10,holdout
+claude_b2b,expense management,b2b_11,holdout
+claude_b2b,expense management,b2b_12,holdout
+claude_b2b,accounts payable automation,b2b_13,holdout
+claude_b2b,accounts payable automation,b2b_14,holdout
+claude_b2b,mid-market ERP,b2b_15,holdout
+claude_b2b,mid-market ERP,b2b_16,holdout
+claude_b2b,cloud data warehouse,b2b_17,explore
+claude_b2b,cloud data warehouse,b2b_18,explore
+claude_b2b,product analytics,b2b_19,explore
+claude_b2b,product analytics,b2b_20,explore
+claude_b2b,observability/APM,b2b_21,holdout
+claude_b2b,observability/APM,b2b_22,holdout
+claude_b2b,SOC 2 compliance automation,b2b_23,explore
+claude_b2b,SOC 2 compliance automation,b2b_24,explore
+claude_b2b,endpoint security (EDR),b2b_25,holdout
+claude_b2b,endpoint security (EDR),b2b_26,holdout
+claude_b2b,identity and SSO,b2b_27,holdout
+claude_b2b,identity and SSO,b2b_28,holdout
+claude_b2b,project management,b2b_29,holdout
+claude_b2b,project management,b2b_30,holdout
+claude_b2b,e-signature,b2b_31,explore
+claude_b2b,e-signature,b2b_32,explore
+claude_b2b,contract lifecycle management,b2b_33,holdout
+claude_b2b,contract lifecycle management,b2b_34,holdout
+claude_b2b,sales engagement,b2b_35,explore
+claude_b2b,sales engagement,b2b_36,explore
+claude_b2b,CPQ,b2b_37,holdout
+claude_b2b,CPQ,b2b_38,holdout
+claude_b2b,applicant tracking system,b2b_39,holdout
+claude_b2b,applicant tracking system,b2b_40,holdout
