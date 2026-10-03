@@ -24,8 +24,8 @@ Sources, read in place from the source experiments' gitignored raw data:
 Building holdout tasks needs ``--allow-holdout``: the holdout stays
 unclassified until a confirmatory spec is frozen.
 
-``--rejudge N`` writes ``tasks_explore_rejudge.jsonl``: a seeded sample of N
-exploration tasks, judged a second time to measure the judge's own
+``--rejudge N`` writes ``tasks_<split>_rejudge.jsonl``: a seeded sample of N
+of the split's tasks, judged a second time to measure the judge's own
 test-retest agreement on identical text (the instrument's noise floor).
 
 Usage:
@@ -78,6 +78,13 @@ def rank_key(unit: str) -> str:
 
 def pick(units: list[str], n: int) -> set[str]:
     return set(sorted(units, key=rank_key)[:n])
+
+
+def same_prompt(sent: str, text: str) -> bool:
+    """DataForSEO decodes "+" in a keyword as a space (seen on 3 agency prompts
+    in 002 to 005; spec deviation 1), so that one substitution is allowed."""
+    sent, text = sent.strip(), text.strip()
+    return sent == text or sent == text.replace("+", " ")
 
 
 def read_csv(path: Path) -> list[dict]:
@@ -140,7 +147,7 @@ def chatgpt_tasks(split: dict[tuple[str, str], str], wanted: set[str]) -> list[d
             raw = json.loads((src / "data/raw/responses" / f"w{wave}" /
                               f"{r['task_id']}.json").read_text())
             answer = raw.get("markdown") or ""
-            if raw.get("keyword", "").strip() != texts[r["item_id"]].strip():
+            if not same_prompt(raw.get("keyword", ""), texts[r["item_id"]]):
                 raise SystemExit(f"prompt mismatch: {exp} {r['task_id']}")
             found = brands.extract_brands(answer, intent)
             lex = brands.LEXICONS[intent]
@@ -246,7 +253,7 @@ def collection_tasks(tag: str) -> list[dict]:
                 if not path.exists():
                     continue
                 resp = json.loads(path.read_text())
-                if (resp.get("keyword") or "").strip() != p["text"].strip():
+                if not same_prompt(resp.get("keyword") or "", p["text"]):
                     raise SystemExit(f"prompt mismatch: {platform} {tid}")
                 answer = resp.get("markdown") or ""
                 run_date = (resp.get("datetime") or "")[:10]
@@ -328,9 +335,9 @@ def main() -> None:
     with out.open("w") as f:
         for t in tasks:
             f.write(json.dumps(t) + "\n")
-    if args.rejudge and args.split == "explore":
+    if args.rejudge:
         sample = sorted(tasks, key=lambda t: rank_key("rejudge:" + t["task_id"]))[:args.rejudge]
-        with (RAW / "tasks_explore_rejudge.jsonl").open("w") as f:
+        with (RAW / f"tasks_{args.split}_rejudge.jsonl").open("w") as f:
             for t in sample:
                 f.write(json.dumps(t) + "\n")
         print(f"wrote {len(sample)} re-judge tasks")

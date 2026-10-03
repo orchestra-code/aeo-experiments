@@ -495,4 +495,12 @@ All checks run at both stages except R7 (Stage 2 only).
 
 ## Deviations from the frozen spec
 
-(none yet)
+1. **Prompt check in `build_tasks.py` (2026-10-03, before any holdout answer
+   was classified).** The harness refuses an answer whose recorded keyword
+   differs from the prompt file. Building the holdout tasks stopped on 5
+   answers: DataForSEO had decoded a "+" in the keyword as a space (agency
+   prompts c005, c113, c119; only c005 is in `chatgpt_agency`, mangled the
+   same way in all three studies, so its run-to-run comparisons are
+   unaffected). The check now allows exactly that substitution. None of the
+   40 B2B prompts contains "+" or another URL-special character, so the new
+   collection is unaffected. No metric had been computed.
