@@ -1,7 +1,7 @@
 # Being shortlisted by AI is stable when rank is not: study spec
 
 **Status:** FROZEN
-**Frozen commit:** (recorded in the next commit)
+**Frozen commit:** `6342963`
 **Frozen date / seed:** 2026-10-03 / 20261003
 **Experiment slug:** `010-shortlist-stability`
 
