@@ -9,6 +9,8 @@ run any number of times per day:
   not yet submitted, submit it on BOTH platforms (40 prompts each), wait for
   the priority queue, collect. A wave submitted after its scheduled date is
   logged as LATE (a spec deviation to record);
+- once wave 7 is fully collected on both platforms: notify that Stage 1
+  (run to run) data are complete;
 - once wave 11 is fully collected on both platforms: notify, delete the
   plist, boot the job out.
 
@@ -45,6 +47,7 @@ LABEL = "io.spyglasses.aeo-exp010"
 PLIST = Path.home() / "Library" / "LaunchAgents" / f"{LABEL}.plist"
 PLATFORMS = ("chatgpt", "gemini")
 TAG = "main"
+STAGE1_FINAL_WAVE = 7
 QUEUE_WAIT_S = 420
 WAVE_DAY_OFFSETS = (0, 1, 2, 3, 4, 5, 6, 13, 20, 27, 34)
 MAX_TASKS_PER_LEDGER = 40 * len(WAVE_DAY_OFFSETS) + 40  # one wave of headroom for retries
@@ -164,6 +167,8 @@ def main() -> None:
     msg = f"Wave {nxt}/{final} {'collected' if ok else 'incomplete, will resweep'}"
     log(msg + (" (LATE)" if late else ""))
     notify(msg)
+    if nxt == STAGE1_FINAL_WAVE and ok:
+        notify("Stage 1 data complete (waves 1 to 7). Ready for the run-to-run analysis.")
     if nxt == final and ok:
         self_destruct()
 
