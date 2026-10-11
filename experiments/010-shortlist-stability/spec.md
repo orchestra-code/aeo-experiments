@@ -504,3 +504,37 @@ All checks run at both stages except R7 (Stage 2 only).
    unaffected). The check now allows exactly that substitution. None of the
    40 B2B prompts contains "+" or another URL-special character, so the new
    collection is unaffected. No metric had been computed.
+2. **One late task (2026-10-09).** One ChatGPT task of wave 6 failed on its
+   scheduled evening (Oct 8) and was resubmitted by the driver the next
+   evening, so it ran a day late. It stays in the analysis with its true run
+   date, as §"Data, arms and collection" provides. Related note on dates: a
+   DataForSEO answer's run date is its `datetime` field, which is UTC, so
+   ChatGPT and Gemini answers submitted at 20:00 local time carry the next
+   day's date; a Claude answer's run date is its local batch submission date.
+   Lags within a platform are unaffected, and cross-platform comparisons pair
+   answers by wave.
+3. **Audit D sample (2026-10-11, before any metric on new answers).** §2 says
+   30 answers, "15 per platform", written when the collection had two
+   platforms; Claude was added before freeze without updating it. The sheet
+   keeps 30 answers: 10 per platform (ChatGPT, Gemini, Claude API) from waves
+   1 and 2, seeded and platform-blind (`harness/audit_d.py`). Thresholds
+   unchanged. Approved by Jim.
+4. **Placebo split (2026-10-11, before any metric on new answers).** §4's
+   H_pla splits prompts into odd and even numbers. In the 009 panel every
+   odd-numbered prompt is a "shortlist" prompt and every even-numbered one an
+   "evaluate" prompt, so that split tests intent (robustness R8), not chance.
+   H_pla now splits the prompts at random within each intent stratum, in the
+   seeded order sha256("20261003:placebo:<item_id>"), half to each side.
+   Band and decision rule unchanged. Stage 2's H_pla uses the same halves.
+   Approved by Jim.
+5. **STOP 2 ran late (2026-10-11).** The lexicon v3 candidates, the curation
+   and the B2B taxonomies were built after wave 7 was collected rather than
+   after wave 2. They used only what the protocol allows: the judge's output
+   on waves 1 and 2 (judged with lexicon v2.1 to list untracked names) and
+   the 009 Claude answers' best-for phrases. No retention or other
+   confirmatory metric has been computed on the new collection or the
+   holdout. The taxonomy phrase pool uses the best-for phrases of every brand
+   the judge recommends, not only lexicon brands, so it does not depend on
+   lexicon v3. The judge ran from a spyglasses worktree at the pinned commit
+   `5e8f813` because the judge files have since changed on another branch;
+   the runner's hash check passed.

@@ -1,0 +1,1830 @@
+{
+ "R1": [
+  {
+   "dataset": "claude_b2b",
+   "answers": 42,
+   "R_within": [
+    0.7142857142857143,
+    0.6344045899534585,
+    0.7907881730792992
+   ],
+   "tests": [
+    {
+     "test": "H1",
+     "kind": "margin",
+     "estimate": 0.5086253369272238,
+     "lo": 0.4246340614098797,
+     "hi": 0.5814137931712093,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.1,
+     "verdict": "SUPPORTED",
+     "label": "Supported: more stable by more than 0.10",
+     "n_draws": 2000,
+     "dataset": "claude_b2b",
+     "label_short": "shortlist minus exact position",
+     "n_pairs": 42
+    },
+    {
+     "test": "H2",
+     "kind": "margin",
+     "estimate": 0.2142857142857143,
+     "lo": 0.0505870257644913,
+     "hi": 0.4305645491219621,
+     "ci_level": 0.9,
+     "p": 0.129,
+     "threshold": 0.1,
+     "verdict": "SMALLER",
+     "label": "More stable, possibly by less than 0.10",
+     "n_draws": 2000,
+     "dataset": "claude_b2b",
+     "label_short": "shortlist minus top choice",
+     "n_pairs": 42
+    },
+    {
+     "test": "H3",
+     "kind": "nonsup",
+     "estimate": -0.23809523809523814,
+     "lo": -0.4523809523809524,
+     "hi": -0.059523809523809534,
+     "ci_level": 0.9,
+     "p": 0.001,
+     "threshold": 0.1,
+     "verdict": "SUPPORTED",
+     "label": "Supported",
+     "n_draws": 2000,
+     "dataset": "claude_b2b",
+     "label_short": "top choice minus rank 1",
+     "n_pairs": 42
+    },
+    {
+     "test": "H4",
+     "kind": "level",
+     "estimate": 0.9791666666666666,
+     "lo": 0.9318181818181818,
+     "hi": 1.0,
+     "ci_level": 0.9,
+     "p": 0.0105,
+     "threshold": 0.9,
+     "verdict": "SUPPORTED",
+     "label": "Supported",
+     "n_draws": 2000,
+     "dataset": "claude_b2b",
+     "label_short": "top choice stays recommended",
+     "n_pairs": 42
+    },
+    {
+     "test": "H6",
+     "kind": "equiv",
+     "estimate": 0.06334231805929924,
+     "lo": 0.012803546364488688,
+     "hi": 0.12359461884568101,
+     "ci_level": 0.9,
+     "p": 0.635,
+     "threshold": 0.05,
+     "verdict": "REAL",
+     "label": "Real change: report it",
+     "n_draws": 2000,
+     "dataset": "claude_b2b",
+     "label_short": "shortlist minus mentioned",
+     "n_pairs": 42
+    }
+   ]
+  },
+  {
+   "dataset": "chatgpt_consumer",
+   "answers": 816,
+   "R_within": [
+    0.8136350104197678,
+    0.7912461497549718,
+    0.8356534172258362
+   ],
+   "tests": [
+    {
+     "test": "H1",
+     "kind": "margin",
+     "estimate": 0.368106289793136,
+     "lo": 0.32806573572221165,
+     "hi": 0.4043531217989978,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.1,
+     "verdict": "SUPPORTED",
+     "label": "Supported: more stable by more than 0.10",
+     "n_draws": 2000,
+     "dataset": "chatgpt_consumer",
+     "label_short": "shortlist minus exact position",
+     "n_pairs": 6528
+    },
+    {
+     "test": "H2",
+     "kind": "margin",
+     "estimate": 0.13497177134521765,
+     "lo": 0.08806475672786244,
+     "hi": 0.17870669522375787,
+     "ci_level": 0.9,
+     "p": 0.1165,
+     "threshold": 0.1,
+     "verdict": "SMALLER",
+     "label": "More stable, possibly by less than 0.10",
+     "n_draws": 2000,
+     "dataset": "chatgpt_consumer",
+     "label_short": "shortlist minus top choice",
+     "n_pairs": 6528
+    },
+    {
+     "test": "H3",
+     "kind": "nonsup",
+     "estimate": 0.02426072335127971,
+     "lo": 0.0020834152178634048,
+     "hi": 0.047198163754437486,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.1,
+     "verdict": "SUPPORTED",
+     "label": "Supported",
+     "n_draws": 2000,
+     "dataset": "chatgpt_consumer",
+     "label_short": "top choice minus rank 1",
+     "n_pairs": 6528
+    },
+    {
+     "test": "H4",
+     "kind": "level",
+     "estimate": 0.9564588688946015,
+     "lo": 0.9410313938617856,
+     "hi": 0.971381488082196,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.9,
+     "verdict": "SUPPORTED",
+     "label": "Supported",
+     "n_draws": 2000,
+     "dataset": "chatgpt_consumer",
+     "label_short": "top choice stays recommended",
+     "n_pairs": 6528
+    },
+    {
+     "test": "H6",
+     "kind": "equiv",
+     "estimate": 0.03093266055031607,
+     "lo": 0.013928155928336738,
+     "hi": 0.04837199419799471,
+     "ci_level": 0.9,
+     "p": 0.0395,
+     "threshold": 0.05,
+     "verdict": "NEGLIGIBLE",
+     "label": "Detectable but negligible",
+     "n_draws": 2000,
+     "dataset": "chatgpt_consumer",
+     "label_short": "shortlist minus mentioned",
+     "n_pairs": 6528
+    }
+   ]
+  },
+  {
+   "dataset": "chatgpt_agency",
+   "answers": 39,
+   "R_within": [
+    0.2217573221757322,
+    0.1464720027481965,
+    0.3017567567567567
+   ],
+   "tests": [
+    {
+     "test": "H1",
+     "kind": "margin",
+     "estimate": 0.18970604012445016,
+     "lo": 0.13163260425935536,
+     "hi": 0.2437888975144346,
+     "ci_level": 0.9,
+     "p": 0.008,
+     "threshold": 0.1,
+     "verdict": "SUPPORTED",
+     "label": "Supported: more stable by more than 0.10",
+     "n_draws": 2000,
+     "dataset": "chatgpt_agency",
+     "label_short": "shortlist minus exact position",
+     "n_pairs": 39
+    },
+    {
+     "test": "H2",
+     "kind": "margin",
+     "estimate": 0.2217573221757322,
+     "lo": 0.1464720027481965,
+     "hi": 0.3017567567567567,
+     "ci_level": 0.9,
+     "p": 0.0045,
+     "threshold": 0.1,
+     "verdict": "SUPPORTED",
+     "label": "Supported: more stable by more than 0.10",
+     "n_draws": 2000,
+     "dataset": "chatgpt_agency",
+     "label_short": "shortlist minus top choice",
+     "n_pairs": 39
+    },
+    {
+     "test": "H3",
+     "kind": "nonsup",
+     "estimate": -0.11428571428571428,
+     "lo": -0.2702702702702703,
+     "hi": 0.0,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.1,
+     "verdict": "SUPPORTED",
+     "label": "Supported",
+     "n_draws": 2000,
+     "dataset": "chatgpt_agency",
+     "label_short": "top choice minus rank 1",
+     "n_pairs": 39
+    },
+    {
+     "test": "H4",
+     "kind": "level",
+     "estimate": 0.2916666666666667,
+     "lo": 0.125,
+     "hi": 0.45,
+     "ci_level": 0.9,
+     "p": 1.0,
+     "threshold": 0.9,
+     "verdict": "NOT_SUPPORTED",
+     "label": "Not supported",
+     "n_draws": 2000,
+     "dataset": "chatgpt_agency",
+     "label_short": "top choice stays recommended",
+     "n_pairs": 39
+    },
+    {
+     "test": "H6",
+     "kind": "equiv",
+     "estimate": 0.0262445016629117,
+     "lo": 0.005128129846274294,
+     "hi": 0.04959510415050913,
+     "ci_level": 0.9,
+     "p": 0.049,
+     "threshold": 0.05,
+     "verdict": "NEGLIGIBLE",
+     "label": "Detectable but negligible",
+     "n_draws": 2000,
+     "dataset": "chatgpt_agency",
+     "label_short": "shortlist minus mentioned",
+     "n_pairs": 39
+    }
+   ]
+  }
+ ],
+ "R2": [
+  {
+   "dataset": "claude_b2b",
+   "answers": 42,
+   "R_within": [
+    0.7760617760617761,
+    0.6784139135106098,
+    0.8588931988225194
+   ],
+   "tests": [
+    {
+     "test": "H1",
+     "kind": "margin",
+     "estimate": 0.4193951093951094,
+     "lo": 0.3504630306189067,
+     "hi": 0.4869335232529969,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.1,
+     "verdict": "SUPPORTED",
+     "label": "Supported: more stable by more than 0.10",
+     "n_draws": 2000,
+     "dataset": "claude_b2b",
+     "label_short": "shortlist minus exact position",
+     "n_pairs": 42
+    },
+    {
+     "test": "H2",
+     "kind": "margin",
+     "estimate": 0.27606177606177607,
+     "lo": 0.11294437987351373,
+     "hi": 0.4861559676612999,
+     "ci_level": 0.9,
+     "p": 0.0395,
+     "threshold": 0.1,
+     "verdict": "SUPPORTED",
+     "label": "Supported: more stable by more than 0.10",
+     "n_draws": 2000,
+     "dataset": "claude_b2b",
+     "label_short": "shortlist minus top choice",
+     "n_pairs": 42
+    },
+    {
+     "test": "H3",
+     "kind": "nonsup",
+     "estimate": -0.30952380952380953,
+     "lo": -0.5071428571428571,
+     "hi": -0.1490649836372137,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.1,
+     "verdict": "SUPPORTED",
+     "label": "Supported",
+     "n_draws": 2000,
+     "dataset": "claude_b2b",
+     "label_short": "top choice minus rank 1",
+     "n_pairs": 42
+    },
+    {
+     "test": "H4",
+     "kind": "level",
+     "estimate": 0.9791666666666666,
+     "lo": 0.9318181818181818,
+     "hi": 1.0,
+     "ci_level": 0.9,
+     "p": 0.0105,
+     "threshold": 0.9,
+     "verdict": "SUPPORTED",
+     "label": "Supported",
+     "n_draws": 2000,
+     "dataset": "claude_b2b",
+     "label_short": "top choice stays recommended",
+     "n_pairs": 42
+    },
+    {
+     "test": "H6",
+     "kind": "equiv",
+     "estimate": 0.009395109395109347,
+     "lo": -0.016311976811803287,
+     "hi": 0.03356311298244937,
+     "ci_level": 0.9,
+     "p": 0.003,
+     "threshold": 0.05,
+     "verdict": "NULL",
+     "label": "Practically equivalent (null)",
+     "n_draws": 2000,
+     "dataset": "claude_b2b",
+     "label_short": "shortlist minus mentioned",
+     "n_pairs": 42
+    },
+    {
+     "test": "H7",
+     "kind": "margin",
+     "estimate": 0.3019685118130714,
+     "lo": 0.2197214081095744,
+     "hi": 0.3865802868819368,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.1,
+     "verdict": "SUPPORTED",
+     "label": "Supported: more stable by more than 0.10",
+     "n_draws": 2000,
+     "dataset": "claude_b2b",
+     "label_short": "shortlist minus best-for use case",
+     "n_pairs": 42
+    }
+   ]
+  },
+  {
+   "dataset": "chatgpt_consumer",
+   "answers": 781,
+   "R_within": [
+    0.827646763672855,
+    0.8086941414912647,
+    0.8451239220146117
+   ],
+   "tests": [
+    {
+     "test": "H1",
+     "kind": "margin",
+     "estimate": 0.3221172863874703,
+     "lo": 0.2839102862747633,
+     "hi": 0.3589702314720613,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.1,
+     "verdict": "SUPPORTED",
+     "label": "Supported: more stable by more than 0.10",
+     "n_draws": 2000,
+     "dataset": "chatgpt_consumer",
+     "label_short": "shortlist minus exact position",
+     "n_pairs": 5970
+    },
+    {
+     "test": "H2",
+     "kind": "margin",
+     "estimate": 0.13871664617130885,
+     "lo": 0.08820143788754573,
+     "hi": 0.1850944593038988,
+     "ci_level": 0.9,
+     "p": 0.1065,
+     "threshold": 0.1,
+     "verdict": "SMALLER",
+     "label": "More stable, possibly by less than 0.10",
+     "n_draws": 2000,
+     "dataset": "chatgpt_consumer",
+     "label_short": "shortlist minus top choice",
+     "n_pairs": 5970
+    },
+    {
+     "test": "H3",
+     "kind": "nonsup",
+     "estimate": 0.0026625118677432447,
+     "lo": -0.02787084332160371,
+     "hi": 0.03278058536293915,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.1,
+     "verdict": "SUPPORTED",
+     "label": "Supported",
+     "n_draws": 2000,
+     "dataset": "chatgpt_consumer",
+     "label_short": "top choice minus rank 1",
+     "n_pairs": 5970
+    },
+    {
+     "test": "H4",
+     "kind": "level",
+     "estimate": 0.9581235091439173,
+     "lo": 0.9427313144476566,
+     "hi": 0.9729917752285923,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.9,
+     "verdict": "SUPPORTED",
+     "label": "Supported",
+     "n_draws": 2000,
+     "dataset": "chatgpt_consumer",
+     "label_short": "top choice stays recommended",
+     "n_pairs": 5970
+    },
+    {
+     "test": "H6",
+     "kind": "equiv",
+     "estimate": -0.007463428068731459,
+     "lo": -0.015194518246804045,
+     "hi": 0.0003771736963863735,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.05,
+     "verdict": "NULL",
+     "label": "Practically equivalent (null)",
+     "n_draws": 2000,
+     "dataset": "chatgpt_consumer",
+     "label_short": "shortlist minus mentioned",
+     "n_pairs": 5970
+    },
+    {
+     "test": "H7",
+     "kind": "margin",
+     "estimate": 0.2605251306253854,
+     "lo": 0.24218490910232368,
+     "hi": 0.27731450612328246,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.1,
+     "verdict": "SUPPORTED",
+     "label": "Supported: more stable by more than 0.10",
+     "n_draws": 2000,
+     "dataset": "chatgpt_consumer",
+     "label_short": "shortlist minus best-for use case",
+     "n_pairs": 5970
+    }
+   ]
+  },
+  {
+   "dataset": "chatgpt_agency",
+   "answers": 38,
+   "R_within": [
+    0.4074074074074074,
+    0.313918464555898,
+    0.5
+   ],
+   "tests": [
+    {
+     "test": "H1",
+     "kind": "margin",
+     "estimate": 0.34074074074074073,
+     "lo": 0.2526896478612738,
+     "hi": 0.42401212121212123,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.1,
+     "verdict": "SUPPORTED",
+     "label": "Supported: more stable by more than 0.10",
+     "n_draws": 2000,
+     "dataset": "chatgpt_agency",
+     "label_short": "shortlist minus exact position",
+     "n_pairs": 37
+    },
+    {
+     "test": "H2",
+     "kind": "margin",
+     "estimate": 0.4074074074074074,
+     "lo": 0.31669966996699667,
+     "hi": 0.5,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.1,
+     "verdict": "SUPPORTED",
+     "label": "Supported: more stable by more than 0.10",
+     "n_draws": 1985,
+     "dataset": "chatgpt_agency",
+     "label_short": "shortlist minus top choice",
+     "n_pairs": 37
+    },
+    {
+     "test": "H3",
+     "kind": "nonsup",
+     "estimate": -0.23076923076923078,
+     "lo": -0.42857142857142855,
+     "hi": -0.06896551724137931,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.1,
+     "verdict": "SUPPORTED",
+     "label": "Supported",
+     "n_draws": 1985,
+     "dataset": "chatgpt_agency",
+     "label_short": "top choice minus rank 1",
+     "n_pairs": 37
+    },
+    {
+     "test": "H4",
+     "kind": "level",
+     "estimate": 0.42857142857142855,
+     "lo": 0.3125,
+     "hi": 0.5,
+     "ci_level": 0.9,
+     "p": 1.0,
+     "threshold": 0.9,
+     "verdict": "NOT_SUPPORTED",
+     "label": "Not supported",
+     "n_draws": 1985,
+     "dataset": "chatgpt_agency",
+     "label_short": "top choice stays recommended",
+     "n_pairs": 37
+    },
+    {
+     "test": "H6",
+     "kind": "equiv",
+     "estimate": 0.015740740740740722,
+     "lo": -0.0135474748544826,
+     "hi": 0.052890303736255924,
+     "ci_level": 0.9,
+     "p": 0.0625,
+     "threshold": 0.05,
+     "verdict": "INCONCLUSIVE",
+     "label": "Inconclusive: do not claim a null",
+     "n_draws": 2000,
+     "dataset": "chatgpt_agency",
+     "label_short": "shortlist minus mentioned",
+     "n_pairs": 37
+    },
+    {
+     "test": "H7",
+     "kind": "margin",
+     "estimate": 0.1931216931216931,
+     "lo": 0.11723456339334917,
+     "hi": 0.27976107688897744,
+     "ci_level": 0.9,
+     "p": 0.008,
+     "threshold": 0.1,
+     "verdict": "SUPPORTED",
+     "label": "Supported: more stable by more than 0.10",
+     "n_draws": 2000,
+     "dataset": "chatgpt_agency",
+     "label_short": "shortlist minus best-for use case",
+     "n_pairs": 37
+    }
+   ]
+  }
+ ],
+ "R3": [
+  {
+   "dataset": "claude_b2b",
+   "answers": 42,
+   "R_within": [
+    0.7760617760617761,
+    0.6784139135106098,
+    0.8588931988225194
+   ],
+   "tests": [
+    {
+     "test": "H1",
+     "kind": "margin",
+     "estimate": 0.4193951093951094,
+     "lo": 0.3504630306189067,
+     "hi": 0.4869335232529969,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.1,
+     "verdict": "SUPPORTED",
+     "label": "Supported: more stable by more than 0.10",
+     "n_draws": 2000,
+     "dataset": "claude_b2b",
+     "label_short": "shortlist minus exact position",
+     "n_pairs": 42
+    },
+    {
+     "test": "H2",
+     "kind": "margin",
+     "estimate": 0.27606177606177607,
+     "lo": 0.11294437987351373,
+     "hi": 0.4861559676612999,
+     "ci_level": 0.9,
+     "p": 0.0395,
+     "threshold": 0.1,
+     "verdict": "SUPPORTED",
+     "label": "Supported: more stable by more than 0.10",
+     "n_draws": 2000,
+     "dataset": "claude_b2b",
+     "label_short": "shortlist minus top choice",
+     "n_pairs": 42
+    },
+    {
+     "test": "H3",
+     "kind": "nonsup",
+     "estimate": -0.30952380952380953,
+     "lo": -0.5071428571428571,
+     "hi": -0.1490649836372137,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.1,
+     "verdict": "SUPPORTED",
+     "label": "Supported",
+     "n_draws": 2000,
+     "dataset": "claude_b2b",
+     "label_short": "top choice minus rank 1",
+     "n_pairs": 42
+    },
+    {
+     "test": "H4",
+     "kind": "level",
+     "estimate": 0.9791666666666666,
+     "lo": 0.9318181818181818,
+     "hi": 1.0,
+     "ci_level": 0.9,
+     "p": 0.0105,
+     "threshold": 0.9,
+     "verdict": "SUPPORTED",
+     "label": "Supported",
+     "n_draws": 2000,
+     "dataset": "claude_b2b",
+     "label_short": "top choice stays recommended",
+     "n_pairs": 42
+    },
+    {
+     "test": "H6",
+     "kind": "equiv",
+     "estimate": 0.009395109395109347,
+     "lo": -0.016311976811803287,
+     "hi": 0.03356311298244937,
+     "ci_level": 0.9,
+     "p": 0.003,
+     "threshold": 0.05,
+     "verdict": "NULL",
+     "label": "Practically equivalent (null)",
+     "n_draws": 2000,
+     "dataset": "claude_b2b",
+     "label_short": "shortlist minus mentioned",
+     "n_pairs": 42
+    },
+    {
+     "test": "H7",
+     "kind": "margin",
+     "estimate": 0.3019685118130714,
+     "lo": 0.2197214081095744,
+     "hi": 0.3865802868819368,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.1,
+     "verdict": "SUPPORTED",
+     "label": "Supported: more stable by more than 0.10",
+     "n_draws": 2000,
+     "dataset": "claude_b2b",
+     "label_short": "shortlist minus best-for use case",
+     "n_pairs": 42
+    }
+   ]
+  },
+  {
+   "dataset": "chatgpt_consumer",
+   "answers": 776,
+   "R_within": [
+    0.842334207204583,
+    0.828971796853708,
+    0.8554845329738782
+   ],
+   "tests": [
+    {
+     "test": "H1",
+     "kind": "margin",
+     "estimate": 0.3302547562198148,
+     "lo": 0.2901576935901096,
+     "hi": 0.3685978717641742,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.1,
+     "verdict": "SUPPORTED",
+     "label": "Supported: more stable by more than 0.10",
+     "n_draws": 2000,
+     "dataset": "chatgpt_consumer",
+     "label_short": "shortlist minus exact position",
+     "n_pairs": 6064
+    },
+    {
+     "test": "H2",
+     "kind": "margin",
+     "estimate": 0.1550579299510848,
+     "lo": 0.10620094372880975,
+     "hi": 0.1997653379734457,
+     "ci_level": 0.9,
+     "p": 0.031,
+     "threshold": 0.1,
+     "verdict": "SUPPORTED",
+     "label": "Supported: more stable by more than 0.10",
+     "n_draws": 2000,
+     "dataset": "chatgpt_consumer",
+     "label_short": "shortlist minus top choice",
+     "n_pairs": 6064
+    },
+    {
+     "test": "H3",
+     "kind": "nonsup",
+     "estimate": -0.006160398208243212,
+     "lo": -0.03609345740583715,
+     "hi": 0.022007110338364298,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.1,
+     "verdict": "SUPPORTED",
+     "label": "Supported",
+     "n_draws": 2000,
+     "dataset": "chatgpt_consumer",
+     "label_short": "top choice minus rank 1",
+     "n_pairs": 6064
+    },
+    {
+     "test": "H4",
+     "kind": "level",
+     "estimate": 0.9672958021477384,
+     "lo": 0.9549307057757059,
+     "hi": 0.9789273603502389,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.9,
+     "verdict": "SUPPORTED",
+     "label": "Supported",
+     "n_draws": 2000,
+     "dataset": "chatgpt_consumer",
+     "label_short": "top choice stays recommended",
+     "n_pairs": 6064
+    },
+    {
+     "test": "H6",
+     "kind": "equiv",
+     "estimate": -0.011615094437627205,
+     "lo": -0.018486487935324092,
+     "hi": -0.005843118986645619,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.05,
+     "verdict": "NEGLIGIBLE",
+     "label": "Detectable but negligible",
+     "n_draws": 2000,
+     "dataset": "chatgpt_consumer",
+     "label_short": "shortlist minus mentioned",
+     "n_pairs": 6064
+    },
+    {
+     "test": "H7",
+     "kind": "margin",
+     "estimate": 0.2652265533575706,
+     "lo": 0.24808709542947802,
+     "hi": 0.28095090586791405,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.1,
+     "verdict": "SUPPORTED",
+     "label": "Supported: more stable by more than 0.10",
+     "n_draws": 2000,
+     "dataset": "chatgpt_consumer",
+     "label_short": "shortlist minus best-for use case",
+     "n_pairs": 6064
+    }
+   ]
+  },
+  {
+   "dataset": "chatgpt_agency",
+   "answers": 26,
+   "R_within": [
+    0.4131455399061033,
+    0.32410884204362467,
+    0.5096590909090908
+   ],
+   "tests": [
+    {
+     "test": "H1",
+     "kind": "margin",
+     "estimate": 0.34563499138289655,
+     "lo": 0.26313665849071366,
+     "hi": 0.432998978100698,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.1,
+     "verdict": "SUPPORTED",
+     "label": "Supported: more stable by more than 0.10",
+     "n_draws": 2000,
+     "dataset": "chatgpt_agency",
+     "label_short": "shortlist minus exact position",
+     "n_pairs": 25
+    },
+    {
+     "test": "H2",
+     "kind": "margin",
+     "estimate": 0.4131455399061033,
+     "lo": 0.32410335236422194,
+     "hi": 0.5097902097902096,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.1,
+     "verdict": "SUPPORTED",
+     "label": "Supported: more stable by more than 0.10",
+     "n_draws": 1997,
+     "dataset": "chatgpt_agency",
+     "label_short": "shortlist minus top choice",
+     "n_pairs": 25
+    },
+    {
+     "test": "H3",
+     "kind": "nonsup",
+     "estimate": -0.24,
+     "lo": -0.44,
+     "hi": -0.07407407407407407,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.1,
+     "verdict": "SUPPORTED",
+     "label": "Supported",
+     "n_draws": 1997,
+     "dataset": "chatgpt_agency",
+     "label_short": "top choice minus rank 1",
+     "n_pairs": 25
+    },
+    {
+     "test": "H4",
+     "kind": "level",
+     "estimate": 0.42857142857142855,
+     "lo": 0.3125,
+     "hi": 0.5,
+     "ci_level": 0.9,
+     "p": 1.0,
+     "threshold": 0.9,
+     "verdict": "NOT_SUPPORTED",
+     "label": "Not supported",
+     "n_draws": 1997,
+     "dataset": "chatgpt_agency",
+     "label_short": "top choice stays recommended",
+     "n_pairs": 25
+    },
+    {
+     "test": "H6",
+     "kind": "equiv",
+     "estimate": 0.01652106733226366,
+     "lo": -0.012699034947787579,
+     "hi": 0.0537181372136233,
+     "ci_level": 0.9,
+     "p": 0.0655,
+     "threshold": 0.05,
+     "verdict": "INCONCLUSIVE",
+     "label": "Inconclusive: do not claim a null",
+     "n_draws": 2000,
+     "dataset": "chatgpt_agency",
+     "label_short": "shortlist minus mentioned",
+     "n_pairs": 25
+    },
+    {
+     "test": "H7",
+     "kind": "margin",
+     "estimate": 0.1946024935484874,
+     "lo": 0.12180038709232122,
+     "hi": 0.2833178344119202,
+     "ci_level": 0.9,
+     "p": 0.007,
+     "threshold": 0.1,
+     "verdict": "SUPPORTED",
+     "label": "Supported: more stable by more than 0.10",
+     "n_draws": 2000,
+     "dataset": "chatgpt_agency",
+     "label_short": "shortlist minus best-for use case",
+     "n_pairs": 25
+    }
+   ]
+  }
+ ],
+ "R4": [
+  {
+   "dataset": "claude_b2b (14 swapped)",
+   "answers": 42,
+   "R_within": [
+    0.7807692307692308,
+    0.684378693853428,
+    0.861609789666855
+   ],
+   "tests": [
+    {
+     "test": "H1",
+     "kind": "margin",
+     "estimate": 0.4241025641025641,
+     "lo": 0.3544130248719003,
+     "hi": 0.49224970410363666,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.1,
+     "verdict": "SUPPORTED",
+     "label": "Supported: more stable by more than 0.10",
+     "n_draws": 2000,
+     "dataset": "claude_b2b (14 swapped)",
+     "label_short": "shortlist minus exact position",
+     "n_pairs": 42
+    },
+    {
+     "test": "H2",
+     "kind": "margin",
+     "estimate": 0.28076923076923077,
+     "lo": 0.1172154316271963,
+     "hi": 0.49353601151123894,
+     "ci_level": 0.9,
+     "p": 0.0375,
+     "threshold": 0.1,
+     "verdict": "SUPPORTED",
+     "label": "Supported: more stable by more than 0.10",
+     "n_draws": 2000,
+     "dataset": "claude_b2b (14 swapped)",
+     "label_short": "shortlist minus top choice",
+     "n_pairs": 42
+    },
+    {
+     "test": "H3",
+     "kind": "nonsup",
+     "estimate": -0.30952380952380953,
+     "lo": -0.5071428571428571,
+     "hi": -0.1490649836372137,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.1,
+     "verdict": "SUPPORTED",
+     "label": "Supported",
+     "n_draws": 2000,
+     "dataset": "claude_b2b (14 swapped)",
+     "label_short": "top choice minus rank 1",
+     "n_pairs": 42
+    },
+    {
+     "test": "H4",
+     "kind": "level",
+     "estimate": 0.9791666666666666,
+     "lo": 0.9318181818181818,
+     "hi": 1.0,
+     "ci_level": 0.9,
+     "p": 0.0105,
+     "threshold": 0.9,
+     "verdict": "SUPPORTED",
+     "label": "Supported",
+     "n_draws": 2000,
+     "dataset": "claude_b2b (14 swapped)",
+     "label_short": "top choice stays recommended",
+     "n_pairs": 42
+    },
+    {
+     "test": "H6",
+     "kind": "equiv",
+     "estimate": 0.014102564102564052,
+     "lo": -0.008847502220814757,
+     "hi": 0.03552878667922302,
+     "ci_level": 0.9,
+     "p": 0.003,
+     "threshold": 0.05,
+     "verdict": "NULL",
+     "label": "Practically equivalent (null)",
+     "n_draws": 2000,
+     "dataset": "claude_b2b (14 swapped)",
+     "label_short": "shortlist minus mentioned",
+     "n_pairs": 42
+    },
+    {
+     "test": "H7",
+     "kind": "margin",
+     "estimate": 0.30584297708191516,
+     "lo": 0.22404545597134215,
+     "hi": 0.39175333013853403,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.1,
+     "verdict": "SUPPORTED",
+     "label": "Supported: more stable by more than 0.10",
+     "n_draws": 2000,
+     "dataset": "claude_b2b (14 swapped)",
+     "label_short": "shortlist minus best-for use case",
+     "n_pairs": 42
+    }
+   ]
+  },
+  {
+   "dataset": "chatgpt_consumer (163 swapped)",
+   "answers": 816,
+   "R_within": [
+    0.8286042944785276,
+    0.8099804672269636,
+    0.8459817896515341
+   ],
+   "tests": [
+    {
+     "test": "H1",
+     "kind": "margin",
+     "estimate": 0.3270376958192446,
+     "lo": 0.2878809384039312,
+     "hi": 0.3652469048330481,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.1,
+     "verdict": "SUPPORTED",
+     "label": "Supported: more stable by more than 0.10",
+     "n_draws": 2000,
+     "dataset": "chatgpt_consumer (163 swapped)",
+     "label_short": "shortlist minus exact position",
+     "n_pairs": 6528
+    },
+    {
+     "test": "H2",
+     "kind": "margin",
+     "estimate": 0.1478872402149617,
+     "lo": 0.09898089591738794,
+     "hi": 0.1923085727960053,
+     "ci_level": 0.9,
+     "p": 0.0545,
+     "threshold": 0.1,
+     "verdict": "SMALLER",
+     "label": "More stable, possibly by less than 0.10",
+     "n_draws": 2000,
+     "dataset": "chatgpt_consumer (163 swapped)",
+     "label_short": "shortlist minus top choice",
+     "n_pairs": 6528
+    },
+    {
+     "test": "H3",
+     "kind": "nonsup",
+     "estimate": 0.0033652501398545587,
+     "lo": -0.027376245891134687,
+     "hi": 0.03353611466488751,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.1,
+     "verdict": "SUPPORTED",
+     "label": "Supported",
+     "n_draws": 2000,
+     "dataset": "chatgpt_consumer (163 swapped)",
+     "label_short": "top choice minus rank 1",
+     "n_pairs": 6528
+    },
+    {
+     "test": "H4",
+     "kind": "level",
+     "estimate": 0.9584948320413437,
+     "lo": 0.9432166621752026,
+     "hi": 0.9729168138810573,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.9,
+     "verdict": "SUPPORTED",
+     "label": "Supported",
+     "n_draws": 2000,
+     "dataset": "chatgpt_consumer (163 swapped)",
+     "label_short": "top choice stays recommended",
+     "n_pairs": 6528
+    },
+    {
+     "test": "H6",
+     "kind": "equiv",
+     "estimate": -0.007813659470758405,
+     "lo": -0.016196460984582828,
+     "hi": 0.00104588238053564,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.05,
+     "verdict": "NULL",
+     "label": "Practically equivalent (null)",
+     "n_draws": 2000,
+     "dataset": "chatgpt_consumer (163 swapped)",
+     "label_short": "shortlist minus mentioned",
+     "n_pairs": 6528
+    },
+    {
+     "test": "H7",
+     "kind": "margin",
+     "estimate": 0.26087262213581386,
+     "lo": 0.24316353306989197,
+     "hi": 0.27691430474261786,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.1,
+     "verdict": "SUPPORTED",
+     "label": "Supported: more stable by more than 0.10",
+     "n_draws": 2000,
+     "dataset": "chatgpt_consumer (163 swapped)",
+     "label_short": "shortlist minus best-for use case",
+     "n_pairs": 6528
+    }
+   ]
+  },
+  {
+   "dataset": "chatgpt_agency (13 swapped)",
+   "answers": 39,
+   "R_within": [
+    0.4,
+    0.30475818452380954,
+    0.49526957890594253
+   ],
+   "tests": [
+    {
+     "test": "H1",
+     "kind": "margin",
+     "estimate": 0.33333333333333337,
+     "lo": 0.23965453657924493,
+     "hi": 0.4180850700900391,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.1,
+     "verdict": "SUPPORTED",
+     "label": "Supported: more stable by more than 0.10",
+     "n_draws": 2000,
+     "dataset": "chatgpt_agency (13 swapped)",
+     "label_short": "shortlist minus exact position",
+     "n_pairs": 39
+    },
+    {
+     "test": "H2",
+     "kind": "margin",
+     "estimate": 0.4,
+     "lo": 0.3076923076923077,
+     "hi": 0.49574183392365206,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.1,
+     "verdict": "SUPPORTED",
+     "label": "Supported: more stable by more than 0.10",
+     "n_draws": 1985,
+     "dataset": "chatgpt_agency (13 swapped)",
+     "label_short": "shortlist minus top choice",
+     "n_pairs": 39
+    },
+    {
+     "test": "H3",
+     "kind": "nonsup",
+     "estimate": -0.23076923076923078,
+     "lo": -0.42857142857142855,
+     "hi": -0.06896551724137931,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.1,
+     "verdict": "SUPPORTED",
+     "label": "Supported",
+     "n_draws": 1985,
+     "dataset": "chatgpt_agency (13 swapped)",
+     "label_short": "top choice minus rank 1",
+     "n_pairs": 39
+    },
+    {
+     "test": "H4",
+     "kind": "level",
+     "estimate": 0.42857142857142855,
+     "lo": 0.3125,
+     "hi": 0.5,
+     "ci_level": 0.9,
+     "p": 1.0,
+     "threshold": 0.9,
+     "verdict": "NOT_SUPPORTED",
+     "label": "Not supported",
+     "n_draws": 1985,
+     "dataset": "chatgpt_agency (13 swapped)",
+     "label_short": "top choice stays recommended",
+     "n_pairs": 39
+    },
+    {
+     "test": "H6",
+     "kind": "equiv",
+     "estimate": 0.00833333333333336,
+     "lo": -0.01904806828391738,
+     "hi": 0.04040327768226471,
+     "ci_level": 0.9,
+     "p": 0.0225,
+     "threshold": 0.05,
+     "verdict": "NULL",
+     "label": "Practically equivalent (null)",
+     "n_draws": 2000,
+     "dataset": "chatgpt_agency (13 swapped)",
+     "label_short": "shortlist minus mentioned",
+     "n_pairs": 39
+    },
+    {
+     "test": "H7",
+     "kind": "margin",
+     "estimate": 0.18807947019867552,
+     "lo": 0.11456265525077954,
+     "hi": 0.2722374847374847,
+     "ci_level": 0.9,
+     "p": 0.003,
+     "threshold": 0.1,
+     "verdict": "SUPPORTED",
+     "label": "Supported: more stable by more than 0.10",
+     "n_draws": 2000,
+     "dataset": "chatgpt_agency (13 swapped)",
+     "label_short": "shortlist minus best-for use case",
+     "n_pairs": 39
+    }
+   ]
+  }
+ ],
+ "R4_ceiling": {
+  "claude_b2b": {
+   "R": [
+    0.9839228295819936,
+    0.9558793999527523,
+    1.0
+   ],
+   "T": [
+    0.96,
+    0.8,
+    1.0
+   ],
+   "C": [
+    0.96,
+    0.75,
+    1.0
+   ],
+   "M": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "Pk": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "WS": [
+    0.7545219638242894,
+    0.7096707268103333,
+    0.7976911086575307
+   ],
+   "WP": [
+    0.652542372881356,
+    0.6218153556288272,
+    0.6843582474096088
+   ]
+  },
+  "chatgpt_consumer": {
+   "R": [
+    0.99079754601227,
+    0.9825275192879166,
+    0.996885218939262
+   ],
+   "T": [
+    0.9514563106796117,
+    0.9258090063357126,
+    0.9741935483870968
+   ],
+   "C": [
+    null,
+    null,
+    null
+   ],
+   "M": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "Pk": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "WS": [
+    0.8654303376129339,
+    0.8509630343129948,
+    0.8805373708683603
+   ],
+   "WP": [
+    0.6629094751673125,
+    0.6380853119090436,
+    0.6877032180326056
+   ]
+  },
+  "chatgpt_agency": {
+   "R": [
+    0.9642857142857143,
+    0.8947368421052632,
+    1.0
+   ],
+   "T": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "C": [
+    null,
+    null,
+    null
+   ],
+   "M": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "Pk": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "WS": [
+    0.9315068493150684,
+    0.9069767441860465,
+    0.9616096866096866
+   ],
+   "WP": [
+    0.8737864077669902,
+    0.810796586059744,
+    0.95
+   ]
+  },
+  "all": {
+   "R": [
+    0.9886295631358468,
+    0.9806188276521185,
+    0.9950576606260296
+   ],
+   "T": [
+    0.9523809523809523,
+    0.9281437125748503,
+    0.9740932642487047
+   ],
+   "C": [
+    0.96,
+    0.8,
+    1.0
+   ],
+   "M": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "Pk": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "WS": [
+    0.8505657432696059,
+    0.8347558786017657,
+    0.8663564674829018
+   ],
+   "WP": [
+    0.6678383128295254,
+    0.6467985334681168,
+    0.6891740438925538
+   ]
+  }
+ },
+ "R5": [
+  {
+   "dataset": "claude_b2b",
+   "answers": 42,
+   "R_within": [
+    0.7760617760617761,
+    0.6678200692041523,
+    0.8661087866108786
+   ],
+   "tests": [
+    {
+     "test": "H1",
+     "kind": "margin",
+     "estimate": 0.4193951093951094,
+     "lo": 0.3395863865819899,
+     "hi": 0.4956731875719218,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.1,
+     "verdict": "SUPPORTED",
+     "label": "Supported: more stable by more than 0.10",
+     "n_draws": 2000,
+     "dataset": "claude_b2b",
+     "label_short": "shortlist minus exact position",
+     "n_pairs": 42
+    },
+    {
+     "test": "H2",
+     "kind": "margin",
+     "estimate": 0.27606177606177607,
+     "lo": 0.14468125607460017,
+     "hi": 0.508754459203036,
+     "ci_level": 0.9,
+     "p": 0.013,
+     "threshold": 0.1,
+     "verdict": "SUPPORTED",
+     "label": "Supported: more stable by more than 0.10",
+     "n_draws": 2000,
+     "dataset": "claude_b2b",
+     "label_short": "shortlist minus top choice",
+     "n_pairs": 42
+    },
+    {
+     "test": "H3",
+     "kind": "nonsup",
+     "estimate": -0.30952380952380953,
+     "lo": -0.5414285714285714,
+     "hi": -0.15423511904761905,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.1,
+     "verdict": "SUPPORTED",
+     "label": "Supported",
+     "n_draws": 2000,
+     "dataset": "claude_b2b",
+     "label_short": "top choice minus rank 1",
+     "n_pairs": 42
+    },
+    {
+     "test": "H4",
+     "kind": "level",
+     "estimate": 0.9791666666666666,
+     "lo": 0.9285714285714286,
+     "hi": 1.0,
+     "ci_level": 0.9,
+     "p": 0.0115,
+     "threshold": 0.9,
+     "verdict": "SUPPORTED",
+     "label": "Supported",
+     "n_draws": 2000,
+     "dataset": "claude_b2b",
+     "label_short": "top choice stays recommended",
+     "n_pairs": 42
+    },
+    {
+     "test": "H6",
+     "kind": "equiv",
+     "estimate": 0.009395109395109347,
+     "lo": -0.013789660874177101,
+     "hi": 0.030511775954012665,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.05,
+     "verdict": "NULL",
+     "label": "Practically equivalent (null)",
+     "n_draws": 2000,
+     "dataset": "claude_b2b",
+     "label_short": "shortlist minus mentioned",
+     "n_pairs": 42
+    },
+    {
+     "test": "H7",
+     "kind": "margin",
+     "estimate": 0.3019685118130714,
+     "lo": 0.20698805838124723,
+     "hi": 0.3995372243515441,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.1,
+     "verdict": "SUPPORTED",
+     "label": "Supported: more stable by more than 0.10",
+     "n_draws": 2000,
+     "dataset": "claude_b2b",
+     "label_short": "shortlist minus best-for use case",
+     "n_pairs": 42
+    }
+   ]
+  }
+ ],
+ "R6": [
+  {
+   "dataset": "claude_b2b (ui_default + ui_think)",
+   "answers": 84,
+   "R_within": [
+    0.7946954813359528,
+    0.7255241668120748,
+    0.8559977258622772
+   ],
+   "tests": [
+    {
+     "test": "H1",
+     "kind": "margin",
+     "estimate": 0.42248278836854286,
+     "lo": 0.3665698906536253,
+     "hi": 0.4708488636824803,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.1,
+     "verdict": "SUPPORTED",
+     "label": "Supported: more stable by more than 0.10",
+     "n_draws": 2000,
+     "dataset": "claude_b2b (ui_default + ui_think)",
+     "label_short": "shortlist minus exact position",
+     "n_pairs": 168
+    },
+    {
+     "test": "H2",
+     "kind": "margin",
+     "estimate": 0.3515136631541346,
+     "lo": 0.2157751913689631,
+     "hi": 0.4994358339197251,
+     "ci_level": 0.9,
+     "p": 0.003,
+     "threshold": 0.1,
+     "verdict": "SUPPORTED",
+     "label": "Supported: more stable by more than 0.10",
+     "n_draws": 2000,
+     "dataset": "claude_b2b (ui_default + ui_think)",
+     "label_short": "shortlist minus top choice",
+     "n_pairs": 168
+    },
+    {
+     "test": "H3",
+     "kind": "nonsup",
+     "estimate": -0.23538961038961043,
+     "lo": -0.40909375712007295,
+     "hi": -0.06965826330532213,
+     "ci_level": 0.9,
+     "p": 0.0005,
+     "threshold": 0.1,
+     "verdict": "SUPPORTED",
+     "label": "Supported",
+     "n_draws": 2000,
+     "dataset": "claude_b2b (ui_default + ui_think)",
+     "label_short": "top choice minus rank 1",
+     "n_pairs": 168
+    },
+    {
+     "test": "H4",
+     "kind": "level",
+     "estimate": 0.9715909090909091,
+     "lo": 0.9226087848932677,
+     "hi": 1.0,
+     "ci_level": 0.9,
+     "p": 0.015,
+     "threshold": 0.9,
+     "verdict": "SUPPORTED",
+     "label": "Supported",
+     "n_draws": 2000,
+     "dataset": "claude_b2b (ui_default + ui_think)",
+     "label_short": "top choice stays recommended",
+     "n_pairs": 168
+    },
+    {
+     "test": "H6",
+     "kind": "equiv",
+     "estimate": -0.0011878805851449625,
+     "lo": -0.023174600451051363,
+     "hi": 0.02197100842538388,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.05,
+     "verdict": "NULL",
+     "label": "Practically equivalent (null)",
+     "n_draws": 2000,
+     "dataset": "claude_b2b (ui_default + ui_think)",
+     "label_short": "shortlist minus mentioned",
+     "n_pairs": 168
+    },
+    {
+     "test": "H7",
+     "kind": "margin",
+     "estimate": 0.3261460589996242,
+     "lo": 0.2820323887796616,
+     "hi": 0.37489278450101726,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.1,
+     "verdict": "SUPPORTED",
+     "label": "Supported: more stable by more than 0.10",
+     "n_draws": 2000,
+     "dataset": "claude_b2b (ui_default + ui_think)",
+     "label_short": "shortlist minus best-for use case",
+     "n_pairs": 168
+    }
+   ]
+  }
+ ],
+ "R8": [
+  {
+   "dataset": "claude_b2b, shortlist",
+   "answers": 21,
+   "R_within": [
+    0.7241379310344828,
+    0.5597215326050976,
+    0.8877551020408163
+   ],
+   "tests": [
+    {
+     "test": "H1",
+     "kind": "margin",
+     "estimate": 0.36243580337490827,
+     "lo": 0.2737991175491175,
+     "hi": 0.4639395650221338,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.1,
+     "verdict": "SUPPORTED",
+     "label": "Supported: more stable by more than 0.10",
+     "n_draws": 2000,
+     "dataset": "claude_b2b, shortlist",
+     "label_short": "shortlist minus exact position",
+     "n_pairs": 21
+    },
+    {
+     "test": "H2",
+     "kind": "margin",
+     "estimate": 0.12413793103448278,
+     "lo": -0.07332677165354329,
+     "hi": 0.44782608695652176,
+     "ci_level": 0.9,
+     "p": 0.377,
+     "threshold": 0.1,
+     "verdict": "NOT_SHOWN",
+     "label": "Not shown",
+     "n_draws": 2000,
+     "dataset": "claude_b2b, shortlist",
+     "label_short": "shortlist minus top choice",
+     "n_pairs": 21
+    },
+    {
+     "test": "H3",
+     "kind": "nonsup",
+     "estimate": -0.20952380952380956,
+     "lo": -0.4880952380952381,
+     "hi": -0.04761904761904767,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.1,
+     "verdict": "SUPPORTED",
+     "label": "Supported",
+     "n_draws": 2000,
+     "dataset": "claude_b2b, shortlist",
+     "label_short": "top choice minus rank 1",
+     "n_pairs": 21
+    },
+    {
+     "test": "H4",
+     "kind": "level",
+     "estimate": 0.9666666666666667,
+     "lo": 0.875,
+     "hi": 1.0,
+     "ci_level": 0.9,
+     "p": 0.076,
+     "threshold": 0.9,
+     "verdict": "NOT_SUPPORTED",
+     "label": "Not supported",
+     "n_draws": 2000,
+     "dataset": "claude_b2b, shortlist",
+     "label_short": "top choice stays recommended",
+     "n_pairs": 21
+    },
+    {
+     "test": "H6",
+     "kind": "equiv",
+     "estimate": 0.01491807287845437,
+     "lo": -0.028990143532518664,
+     "hi": 0.05105073786306513,
+     "ci_level": 0.9,
+     "p": 0.0525,
+     "threshold": 0.05,
+     "verdict": "INCONCLUSIVE",
+     "label": "Inconclusive: do not claim a null",
+     "n_draws": 2000,
+     "dataset": "claude_b2b, shortlist",
+     "label_short": "shortlist minus mentioned",
+     "n_pairs": 21
+    },
+    {
+     "test": "H7",
+     "kind": "margin",
+     "estimate": 0.26353187042842213,
+     "lo": 0.15895835817005177,
+     "hi": 0.39046792280663245,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.1,
+     "verdict": "SUPPORTED",
+     "label": "Supported: more stable by more than 0.10",
+     "n_draws": 2000,
+     "dataset": "claude_b2b, shortlist",
+     "label_short": "shortlist minus best-for use case",
+     "n_pairs": 21
+    }
+   ]
+  },
+  {
+   "dataset": "claude_b2b, evaluate",
+   "answers": 21,
+   "R_within": [
+    0.8181818181818182,
+    0.7560975609756098,
+    0.8723404255319149
+   ],
+   "tests": [
+    {
+     "test": "H1",
+     "kind": "margin",
+     "estimate": 0.46598056032018303,
+     "lo": 0.3715112374011843,
+     "hi": 0.5432098765432098,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.1,
+     "verdict": "SUPPORTED",
+     "label": "Supported: more stable by more than 0.10",
+     "n_draws": 2000,
+     "dataset": "claude_b2b, evaluate",
+     "label_short": "shortlist minus exact position",
+     "n_pairs": 21
+    },
+    {
+     "test": "H2",
+     "kind": "margin",
+     "estimate": 0.4848484848484849,
+     "lo": 0.3601609657947686,
+     "hi": 0.6474188222344524,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.1,
+     "verdict": "SUPPORTED",
+     "label": "Supported: more stable by more than 0.10",
+     "n_draws": 1999,
+     "dataset": "claude_b2b, evaluate",
+     "label_short": "shortlist minus top choice",
+     "n_pairs": 21
+    },
+    {
+     "test": "H3",
+     "kind": "nonsup",
+     "estimate": -0.4761904761904762,
+     "lo": -0.7142857142857143,
+     "hi": -0.2507359307359311,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.1,
+     "verdict": "SUPPORTED",
+     "label": "Supported",
+     "n_draws": 1999,
+     "dataset": "claude_b2b, evaluate",
+     "label_short": "top choice minus rank 1",
+     "n_pairs": 21
+    },
+    {
+     "test": "H4",
+     "kind": "level",
+     "estimate": 1.0,
+     "lo": 1.0,
+     "hi": 1.0,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.9,
+     "verdict": "SUPPORTED",
+     "label": "Supported",
+     "n_draws": 1999,
+     "dataset": "claude_b2b, evaluate",
+     "label_short": "top choice stays recommended",
+     "n_pairs": 21
+    },
+    {
+     "test": "H6",
+     "kind": "equiv",
+     "estimate": 0.0005717552887364308,
+     "lo": -0.034943248586398926,
+     "hi": 0.03377001852207401,
+     "ci_level": 0.9,
+     "p": 0.0065,
+     "threshold": 0.05,
+     "verdict": "NULL",
+     "label": "Practically equivalent (null)",
+     "n_draws": 2000,
+     "dataset": "claude_b2b, evaluate",
+     "label_short": "shortlist minus mentioned",
+     "n_pairs": 21
+    },
+    {
+     "test": "H7",
+     "kind": "margin",
+     "estimate": 0.3340189222542164,
+     "lo": 0.22673379239265046,
+     "hi": 0.43420004386809147,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.1,
+     "verdict": "SUPPORTED",
+     "label": "Supported: more stable by more than 0.10",
+     "n_draws": 2000,
+     "dataset": "claude_b2b, evaluate",
+     "label_short": "shortlist minus best-for use case",
+     "n_pairs": 21
+    }
+   ]
+  }
+ ]
+}

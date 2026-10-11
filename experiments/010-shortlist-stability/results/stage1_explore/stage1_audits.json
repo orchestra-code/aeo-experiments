@@ -1,0 +1,225 @@
+{
+ "A": {
+  "new": [],
+  "holdout": [
+   {
+    "dataset": "chatgpt_agency",
+    "arm": "chatgpt",
+    "runs": 3,
+    "prompts": 13,
+    "answers": 39,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0
+   },
+   {
+    "dataset": "chatgpt_consumer",
+    "arm": "chatgpt",
+    "runs": 17,
+    "prompts": 48,
+    "answers": 816,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0
+   },
+   {
+    "dataset": "claude_b2b",
+    "arm": "opus55_plain",
+    "runs": 3,
+    "prompts": 14,
+    "answers": 42,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0
+   },
+   {
+    "dataset": "claude_b2b",
+    "arm": "ui_default",
+    "runs": 3,
+    "prompts": 14,
+    "answers": 42,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0
+   },
+   {
+    "dataset": "claude_b2b",
+    "arm": "ui_think",
+    "runs": 3,
+    "prompts": 14,
+    "answers": 42,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0
+   }
+  ],
+  "passes": true
+ },
+ "B": {
+  "claude_b2b": {
+   "answers": 126,
+   "demoted": 0.031746031746031744,
+   "over_cap": 0.023809523809523808,
+   "fallback_mapped": 0,
+   "untracked_per_answer": 5.26984126984127
+  },
+  "chatgpt_consumer": {
+   "answers": 816,
+   "demoted": 0.00857843137254902,
+   "over_cap": 0.0,
+   "fallback_mapped": 0,
+   "untracked_per_answer": 0.4889705882352941
+  },
+  "chatgpt_agency": {
+   "answers": 39,
+   "demoted": 0.1282051282051282,
+   "over_cap": 0.02564102564102564,
+   "fallback_mapped": 0,
+   "untracked_per_answer": 4.923076923076923
+  },
+  "judge_rows_off_pin": 0
+ },
+ "D": {
+  "status": "n/a"
+ },
+ "E": {
+  "groups": {
+   "all": {
+    "answers": 200,
+    "mentions": 912,
+    "agreement": 0.9605263157894737,
+    "kappa": 0.9072298654731328,
+    "top_choices": 169,
+    "top_kept": 0.9467455621301775,
+    "changes": {
+     "one_of_many -> generic_mention": 11,
+     "top_choice -> one_of_many": 9,
+     "one_of_many -> top_choice": 7,
+     "generic_mention -> one_of_many": 7,
+     "cautioned_against -> one_of_many": 1,
+     "unclassified -> generic_mention": 1
+    }
+   },
+   "old datasets": {
+    "answers": 200,
+    "mentions": 912,
+    "agreement": 0.9605263157894737,
+    "kappa": 0.9072298654731328,
+    "top_choices": 169,
+    "top_kept": 0.9467455621301775,
+    "changes": {
+     "one_of_many -> generic_mention": 11,
+     "top_choice -> one_of_many": 9,
+     "one_of_many -> top_choice": 7,
+     "generic_mention -> one_of_many": 7,
+     "cautioned_against -> one_of_many": 1,
+     "unclassified -> generic_mention": 1
+    }
+   },
+   "claude_b2b": {
+    "answers": 24,
+    "mentions": 194,
+    "agreement": 0.9690721649484536,
+    "kappa": 0.9282013323464101,
+    "top_choices": 13,
+    "top_kept": 0.9230769230769231,
+    "changes": {
+     "generic_mention -> one_of_many": 4,
+     "cautioned_against -> one_of_many": 1,
+     "top_choice -> one_of_many": 1
+    }
+   },
+   "chatgpt_consumer": {
+    "answers": 163,
+    "mentions": 689,
+    "agreement": 0.9593613933236574,
+    "kappa": 0.9045578901020614,
+    "top_choices": 155,
+    "top_kept": 0.9483870967741935,
+    "changes": {
+     "one_of_many -> generic_mention": 11,
+     "top_choice -> one_of_many": 8,
+     "one_of_many -> top_choice": 7,
+     "generic_mention -> one_of_many": 1,
+     "unclassified -> generic_mention": 1
+    }
+   },
+   "chatgpt_agency": {
+    "answers": 13,
+    "mentions": 29,
+    "agreement": 0.9310344827586207,
+    "kappa": 0.48214285714285693,
+    "top_choices": 1,
+    "top_kept": 1.0,
+    "changes": {
+     "generic_mention -> one_of_many": 2
+    }
+   }
+  },
+  "passes": true
+ },
+ "F": {
+  "claude_b2b (opus55_plain)": {
+   "modal": "claude-opus-5-5",
+   "models": {
+    "claude-opus-5-5": 42
+   },
+   "off_modal_share": 0.0,
+   "runs_with_other_modal": []
+  },
+  "claude_b2b": {
+   "modal": "claude.ai",
+   "models": {
+    "claude.ai": 42
+   },
+   "off_modal_share": 0.0,
+   "runs_with_other_modal": []
+  },
+  "claude_b2b (ui_think)": {
+   "modal": "claude.ai",
+   "models": {
+    "claude.ai": 42
+   },
+   "off_modal_share": 0.0,
+   "runs_with_other_modal": []
+  },
+  "chatgpt_consumer": {
+   "modal": "gpt-5-5",
+   "models": {
+    "gpt-5-5": 781,
+    "(not recorded)": 35
+   },
+   "off_modal_share": 0.04289215686274506,
+   "runs_with_other_modal": []
+  },
+  "chatgpt_agency": {
+   "modal": "gpt-5-5",
+   "models": {
+    "gpt-5-5": 38,
+    "(not recorded)": 1
+   },
+   "off_modal_share": 0.02564102564102566,
+   "runs_with_other_modal": []
+  }
+ },
+ "G": {
+  "groups": {
+   "all": {
+    "phrases": 3439,
+    "agreement": 0.9546379761558592,
+    "outside": 0.01395754579819715
+   },
+   "B2B": {
+    "phrases": 1150,
+    "agreement": 0.957391304347826,
+    "outside": 0.0008695652173913044
+   },
+   "headphones and agencies": {
+    "phrases": 2289,
+    "agreement": 0.9532546963739624,
+    "outside": 0.02053298383573613
+   }
+  },
+  "passes": true
+ }
+}
