@@ -68,14 +68,20 @@ SRC_009 = EXPERIMENTS / "009-claude-model-fidelity"
 #: aliases, category, decision, match, ...). Its sha256 is recorded here at
 #: STOP 2, after Jim's review and before Audit D. While it is None, nothing
 #: reads a confirmatory judged file.
-LEXICON_V3 = RAW / "lexicon_v3" / "lexicon_v3.csv"
-LEXICON_V3_SHA256: str | None = None
+#: The paths and pins live in harness/instrument.py (shared with build_tasks
+#: and audit_d), with the new collection's extraction (deviation 6).
+_spec = importlib.util.spec_from_file_location("x010_instrument", HARNESS / "instrument.py")
+INSTRUMENT = importlib.util.module_from_spec(_spec)
+sys.modules["x010_instrument"] = INSTRUMENT
+_spec.loader.exec_module(INSTRUMENT)
+LEXICON_V3 = INSTRUMENT.LEXICON_V3
+LEXICON_V3_SHA256: str | None = INSTRUMENT.LEXICON_V3_SHA256
 
 #: The 20 B2B "best for" taxonomies (spec §5 taxonomy protocol), built with
 #: ``harness/bestfor_segments.mts taxonomy --split taxonomy_b2b``. Frozen at
 #: STOP 2 with lexicon v3.
-TAXONOMY_B2B = RAW / "bestfor_taxonomy_b2b" / "taxonomy.json"
-TAXONOMY_B2B_SHA256: str | None = None
+TAXONOMY_B2B = INSTRUMENT.TAXONOMY_B2B
+TAXONOMY_B2B_SHA256: str | None = INSTRUMENT.TAXONOMY_B2B_SHA256
 
 #: Headphone and agency taxonomies are the exploration ones (spec §5), frozen
 #: with the exploration results (results/exploration_bestfor.md).
@@ -1050,7 +1056,7 @@ def instrument_problems() -> list[str]:
     """
     problems = []
     if LEXICON_V3_SHA256 is None:
-        problems.append("lexicon v3 is not frozen: common.LEXICON_V3_SHA256 is None (spec §5 "
+        problems.append("lexicon v3 is not frozen: harness/instrument.py LEXICON_V3_SHA256 is None (spec §5 "
                         "lexicon protocol; record the sha256 of data/raw/lexicon_v3/"
                         "lexicon_v3.csv at STOP 2)")
     elif not LEXICON_V3.exists():
@@ -1058,7 +1064,7 @@ def instrument_problems() -> list[str]:
     elif sha256_file(LEXICON_V3) != LEXICON_V3_SHA256:
         problems.append("lexicon_v3.csv does not match LEXICON_V3_SHA256")
     if TAXONOMY_B2B_SHA256 is None:
-        problems.append("the B2B best-for taxonomy is not frozen: common.TAXONOMY_B2B_SHA256 is "
+        problems.append("the B2B best-for taxonomy is not frozen: harness/instrument.py TAXONOMY_B2B_SHA256 is "
                         "None (spec §5 taxonomy protocol; record the sha256 of data/raw/"
                         "bestfor_taxonomy_b2b/taxonomy.json at STOP 2)")
     elif not TAXONOMY_B2B.exists():

@@ -62,6 +62,7 @@ from pathlib import Path
 
 import numpy as np
 from common import (
+    INSTRUMENT,
     AUDIT_E_SHARE,
     CLAUDE_ARMS,
     JUDGE_PIN,
@@ -130,7 +131,7 @@ def check_lexicon_build(tasks: list[dict], patterns: dict, label: str) -> dict:
     """Every task's lexicon brands must be what the frozen lexicon finds in its answer."""
     b9 = brands009()
     bad = [t["task_id"] for t in tasks
-           if b9.lexicon_extract(t.get("answer") or "", patterns.get(t["category"], []))
+           if INSTRUMENT.extract_new(b9, t.get("answer") or "", patterns.get(t["category"], []))
            != list(t["brands"])
            or [x["canonical"] for x in t.get("tracked", [])] != list(t["brands"])]
     if bad:
@@ -695,7 +696,7 @@ class World:
                 old = t["task_id"]
                 t["item_id"], t["category"] = new_item, cat_of[new_item]
                 t["task_id"] = f"{t['dataset']}|010|{t['arm']}|{new_item}|w{t['wave']}"
-                t["brands"] = b9.lexicon_extract(t["answer"], patterns.get(t["category"], []))
+                t["brands"] = INSTRUMENT.extract_new(b9, t["answer"], patterns.get(t["category"], []))
                 t["tracked"] = [{"canonical": b, "aliases": [b]} for b in t["brands"]]
                 rename[old] = t["task_id"]
                 out.append(t)

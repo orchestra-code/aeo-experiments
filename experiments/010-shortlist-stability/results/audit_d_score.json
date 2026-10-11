@@ -1,0 +1,44 @@
+{
+  "rows": 30,
+  "complete": true,
+  "true_positive": 211,
+  "false_positive": 0,
+  "false_negative": 0,
+  "wrong_names_not_extracted": 0,
+  "precision": 1.0,
+  "recall": 1.0,
+  "per_dataset": {
+    "chatgpt_b2b": {
+      "answers": 10,
+      "true_positive": 51,
+      "false_positive": 0,
+      "false_negative": 0,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    "gemini_b2b": {
+      "answers": 10,
+      "true_positive": 54,
+      "false_positive": 0,
+      "false_negative": 0,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    "claude_api_b2b": {
+      "answers": 10,
+      "true_positive": 106,
+      "false_positive": 0,
+      "false_negative": 0,
+      "precision": 1.0,
+      "recall": 1.0
+    }
+  },
+  "gate_precision": 0.95,
+  "gate_recall": 0.9,
+  "passes": true,
+  "sheet_sha256": "5c35655584d31fcdb3044cb6c0b6f6a6505c914e92ab2c564840c8a59e34d003",
+  "key_sha256": "ed1df13bbd917614c7dd41cca12f71c27e154ecd5fd9c8945004ed8c01732759",
+  "lexicon_sha256": "6084f47ca1831474de9cb64d79425d522b75ac409d2b5080b24653ec9905cf5d",
+  "signed_by": "Jim Wrubel",
+  "scored_on": "2026-10-11"
+}

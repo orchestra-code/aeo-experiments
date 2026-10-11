@@ -34,6 +34,9 @@ from pathlib import Path
 
 import numpy as np
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import instrument  # noqa: E402  (shared extraction, deviation 6)
+
 EXP = Path(__file__).resolve().parents[1]
 RAW = EXP / "data" / "raw"
 OUT = RAW / "audit_d"
@@ -116,7 +119,7 @@ def make(lexicon: Path, force: bool) -> None:
     sheet, key, md = [], [], [*(f"- {line}" for line in INSTRUCTIONS), ""]
     for n, t in enumerate(picks(), start=1):
         aid = f"A{n:02d}"
-        found = b9.lexicon_extract(t["answer"], patterns.get(t["category"], []))
+        found = instrument.extract_new(b9, t["answer"], patterns.get(t["category"], []))
         listed = "; ".join(found)
         sheet.append({"audit_id": aid, "category": t["category"], "extracted_brands": listed,
                       "missed_brands": "", "wrong_brands": "", "reviewer_notes": ""})
@@ -125,7 +128,9 @@ def make(lexicon: Path, force: bool) -> None:
         md += [f"## {aid}: {t['category']}", "",
                f"**Question:** {t['question']}", "",
                f"**Extracted brands ({len(found)}):** {listed or '(none)'}", "",
-               "**Answer text:**", "", b9.strip_sources(t["answer"]).strip(), "", "---", ""]
+               "**Answer text:**", "",
+               b9.strip_sources(instrument.strip_citation_links(t["answer"])).strip(), "",
+               "---", ""]
     write_csv(SHEET, sheet)
     write_csv(KEY, key)
     ANSWERS.write_text("\n".join(md))

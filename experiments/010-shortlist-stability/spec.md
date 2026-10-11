@@ -538,3 +538,43 @@ All checks run at both stages except R7 (Stage 2 only).
    lexicon v3. The judge ran from a spyglasses worktree at the pinned commit
    `5e8f813` because the judge files have since changed on another branch;
    the runner's hash check passed.
+6. **Citation links removed before extraction, new collection only
+   (2026-10-11, found by Audit D, before any metric on new answers).**
+   ChatGPT and Gemini answers (DataForSEO) cite inline as markdown links whose
+   visible text is a domain (`[www.vendor.com](https://...)`). 009's
+   extractor removes link targets but keeps link text, so a cited vendor's
+   domain counted as a mention, sometimes as the first one. Over waves 1 to 7
+   this changed 101 of 280 Gemini answers (97 brands found only in citations,
+   24 first-mentioned brands) and 28 of 280 ChatGPT answers (18 brands, 5
+   first-mentioned); Claude API answers carry no such links. Extraction for
+   the new collection now removes any markdown link whose text is a domain or
+   URL before matching (`harness/instrument.py`, shared by `build_tasks.py`,
+   `audit_d.py` and the pipeline). Link text that is a name is kept. The
+   holdout datasets keep their source studies' frozen extraction: on the
+   ChatGPT consumer and agency answers the same change would alter at most 5
+   answers per split. Approved by Jim.
+
+## Instrument freeze (STOP 2, 2026-10-11)
+
+- **Lexicon v3:** `data/raw/lexicon_v3/lexicon_v3.csv`, sha256
+  `6084f47ca1831474de9cb64d79425d522b75ac409d2b5080b24653ec9905cf5d`.
+  009's v2.1 rows unchanged plus 45 new rows (40 kept brands or aliases, 5
+  dropped names), from the judge's untracked names in waves 1 and 2, curated
+  by an Opus pass under 009's rules; every new row reviewed and labeled by
+  Jim (one change from the curator: one project-management name dropped). Two
+  v2.1 rows queried by the curator were kept as they are.
+- **B2B taxonomies:** `data/raw/bestfor_taxonomy_b2b/taxonomy.json`, sha256
+  `b7fe060460d49e4ffdb6018d35c7feca74f461d6db06105ced6f3c6c5828e9f7`.
+  20 categories, 7 or 8 segments plus "general" each (cap 8), from 6,014
+  distinct best-for phrases (009 Claude answers, exploration and holdout, and
+  new waves 1 and 2). Build-set classifier test-retest 96.3%; 1.1% of phrases
+  fit no segment.
+- **Audit D:** 30 answers (10 per platform), reviewed by Jim, scored with the
+  frozen lexicon and extraction: precision 1.00, recall 1.00 (211 brands, 0
+  wrong, 0 missed): PASS (`results/audit_d_score.json`). Before the
+  deviation 6 fix the same sheet scored precision 0.98 (4 brands found only
+  in citation links, 215 extracted), recall 1.00. Three names Jim first marked
+  as missed in one answer are dropped rows of v2.1 in that category and were
+  withdrawn at review, keeping the prior decision.
+- Pins live in `harness/instrument.py`; `build_tasks.py` and the pipeline
+  refuse any other lexicon or taxonomy file.

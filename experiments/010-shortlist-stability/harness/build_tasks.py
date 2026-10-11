@@ -44,6 +44,9 @@ import json
 import sys
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import instrument  # noqa: E402  (harness/instrument.py: lexicon v3 pins, extraction)
+
 EXP = Path(__file__).resolve().parents[1]
 EXPERIMENTS = EXP.parent
 RAW = EXP / "data" / "raw"
@@ -205,21 +208,30 @@ COLLECTION_PLATFORMS = ("chatgpt", "gemini", "claude")
 CLAUDE_COLLECTION_ARM = "opus55_plain"
 
 
-def collection_tasks(tag: str) -> list[dict]:
+def collection_tasks(tag: str, lexicon: str = "v3") -> list[dict]:
     """Judge tasks for 010's own B2B collection: ChatGPT and Gemini (DataForSEO),
     Claude (Anthropic API, 009's collector, arm ``opus55_plain``).
 
     One ledger and one response tree per platform: ``ledger_<tag>_<platform>.jsonl``
     and ``responses_<tag>_<platform>/w<wave>/<task_id>.json`` (Claude:
-    ``w<wave>/opus55_plain/<item_id>.json``). Brands = 009's
-    frozen lexicon over the prompt's category rows (the lexicon protocol in
-    spec.md extends it before any confirmatory metric).
+    ``w<wave>/opus55_plain/<item_id>.json``). Brands = lexicon v3 (hash-pinned
+    in harness/instrument.py) over the prompt's category rows, extracted with
+    citation links removed (deviation 6); ``lexicon="v2_1"`` reproduces the
+    pre-freeze candidate build (009's frozen v2.1, same extraction).
     """
     sys.path.insert(0, str(SRC_009 / "pipeline"))
     b9 = _load(SRC_009 / "pipeline/brands.py", "exp009_brands")
-    patterns, _alias_map, _sha = b9.frozen_lexicon()
+    if lexicon == "v3":
+        if instrument.LEXICON_V3_SHA256 is None:
+            raise SystemExit("lexicon v3 is not frozen (harness/instrument.py); pass "
+                             "--lexicon v2_1 for the pre-freeze candidate run")
+        lex_path = instrument.LEXICON_V3
+        patterns, _alias_map, _sha = b9.frozen_lexicon(lex_path, instrument.LEXICON_V3_SHA256)
+    else:
+        lex_path = b9.LEXICON
+        patterns, _alias_map, _sha = b9.frozen_lexicon()
     aliases = {}
-    for cat, rows in b9.lexicon_categories(b9.LEXICON).items():
+    for cat, rows in b9.lexicon_categories(lex_path).items():
         for row in rows:
             if row["decision"] == "keep":
                 aliases.setdefault((cat, row["canonical"]), set()).update(
@@ -258,7 +270,7 @@ def collection_tasks(tag: str) -> list[dict]:
                 answer = resp.get("markdown") or ""
                 run_date = (resp.get("datetime") or "")[:10]
                 model = resp.get("model")
-            found = b9.lexicon_extract(answer, patterns.get(p["category"], []))
+            found = instrument.extract_new(b9, answer, patterns.get(p["category"], []))
             dataset = "claude_api_b2b" if platform == "claude" else f"{platform}_b2b"
             out.append({
                 "task_id": f"{dataset}|010|{platform}|{r['item_id']}|w{r['wave']}",
@@ -291,6 +303,8 @@ def main() -> None:
     ap.add_argument("--check", action="store_true", help="verify split.csv only")
     ap.add_argument("--collection", default=None, metavar="TAG",
                     help="build tasks for 010's own collection (smoke | main) instead")
+    ap.add_argument("--lexicon", choices=["v3", "v2_1"], default="v3",
+                    help="lexicon for --collection (v2_1 only for the pre-freeze candidate run)")
     ap.add_argument("--rejudge", type=int, default=0,
                     help="also write a seeded sample of N exploration tasks to re-judge")
     args = ap.parse_args()
@@ -308,7 +322,7 @@ def main() -> None:
         print("split.csv matches the seeded split")
         return
     if args.collection:
-        tasks = collection_tasks(args.collection)
+        tasks = collection_tasks(args.collection, args.lexicon)
         out = RAW / f"tasks_b2b_{args.collection}.jsonl"
         with out.open("w") as f:
             for t in tasks:
