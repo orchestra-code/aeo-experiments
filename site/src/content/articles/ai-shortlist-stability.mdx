@@ -1,0 +1,277 @@
+---
+title: "When AI shortlists your software, it usually shortlists you again"
+description: "Experiment 010, Stage 1, pre-registered: 40 B2B software buying questions asked on 7 days on ChatGPT, Gemini and Claude. A vendor on the AI's shortlist was shortlisted again in another run 81% of the time on ChatGPT, 78% on Claude and 64% on Gemini, and claude.ai replicated at 75%. Most of each shortlist is a stable core of vendors, while the platforms disagree with each other."
+pubDate: 2026-10-13
+authors:
+  - name: "Spyglasses Research"
+    url: "https://spyglasses.io"
+experiment: "010-shortlist-stability"
+heroFigure: "/figures/010-shortlist-stability/stage1_shortlist.png"
+figures:
+  - "/figures/010-shortlist-stability/stage1_shortlist.png"
+  - "/figures/010-shortlist-stability/stage1_shortlist_runs.png"
+  - "/figures/010-shortlist-stability/stage1_platform_agreement.png"
+  - "/figures/010-shortlist-stability/stage1_retention.png"
+datasets:
+  - title: "AI shortlist stability, one row per answer (derived features)"
+    path: "/datasets/010-shortlist-stability/ai-shortlist-stability-answers.csv"
+    license: "CC BY 4.0"
+    rows: 2770
+  - title: "AI shortlist stability, one row per answer and vendor (vendors as codes)"
+    path: "/datasets/010-shortlist-stability/ai-shortlist-stability-mentions.csv"
+    license: "CC BY 4.0"
+    rows: 14726
+  - title: "AI shortlist stability, the use-case groups for each B2B category"
+    path: "/datasets/010-shortlist-stability/ai-shortlist-stability-segments.csv"
+    license: "CC BY 4.0"
+    rows: 172
+tags: ["chatgpt", "gemini", "claude", "claude-ai", "shortlist", "rank-stability", "b2b-software", "brand-recommendations", "pre-registered"]
+draft: true
+---
+
+## Key findings
+
+- **The shortlist repeats.** We asked ChatGPT, Gemini and Claude the same 40 B2B software buying questions on seven days in a row. When ChatGPT put a vendor on its shortlist, that vendor was on the shortlist again in another run 81% of the time. Through the Claude API it was 78%. In claude.ai, where the questions ran on three days, it was 75%. On every platform that beat how often a vendor kept its exact position, by far more than our pre-registered margin.
+- **Gemini is less consistent.** Its repeat rate was 64%. On ChatGPT and Claude, vendors that made the shortlist in all seven runs held 56% to 60% of all shortlist places. On Gemini they held 32%.
+- **The platforms disagree with each other.** For the same question on the same day, two platforms shared 55% to 63% of their shortlists. ChatGPT and Claude each agreed with themselves on another day more than with any other platform.
+- **"Best for" claims move more than the shortlist.** A vendor was called best for the same use case again 39% to 52% of the time, and the exact wording repeated 4% to 9% of the time.
+
+## Why we asked
+
+Many AI-visibility tools sell rank: "you are number one in ChatGPT." Our earlier research found that rank in AI answers does not hold up well. Between two runs of the same question, about a quarter of the recommended brands change ([prompt phrasing and consistency](/articles/prompt-phrasing-consistency)). The same brand opened both answers only 68% of the time, and only 40% of the time when the question was reworded ([rank stability in ChatGPT](/articles/rank-stability-chatgpt)).
+
+A B2B buyer does not act on rank. A buyer acts on the shortlist: the handful of vendors worth a demo call. That is our reason for asking. It is not a finding of this study, and we measured nothing about what buyers do.
+
+So we asked a different question. When an AI assistant recommends a software vendor for a buyer's question, does it recommend that vendor again the next time the same question is asked? And is that more reliable than the vendor's exact place in the list?
+
+Before collecting anything, we wrote down what we expected. An assistant builds each answer from a pool of candidate vendors. The pool comes from what the model already knows and from the pages its search finds. Well-known vendors with steady search presence should enter that pool in almost every run. The order of the list, and the single pick, depend on reasoning about fit that varies from run to run. So we expected a steady shortlist with a moving order. We expected shortlist repeat rates near 0.8 and 30 to 40 points above exact position.
+
+This is Stage 1 of a two-stage study. Stage 1 asks about runs a few days apart. Stage 2 asks whether the same holds over five weeks. Both stages were pre-registered together, and Stage 2 is already collecting (see "Next: Stage 2").
+
+## Methods in brief
+
+**The questions.** We reused the 40 B2B software buying questions from [experiment 009](/articles/claude-api-vs-claude-ai), two for each of 20 software categories such as CRM, payroll and endpoint security. One of each pair asks for a shortlist for a described company. The other asks how the top options compare for a described need. No question names a vendor. The [40 prompts are public](/datasets/009-claude-model-fidelity/claude-api-vs-claude-ai-prompts.csv).
+
+**The platforms.** Each question was asked once a day on each of three platforms, at the same evening hour, from 2026-10-03 to 2026-10-09. We call each day's set of questions a wave, and each answer a run.
+
+| Platform | How we collected it | Model the platform reported |
+|---|---|---|
+| ChatGPT | DataForSEO, a data provider, from a US location, web search on | `gpt-5-6` in waves 1 to 5, `gpt-6` in waves 6 and 7 |
+| Gemini | DataForSEO, from the Gemini app, US location | 3.5 Flash-Lite in every wave |
+| Claude API | Anthropic's Batches API: Opus 5.5, medium effort, no system prompt, web search on, location Pittsburgh | Opus 5.5 in every wave |
+
+The Claude API setup is the one experiment 009 found closest to claude.ai. It is also how Spyglasses now tracks Claude.
+
+**A claude.ai replication.** Experiment 009 also asked these questions in claude.ai by hand, three times each, on 2026-09-27, 09-29 and 10-01. It used one fresh account with memory and personalization off, on the default setting (Opus 5.5). We had explored 14 of those questions while planning this study. The other 26 questions, 78 answers, were never looked at, so they form the claude.ai replication.
+
+**Sample.** In total, 2,770 answers were evaluated in this study. The main results use 918 of them: 840 new answers (40 questions, 7 waves, 3 platforms) and the 78 claude.ai answers. Another 156 are experiment 009 answers to the same 26 questions from two other Claude setups, used in robustness checks. The remaining 1,696 are older ChatGPT answers about headphones and design agencies, used to see whether the result holds beyond B2B software.
+
+**Who is on the shortlist.** We matched the vendors each answer names against a fixed list of vendor names for its category. A person checked the matching by hand (see "Audits"). Then the recommendation classifier Spyglasses runs in production labeled each named vendor. The classifier is a language model (`gpt-5.6-luna`), and we pinned its code and settings for the whole study. It gives each vendor one of four labels:
+
+- **Top choice:** singled out as the pick.
+- **One of many:** recommended alongside others.
+- **Generic mention:** named without an endorsement.
+- **Cautioned against:** steered away from for this buyer.
+
+A vendor is **shortlisted** when it is a top choice or one of many. The average shortlist held about 4 to 5 vendors on ChatGPT and Gemini and about 8 on Claude.
+
+**The repeat rate.** We compared every pair of runs of the same question on the same platform. With seven runs, each question has 21 pairs. For each pair, we counted the shortlist places on both answers and the places held by a vendor that is on both lists.
+
+Here is an invented example. Run 1 shortlists vendors A, B, C, D and E. Run 2 shortlists A, B, C and F. Together the two lists have 9 places. Vendors A, B and C appear on both, so they hold 6 of the 9 places. The repeat rate for this pair is 6 / 9, or 0.67. We add up the places across all pairs of a platform before dividing, so long lists and short lists count by their size. Statisticians call this a pooled Dice coefficient. In this article we call it the repeat rate, or "shortlisted again".
+
+We computed the same rate for other things we could track: the top choice, the vendor named first, the vendor in the exact same position, and a vendor called best for the same use case. **Exact position** means the vendor's place in the order in which the answer first names each vendor.
+
+**Intervals.** Runs of one question are related to each other, so we treated each question as the unit of resampling. We drew the 40 questions at random with replacement 2,000 times and recomputed every number each time. The middle 90% of those results is the 90% interval, the range of values the data supports.
+
+**The test and the margin.** The main test, H1, asks whether the shortlist repeat rate beats the exact-position repeat rate by more than 0.10. We chose 0.10 before collecting data. It is about one vendor in a typical five-to-eight-vendor shortlist. A result counts as supported when the whole interval sits above 0.10. We ran H1 four times, once per platform, so we widened the intervals with the Holm method. That keeps the chance of any false alarm across the four tests at 5%.
+
+The full plan is in the [pre-registered spec](https://github.com/orchestra-code/aeo-experiments/blob/6342963/experiments/010-shortlist-stability/spec.md), frozen at commit `6342963` on 2026-10-03, before the first wave.
+
+## Results
+
+### The shortlist repeats on ChatGPT and Claude, less so on Gemini
+
+<figure>
+  <img src="/figures/010-shortlist-stability/stage1_shortlist.png" alt="A dot plot, one row per platform, of the share of shortlisted vendors shortlisted again in another run, with 90% intervals. ChatGPT 81%, Claude API 78%, claude.ai 75% (hollow marker, wider interval), Gemini 64%." />
+</figure>
+
+| Platform | Shortlisted again | Same exact position again | Difference (H1) | Verdict |
+|---|---|---|---|---|
+| ChatGPT | 0.81 (0.78 to 0.84) | 0.35 | 0.46 (0.42 to 0.50) | supported |
+| Claude API | 0.78 (0.76 to 0.81) | 0.22 | 0.56 (0.52 to 0.59) | supported |
+| claude.ai | 0.75 (0.71 to 0.80) | 0.28 | 0.47 (0.41 to 0.53) | supported |
+| Gemini | 0.64 (0.60 to 0.68) | 0.27 | 0.37 (0.33 to 0.41) | supported |
+
+The intervals in the Difference column are the Holm-widened ones.
+
+On ChatGPT and Claude, about four in five shortlist places went to a vendor that was also shortlisted in the other run. claude.ai, with only three runs per question, landed in the same range. Gemini was clearly lower: about two in three.
+
+The exact position repeated far less often everywhere. On every platform, the shortlist beat exact position by 0.37 to 0.56, and every interval sits well above the 0.10 margin.
+
+### Most of each shortlist is a stable core
+
+<figure>
+  <img src="/figures/010-shortlist-stability/stage1_shortlist_runs.png" alt="Stacked bars, one per platform, splitting all shortlist places across a question's 7 runs by how many runs that vendor was shortlisted in. ChatGPT: 60% in every run, 19% in 5 or 6, 17% in 2 to 4, 4% in one run only. Claude API: 56%, 19%, 21%, 4%. Gemini: 32%, 31%, 28%, 9%." />
+</figure>
+
+Another way to see the same thing is to count, for each question, how many of the seven runs shortlisted each vendor. On ChatGPT, 60% of all shortlist places went to vendors that were shortlisted in every run. Vendors that appeared only once held 4%. The Claude API looked much the same, at 56% and 4%.
+
+Gemini's core was smaller. Vendors shortlisted in every run held 32% of its places, and one-run vendors held 9%.
+
+Counting vendors rather than places gives the same picture. Of the vendors a question shortlisted at least once, 50% on ChatGPT were shortlisted in at least 80% of the runs, 43% on the Claude API and 25% on Gemini. A vendor shortlisted in only one run was common on every platform (18%, 18% and 32%), but those vendors hold few places. In claude.ai's three runs, 47% of vendors were shortlisted every time and 34% only once.
+
+This chart is a new summary, added after the results review. It uses the same counts as the pre-registered "80% of runs" share.
+
+### Part of the stability is the market
+
+Some vendors are well known in their category. They will appear in almost any answer about it. To see how much of the repeat rate comes from that, we compared two *different* questions in the same category, asked on the same day.
+
+| Platform | Same question, another run | Different question, same category | Difference |
+|---|---|---|---|
+| ChatGPT | 0.81 | 0.59 | 0.22 |
+| Claude API | 0.78 | 0.47 | 0.32 |
+| Gemini | 0.64 | 0.45 | 0.20 |
+| claude.ai | 0.75 | 0.50 | 0.25 |
+
+Two different questions in the same category share about half their shortlist. The specific question adds another 20 to 32 points on top of that. So the shortlist is partly the market's best-known vendors and partly the buyer's question.
+
+### The platforms disagree with each other
+
+<figure>
+  <img src="/figures/010-shortlist-stability/stage1_platform_agreement.png" alt="A dot plot with 90% intervals. Top three rows: the same platform on another day, ChatGPT 81%, Claude API 78%, Gemini 64%. Bottom three rows: two platforms on the same day, ChatGPT vs Gemini 63%, ChatGPT vs Claude API 63%, Gemini vs Claude API 55%." />
+</figure>
+
+For the same question on the same day, ChatGPT and Gemini shared 0.63 of their shortlists (0.59 to 0.67). ChatGPT and the Claude API also shared 0.63 (0.59 to 0.67). Gemini and the Claude API shared 0.55 (0.52 to 0.58).
+
+ChatGPT and Claude each agreed with themselves on another day more than with any other platform on the same day. Gemini is the exception: its agreement with itself (0.64) was about the same as its agreement with ChatGPT (0.63). A vendor's standing on one platform says only part of what it is on another.
+
+### "Best for" use cases move more than the shortlist
+
+AI answers often say a vendor is best for something, such as small teams or regulated industries. The exact wording varies a lot, so we grouped the phrases into seven or eight use cases per category. A second language-model classifier assigned each phrase to a use case. It gave the same use case on two passes 96% of the time.
+
+Shortlisted for the same use case again, the repeat rate was 0.51 on ChatGPT, 0.52 on the Claude API, 0.46 on claude.ai and 0.39 on Gemini. That is 0.25 to 0.30 below the shortlist on every platform, and every difference cleared the 0.10 margin (H7). The exact wording, after light clean-up, repeated only 4% to 9% of the time.
+
+So a vendor tends to stay on the list, but the reason the answer gives for it moves. We did not test why. It would make a good follow-up study.
+
+### Endorsed versus merely named
+
+The shortlist was exactly as stable as the full set of vendors an answer named: the difference was 0.00, equivalent to zero within a band of 0.05 on every platform (H6). The labels do not make the list more stable. They tell you which named vendors are endorsed.
+
+That distinction is often real. The shortlist differed from the set of named vendors in 45% of ChatGPT answers, 68% of Claude API answers and 33% of Gemini answers. Claude cautioned against at least one vendor in 28% of its answers, ChatGPT in 11% and Gemini in 7%. On ChatGPT and the Claude API, the most common reason for a caution was that the vendor did not fit the buyer's company size. On Gemini it was complexity.
+
+### Top picks rotate inside a stable shortlist
+
+Our [earlier research](/articles/rank-stability-chatgpt) already showed that the top spot does not hold, and the top pick behaves the same way. The top choice was the top choice again in another run 55% of the time on ChatGPT, 43% on the Claude API, 32% on claude.ai and 39% on Gemini. That is less often than the first-named vendor stayed first (0.53 to 0.65). But a top pick rarely leaves the list. It was still shortlisted in the other run 95% of the time on ChatGPT, 99% on the Claude API and 95% on claude.ai (interval down to 0.88), though only 82% on Gemini. Part of this churn is the classifier itself: when we re-ran it on identical answers, the top choice stayed the same 94% of the time on ChatGPT and 76% to 82% on the Claude API and Gemini, while the shortlist came back the same 97% to 100% of the time.
+
+### ChatGPT changed models during collection
+
+ChatGPT reported `gpt-5-6` for waves 1 to 5 and `gpt-6` for waves 6 and 7, from 2026-10-08. That is part of what a vendor experiences, so the main results keep both. With only the five `gpt-5-6` waves, ChatGPT's shortlist repeat rate was 0.83 (0.81 to 0.86), and the H1 verdict did not change. The change also means fewer days per model than we planned.
+
+### Beyond B2B software
+
+We also ran the same measures on older ChatGPT answers from experiments 002, 003 and 005, collected in July and August 2026 on `gpt-5-5`. These are secondary results.
+
+For headphone questions (1,615 answers, 95 questions, 17 runs each over three weeks), the shortlist repeat rate was 0.82. For brand-design agencies (81 answers, 27 questions, 3 runs each), it was 0.36. The agency set is small, so it is underpowered. Agencies are a fragmented market with many small firms, and there the shortlist churned. How stable a shortlist is depends on how concentrated the market is.
+
+## What we can and cannot claim
+
+**We can claim:** across 918 B2B answers evaluated in this study, when ChatGPT, Claude (API and claude.ai) or Gemini shortlisted a software vendor for a buyer's question, it shortlisted that vendor again in another run of the same question 81%, 78%, 75% and 64% of the time. On every platform, that beat the vendor's exact position by more than our 0.10 margin, at 90% confidence after the Holm correction.
+
+**One question is not a category.** The unit is a specific question. Two different questions in the same category shared only 0.45 to 0.59 of their shortlist. A vendor that is shortlisted for one question may not be shortlisted for another in the same category.
+
+**Some of the stability is the market.** In a concentrated category, well-known vendors appear for almost any question. The specific question added 20 to 32 points on top of that. In a fragmented market, such as design agencies, the shortlist churned.
+
+**Gemini is less consistent.** Its repeat rate, 64%, was clearly below ChatGPT's and Claude's, and its stable core was about half their size. Its top picks fell off the shortlist more often too.
+
+**Seven consecutive days.** Stage 1 compares runs zero to six days apart. Whether the shortlist holds over weeks is the Stage 2 question.
+
+**How we collected.** ChatGPT and Gemini came through DataForSEO, a third-party data service, from a US location. Claude came through the Anthropic API from Pittsburgh. claude.ai came by hand from one fresh account. We make no claim about logged-in or personalized sessions, follow-up questions, or other platforms such as Google AI Overviews or Perplexity.
+
+**B2B software only for the main claims.** The 40 questions are synthetic, written by a model and reviewed by a person. They are not real buyer phrasing. The headphone and agency results are secondary.
+
+**The vendor list bounds what we count.** Vendors that are not on our list are invisible to the main measures. Counting every vendor the classifier names gave the same conclusions (see "Robustness").
+
+**The classifier is a language model.** Its labels are not perfect. On identical text it agreed with itself on 96% of labels. The shortlist reproduced 97% to 100% of the time on identical text, but the top choice only 55% to 94%, so some of the top-pick churn is the classifier.
+
+**Nothing about buyers.** We did not measure what anyone does with an answer. "The shortlist gets the demo call" is why we asked, not what we found.
+
+**No vendor is being judged.** Vendors appear only as codes in the data, and this article names none.
+
+## Pre-registration, audits and changes to the plan
+
+**Pre-registration.** We explored one third of the older answers (headphones, agencies and claude.ai), then wrote and froze the plan before the first wave. The plan fixed the hypotheses, the margins, the decision rules, the questions, the collection schedule and the classifier version. The vendor list and the use-case groups were built from early answers and frozen before any result was computed. The other two thirds of the older answers were held back until then.
+
+**Two controls.**
+
+- **Positive control.** Shortlists for the same question should overlap far more than shortlists for questions in different categories. If not, answers were filed under the wrong question. Cross-category overlap was 0.01 to 0.02 on every platform, against 0.64 to 0.81 within a question. It passed easily.
+- **Placebo.** We split the questions at random into two halves and computed the H1 gap on each. The halves should agree within 0.10. On ChatGPT and the Claude API they did. On claude.ai the result was inconclusive (difference -0.05, interval -0.18 to 0.06): its halves have only 13 questions each. On Gemini the placebo came out as a real difference: -0.06 (interval -0.12 to -0.00). That means Gemini's gap depends more on which questions are in the sample than our interval shows, so its intervals are probably a little too narrow. It does not change the verdict. The gap was 0.34 in one half and 0.40 in the other, both far above the 0.10 margin.
+
+**Audits.**
+
+- **Completeness.** All 40 questions came back with a usable answer in every wave on every platform. No answer was a refusal or empty.
+- **Vendor matching, by hand.** A person read 30 answers from waves 1 and 2, 10 per platform, without knowing the platform, and marked every vendor. The matcher found all 211 correctly, listed none wrongly and missed none: precision 1.00 and recall 1.00, against minimums of 0.95 and 0.90.
+- **Classifier test-retest.** We re-ran the classifier on a random 10% of answers (277). It gave the same label to 96% of vendor mentions. Cohen's kappa, an agreement score that corrects for chance, was 0.89. The minimum was 90% agreement.
+- **Use-case classifier.** The same use case on two passes for 96% of distinct phrases, against a minimum of 90%.
+- **Top-choice cap.** The classifier sometimes names more than two top choices in one answer. Production rules then demote them to one of many. That happened in 1% to 3% of B2B answers.
+- **Model drift.** ChatGPT changed models during collection (above). Gemini and Claude did not.
+
+**Changes to the plan.** We made eight changes after the freeze. The spec's deviation log records each one.
+
+1. **A prompt check.** Our harness refuses an answer whose question text differs from the prompt file. It stopped on older agency answers where a "+" had become a space. The check now allows exactly that. None of the 40 B2B questions contains a "+". No result had been computed.
+2. **One late task.** One ChatGPT question in wave 6 failed on its evening and ran the next evening. It stays in the analysis with its true date.
+3. **The hand-check sample.** The plan said 15 answers per platform, written when there were two platforms. With three, we kept 30 answers, 10 per platform.
+4. **The placebo split.** The plan split questions by odd and even numbers. In this question set, every odd number is a "shortlist" question and every even number an "evaluate" question, so that split would have tested question type, not chance. We split at random within each type instead. The result is above: the Gemini placebo came out as a real difference, and the claude.ai one was inconclusive.
+5. **The vendor list ran late.** The plan said to extend the vendor list and build the use-case groups after wave 2. We did it after wave 7 had been collected. We used only the inputs the plan allows: the classifier's output on waves 1 and 2 and the older claude.ai answers. No result was computed before both were frozen.
+6. **Citation links counted as mentions.** ChatGPT and Gemini answers cite sources as links whose visible text is a website address. Our matcher counted a vendor's address as a mention of the vendor, sometimes as the first one. The hand check found this, and we fixed it before computing any result: links whose text is an address are now removed before matching. It changed 101 of 280 Gemini answers and 28 of 280 ChatGPT answers. Before the fix, the hand check scored precision 0.98.
+7. **What counts as a refusal.** The planned rule flagged 3 of 2,770 answers that open like a refusal. None of them declined the task. A refusal now needs a refusal-like opening and no vendor in the answer, so none of the 3 was excluded. This was decided before any result was computed.
+8. **The lead chart.** The plan had a lead chart with every status side by side. At the results review we chose to lead with the shortlist alone. The all-status chart is in the appendix. No test or estimate changed.
+
+## Robustness
+
+H1 held in every check, on every platform.
+
+- **Every vendor the classifier names,** not only those on our vendor list: shortlist repeat rates of 0.78 (ChatGPT), 0.76 (Claude API), 0.74 (claude.ai) and 0.60 (Gemini). With every name counted, the shortlist was more stable than the set of named vendors by 0.07 to 0.13. The extra names come and go more often than the vendors on our list.
+- **ChatGPT's first model only:** 0.83 (above). The shortlist's lead over the top choice shrank to 0.16 (0.09 to 0.24), so on this subset it may be less than 0.10.
+- **Without answers that name no listed vendor:** no change.
+- **With the classifier's second pass swapped in:** no change to any H1 verdict.
+- **Resampling whole categories instead of questions:** no change.
+- **claude.ai default and higher reasoning pooled** (six runs per question): 0.74, and the top pick stayed shortlisted 97% of the time.
+- **"Shortlist" questions versus "evaluate" questions:** questions that ask for a shortlist were less stable than questions that ask how options compare, on every platform. On Gemini the gap was largest, 0.57 against 0.70. Some top-pick results weakened in the smaller subsets.
+
+## Next: Stage 2, over five weeks
+
+Stage 1 compared runs a few days apart. Stage 2 asks whether the shortlist drifts over time. It was pre-registered with Stage 1, and everything it uses is already frozen: the questions, the vendor list, the use-case groups and the schedule.
+
+**Collection.** Four more waves, on 2026-10-16, 10-23, 10-30 and 11-06. Same 40 questions, same three platforms, same evening hour.
+
+**The main test, H5.** For ChatGPT, Gemini and the Claude API, we will compare the shortlist repeat rate for runs at least 27 days apart with the rate for runs 1 to 2 days apart. The hypothesis is that the difference is zero, within a band of plus or minus 0.05. Losing five points of repeat rate in five weeks would mean tracking needs monthly recalibration. We will test it with two one-sided tests (TOST), a standard way to show a difference is small enough to ignore, with the Holm correction across the three platforms.
+
+**Secondary.** The same test for the top choice and for best-for use cases. For ChatGPT headphone answers, runs at least 15 days apart against 0 to 2 days apart.
+
+We expect no drift. We will publish the result either way, in about a month, around 2026-11-11.
+
+## Data and reproducibility
+
+- **Datasets:** [answers](/datasets/010-shortlist-stability/ai-shortlist-stability-answers.csv) (CC BY 4.0, 2,770 answers evaluated in this study), [answer and vendor rows](/datasets/010-shortlist-stability/ai-shortlist-stability-mentions.csv) (CC BY 4.0) and [use-case groups](/datasets/010-shortlist-stability/ai-shortlist-stability-segments.csv) (CC BY 4.0). Each has a datasheet with the column dictionary. Vendors appear as codes, so every repeat rate in this article can be recomputed without naming a vendor. Answer text, best-for phrases and caution reasons are not released. The headphone and agency question text is not released.
+- **Questions:** the [40 B2B prompts](/datasets/009-claude-model-fidelity/claude-api-vs-claude-ai-prompts.csv), released with experiment 009.
+- **Pre-registered spec:** [frozen at `6342963`](https://github.com/orchestra-code/aeo-experiments/blob/6342963/experiments/010-shortlist-stability/spec.md) on 2026-10-03. The [current spec](https://github.com/orchestra-code/aeo-experiments/blob/main/experiments/010-shortlist-stability/spec.md) adds the deviation log and the instrument freeze.
+- **Analysis code:** [experiments/010-shortlist-stability/](https://github.com/orchestra-code/aeo-experiments/tree/main/experiments/010-shortlist-stability), including the collection driver, the audits, the model, the robustness checks and the figure code.
+
+## Appendix: every status side by side
+
+<figure>
+  <img src="/figures/010-shortlist-stability/stage1_retention.png" alt="Four dot plot panels, one per platform, each with five rows and 90% intervals: on the shortlist, best for the same use case, the top pick, named first, and in the exact same position. On every platform the shortlist is highest (ChatGPT 0.81, Gemini 0.64, Claude API 0.78, claude.ai 0.75) and the exact position lowest (0.35, 0.27, 0.22, 0.28), with the use case, top pick and first-named vendor in between." />
+</figure>
+
+| Repeat rate within a question | ChatGPT | Claude API | claude.ai | Gemini |
+|---|---|---|---|---|
+| On the shortlist | 0.81 | 0.78 | 0.75 | 0.64 |
+| Best for the same use case | 0.51 | 0.52 | 0.46 | 0.39 |
+| Named first | 0.65 | 0.54 | 0.63 | 0.53 |
+| Top choice | 0.55 | 0.43 | 0.32 | 0.39 |
+| Exact position | 0.35 | 0.22 | 0.28 | 0.27 |
+| Top choice still shortlisted | 0.95 | 0.99 | 0.95 | 0.82 |
+
+## Changelog
+
+- 2026-10-13: draft.

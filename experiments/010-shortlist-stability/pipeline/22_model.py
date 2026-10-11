@@ -192,10 +192,14 @@ def h_pla(rep: Report, ans: list[dict], datasets: list[str], n_boot: int) -> boo
         v = eq_verdict(lo, hi, PLA_BAND)
         ok = v in ("NULL", "NEGLIGIBLE")
         ok_all &= ok
+        gap_a = p.est("A", "R") - p.est("A", "Pk")
+        gap_b = p.est("B", "R") - p.est("B", "Pk")
         rep.data["h_pla"].append({"dataset": ds, "estimate": d.point, "lo": lo, "hi": hi,
+                                  "gap_a": gap_a.point, "gap_b": gap_b.point,
                                   "p": p_tost(d, PLA_BAND), "verdict": v, "label": EQ_LABELS[v],
                                   "passed": ok})
-        rep.say(f"- {ds}: {fmt_ci(d.point, lo, hi)} -> {EQ_LABELS[v]}"
+        rep.say(f"- {ds}: {fmt_ci(d.point, lo, hi)} -> {EQ_LABELS[v]} (H1 gap on the two "
+                f"halves: {gap_a.point:.2f} and {gap_b.point:.2f})"
                 + ("" if ok else "  **WARNING: placebo not null or negligible**"))
     rep.say("")
     return ok_all

@@ -19,10 +19,10 @@ Within-prompt R retention minus cross-category R retention (same platform, same 
 
 The H1 gap (R minus Pk) on one seeded random half of the prompts minus the same gap on the other half, TOST +/-0.10. Must be null or negligible. The halves are drawn within each intent stratum (spec deviation 4: the frozen odd/even split coincided with the shortlist/evaluate intent split in the B2B panel).
 
-- chatgpt_b2b: -0.04 [-0.10, 0.01] -> Practically equivalent (null)
-- gemini_b2b: -0.06 [-0.12, -0.00] -> Real change: report it  **WARNING: placebo not null or negligible**
-- claude_api_b2b: -0.00 [-0.07, 0.05] -> Practically equivalent (null)
-- claude_b2b: -0.05 [-0.18, 0.06] -> Inconclusive: do not claim a null  **WARNING: placebo not null or negligible**
+- chatgpt_b2b: -0.04 [-0.10, 0.01] -> Practically equivalent (null) (H1 gap on the two halves: 0.44 and 0.48)
+- gemini_b2b: -0.06 [-0.12, -0.00] -> Real change: report it (H1 gap on the two halves: 0.34 and 0.40)  **WARNING: placebo not null or negligible**
+- claude_api_b2b: -0.00 [-0.07, 0.05] -> Practically equivalent (null) (H1 gap on the two halves: 0.56 and 0.56)
+- claude_b2b: -0.05 [-0.18, 0.06] -> Inconclusive: do not claim a null (H1 gap on the two halves: 0.45 and 0.50)  **WARNING: placebo not null or negligible**
 
 ## Stage 1 primary family: H1 (the shortlist beats position)
 
