@@ -1,0 +1,173 @@
+category,segment_id,label,definition,edited
+CPQ,mid_market_budget,Mid-Market Budget Buyers,"Mid-sized manufacturers and budget-conscious teams seeking practical CPQ, manageable configurations, or fast implementation.",0
+CPQ,enterprise_global,Enterprise Global Deployments,"Large organizations and manufacturers needing global rollouts, multi-country support, multiple systems, or enterprise-scale governance.",0
+CPQ,existing_system_ecosystems,Existing System Ecosystems,"Organizations choosing CPQ to extend or integrate with an established ERP, CRM, CAD, or other business technology stack.",0
+CPQ,eto_cto_operations,ETO and CTO Operations,"Manufacturers selling engineer-to-order, configure-to-order, made-to-order, or similarly build-to-order products.",0
+CPQ,complex_configuration,Complex Product Configuration,"Teams managing highly configurable products with deep rules, large option spaces, technical constraints, multi-level BOMs, or complex variants.",0
+CPQ,industrial_equipment,Industrial Equipment Makers,"Manufacturers of industrial machinery, heavy equipment, aerospace and defense products, HVAC systems, vehicles, or other specialized equipment.",0
+CPQ,cad_engineering_automation,CAD Engineering Automation,"Engineering-led teams needing CAD, BOM, drawing, feasibility, or other automated outputs from the quoting and configuration process.",0
+CPQ,pricing_margin_control,Pricing and Margin Control,"Sales and commercial teams focused on discounting, price waterfalls, contracts, approvals, pricing optimization, or margin protection.",0
+CPQ,general,General or all-round,"All-round or unqualified picks: most people, overall, everyday use.",0
+CRM,budget_value_buyers,Budget and Value Buyers,"Teams prioritizing low total cost, transparent pricing, strong capability per dollar, or cost-effective CRM workflows.",0
+CRM,small_lean_teams,Small Lean Teams,"Small, growing, or administratively lean teams that need simple setup, fast rollout, low overhead, and easy rep adoption.",0
+CRM,existing_stack_users,Existing Stack Users,"Organizations choosing a CRM for compatibility with the productivity suite, ERP, accounting, or other business systems they already use.",1
+CRM,saas_billing_operations,SaaS Billing Operations,"SaaS and subscription businesses that need billing-platform integrations, subscription data models, usage tracking, or quote-to-cash workflows.",0
+CRM,industrial_project_sales,Industrial Project Sales,"Manufacturers, equipment suppliers, distributors, and field-service organizations managing project-based, installation, service-contract, or industrial B2B sales.",0
+CRM,sales_pipeline_teams,Sales Pipeline Teams,"Sales-led teams prioritizing straightforward pipeline management, stage visibility, forecasting, sales automation, and structured deal tracking.",0
+CRM,complex_custom_processes,Complex Custom Processes,"Mid-market and enterprise organizations requiring sophisticated quoting, CPQ, approvals, highly customized workflows, complex contracts, or detailed process control.",0
+CRM,marketing_sales_alignment,Marketing-Sales Alignment,"Teams that need coordinated marketing and sales operations, inbound lead management, marketing automation, or unified customer and revenue data.",0
+CRM,general,General or all-round,"All-round or unqualified picks: most people, overall, everyday use.",0
+HRIS,standalone_leave,Standalone leave tracking,"Organizations seeking dedicated PTO, leave, accrual, approval, or protected-leave management without adopting a broader HRIS.",0
+HRIS,payroll_ecosystem,Payroll-connected operations,"Teams that want HR, PTO, timekeeping, or benefits connected to an existing payroll provider or payroll-centered stack.",0
+HRIS,chat_based_workflows,Chat-based HR workflows,Teams that prefer managing leave requests and lightweight HR tasks through workplace chat or similar collaboration tools.,1
+HRIS,hourly_shift_scheduling,Hourly shift operations,"Organizations managing hourly, deskless, frontline, rotating, overtime-heavy, or 24/7 workforces that need scheduling and time management.",0
+HRIS,manufacturing_workforces,Manufacturing workforces,"Manufacturers and plants needing industry-specific shift planning, labor management, workforce automation, or production scheduling.",0
+HRIS,smb_midmarket_simplicity,SMB and midmarket simplicity,"Small and mid-sized organizations prioritizing affordability, ease of use, fast rollout, straightforward administration, or reduced reliance on dedicated HR staff.",0
+HRIS,global_compliance,Global compliance needs,"Organizations operating across countries, states, locations, or complex policy environments that need multi-jurisdiction leave, payroll, or compliance support.",0
+HRIS,unified_hris,Unified HR management,"Organizations replacing fragmented tools or spreadsheets with an all-in-one system for core HR, onboarding, employee records, payroll, IT, benefits, or broader HR administration.",0
+HRIS,general,General or all-round,"All-round or unqualified picks: most people, overall, everyday use.",0
+SOC 2 compliance automation,small_lean_teams,Small Lean Teams,"Teams with limited compliance, security, or GRC staffing that need a low-effort implementation.",0
+SOC 2 compliance automation,first_time_compliance,First-Time Compliance,"Organizations completing their first SOC 2 or compliance cycle and seeking guided onboarding, hand-holding, or expert support.",0
+SOC 2 compliance automation,budget_conscious_buyers,Budget-Conscious Buyers,"Teams prioritizing affordability, price-to-value, or a lower-cost path to compliance.",0
+SOC 2 compliance automation,multi_framework_programs,Multi-Framework Programs,Organizations managing SOC 2 alongside several additional compliance frameworks or needing broad framework mapping.,0
+SOC 2 compliance automation,enterprise_risk_teams,Enterprise Risk Teams,"Larger or regulated organizations with dedicated audit, risk, governance, SOX, or complex internal-control functions.",0
+SOC 2 compliance automation,technical_automation_teams,Technical Automation Teams,"Engineering-led or technically sophisticated teams prioritizing integrations, continuous evidence collection, automation, and detailed control workflows.",0
+SOC 2 compliance automation,bundled_audit_buyers,Bundled Audit Buyers,"Organizations wanting compliance software and audit execution, auditor access, or audit expertise from an integrated provider.",0
+SOC 2 compliance automation,general,General or all-round,"All-round or unqualified picks: most people, overall, everyday use.",0
+accounts payable automation,small_simple_ap,Small and Simple AP,"Small businesses, startups, lean teams, and buyers prioritizing low cost, easy adoption, minimal implementation, or straightforward invoice processing.",0
+accounts payable automation,mid_market_teams,Mid-Market Teams,"Growing or mid-sized organizations seeking a practical AP platform without the scale, complexity, or governance requirements of large enterprises.",0
+accounts payable automation,enterprise_erp,Enterprise ERP Environments,Large organizations and teams running established enterprise ERP suites or other complex ERP environments that need deep integration and controls.,1
+accounts payable automation,healthcare_workflows,Healthcare Workflows,"Healthcare providers, clinics, medical groups, surgery centers, and healthcare networks needing industry-specific invoice, approval, purchasing, or payment workflows.",0
+accounts payable automation,multi_entity_operations,Multi-Entity Operations,"Organizations managing multiple legal entities, subsidiaries, locations, clinics, or business units that need centralized AP and entity-level control.",0
+accounts payable automation,high_volume_ap,High-Volume AP,"Organizations processing large numbers of invoices or transactions and prioritizing scalable capture, automation, exception handling, and throughput.",0
+accounts payable automation,procurement_po_control,Procurement and PO Control,"Procurement-led teams with purchase-order-heavy workflows that need matching, purchasing visibility, approval governance, or end-to-end procure-to-pay control.",0
+accounts payable automation,global_payments_tax,Global Payments and Tax,"Organizations paying international suppliers or contractors that need cross-border payments, multi-country support, tax compliance, or global vendor management.",0
+accounts payable automation,general,General or all-round,"All-round or unqualified picks: most people, overall, everyday use.",0
+applicant tracking system,budget_value,Budget-conscious teams,"Teams primarily prioritizing low cost, transparent pricing, free tiers, or strong value, including budget-sensitive small and mid-sized businesses.",0
+applicant tracking system,small_easy_start,"Simple, easy setup","Small, non-technical, first-time, or lean teams seeking straightforward workflows, quick implementation, low overhead, or a simple replacement for spreadsheets.",0
+applicant tracking system,structured_fair_hiring,Structured fair hiring,"Teams prioritizing standardized hiring processes, interviews, scorecards, consistent evaluation, and rigorous or fair candidate comparison.",0
+applicant tracking system,integrated_hr,Integrated HR operations,"Companies wanting an ATS connected with an HRIS, payroll, onboarding, core HR, or a broader unified HR system.",0
+applicant tracking system,scaling_collaborative,Scaling collaborative hiring,"Growing, mid-market, enterprise, high-volume, or multi-department organizations needing scalable workflows for many roles, hiring managers, or recruiting participants.",0
+applicant tracking system,analytics_reporting,Analytics-driven recruiting,"Data-focused recruiting teams prioritizing reporting, dashboards, hiring metrics, analytics, or AI-supported screening and decision-making.",0
+applicant tracking system,employer_brand_experience,Candidate experience and brand,"Companies prioritizing branded career pages, employer branding, polished recruiting experiences, candidate attraction, or a candidate-first process.",0
+applicant tracking system,sourcing_relationships,Sourcing and relationships,"Recruiting teams focused on outbound or passive-candidate sourcing, talent pools, candidate relationship management, nurturing, or proactive recruiting.",0
+applicant tracking system,general,General or all-round,"All-round or unqualified picks: most people, overall, everyday use.",0
+cloud data warehouse,budget_small_scale,Budget and Small-Scale Teams,"Teams prioritizing low cost, low entry price, or analytics for small, modest, or lightweight data volumes.",0
+cloud data warehouse,ecosystem_aligned,Cloud Ecosystem Teams,"Organizations already standardized on a major productivity suite, BI tool, public cloud, or another major cloud ecosystem.",1
+cloud data warehouse,self_service_bi,Self-Service BI Users,"Non-SQL, spreadsheet-oriented, or business users who need visual querying, drag-and-drop reporting, dashboards, or no-code analytics.",0
+cloud data warehouse,managed_low_ops,Managed Low-Operations Teams,"Teams with limited engineering capacity that prioritize managed ingestion, easy setup, minimal maintenance, and hands-off infrastructure.",0
+cloud data warehouse,marketing_activation,Marketing Activation Teams,"Organizations needing unified customer profiles, reverse ETL, audience syncing, or data activation in marketing and operational tools.",0
+cloud data warehouse,transformation_engineering,Analytics Engineering Teams,"Teams building SQL transformations, tested and version-controlled data models, warehouse-centric pipelines, or cleaned and joined source data.",0
+cloud data warehouse,complex_enterprise,Complex Enterprise Analytics,"Large or sophisticated organizations with high-volume, real-time, governed, multi-cloud, data-sharing, machine-learning, or advanced analytics requirements.",0
+cloud data warehouse,general,General or all-round,"All-round or unqualified picks: most people, overall, everyday use.",0
+contract lifecycle management,enterprise_scale,Enterprise scale,"Organizations with very large contract volumes, complex portfolios, global operations, extensive governance, or highly customized enterprise-wide requirements.",0
+contract lifecycle management,mid_market_speed,Mid-market simplicity,"Small to mid-sized or budget-conscious organizations prioritizing affordable CLM, quick deployment, ease of setup, usability, or lighter contract-management needs.",0
+contract lifecycle management,ecosystem_integration,Ecosystem integration,"Organizations choosing CLM to fit an existing e-signature, CRM, ERP, procurement, insurance-management, or other enterprise software ecosystem.",0
+contract lifecycle management,procurement_vendor,Procurement and vendors,"Procurement-led teams managing supplier, vendor, sourcing, purchase-order, spend, or service-provider contracts and relationships.",0
+contract lifecycle management,legal_contracting,Legal contracting workflows,"Legal and business teams focused on drafting, negotiation, intake, approvals, contract generation, or front-end revenue and sales workflows.",0
+contract lifecycle management,post_signature,Post-signature management,"Teams prioritizing signed-contract repositories, obligation tracking, renewals, amendments, contract analysis, performance oversight, or ongoing governance.",0
+contract lifecycle management,regulated_insurance,Regulated and insurance,"Regulated organizations and insurance businesses requiring jurisdiction-specific workflows, auditability, compliance controls, or industry-specific contract data and processes.",0
+contract lifecycle management,general,General or all-round,"All-round or unqualified picks: most people, overall, everyday use.",0
+customer support helpdesk,hospitality_operations,Hospitality Operations,"Hotels, hotel groups, and property teams needing reservations, guest messaging, housekeeping, maintenance, PMS context, or cross-property oversight.",0
+customer support helpdesk,internal_service_desk,Internal Service Desks,"Organizations handling internal IT, staff, engineering, facilities, or cross-department requests rather than primarily customer inquiries.",0
+customer support helpdesk,crm_ecosystem_teams,CRM Ecosystem Teams,"Teams prioritizing native integration with their CRM platform, CRM data, sales, marketing, or customer records.",1
+customer support helpdesk,subscription_ecommerce,Subscription and Ecommerce,"SaaS, subscription, ecommerce-platform, and product-led businesses supporting customers with billing, orders, product questions, or retention needs.",1
+customer support helpdesk,small_value_teams,Small Value Teams,"Small or growing teams prioritizing affordability, easy setup, quick staff training, practical features, or strong value.",0
+customer support helpdesk,email_ticketing,Email Ticketing,"Teams centered on conventional ticketing, email support, shared inboxes, structured workflows, and collaborative case handling.",0
+customer support helpdesk,omnichannel_support,Omnichannel Support,"Support organizations prioritizing phone, chat, in-app, website, messaging-app, or broad channel coverage, especially when conversations dominate.",1
+customer support helpdesk,complex_enterprise_support,Complex Enterprise Support,"Large or scaling support operations requiring advanced routing, SLAs, automation, analytics, security, customization, or high-volume workflow management.",0
+customer support helpdesk,general,General or all-round,"All-round or unqualified picks: most people, overall, everyday use.",0
+e-signature,lean_signing_teams,Lean signing teams,"Small or mid-sized teams seeking affordable, straightforward, low-volume signing with minimal setup and development effort.",0
+e-signature,integration_focused_teams,Integration-focused teams,"Organizations prioritizing no-code automation, APIs, connectors, or integrations with CRM, ERP, procurement, and other business systems.",0
+e-signature,ecosystem_native_users,Ecosystem-native users,"Teams already invested in a major productivity, document, CRM, cloud-storage, or similar software ecosystem.",1
+e-signature,regulated_compliance_workflows,Regulated compliance workflows,"Organizations that need strong auditability, identity verification, security, governance, or compliance for regulated document signing.",0
+e-signature,banking_financial_services,Banking and finance,"Banks, fintechs, lenders, insurers, and financial-services organizations needing banking-platform connectivity or finance-specific workflows.",0
+e-signature,enterprise_high_volume,Enterprise high-volume use,"Large organizations and vendors managing high contract volumes, complex routing, enterprise security, or broad organizational adoption.",0
+e-signature,contract_lifecycle_workflows,Contract lifecycle workflows,"Teams handling contract creation, PDF editing, drafting, negotiation, templates, collaboration, approvals, vendor agreements, or procurement processes.",0
+e-signature,general,General or all-round,"All-round or unqualified picks: most people, overall, everyday use.",0
+endpoint security (EDR),managed_security,Managed Security Buyers,"Organizations without dedicated security staff, SOC analysts, or round-the-clock monitoring that want outsourced MDR, managed detection, threat hunting, or human response.",0
+endpoint security (EDR),productivity_suite_ecosystem,Productivity Suite Ecosystem Teams,"Organizations invested in one major vendor's productivity suite, device management, built-in endpoint protection, cloud, or licensing that want native integration and unified security.",1
+endpoint security (EDR),single_platform_mdm,Single-Platform MDM Environments,"Organizations whose devices come mainly from one platform maker and that use device-management tools built for that platform, needing platform-specific management and protection.",1
+endpoint security (EDR),ransomware_resilience,Ransomware Resilience,"Buyers whose primary priority is ransomware prevention, detection, containment, rollback, remediation, or autonomous recovery.",0
+endpoint security (EDR),lean_value_teams,Lean Value Teams,"Small and mid-sized organizations with limited IT or security resources that prioritize affordability, simplicity, lightweight deployment, or automation.",0
+endpoint security (EDR),enterprise_detection,Enterprise Detection Teams,"Large or mature security organizations that need strong raw detection, deep telemetry, investigation, threat hunting, forensic depth, or advanced response.",0
+endpoint security (EDR),mixed_platforms,Mixed Platform Environments,"Organizations managing diverse desktop operating systems or other endpoint systems that prioritize broad MDM compatibility, cross-platform coverage, or vendor independence.",1
+endpoint security (EDR),general,General or all-round,"All-round or unqualified picks: most people, overall, everyday use.",0
+expense management,accounting_integrations,Accounting System Users,Teams that need expense management connected to mainstream accounting or ERP platforms.,1
+expense management,legal_workflows,Legal Practice Workflows,"Law firms and legal teams that need matter-level tracking, client billing, or integrations with legal practice management and legal accounting platforms.",1
+expense management,travel_management,Travel-Heavy Teams,"Organizations managing frequent, international, or high-volume business travel with needs such as trip booking, hotel and flight policies, and centralized travel control.",0
+expense management,corporate_card_control,Corporate Card Programs,"Teams that use or are adopting company cards and prioritize card issuance, card-based automation, receipt matching, and real-time spending controls.",0
+expense management,reimbursement_workflows,Reimbursement-Heavy Teams,"Organizations handling substantial out-of-pocket spending or personal-card use that prioritize fast receipt submission, reimbursement, and expense processing.",0
+expense management,low_it_setup,Low-IT Implementations,"Teams prioritizing self-serve onboarding, lightweight deployment, minimal IT involvement, and a fast implementation with few moving parts.",0
+expense management,budget_conscious,Budget-Conscious Teams,"Small, lean, startup, or otherwise cost-sensitive organizations seeking low-cost plans or inexpensive all-in-one expense management.",0
+expense management,enterprise_scale,Large Complex Organizations,"Larger or enterprise organizations with complex finance operations, many employees or locations, substantial policy needs, and more demanding controls or integrations.",0
+expense management,general,General or all-round,"All-round or unqualified picks: most people, overall, everyday use.",0
+identity and SSO,directory_suite_ecosystem,Directory Suite Ecosystem Teams,"Organizations centered on one major vendor's productivity suite, cloud, on-premises directory, desktop operating system, device management, or related services.",1
+identity and SSO,cloud_workspace_ecosystem,Cloud Workspace Ecosystem Teams,"Organizations primarily using one major vendor's browser-based productivity workspace, cloud, or related identity and collaboration tools.",1
+identity and SSO,healthcare_clinical,Healthcare Clinical Workflows,"Healthcare organizations needing identity for clinicians, shared workstations, EHRs, patient-facing applications, telehealth, or controlled-substance prescribing.",0
+identity and SSO,self_hosted_control,Self-Hosted Identity,"Organizations prioritizing self-hosting, open-source deployments, data-residency control, on-premises systems, or avoiding SaaS licensing.",0
+identity and SSO,small_midmarket,Small and Mid-Market Teams,"Smaller organizations seeking straightforward, affordable identity, MFA, or all-in-one capabilities with limited administrative capacity.",0
+identity and SSO,hybrid_heterogeneous,Hybrid Heterogeneous Environments,"Organizations managing mixed vendors, operating systems, clouds, legacy systems, or complex enterprise technology environments with vendor-neutral identity needs.",0
+identity and SSO,remote_device_access,Remote and Device Access,"Distributed teams needing secure remote access, device trust, endpoint verification, or identity-aware access to internal applications.",0
+identity and SSO,saas_integration,SaaS-Heavy Organizations,"Organizations with many SaaS applications, broad app catalogs, diverse cloud tools, or strong requirements for consolidated SSO and lifecycle automation.",0
+identity and SSO,general,General or all-round,"All-round or unqualified picks: most people, overall, everyday use.",0
+marketing automation,construction_contractors,Construction Contractors,"Construction, AEC, specialty-trade, and commercial contracting teams managing bids, proposals, preconstruction, and project-related follow-up.",0
+marketing automation,enterprise_b2b_operations,Enterprise B2B Operations,"Large or sophisticated B2B organizations needing advanced scoring, segmentation, complex journeys, account-based marketing, or dedicated marketing operations.",0
+marketing automation,enterprise_crm_teams,Enterprise CRM Teams,"Organizations already using, standardizing on, or requiring tight synchronization with a leading enterprise CRM for sales and marketing.",1
+marketing automation,ecommerce_b2c,Ecommerce and B2C,"Ecommerce, DTC, retail, consumer, and product-led teams focused on purchase behavior, browsing activity, and lifecycle marketing.",0
+marketing automation,budget_small_teams,Budget-Conscious Small Teams,"Small or growing teams with tight budgets, limited technical or IT resources, few administrators, or a strong preference for simplicity.",0
+marketing automation,email_nurture,Email-Focused Nurture,"Teams primarily seeking email campaigns, newsletters, nurture sequences, deliverability, and ongoing relationship communication.",0
+marketing automation,unified_crm_marketing,Unified CRM Marketing,"Teams prioritizing an all-in-one system that combines CRM, marketing, pipeline management, lead capture, and sales workflows.",0
+marketing automation,general,General or all-round,"All-round or unqualified picks: most people, overall, everyday use.",0
+mid-market ERP,wholesale_distribution,Wholesale Distribution,"Distributors, wholesalers, and distribution-first businesses needing industry-specific pricing, sales, fulfillment, and channel workflows.",0
+mid-market ERP,manufacturing_operations,Manufacturing Operations,"Manufacturers and production teams requiring capabilities such as discrete, process, make-to-order, engineer-to-order, assembly, or shop-floor management.",0
+mid-market ERP,productivity_suite_ecosystem,Productivity Suite Ecosystem,"Organizations already standardized on one major vendor's productivity suite, cloud, BI, or related tools and seeking tight ecosystem integration.",1
+mid-market ERP,multi_entity_global,Multi-Entity Operations,"Organizations managing multiple companies, subsidiaries, legal entities, locations, currencies, countries, or consolidated financials.",0
+mid-market ERP,warehouse_inventory,Warehouse Inventory,"Inventory-intensive businesses prioritizing multi-warehouse control, WMS connectivity, traceability, replenishment, or inventory accuracy.",0
+mid-market ERP,growing_mid_market,Growing Mid-Market,"Fast-growing or scaling organizations that need an ERP capable of supporting increasing headcount, sites, users, or operational complexity.",0
+mid-market ERP,budget_conscious,Budget-Conscious Buyers,"Smaller or cost-conscious organizations prioritizing manageable pricing, modular adoption, predictable scaling, or lower-cost mid-market functionality.",0
+mid-market ERP,general,General or all-round,"All-round or unqualified picks: most people, overall, everyday use.",0
+observability/APM,cost_sensitive,Cost-conscious buyers,"Teams prioritizing low, predictable, or scalable observability costs, including budget-constrained and price-sensitive buyers.",0
+observability/APM,deployment_control,Deployment control,"Teams needing self-hosting, on-premises retention, data residency, portability, open-source control, or reduced vendor lock-in.",0
+observability/APM,lean_operations,Lean operations teams,"Small or stretched teams prioritizing minimal setup, managed service convenience, automation, fast adoption, and low ongoing effort.",0
+observability/APM,container_native,Container-native teams,"Teams whose primary observability needs center on container orchestration, containers, microservices, platform engineering, or zero-code instrumentation.",1
+observability/APM,existing_ecosystems,Existing telemetry ecosystems,"Teams already invested in open-source metrics, dashboarding, tracing, or logging tools, or related open standards and integrations.",1
+observability/APM,hybrid_estates,Hybrid infrastructure,"Organizations monitoring mixed data-center, on-premises, private-cloud, and public-cloud environments or other complex hybrid estates.",0
+observability/APM,advanced_debugging,Advanced debugging,"Engineers investigating intermittent latency, rare outliers, high-cardinality data, distributed-system bottlenecks, or unknown root causes.",0
+observability/APM,full_stack_visibility,Full-stack visibility,"Teams wanting broad or unified coverage across infrastructure, metrics, logs, traces, and applications in one observability platform.",0
+observability/APM,general,General or all-round,"All-round or unqualified picks: most people, overall, everyday use.",0
+payroll,multi_jurisdiction_payroll,Multi-Jurisdiction Payroll,"Employers managing payroll across multiple states, locations, entities, or countries with demanding tax and compliance requirements.",0
+payroll,growth_and_scale,Growth and Scale,"Companies choosing payroll based on headcount growth, mid-market or enterprise capacity, or long-term scalability.",0
+payroll,existing_software_ecosystems,Existing Software Ecosystems,"Organizations prioritizing compatibility with an existing accounting, ERP, general ledger, or business software platform.",0
+payroll,unified_hr_it,Unified HR and IT,"Companies seeking to consolidate payroll with HR, benefits, finance, IT, employee management, or broader workforce systems.",0
+payroll,complex_workforce_operations,Complex Workforce Operations,"Organizations needing to handle hourly, shift-based, union, project-based, time-and-attendance, scheduling, or other intricate pay rules.",0
+payroll,hands_on_support,Hands-On Support,"Businesses prioritizing dedicated representatives, phone assistance, payroll expertise, or substantial implementation and ongoing service.",0
+payroll,easy_transition_and_use,Easy Transition and Use,"Buyers seeking simple payroll administration, modern interfaces, employee self-service, fast implementation, or a low-disruption switch.",0
+payroll,cost_and_value,Cost and Value,"Budget-conscious companies prioritizing low pricing, predictable costs, manual-work reduction, or strong overall value.",0
+payroll,general,General or all-round,"All-round or unqualified picks: most people, overall, everyday use.",0
+product analytics,technical_depth,Technical depth,"Engineering-led, data-mature, or product teams that need deep behavioral analysis, retroactive querying, instrumentation control, debugging, or experimentation workflows.",0
+product analytics,no_code_self_serve,No-code self-serve,"Non-technical teams and users prioritizing minimal setup, automatic tracking, approachable interfaces, and fast self-serve analysis.",0
+product analytics,budget_free,Budget and free,"Teams choosing primarily for free tiers, low cost, transparent pricing, or a zero-budget starting point.",0
+product analytics,enterprise_scale,Enterprise scale,"Large organizations, retailers, and digital-experience programs needing enterprise-grade scale, broad capabilities, governance, or consolidated analytics.",0
+product analytics,behavior_replay,Behavior replay,"Teams investigating user behavior and friction through session replay, heatmaps, recordings, journey visualization, or frustration signals.",0
+product analytics,mobile_apps,Mobile app analytics,"Teams analyzing native mobile apps, including mobile funnels, gestures, screen behavior, crashes, and mobile UX issues.",1
+product analytics,ecommerce_checkout,Ecommerce checkout,"Ecommerce and retail teams focused on checkout funnels, abandonment, conversion drop-offs, payment failures, and revenue-weighted prioritization.",0
+product analytics,customer_adoption,Customer adoption,"Product, customer success, and account teams using portals, onboarding, in-app guidance, or adoption analytics to help customers succeed.",0
+product analytics,general,General or all-round,"All-round or unqualified picks: most people, overall, everyday use.",0
+project management,construction_firms,Construction firms,"Residential builders, remodelers, commercial contractors, general contractors, specialty contractors, and other construction companies seeking project management for building work.",0
+project management,field_first_teams,Field-first teams,"Jobsite-oriented teams that prioritize mobile field execution, crew coordination, punch lists, subcontractor management, and on-site communication.",0
+project management,design_integrated_teams,Design-integrated teams,"Construction and engineering organizations whose workflows depend on BIM, CAD and other design software, drawings, or design-to-construction integration.",1
+project management,productivity_suite_teams,Productivity suite teams,Organizations already standardized on one major vendor's productivity and collaboration suite and seeking connected project workflows.,1
+project management,regulated_finance,Regulated financial institutions,"Banks, credit unions, lending, compliance, risk, and other financial-services teams that require core-system integration, auditability, governance, or regulatory control.",0
+project management,portfolio_resource_planners,Portfolio resource planners,"Organizations managing many concurrent projects that need cross-project dashboards, portfolio reporting, capacity planning, staffing, timelines, or resource allocation.",0
+project management,easy_budget_teams,"Easy, low-cost teams","Small or budget-conscious teams prioritizing affordability, quick setup, low administrative overhead, intuitive adoption, or minimal training.",0
+project management,it_internal_teams,IT and internal teams,"IT, software, digital, operations, and cross-department teams managing internal initiatives, service requests, change management, agile work, or business workflows.",0
+project management,general,General or all-round,"All-round or unqualified picks: most people, overall, everyday use.",0
+sales engagement,solar_vertical,Solar Industry Teams,"Solar installers, dealers, EPCs, roofing companies, and other solar businesses needing industry-specific workflows, CRM, automation, or project context.",0
+sales engagement,lean_budget_teams,Lean Budget Teams,"Small, SMB, owner-led, or non-technical teams prioritizing affordability, simple setup, lightweight adoption, or avoiding enterprise complexity.",0
+sales engagement,crm_ecosystem_teams,CRM Ecosystem Teams,Teams choosing around an existing CRM or email environment and wanting native integration or in-CRM engagement.,1
+sales engagement,enterprise_sales_orgs,Enterprise Sales Organizations,"Large, mature, or structured sales organizations needing governance, reporting, coaching, forecasting, complex workflows, or standardized processes across many reps.",0
+sales engagement,multichannel_phone_selling,Phone and Multichannel Selling,"Teams prioritizing calling, texting, SMS, phone-heavy selling, or coordinated contact across multiple channels.",1
+sales engagement,prospecting_sequencing,Outbound Prospecting And Sequencing,"Teams focused on high-volume prospecting, contact data, cadences, multi-step sequences, automated follow-up, or systematic cold and warm contact.",1
+sales engagement,sales_operations_unification,Unified Sales Operations,"Businesses wanting to combine engagement with proposals, financing, installation, project management, lead handling, or broader CRM and operational workflows.",0
+sales engagement,general,General or all-round,"All-round or unqualified picks: most people, overall, everyday use.",0

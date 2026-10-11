@@ -64,7 +64,7 @@ of the completed checklist lives in `experiments/<slug>/results/`.
 
 ## Decisions to confirm when signing (tick each)
 
-- [ ] Brand codes reuse 009's published `bNNNN` strings (spec §3 writes
+- [x] Brand codes reuse 009's published `bNNNN` strings (spec §3 writes
       `v0001`, "as in 009's release", but 009 shipped `bNNNN`). Reusing the
       exact strings lets the 234 claude_b2b rows join 009's public answers
       file (checked: their code lists equal 009's `brand_codes` row for row).
@@ -75,23 +75,23 @@ of the completed checklist lives in `experiments/<slug>/results/`.
       nothing else. To ship `v` codes instead, set BRAND_PREFIX = "v" (the
       join to 009 then needs b -> v).
 
-- [ ] Headphone and agency brands are coded in their own namespace (one agency
+- [x] Headphone and agency brands are coded in their own namespace (one agency
       name is spelled like a B2B brand and is a different company). Note: 002,
       003 and 005 published headphone and agency brand names in the clear;
       this release is stricter, per spec §3.
 
-- [ ] Headphone and agency categories ship as `cat_c1` and `cat_a1` and their
+- [x] Headphone and agency categories ship as `cat_c1` and `cat_a1` and their
       item ids as per-release codes (spec §3). The categories themselves are
       public (002's release, the article), so this is belt and braces; the
       agency segment ids (for example `coffee_cafe_specialists`) also show the
       agency vertical.
 
-- [ ] Headphone and agency segment ids ship in the mentions file without
+- [x] Headphone and agency segment ids ship in the mentions file without
       labels. 1 headphone segment id named a device maker that is a brand in
       the headphone lexicon; it ships as `single_ecosystem_users`. No agency
       segment id names a brand.
 
-- [ ] B2B segment text: 25 of 172 segments named vendors or products in the
+- [x] B2B segment text: 25 of 172 segments named vendors or products in the
       model-written label, definition or id and were rewritten generically
       (the originals are in data/raw/bestfor_taxonomy_b2b/taxonomy.json, not
       committed; this list says what was named without repeating it):
@@ -154,12 +154,12 @@ of the completed checklist lives in `experiments/<slug>/results/`.
         word that is also the name of a sales engagement vendor in this
         category; rewrote definition.
 
-- [ ] The B2B definitions are model-written summaries of clusters of best-for
+- [x] The B2B definitions are model-written summaries of clusters of best-for
       phrases (an instrument, built from many answers), not answer text. If
       you read them as too close to AI response text, drop the `definition`
       column (remove it from SEGMENT_COLUMNS) and publish labels only.
 
-- [ ] Scans, all clean: (1) every B2B label, definition and public id against
+- [x] Scans, all clean: (1) every B2B label, definition and public id against
       2,841 aliases (lexicon v3 and 009 v2.1, keep and drop rows, and 005's
       lexicons), case-insensitively, plus a capitalized-name check on every
       definition that catches product names in no lexicon. Accepted as
@@ -183,17 +183,17 @@ of the completed checklist lives in `experiments/<slug>/results/`.
       chat product), 'wave' (ordinary word, a collection wave; an alias in the
       B2B lexicon). No other hit.
 
-- [ ] Brand codes are pseudonyms, not anonymity. As with 009's codes, a reader
+- [x] Brand codes are pseudonyms, not anonymity. As with 009's codes, a reader
       who knows a market can guess the most frequent codes in a category, and
       a few segment ids sharpen the guess (for example the brand most often
       placed in a productivity-suite ecosystem segment, or in the headphone
       segment `single_ecosystem_users`). No name ships; confirm this is
       acceptable, as it was for 009.
 
-- [ ] Answer-level flags: `refusal` follows deviation 7 (0 refusals of 2,770);
+- [x] Answer-level flags: `refusal` follows deviation 7 (0 refusals of 2,770);
       `refusal_phrase` keeps the old heuristic's 3 flags for transparency.
 
-- [ ] Not released: R1's names outside the lexicon (only the count
+- [cx] Not released: R1's names outside the lexicon (only the count
       `n_brands_all`), the Audit E second-pass labels, and the per-answer
       judge metadata (sha, version), which is constant and stated in the
       datasheets.
@@ -206,5 +206,5 @@ of the completed checklist lives in `experiments/<slug>/results/`.
 
 ## Sign-off
 
-- Name: ______________  Date: ______________
-- Release gate run: `pipeline/25_release.py --stage 1` exit 0 on ______________
+- Name: ____Jim Wrubel_____  Date: ___11 OCT 2026__
+- Release gate run: `pipeline/25_release.py --stage 1` exit 0 on ___11 OCT 2026___________
