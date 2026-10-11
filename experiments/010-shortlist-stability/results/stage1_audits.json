@@ -1,0 +1,582 @@
+{
+ "A": {
+  "new": [
+   {
+    "dataset": "chatgpt_b2b",
+    "wave": 1,
+    "collected": 40,
+    "ok": 40,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0,
+    "passes": true,
+    "h5_bins": true
+   },
+   {
+    "dataset": "chatgpt_b2b",
+    "wave": 2,
+    "collected": 40,
+    "ok": 40,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0,
+    "passes": true,
+    "h5_bins": true
+   },
+   {
+    "dataset": "chatgpt_b2b",
+    "wave": 3,
+    "collected": 40,
+    "ok": 40,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0,
+    "passes": true,
+    "h5_bins": true
+   },
+   {
+    "dataset": "chatgpt_b2b",
+    "wave": 4,
+    "collected": 40,
+    "ok": 40,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0,
+    "passes": true,
+    "h5_bins": true
+   },
+   {
+    "dataset": "chatgpt_b2b",
+    "wave": 5,
+    "collected": 40,
+    "ok": 40,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0,
+    "passes": true,
+    "h5_bins": true
+   },
+   {
+    "dataset": "chatgpt_b2b",
+    "wave": 6,
+    "collected": 40,
+    "ok": 40,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0,
+    "passes": true,
+    "h5_bins": true
+   },
+   {
+    "dataset": "chatgpt_b2b",
+    "wave": 7,
+    "collected": 40,
+    "ok": 40,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0,
+    "passes": true,
+    "h5_bins": true
+   },
+   {
+    "dataset": "gemini_b2b",
+    "wave": 1,
+    "collected": 40,
+    "ok": 40,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0,
+    "passes": true,
+    "h5_bins": true
+   },
+   {
+    "dataset": "gemini_b2b",
+    "wave": 2,
+    "collected": 40,
+    "ok": 40,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0,
+    "passes": true,
+    "h5_bins": true
+   },
+   {
+    "dataset": "gemini_b2b",
+    "wave": 3,
+    "collected": 40,
+    "ok": 40,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0,
+    "passes": true,
+    "h5_bins": true
+   },
+   {
+    "dataset": "gemini_b2b",
+    "wave": 4,
+    "collected": 40,
+    "ok": 40,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0,
+    "passes": true,
+    "h5_bins": true
+   },
+   {
+    "dataset": "gemini_b2b",
+    "wave": 5,
+    "collected": 40,
+    "ok": 40,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0,
+    "passes": true,
+    "h5_bins": true
+   },
+   {
+    "dataset": "gemini_b2b",
+    "wave": 6,
+    "collected": 40,
+    "ok": 40,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0,
+    "passes": true,
+    "h5_bins": true
+   },
+   {
+    "dataset": "gemini_b2b",
+    "wave": 7,
+    "collected": 40,
+    "ok": 40,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0,
+    "passes": true,
+    "h5_bins": true
+   },
+   {
+    "dataset": "claude_api_b2b",
+    "wave": 1,
+    "collected": 40,
+    "ok": 40,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0,
+    "passes": true,
+    "h5_bins": true
+   },
+   {
+    "dataset": "claude_api_b2b",
+    "wave": 2,
+    "collected": 40,
+    "ok": 40,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0,
+    "passes": true,
+    "h5_bins": true
+   },
+   {
+    "dataset": "claude_api_b2b",
+    "wave": 3,
+    "collected": 40,
+    "ok": 40,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0,
+    "passes": true,
+    "h5_bins": true
+   },
+   {
+    "dataset": "claude_api_b2b",
+    "wave": 4,
+    "collected": 40,
+    "ok": 40,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0,
+    "passes": true,
+    "h5_bins": true
+   },
+   {
+    "dataset": "claude_api_b2b",
+    "wave": 5,
+    "collected": 40,
+    "ok": 40,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0,
+    "passes": true,
+    "h5_bins": true
+   },
+   {
+    "dataset": "claude_api_b2b",
+    "wave": 6,
+    "collected": 40,
+    "ok": 40,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0,
+    "passes": true,
+    "h5_bins": true
+   },
+   {
+    "dataset": "claude_api_b2b",
+    "wave": 7,
+    "collected": 40,
+    "ok": 40,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0,
+    "passes": true,
+    "h5_bins": true
+   }
+  ],
+  "holdout": [
+   {
+    "dataset": "chatgpt_agency",
+    "arm": "chatgpt",
+    "runs": 3,
+    "prompts": 27,
+    "answers": 81,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0
+   },
+   {
+    "dataset": "chatgpt_consumer",
+    "arm": "chatgpt",
+    "runs": 17,
+    "prompts": 95,
+    "answers": 1615,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0
+   },
+   {
+    "dataset": "claude_b2b",
+    "arm": "opus55_plain",
+    "runs": 3,
+    "prompts": 26,
+    "answers": 78,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0
+   },
+   {
+    "dataset": "claude_b2b",
+    "arm": "ui_default",
+    "runs": 3,
+    "prompts": 26,
+    "answers": 78,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0
+   },
+   {
+    "dataset": "claude_b2b",
+    "arm": "ui_think",
+    "runs": 3,
+    "prompts": 26,
+    "answers": 78,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0
+   }
+  ],
+  "passes": true
+ },
+ "B": {
+  "chatgpt_b2b": {
+   "answers": 280,
+   "demoted": 0.03214285714285714,
+   "over_cap": 0.0,
+   "fallback_mapped": 0,
+   "untracked_per_answer": 3.1214285714285714
+  },
+  "gemini_b2b": {
+   "answers": 280,
+   "demoted": 0.010714285714285714,
+   "over_cap": 0.0,
+   "fallback_mapped": 0,
+   "untracked_per_answer": 3.442857142857143
+  },
+  "claude_api_b2b": {
+   "answers": 280,
+   "demoted": 0.014285714285714285,
+   "over_cap": 0.0,
+   "fallback_mapped": 0,
+   "untracked_per_answer": 3.8464285714285715
+  },
+  "claude_b2b": {
+   "answers": 234,
+   "demoted": 0.029914529914529916,
+   "over_cap": 0.004273504273504274,
+   "fallback_mapped": 1,
+   "untracked_per_answer": 3.517094017094017
+  },
+  "chatgpt_consumer": {
+   "answers": 1615,
+   "demoted": 0.007430340557275541,
+   "over_cap": 0.0,
+   "fallback_mapped": 0,
+   "untracked_per_answer": 0.6198142414860681
+  },
+  "chatgpt_agency": {
+   "answers": 81,
+   "demoted": 0.04938271604938271,
+   "over_cap": 0.012345679012345678,
+   "fallback_mapped": 0,
+   "untracked_per_answer": 5.283950617283951
+  },
+  "judge_rows_off_pin": 0
+ },
+ "D": {
+  "status": "scored",
+  "passes": true,
+  "precision": 1.0,
+  "recall": 1.0,
+  "signed_by": "Jim Wrubel"
+ },
+ "E": {
+  "groups": {
+   "all": {
+    "answers": 277,
+    "mentions": 1492,
+    "agreement": 0.9557640750670241,
+    "kappa": 0.892794154150318,
+    "top_choices": 219,
+    "top_kept": 0.9223744292237442,
+    "changes": {
+     "top_choice -> one_of_many": 17,
+     "one_of_many -> top_choice": 14,
+     "generic_mention -> one_of_many": 11,
+     "one_of_many -> unclassified": 7,
+     "one_of_many -> generic_mention": 5,
+     "cautioned_against -> one_of_many": 3,
+     "unclassified -> generic_mention": 3,
+     "one_of_many -> cautioned_against": 3,
+     "generic_mention -> unclassified": 3
+    }
+   },
+   "new collection": {
+    "answers": 84,
+    "mentions": 567,
+    "agreement": 0.9365079365079365,
+    "kappa": 0.8671923797626483,
+    "top_choices": 67,
+    "top_kept": 0.8955223880597015,
+    "changes": {
+     "one_of_many -> top_choice": 9,
+     "top_choice -> one_of_many": 7,
+     "one_of_many -> unclassified": 4,
+     "cautioned_against -> one_of_many": 3,
+     "generic_mention -> one_of_many": 3,
+     "unclassified -> generic_mention": 3,
+     "one_of_many -> generic_mention": 3,
+     "generic_mention -> unclassified": 3,
+     "one_of_many -> cautioned_against": 1
+    }
+   },
+   "old datasets": {
+    "answers": 193,
+    "mentions": 925,
+    "agreement": 0.9675675675675676,
+    "kappa": 0.9116427757223005,
+    "top_choices": 152,
+    "top_kept": 0.9342105263157895,
+    "changes": {
+     "top_choice -> one_of_many": 10,
+     "generic_mention -> one_of_many": 8,
+     "one_of_many -> top_choice": 5,
+     "one_of_many -> unclassified": 3,
+     "one_of_many -> cautioned_against": 2,
+     "one_of_many -> generic_mention": 2
+    }
+   },
+   "chatgpt_b2b": {
+    "answers": 39,
+    "mentions": 231,
+    "agreement": 0.9393939393939394,
+    "kappa": 0.8741291402327483,
+    "top_choices": 41,
+    "top_kept": 0.975609756097561,
+    "changes": {
+     "one_of_many -> unclassified": 4,
+     "one_of_many -> top_choice": 4,
+     "generic_mention -> unclassified": 2,
+     "cautioned_against -> one_of_many": 1,
+     "one_of_many -> generic_mention": 1,
+     "top_choice -> one_of_many": 1,
+     "unclassified -> generic_mention": 1
+    }
+   },
+   "gemini_b2b": {
+    "answers": 23,
+    "mentions": 142,
+    "agreement": 0.9647887323943662,
+    "kappa": 0.9105455461761371,
+    "top_choices": 10,
+    "top_kept": 0.7,
+    "changes": {
+     "top_choice -> one_of_many": 3,
+     "unclassified -> generic_mention": 1,
+     "generic_mention -> unclassified": 1
+    }
+   },
+   "claude_api_b2b": {
+    "answers": 22,
+    "mentions": 194,
+    "agreement": 0.9123711340206185,
+    "kappa": 0.8308804676683247,
+    "top_choices": 16,
+    "top_kept": 0.8125,
+    "changes": {
+     "one_of_many -> top_choice": 5,
+     "top_choice -> one_of_many": 3,
+     "generic_mention -> one_of_many": 3,
+     "cautioned_against -> one_of_many": 2,
+     "one_of_many -> generic_mention": 2,
+     "unclassified -> generic_mention": 1,
+     "one_of_many -> cautioned_against": 1
+    }
+   },
+   "claude_b2b": {
+    "answers": 23,
+    "mentions": 233,
+    "agreement": 0.9399141630901288,
+    "kappa": 0.7705079499085409,
+    "top_choices": 6,
+    "top_kept": 0.5,
+    "changes": {
+     "generic_mention -> one_of_many": 5,
+     "top_choice -> one_of_many": 3,
+     "one_of_many -> unclassified": 3,
+     "one_of_many -> top_choice": 2,
+     "one_of_many -> generic_mention": 1
+    }
+   },
+   "chatgpt_consumer": {
+    "answers": 156,
+    "mentions": 654,
+    "agreement": 0.9785932721712538,
+    "kappa": 0.9460688452748391,
+    "top_choices": 144,
+    "top_kept": 0.9513888888888888,
+    "changes": {
+     "top_choice -> one_of_many": 7,
+     "one_of_many -> top_choice": 3,
+     "generic_mention -> one_of_many": 3,
+     "one_of_many -> generic_mention": 1
+    }
+   },
+   "chatgpt_agency": {
+    "answers": 14,
+    "mentions": 38,
+    "agreement": 0.9473684210526315,
+    "kappa": 0.7816091954022987,
+    "top_choices": 2,
+    "top_kept": 1.0,
+    "changes": {
+     "one_of_many -> cautioned_against": 2
+    }
+   }
+  },
+  "passes": true
+ },
+ "F": {
+  "chatgpt_b2b": {
+   "modal": "gpt-5-6",
+   "models": {
+    "gpt-5-6": 200,
+    "gpt-6": 80
+   },
+   "off_modal_share": 0.2857142857142857,
+   "runs_with_other_modal": [
+    "010 w6",
+    "010 w7"
+   ]
+  },
+  "gemini_b2b": {
+   "modal": "3.5 Flash-Lite",
+   "models": {
+    "3.5 Flash-Lite": 280
+   },
+   "off_modal_share": 0.0,
+   "runs_with_other_modal": []
+  },
+  "claude_api_b2b": {
+   "modal": "claude-opus-5-5",
+   "models": {
+    "claude-opus-5-5": 280
+   },
+   "off_modal_share": 0.0,
+   "runs_with_other_modal": []
+  },
+  "claude_b2b (opus55_plain)": {
+   "modal": "claude-opus-5-5",
+   "models": {
+    "claude-opus-5-5": 78
+   },
+   "off_modal_share": 0.0,
+   "runs_with_other_modal": []
+  },
+  "claude_b2b": {
+   "modal": "claude.ai",
+   "models": {
+    "claude.ai": 78
+   },
+   "off_modal_share": 0.0,
+   "runs_with_other_modal": []
+  },
+  "claude_b2b (ui_think)": {
+   "modal": "claude.ai",
+   "models": {
+    "claude.ai": 78
+   },
+   "off_modal_share": 0.0,
+   "runs_with_other_modal": []
+  },
+  "chatgpt_consumer": {
+   "modal": "gpt-5-5",
+   "models": {
+    "gpt-5-5": 1548,
+    "(not recorded)": 67
+   },
+   "off_modal_share": 0.041486068111455054,
+   "runs_with_other_modal": [
+    "002 w7"
+   ]
+  },
+  "chatgpt_agency": {
+   "modal": "gpt-5-5",
+   "models": {
+    "gpt-5-5": 78,
+    "(not recorded)": 3
+   },
+   "off_modal_share": 0.03703703703703709,
+   "runs_with_other_modal": []
+  }
+ },
+ "G": {
+  "groups": {
+   "all": {
+    "phrases": 14608,
+    "agreement": 0.9594742606790799,
+    "outside": 0.015470974808324206
+   },
+   "B2B": {
+    "phrases": 10169,
+    "agreement": 0.9618448224997541,
+    "outside": 0.008358737338971384
+   },
+   "headphones and agencies": {
+    "phrases": 4439,
+    "agreement": 0.9540437035368327,
+    "outside": 0.03176391079071863
+   }
+  },
+  "passes": true
+ }
+}
