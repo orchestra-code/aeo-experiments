@@ -431,7 +431,7 @@ def lexicon_file_mapper(path: Path) -> tuple[Mapper, dict]:
 # --------------------------------------------------------------- answers
 
 #: Audit A refusal heuristic (009's 01_features.py): an apology-shaped refusal
-#: in the first 600 characters of the answer.
+#: in the first 600 characters of the answer, and (deviation 7) no lexicon brand.
 REFUSAL = re.compile(
     r"\b(?:I\s+(?:can(?:'|’)?t|cannot|am\s+unable\s+to|won(?:'|’)?t)|I(?:'|’)m\s+(?:not\s+able|unable)\s+to)"
     r"\s+(?:help|assist|provide|recommend|do\s+that|comply)",
@@ -535,7 +535,11 @@ def build_rows(tasks: list[dict], judged: dict[str, dict], mapper: Mapper,
             "intent": intents.get(t["item_id"]) if t["dataset"] in B2B_DATASETS else None,
             "wave": int(t["wave"]), "run_date": t.get("run_date"),
             "model": t.get("model") or models.get(tid),
-            "empty": empty, "refusal": (not empty) and bool(REFUSAL.search(answer[:600])),
+            # Deviation 7: a refusal-shaped opening counts only when the answer
+            # names no lexicon brand (clarifying openers that go on to answer stay).
+            "empty": empty,
+            "refusal": (not empty) and not order and bool(REFUSAL.search(answer[:600])),
+            "refusal_phrase": (not empty) and bool(REFUSAL.search(answer[:600])),
             "judge_ok": ok,
             "judge_sha256": (r or {}).get("judge_sha256"), "judge_model": (r or {}).get("model"),
             "judge_version": (r or {}).get("version"), "dropped": (r or {}).get("dropped") or {},

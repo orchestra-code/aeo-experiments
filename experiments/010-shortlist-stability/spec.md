@@ -578,3 +578,13 @@ All checks run at both stages except R7 (Stage 2 only).
   withdrawn at review, keeping the prior decision.
 - Pins live in `harness/instrument.py`; `build_tasks.py` and the pipeline
   refuse any other lexicon or taxonomy file.
+7. **What counts as a refusal (2026-10-11, before any Stage 1 metric was
+   computed).** Audit A excludes refusals. The pipeline's heuristic (009's: a
+   "I can't recommend / I'm unable to" opening in the first 600 characters)
+   flagged 3 of 2,770 Stage 1 answers, none of which declines the task: one
+   Claude API answer opens "I can't recommend one product yet" and then
+   compares ten vendors; two ChatGPT headphone answers ask for the missing
+   budget, one of them going on to list options. A refusal is now a
+   refusal-shaped opening AND no lexicon brand in the answer. None of the 3
+   is excluded; the phrase flag is still reported. R3 (exclude answers with
+   no lexicon brand) is unchanged.
