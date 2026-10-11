@@ -588,3 +588,12 @@ All checks run at both stages except R7 (Stage 2 only).
    refusal-shaped opening AND no lexicon brand in the answer. None of the 3
    is excluded; the phrase flag is still reported. R3 (exclude answers with
    no lexicon brand) is unchanged.
+8. **Article 1 lead figure (2026-10-11, after the Stage 1 review; presentation
+   only).** §9 planned a lead figure with every status side by side. At the
+   Stage 1 review Jim chose to lead with the shortlist alone: the lead figure
+   is shortlist retention by platform (`stage1_shortlist`), supported by the
+   share of shortlist places held by vendors shortlisted in every run
+   (`stage1_shortlist_runs`, a new descriptive from the same counts as the
+   pre-registered 80% share) and same-platform vs cross-platform shortlist
+   agreement (`stage1_platform_agreement`). The all-status figures move to the
+   appendix. No test, verdict or estimate changes.

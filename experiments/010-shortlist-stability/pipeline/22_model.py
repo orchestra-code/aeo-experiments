@@ -265,11 +265,13 @@ def secondary(rep: Report, panels: dict[str, Panel], datasets: list[str], sectio
 # ---------------------------------------------------------- descriptives
 
 
-def held_share(panel: Panel, own: list[dict]) -> tuple[Est, float, float, int]:
-    """Share of shortlisted brand-prompt pairs shortlisted in >= 80% of a prompt's runs."""
+def held_share(panel: Panel, own: list[dict]) -> tuple[Est, float, float, int, dict]:
+    """Share of shortlisted brand-prompt pairs shortlisted in >= 80% of a prompt's runs,
+    plus the count of pairs by (runs shortlisted, runs of the prompt) for the figures."""
     n = len(panel.units)
     num, den = np.zeros(n), np.zeros(n)
     every = single = total = 0
+    hist: Counter = Counter()
     groups = defaultdict(list)
     for a in own:
         groups[(a["item_id"], a["arm"])].append(a)
@@ -282,11 +284,12 @@ def held_share(panel: Panel, own: list[dict]) -> tuple[Est, float, float, int]:
             every += c == len(runs)
             single += c == 1
             total += 1
+            hist[f"{c}/{len(runs)}"] += 1
     with np.errstate(invalid="ignore", divide="ignore"):
         draws = (panel.W @ num) / (panel.W @ den)
     point = num.sum() / den.sum() if den.sum() else float("nan")
     return (Est(point, draws), every / total if total else float("nan"),
-            single / total if total else float("nan"), total)
+            single / total if total else float("nan"), total, dict(hist))
 
 
 def dataset_descriptives(rep: Report, ds: str, panel: Panel, own: list[dict], n_boot: int
@@ -337,8 +340,9 @@ def dataset_descriptives(rep: Report, ds: str, panel: Panel, own: list[dict], n_
     rep.say(f"- Pair-mean Jaccard of R, within minus cross: {fmt_ci(*jr)}")
     rep.data["levels"][ds] = levels
 
-    held, every, single, n_bp = held_share(panel, own)
+    held, every, single, n_bp, hist = held_share(panel, own)
     out["held_80"] = [held.point, *held.ci()]
+    out["runs_shortlisted"] = hist
     rep.say(f"- Shortlisted brand-prompt pairs ({n_bp}) shortlisted in at least 80% of the "
             f"prompt's runs: {fmt_ci(held.point, *held.ci())}; in every run {pct(every)}; in "
             f"only one run {pct(single)}")
