@@ -200,7 +200,7 @@ The practical point does not depend on the model. Any single run tells you littl
 | Sonnet 5, production request | 2.7 | 9.4 | 0.081 |
 | Haiku 4.5, leaked prompt | 2.9 | 5.6 | 0.047 |
 
-These costs are estimates. The API reports token counts and the number of web searches for each call, not dollars. We priced those counts at Anthropic's published list prices: tokens at the Batches API's half price, web search at $10 per 1,000 searches, and the cost of caching the leaked prompt. At the time of writing, the study's usage had not yet appeared in Anthropic's billing reports, so we could not check these figures against an invoice. Web search is a large share of each estimate, from about 21% for Opus with no system prompt to about 62% for Haiku. Without the calls that paid to write the cache, the Opus leaked-prompt arm came to $0.110. claude.ai reports subscription usage only as a share of plan limits, so it has no per-chat price.
+These costs are estimates. The API reports token counts and the number of web searches for each call, not dollars. We priced those counts at Anthropic's published list prices: tokens at the Batches API's half price, web search at $10 per 1,000 searches, and the cost of caching the leaked prompt. We later checked the counts against Anthropic's usage export. For the third day, it matches the counts we recorded exactly, token for token and search for search, for all three models. For the first two days, the export shows only part of the usage. The same Opus request, run daily in a later study, matched exactly on all eight days we checked. Anthropic's cost export confirms the list prices, including $10 per 1,000 searches, but does not yet show the Batches discount, so the dollar figures remain estimates. Web search is a large share of each estimate, from about 21% for Opus with no system prompt to about 62% for Haiku. Without the calls that paid to write the cache, the Opus leaked-prompt arm came to $0.110. claude.ai reports subscription usage only as a share of plan limits, so it has no per-chat price.
 
 ### Checks on the pipeline
 
@@ -236,7 +236,7 @@ We froze the plan before collection. These eleven changes were made afterwards, 
 
 **B2B software questions only.** We tested 40 synthetic buying questions in 20 software categories, written by a model and reviewed by a person. They are not real buyer phrasing, and the results may not hold for consumer products, local services, other languages or other kinds of question.
 
-**Costs are estimates.** Per-call costs are computed from token and search counts at list prices, not taken from a bill. They had not been reconciled with Anthropic's billing at the time of writing.
+**Costs are estimates.** Per-call costs are computed from token and search counts at list prices, not taken from a bill. Anthropic's usage export later matched our counts exactly for the third day. Its export for the first two days is incomplete, and its cost export does not yet show the Batches discount.
 
 **Three days.** Each prompt ran once per arm on three days. A longer run could show more drift on either side. On day two, the API answers came 5 to 10 hours after the claude.ai chats.
 
@@ -261,3 +261,4 @@ We froze the plan before collection. These eleven changes were made afterwards, 
 
 - 2026-10-02: draft.
 - 2026-10-02: costs relabeled as estimates computed from list prices; the study's usage had not yet appeared in Anthropic's billing reports.
+- 2026-10-19: token and search counts checked against Anthropic's usage export. Day three matches exactly; the export for days one and two is incomplete. Costs stay labeled as estimates until the Batches discount appears in a cost export.
