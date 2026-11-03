@@ -1,8 +1,8 @@
 # An unattended Claude Code run names the same brands as a person in claude.ai: study spec
 
-**Status:** DRAFT, not frozen
-**Frozen commit:** none yet
-**Frozen date / seed:** none yet / 20261103 (proposed)
+**Status:** FROZEN
+**Frozen commit:** recorded in the next commit
+**Frozen date / seed:** 2026-11-03 / 20261103
 **Experiment slug:** `011-claude-code-fidelity`
 
 > Freeze rule: §4 (hypotheses) and §5 (model and decision rules) are fixed before
@@ -49,7 +49,8 @@ characters with these tools. `--system-prompt ""` leaves a 136-character block, 
 
 **Scheduled tasks.** These findings shape the design:
 - A study prompt pasted in unchanged did **no web search** and answered from memory,
-  and the session also sent a push notification on its own (n = 1). A task's prompt
+  and the session also called the push notification tool on its own (n = 1). The tool
+  reported the push as requested; the account holder did not receive one. A task's prompt
   therefore has to ask for search, and the arm cannot use the prompt alone.
 - The server attaches every connector on the account to a new task, even when the
   request lists none. Only an explicit clear removes them. An answer run with
@@ -60,16 +61,21 @@ characters with these tools. `--system-prompt ""` leaves a 136-character block, 
   was +0.068 [+0.013, +0.124], and +0.132 [+0.065, +0.193] with unplaced names counted.
   It overlapped local `cc_stock_full` at 0.614, while the local arms overlap each other
   at 0.688 to 0.793. So this is a real question and §4 tests it.
-- The task's model can be set to Opus 5.5. An `effort` field in the request was dropped
-  without an error, and the run's log does not report effort, so the effort level is
-  unverified. 009 found claude.ai's Medium and High settings do not change brands.
+- The task's model can be set to Opus 5.5, and the transcript confirms each subagent ran
+  on it. An `effort` field in the request was dropped without an error, and the run's log
+  does not report effort, so the effort level is unverified. The study leaves it unset on
+  all three waves. 009 found claude.ai's Medium and High settings do not change brands.
 - The run log truncates answers. `claude --teleport <session>` pulls the full
-  transcript. The main session's printed answers matched the subagents' reports exactly
-  (first 3,000 characters of each).
+  transcript. The main session's printed answers were exact copies of the subagents'
+  reports (whole answers, 10 of 10). The pulled transcript records the version of the
+  client that pulled it, not the cloud's, so the cloud version cannot be read.
 
 **Usage.** 40 local answers moved a Max plan's five-hour window from 4% to 18% and its
 seven-day window from 16% to 17%, with other work on the account at the same time.
-Pro is measured separately before the freeze (`harness/pro_usage_check.md`).
+On Pro (`harness/pro_usage_check.md`), 10 local answers with nothing else on the account
+moved the five-hour window from 0% to 6% and left the seven-day window at 0%. Both round
+to 1%, so these are rough. For comparison, 10 claude.ai chats used 11% of the same Pro
+plan's five-hour window in 009's pilot, on a different date.
 
 **Power.** §5.
 
@@ -81,7 +87,7 @@ not claude.ai: its system prompt, search tool and path from search result to ans
 differ. We test whether, for B2B software research on Opus 5.5, an unattended Claude
 Code run names the same brands as a person in claude.ai. 40 synthetic buyer prompts run
 on 3 non-consecutive days through claude.ai by hand (the reference), local Claude Code
-out of the box, a scheduled task built the way a customer would build it, local Claude
+out of the box, a scheduled task built the way a subscriber would build it, local Claude
 Code with no system prompt and search only, and the API as in 009. The primary test asks
 whether each primary arm overlaps claude.ai about as much as claude.ai overlaps itself
 across days, within +/-0.10. The pilot suggests small gaps, near the band's inner half,
@@ -98,7 +104,7 @@ day, and what that uses of a subscription's limits.
 **What this design does NOT measure:**
 - **Location-dependent visibility. This process is not suitable for tracking visibility
   when location matters.** Claude Code's `WebSearch` has no location setting, so neither
-  this study nor a customer can choose where a search appears to come from. A scheduled
+  this study nor anyone running this setup can choose where a search appears to come from. A scheduled
   task runs in Anthropic's cloud, from a place we do not know and cannot set. The
   prompts contain no location by construction, so the study says nothing about prompts
   where the answer depends on place, such as local services or regional vendors. We
@@ -137,7 +143,7 @@ expect cited domains to diverge further than brands.
 |---|---|---|---|---|---|
 | `ui_default` | claude.ai, by hand, Pro | Opus 5.5, Medium (confirmed default) | claude.ai's own | claude.ai's own | **reference** |
 | `cc_stock_full` | local `claude -p`, Max | `claude-opus-5-5`, effort medium | Claude Code's own | `WebSearch`, `WebFetch` | **primary** |
-| `sched_kit` | scheduled task, Max | `claude-opus-5-5`, effort unverified | Claude Code's own, plus a subagent's | `Agent`, `WebSearch`, `WebFetch` | **primary** |
+| `sched_kit` | scheduled task, Max | `claude-opus-5-5`, effort not set (unverified) | Claude Code's own, plus a subagent's | `Agent`, `WebSearch`, `WebFetch` | **primary** |
 | `cc_none_search` | local `claude -p`, Max | `claude-opus-5-5`, effort medium | replaced, 136 characters remain | `WebSearch` | secondary |
 | `opus55_plain` | API, Batches | `claude-opus-5-5`, effort medium | none | `web_search_20250305`, `user_location` Pittsburgh | secondary (replicates 009) |
 
@@ -145,7 +151,7 @@ The local arms follow the instrument rules in `sketch.md`: a pinned unmodified b
 an empty environment, a check on every run that `apiKeySource` is `none`, no MCP servers,
 the arm's exact tools, and one process per answer.
 
-`sched_kit` is built as a customer would build it, and it tests that build, not the
+`sched_kit` is built as a subscriber would build it, and it tests that build, not the
 cloud surface alone. Its frozen prompt (`harness/sched_kit.py`) tells the main session to
 start one new general-purpose subagent per prompt on the same model, with this
 instruction and nothing else, and to print the result unchanged:
@@ -177,8 +183,9 @@ on the ledger. Keys come only from this repo's `.env.local`.
 - **Audit A: degenerate responses.** Per arm x wave: failed runs, audit failures, empty
   answers, zero searches, zero links, zero extracted brands, replies that only ask a
   question back, coding behavior. If more than 30% of an arm's answers have no search,
-  its domain claims are INCONCLUSIVE. For `sched_kit`, a search count comes from the run
-  log. claude.ai chats that ask clarifying questions are scored on the first reply
+  its domain claims are INCONCLUSIVE. For `sched_kit`, the transcript records whether each
+  subagent searched and its total tool count, not the number of searches, so its search
+  depth is reported as a tool count. claude.ai chats that ask clarifying questions are scored on the first reply
   (009, deviation 1).
 - **Audit B: what the labels mean.** "Brand named" = lexicon alias match in the answer
   text for the prompt's category, labelled sources blocks stripped
@@ -206,7 +213,8 @@ One row per answer (prompt x arm x wave).
 | search query text | str[] | stream | **never** | counts and overlap only |
 | brands (ordered) | str[] | lexicon | yes (public facts) | |
 | links, evaluated URLs | str[] | answer text / stream | derived-only | domains publish |
-| n_searches, n_fetches, n_backend_searches, chars, n_brands | int | derived | yes | |
+| n_searches, n_fetches, n_backend_searches, chars, n_brands | int | derived | yes | null for `sched_kit` where the transcript has no count |
+| searched, subagent_tool_uses, resolved_model, report_match, instruction_exact | bool/int/str | transcript, `sched_kit` only | yes | |
 | cost estimate, usage | float | stream | yes (aggregates per arm) | client-side estimate, comparison only |
 | window utilization | float | `rate_limit_event` | yes (aggregates per plan) | rounds to 1% |
 | scheduled-task prompt | text | `harness/sched_kit.py` | yes | |
@@ -224,7 +232,7 @@ prompt). Gap = mean(within:ui) - mean(cross:arm|ui). Positive means the arm is f
 from claude.ai than claude.ai is from itself.
 
 **Primary family (Holm across 2 tests): H1, brand-set Jaccard gap** for `cc_stock_full`
-and `sched_kit`: equivalent to 0 within +/-0.10. These are the two surfaces a customer
+and `sched_kit`: equivalent to 0 within +/-0.10. These are the two surfaces a subscriber
 would use.
 
 **Secondary (no multiplicity correction, labeled as such):**
@@ -309,12 +317,19 @@ same rules, because missing names bias the comparison toward equivalence (009, d
 - **Different accounts.** claude.ai runs on Pro and Claude Code on Max. Neither has
   memory or connectors in the measured path, but account-level rollouts are invisible to us.
 - **A moving instrument.** The local binary is pinned. A scheduled task runs whatever
-  version the cloud provides, so the version is recorded and may change between waves.
+  version the cloud provides. We cannot read that version from the run's records, so a
+  change between waves would not be visible. R3 drops each wave in turn.
 - **The kit's wording.** `sched_kit` adds an instruction to use web search that no other
   arm has. claude.ai skipped search on 17% of these pilot prompts; `sched_kit` will
-  likely never skip it. That is the kit as a customer would run it.
-- **Retyped answers.** The main session retypes each subagent's answer. A hand check on
-  the pilot found exact copies; Audit A repeats it on a sample of 10 answers per wave.
+  likely never skip it. That is the kit as a subscriber would run it.
+- **Retyped answers.** The main session retypes each subagent's answer. The transcript
+  also holds each subagent's report, so Audit A compares every answer with its report, and
+  checks that each subagent received the exact instruction. Any mismatch is reported.
+- **One account's history.** The claude.ai account also holds 009's chats on the same
+  prompts, some with what would be the same names. This study's chats are named
+  `e011-w<wave>-ui_default-<item>`. The ingest matches only that exact name, only for chats
+  created on or after the freeze date, never on prompt text, and writes neither chat when
+  two share a name.
 - **Search depth.** Claude Code searches about 4 times as much, so a pass on brands would
   not mean the sources match. Cited domains are descriptive and probably diverge.
 - **Lexicon built partly in-sample.** The UI answers from 009 are fully covered and the new
@@ -338,22 +353,25 @@ same rules, because missing names bias the comparison toward equivalence (009, d
 
 ## 8. Deliverables and sequence
 
-1. Pro usage check (Jim, `harness/pro_usage_check.md`). Pre-freeze; the number goes in §A.
-2. **STOP 1: Jim reviews this spec.**
+1. Pro usage check (Jim, `harness/pro_usage_check.md`). Done; the number is in §A.
+2. **STOP 1: Jim reviews this spec.** Approved 2026-11-03, including `sched_kit` as a primary
+   arm.
 3. Analysis pipeline, built and dry-run on synthetic data before the freeze: planted
    equivalent and divergent arms are recovered and `03_model.py` exits non-zero when H_pos
-   fails. (009 built its pipeline after collection and logged that as a deviation.)
+   fails. Done. The same code run on 009's stored frame gives +0.067 [+0.034, +0.099], 009's
+   published gap for `opus55_plain`. (009 built its pipeline after collection and logged that
+   as a deviation.)
 4. Freeze (two commits), record the hash and seed. Push.
 5. Wave 1. Lexicon candidates, curation, **STOP 2: Jim reviews the lexicon**, freeze.
 6. Waves 2 and 3.
 7. Audit D (signed), model, robustness suite.
 8. **STOP 3: results review.**
-9. Only if approved: article, release, companion blog post (EN and DE), and any customer
-   setup guide.
+9. Only if approved: article, release, companion blog post (EN and DE), and any setup
+   guide.
 
 ## 9. Notes for the write-up
 
-- **Required, in the article, the blog post and any customer guide, in plain words:** this
+- **Required, in the article, the blog post and any setup guide, in plain words:** this
   process is not suitable for tracking visibility when location matters, because the
   harness cannot control search location. The release checklist adds this as a sign-off
   item. Say what to use instead: the API, which can set a location.
@@ -369,4 +387,4 @@ same rules, because missing names bias the comparison toward equivalence (009, d
 
 ## Deviations from the frozen spec
 
-None. The spec is not frozen.
+None yet.
