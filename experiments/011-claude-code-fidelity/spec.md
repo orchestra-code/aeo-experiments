@@ -1,7 +1,7 @@
 # An unattended Claude Code run names the same brands as a person in claude.ai: study spec
 
 **Status:** FROZEN
-**Frozen commit:** recorded in the next commit
+**Frozen commit:** `14fa495`
 **Frozen date / seed:** 2026-11-03 / 20261103
 **Experiment slug:** `011-claude-code-fidelity`
 
