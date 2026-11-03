@@ -47,7 +47,7 @@ recorded the request body. Every local arm sends `model: claude-opus-5-5`,
 characters with these tools. `--system-prompt ""` leaves a 136-character block, so the
 "no system prompt" arm is close to empty, not empty.
 
-**Scheduled tasks.** Three findings shape the design:
+**Scheduled tasks.** These findings shape the design:
 - A study prompt pasted in unchanged did **no web search** and answered from memory,
   and the session also sent a push notification on its own (n = 1). A task's prompt
   therefore has to ask for search, and the arm cannot use the prompt alone.
@@ -292,7 +292,7 @@ failure of the idea. More prompts would narrow the interval, at the cost of comp
 with 009 and more hand collection. We keep 40 x 3.
 
 **Lexicon protocol.** Start from experiment 010's frozen v3 (sha256
-`6084f47c…5cf5d`, a superset of 009's v2.1), so that the 009 rules carry over. Haiku 4.5
+`6084f47c…5cf5d`, a superset of 009's v2.1), so that the 009 rules still apply. Haiku 4.5
 proposes brand names from all wave 1 answers. A plan or edition of a vendor already in the
 lexicon resolves to that vendor. Curation follows `009/harness/lexicon_rules.md`, then a
 person reviews flagged rows and rows matching five or more answers. The sha256 is recorded
