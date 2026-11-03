@@ -272,7 +272,8 @@ def cmd_check(_args) -> None:
 def cmd_run(args) -> None:
     sha = verify_binary()
     prompts = load_prompts()
-    item_ids = args.items.split(",") if args.items else PILOT_ITEMS
+    default_items = PILOT_ITEMS if args.wave == 0 else sorted(prompts)
+    item_ids = args.items.split(",") if args.items else default_items
     arm_names = list(ARMS) if args.arms == "all" else args.arms.split(",")
     rng = random.Random(f"{SEED}:{args.wave}")
     rng.shuffle(arm_names)
@@ -349,7 +350,7 @@ def main() -> None:
     run = sub.add_parser("run")
     run.add_argument("--wave", type=int, required=True)
     run.add_argument("--arms", default="all")
-    run.add_argument("--items", default=None, help="comma-separated, default the 10 pilot prompts")
+    run.add_argument("--items", default=None, help="comma-separated; default all 40, or the 10 pilot prompts on wave 0")
     run.add_argument("--workers", type=int, default=3)
     run.set_defaults(fn=cmd_run)
     check = sub.add_parser("usage-check")
