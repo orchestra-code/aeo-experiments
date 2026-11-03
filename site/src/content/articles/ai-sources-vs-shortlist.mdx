@@ -1,0 +1,111 @@
+---
+title: "AI changes its sources far more than its shortlist"
+description: "Research note, exploratory: in 918 B2B software answers, a vendor on the AI shortlist repeated in another run 64% to 81% of the time, while third-party cited sites repeated 19% to 46% of the time. When the sources changed, the shortlist barely moved."
+pubDate: 2026-11-03
+authors:
+  - name: "Spyglasses Research"
+    url: "https://spyglasses.io"
+experiment: "012-source-churn-vs-shortlist"
+heroFigure: "/figures/012-source-churn-vs-shortlist/source_vs_shortlist.png"
+figures:
+  - "/figures/012-source-churn-vs-shortlist/source_vs_shortlist.png"
+tags: ["chatgpt", "gemini", "claude", "claude-ai", "shortlist", "citations", "b2b-software", "exploratory", "research-note"]
+draft: false
+---
+
+**This is a research note, not a pre-registered study.** We looked again at answers we had already collected, after seeing a new result from another team. Treat the findings as strong leads. A [draft specification](https://github.com/orchestra-code/aeo-experiments/blob/main/experiments/012-source-churn-vs-shortlist/spec.md) sets out how we plan to test them.
+
+## Key findings
+
+- **Sources change far more than the shortlist.** A vendor on the shortlist repeated in another run of the same prompt 64% to 81% of the time, depending on the platform. A third-party site cited in one run was cited again only 19% to 46% of the time.
+- **When the sources changed, the shortlist barely moved.** Within a single prompt, moving from low to high source overlap changed shortlist overlap by 0.06 or less on a 0 to 1 scale, on all four platforms.
+- **ChatGPT's source overlap is mostly an echo of its shortlist.** 83% of the domains it cited were vendor sites, and 91% of those belonged to a vendor named in the same answer. Without vendor sites, repeat citation falls from 60% to 19%.
+- **This does not show that sources are irrelevant.** The shortlist could be stable because the model already knows these brands, or because different pages name the same brands. This data cannot separate the two.
+
+## Why we asked
+
+Muck Rack and Generative Pulse recently [reported](https://muckrack.com/blog/what-is-ai-reading-october-2026) that when the same prompt ran twice in one day, ChatGPT repeated 41% of its cited domains and Gemini repeated 45%, while Perplexity repeated 94%.
+
+Our own [shortlist study](/articles/ai-shortlist-stability) found that the vendors AI recommends are fairly stable from run to run. Put together, those results raise a question. If the sources change this much, why does the shortlist not change with them?
+
+## Methods in brief
+
+We reused the answers from [experiment 010](/articles/ai-shortlist-stability), Stage 1: 40 B2B software buying prompts run on 7 days on ChatGPT, Gemini and the Claude API, plus 26 prompts run 3 times each on claude.ai. That is 918 answers and 4,518 citations evaluated in this study, counted once per domain per answer.
+
+For every pair of runs of the same prompt, we measured the share of items in one run that also appeared in the other (the Dice coefficient, pooled across pairs). We used the same answers, pairs and metric for sources and for the shortlist, so the numbers are directly comparable. Intervals are 90% and come from resampling prompts.
+
+We split cited domains into two groups. **Vendor sites** belong to a company the answers name. **Third-party sites** are everything else, including review sites, publishers and smaller software companies writing comparison articles. We matched names automatically, then reviewed the results and corrected 41 of 1,076 domains.
+
+The study's Stage 2 waves were not used.
+
+## Results
+
+<figure>
+  <img src="/figures/012-source-churn-vs-shortlist/source_vs_shortlist.png" alt="Dot plot of the share repeated in another run of the same prompt. Shortlist: ChatGPT 81%, Claude API 78%, claude.ai 75%, Gemini 64%. Third-party sites retrieved: ChatGPT 36%, Claude API 53%, claude.ai 30%. Third-party sites cited: ChatGPT 19%, Claude API 46%, claude.ai 22%, Gemini 24%." />
+</figure>
+
+| Share repeated between two runs | Shortlist | All cited domains | Vendor sites cited | Third-party sites cited | Third-party sites retrieved |
+|---|---|---|---|---|---|
+| ChatGPT | 81% | 60% | 68% | 19% | 36% |
+| Claude API | 78% | 52% | 60% | 46% | 53% |
+| claude.ai | 75% | 25% | 32% | 22% | 30% |
+| Gemini | 64% | 25% | 27% | 24% | no data |
+
+**The gap passes a check against chance.** Two different prompts in the same category share some vendors and sources anyway. After correcting for that baseline, the shortlist still leads third-party citations by 39 points on ChatGPT, 35 on claude.ai, 23 on the Claude API and 19 on Gemini.
+
+**Short lists create part of the gap.** ChatGPT cites about one third-party domain per answer, and a short list repeats less often by chance alone. When we randomly cut each shortlist down to the size of that answer's third-party list, its repeat rate fell to about the same level: 20% against 19% on ChatGPT, and 43% against 46% on the Claude API.
+
+So the cited column alone is not a fair comparison. The retrieved column is fairer, because those lists are about as long as the shortlist. There the gap remains: 45 points on ChatGPT, 25 on the Claude API and 45 on claude.ai. We have no retrieval data for Gemini, so its gap may be mostly this effect.
+
+**Source changes barely predict shortlist changes.** To compare like with like, we looked only within the same prompt.
+
+| Same prompt only | Shortlist change, low to high source overlap | Runs sharing no third-party site, against runs sharing at least one |
+|---|---|---|
+| ChatGPT | -0.01 | -0.02 [-0.07, 0.03] |
+| Claude API | +0.06 | -0.04 [-0.08, 0.00] |
+| claude.ai | +0.02 | -0.07 [-0.17, 0.02] |
+| Gemini | +0.05 | -0.06 [-0.09, -0.03] |
+
+Both columns use Jaccard overlap, a stricter measure on a 0 to 1 scale. The effect is small, but it is not always zero: runs that share no third-party site have detectably lower shortlist overlap on Gemini, and the Claude API is close to that line.
+
+**A hint about why.** Some claude.ai answers ran no web search at all. Within the 4 prompts where we can compare, overlap in the brands named between a run that searched and a run that did not was 0.07 lower than between two runs that searched, with an interval from -0.17 to 0.03. A second Claude setup with 7 such prompts showed about the same, at -0.06. These samples are small, and the model chooses when to search, so this is only a hint that much of the list survives without any sources.
+
+## How this compares with Muck Rack
+
+We cannot compare these numbers directly. The report's post does not define overlap, and its prompts are reported to be consumer questions. Ours are mostly B2B, and our closest runs are a day apart rather than the same day. We also have no Perplexity data.
+
+| Cited domains, one day apart | Muck Rack | Ours, Jaccard overlap | Ours, share repeated |
+|---|---|---|---|
+| ChatGPT | 41% | 48% | 63% |
+| ChatGPT, consumer headphone prompts | not applicable | 43% | 55% |
+| Claude API | 56% (Claude) | 40% | 54% |
+| claude.ai | 56% (Claude) | 14% | 27% |
+| Gemini | 45% | 15% | 26% |
+
+ChatGPT on consumer prompts lines up well, and it also matches the 43% from [our earlier study](/articles/prompt-phrasing-consistency). Gemini is the clear difference. Our Gemini answers cite few sources, about 2.7 per answer, which may explain part of it.
+
+## What we can and cannot claim
+
+**We can say:** run to run, the sources AI cites change far more than the brands it shortlists, and when the sources change, the shortlist barely moves. This held for B2B software prompts in our sample.
+
+**We cannot say:**
+
+- **That sources do not matter.** This data has no experiment in it. We watched what happened and did not change the sources an AI could see. A stable shortlist fits two opposite explanations. The model may already know the brands, which would make sources matter less. Or many different pages may name the same brands, which would make being on those pages matter a great deal.
+- **That AI reaches the same conclusion from any source.** The links we found are weak, not absent.
+- **That source lists are unstable in every sense.** A short citation list can look unstable even when the pool behind it is steady.
+- **That this generalizes.** Fragmented markets behave differently. For brand design agencies on ChatGPT, the shortlist repeated only 36% of the time.
+
+**Other limits.** This analysis was not pre-registered, and we chose some controls after seeing early results. No null result here passed an equivalence test. Our vendor labels come from name matching plus review, and they affect ChatGPT most. ChatGPT also changed models during collection, though results looked similar on both models. Retrieved lists on ChatGPT are search results the model may not have read. claude.ai has only 26 prompts and 3 runs.
+
+## What comes next
+
+We have [drafted a study](https://github.com/orchestra-code/aeo-experiments/blob/main/experiments/012-source-churn-vs-shortlist/spec.md) that changes the sources directly: search on against search off, and answers built from controlled sets of pages. It will start after our current studies finish.
+
+## Data and reproducibility
+
+- **Dataset:** no new dataset. Vendor-level answer data is in the [experiment 010 release](/articles/ai-shortlist-stability). Cited domains and URLs are not released.
+- **Analysis code and aggregate results:** [experiments/012-source-churn-vs-shortlist/](https://github.com/orchestra-code/aeo-experiments/tree/main/experiments/012-source-churn-vs-shortlist)
+
+## Changelog
+
+- 2026-11-03: drafted.
