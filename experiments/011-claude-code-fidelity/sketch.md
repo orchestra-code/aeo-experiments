@@ -192,3 +192,24 @@ allows, because that is the surface with no machine to keep running.
   account signed in from Pittsburgh and its API arms set `user_location` there.
   The anchor keeps the 009 setting. B2B software prompts are expected to be
   insensitive to location, and no study here has tested that.
+
+## Deviations from this sketch
+
+Logged after the feasibility run. The criteria above are unchanged, as committed
+in `449e49d`.
+
+1. **G3 scoring changed after it failed (2026-11-03).** As first scored, a Haiku
+   name counted as covered only if it was exactly a lexicon alias. Every arm failed
+   (83.2% to 88.0%, floor 90%). The gaps had already been seen when this was
+   changed, so read the change with that in mind. Most uncovered names were plan
+   tiers of vendors the lexicon already matches in the answer text, which the exact
+   rule counts as missing although extraction finds the vendor. G3 now asks whether
+   the lexicon's own matcher finds an alias inside the name (93.3% to 98.9%). The
+   report shows both numbers. Because this change could flatter the result, the
+   report adds a check that needs neither rule: the gap recomputed with every
+   unplaced name added to the brand set on both sides. It moved each arm by 0.005 to
+   0.038, and no arm went above +0.106.
+2. **G2 flags read by a person (2026-11-03).** The pattern check flagged 2 answers,
+   both on `b2b_09`. Both offer to draft a demo script for a vendor call, which is
+   advice to a buyer, not coding behavior. Cleared. Both arms stood at 90% with the
+   flags counted, so G2 passes either way.
