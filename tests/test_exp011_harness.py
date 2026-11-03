@@ -103,3 +103,23 @@ def test_every_arm_carries_the_isolation_flags():
 )
 def test_limit_guard_stops_before_overage(windows, stops):
     assert bool(cc.limit_problem(windows)) is stops
+
+
+def test_usage_check_login_directory_passes_but_no_credential_does(monkeypatch):
+    monkeypatch.setenv("ANTHROPIC_API_KEY", "sk-should-not-pass")
+    monkeypatch.setattr(cc, "CONFIG_DIR", "/tmp/pro-login")
+    env = cc.clean_env()
+    assert env["CLAUDE_CONFIG_DIR"] == "/tmp/pro-login"
+    assert "ANTHROPIC_API_KEY" not in env
+
+
+def test_usage_summary_reports_points_per_answer():
+    rows = [
+        {"status": "ok", "rate_limits": {"first": {"five_hour": 0.10, "seven_day": 0.20},
+                                         "last": {"five_hour": 0.12, "seven_day": 0.20}}},
+        {"status": "ok", "rate_limits": {"first": {"five_hour": 0.12, "seven_day": 0.20},
+                                         "last": {"five_hour": 0.14, "seven_day": 0.21}}},
+    ]
+    text = cc.usage_summary(rows)
+    assert "2.00 points per answer" in text
+    assert "0.50 points per answer" in text

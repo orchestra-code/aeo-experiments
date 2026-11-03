@@ -57,6 +57,16 @@ The same gap, with every Haiku name the lexicon cannot place added to the answer
 | `cc_none_search` | +0.054 | +0.092 [+0.045, +0.134] | 0.7 |
 | `ui_default` | | | 0.0 |
 
+## Scheduled task (directional only)
+One scheduled task in Claude Code's cloud, a fresh subagent per prompt, each told to use web search. The arm was designed after the feasibility criteria and is not covered by them. The wording around the prompt differs from the local arms, and the effort level could not be set or confirmed. 10 prompts, one run.
+
+- Brand gap to claude.ai: +0.068 [+0.013, +0.124]; nothing censored +0.132 [+0.065, +0.193].
+- Mean brand overlap with claude.ai: 0.620.
+- Overlap with local `cc_stock_full`, same prompt: 0.614; with `cc_none_search`: 0.634; with the API anchor: 0.557.
+- For scale, the local arms overlap each other at 0.688 to 0.793.
+- Per answer: 6598 characters, 8.5 brands, 16.5 links. Coverage: exact 86.0%, resolved 91.5%.
+- With one prompt pasted in unchanged and no subagent, the only such run did no web search and answered from memory (n = 1, not scored).
+
 ## Other measures (descriptive; links are not 009's citation objects)
 | Arm | Cited-domain gap | Evaluated-domain gap | Brand-order gap |
 |---|---|---|---|

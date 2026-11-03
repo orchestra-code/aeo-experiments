@@ -18,6 +18,11 @@ Usage (repo root):
     uv run python experiments/011-claude-code-fidelity/harness/collect_cc.py check
     uv run python experiments/011-claude-code-fidelity/harness/collect_cc.py run --wave 0 \
         --items b2b_01,b2b_06 --arms cc_stock_full
+    uv run python experiments/011-claude-code-fidelity/harness/collect_cc.py usage-check \
+        --config-dir ~/.claude-exp011-pro
+
+``usage-check`` measures one plan's usage on the pilot prompts, one answer at a time
+(``harness/pro_usage_check.md``). Its answers go in their own ledger and are not study data.
 """
 
 from __future__ import annotations
@@ -55,6 +60,8 @@ FIVE_HOUR_STOP = 0.60
 SEVEN_DAY_STOP = 0.50
 RUN_TIMEOUT_S = 900
 ENV_KEEP = ("HOME", "PATH", "USER", "LANG")
+USAGE_CHECK_WAVE = 91
+USAGE_CHECK_ARM = "cc_stock_full"
 
 
 @dataclass(frozen=True)
@@ -79,10 +86,16 @@ class LimitReached(Exception):
     """The account is near a limit: stop the run, keep what is done."""
 
 
+#: Set only by ``usage-check``: the config directory holding another plan's login.
+CONFIG_DIR: str | None = None
+
+
 def clean_env() -> dict[str, str]:
     """The only environment a run sees. No key, token or session variable passes."""
     env = {k: os.environ[k] for k in ENV_KEEP if k in os.environ}
     env["CLAUDE_CODE_DISABLE_AUTO_MEMORY"] = "1"
+    if CONFIG_DIR:
+        env["CLAUDE_CONFIG_DIR"] = CONFIG_DIR
     return env
 
 
@@ -277,6 +290,58 @@ def cmd_run(args) -> None:
             raise SystemExit(f"STOPPED before finishing {name}: {stop}") from stop
 
 
+def auth_status() -> dict:
+    out = subprocess.run(
+        [str(BINARY), "auth", "status"], env=clean_env(), capture_output=True, text=True, check=False
+    )
+    return json.loads(out.stdout)
+
+
+def usage_summary(rows: list[dict]) -> str:
+    """Usage per answer on one plan. Utilization rounds to 1%, so totals say more than rows."""
+    marks = [r["rate_limits"] for r in rows if r.get("rate_limits")]
+    if not marks:
+        return "No usage readings: no answer finished."
+    first, last = marks[0]["first"], marks[-1]["last"]
+    n = len(marks)
+    five = last["five_hour"] - first["five_hour"]
+    seven = last["seven_day"] - first["seven_day"]
+    ok = sum(r["status"] == "ok" for r in rows)
+    return (
+        f"Answers finished: {ok} of {len(rows)}.\n"
+        f"Five-hour window: {first['five_hour']:.0%} to {last['five_hour']:.0%} "
+        f"({five / n * 100:.2f} points per answer).\n"
+        f"Seven-day window: {first['seven_day']:.0%} to {last['seven_day']:.0%} "
+        f"({seven / n * 100:.2f} points per answer)."
+    )
+
+
+def cmd_usage_check(args) -> None:
+    global CONFIG_DIR, LEDGER, RESPONSES
+    CONFIG_DIR = str(Path(args.config_dir).expanduser())
+    LEDGER = RAW / "ledger_usage_check.jsonl"
+    RESPONSES = RAW / "responses_usage_check"
+    status = auth_status()
+    if not status.get("loggedIn") or status.get("subscriptionType") != args.plan:
+        raise SystemExit(
+            f"expected a logged-in {args.plan} account in {CONFIG_DIR}, got "
+            f"loggedIn={status.get('loggedIn')} plan={status.get('subscriptionType')}"
+        )
+    sha = verify_binary()
+    prompts = load_prompts()
+    order = list(PILOT_ITEMS)
+    random.Random(f"{SEED}:usage").shuffle(order)
+    done = done_keys()
+    items = [prompts[i] for i in order if (USAGE_CHECK_WAVE, USAGE_CHECK_ARM, i) not in done]
+    print(f"{status['subscriptionType']} account; {len(items)} answers to run, one at a time.", flush=True)
+    try:
+        run_arm(ARMS[USAGE_CHECK_ARM], items, USAGE_CHECK_WAVE, sha, workers=1)
+    except LimitReached as stop:
+        print(f"STOPPED early: {stop}")
+    rows = [json.loads(x) for x in LEDGER.read_text().splitlines() if x]
+    print("\n" + usage_summary(rows))
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__)
     sub = ap.add_subparsers(dest="cmd", required=True)
@@ -287,6 +352,10 @@ def main() -> None:
     run.add_argument("--items", default=None, help="comma-separated, default the 10 pilot prompts")
     run.add_argument("--workers", type=int, default=3)
     run.set_defaults(fn=cmd_run)
+    check = sub.add_parser("usage-check")
+    check.add_argument("--config-dir", required=True, help="config directory with the plan's login")
+    check.add_argument("--plan", default="pro")
+    check.set_defaults(fn=cmd_usage_check)
     args = ap.parse_args()
     if shutil.which(str(BINARY)) is None:
         raise SystemExit(f"pinned binary missing: {BINARY}")

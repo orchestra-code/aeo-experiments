@@ -35,6 +35,8 @@ LEXICON = EXP.parent / "010-shortlist-stability" / "data" / "raw" / "lexicon_v3"
 LEXICON_SHA256 = "6084f47ca1831474de9cb64d79425d522b75ac409d2b5080b24653ec9905cf5d"
 CC_ARMS = ("cc_stock_full", "cc_stock_search", "cc_none_full", "cc_none_search")
 ANCHOR = "opus55_plain"
+#: One scheduled task, one fresh subagent per prompt, told to use web search. Directional only.
+SCHEDULED = "sched_kit"
 UI_WAVES = (1, 2, 3)
 WAVE = 0
 SEED = 20261103
@@ -79,7 +81,7 @@ def load_answers() -> tuple[pd.DataFrame, dict[str, str]]:
 
     arm_items = sorted((RAW / "responses" / f"w{WAVE}" / CC_ARMS[0]).glob("*.json"))
     items = [p.stem for p in arm_items]
-    for arm in (*CC_ARMS, ANCHOR):
+    for arm in (*CC_ARMS, ANCHOR, SCHEDULED):
         for item in items:
             path = RAW / "responses" / f"w{WAVE}" / arm / f"{item}.json"
             if path.exists():
@@ -137,9 +139,9 @@ def gap(frame: pd.DataFrame, arm: str, metric: str = "brand"):
                         seed=SEED)
 
 
-def same_day_overlap(frame: pd.DataFrame, arm: str) -> float:
+def same_day_overlap(frame: pd.DataFrame, arm: str, other: str = ANCHOR) -> float:
     left = frame[frame.arm == arm].set_index("item_id")
-    right = frame[frame.arm == ANCHOR].set_index("item_id")
+    right = frame[frame.arm == other].set_index("item_id")
     shared = left.index.intersection(right.index)
     return st.mean(jaccard(set(left.at[i, "brands"]), set(right.at[i, "brands"])) for i in shared)
 
@@ -168,7 +170,7 @@ def haiku_names(frame: pd.DataFrame) -> dict[str, list[str]]:
     for row in frame[frame.arm == "ui_default"].itertuples():
         cache[_key(row.category, row.answer_text)] = stored.get((row.item_id, row.wave), [])
 
-    subset = frame[frame.arm.isin((*CC_ARMS, ANCHOR))]
+    subset = frame[frame.arm.isin((*CC_ARMS, ANCHOR, SCHEDULED))]
     todo = [
         (_key(r.category, r.answer_text), r.answer_text, r.category)
         for r in subset.itertuples()
@@ -379,6 +381,33 @@ def main() -> None:
         lines.append(f"| `{arm}` | {results[arm].estimate:+.3f} | {result.estimate:+.3f} "
                      f"[{result.lo:+.3f}, {result.hi:+.3f}] | {group.residual.map(len).mean():.1f} |")
     lines.append(f"| `ui_default` | | | {frame[frame.arm == 'ui_default'].residual.map(len).mean():.1f} |")
+
+    if (frame.arm == SCHEDULED).any():
+        result = gap(frame, SCHEDULED)
+        censored = gap(frame, SCHEDULED, "brand_all")
+        group = frame[frame.arm == SCHEDULED]
+        level = pairs(frame, SCHEDULED, "brand").query("condition == 'cross'").value.mean()
+        local_pairs = [same_day_overlap(frame, a, b) for i, a in enumerate(CC_ARMS) for b in CC_ARMS[i + 1:]]
+        lines += ["", "## Scheduled task (directional only)",
+                  "One scheduled task in Claude Code's cloud, a fresh subagent per prompt, each told to "
+                  "use web search. The arm was designed after the feasibility criteria and is not "
+                  "covered by them. The wording around the prompt differs from the local arms, and the "
+                  "effort level could not be set or confirmed. 10 prompts, one run.", "",
+                  f"- Brand gap to claude.ai: {result.estimate:+.3f} [{result.lo:+.3f}, {result.hi:+.3f}]; "
+                  f"nothing censored {censored.estimate:+.3f} [{censored.lo:+.3f}, {censored.hi:+.3f}].",
+                  f"- Mean brand overlap with claude.ai: {level:.3f}.",
+                  f"- Overlap with local `cc_stock_full`, same prompt: "
+                  f"{same_day_overlap(frame, SCHEDULED, 'cc_stock_full'):.3f}; with `cc_none_search`: "
+                  f"{same_day_overlap(frame, SCHEDULED, 'cc_none_search'):.3f}; with the API anchor: "
+                  f"{same_day_overlap(frame, SCHEDULED):.3f}.",
+                  f"- For scale, the local arms overlap each other at {min(local_pairs):.3f} to "
+                  f"{max(local_pairs):.3f}.",
+                  f"- Per answer: {group.answer_text.str.len().mean():.0f} characters, "
+                  f"{group.brands.map(len).mean():.1f} brands, {group.cited_urls.map(len).mean():.1f} links. "
+                  f"Coverage: exact {coverage[SCHEDULED]['strict']:.1%}, resolved "
+                  f"{coverage[SCHEDULED]['resolved']:.1%}.",
+                  "- With one prompt pasted in unchanged and no subagent, the only such run did no web "
+                  "search and answered from memory (n = 1, not scored)."]
 
     lines += ["", "## Other measures (descriptive; links are not 009's citation objects)",
               "| Arm | Cited-domain gap | Evaluated-domain gap | Brand-order gap |", "|---|---|---|---|"]

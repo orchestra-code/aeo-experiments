@@ -213,3 +213,10 @@ in `449e49d`.
    both on `b2b_09`. Both offer to draft a demo script for a vendor call, which is
    advice to a buyer, not coding behavior. Cleared. Both arms stood at 90% with the
    flags counted, so G2 passes either way.
+3. **Scheduled-task arm added at Jim Wrubel's request (2026-11-03).** It came after the
+   feasibility run and is not covered by G1 to G5. It was run on the same 10 prompts and
+   is reported as directional in `results/pilot_report.md`. Findings are in `spec.md`, §A.
+4. **The selection rule allowed at most 2 Claude Code arms; the draft spec has 3.** It
+   applies the rule to the local arms (`cc_stock_full`, `cc_none_search`) and adds
+   `sched_kit` for the reason in deviation 3. Only `cc_stock_full` and `sched_kit` are in
+   the primary family.
