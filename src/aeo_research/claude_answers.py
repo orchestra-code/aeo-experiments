@@ -320,3 +320,121 @@ def from_claude_export(conversation: Mapping) -> dict:
         "created_at": conversation.get("created_at"),
         "warnings": warnings,
     }
+
+
+# ------------------------------------------------------------- Claude Code
+
+_BARE_URL_RE = re.compile(r"https?://[^\s)\]>\"'`|]+")
+
+
+def _links_in_text(text: str) -> list[str]:
+    """URLs in answer text, markdown links first-seen with bare URLs, unique."""
+    return _unique(u.rstrip(".,;:") for u in _BARE_URL_RE.findall(text or ""))
+
+
+def from_claude_code_stream(events: Iterable[Mapping]) -> dict:
+    """Normalize one ``claude -p --output-format stream-json --verbose`` run.
+
+    Same record as ``from_api_message`` and ``from_claude_export``, plus what
+    only this surface reports. The semantics differ from the other two in one
+    way that matters: the stream has no citation objects, so ``cited_urls`` are
+    the links written in the answer text (``cited_urls_source = "answer_links"``).
+
+    - ``evaluated_urls``: the ``url`` of each link in a ``WebSearch`` tool
+      result (``tool_use_result.results[*].content[*].url``). Text items in
+      ``results`` are the backend's summary and are skipped.
+    - ``fetched_urls`` / ``n_fetches``: ``WebFetch`` calls by the main model.
+    - ``search_queries`` / ``n_searches``: ``WebSearch`` calls by the main model.
+      ``n_backend_searches`` is the count Claude Code bills to the search
+      backend, from ``modelUsage``; one call can run several backend searches.
+    - ``answer_text``: the ``result`` event's text. A run with no ``result``
+      event, or one flagged ``is_error``, gets a warning and an empty answer.
+    - ``init``: the audit fields from the ``init`` event.
+    - ``rate_limits``: utilization per window, first and last seen in the run.
+    """
+    init: dict = {}
+    result: dict = {}
+    queries: list[str] = []
+    fetches: list[str] = []
+    evaluated: list[str] = []
+    windows: list[dict] = []
+    main_models: list[str] = []
+    warnings: list[str] = []
+
+    for event in events:
+        kind = event.get("type")
+        if kind == "system" and event.get("subtype") == "init":
+            init = dict(event)
+        elif kind == "assistant":
+            message = event.get("message") or {}
+            if message.get("model"):
+                main_models.append(message["model"])
+            for block in message.get("content") or []:
+                if not isinstance(block, Mapping) or block.get("type") != "tool_use":
+                    continue
+                tool_input = block.get("input") or {}
+                if block.get("name") == "WebSearch":
+                    queries.append(tool_input.get("query") or "")
+                elif block.get("name") == "WebFetch":
+                    fetches.append(tool_input.get("url") or "")
+        elif kind == "user":
+            outcome = event.get("tool_use_result")
+            if isinstance(outcome, Mapping):
+                for item in outcome.get("results") or []:
+                    if isinstance(item, Mapping):
+                        for link in item.get("content") or []:
+                            if isinstance(link, Mapping):
+                                evaluated.append(link.get("url"))
+        elif kind == "rate_limit_event":
+            info = event.get("rate_limit_info") or {}
+            windows.append(
+                {
+                    "status": info.get("status"),
+                    "is_using_overage": info.get("isUsingOverage"),
+                    **{
+                        name: (value or {}).get("utilization")
+                        for name, value in (info.get("unifiedWindows") or {}).items()
+                    },
+                }
+            )
+        elif kind == "result":
+            result = dict(event)
+
+    answer_text = ""
+    if not result:
+        warnings.append("no_result_event")
+    elif result.get("is_error"):
+        warnings.append("result_is_error")
+    else:
+        answer_text = result.get("result") or ""
+    if result and not answer_text and "result_is_error" not in warnings:
+        warnings.append("empty_answer")
+
+    model_usage = result.get("modelUsage") or {}
+    return {
+        "answer_text": answer_text,
+        "cited_urls": _links_in_text(answer_text),
+        "cited_urls_source": "answer_links",
+        "evaluated_urls": _unique(evaluated),
+        "fetched_urls": _unique(fetches),
+        "search_queries": queries,
+        "n_searches": len(queries),
+        "n_fetches": len(fetches),
+        "n_backend_searches": sum(
+            (usage or {}).get("webSearchRequests") or 0 for usage in model_usage.values()
+        ),
+        "stop_reason": result.get("stop_reason"),
+        "model": main_models[-1] if main_models else None,
+        "main_models": sorted(set(main_models)),
+        "model_usage": model_usage,
+        "total_cost_usd": result.get("total_cost_usd"),
+        "duration_ms": result.get("duration_ms"),
+        "num_turns": result.get("num_turns"),
+        "source": "claude_code",
+        "init": {
+            key: init.get(key)
+            for key in ("apiKeySource", "tools", "mcp_servers", "model", "claude_code_version")
+        },
+        "rate_limits": {"first": windows[0], "last": windows[-1]} if windows else None,
+        "warnings": warnings,
+    }
