@@ -17,9 +17,11 @@ from __future__ import annotations
 
 import argparse
 import csv
+import hashlib
 import importlib.util
 import json
 import re
+from collections import Counter
 from pathlib import Path
 
 from aeo_research.claude_answers import first_human_text
@@ -61,6 +63,41 @@ def match(convs: list[dict], wave: int, item_ids: set[str]) -> tuple[dict, dict,
     return matched, duplicates, refused
 
 
+def injected_fingerprint(conv: dict) -> str:
+    """What claude.ai added to the first message, as a stable string (spec, observation 3).
+
+    Maps each ``injection_source`` to the sha256 of its text. The date note changes every day
+    by design, so only its presence counts.
+    """
+    first = next((m for m in conv.get("chat_messages") or [] if m.get("sender") == "human"), {})
+    blocks = [b for b in first.get("content") or [] if b.get("type") == "injected_prompt_block"]
+    fingerprint = {
+        b.get("injection_source"): "present" if b.get("injection_source") == "date_note"
+        else hashlib.sha256((b.get("prompt") or "").encode()).hexdigest()
+        for b in blocks
+    }
+    return json.dumps(fingerprint, sort_keys=True)
+
+
+def injected_report(matched: dict[str, dict], wave: int, sheets: Path) -> list[str]:
+    """Save this wave's fingerprints and compare them with the other waves. Report only."""
+    counts = Counter(injected_fingerprint(conv) for conv in matched.values())
+    lines = [f"injected blocks w{wave}: {len(counts)} distinct across {len(matched)} chats"]
+    for fingerprint, n in counts.most_common():
+        lines.append(f"  {n} chats: sources {sorted(json.loads(fingerprint))}")
+    if len(counts) > 1:
+        lines.append("  CHECK: chats in this wave differ")
+    sheets.mkdir(parents=True, exist_ok=True)
+    (sheets / f"w{wave}_injected.json").write_text(json.dumps(dict(counts), indent=1))
+    for other in sorted(sheets.glob("w*_injected.json")):
+        name = other.name.split("_")[0]
+        if name == f"w{wave}":
+            continue
+        same = set(json.loads(other.read_text())) == set(counts)
+        lines.append(f"  against {name}: {'same' if same else 'CHANGED, read the blocks before going on'}")
+    return lines
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--wave", type=int, required=True)
@@ -91,6 +128,7 @@ def main() -> None:
     print(f"coverage w{args.wave}: {len(matched)}/{len(prompts)}; {searched} with searches, "
           f"{cited} with cited URLs, {differs} with a different prompt")
     print("missing:", missing or "none")
+    print("\n".join(injected_report(matched, args.wave, RAW / "ui_sheets")))
     for item, uuids in duplicates.items():
         print(f"duplicate {item}, neither written: {uuids}")
     for line in refused:

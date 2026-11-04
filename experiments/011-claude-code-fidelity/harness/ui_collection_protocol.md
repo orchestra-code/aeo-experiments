@@ -30,7 +30,8 @@ that row when it resets.
 3. For each row:
    1. Start a **new chat**. Never continue an old one.
    2. Check that the picker shows Opus 5.5 with Medium reasoning.
-   3. Check that web search is on in the search-and-tools menu.
+   3. Web search: nothing to check from wave 2 on. The merged chat and Cowork experience has
+      no web search toggle (spec, observation 3).
    4. Paste the row's `text` exactly, with nothing added, and send.
    5. Wait until the answer has finished completely.
    6. Do not regenerate, edit, reply or rate the answer. If Claude asks a clarifying question,
@@ -53,8 +54,9 @@ that row when it resets.
    uv run python experiments/011-claude-code-fidelity/harness/ingest_claude_export.py --wave N
    ```
 
-   It must report 40 of 40, with no duplicates. It will see 009's chats in the export and skip
-   them. That is expected.
+   It must report 40 of 40, with no duplicates. If the export also holds 009's chats, it skips
+   them. It also reports whether the blocks claude.ai adds to each first message match the
+   earlier waves. If it says CHANGED, read them before starting the next wave.
 
 ## What not to do
 
