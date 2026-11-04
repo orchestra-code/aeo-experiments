@@ -28,7 +28,7 @@ RAW = EXP / "data" / "raw"
 #: hash goes here and in the spec before any confirmatory metric. Until then every stage
 #: that reads real data refuses to run.
 LEXICON = RAW / "lexicon_v1.csv"
-LEXICON_SHA256: str | None = None
+LEXICON_SHA256: str | None = "728794746267de5bdb6ff1662f3873cb9571a158881b0a04815412614c35f87a"
 
 # ------------------------------------------------------------ lexicon matching
 

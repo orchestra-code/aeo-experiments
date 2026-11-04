@@ -148,6 +148,33 @@ def test_export_parser_reads_inferred_shape():
     assert first_human_text(export_conversation()) == "What CRM should we pick?"
 
 
+def test_export_parser_counts_websearch_calls_from_the_november_export():
+    """The call is named ``WebSearch``; its result block is still ``web_search``."""
+    conv = {
+        "chat_messages": [
+            {"sender": "human", "text": "What CRM should we pick?"},
+            {"sender": "assistant", "content": [
+                {"type": "text", "text": "Let me look. "},
+                {"type": "tool_use", "name": "WebSearch",
+                 "input": {"query": "best crm", "mode": "standard"}},
+                {"type": "tool_result", "name": "web_search", "content": [
+                    {"type": "knowledge", "title": "A", "url": "https://a.com/x"},
+                ]},
+                {"type": "tool_use", "name": "WebFetch", "input": {"url": "https://a.com/x"}},
+                {"type": "tool_result", "name": "web_fetch", "content": []},
+                {"type": "text", "text": "Consider A.", "citations": [
+                    {"details": {"url": "https://a.com/x"}}]},
+            ]},
+        ],
+    }
+    out = from_claude_export(conv)
+    assert out["search_queries"] == ["best crm"]
+    assert out["n_searches"] == 1
+    assert out["evaluated_urls"] == ["https://a.com/x"]
+    assert out["answer_text"] == "Let me look. Consider A."
+    assert out["warnings"] == ["other tools used: ['WebFetch']"]
+
+
 def test_export_parser_tolerates_missing_fields_and_falls_back_to_markdown_links():
     conv = {
         "chat_messages": [

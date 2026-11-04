@@ -387,4 +387,81 @@ same rules, because missing names bias the comparison toward equivalence (009, d
 
 ## Deviations from the frozen spec
 
-None yet.
+1. **Export parser extended for a renamed tool (2026-11-03, before any brand measure or
+   lexicon work on wave 1).** The wave 1 claude.ai export names the search call `WebSearch`,
+   with an added `input.mode`. Its result block is still `web_search`. The frozen parser
+   knew only `web_search` and `web_search_fast`, so it reported 0 searches for all 40 chats,
+   although evaluated URLs parsed correctly. `WebSearch` was added to the parser's search
+   tools. Answer text and citations do not depend on this list, so the brand measure is
+   unaffected. Normalized output for all 251 chats in 009's exports was hashed before and
+   after the change, and the hash is identical.
+
+## Lexicon freeze record
+
+Frozen 2026-11-03, after wave 1 answers were in and before any gap or brand comparison was
+computed. `data/raw/lexicon_v1.csv`, sha256 `728794746267de5bdb6ff1662f3873cb9571a158881b0a04815412614c35f87a`, 1,453 rows: 010's v3 plus 83 rows for
+011. Curation did not read arm labels. Names the lexicon cannot place, wave 1: 0.0% to 0.2%
+per arm, against the 2% limit.
+
+Review by Jim Wrubel: flagged and new rows one by one; the remaining rows matching five or
+more answers were skimmed. Two rules applied at this review, for the record:
+
+- **Source-only mentions.** A brand named only as the source of a claim is dropped, even if
+  it sells in the category. This follows the 2026-09-28 reviewer calls in 009's lexicon and
+  was not written in `lexicon_rules.md`. A name presented as an option counts even when it
+  is written as a link. The question is whether a reader would take it as something to
+  consider.
+- **Retired products.** A product named only as something to move off is dropped. A vendor
+  still on the market counts even when the answer warns against it.
+
+The review sheet's context cells remove link targets and keep the brackets, so a linked
+option can look like a citation. Rows were read with that in mind.
+
+## Observations during collection
+
+These are not deviations. They are recorded because they change how the results read.
+
+1. **The claude.ai reference no longer behaves as it did in 009.** Wave 1 against 009's
+   three `ui_default` waves (September 27 to October 1): searches per answer 3.33 against
+   1.15 to 1.32; chats with no search 0 of 40 against 6 to 8 of 40; median URLs evaluated
+   per answer 53 against 9 to 10; median answer length about 4,600 characters against about
+   3,500; chats that open with a short text block before searching 34 of 40 against 0 to 1
+   of 40. The account is the same one, confirmed from the export. The fresh reference is
+   what this design relies on, so the test still answers its question about claude.ai as it
+   stands now. It also means §6's search-depth note, and 009's result, describe an earlier
+   claude.ai. Observation 3 points to a likely cause.
+2. **The opening text block is scored.** The frozen parser joins every text block, so the
+   short opening block in `ui_default` answers counts as answer text. The Claude Code arms
+   score only the final text. Whether this moves any brand set is checked once the lexicon
+   is frozen and reported as an exploratory sensitivity.
+3. **The claude.ai chats show Claude Code's harness.** Every wave 1 chat's first message
+   holds four injected blocks that none of 009's chats have, identical across all 40: a
+   date note, a listing of agent types for an `Agent` tool, a list of deferred tools loaded
+   through `ToolSearch`, and MCP server instructions. The last three use a
+   `<system-reminder>` format, and the search tools are named as in Claude Code. The pasted
+   prompt is still byte for byte the sheet's text. The system prompt is not in the export.
+   The comparison is therefore no longer between two unrelated surfaces, and a pass or a
+   failure has to be read that way. Later waves check that these blocks are unchanged.
+
+   **What Anthropic documents.** On September 16, 2026 Anthropic announced that chat and
+   Cowork had become one experience, rolling out gradually to Pro, Max and Ultra plans over
+   several weeks, with Team and Free to follow and Enterprise from October 23
+   ([announcement](https://claude.com/blog/cowork-is-now-claude)). Once an account has it,
+   it cannot switch back, there is no web search toggle, and incognito chats open in the
+   previous experience
+   ([help article](https://support.claude.com/en/articles/16761823-claude-cowork-and-chat-are-one-claude)).
+   Cowork "uses the same agentic architecture that powers Claude Code"
+   ([help article](https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork)).
+   Claude Code stays a separate product behind its own tab.
+
+   **What is inferred.** No Anthropic source found says that a chat answer runs on Claude
+   Code's harness, and this account's rollout date is unknown. 009's last wave (October 1)
+   shows none of these blocks and wave 1 (November 3) shows them, which fits the rollout
+   reaching the account in between. That link is an inference from timing and from the
+   export, not a documented fact.
+
+   **Consequences.** What a person gets from claude.ai can now depend on plan and setting,
+   so `ui_default` describes the unified experience on one Pro account. Incognito chats may
+   still show the previous experience, but the export leaves them out, so this design cannot
+   measure it. The protocol's step to check that web search is on no longer applies, because
+   the toggle is gone.
