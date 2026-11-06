@@ -419,6 +419,48 @@ missing names bias the comparison toward equivalence (009, deviation 7).
   queries are never published.
 - Publish the equivalence bound and the power table.
 
+## Lexicon freeze record
+
+Frozen 2026-11-06, after wave 1 answers were in and before any gap or brand comparison was
+computed. v3 failed §5's coverage check on wave 1: names the lexicon's own matcher could not
+place were 4.0% (`cg_ui`), 3.9% (`cg_api_low`), 8.7% (`gm_ui`) and 8.7% (`gm_api_plain`)
+against the 2% limit; `cg_api_plain` was at 1.8%. So v3 was extended under the protocol.
+
+`data/raw/lexicon_v1.csv` (gitignored: it names brands), sha256
+`89aa6ac0b401e7826a6506c2fc847927cc7e18b1bf178482e3d504e9869e0089`, 1,513 rows. It is
+010's v3, plus the 83 rows 011 added under the same rules (011's frozen v1, sha256
+`72879474…4c35f87a`, reviewed by Jim Wrubel on 2026-11-03), plus 60 rows for 004's wave 1
+names. Starting from 011's v1 keeps the Claude and the ChatGPT and Gemini studies on one
+lexicon; Jim Wrubel approved it at this review. Most of the 60 rows are drop rows for the
+buyer's other systems that the answers name around the category (data warehouses and billing
+tools in a CRM answer, medical-record systems in an accounts payable answer, infrastructure
+tools in a monitoring answer). Curation did not read arm labels. Names the lexicon cannot
+place, wave 1: 0.0% in every arm. The pin is `exp004.LEXICON_V1_SHA256`; the pilot report
+stays on v3.
+
+Review by Jim Wrubel: every row on the review sheet (the 60 new rows, 11 earlier flagged rows
+that match wave 1, and 140 rows matching five or more answers), with a call recorded on each
+of the 14 flagged new rows. One call changed: a general database tool presented as a
+do-it-yourself hiring tracker is kept in the applicant tracking category (it was a drop row).
+The bare company name of a hotel messaging vendor stays a drop row under the company-name
+rule, because its product row counts, although one answer names only the company.
+
+Waves 2 and 3 are checked against the same 2% limit before the model runs.
+
+## Observations during collection
+
+These are not deviations. They are recorded because they change how the results read.
+
+1. **One `gm_ui` answer in wave 1 is truncated.** It is one sentence (114 characters) that
+   stops mid-clause, with 8 sources attached, so it looks cut off in the scrape rather than
+   an error message. The frozen rules resubmit only failed tasks and the app's error
+   messages, and redrawing this one answer would be selective, so it is kept as collected
+   (Jim Wrubel, 2026-11-06). It has no brands, which lowers both the UI's own overlap and
+   the API's overlap with the UI for that prompt.
+2. **A wave takes about 3.5 hours, not the 90 minutes in §1.** `cg_api_low` ran a median
+   of 13 searches per answer, with a long tail (one call took 22 minutes), as in the pilot.
+   The 10:00 to 14:00 ET window applies to the start of a wave only, so nothing changes.
+
 ## Deviations from the frozen spec
 
 (none yet)

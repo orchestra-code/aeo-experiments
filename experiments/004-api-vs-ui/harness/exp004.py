@@ -54,6 +54,10 @@ EXP010_RAW = MAIN / "experiments" / "010-shortlist-stability" / "data" / "raw"
 PROMPTS = Path(os.environ.get("EXP004_PROMPTS") or EXP010_RAW / "prompts_b2b.csv")
 LEXICON_V3 = EXP010_RAW / "lexicon_v3" / "lexicon_v3.csv"
 LEXICON_V3_SHA256 = "6084f47ca1831474de9cb64d79425d522b75ac409d2b5080b24653ec9905cf5d"
+#: The study lexicon (spec §5, frozen 2026-11-06 at STOP 2): 011's frozen v1 (010's v3 plus
+#: 83 rows) plus 60 rows from 004's wave 1. Gitignored: it names brands. The pilot stays on v3.
+LEXICON_V1 = MAIN / "experiments" / EXP_NAME / "data" / "raw" / "lexicon_v1.csv"
+LEXICON_V1_SHA256 = "89aa6ac0b401e7826a6506c2fc847927cc7e18b1bf178482e3d504e9869e0089"
 
 #: Sibling experiments whose committed code 004 reuses (read from this checkout).
 EXP009 = EXP.parent / "009-claude-model-fidelity"

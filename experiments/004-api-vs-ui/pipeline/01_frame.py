@@ -12,7 +12,7 @@ pilot's, re-normalizes every response with ``harness/answers.py`` and extracts b
   answers not yet cached (paid; it writes ``brand_candidates_main.jsonl``, which the
   study's cost guard counts). The Haiku pass reads the same text the lexicon reads.
 
-The lexicon is pinned by sha256: lexicon v3 (``exp004.LEXICON_V3_SHA256``) unless
+The lexicon is pinned by sha256: 004's v1 (``exp004.LEXICON_V1_SHA256``, spec §5) unless
 ``--lexicon PATH --lexicon-sha256 SHA`` names an extended one. The frame holds no answer
 text and no search query text, only derived fields; it is gitignored all the same, since
 it names brands and domains.
@@ -159,6 +159,8 @@ def lexicon_for(mode: Mode, args) -> tuple[Path, str]:
         if not args.lexicon_sha256:
             raise SystemExit("--lexicon needs --lexicon-sha256 (the extended lexicon's pin)")
         path, sha = Path(args.lexicon), args.lexicon_sha256
+    elif mode.pilot:  # the pilot report was computed on v3; reproduce it as it was
+        path, sha = exp004.LEXICON_V3, exp004.LEXICON_V3_SHA256
     else:
         path, sha = common.STUDY_LEXICON, common.STUDY_LEXICON_SHA256
     got = common.sha256_file(path)

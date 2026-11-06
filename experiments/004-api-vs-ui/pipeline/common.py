@@ -57,10 +57,10 @@ RBO_P = 0.9               # spec §3
 NO_SEARCH_MAX = 0.30      # Audit A
 H_POS_MIN = 0.10          # spec §4
 WAVES = exp004.STUDY_WAVES
-#: The lexicon the confirmatory model must use. Lexicon v3 until §5's coverage check says
-#: otherwise; an extension updates this pin (and the spec) before any confirmatory metric.
-STUDY_LEXICON = exp004.LEXICON_V3
-STUDY_LEXICON_SHA256 = exp004.LEXICON_V3_SHA256
+#: The lexicon the confirmatory model must use. v3 failed §5's coverage check after wave 1,
+#: so this is 004's v1, frozen 2026-11-06 at STOP 2 and recorded in the spec.
+STUDY_LEXICON = exp004.LEXICON_V1
+STUDY_LEXICON_SHA256 = exp004.LEXICON_V1_SHA256
 PILOT_SEED = exp004.SEED  # 20261105, the pilot report's bootstrap seed
 
 # ------------------------------------------------------------------ arms
