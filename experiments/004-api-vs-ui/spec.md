@@ -1,7 +1,7 @@
 # The API names the same brands as the ChatGPT and Gemini UI: study spec
 
 **Status:** FROZEN
-**Frozen commit:** (recorded in the next commit)
+**Frozen commit:** `42e7c75`
 **Frozen date / seed:** 2026-11-06 / 20261106
 **Experiment slug:** `004-api-vs-ui`
 
