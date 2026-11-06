@@ -297,22 +297,21 @@ missing names bias the comparison toward equivalence (009, deviation 7).
 
 ## 6. Known traps for this design
 
-- **The ChatGPT model is an inference, not a documented fact.** DataForSEO reports
-  `gpt-6`, the family, not the tier. No OpenAI source found names the model for
-  signed-out users. What OpenAI does say (checked 2026-11-06):
-  - OpenAI's GPT-6 announcement and the developer forum post of 2026-10-07: paid
-    plans use GPT-6 Sol, and "Free and Go use GPT-6 Luna", from 2026-10-08.
-  - OpenAI's model release notes, 2026-10-29: an update to "GPT-6 in Chat" applies to
-    Free and Go users and to people using ChatGPT without signing in, while Plus and
-    Pro get it only on the model they fall back to after their GPT-6 limit. So OpenAI
-    groups signed-out users with Free and Go, on a model other than the paid default.
-  - OpenAI's models help page still lists GPT-5.6 Luna for Free and Go, which
-    contradicts the release notes and looks out of date.
+- **The ChatGPT model.** DataForSEO reports `gpt-6`, the family, not the tier. The
+  study takes `gpt-6-luna` on this basis (checked 2026-11-06):
+  - **Source:** OpenAI's developer forum announcement of 2026-10-07
+    (<https://community.openai.com/t/gpt-6-is-now-rolling-out-to-all-chatgpt-users/1404163>):
+    paid plans use GPT-6 Sol, and "Free and Go use GPT-6 Luna", from 2026-10-08.
+  - **Logged-out users are on the Free plan's model** (Jim Wrubel's call at STOP 1).
+    OpenAI's model release notes of 2026-10-29 fit this: an update to "GPT-6 in Chat"
+    applies to Free and Go users and to people using ChatGPT without signing in,
+    while Plus and Pro get it only on the model they fall back to after their GPT-6
+    limit.
+  - OpenAI's models help page still lists GPT-5.6 Luna for Free and Go. It
+    contradicts the announcement and is treated as out of date.
 
-  The study therefore takes `gpt-6-luna`, the reading that fits all three and the
-  `gpt-6` field. It is also the cheapest GPT-6 model, which makes it the likely one to
-  serve users who pay nothing. If the UI runs another model, a gap is partly a model
-  gap. The write-up states the inference and its sources.
+  If the UI runs another model, a gap is partly a model gap. The write-up links the
+  forum post.
 - **Gemini Auto routing.** The free app may send a prompt to a larger model. 010 saw 1
   of 400 answers do so; the pilot saw none of 30. R8 excludes those answers.
 - **DataForSEO is a proxy.** The UI references are a scraper's view of the logged-out
@@ -382,8 +381,9 @@ missing names bias the comparison toward equivalence (009, deviation 7).
   ChatGPT page and the free Gemini app. Logged-in, paid and Workspace users may get
   other models, and the Gemini caveat on paid and Workspace use goes in the body, not
   a footnote.
-- State the `gpt-6-luna` inference and its sources (§6). Recheck the help page and
-  release notes before publishing, in case OpenAI has since documented it.
+- State the model basis (§6): link the forum post ("Free and Go use GPT-6 Luna") and
+  say logged-out users get the Free plan. Recheck OpenAI's help page before
+  publishing, in case it has been updated.
 - The leaked prompts are mentioned as a pilot finding only (one moved the API further
   from the UI; the other stopped Gemini from searching on 4 of 10 prompts). Their text
   is not released unless Jim Wrubel signs that off.
