@@ -1,6 +1,6 @@
 # The API names the same brands as the ChatGPT and Gemini UI: study spec
 
-**Status:** DRAFT, for Jim Wrubel's review (STOP 1). Nothing is frozen.
+**Status:** APPROVED 2026-11-06, not yet frozen (power table and pipeline pending, §8).
 **Frozen commit:** (at freeze)
 **Frozen date / seed:** (at freeze) / 20261106
 **Experiment slug:** `004-api-vs-ui`
@@ -297,10 +297,22 @@ missing names bias the comparison toward equivalence (009, deviation 7).
 
 ## 6. Known traps for this design
 
-- **The ChatGPT model is an assumption.** DataForSEO reports `gpt-6`, the family, not
-  the tier. OpenAI's release note says Free and Go use GPT-6 Luna; its models help
-  page says GPT-5.6 Luna. The study takes `gpt-6-luna`. If the UI runs another model,
-  a gap is partly a model gap. The write-up states the assumption.
+- **The ChatGPT model is an inference, not a documented fact.** DataForSEO reports
+  `gpt-6`, the family, not the tier. No OpenAI source found names the model for
+  signed-out users. What OpenAI does say (checked 2026-11-06):
+  - OpenAI's GPT-6 announcement and the developer forum post of 2026-10-07: paid
+    plans use GPT-6 Sol, and "Free and Go use GPT-6 Luna", from 2026-10-08.
+  - OpenAI's model release notes, 2026-10-29: an update to "GPT-6 in Chat" applies to
+    Free and Go users and to people using ChatGPT without signing in, while Plus and
+    Pro get it only on the model they fall back to after their GPT-6 limit. So OpenAI
+    groups signed-out users with Free and Go, on a model other than the paid default.
+  - OpenAI's models help page still lists GPT-5.6 Luna for Free and Go, which
+    contradicts the release notes and looks out of date.
+
+  The study therefore takes `gpt-6-luna`, the reading that fits all three and the
+  `gpt-6` field. It is also the cheapest GPT-6 model, which makes it the likely one to
+  serve users who pay nothing. If the UI runs another model, a gap is partly a model
+  gap. The write-up states the inference and its sources.
 - **Gemini Auto routing.** The free app may send a prompt to a larger model. 010 saw 1
   of 400 answers do so; the pilot saw none of 30. R8 excludes those answers.
 - **DataForSEO is a proxy.** The UI references are a scraper's view of the logged-out
@@ -346,7 +358,7 @@ missing names bias the comparison toward equivalence (009, deviation 7).
 
 ## 8. Deliverables and sequence
 
-1. **STOP 1: Jim reviews this spec.**
+1. **STOP 1: Jim reviews this spec.** Approved 2026-11-06, with the §1 and §6 wording.
 2. Wave driver (`harness/run_wave.py`) and analysis pipeline, built and dry-run on
    synthetic data before the freeze: planted equivalent and divergent arms are
    recovered, and the model exits non-zero when H_pos fails. Run on the pilot frame,
@@ -370,7 +382,8 @@ missing names bias the comparison toward equivalence (009, deviation 7).
   ChatGPT page and the free Gemini app. Logged-in, paid and Workspace users may get
   other models, and the Gemini caveat on paid and Workspace use goes in the body, not
   a footnote.
-- State the `gpt-6-luna` assumption.
+- State the `gpt-6-luna` inference and its sources (§6). Recheck the help page and
+  release notes before publishing, in case OpenAI has since documented it.
 - The leaked prompts are mentioned as a pilot finding only (one moved the API further
   from the UI; the other stopped Gemini from searching on 4 of 10 prompts). Their text
   is not released unless Jim Wrubel signs that off.
