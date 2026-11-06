@@ -1,7 +1,12 @@
-"""Experiment 004: shared paths, pins, prices, ledger and cost guard (sketch.md).
+"""Experiment 004: shared paths, pins, prices, ledger and cost guard (sketch.md, spec.md).
 
 Every 004 script imports this module, so the arms, the pilot prompts, the
-lexicon pin, the price table and the $10 cap live in one place.
+lexicon pin, the price table and both cost caps live in one place: the pilot's
+$10 over all pilot-era spend (``guard_cost``, ``total_spend``) and the main
+study's $45 over main-study spend only (``STUDY``, ``main_spend``). The main
+study's ledgers and response folders (``ledger_main_*``, ``responses_main_*``)
+have names the pilot's globs never match, so neither side's spend or data
+reaches the other. ``api_attempt`` is the one API request path both use.
 
 Data location. A worktree holds no gitignored data, so raw data always goes to
 the MAIN checkout, resolved at runtime from git's common dir
@@ -45,7 +50,8 @@ ENV_FILE = MAIN / ".env.local"
 RESULTS = EXP / "results"
 
 EXP010_RAW = MAIN / "experiments" / "010-shortlist-stability" / "data" / "raw"
-PROMPTS = EXP010_RAW / "prompts_b2b.csv"
+#: ``EXP004_PROMPTS`` overrides the prompt file (synthetic dry runs and tests only).
+PROMPTS = Path(os.environ.get("EXP004_PROMPTS") or EXP010_RAW / "prompts_b2b.csv")
 LEXICON_V3 = EXP010_RAW / "lexicon_v3" / "lexicon_v3.csv"
 LEXICON_V3_SHA256 = "6084f47ca1831474de9cb64d79425d522b75ac409d2b5080b24653ec9905cf5d"
 
@@ -304,7 +310,8 @@ def guard_cost(planned: dict[str, int], cap: float = COST_CAP_USD, spent: float 
     spent = total_spend() if spent is None else spent
     estimate = sum(PRIOR_USD[arm] * n for arm, n in planned.items())
     total = spent + estimate
-    print(f"cost guard: spent ${spent:.4f} + planned ${estimate:.4f} = ${total:.4f} (cap ${cap:.2f})")
+    print(f"cost guard: spent ${spent:.4f} + planned ${estimate:.4f} = ${total:.4f} (cap ${cap:.2f})",
+          flush=True)
     if total > cap:
         raise CostCapError(f"cost cap: ${total:.2f} would pass ${cap:.2f}; refusing to start")
     return total
@@ -312,6 +319,109 @@ def guard_cost(planned: dict[str, int], cap: float = COST_CAP_USD, spent: float 
 
 def response_path(prefix: str, arm: str, item_id: str, rnd: int) -> Path:
     return RAW / f"{prefix}responses" / f"r{rnd}" / arm / f"{item_id}.json"
+
+
+# ---------------------------------------------------------------- main study (spec.md)
+# The study's own seed, cap, arms and files. Its ledgers and response folders have names
+# the pilot's globs never match (``ledger_main_*``, ``responses_main_*``), and its cost
+# guard counts only them, so pilot and smoke data never mix in either way.
+
+STUDY_SEED = 20261106
+STUDY_WAVES = (1, 2, 3)
+STUDY_COST_CAP_USD = 45.0
+STUDY_ARMS = ("cg_ui", "cg_api_low", "cg_api_plain", "gm_ui", "gm_api_plain")
+STUDY_OPENAI_ARMS = ("cg_api_low", "cg_api_plain")
+STUDY_GEMINI_ARMS = ("gm_api_plain",)
+STUDY_API_ARMS = STUDY_OPENAI_ARMS + STUDY_GEMINI_ARMS
+STUDY_N_PROMPTS = 40
+#: Tries per (arm, prompt, wave): UI submissions (sketch, clarification 4) and API calls.
+STUDY_MAX_TRIES = 3
+#: An arm missing more than this many answers in a wave is rerun the next day (spec §1).
+STUDY_RERUN_OVER = 4
+#: Model labels the UI scrapes report when they run the model the study assumes (R8).
+UI_MODEL_EXPECTED = {"cg_ui": "gpt-6", "gm_ui": "3.5 Flash-Lite"}
+
+
+def study_tag(wave: int) -> str:
+    return f"{TAG}-w{wave}"
+
+
+@dataclass(frozen=True)
+class Store:
+    """Ledger and response locations of one collection, and the cost guard it answers to.
+
+    ``Store(prefix)`` is the pilot (``""``) or the smoke run (``"smoke_"``), with the
+    pilot's file names and its $10 guard over all pilot-era spend. ``Store(main=True)``
+    is the main study: ``ledger_main_api_<instrument>.jsonl``,
+    ``ledger_main_ui_<platform>.jsonl``, ``responses_main_api/w<wave>/<arm>/<item>.json``
+    and ``responses_main_ui_<platform>/w<wave>/<task_id>.json``, guarded at $45 on
+    main-study spend only. Paths resolve against ``RAW`` at call time.
+    """
+
+    prefix: str = ""
+    main: bool = False
+
+    def api_ledger(self, instrument: str) -> Path:
+        if self.main:
+            return RAW / f"ledger_main_api_{instrument}.jsonl"
+        return api_ledger(self.prefix, instrument)
+
+    def ui_ledger(self, platform: str) -> Path:
+        if self.main:
+            return RAW / f"ledger_main_ui_{platform}.jsonl"
+        return ui_ledger(self.prefix, platform)
+
+    def api_response(self, arm: str, item: str, n: int) -> Path:
+        if self.main:
+            return RAW / "responses_main_api" / f"w{n}" / arm / f"{item}.json"
+        return response_path(self.prefix, arm, item, n)
+
+    def ui_responses(self, platform: str) -> Path:
+        if self.main:
+            return RAW / f"responses_main_ui_{platform}"
+        return RAW / f"{self.prefix}responses_ui_{platform}"
+
+    def haiku_cache(self) -> Path:
+        return RAW / ("brand_candidates_main.jsonl" if self.main else "brand_candidates.jsonl")
+
+    def spend(self) -> float:
+        return main_spend() if self.main else total_spend()
+
+    def guard(self, planned: dict[str, int]) -> float:
+        if self.main:
+            return guard_cost(planned, cap=STUDY_COST_CAP_USD, spent=main_spend())
+        return guard_cost(planned)
+
+
+STUDY = Store(main=True)
+
+
+def read_jsonl(path: Path) -> list[dict]:
+    """Records of a JSONL file; a line cut short by a concurrent append is skipped."""
+    if not path.exists():
+        return []
+    out = []
+    for line in path.read_text().splitlines():
+        if line.strip():
+            try:
+                out.append(json.loads(line))
+            except ValueError:
+                continue
+    return out
+
+
+def main_spend() -> float:
+    """Main-study spend only: every API attempt's estimate, every DataForSEO task as
+    submitted (error answers and failed tasks are billed too) and the main Haiku pass.
+    Pilot, smoke and probe spend are not counted (spec §1: pilot spend not counted)."""
+    total = 0.0
+    for instrument in ("openai", "gemini"):
+        total += sum(float(r.get("cost_usd") or 0) for r in read_jsonl(STUDY.api_ledger(instrument)))
+    for platform in ("chatgpt", "gemini"):
+        total += sum(float(r.get("cost") or 0) for r in read_jsonl(STUDY.ui_ledger(platform))
+                     if r.get("status") == "submitted")
+    total += sum(float(r.get("cost_usd") or 0) for r in read_jsonl(STUDY.haiku_cache()))
+    return total
 
 
 # ---------------------------------------------------------------- HTTP
@@ -371,6 +481,59 @@ def request_sha256(body: dict) -> str:
     return sha256_text(json.dumps(body, sort_keys=True, ensure_ascii=False))
 
 
+def model_problems(norm: dict, check_model: str) -> list[str]:
+    """Why a normalized API answer does not count: a model other than the pin, or no text."""
+    problems = []
+    if norm.get("model") is None or not str(norm["model"]).startswith(check_model):
+        problems.append(f"model {norm.get('model')!r} != {check_model!r}")
+    if not norm["answer_text"].strip():
+        problems.append("empty answer")
+    return problems
+
+
+def api_attempt(*, instrument: str, arm: str, item: str, rnd: int, text: str, build, send,
+                normalize, cost, check_model: str, ledger: JsonlLedger, path: Path,
+                extra: dict | None = None, strict: bool = False) -> dict:
+    """One API request: send it, store the raw response, append one ledger record.
+
+    Returns the ledger record. With ``strict`` (the main study), an answer from a model
+    other than the pin is recorded as ``model_mismatch`` and an empty one as
+    ``empty_answer``, so neither counts as collected; the pilot recorded both as
+    ``collected`` with the problem noted.
+    """
+    body, meta = build(arm, text)
+    started = now_iso()
+    res = send(body)
+    rec = {"arm": arm, "item_id": item, "round": rnd, "instrument": instrument,
+           "keyword_sha256": sha256_text(text), "request_sha256": request_sha256(body),
+           "model_requested": body.get("model") or check_model, **meta,
+           "started": started, "finished": now_iso(), "attempts": res.attempts,
+           "http_status": res.status, "run_date": run_date(), **(extra or {})}
+    if res.status != 200 or not res.body:
+        rec |= {"status": "failed", "error": res.error, "cost_usd": 0.0}
+        ledger.append(rec)
+        return rec
+    path.parent.mkdir(parents=True, exist_ok=True)
+    norm = normalize(res.body)
+    price = cost(res.body, norm)
+    path.write_text(json.dumps({"request_meta": meta | {"request_sha256": rec["request_sha256"]},
+                                "raw": res.body, "normalized": norm}, indent=1,
+                               ensure_ascii=False))
+    problems = model_problems(norm, check_model)
+    status = "collected"
+    if strict and problems:
+        status = "model_mismatch" if problems[0].startswith("model ") else "empty_answer"
+    rec |= {"status": status, "response_model": norm.get("model"),
+            "response_status": norm.get("status"),
+            "usage": res.body.get("usage") or res.body.get("usageMetadata"),
+            "n_searches": norm["n_searches"],
+            "n_web_search_calls": norm.get("n_web_search_calls"),
+            "cost_usd": price["total"], "cost_parts": price,
+            "problems": problems, "response_path": str(path)}
+    ledger.append(rec)
+    return rec
+
+
 def run_api_jobs(*, instrument: str, arms: list[str], items: list[str], rnd: int, prefix: str,
                  build, send, normalize, cost, check_model: str, workers: int = 4,
                  log=print) -> dict:
@@ -397,38 +560,12 @@ def run_api_jobs(*, instrument: str, arms: list[str], items: list[str], rnd: int
 
     def one(job):
         arm, item = job
-        text = prompts[item]["text"]
-        body, meta = build(arm, text)
-        started = now_iso()
-        res = send(body)
-        rec = {"arm": arm, "item_id": item, "round": rnd, "instrument": instrument,
-               "keyword_sha256": sha256_text(text), "request_sha256": request_sha256(body),
-               "model_requested": body.get("model") or check_model, **meta,
-               "started": started, "finished": now_iso(), "attempts": res.attempts,
-               "http_status": res.status, "run_date": run_date()}
-        if res.status != 200 or not res.body:
-            ledger.append(rec | {"status": "failed", "error": res.error, "cost_usd": 0.0})
-            return arm, item, "failed", res.error
-        path = response_path(prefix, arm, item, rnd)
-        path.parent.mkdir(parents=True, exist_ok=True)
-        norm = normalize(res.body)
-        price = cost(res.body, norm)
-        path.write_text(json.dumps({"request_meta": meta | {"request_sha256": rec["request_sha256"]},
-                                    "raw": res.body, "normalized": norm}, indent=1,
-                                   ensure_ascii=False))
-        problems = []
-        if norm.get("model") is None or not str(norm["model"]).startswith(check_model):
-            problems.append(f"model {norm.get('model')!r} != {check_model!r}")
-        if not norm["answer_text"].strip():
-            problems.append("empty answer")
-        ledger.append(rec | {"status": "collected", "response_model": norm.get("model"),
-                             "response_status": norm.get("status"),
-                             "usage": res.body.get("usage") or res.body.get("usageMetadata"),
-                             "n_searches": norm["n_searches"],
-                             "n_web_search_calls": norm.get("n_web_search_calls"),
-                             "cost_usd": price["total"], "cost_parts": price,
-                             "problems": problems, "response_path": str(path)})
-        return arm, item, "collected", "; ".join(problems)
+        rec = api_attempt(instrument=instrument, arm=arm, item=item, rnd=rnd,
+                          text=prompts[item]["text"], build=build, send=send, normalize=normalize,
+                          cost=cost, check_model=check_model, ledger=ledger,
+                          path=response_path(prefix, arm, item, rnd))
+        note = rec.get("error") if rec["status"] == "failed" else "; ".join(rec["problems"])
+        return arm, item, rec["status"], note
 
     ok = failed = 0
     with cf.ThreadPoolExecutor(max_workers=workers) as pool:

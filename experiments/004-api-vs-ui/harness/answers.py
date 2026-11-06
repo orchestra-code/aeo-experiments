@@ -198,3 +198,52 @@ ERROR_ANSWER_MAX_CHARS = 300
 def is_error_answer(text: str) -> bool:
     text = (text or "").strip()
     return not text or (len(text) <= ERROR_ANSWER_MAX_CHARS and bool(ERROR_ANSWER.search(text)))
+
+
+# ---------------------------------------------------------------- Gemini app markup
+# The Gemini web app's scrape returns its UI components as raw tags (sketch, deviation 8).
+# Shapes seen in the pilot's 30 gm_ui answers, always after the last line of prose, with
+# double-quoted attributes on one line:
+#   <ElicitationsGroup message="..."> <Elicitation label="..." query="..."/> ... </ElicitationsGroup>
+#   <FollowUp label="..." query="..."/>
+#   <Carousel> <Video ... query="..."/> </Carousel>
+#   <Questionnaire> <FormStep ...> <ChipGroup ...> <Chip label="..." value="..."/> ...
+#     </ChipGroup> </FormStep> </Questionnaire>
+# ``<FollowUp>...</FollowUp>`` (a body instead of attributes) is matched too. The API arms
+# have no such element, so the primary extraction strips these (spec §2, Audit B); R6
+# keeps them. Only the components below are stripped, with their bodies: they hold
+# suggested replies, chips and media, not answer prose. Components that could wrap answer
+# prose (``Sequence``, ``Step``, ``Timeline``) are left alone, and so is any tag not
+# listed; ``app_markup_tags`` counts what remains so Audit A can catch a new shape.
+
+APP_COMPONENTS = ("ElicitationsGroup", "Elicitation", "FollowUp", "Questionnaire", "FormStep",
+                  "ChipGroup", "Chip", "Carousel", "Video", "Image")
+_ATTRS = r"(?:\s+[A-Za-z_][\w:-]*\s*=\s*(?:\"[^\"]*\"|'[^']*'|\{[^{}]*\}))*\s*"
+_NAMES = "|".join(APP_COMPONENTS)
+_SELF_CLOSING = re.compile(rf"<(?:{_NAMES})\b{_ATTRS}/>")
+_PAIRED = {name: re.compile(rf"<{name}\b{_ATTRS}>.*?</{name}\s*>", re.S) for name in APP_COMPONENTS}
+_LONE = re.compile(rf"</?(?:{_NAMES})\b{_ATTRS}/?>")
+#: Any capitalized tag, as the web app writes its components (HTML in answers is lowercase).
+_ANY_COMPONENT = re.compile(rf"</?([A-Z][A-Za-z]*)\b{_ATTRS}/?>")
+
+
+def strip_app_markup(text: str) -> str:
+    """The answer without the Gemini app's follow-up, chip and media components."""
+    if not text or "<" not in text:
+        return text or ""
+    out = text
+    for name in APP_COMPONENTS:  # outer containers first, bodies included
+        out = _PAIRED[name].sub("", out)
+    out = _SELF_CLOSING.sub("", out)
+    out = _LONE.sub("", out)  # an unmatched opening or closing tag
+    return out.rstrip()
+
+
+def app_markup_tags(text: str) -> list[str]:
+    """Component tag names in the text (opening or self-closing, in order)."""
+    return [m.group(1) for m in _ANY_COMPONENT.finditer(text or "") if not m.group(0).startswith("</")]
+
+
+def brand_text(arm: str, text: str, keep_markup: bool = False) -> str:
+    """The text brand extraction reads: ``gm_ui`` without app markup unless R6 keeps it."""
+    return text if keep_markup or arm != "gm_ui" else strip_app_markup(text)

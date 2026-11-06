@@ -1,8 +1,8 @@
 # The API names the same brands as the ChatGPT and Gemini UI: study spec
 
-**Status:** APPROVED 2026-11-06, not yet frozen (power table and pipeline pending, §8).
-**Frozen commit:** (at freeze)
-**Frozen date / seed:** (at freeze) / 20261106
+**Status:** FROZEN
+**Frozen commit:** (recorded in the next commit)
+**Frozen date / seed:** 2026-11-06 / 20261106
 **Experiment slug:** `004-api-vs-ui`
 
 > Freeze rule: §4 (hypotheses) and §5 (model and decision rules) are fixed before
@@ -175,9 +175,13 @@ prompts; 004's wave 1 finishes well before it, and 004 never reads 010 Stage 2 d
   flagged answer, as in 011.
 - **Audit B: what the labels mean.** "Brand named" = a lexicon alias match in the
   answer text for the prompt's category, with labelled source blocks stripped, as in
-  009 (`extract_new` from 010). For `gm_ui`, the follow-up chip markup is stripped
-  before extraction (`harness/answers.py`), because the API arms have no such
-  element; R6 keeps it. "Cited" = DataForSEO `sources` (UI); `url_citation`
+  009 (`extract_new` from 010). For `gm_ui`, the Gemini web app's interface markup
+  is stripped with its contents before extraction and before the Haiku pass
+  (`harness/answers.py`, `strip_app_markup`): follow-up chips (`ElicitationsGroup`,
+  `Elicitation`, `FollowUp`), chip forms (`Questionnaire`, `FormStep`, `ChipGroup`,
+  `Chip`) and media (`Carousel`, `Video`, `Image`). The API arms have no such
+  elements. Layout tags that could wrap answer prose (`Sequence`, `Step`, `Timeline`)
+  are not stripped, and Audit A counts any tags left. R6 keeps all markup. "Cited" = DataForSEO `sources` (UI); `url_citation`
   annotations (OpenAI); grounding chunks (Gemini API, domain from the chunk title,
   since its URIs are redirect links). "Evaluated" = DataForSEO `search_results`
   (ChatGPT UI) and `web_search_call` sources (OpenAI). The instruments expose
@@ -272,16 +276,35 @@ answer.
 **Power** (`pipeline/power_sim.py`). Within:ui across days comes from 010 Stage 1
 (waves 1 to 7, daily, the same 40 prompts through the same DataForSEO settings, 3
 waves drawn per simulated study); the per-prompt spread of the cross-arm overlap comes
-from the pilot. Shifted to a planted true gap, 1,000 studies x 1,000 draws.
+from the pilot. Shifted to a planted true gap, 1,000 studies x 1,000 draws. Full
+tables and two bracketing schemes: `results/power.md`.
 
 | True gap | ChatGPT pass, 95% CI | ChatGPT pass, 90% CI | Gemini pass, 90% CI |
 |---|---|---|---|
-| 0.000 | (pending) | (pending) | (pending) |
-| 0.050 | | | |
-| 0.075 | | | |
-| 0.100 (false pass) | | | |
+| 0.000 | 1.00 | 1.00 | 0.88 |
+| 0.025 | 0.94 | 0.96 | 0.78 |
+| 0.050 | 0.68 | 0.77 | 0.52 |
+| 0.075 | 0.26 | 0.36 | 0.26 |
+| 0.100 (false pass) | 0.03 | 0.05 | 0.08 |
+| 0.125 | 0.00 | 0.00 | 0.03 |
 
-(Filled in before the freeze.)
+Mean interval half-width: ChatGPT 0.037 at 95% and 0.031 at 90%, Gemini 0.050 at 90%.
+Gemini's per-prompt spread is wider, so its test is weaker: a true gap of 0.05 passes
+about half the time.
+
+The UI's own day-to-day overlap in 010 Stage 1 (waves 1 to 7, daily, October 3 to 10)
+was 0.701 for ChatGPT and 0.515 for Gemini, against the pilot's same-day 0.722 and
+0.659. Gemini's floor drops most across days, which will shrink its gap compared with
+the pilot. ChatGPT then reported `gpt-5-6` on most answers, so today's floor may
+differ.
+
+**A known limit of the interval.** The bootstrap resamples prompts and treats the 3
+days as fixed, as in 009 and 011. Day-to-day noise shared by all prompts is not in
+the interval. When the simulation treats days as exchangeable (scheme C), false passes
+at a true gap of 0.10 reach 8% to 12% instead of the nominal 5%. We keep the house
+method so the three studies compare directly, report R3 (each wave dropped in turn)
+next to every H1 verdict, and say in the write-up that a pass near the band edge is
+weaker evidence than its interval suggests.
 
 **Lexicon protocol.** Start from 010's frozen v3 (sha256 `6084f47c…5cf5d`), which was
 built partly from DataForSEO ChatGPT and Gemini answers to these 40 prompts. 009's
@@ -326,8 +349,9 @@ missing names bias the comparison toward equivalence (009, deviation 7).
 - **Different search depth.** `cg_api_low` searches about 4 times as much as
   `cg_api_plain`, and the UI's answers are about 3 times as long. A pass on brands
   would not mean the sources match. Domains are descriptive.
-- **Gemini app markup.** The follow-up chips are stripped before extraction (Audit B);
-  R6 keeps them.
+- **Gemini app markup.** Interface markup is stripped before extraction (Audit B);
+  R6 keeps it. In the pilot all of it followed the answer prose, and stripping
+  changed no brand set.
 - **Error answers.** The Gemini app has returned at least two error wordings. Both are
   matched; any new one found in Audit A is added to the rule, resubmitted if found the
   same day, else excluded and logged.
@@ -349,7 +373,7 @@ missing names bias the comparison toward equivalence (009, deviation 7).
 6. R4: nothing censored. Unplaced Haiku names added to each answer's brand set, both
    sides.
 7. R5: category-level cluster bootstrap.
-8. R6: `gm_ui` with the follow-up chip markup kept.
+8. R6: `gm_ui` with all app markup kept.
 9. R7: exclude answers with no search (UI answers included).
 10. R8: exclude UI answers whose reported model is not `gpt-6` or `3.5 Flash-Lite`.
 11. R9: exclude the 10 pilot prompts.
@@ -362,6 +386,10 @@ missing names bias the comparison toward equivalence (009, deviation 7).
    synthetic data before the freeze: planted equivalent and divergent arms are
    recovered, and the model exits non-zero when H_pos fails. Run on the pilot frame,
    the pipeline reproduces the pilot report's gaps. The power table above is filled in.
+   Done 2026-11-06 (`pipeline/check_synthetic.sh`; the pilot's three gaps and
+   intervals reproduce exactly). The Audit D sheet writer and scorer are built after
+   wave 1 and before the model runs; `03_model.py` refuses real data without a signed
+   Audit D pass.
 3. Freeze (two commits), record the hash and seed. Jim pushes.
 4. Wave 1, Friday Nov 6. Lexicon candidates and the coverage check; if v3 needs
    extending, curation and **STOP 2: Jim reviews the lexicon**, which can run while

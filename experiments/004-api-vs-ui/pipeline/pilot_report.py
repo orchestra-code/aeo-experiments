@@ -165,9 +165,13 @@ def _cache_key(category: str, text: str) -> str:
     return exp004.sha256_text(f"{category}\n{text}")
 
 
-def haiku_names(frame: pd.DataFrame, run: bool = True) -> dict[str, list[str]]:
-    """009's Haiku brand extractor per answer, cached; costs recorded in the cache."""
-    cache_path = exp004.RAW / "brand_candidates.jsonl"
+def haiku_names(frame: pd.DataFrame, run: bool = True,
+                cache_path: Path | None = None) -> dict[str, list[str]]:
+    """009's Haiku brand extractor per answer, cached; costs recorded in the cache.
+
+    ``cache_path`` defaults to the pilot's ``brand_candidates.jsonl``; the main study passes
+    ``brand_candidates_main.jsonl``, which its cost guard counts."""
+    cache_path = cache_path or exp004.RAW / "brand_candidates.jsonl"
     cache = {}
     if cache_path.exists():
         for line in cache_path.read_text().splitlines():
