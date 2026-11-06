@@ -240,3 +240,53 @@ into one estimate.
   shared with another poller).
 - Keys come from this repo's `.env.local` only. `DATAFORSEO_API_KEY` must be added
   there before the run.
+
+## Clarifications and deviations
+
+Logged in order. The criteria above are unchanged, as committed in `640edc7`.
+
+1. **ChatGPT identity line (2026-11-05, before any study prompt ran).** Rule 4 of
+   the adaptation says to prepend the identity line from the same leak, and
+   `web_tool.txt` has none. The adapted ChatGPT prompt opens with the generic
+   sentence every ChatGPT leak starts with, without a model clause ("You are
+   ChatGPT, a large language model trained by OpenAI."), then "Current date:" and
+   the run date. Naming a model would borrow from a leak this study does not use.
+2. **Gemini leak context (2026-11-05, before any study prompt ran).** The leak's
+   context block carries the leaker's own location. It is per-user context, like
+   the saved-information placeholder, so rule 2 drops it. Keeping it would point
+   search outside the US, where the UI arm runs. The date is set to the run date and
+   the time of day is kept as written.
+3. **Line-level adaptation (2026-11-05, before any study prompt ran).** Rule 2 is
+   applied line by line where a kept section mentions dropped tools: lines on
+   choosing between ChatGPT's two search engines, its recency field, ops other than
+   search, the reference-id format and a pointer to a missing UI spec are dropped,
+   as are lines whose only content is combining two dropped tools. Rule 3 is then
+   applied literally, including where it reads oddly; those lines concern visual
+   and safety topics that B2B software prompts do not touch. Gemini's follow-up
+   rules are kept; if they produce questions back, G2 shows it. The exact rules are
+   in `harness/leaks.py`, and the adapted files' sha256s in the gitignored manifest.
+4. **UI error answers (2026-11-05, before any study prompt ran).** A DataForSEO
+   answer that is the app's own error message counts as no answer and is resubmitted
+   in the same round, at most 3 submissions per prompt and round, as 010's driver
+   did. G1 counts final answers; the report shows first-try failures.
+5. **Gemini UI search depth (2026-11-05, before any study prompt ran).** DataForSEO's
+   Gemini result has no fan-out queries, so search depth for `gm_ui` is not
+   observable. "Searched" means sources were reported.
+6. **G2 flags (2026-11-05, before any study prompt ran).** "Buyer-facing" is screened
+   by rule: no lexicon brand, a short answer that asks a question, or an error
+   message. A person reads every flag, as in 011, and cleared ones are recorded in
+   the report code.
+7. **Second Gemini error wording (2026-11-05, after the pilot ran; a deviation).**
+   Two pilot `gm_ui` answers in round 1 were a different Gemini app error ("I
+   encountered an error ..."), which the error rule in 4 did not match, so they were
+   neither resubmitted nor treated as missing. Reading the two G2 flags found them.
+   The rule now matches that wording too, G1 counts only usable answers (28 of 30,
+   need 28), and the brand gap leaves error answers out instead of scoring them as
+   empty brand sets. That changed the Gemini screen from +0.050 to +0.101 for
+   `gm_api_plain`; the verdicts did not change. In the full study these answers are
+   resubmitted as in 4.
+8. **Gemini UI follow-up markup (2026-11-05, after the pilot ran).** 24 of 30 `gm_ui`
+   answers end with the web app's follow-up chip markup (the components the leaked
+   prompt describes), which the scrape returns as raw tags. Brands in those chips
+   are counted as answer brands. In the pilot, removing the markup changed no
+   answer's brand set. The spec decides whether to strip it before extraction.
