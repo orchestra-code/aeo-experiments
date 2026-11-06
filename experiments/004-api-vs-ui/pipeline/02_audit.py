@@ -13,8 +13,10 @@ A  degenerate responses, per arm x wave: missing answers, UI resubmissions, fail
    matcher cannot place, against the 2% limit; "not run" until ``01_frame.py --haiku``.
 B  what the labels mean, with the code that defines each one.
 C  independence: prompts, categories, waves and the pair counts per condition.
-D  extraction validity is scored separately (a 30-answer arm-blind sheet, signed by Jim
-   Wrubel); 03_model's gate reads ``results/audit_d_score.json``.
+D  extraction validity (``audit_d.py``): ``--audit-d-sheet`` draws the 30-answer arm-blind
+   sheet, its reading file and key into the raw directory (gitignored; after all three waves
+   and the lexicon freeze); ``--score-audit-d --signed-by NAME`` scores the filled sheet and
+   writes ``results/audit_d_score.json``, which 03_model's gate reads.
 
 Nothing here computes a hypothesis metric. Outputs hold aggregates only: no brand, domain,
 prompt, answer or query text.
@@ -22,6 +24,8 @@ prompt, answer or query text.
 Usage (repo root):
   uv run python experiments/004-api-vs-ui/pipeline/02_audit.py
   uv run python .../02_audit.py --synthetic planted
+  uv run python .../02_audit.py --audit-d-sheet
+  uv run python .../02_audit.py --score-audit-d --signed-by "Jim Wrubel"
 """
 
 from __future__ import annotations
@@ -30,6 +34,7 @@ import argparse
 import json
 from collections import Counter
 
+import audit_d
 import common
 import pandas as pd
 from common import API_ARMS, NO_SEARCH_MAX, PLATFORMS, UI_ARMS, Mode, m011, md_table
@@ -135,8 +140,17 @@ def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     common.add_mode_args(ap)
+    ap.add_argument("--audit-d-sheet", action="store_true",
+                    help="draw the Audit D sheet, reading file and key (gitignored)")
+    ap.add_argument("--force-new-sheet", action="store_true",
+                    help="redraw the Audit D sheet even if it has reviewer input")
+    ap.add_argument("--score-audit-d", action="store_true",
+                    help="score the filled Audit D sheet -> results/audit_d_score.json")
+    ap.add_argument("--signed-by", default=None, help="Audit D sign-off name (with --score-audit-d)")
     a = ap.parse_args()
     mode: Mode = common.mode_from(a)
+    if mode.pilot and (a.audit_d_sheet or a.score_audit_d):
+        raise SystemExit("Audit D is for the study and synthetic worlds, not the pilot")
     df, meta = common.load_frame(mode)
     table, flagged = audit_a(df, meta)
     pooled = df.groupby("arm")["searched"].apply(lambda s: float((~s.astype(bool)).mean())).to_dict()
@@ -168,10 +182,8 @@ def main() -> None:
     out += ["", "## Audit B: what the labels mean", "", AUDIT_B, "",
             "## Audit C: independence", "", *audit_c(df), "",
             "## Audit D: extraction validity", "",
-            "Scored separately: a 30-answer random spot check, arm-blind, stratified across the "
-            "five arms, read by hand (precision at least 0.95, recall at least 0.90), signed by "
-            "Jim Wrubel. 03_model refuses the real data until `results/audit_d_score.json` "
-            "records a pass against the pinned lexicon."]
+            *audit_d.run(df, meta, mode, write_sheet=a.audit_d_sheet, do_score=a.score_audit_d,
+                         signed_by=a.signed_by, force_sheet=a.force_new_sheet)]
     res = mode.results
     res.mkdir(parents=True, exist_ok=True)
     (res / "audit_report.md").write_text("\n".join(out) + "\n")
