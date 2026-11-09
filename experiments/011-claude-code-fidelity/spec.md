@@ -395,6 +395,16 @@ same rules, because missing names bias the comparison toward equivalence (009, d
    tools. Answer text and citations do not depend on this list, so the brand measure is
    unaffected. Normalized output for all 251 chats in 009's exports was hashed before and
    after the change, and the hash is identical.
+2. **Lexicon v1.2 after Audit D (2026-11-09, before any gap or confirmatory metric).** Audit D
+   on v1.1 passed (precision 1.000, recall 0.992; 243 true positives, 0 false positives, 2
+   missed). Jim Wrubel's review found both misses to be lexicon errors, and the two were fixed:
+   the short form of a product already on a keep row was added as an alias, and a payroll
+   vendor dropped in 009 because it appeared there only as a source is now kept, since 011's
+   answers present it as an option. Two further notes questioned rules (a renamed product kept
+   on its own row, and hotel systems dropped while their own messaging product counts); both
+   rules were kept. v1.2, sha256 `d9fe9ce3ea232cb2af1357882a0849eea4fe9d775145bf8640958542c115b8b8`, changes the brand set of 3 of 600 answers, 2 of them
+   in the audit sample. Those two sheet rows were updated to v1.2's extraction and re-scored;
+   the review as made on v1.1 is kept in `data/raw/audit_d_sheet_reviewed_v1_1.csv`.
 
 ## Lexicon freeze record
 

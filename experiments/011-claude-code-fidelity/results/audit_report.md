@@ -79,7 +79,7 @@ Run dates per wave x surface: {'w1 api': ['2026-11-03'], 'w1 claude.ai': ['2026-
 
 ## Audit B: what the labels mean (quoted from code)
 
-- **brand named** = a keep-row alias of the frozen lexicon (sha256 `8e063e09873f8fb3d0d748c371c2c90904c6c039b80314d3debfacec6bd948ed`) matched in the answer text for the prompt's category, after labelled sources blocks, link targets, bare URLs and markup are stripped; longest alias first, word boundaries, matched spans consumed, first-mention order.
+- **brand named** = a keep-row alias of the frozen lexicon (sha256 `d9fe9ce3ea232cb2af1357882a0849eea4fe9d775145bf8640958542c115b8b8`) matched in the answer text for the prompt's category, after labelled sources blocks, link targets, bare URLs and markup are stripped; longest alias first, word boundaries, matched spans consumed, first-mention order.
 
 `experiments/011-claude-code-fidelity/pipeline/brands.py::strip_sources` (lines 69-82)
 
@@ -256,7 +256,17 @@ Every answer joins several pairs, so pairs are not independent. All inference is
 
 Arm-blind spot check, 30 answers stratified across the 5 arms, drawn with seed 20261103, shuffled into A01-A30. The reviewer edits `audit_d_sheet.csv` and reads `audit_d_answers.md`; neither names the arm, prompt or wave. `audit_d_key.csv` maps audit_id to arm, item and wave for the scorer. All three are gitignored. `missed_brands` = in-category brands the answer presents that extraction missed; `wrong_brands` = extracted brands that are not real in-category mentions in that answer (names separated by `; `).
 
-Not scored yet. After review: `02_audit.py --score-audit-d --signed-by "<name>"`. 03_model refuses to run on real data until the score passes and is signed.
+Score (2026-11-09, 30 rows): precision 1.000 (gate >= 0.95), recall 1.000 (gate >= 0.9); TP 245, FP 0, FN 0; wrong names that match no extracted brand: 0. **PASS**, signed by Jim Wrubel.
+
+Per arm:
+
+| arm | answers | true_positive | false_positive | false_negative | precision | recall |
+|---|---|---|---|---|---|---|
+| ui_default | 6 | 40 | 0 | 0 | 1.000 | 1.000 |
+| cc_stock_full | 6 | 32 | 0 | 0 | 1.000 | 1.000 |
+| sched_kit | 6 | 57 | 0 | 0 | 1.000 | 1.000 |
+| cc_none_search | 6 | 38 | 0 | 0 | 1.000 | 1.000 |
+| opus55_plain | 6 | 78 | 0 | 0 | 1.000 | 1.000 |
 
 Haiku candidate cache coverage (R4 needs every answer; `harness/lexicon_candidates.py --wave N`):
 

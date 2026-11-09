@@ -1,0 +1,60 @@
+{
+ "rows": 30,
+ "complete": true,
+ "true_positive": 245,
+ "false_positive": 0,
+ "false_negative": 0,
+ "wrong_names_not_extracted": 0,
+ "precision": 1.0,
+ "recall": 1.0,
+ "per_arm": {
+  "ui_default": {
+   "answers": 6,
+   "true_positive": 40,
+   "false_positive": 0,
+   "false_negative": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  },
+  "cc_stock_full": {
+   "answers": 6,
+   "true_positive": 32,
+   "false_positive": 0,
+   "false_negative": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  },
+  "sched_kit": {
+   "answers": 6,
+   "true_positive": 57,
+   "false_positive": 0,
+   "false_negative": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  },
+  "cc_none_search": {
+   "answers": 6,
+   "true_positive": 38,
+   "false_positive": 0,
+   "false_negative": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  },
+  "opus55_plain": {
+   "answers": 6,
+   "true_positive": 78,
+   "false_positive": 0,
+   "false_negative": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  }
+ },
+ "gate_precision": 0.95,
+ "gate_recall": 0.9,
+ "passes": true,
+ "sheet_sha256": "2d4e252c6baa8d845ec1bc23579ff10d258e7a650323067d5f369954077eeabb",
+ "key_sha256": "ea9a3cb43270349f108271436a72ea6b92b6181ab595573327f92aef47afc422",
+ "lexicon_sha256": "d9fe9ce3ea232cb2af1357882a0849eea4fe9d775145bf8640958542c115b8b8",
+ "scored_on": "2026-11-09",
+ "signed_by": "Jim Wrubel"
+}
