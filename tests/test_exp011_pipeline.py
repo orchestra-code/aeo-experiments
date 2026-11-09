@@ -590,6 +590,24 @@ def test_audit_d_sheet_is_arm_blind_and_keeps_reviewer_input(tmp_path):
     assert "wrote" in audit.make_audit_d_sheet(df, src, force=True)
 
 
+def test_audit_d_reading_file_lists_deliberate_exclusions(tmp_path):
+    lex = tmp_path / "lex.csv"
+    lex.write_text("canonical,aliases,category,decision,reason,match,n_answers,change\n"
+                   "fakeone,Fakeone,c,keep,in category,ci,,\n"
+                   "otherco,Otherco,c,drop,out of category: billing,ci,,\n")
+    src = common.Sources(tmp_path, tmp_path / "prompts.csv")
+    df = _audit_frame()
+    for r in df.itertuples():
+        path = src.responses / f"w{r.wave}" / r.arm / f"{r.item_id}.json"
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(json.dumps({"normalized": {"answer_text": "Fakeone syncs with Otherco."}}))
+    audit.make_audit_d_sheet(df, src, lexicon=lex)
+    answers = src.audit_d_answers.read_text()
+    assert "**Excluded on purpose (1):** otherco (out of category: billing)" in answers
+    with src.audit_d_sheet.open(newline="") as f:
+        assert "otherco" not in next(csv.DictReader(f))["extracted_brands"]
+
+
 def test_audit_d_scorer_joins_the_key_per_arm(tmp_path):
     sheet, key = tmp_path / "sheet.csv", tmp_path / "key.csv"
     rows = [{"audit_id": f"A{i:02d}", "category": "c", "extracted_brands": "A; B; C; D; E",

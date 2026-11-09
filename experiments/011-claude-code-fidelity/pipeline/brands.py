@@ -96,6 +96,35 @@ def lexicon_extract(text: str, patterns) -> list[str]:
     return sorted(first, key=first.get)
 
 
+def excluded_names(text: str, patterns) -> list[str]:
+    """Drop rows the matcher consumes in this text, first-mention order (Audit D reading file).
+
+    Same stripping and span consumption as ``lexicon_extract``, so a name shows here only when
+    extraction itself saw it and excluded it on purpose.
+    """
+    text = _MD_MARKUP.sub(" ", _MD_URL.sub(" ", strip_sources(text)))
+    taken = np.zeros(len(text) + 1, dtype=bool)
+    first: dict[str, int] = {}
+    for pattern, canon, keep in patterns:
+        for m in pattern.finditer(text):
+            if taken[m.start():m.end()].any():
+                continue
+            taken[m.start():m.end()] = True
+            if not keep and (canon not in first or m.start() < first[canon]):
+                first[canon] = m.start()
+    return sorted(first, key=first.get)
+
+
+def drop_reasons(path: Path) -> dict[tuple[str, str], str]:
+    """(category, canonical) -> reason, for the lexicon's drop rows."""
+    out: dict[tuple[str, str], str] = {}
+    with path.open(newline="") as f:
+        for row in csv.DictReader(f):
+            if row["decision"] != "keep":
+                out.setdefault((row["category"], row["canonical"]), row["reason"])
+    return out
+
+
 def lexicon_alias_map(path: Path) -> dict[tuple[str, str], tuple[str, bool]]:
     amap = {}
     with path.open(newline="") as f:

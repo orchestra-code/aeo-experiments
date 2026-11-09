@@ -77,6 +77,8 @@ AUDIT_D_INSTRUCTIONS = (
     "wrong_brands: listed brands that are not real in-category mentions in this answer. "
     "Copy the names exactly as listed, separated by \"; \".",
     "Leave both cells empty when the list is right. Use reviewer_notes for anything else.",
+    "Excluded on purpose: names the lexicon matched and drops by rule, with the reason. They are "
+    "not missed. Write one in missed_brands only if you think the rule is wrong for this answer.",
 )
 SPLIT = re.compile(r"[;|\n]+")
 #: Ledger problem codes that mean the run itself failed. Anything else is an instrument audit
@@ -350,17 +352,21 @@ def audit_d_picks(df: pd.DataFrame) -> list[pd.Series]:
     return [picks[i] for i in rng.permutation(len(picks))]
 
 
-def make_audit_d_sheet(df: pd.DataFrame, src: Sources, *, force: bool = False) -> str:
+def make_audit_d_sheet(df: pd.DataFrame, src: Sources, *, force: bool = False,
+                       lexicon: Path | None = None) -> str:
     """Write the arm-blind review sheet, the reading file and the key.
 
     Sheet (edited by the reviewer): audit_id, category, extracted_brands and the blank reviewer
     columns. Reading file: per audit_id, the category, the extracted brands and the answer text
-    as extraction reads it (sources block stripped). Key: audit_id -> arm, item_id, wave. Neither
+    as extraction reads it (sources block stripped), and, given ``lexicon``, the names it drops
+    on purpose with the reason, so a deliberate exclusion is not marked missed. Key: audit_id -> arm, item_id, wave. Neither
     reviewer file names the arm, prompt or wave.
     """
     if sheet_has_input(src.audit_d_sheet) and not force:
         return f"{src.audit_d_sheet.name} already has reviewer input; left unchanged (--force-new-sheet)"
     sheet, key, md = [], [], [*(f"- {line}" for line in AUDIT_D_INSTRUCTIONS), ""]
+    patterns = brands.load_lexicon(lexicon) if lexicon else {}
+    reasons = brands.drop_reasons(lexicon) if lexicon else {}
     for n, r in enumerate(audit_d_picks(df), start=1):
         audit_id = f"A{n:02d}"
         path = src.responses / f"w{int(r['wave'])}" / r["arm"] / f"{r['item_id']}.json"
@@ -371,7 +377,12 @@ def make_audit_d_sheet(df: pd.DataFrame, src: Sources, *, force: bool = False) -
         key.append({"audit_id": audit_id, "arm": r["arm"], "item_id": r["item_id"],
                     "wave": int(r["wave"])})
         md += [f"## {audit_id}: {r['category']}", "",
-               f"**Extracted brands ({len(r['brands'])}):** {listed or '(none)'}", "",
+               f"**Extracted brands ({len(r['brands'])}):** {listed or '(none)'}", ""]
+        if lexicon:
+            excluded = brands.excluded_names(text, patterns.get(r["category"], []))
+            shown = "; ".join(f"{n} ({reasons.get((r['category'], n), 'drop')})" for n in excluded)
+            md += [f"**Excluded on purpose ({len(excluded)}):** {shown or '(none)'}", ""]
+        md += [
                "**Answer text:**", "", text.strip(), "", "---", ""]
     _write_csv(src.audit_d_sheet, sheet)
     _write_csv(src.audit_d_key, key)
@@ -451,9 +462,10 @@ def candidate_coverage(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
 
 
 def audit_d(df: pd.DataFrame, src: Sources, score_path: Path, out: list[str], *, score: bool,
-            signed_by: str | None, force_sheet: bool, lexicon_sha256: str | None) -> dict | None:
+            signed_by: str | None, force_sheet: bool, lexicon_sha256: str | None,
+            lexicon: Path | None = None) -> dict | None:
     h(out, "Audit D: extraction validity")
-    note = make_audit_d_sheet(df, src, force=force_sheet)
+    note = make_audit_d_sheet(df, src, force=force_sheet, lexicon=lexicon)
     print(f"  audit D sheet: {note}")
     out.append(
         f"Arm-blind spot check, {AUDIT_D_N} answers stratified across the {df['arm'].nunique()} arms, "
@@ -531,7 +543,8 @@ def main() -> None:
     audit_b(out)
     audit_c(df, out)
     audit_d(df, src, results / "audit_d_score.json", out, score=a.score_audit_d,
-            signed_by=a.signed_by, force_sheet=a.force_new_sheet, lexicon_sha256=lexicon_sha)
+            signed_by=a.signed_by, force_sheet=a.force_new_sheet, lexicon_sha256=lexicon_sha,
+            lexicon=None if a.synthetic else brands.LEXICON)
 
     results.mkdir(parents=True, exist_ok=True)
     path = results / "audit_report.md"

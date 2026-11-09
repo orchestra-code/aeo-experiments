@@ -430,6 +430,17 @@ by one, and the rest of the sheet read; all calls accepted as drafted. The sheet
 linked names, so a linked option no longer reads as a citation. No gap, brand comparison or
 confirmatory metric had been computed.
 
+## Audit notes
+
+**Audit A coding flags read by a person (2026-11-09).** The pattern check flagged 7 of 600
+answers across four arms. Each ends with the same offer to narrow the list and draft a demo
+script for vendor calls, which is advice to a buyer, not coding behavior (the same call as
+the feasibility run, sketch deviation 2). All 7 cleared; none is excluded.
+
+**Audit D reading file.** Each answer now also lists the names the lexicon matched and drops
+by rule, with the reason, so a deliberate exclusion is not marked missed. This changes only
+what the reviewer reads, not extraction or any metric.
+
 ## Observations during collection
 
 These are not deviations. They are recorded because they change how the results read.
