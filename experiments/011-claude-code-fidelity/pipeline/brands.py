@@ -1,7 +1,7 @@
 """Deterministic brand extraction for experiment 011 (spec §2 Audit B, §5 lexicon protocol).
 
 Same matcher as 009's ``pipeline/brands.py``, so that 009's lexicon rules still apply. The
-lexicon (``data/raw/lexicon_v1.csv``, gitignored: it is built from AI answers) has one row
+lexicon (``data/raw/lexicon_v1_2.csv``: v1 extended with waves 2 and 3 under spec §5, then two Audit D fixes; gitignored: it is built from AI answers) has one row
 per (brand, prompt category): ``canonical``, ``aliases`` (``|``-separated), ``category``,
 ``decision`` (keep|drop), ``match`` (ci|cs). Labelled sources blocks, markdown link targets,
 bare URLs and markup are stripped; the category's aliases are matched longest first on word
@@ -27,8 +27,8 @@ RAW = EXP / "data" / "raw"
 #: The frozen lexicon. It is created at the lexicon step after wave 1 (spec §5), and its
 #: hash goes here and in the spec before any confirmatory metric. Until then every stage
 #: that reads real data refuses to run.
-LEXICON = RAW / "lexicon_v1.csv"
-LEXICON_SHA256: str | None = None
+LEXICON = RAW / "lexicon_v1_2.csv"
+LEXICON_SHA256: str | None = "d9fe9ce3ea232cb2af1357882a0849eea4fe9d775145bf8640958542c115b8b8"
 
 # ------------------------------------------------------------ lexicon matching
 
@@ -94,6 +94,35 @@ def lexicon_extract(text: str, patterns) -> list[str]:
             if keep and (canon not in first or m.start() < first[canon]):
                 first[canon] = m.start()
     return sorted(first, key=first.get)
+
+
+def excluded_names(text: str, patterns) -> list[str]:
+    """Drop rows the matcher consumes in this text, first-mention order (Audit D reading file).
+
+    Same stripping and span consumption as ``lexicon_extract``, so a name shows here only when
+    extraction itself saw it and excluded it on purpose.
+    """
+    text = _MD_MARKUP.sub(" ", _MD_URL.sub(" ", strip_sources(text)))
+    taken = np.zeros(len(text) + 1, dtype=bool)
+    first: dict[str, int] = {}
+    for pattern, canon, keep in patterns:
+        for m in pattern.finditer(text):
+            if taken[m.start():m.end()].any():
+                continue
+            taken[m.start():m.end()] = True
+            if not keep and (canon not in first or m.start() < first[canon]):
+                first[canon] = m.start()
+    return sorted(first, key=first.get)
+
+
+def drop_reasons(path: Path) -> dict[tuple[str, str], str]:
+    """(category, canonical) -> reason, for the lexicon's drop rows."""
+    out: dict[tuple[str, str], str] = {}
+    with path.open(newline="") as f:
+        for row in csv.DictReader(f):
+            if row["decision"] != "keep":
+                out.setdefault((row["category"], row["canonical"]), row["reason"])
+    return out
 
 
 def lexicon_alias_map(path: Path) -> dict[tuple[str, str], tuple[str, bool]]:

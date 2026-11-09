@@ -1,0 +1,228 @@
+---
+title: "Claude Code on a subscription names the same brands as claude.ai"
+description: "Experiment 011, pre-registered: 40 B2B software buying prompts on three days, typed by hand into claude.ai and run unattended through Claude Code on a Claude subscription. A scheduled Claude Code task named the same brands as claude.ai, within claude.ai's own day-to-day variation. A local Claude Code run came close, inside our equivalence band. Not suitable when search location matters."
+pubDate: 2026-11-09
+authors:
+  - name: "Spyglasses Research"
+    url: "https://spyglasses.io"
+experiment: "011-claude-code-fidelity"
+heroFigure: "/figures/011-claude-code-fidelity/brand-gap.png"
+figures:
+  - "/figures/011-claude-code-fidelity/brand-gap.png"
+  - "/figures/011-claude-code-fidelity/search-behavior.png"
+  - "/figures/011-claude-code-fidelity/scheduled-vs-local.png"
+  - "/figures/011-claude-code-fidelity/claude-ai-then-now.png"
+  - "/figures/011-claude-code-fidelity/api-appendix.png"
+datasets:
+  - title: "Claude Code vs claude.ai, brands named and domains cited (derived features, brands as codes)"
+    path: "/datasets/011-claude-code-fidelity/claude-code-vs-claude-ai-answers.csv"
+    license: "CC BY 4.0"
+    rows: 600
+tags: ["claude", "claude-ai", "claude-code", "brand-mentions", "ai-visibility-tracking", "pre-registered"]
+draft: false
+---
+
+## Key findings
+
+- **A scheduled Claude Code task named the same brands as claude.ai.** We ran 40 B2B software buying questions on three days. A scheduled task in Claude Code, built the way a subscriber would build it, named brands that matched claude.ai as closely as claude.ai matches itself from one day to the next. Its gap was 0.028 on a 0 to 1 scale, equivalent to zero within our pre-registered band of 0.10.
+- **A local Claude Code run came close.** Running the same questions through Claude Code on a computer, with its default settings, gave a gap of 0.065. That is a real difference, but small enough to sit inside the band.
+- **The two Claude Code setups agree with each other.** A scheduled task in the cloud and a local run named similar brands. The difference between them was small and inside the band.
+- **Brand order is less faithful on a local run.** The brands a local run named matched claude.ai's, but the order they came in was a real gap, just past the band. The scheduled task stayed inside the band on order too.
+- **Claude Code searches more.** It ran about 5 to 6 web searches per answer, against about 3.4 in claude.ai, and cited a somewhat different set of websites. Different search behavior still led to similar brands.
+- **Not for location.** Claude Code's web search has no location setting. This way of tracking is not suitable when search location matters.
+
+## Why we asked
+
+Tracking how Claude talks about brands usually means calling the Anthropic API, and that is expensive at the scale tracking needs. A team that already pays for a Claude subscription has another route. It could run its own tracking questions on that subscription through Claude Code, either on a computer with `claude -p` or as a scheduled task in Anthropic's cloud.
+
+Nothing about that route is claude.ai, though. Claude Code has its own system prompt, its own search tool and its own path from a search result to an answer. Its search tool returns titles and links, and a smaller model reads pages before the answer is written. Our earlier study, [experiment 009](/articles/claude-api-vs-claude-ai), compared the API with claude.ai and said nothing about Claude Code.
+
+So we asked one question. For B2B software research on Opus 5.5, does an unattended Claude Code run name the same brands as a person typing the same question into claude.ai?
+
+Before collecting anything, we wrote down what we expected. Search tends to pull answers together, because the same question surfaces similar pages. A short pilot showed that Claude Code searches about four times as often as claude.ai did in September, and reads many more pages. That should pull answers apart. On balance, we expected small gaps, close enough that a pass was plausible but not assured.
+
+## Methods in brief
+
+**The prompts.** We reused the 40 buying questions from experiment 009, two for each of 20 software categories such as CRM, payroll and endpoint security. No prompt names a vendor, a location or a year. They are [published with experiment 009](/datasets/009-claude-model-fidelity/claude-api-vs-claude-ai-prompts.csv).
+
+**The setups.** We call each setup an arm. All of them used Opus 5.5.
+
+| Arm | Where it ran | System prompt | Role |
+|---|---|---|---|
+| claude.ai, by hand | claude.ai, Pro plan, default Medium reasoning | claude.ai's own | the reference |
+| Scheduled task | Claude Code in Anthropic's cloud, Max plan | Claude Code's own | primary |
+| Local, stock | Claude Code on a Mac with `claude -p`, Max plan | Claude Code's own | primary |
+| Local, no system prompt | Claude Code on a Mac, search only | replaced with an empty one | secondary |
+| Claude API | Anthropic API, as in experiment 009 | none | secondary, see the appendix |
+
+**The scheduled task.** Pasting a question into a scheduled task did not work in our pilot: it answered from memory, skipped search, and sent a push notification. So we built the task the way a careful subscriber would. Each task takes 10 questions. For each question, it starts a fresh helper agent (a subagent) and gives it only one instruction: "Use web search to research this question, then answer it the way you would answer the person asking it", followed by the question. The task then prints each answer word for word. Notifications were turned off, and so were the account's connected apps, which a new task picks up by default. The exact task text is in the [study code](https://github.com/orchestra-code/aeo-experiments/blob/main/experiments/011-claude-code-fidelity/harness/sched_kit.py). We could not set the reasoning level for scheduled tasks, so we left it at its default.
+
+**The local runs.** Each answer ran in its own new folder, with no saved settings, no connected apps and no memory, on one pinned Claude Code version (2.1.316). Every run checked that it used the subscription and not an API key. The reasoning level was Medium, the same as claude.ai's default.
+
+**Collection.** Each prompt ran once in every arm on three days: 2026-11-03, 2026-11-05 and 2026-11-09. One person typed the claude.ai chats by hand on the same Pro account used in experiment 009, signed in from Pittsburgh, with memory and chat search off. In total, 600 answers were evaluated in this study, 120 per arm.
+
+**What we measured.** We matched the brands each answer named against a fixed list of vendor names for its category. To compare two answers we used two scores:
+
+- **Jaccard overlap** is the number of brands two answers share, divided by the number of brands either one names. It runs from 0 (nothing in common) to 1 (the same brands), and it ignores order.
+- **Rank-biased overlap (RBO)** also runs from 0 to 1, but gives more weight to the brands named first.
+
+**The gap.** claude.ai does not give the same answer twice. So we first measured how much claude.ai agrees with itself: the same prompt on two different days. Its brand overlap with itself was 0.670. Then we measured how much each arm agrees with claude.ai on the same prompt and the same day. The gap is the first number minus the second. A gap of 0 means the arm is as close to claude.ai as claude.ai is to itself.
+
+**The tolerance band.** Before collecting data, we set the smallest gap that would matter: 0.10 on the Jaccard scale. For two answers that together name about ten brands, that is roughly one brand swapped for another.
+
+**Equivalence testing.** We used two one-sided tests (TOST), which ask whether a difference is small enough to ignore, not only whether it is zero. Each estimate has a 90% confidence interval, built by resampling whole prompts 2,000 times. Each result gets one of four labels:
+
+| Label | What the interval shows | What it means |
+|---|---|---|
+| Equivalent | Entirely inside the band, and it includes 0 | No difference that matters |
+| Small, inside the band | Inside the band, but it excludes 0 | A real difference too small to matter |
+| Real gap | Excludes 0 and reaches past the band | A difference that may matter |
+| Inconclusive | Wider than the band and includes 0 | The data cannot tell |
+
+The two primary arms, the scheduled task and the local stock run, form one pre-registered family. We adjusted their intervals with the Holm method so the chance of a false pass across the two stays at 10%. The first-ranked test is read at 95%.
+
+The full plan is in the [pre-registered spec](https://github.com/orchestra-code/aeo-experiments/blob/14fa495/experiments/011-claude-code-fidelity/spec.md), frozen at commit `14fa495` on 2026-11-03, before the first day of collection. Changes made after the freeze are listed below.
+
+## Results
+
+### The lead chart: closeness to claude.ai
+
+<figure>
+  <img src="/figures/011-claude-code-fidelity/brand-gap.png" alt="Two dot plots with a shaded band from -0.10 to 0.10, one row per Claude Code arm. Left, which brands are named: all three arms sit inside the band, the scheduled task closest to zero. Right, the order of the brands: the scheduled task stays inside the band, while both local runs reach past it." />
+</figure>
+
+| Arm | Brand gap to claude.ai | Interval | Label |
+|---|---|---|---|
+| Scheduled task | +0.028 | -0.008 to +0.063 (Holm, 95%) | equivalent |
+| Local, stock | +0.065 | +0.037 to +0.095 (Holm, 90%) | small, inside the band |
+| Local, no system prompt | +0.056 | +0.026 to +0.089 (90%) | small, inside the band |
+
+Both primary arms pass. The scheduled task is the closest: its interval includes zero and stays well inside the band. The local stock run has a real gap, but a small one. Its interval ends at 0.095, under the 0.10 band. Replacing Claude Code's system prompt with an empty one gave a similar result.
+
+The overlap levels make this concrete. On the same prompt and day, the scheduled task shared 0.642 of its brands with claude.ai, and the local stock run 0.605. claude.ai shared 0.670 with itself across days.
+
+### Brand order
+
+| Arm | Order gap to claude.ai (RBO) | 90% interval | Label |
+|---|---|---|---|
+| Scheduled task | +0.035 | +0.003 to +0.070 | small, inside the band |
+| Local, stock | +0.065 | +0.030 to +0.102 | real gap |
+| Local, no system prompt | +0.085 | +0.047 to +0.123 | real gap |
+
+On order, the local runs reach just past the band. They name the same brands as claude.ai but list them in a somewhat different order. For tracking, that matters most for anyone who reports position, such as which brand is named first. The scheduled task stays inside the band on order too.
+
+### Scheduled and local agree
+
+<figure>
+  <img src="/figures/011-claude-code-fidelity/scheduled-vs-local.png" alt="A plot of brand overlaps: the scheduled task with itself across days, the local run with itself across days, the two with each other on the same day, and claude.ai with itself. All sit close together." />
+</figure>
+
+We also tested the scheduled task against the local stock run directly. This test compares each setup's agreement with itself across days to the two setups' agreement with each other on the same day. The difference was +0.046 (interval +0.029 to +0.064), small and inside the band. The scheduled task as we built it adds a subagent and an instruction, so this test compares the two setups as built. It does not isolate the cloud from the instruction.
+
+### Different search, similar brands
+
+<figure>
+  <img src="/figures/011-claude-code-fidelity/search-behavior.png" alt="Bars of web searches per answer and answer length for claude.ai and the Claude Code arms. The Claude Code arms search more and write longer answers than claude.ai." />
+</figure>
+
+| Arm | Searches per answer | Links in the answer | Brands per answer | Answer length (characters) |
+|---|---|---|---|---|
+| claude.ai, by hand | 3.4 | 9.9 | 7.6 | 4,639 |
+| Scheduled task | not reported | 16.1 | 8.3 | 6,464 |
+| Local, stock | 5.1 | 13.1 | 7.3 | 5,391 |
+| Local, no system prompt | 5.9 | 14.9 | 7.6 | 5,912 |
+
+Claude Code searched about one and a half times as often as claude.ai, linked to more pages and wrote longer answers. A scheduled task does not report its search count, because each question runs in a subagent; every one of its answers did search. Despite these differences, the brands came out close.
+
+Cited sources differ more than brands do. Compared with claude.ai, the Claude Code arms' gaps on cited websites were +0.100 to +0.125. We report these as description only, because Claude Code has no citation objects: we read links from the answer text, while claude.ai's citations come from its own records. Some of that difference is the measure itself.
+
+### How much of a subscription it uses
+
+These readings are rough. Usage limits are shown to the nearest 1%, and other work on the account also moves them.
+
+- **Max plan:** the 240 local answers together moved the seven-day limit by about 8 points, or roughly 0.03 points per answer, and the five-hour limit by about 0.2 points per answer.
+- **Pro plan:** in a separate check, 10 local answers moved the five-hour limit from 0% to 6% and left the seven-day limit at 0%.
+- **Time:** a scheduled task with 10 questions took about 12 to 14 minutes, about 50 seconds per answer.
+
+### Checks on the pipeline
+
+- **Positive control.** Brand overlap with claude.ai was 0.592 higher for the same prompt than for prompts in different categories (interval 0.562 to 0.622). This check catches a broken matcher or answers joined to the wrong prompt. It passed easily.
+- **Placebo.** We split the prompts into odd and even numbers and recomputed each primary gap on both halves. The halves agreed for both arms: +0.025 for the local run and +0.019 for the scheduled task, both equivalent.
+- **Robustness.** Both primary arms stayed inside the band when we used only each answer's first ten brands, resampled whole categories instead of prompts, and added back every brand name our list could not place. Dropping one day at a time kept the scheduled task inside the band every time. For the local stock run, the estimate stayed under 0.10, but with day one or day three removed its interval reached past the band (to 0.116 and 0.126). That is a caveat on the local run's margin.
+- **Brand matching was checked by hand.** A reviewer read 30 answers chosen at random across all five arms, without knowing which arm wrote them. The matcher found 243 brands correctly, listed none wrongly and missed 2. That is a precision of 1.00 and a recall of 0.99, against minimums of 0.95 and 0.90. The two misses were fixed before any result was computed (change 2 below).
+- **Data quality.** Every arm has 40 answers on each day. No run failed, no answer was empty, and every answer in every arm ran at least one web search. Every answer from the scheduled tasks was checked against its subagent's own report and matched word for word.
+
+### claude.ai itself changed
+
+<figure>
+  <img src="/figures/011-claude-code-fidelity/claude-ai-then-now.png" alt="claude.ai's behavior on the same account and prompts in late September and in November: searches per answer rose, and the share of answers with no search fell to zero." />
+</figure>
+
+On the same account and the same prompts, claude.ai behaved differently in November than it did in experiment 009, five weeks earlier. It ran about 3.4 searches per answer instead of about 1.2. Every answer searched, where about one in six had not. Answers were longer, and most opened with a short note before searching. The chats also include four blocks of instructions added to each message, in the format Claude Code uses, which experiment 009's chats did not.
+
+On 2026-09-16, Anthropic announced that [chat and Cowork had become one experience](https://claude.com/blog/cowork-is-now-claude), rolling out to Pro and Max plans over several weeks. Anthropic's help pages say Cowork [uses the same agentic architecture that powers Claude Code](https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork), and that the new experience has [no web search toggle](https://support.claude.com/en/articles/16761823-claude-cowork-and-chat-are-one-claude). That this rollout explains the change on our account is our inference, not something Anthropic has said.
+
+This matters for reading the result. Our reference is claude.ai as it was in November 2026, on one Pro account with the merged experience. Because it now behaves more like Claude Code, a close match is less surprising than it would have been in September. It also shows that claude.ai can change within weeks, so any stand-in should be checked against it again over time.
+
+## Changes to the plan
+
+We froze the plan before collection. These changes were made afterward, and the spec's deviation log records each one.
+
+1. **A renamed search tool.** claude.ai's data export now names its search call differently. Our frozen parser did not know the new name, so it counted zero searches for the first day's chats. We added the new name. This affects only search counts, not brands, and the parser's output on all 251 of experiment 009's chats was unchanged.
+2. **Two fixes to the vendor list after the hand check.** The hand check found two misses. One was a short form of a product name already on the list. The other was a payroll vendor that experiment 009 had excluded, because there it appeared only as a source; here answers offered it as an option. Both were fixed before any result was computed. The fix changed the brands found in 3 of 600 answers. The hand check as made is kept on file, and on the fixed list the reviewer's two misses are resolved.
+
+Two other steps followed the plan as written. The vendor list was extended after days two and three, because it missed more than 2% of brand names there, which the plan required us to fix before any result. And on day one the claude.ai chats ran about five hours after the Claude Code runs. On days two and three they ran within the same hour.
+
+## What we can and cannot claim
+
+**We can claim:** across 600 answers evaluated in this study, for B2B software prompts with no location in them, a scheduled Claude Code task on Opus 5.5 named the same brands as claude.ai, within claude.ai's own day-to-day variation plus 0.10. A local Claude Code run stayed inside that band too, with a small real gap. The local runs ordered brands less like claude.ai than the band allows.
+
+**The equivalence bound.** Before collection, we simulated the study's power from experiment 009's data. If the true gap were 0.10, the study would wrongly call it a pass only 3% to 6% of the time. Where we report "equivalent" or "small, inside the band", the gap is under 0.10 at the stated confidence. The interval half-width was about 0.03.
+
+| True gap | Chance of a pass, 90% | Chance of a pass, 95% |
+|---|---|---|
+| 0.000 | 1.00 | 1.00 |
+| 0.030 | 0.98 | 0.95 |
+| 0.055 | 0.73 | 0.62 |
+| 0.075 | 0.37 | 0.26 |
+| 0.100 | 0.06 | 0.03 |
+
+**Not suitable when location matters.** Claude Code's web search has no location setting. A scheduled task runs in Anthropic's cloud, from a place we do not know and cannot set. Our prompts contain no location by design, so this study says nothing about questions where the answer depends on place, such as local services or regional vendors. For those, use the Claude API, which can set the search location.
+
+**The reference is one account, at one point in time.** The claude.ai side is one Pro account with memory and personalization off, signed in from Pittsburgh, using the merged chat and Cowork experience. Accounts without that experience, other plans, and personalized sessions may differ. claude.ai changed between September and November, and it may change again.
+
+**Brands, not sources.** The match is on which brands are named. Claude Code cites a somewhat different set of websites, and we treat those results as description only.
+
+**The scheduled task was tested as built.** It uses a subagent per question and a short instruction to search. We did not test other ways of building it, and we could not set or check its reasoning level.
+
+**B2B software questions only.** The 40 synthetic questions cover 20 software categories. They are not real buyer phrasing, and the results may not hold for consumer products, local services, other languages or other kinds of question.
+
+**Three days.** Each prompt ran once per arm on three days in November 2026.
+
+**The brand list was built from the answers.** One person reviewed it, and the same list applies to every arm. A hand check found precision 1.00 and recall 0.99.
+
+**Terms of use.** Whether a particular use of a subscription is allowed is a question about Anthropic's terms, not something this study can test.
+
+**No brand is being judged.** This study compares ways of running Claude. It names no brand from any answer.
+
+## Data and reproducibility
+
+- **Dataset:** [answers](/datasets/011-claude-code-fidelity/claude-code-vs-claude-ai-answers.csv) (CC BY 4.0, 600 answers evaluated in this study), with a [datasheet](/datasets/011-claude-code-fidelity/claude-code-vs-claude-ai-answers.datasheet.md) for the column dictionary. Brands appear as codes, so every overlap score in this article can be recomputed without naming a brand. Answer text, search queries and full URLs are not released. The prompts are [published with experiment 009](/datasets/009-claude-model-fidelity/claude-api-vs-claude-ai-prompts.csv).
+- **Pre-registered spec:** [frozen at `14fa495`](https://github.com/orchestra-code/aeo-experiments/blob/14fa495/experiments/011-claude-code-fidelity/spec.md) on 2026-11-03. The [current spec](https://github.com/orchestra-code/aeo-experiments/blob/main/experiments/011-claude-code-fidelity/spec.md) adds the deviation log, the vendor list records and the notes on claude.ai's change.
+- **Analysis code:** [experiments/011-claude-code-fidelity/](https://github.com/orchestra-code/aeo-experiments/tree/main/experiments/011-claude-code-fidelity), including the collection harness, the scheduled task, the dry run on made-up data, the audits and the figure code. Every pre-registered test, including the secondary ones, is in the [results report](https://github.com/orchestra-code/aeo-experiments/blob/main/experiments/011-claude-code-fidelity/results/model_report.md).
+
+## Appendix: the API arm
+
+We also ran the same questions through the Claude API, set up as in experiment 009: Opus 5.5 with no system prompt, Anthropic's web search tool, and Pittsburgh as the search location. This was a secondary arm, included to repeat 009's measurement on the same days.
+
+<figure>
+  <img src="/figures/011-claude-code-fidelity/api-appendix.png" alt="A dot plot of the brand gap to claude.ai for all four arms, with experiment 009's API result shown for reference. The API arm in November sits past the band; the Claude Code arms sit inside it." />
+</figure>
+
+In this study, the API arm's brand gap to claude.ai was +0.126 (interval +0.098 to +0.154), past the band. In experiment 009, the same setup measured +0.067 and stayed inside it. Each Claude Code arm was closer to claude.ai than the API arm was.
+
+We give this little weight for now. The study was designed to test Claude Code, not to track the API over time. The most likely reason for the change is that claude.ai itself changed, as described above, so the API is being compared with a different reference than in September. One study on one account cannot separate that from other causes. We report it because it was pre-registered, and we think it needs further testing before anyone acts on it.
+
+## Changelog
+
+- 2026-11-09: draft.

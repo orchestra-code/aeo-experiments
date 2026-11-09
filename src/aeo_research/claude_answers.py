@@ -185,8 +185,10 @@ def from_api_message(msg) -> dict:
 #   - whether ``content`` is empty on older messages (then only ``text`` exists)
 
 #: Tool names treated as web search in the export. claude.ai offers
-#: ``web_search_fast`` next to ``web_search`` (leaked prompt, 2026-09-22).
-EXPORT_SEARCH_TOOLS = frozenset({"web_search", "web_search_fast"})
+#: ``web_search_fast`` next to ``web_search`` (leaked prompt, 2026-09-22). The
+#: 2026-11-03 export names the call ``WebSearch`` with ``input.mode``, while its
+#: result block is still ``web_search``.
+EXPORT_SEARCH_TOOLS = frozenset({"web_search", "web_search_fast", "WebSearch"})
 
 
 def _export_citation_url(citation) -> str | None:

@@ -56,6 +56,32 @@ def test_export_writes_neither_chat_when_two_share_a_name():
     assert duplicates == {"b2b_01": ["a", "b"]}
 
 
+def _chat_with_blocks(date: str, listing: str) -> dict:
+    return {"chat_messages": [{"sender": "human", "content": [
+        {"type": "text", "text": "q"},
+        {"type": "injected_prompt_block", "injection_source": "date_note", "prompt": date},
+        {"type": "injected_prompt_block", "injection_source": "agent_listing", "prompt": listing},
+    ]}]}
+
+
+def test_injected_fingerprint_ignores_the_date_but_not_other_blocks():
+    a = export.injected_fingerprint(_chat_with_blocks("Tuesday", "agents"))
+    assert a == export.injected_fingerprint(_chat_with_blocks("Thursday", "agents"))
+    assert a != export.injected_fingerprint(_chat_with_blocks("Tuesday", "other agents"))
+    assert export.injected_fingerprint({"chat_messages": [{"sender": "human", "content": []}]}) == "{}"
+
+
+def test_injected_report_flags_a_change_between_waves(tmp_path):
+    export.injected_report({"b2b_01": _chat_with_blocks("Tuesday", "agents")}, 1, tmp_path)
+    same = export.injected_report({"b2b_01": _chat_with_blocks("Thursday", "agents")}, 2, tmp_path)
+    assert "against w1: same" in same[-1]
+    changed = export.injected_report({"b2b_01": _chat_with_blocks("Friday", "new")}, 3, tmp_path)
+    assert any("against w1: CHANGED" in line for line in changed)
+    mixed = export.injected_report(
+        {"b2b_01": _chat_with_blocks("x", "a"), "b2b_02": _chat_with_blocks("x", "b")}, 4, tmp_path)
+    assert any("chats in this wave differ" in line for line in mixed)
+
+
 def test_sheet_names_match_the_export_rule_and_cover_every_prompt_once():
     prompts = [{"item_id": f"b2b_{i:02d}", "text": f"q{i}"} for i in range(1, 41)]
     rows = sheet.build_sheet(prompts, 1)
