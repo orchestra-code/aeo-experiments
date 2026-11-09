@@ -81,7 +81,7 @@ def test_design_constants_match_the_spec():
     assert common.PRIMARY_ARMS == ("cc_stock_full", "sched_kit")
     assert common.SECONDARY_ARMS == ("cc_none_search", "opus55_plain")
     assert common.PROMPTS_CSV.parts[-4:] == ("009-claude-model-fidelity", "data", "raw", "prompts.csv")
-    assert brands.LEXICON.name == "lexicon_v1.csv"
+    assert brands.LEXICON.name == "lexicon_v1_1.csv"
 
 
 # ------------------------------------------------------------- bootstrap

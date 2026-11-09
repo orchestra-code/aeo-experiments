@@ -1,7 +1,7 @@
 """Deterministic brand extraction for experiment 011 (spec §2 Audit B, §5 lexicon protocol).
 
 Same matcher as 009's ``pipeline/brands.py``, so that 009's lexicon rules still apply. The
-lexicon (``data/raw/lexicon_v1.csv``, gitignored: it is built from AI answers) has one row
+lexicon (``data/raw/lexicon_v1_1.csv``, v1 extended with waves 2 and 3 under spec §5; gitignored: it is built from AI answers) has one row
 per (brand, prompt category): ``canonical``, ``aliases`` (``|``-separated), ``category``,
 ``decision`` (keep|drop), ``match`` (ci|cs). Labelled sources blocks, markdown link targets,
 bare URLs and markup are stripped; the category's aliases are matched longest first on word
@@ -27,8 +27,8 @@ RAW = EXP / "data" / "raw"
 #: The frozen lexicon. It is created at the lexicon step after wave 1 (spec §5), and its
 #: hash goes here and in the spec before any confirmatory metric. Until then every stage
 #: that reads real data refuses to run.
-LEXICON = RAW / "lexicon_v1.csv"
-LEXICON_SHA256: str | None = "728794746267de5bdb6ff1662f3873cb9571a158881b0a04815412614c35f87a"
+LEXICON = RAW / "lexicon_v1_1.csv"
+LEXICON_SHA256: str | None = "8e063e09873f8fb3d0d748c371c2c90904c6c039b80314d3debfacec6bd948ed"
 
 # ------------------------------------------------------------ lexicon matching
 

@@ -14,7 +14,7 @@ Writes ``data/raw/lexicon_w<wave>_candidates.csv`` (gitignored: brand names from
 prints coverage: names the lexicon cannot place, against the spec's 2% limit, and answers per
 category with a candidate the lexicon has no alias for.
 
-The lexicon compared against is ``data/raw/lexicon_v1.csv`` once it exists, and until then 010's
+The lexicon compared against is ``brands.LEXICON`` (now ``data/raw/lexicon_v1_1.csv``) once it exists, and until then 010's
 frozen v3, the spec's starting point, with its hash checked. ``--lexicon`` overrides.
 
 The cache also holds the pilot's records (a bare hash key and ``names``). ``pilot_report.py``

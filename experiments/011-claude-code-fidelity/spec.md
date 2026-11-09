@@ -417,6 +417,19 @@ more answers were skimmed. Two rules applied at this review, for the record:
 The review sheet's context cells remove link targets and keep the brackets, so a linked
 option can look like a citation. Rows were read with that in mind.
 
+**Extension after waves 2 and 3 (2026-11-09), as §5 requires.** Checked against v1, the
+lexicon could not place 2.1% to 5.9% of names in wave 2 and 0.8% to 4.1% in wave 3, against
+the 2% limit, in 8 of 10 arm-waves. Of 150 flagged (category, name) pairs, 100 were truly
+unplaced; the other 50 were already found inside a longer name. v1 was extended under the
+same rules, again without reading arm labels: 94 rows, 36 keep and 58 drop.
+`data/raw/lexicon_v1_1.csv`, sha256 `8e063e09873f8fb3d0d748c371c2c90904c6c039b80314d3debfacec6bd948ed`, 1,547 rows. Names the lexicon cannot place after
+the extension: 0.0% to 0.7% per arm in every wave. v1 is kept unchanged for the record.
+
+Review by Jim Wrubel: the 5 flagged rows and the 7 rows matching five or more answers one
+by one, and the rest of the sheet read; all calls accepted as drafted. The sheet now marks
+linked names, so a linked option no longer reads as a citation. No gap, brand comparison or
+confirmatory metric had been computed.
+
 ## Observations during collection
 
 These are not deviations. They are recorded because they change how the results read.
