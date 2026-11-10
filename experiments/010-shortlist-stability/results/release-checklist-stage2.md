@@ -69,7 +69,7 @@ of the completed checklist lives in `experiments/<slug>/results/`.
 
 ## Decisions to confirm when signing (tick each)
 
-- [ ] Scope: this is an update of the signed Stage 1 release
+- [x] Scope: this is an update of the signed Stage 1 release
       (results/release-checklist.md, 2026-10-11), not a new dataset. Same
       three file names, same columns; the files in data/public/ are replaced.
       The Stage 1 version stays in git history (commit 4432548) and on the
@@ -78,7 +78,7 @@ of the completed checklist lives in `experiments/<slug>/results/`.
       separate `-stage1` set), which would leave two copies of the same rows
       on the site.
 
-- [ ] Stage 1 rows unchanged and first: the 2,770 Stage 1 answers keep run_id
+- [x] Stage 1 rows unchanged and first: the 2,770 Stage 1 answers keep run_id
       r00001 to r02770 and their position; the 480 answers of waves 8 to 11
       are appended as r02771 to r03250, in the same sort among themselves. So
       the answers file is not in one global dataset order (chatgpt_b2b rows of
@@ -86,7 +86,7 @@ of the completed checklist lives in `experiments/<slug>/results/`.
       re-sorting and renumbering, which would change most Stage 1 run_ids and
       break any join a reader built on the Stage 1 files.
 
-- [ ] Proof that Stage 1 rows are unchanged, run by the gate itself: it
+- [x] Proof that Stage 1 rows are unchanged, run by the gate itself: it
       rebuilds the Stage 1 release in-process from the Stage 1 frame and
       checks it against the sha256 of the signed files
       (`ai-shortlist-stability-answers.csv` 829a4ca17e2d,
@@ -99,7 +99,7 @@ of the completed checklist lives in `experiments/<slug>/results/`.
       identical. Filtering the new files to wave 7 or less (mentions: by
       run_id) gives the signed files back byte for byte.
 
-- [ ] Brand codes: the code table is unchanged (checked: identical to the
+- [x] Brand codes: the code table is unchanged (checked: identical to the
       Stage 1 table, 663 codes from 009 and 155 seeded codes from b0664 on).
       No brand needed a new code: the Stage 1 table already covered every
       brand of the frozen lexicons, and firewall rule 4 keeps them frozen, so
@@ -109,7 +109,7 @@ of the completed checklist lives in `experiments/<slug>/results/`.
       codes appear for the first time in waves 8 to 11 (26 of them 009 codes,
       2 from the seeded range); the datasheet states the count, not the codes.
 
-- [ ] Best-for segment ids: phrases classified at Stage 1 keep their Stage 1
+- [x] Best-for segment ids: phrases classified at Stage 1 keep their Stage 1
       classifications (deviation 10b; checked: no Stage 1 phrase changes
       segment in the merged maps); the 3,671 phrases first seen at Stage 2
       were classified twice with the frozen taxonomies. Audit G over all
@@ -118,11 +118,11 @@ of the completed checklist lives in `experiments/<slug>/results/`.
       anything in the Spyglasses database. Confirm, or drop the counts from
       the notes.
 
-- [ ] Segments file unchanged, so the 25 segment rewrites and the definition
+- [x] Segments file unchanged, so the 25 segment rewrites and the definition
       decision signed at Stage 1 carry over as they are; nothing in REWRITES
       changed.
 
-- [ ] Datasheets: titles now read 'Stages 1 and 2'; 'Released' is the Stage 2
+- [x] Datasheets: titles now read 'Stages 1 and 2'; 'Released' is the Stage 2
       date (2026-11-09) and the Changelog keeps the Stage 1 date (2026-10-11);
       the deviations pointer covers 1 to 10; a Stage 2 run notes item records
       deviation 9 (ChatGPT gpt-6 in waves 6 to 11, one Gemini answer reporting
@@ -134,12 +134,12 @@ of the completed checklist lives in `experiments/<slug>/results/`.
       files. The model notes are checked against the data (the gate refuses if
       a wave's model differs from what the notes say).
 
-- [ ] Wave dates: the datasheets give scheduled local dates (waves 8 to 11:
+- [x] Wave dates: the datasheets give scheduled local dates (waves 8 to 11:
       2026-10-16, 2026-10-23, 2026-10-30 and 2026-11-06); run_date carries the
       true dates, through 2026-11-07 for ChatGPT and Gemini (UTC). Late tasks
       keep their true dates, as at Stage 1.
 
-- [ ] Scans, all clean: the segment scan as at Stage 1 (unchanged file); every
+- [x] Scans, all clean: the segment scan as at Stage 1 (unchanged file); every
       public value, column description, note and Changelog line, and the
       written CSV and datasheet files, against every alias of at least 4
       characters, case-insensitively; accepted: 'front' (ordinary word, as in
@@ -155,20 +155,20 @@ of the completed checklist lives in `experiments/<slug>/results/`.
       product), 'wave' (ordinary word, a collection wave; an alias in the B2B
       lexicon). No other hit.
 
-- [ ] Brand codes are pseudonyms, not anonymity, as signed at Stage 1. Four
+- [x] Brand codes are pseudonyms, not anonymity, as signed at Stage 1. Four
       more runs per question add frequency information, so a reader who knows
       a market guesses the most frequent codes a little more easily; no name
       ships. Confirm this is still acceptable.
 
-- [ ] Answer-level flags: 0 refusals and 0 empty answers of 3,250;
+- [x] Answer-level flags: 0 refusals and 0 empty answers of 3,250;
       `refusal_phrase` flags 3 answers (3 at Stage 1).
 
-- [ ] Not released, as at Stage 1: R1's names outside the lexicon (only the
+- [x] Not released, as at Stage 1: R1's names outside the lexicon (only the
       count `n_brands_all`), the Audit E second-pass labels (now including the
       Stage 2 sample of waves 8 to 11), and the per-answer judge metadata,
       which is constant and stated in the datasheets.
 
-- [ ] Site: the Stage 2 figures were synced with `sync_site_assets.py
+- [x] Site: the Stage 2 figures were synced with `sync_site_assets.py
       --figures-only` for the article 2 draft; the datasets are not synced.
       After signing: commit data/public/ and this checklist, then run `uv run
       python scripts/sync_site_assets.py 010-shortlist-stability`.
@@ -180,10 +180,10 @@ of the completed checklist lives in `experiments/<slug>/results/`.
 - [x] Audit D signed (precision 1.00, recall 1.00); Stage 2 audits pass
       (`results/stage2_audits.md`): Audit A every wave 40 of 40, Audit E
       96% on the waves 8 to 11 sample, Audit G 96%.
-- [ ] STOP 4: Stage 2 results reviewed by Jim (`results/stage2_model.md`,
+- [x] STOP 4: Stage 2 results reviewed by Jim (`results/stage2_model.md`,
       `results/stage2_robustness.md`).
 
 ## Sign-off
 
-- Name: ______________  Date: ______________
-- Release gate run: `pipeline/25_release.py --stage 2` exit 0 on ______________
+- Name: ____Jim Wrubel__________  Date: ____9 NOV 2026__________
+- Release gate run: `pipeline/25_release.py --stage 2` exit 0 on __9 NOV 2026____________
