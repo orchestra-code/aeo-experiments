@@ -2769,3 +2769,483 @@ r02767,chatgpt_agency,chatgpt,dataforseo,chatgpt,1,gpt-5-5,005-subintent-matched
 r02768,chatgpt_agency,chatgpt,dataforseo,chatgpt,1,gpt-5-5,005-subintent-matched-panels,agency_025,cat_a1,,1,2026-08-02,0,0,0,0,0,0,0,0,0,0,0,1
 r02769,chatgpt_agency,chatgpt,dataforseo,chatgpt,1,gpt-5-5,005-subintent-matched-panels,agency_026,cat_a1,,1,2026-08-02,6,6,0,0,0,0,0,10,0,0,0,1
 r02770,chatgpt_agency,chatgpt,dataforseo,chatgpt,1,gpt-5-5,005-subintent-matched-panels,agency_027,cat_a1,,1,2026-08-02,3,3,1,0,1,0,1,13,0,0,0,1
+r02771,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_01,CRM,shortlist,8,2026-10-17,5,4,0,0,0,0,0,12,0,0,0,1
+r02772,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_01,CRM,shortlist,9,2026-10-24,5,5,2,0,1,0,2,11,0,0,0,1
+r02773,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_01,CRM,shortlist,10,2026-10-31,5,5,2,0,1,0,2,5,0,0,0,1
+r02774,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_01,CRM,shortlist,11,2026-11-07,5,5,1,0,1,0,1,7,0,0,0,1
+r02775,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_02,CRM,evaluate,8,2026-10-17,5,5,1,0,1,0,1,5,0,0,0,1
+r02776,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_02,CRM,evaluate,9,2026-10-24,5,5,1,0,1,0,1,7,0,0,0,1
+r02777,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_02,CRM,evaluate,10,2026-10-31,8,6,1,0,1,0,1,8,0,0,0,1
+r02778,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_02,CRM,evaluate,11,2026-11-07,5,5,1,0,1,0,1,5,0,0,0,1
+r02779,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_03,marketing automation,shortlist,8,2026-10-17,4,3,2,0,1,0,2,5,0,0,0,1
+r02780,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_03,marketing automation,shortlist,9,2026-10-24,5,4,2,0,1,0,2,5,0,0,0,1
+r02781,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_03,marketing automation,shortlist,10,2026-10-31,5,5,1,0,1,0,1,9,0,0,0,1
+r02782,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_03,marketing automation,shortlist,11,2026-11-07,5,4,0,0,0,0,0,9,0,0,0,1
+r02783,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_04,marketing automation,evaluate,8,2026-10-17,5,5,1,0,1,0,1,5,0,0,0,1
+r02784,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_04,marketing automation,evaluate,9,2026-10-24,7,6,0,0,0,0,0,8,0,0,0,1
+r02785,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_04,marketing automation,evaluate,10,2026-10-31,9,5,2,0,1,0,2,9,0,0,0,1
+r02786,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_04,marketing automation,evaluate,11,2026-11-07,6,6,1,0,1,0,1,7,0,0,0,1
+r02787,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_05,customer support helpdesk,shortlist,8,2026-10-17,8,6,2,0,1,0,2,12,0,0,0,1
+r02788,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_05,customer support helpdesk,shortlist,9,2026-10-24,8,7,1,0,1,0,1,12,0,0,0,1
+r02789,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_05,customer support helpdesk,shortlist,10,2026-10-31,7,6,0,0,0,0,0,8,0,0,0,1
+r02790,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_05,customer support helpdesk,shortlist,11,2026-11-07,6,6,1,0,1,0,1,10,0,0,0,1
+r02791,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_06,customer support helpdesk,evaluate,8,2026-10-17,6,5,1,0,1,0,1,6,0,0,0,1
+r02792,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_06,customer support helpdesk,evaluate,9,2026-10-24,5,5,1,0,1,0,1,5,0,0,0,1
+r02793,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_06,customer support helpdesk,evaluate,10,2026-10-31,7,5,1,0,1,0,1,11,0,0,0,1
+r02794,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_06,customer support helpdesk,evaluate,11,2026-11-07,6,6,1,0,1,0,1,6,0,0,0,1
+r02795,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_07,HRIS,shortlist,8,2026-10-17,8,3,1,0,1,0,1,9,0,0,0,1
+r02796,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_07,HRIS,shortlist,9,2026-10-24,8,6,0,0,0,0,0,9,0,0,0,1
+r02797,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_07,HRIS,shortlist,10,2026-10-31,7,5,2,0,1,0,2,8,0,0,0,1
+r02798,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_07,HRIS,shortlist,11,2026-11-07,7,5,2,0,1,0,2,8,0,0,0,1
+r02799,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_08,HRIS,evaluate,8,2026-10-17,5,5,2,0,1,0,2,5,0,0,0,1
+r02800,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_08,HRIS,evaluate,9,2026-10-24,6,6,0,0,0,0,3,6,0,0,0,1
+r02801,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_08,HRIS,evaluate,10,2026-10-31,5,5,1,0,1,0,1,5,0,0,0,1
+r02802,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_08,HRIS,evaluate,11,2026-11-07,6,6,1,0,1,0,1,6,0,0,0,1
+r02803,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_09,payroll,shortlist,8,2026-10-17,4,4,2,0,1,0,2,5,0,0,0,1
+r02804,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_09,payroll,shortlist,9,2026-10-24,5,4,0,0,0,0,0,8,0,0,0,1
+r02805,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_09,payroll,shortlist,10,2026-10-31,7,5,1,2,1,1,1,13,0,0,0,1
+r02806,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_09,payroll,shortlist,11,2026-11-07,7,5,1,0,1,0,1,11,0,0,0,1
+r02807,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_10,payroll,evaluate,8,2026-10-17,5,5,1,0,1,0,1,8,0,0,0,1
+r02808,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_10,payroll,evaluate,9,2026-10-24,5,5,1,0,1,0,1,11,0,0,0,1
+r02809,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_10,payroll,evaluate,10,2026-10-31,5,5,1,0,1,0,1,7,0,0,0,1
+r02810,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_10,payroll,evaluate,11,2026-11-07,5,5,1,0,1,0,1,10,0,0,0,1
+r02811,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_11,expense management,shortlist,8,2026-10-17,4,4,0,0,0,0,0,13,0,0,0,1
+r02812,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_11,expense management,shortlist,9,2026-10-24,4,4,2,0,1,0,2,8,0,0,0,1
+r02813,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_11,expense management,shortlist,10,2026-10-31,5,5,1,0,1,0,1,5,0,0,0,1
+r02814,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_11,expense management,shortlist,11,2026-11-07,5,4,1,0,1,0,1,10,0,0,0,1
+r02815,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_12,expense management,evaluate,8,2026-10-17,4,4,2,0,1,0,2,4,0,0,0,1
+r02816,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_12,expense management,evaluate,9,2026-10-24,5,5,1,0,1,0,1,8,0,0,0,1
+r02817,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_12,expense management,evaluate,10,2026-10-31,6,5,1,0,1,0,1,9,0,0,0,1
+r02818,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_12,expense management,evaluate,11,2026-11-07,7,5,1,1,1,1,1,11,0,0,0,1
+r02819,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_13,accounts payable automation,shortlist,8,2026-10-17,5,4,0,0,0,0,0,16,0,0,0,1
+r02820,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_13,accounts payable automation,shortlist,9,2026-10-24,6,5,0,0,0,0,3,16,0,0,0,1
+r02821,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_13,accounts payable automation,shortlist,10,2026-10-31,5,4,2,0,1,0,2,5,0,0,0,1
+r02822,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_13,accounts payable automation,shortlist,11,2026-11-07,6,6,1,0,1,0,1,16,0,0,0,1
+r02823,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_14,accounts payable automation,evaluate,8,2026-10-17,6,6,1,0,1,0,1,12,0,0,0,1
+r02824,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_14,accounts payable automation,evaluate,9,2026-10-24,6,6,0,0,0,0,0,6,0,0,0,1
+r02825,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_14,accounts payable automation,evaluate,10,2026-10-31,8,8,2,0,1,0,2,8,0,0,0,1
+r02826,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_14,accounts payable automation,evaluate,11,2026-11-07,6,6,1,0,1,0,1,8,0,0,0,1
+r02827,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_15,mid-market ERP,shortlist,8,2026-10-17,5,5,0,0,0,0,3,9,0,0,0,1
+r02828,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_15,mid-market ERP,shortlist,9,2026-10-24,4,4,1,0,1,0,1,4,0,0,0,1
+r02829,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_15,mid-market ERP,shortlist,10,2026-10-31,5,5,1,0,1,0,2,5,0,0,0,1
+r02830,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_15,mid-market ERP,shortlist,11,2026-11-07,8,6,1,0,1,0,1,8,0,0,0,1
+r02831,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_16,mid-market ERP,evaluate,8,2026-10-17,5,5,2,0,1,0,2,5,0,0,0,1
+r02832,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_16,mid-market ERP,evaluate,9,2026-10-24,6,6,2,0,1,0,2,6,0,0,0,1
+r02833,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_16,mid-market ERP,evaluate,10,2026-10-31,6,6,0,0,0,0,0,6,0,0,0,1
+r02834,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_16,mid-market ERP,evaluate,11,2026-11-07,5,5,1,0,1,0,1,6,0,0,0,1
+r02835,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_17,cloud data warehouse,shortlist,8,2026-10-17,4,4,1,0,1,0,1,12,0,0,0,1
+r02836,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_17,cloud data warehouse,shortlist,9,2026-10-24,4,4,0,0,0,0,0,16,0,0,0,1
+r02837,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_17,cloud data warehouse,shortlist,10,2026-10-31,4,4,1,0,1,0,1,20,0,0,0,1
+r02838,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_17,cloud data warehouse,shortlist,11,2026-11-07,5,5,1,0,1,0,1,18,0,0,0,1
+r02839,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_18,cloud data warehouse,evaluate,8,2026-10-17,4,4,0,0,0,0,0,13,0,0,0,1
+r02840,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_18,cloud data warehouse,evaluate,9,2026-10-24,4,4,0,0,0,0,0,10,0,0,0,1
+r02841,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_18,cloud data warehouse,evaluate,10,2026-10-31,4,4,1,0,1,0,2,25,0,0,0,1
+r02842,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_18,cloud data warehouse,evaluate,11,2026-11-07,5,5,1,0,1,0,1,25,0,0,0,1
+r02843,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_19,product analytics,shortlist,8,2026-10-17,5,5,2,0,1,0,2,5,0,0,0,1
+r02844,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_19,product analytics,shortlist,9,2026-10-24,5,5,1,0,1,0,1,5,0,0,0,1
+r02845,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_19,product analytics,shortlist,10,2026-10-31,5,5,1,0,1,0,1,5,0,0,0,1
+r02846,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_19,product analytics,shortlist,11,2026-11-07,5,5,1,0,1,0,1,5,0,0,0,1
+r02847,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_20,product analytics,evaluate,8,2026-10-17,4,4,0,0,0,0,0,4,0,0,0,1
+r02848,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_20,product analytics,evaluate,9,2026-10-24,5,5,1,0,1,0,1,5,0,0,0,1
+r02849,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_20,product analytics,evaluate,10,2026-10-31,5,5,2,0,1,0,2,5,0,0,0,1
+r02850,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_20,product analytics,evaluate,11,2026-11-07,6,5,2,0,1,0,2,6,0,0,0,1
+r02851,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_21,observability/APM,shortlist,8,2026-10-17,7,5,1,0,1,0,1,8,0,0,0,1
+r02852,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_21,observability/APM,shortlist,9,2026-10-24,6,5,2,0,1,0,2,8,0,0,0,1
+r02853,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_21,observability/APM,shortlist,10,2026-10-31,6,5,1,0,1,0,1,9,0,0,0,1
+r02854,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_21,observability/APM,shortlist,11,2026-11-07,6,5,1,0,1,0,1,12,0,0,0,1
+r02855,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_22,observability/APM,evaluate,8,2026-10-17,7,6,1,0,1,0,1,8,0,0,0,1
+r02856,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_22,observability/APM,evaluate,9,2026-10-24,8,6,1,0,1,0,1,9,0,0,0,1
+r02857,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_22,observability/APM,evaluate,10,2026-10-31,7,6,2,0,1,0,2,8,0,0,0,1
+r02858,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_22,observability/APM,evaluate,11,2026-11-07,8,6,2,0,1,0,2,9,0,0,0,1
+r02859,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_23,SOC 2 compliance automation,shortlist,8,2026-10-17,3,3,0,0,0,0,0,17,0,0,0,1
+r02860,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_23,SOC 2 compliance automation,shortlist,9,2026-10-24,5,5,0,0,0,0,0,14,0,0,0,1
+r02861,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_23,SOC 2 compliance automation,shortlist,10,2026-10-31,4,4,1,0,1,0,1,8,0,0,0,1
+r02862,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_23,SOC 2 compliance automation,shortlist,11,2026-11-07,5,5,1,0,1,0,1,12,0,0,0,1
+r02863,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_24,SOC 2 compliance automation,evaluate,8,2026-10-17,4,4,1,0,1,0,1,4,0,0,0,1
+r02864,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_24,SOC 2 compliance automation,evaluate,9,2026-10-24,5,5,0,0,0,0,0,6,0,0,0,1
+r02865,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_24,SOC 2 compliance automation,evaluate,10,2026-10-31,6,6,1,0,1,0,1,6,0,0,0,1
+r02866,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_24,SOC 2 compliance automation,evaluate,11,2026-11-07,5,5,0,0,0,0,3,5,0,0,0,1
+r02867,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_25,endpoint security (EDR),shortlist,8,2026-10-17,6,4,1,0,1,0,1,10,0,0,0,1
+r02868,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_25,endpoint security (EDR),shortlist,9,2026-10-24,5,4,0,0,0,0,0,9,0,0,0,1
+r02869,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_25,endpoint security (EDR),shortlist,10,2026-10-31,5,4,2,0,1,0,2,16,0,0,0,1
+r02870,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_25,endpoint security (EDR),shortlist,11,2026-11-07,6,5,1,0,1,0,1,9,0,0,0,1
+r02871,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_26,endpoint security (EDR),evaluate,8,2026-10-17,7,7,0,0,0,0,0,7,0,0,0,1
+r02872,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_26,endpoint security (EDR),evaluate,9,2026-10-24,6,6,0,0,0,0,0,7,0,0,0,1
+r02873,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_26,endpoint security (EDR),evaluate,10,2026-10-31,7,5,0,0,0,0,0,12,0,0,0,1
+r02874,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_26,endpoint security (EDR),evaluate,11,2026-11-07,7,6,2,0,1,0,2,7,0,0,0,1
+r02875,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_27,identity and SSO,shortlist,8,2026-10-17,6,5,0,0,0,0,3,10,0,0,0,1
+r02876,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_27,identity and SSO,shortlist,9,2026-10-24,6,5,0,0,0,0,0,11,0,0,0,1
+r02877,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_27,identity and SSO,shortlist,10,2026-10-31,7,5,1,0,1,0,1,15,0,0,0,1
+r02878,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_27,identity and SSO,shortlist,11,2026-11-07,5,5,1,0,1,0,1,5,0,0,0,1
+r02879,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_28,identity and SSO,evaluate,8,2026-10-17,5,4,0,0,0,0,0,6,0,0,0,1
+r02880,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_28,identity and SSO,evaluate,9,2026-10-24,7,5,0,0,0,0,0,8,0,0,0,1
+r02881,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_28,identity and SSO,evaluate,10,2026-10-31,7,5,0,0,0,0,0,14,0,0,0,1
+r02882,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_28,identity and SSO,evaluate,11,2026-11-07,6,5,0,0,0,0,0,15,0,0,0,1
+r02883,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_29,project management,shortlist,8,2026-10-17,4,3,1,0,1,0,1,11,0,0,0,1
+r02884,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_29,project management,shortlist,9,2026-10-24,6,5,0,0,0,0,0,14,0,0,0,1
+r02885,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_29,project management,shortlist,10,2026-10-31,7,5,1,0,1,0,1,19,0,0,0,1
+r02886,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_29,project management,shortlist,11,2026-11-07,5,4,1,0,1,0,1,15,0,0,0,1
+r02887,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_30,project management,evaluate,8,2026-10-17,5,5,0,0,0,0,0,6,0,0,0,1
+r02888,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_30,project management,evaluate,9,2026-10-24,6,6,2,0,1,0,2,6,0,0,0,1
+r02889,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_30,project management,evaluate,10,2026-10-31,6,5,0,0,0,0,0,8,0,0,0,1
+r02890,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_30,project management,evaluate,11,2026-11-07,5,5,1,0,1,0,1,5,0,0,0,1
+r02891,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_31,e-signature,shortlist,8,2026-10-17,3,3,2,0,1,0,2,17,0,0,0,1
+r02892,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_31,e-signature,shortlist,9,2026-10-24,5,4,2,0,1,0,2,16,0,0,0,1
+r02893,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_31,e-signature,shortlist,10,2026-10-31,3,3,1,0,1,0,2,16,0,0,0,1
+r02894,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_31,e-signature,shortlist,11,2026-11-07,4,4,2,0,1,0,2,21,0,0,0,1
+r02895,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_32,e-signature,evaluate,8,2026-10-17,4,4,0,0,0,0,0,4,0,0,0,1
+r02896,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_32,e-signature,evaluate,9,2026-10-24,5,5,0,0,0,0,0,5,0,0,0,1
+r02897,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_32,e-signature,evaluate,10,2026-10-31,5,5,1,0,1,0,1,5,0,0,0,1
+r02898,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_32,e-signature,evaluate,11,2026-11-07,5,5,2,0,1,0,2,5,0,0,0,1
+r02899,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_33,contract lifecycle management,shortlist,8,2026-10-17,6,6,0,0,0,0,0,10,0,0,0,1
+r02900,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_33,contract lifecycle management,shortlist,9,2026-10-24,7,6,0,0,0,0,3,12,0,0,0,1
+r02901,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_33,contract lifecycle management,shortlist,10,2026-10-31,6,5,0,0,0,0,0,18,0,0,0,1
+r02902,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_33,contract lifecycle management,shortlist,11,2026-11-07,7,6,1,0,1,0,1,19,0,0,0,1
+r02903,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_34,contract lifecycle management,evaluate,8,2026-10-17,11,10,0,0,0,0,0,11,0,0,0,1
+r02904,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_34,contract lifecycle management,evaluate,9,2026-10-24,6,5,2,0,1,0,2,6,0,0,0,1
+r02905,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_34,contract lifecycle management,evaluate,10,2026-10-31,7,6,1,0,1,0,1,7,0,0,0,1
+r02906,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_34,contract lifecycle management,evaluate,11,2026-11-07,7,6,1,0,1,0,1,7,0,0,0,1
+r02907,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_35,sales engagement,shortlist,8,2026-10-17,5,5,0,0,0,0,0,6,0,0,0,1
+r02908,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_35,sales engagement,shortlist,9,2026-10-24,4,4,1,0,1,0,1,6,0,0,0,1
+r02909,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_35,sales engagement,shortlist,10,2026-10-31,5,3,0,0,0,0,1,9,0,0,0,1
+r02910,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_35,sales engagement,shortlist,11,2026-11-07,7,5,1,0,1,0,1,10,0,0,0,1
+r02911,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_36,sales engagement,evaluate,8,2026-10-17,6,4,0,0,0,0,0,6,0,0,0,1
+r02912,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_36,sales engagement,evaluate,9,2026-10-24,6,4,0,1,0,1,0,6,0,0,0,1
+r02913,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_36,sales engagement,evaluate,10,2026-10-31,6,5,0,0,0,0,0,6,0,0,0,1
+r02914,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_36,sales engagement,evaluate,11,2026-11-07,5,5,0,0,0,0,0,6,0,0,0,1
+r02915,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_37,CPQ,shortlist,8,2026-10-17,9,5,0,0,0,0,4,13,0,0,0,1
+r02916,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_37,CPQ,shortlist,9,2026-10-24,10,8,1,0,1,0,1,10,0,0,0,1
+r02917,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_37,CPQ,shortlist,10,2026-10-31,9,8,1,0,1,0,1,10,0,0,0,1
+r02918,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_37,CPQ,shortlist,11,2026-11-07,9,7,1,0,1,0,1,12,0,0,0,1
+r02919,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_38,CPQ,evaluate,8,2026-10-17,6,6,1,0,1,0,1,10,0,0,0,1
+r02920,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_38,CPQ,evaluate,9,2026-10-24,6,6,1,0,1,0,1,8,0,0,0,1
+r02921,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_38,CPQ,evaluate,10,2026-10-31,7,7,1,0,1,0,1,7,0,0,0,1
+r02922,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_38,CPQ,evaluate,11,2026-11-07,6,6,1,0,1,0,1,7,0,0,0,1
+r02923,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_39,applicant tracking system,shortlist,8,2026-10-17,5,5,1,0,1,0,1,5,0,0,0,1
+r02924,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_39,applicant tracking system,shortlist,9,2026-10-24,5,5,1,0,1,0,1,5,0,0,0,1
+r02925,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_39,applicant tracking system,shortlist,10,2026-10-31,5,4,1,1,1,1,1,5,0,0,0,1
+r02926,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_39,applicant tracking system,shortlist,11,2026-11-07,7,5,1,0,1,0,1,7,0,0,0,1
+r02927,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_40,applicant tracking system,evaluate,8,2026-10-17,5,5,0,0,0,0,3,5,0,0,0,1
+r02928,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_40,applicant tracking system,evaluate,9,2026-10-24,5,5,1,0,1,0,1,5,0,0,0,1
+r02929,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_40,applicant tracking system,evaluate,10,2026-10-31,7,7,1,0,1,0,1,7,0,0,0,1
+r02930,chatgpt_b2b,chatgpt,dataforseo,chatgpt,1,gpt-6,010-shortlist-stability,b2b_40,applicant tracking system,evaluate,11,2026-11-07,6,6,1,0,1,0,1,6,0,0,0,1
+r02931,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_01,CRM,shortlist,8,2026-10-17,3,3,0,0,0,0,0,8,0,0,0,1
+r02932,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_01,CRM,shortlist,9,2026-10-24,4,3,0,1,0,1,0,12,0,0,0,1
+r02933,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_01,CRM,shortlist,10,2026-10-31,3,3,0,0,0,0,0,9,0,0,0,1
+r02934,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_01,CRM,shortlist,11,2026-11-07,1,1,1,0,1,0,1,1,0,0,0,1
+r02935,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_02,CRM,evaluate,8,2026-10-18,4,4,1,0,1,0,1,4,0,0,0,1
+r02936,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_02,CRM,evaluate,9,2026-10-24,4,4,0,0,0,0,0,9,0,0,0,1
+r02937,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_02,CRM,evaluate,10,2026-10-31,4,4,1,0,1,0,1,5,0,0,0,1
+r02938,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_02,CRM,evaluate,11,2026-11-07,4,4,0,0,0,0,0,4,0,0,0,1
+r02939,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_03,marketing automation,shortlist,8,2026-10-17,6,3,1,3,1,1,1,12,0,0,0,1
+r02940,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_03,marketing automation,shortlist,9,2026-10-24,4,4,1,0,1,0,1,5,0,0,0,1
+r02941,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_03,marketing automation,shortlist,10,2026-10-31,5,4,1,1,1,1,1,6,0,0,0,1
+r02942,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_03,marketing automation,shortlist,11,2026-11-07,7,5,0,1,0,1,0,14,0,0,0,1
+r02943,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_04,marketing automation,evaluate,8,2026-10-17,5,5,0,0,0,0,0,5,0,0,0,1
+r02944,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_04,marketing automation,evaluate,9,2026-10-24,7,6,1,0,1,0,1,7,0,0,0,1
+r02945,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_04,marketing automation,evaluate,10,2026-10-31,4,4,0,0,0,0,0,4,0,0,0,1
+r02946,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_04,marketing automation,evaluate,11,2026-11-07,6,6,0,0,0,0,0,8,0,0,0,1
+r02947,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_05,customer support helpdesk,shortlist,8,2026-10-17,6,5,0,0,0,0,0,11,0,0,0,1
+r02948,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_05,customer support helpdesk,shortlist,9,2026-10-24,6,4,0,1,0,1,0,12,0,0,0,1
+r02949,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_05,customer support helpdesk,shortlist,10,2026-10-31,10,8,0,0,0,0,0,15,0,0,0,1
+r02950,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_05,customer support helpdesk,shortlist,11,2026-11-07,5,5,0,0,0,0,0,15,0,0,0,1
+r02951,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_06,customer support helpdesk,evaluate,8,2026-10-18,5,5,1,0,1,0,1,5,0,0,0,1
+r02952,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_06,customer support helpdesk,evaluate,9,2026-10-24,6,4,0,0,0,0,0,8,0,0,0,1
+r02953,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_06,customer support helpdesk,evaluate,10,2026-10-31,4,4,0,0,0,0,0,8,0,0,0,1
+r02954,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_06,customer support helpdesk,evaluate,11,2026-11-07,5,5,0,0,0,0,0,8,0,0,0,1
+r02955,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_07,HRIS,shortlist,8,2026-10-17,5,3,0,0,0,0,0,6,0,0,0,1
+r02956,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_07,HRIS,shortlist,9,2026-10-24,4,4,0,0,0,0,0,4,0,0,0,1
+r02957,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_07,HRIS,shortlist,10,2026-10-31,8,5,0,0,0,0,0,11,0,0,0,1
+r02958,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_07,HRIS,shortlist,11,2026-11-07,4,4,0,0,0,0,0,4,0,0,0,1
+r02959,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_08,HRIS,evaluate,8,2026-10-17,6,6,0,0,0,0,0,10,0,0,0,1
+r02960,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_08,HRIS,evaluate,9,2026-10-24,5,5,1,0,1,0,1,5,0,0,0,1
+r02961,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_08,HRIS,evaluate,10,2026-10-31,4,4,1,0,1,0,1,8,0,0,0,1
+r02962,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_08,HRIS,evaluate,11,2026-11-07,0,0,0,0,0,0,0,0,0,0,0,1
+r02963,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_09,payroll,shortlist,8,2026-10-17,4,4,0,0,0,0,0,9,0,0,0,1
+r02964,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_09,payroll,shortlist,9,2026-10-24,4,4,0,0,0,0,0,9,0,0,0,1
+r02965,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_09,payroll,shortlist,10,2026-10-31,7,4,0,2,0,1,0,15,0,0,0,1
+r02966,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_09,payroll,shortlist,11,2026-11-07,8,6,0,2,0,1,0,13,0,0,0,1
+r02967,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_10,payroll,evaluate,8,2026-10-18,4,4,0,0,0,0,0,8,0,0,0,1
+r02968,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_10,payroll,evaluate,9,2026-10-24,5,4,0,0,0,0,0,12,0,0,0,1
+r02969,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_10,payroll,evaluate,10,2026-10-31,4,4,0,0,0,0,0,6,0,0,0,1
+r02970,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_10,payroll,evaluate,11,2026-11-07,4,4,1,0,1,0,1,8,0,0,0,1
+r02971,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_11,expense management,shortlist,8,2026-10-18,5,5,0,0,0,0,0,12,0,0,0,1
+r02972,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_11,expense management,shortlist,9,2026-10-24,4,4,0,0,0,0,0,16,0,0,0,1
+r02973,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_11,expense management,shortlist,10,2026-10-31,7,6,2,0,1,0,2,15,0,0,0,1
+r02974,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_11,expense management,shortlist,11,2026-11-07,6,4,0,0,0,0,0,12,0,0,0,1
+r02975,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_12,expense management,evaluate,8,2026-10-17,6,6,1,0,1,0,1,8,0,0,0,1
+r02976,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_12,expense management,evaluate,9,2026-10-24,3,3,0,0,0,0,0,3,0,0,0,1
+r02977,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_12,expense management,evaluate,10,2026-10-31,5,5,1,0,1,0,1,5,0,0,0,1
+r02978,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_12,expense management,evaluate,11,2026-11-07,5,5,1,0,1,0,1,5,0,0,0,1
+r02979,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_13,accounts payable automation,shortlist,8,2026-10-17,2,2,0,0,0,0,0,11,0,0,0,1
+r02980,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_13,accounts payable automation,shortlist,9,2026-10-24,4,4,0,0,0,0,0,11,0,0,0,1
+r02981,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_13,accounts payable automation,shortlist,10,2026-10-31,3,3,0,0,0,0,0,13,0,0,0,1
+r02982,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_13,accounts payable automation,shortlist,11,2026-11-07,2,2,0,0,0,0,0,3,0,0,0,1
+r02983,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_14,accounts payable automation,evaluate,8,2026-10-17,0,0,0,0,0,0,0,0,0,0,0,1
+r02984,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_14,accounts payable automation,evaluate,9,2026-10-24,6,6,0,0,0,0,0,13,0,0,0,1
+r02985,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_14,accounts payable automation,evaluate,10,2026-10-31,5,5,0,0,0,0,0,10,0,0,0,1
+r02986,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_14,accounts payable automation,evaluate,11,2026-11-07,3,3,0,0,0,0,0,9,0,0,0,1
+r02987,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_15,mid-market ERP,shortlist,8,2026-10-17,4,4,1,0,1,0,1,6,0,0,0,1
+r02988,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_15,mid-market ERP,shortlist,9,2026-10-24,4,4,0,0,0,0,0,4,0,0,0,1
+r02989,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_15,mid-market ERP,shortlist,10,2026-10-31,4,4,0,0,0,0,0,11,0,0,0,1
+r02990,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_15,mid-market ERP,shortlist,11,2026-11-07,4,4,0,0,0,0,0,4,0,0,0,1
+r02991,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_16,mid-market ERP,evaluate,8,2026-10-17,4,4,0,0,0,0,0,4,0,0,0,1
+r02992,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_16,mid-market ERP,evaluate,9,2026-10-24,5,4,0,0,0,0,0,5,0,0,0,1
+r02993,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_16,mid-market ERP,evaluate,10,2026-10-31,5,5,0,0,0,0,0,10,0,0,0,1
+r02994,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_16,mid-market ERP,evaluate,11,2026-11-07,4,4,0,0,0,0,0,5,0,0,0,1
+r02995,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_17,cloud data warehouse,shortlist,8,2026-10-17,4,3,0,0,0,0,0,15,0,0,0,1
+r02996,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_17,cloud data warehouse,shortlist,9,2026-10-24,5,4,0,1,0,1,0,15,0,0,0,1
+r02997,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_17,cloud data warehouse,shortlist,10,2026-10-31,3,3,1,0,1,0,2,11,0,0,0,1
+r02998,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_17,cloud data warehouse,shortlist,11,2026-11-07,4,4,2,0,1,0,2,11,0,0,0,1
+r02999,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_18,cloud data warehouse,evaluate,8,2026-10-17,3,3,2,0,1,0,2,19,0,0,0,1
+r03000,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_18,cloud data warehouse,evaluate,9,2026-10-24,3,3,0,0,0,0,0,12,0,0,0,1
+r03001,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_18,cloud data warehouse,evaluate,10,2026-10-31,3,3,0,0,0,0,0,19,0,0,0,1
+r03002,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_18,cloud data warehouse,evaluate,11,2026-11-07,3,3,2,0,1,0,2,20,0,0,0,1
+r03003,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_19,product analytics,shortlist,8,2026-10-17,3,3,2,0,1,0,2,3,0,0,0,1
+r03004,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_19,product analytics,shortlist,9,2026-10-24,4,3,0,0,0,0,0,4,0,0,0,1
+r03005,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_19,product analytics,shortlist,10,2026-10-31,4,4,1,0,1,0,1,4,0,0,0,1
+r03006,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_19,product analytics,shortlist,11,2026-11-07,3,3,1,0,1,0,1,3,0,0,0,1
+r03007,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_20,product analytics,evaluate,8,2026-10-17,7,7,0,0,0,0,0,7,0,0,0,1
+r03008,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_20,product analytics,evaluate,9,2026-10-24,7,7,0,0,0,0,0,8,0,0,0,1
+r03009,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_20,product analytics,evaluate,10,2026-10-31,5,5,0,0,0,0,0,5,0,0,0,1
+r03010,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_20,product analytics,evaluate,11,2026-11-07,4,4,0,0,0,0,0,7,0,0,0,1
+r03011,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_21,observability/APM,shortlist,8,2026-10-18,3,3,0,0,0,0,0,5,0,0,0,1
+r03012,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_21,observability/APM,shortlist,9,2026-10-24,5,3,1,2,1,1,2,9,0,0,0,1
+r03013,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_21,observability/APM,shortlist,10,2026-10-31,4,3,1,0,1,0,1,4,0,0,0,1
+r03014,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_21,observability/APM,shortlist,11,2026-11-07,6,3,0,3,0,1,0,6,0,0,0,1
+r03015,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_22,observability/APM,evaluate,8,2026-10-17,0,0,0,0,0,0,0,0,0,0,0,1
+r03016,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_22,observability/APM,evaluate,9,2026-10-24,5,4,0,0,0,0,0,5,0,0,0,1
+r03017,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_22,observability/APM,evaluate,10,2026-10-31,5,4,1,0,1,0,1,5,0,0,0,1
+r03018,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_22,observability/APM,evaluate,11,2026-11-07,6,5,0,0,0,0,0,8,0,0,0,1
+r03019,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_23,SOC 2 compliance automation,shortlist,8,2026-10-17,4,4,0,0,0,0,0,9,0,0,0,1
+r03020,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_23,SOC 2 compliance automation,shortlist,9,2026-10-24,3,3,1,0,1,0,1,12,0,0,0,1
+r03021,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_23,SOC 2 compliance automation,shortlist,10,2026-10-31,4,4,0,0,0,0,0,14,0,0,0,1
+r03022,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_23,SOC 2 compliance automation,shortlist,11,2026-11-07,4,4,0,0,0,0,0,13,0,0,0,1
+r03023,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_24,SOC 2 compliance automation,evaluate,8,2026-10-17,5,5,0,0,0,0,0,5,0,0,0,1
+r03024,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_24,SOC 2 compliance automation,evaluate,9,2026-10-24,4,4,0,0,0,0,0,14,0,0,0,1
+r03025,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_24,SOC 2 compliance automation,evaluate,10,2026-10-31,6,6,0,0,0,0,0,12,0,0,0,1
+r03026,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_24,SOC 2 compliance automation,evaluate,11,2026-11-07,4,4,0,0,0,0,0,11,0,0,0,1
+r03027,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_25,endpoint security (EDR),shortlist,8,2026-10-18,6,4,0,0,0,0,0,9,0,0,0,1
+r03028,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_25,endpoint security (EDR),shortlist,9,2026-10-24,6,4,0,0,0,0,0,8,0,0,0,1
+r03029,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_25,endpoint security (EDR),shortlist,10,2026-10-31,1,1,0,0,0,0,0,1,0,0,0,1
+r03030,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_25,endpoint security (EDR),shortlist,11,2026-11-07,6,4,0,0,0,0,0,8,0,0,0,1
+r03031,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_26,endpoint security (EDR),evaluate,8,2026-10-17,6,6,0,0,0,0,0,6,0,0,0,1
+r03032,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_26,endpoint security (EDR),evaluate,9,2026-10-24,5,5,0,0,0,0,0,5,0,0,0,1
+r03033,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_26,endpoint security (EDR),evaluate,10,2026-10-31,5,5,0,0,0,0,0,5,0,0,0,1
+r03034,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_26,endpoint security (EDR),evaluate,11,2026-11-07,5,5,0,0,0,0,0,5,0,0,0,1
+r03035,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_27,identity and SSO,shortlist,8,2026-10-17,4,4,0,0,0,0,0,10,0,0,0,1
+r03036,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_27,identity and SSO,shortlist,9,2026-10-24,6,3,0,0,0,0,0,6,0,0,0,1
+r03037,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_27,identity and SSO,shortlist,10,2026-10-31,3,3,0,0,0,0,0,5,0,0,0,1
+r03038,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_27,identity and SSO,shortlist,11,2026-11-07,4,4,1,0,1,0,1,12,0,0,0,1
+r03039,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_28,identity and SSO,evaluate,8,2026-10-17,5,4,0,0,0,0,0,9,0,0,0,1
+r03040,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_28,identity and SSO,evaluate,9,2026-10-24,6,4,0,0,0,0,0,11,0,0,0,1
+r03041,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_28,identity and SSO,evaluate,10,2026-10-31,6,4,0,0,0,0,0,6,0,0,0,1
+r03042,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_28,identity and SSO,evaluate,11,2026-11-07,6,5,0,0,0,0,0,10,0,0,0,1
+r03043,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_29,project management,shortlist,8,2026-10-17,4,4,1,0,1,0,1,17,0,0,0,1
+r03044,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_29,project management,shortlist,9,2026-10-24,4,3,0,0,0,0,0,15,0,0,0,1
+r03045,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_29,project management,shortlist,10,2026-10-31,3,3,2,0,1,0,2,16,0,0,0,1
+r03046,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_29,project management,shortlist,11,2026-11-07,3,3,0,0,0,0,0,15,0,0,0,1
+r03047,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_30,project management,evaluate,8,2026-10-18,7,7,0,0,0,0,3,8,0,0,0,1
+r03048,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_30,project management,evaluate,9,2026-10-24,6,6,0,0,0,0,0,6,0,0,0,1
+r03049,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_30,project management,evaluate,10,2026-10-31,4,4,0,0,0,0,0,5,0,0,0,1
+r03050,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_30,project management,evaluate,11,2026-11-07,6,5,0,0,0,0,0,6,0,0,0,1
+r03051,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_31,e-signature,shortlist,8,2026-10-17,4,4,0,0,0,0,0,11,0,0,0,1
+r03052,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_31,e-signature,shortlist,9,2026-10-24,4,4,0,0,0,0,0,9,0,0,0,1
+r03053,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_31,e-signature,shortlist,10,2026-10-31,4,4,1,0,1,0,1,5,0,0,0,1
+r03054,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_31,e-signature,shortlist,11,2026-11-07,4,4,0,0,0,0,0,11,0,0,0,1
+r03055,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_32,e-signature,evaluate,8,2026-10-17,6,6,0,0,0,0,0,7,0,0,0,1
+r03056,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_32,e-signature,evaluate,9,2026-10-24,5,5,1,0,1,0,1,5,0,0,0,1
+r03057,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_32,e-signature,evaluate,10,2026-10-31,5,5,0,0,0,0,0,5,0,0,0,1
+r03058,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_32,e-signature,evaluate,11,2026-11-07,4,4,1,0,1,0,1,5,0,0,0,1
+r03059,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_33,contract lifecycle management,shortlist,8,2026-10-17,0,0,0,0,0,0,0,0,0,0,0,1
+r03060,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_33,contract lifecycle management,shortlist,9,2026-10-24,5,5,0,0,0,0,0,14,0,0,0,1
+r03061,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_33,contract lifecycle management,shortlist,10,2026-10-31,5,5,0,0,0,0,0,13,0,0,0,1
+r03062,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_33,contract lifecycle management,shortlist,11,2026-11-07,4,4,1,0,1,0,1,11,0,0,0,1
+r03063,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_34,contract lifecycle management,evaluate,8,2026-10-17,7,6,1,0,1,0,1,8,0,0,0,1
+r03064,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_34,contract lifecycle management,evaluate,9,2026-10-24,5,5,1,0,1,0,1,8,0,0,0,1
+r03065,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_34,contract lifecycle management,evaluate,10,2026-10-31,5,5,2,0,1,0,2,5,0,0,0,1
+r03066,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_34,contract lifecycle management,evaluate,11,2026-11-07,5,5,0,0,0,0,0,5,0,0,0,1
+r03067,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_35,sales engagement,shortlist,8,2026-10-17,5,4,1,0,1,0,1,7,0,0,0,1
+r03068,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_35,sales engagement,shortlist,9,2026-10-24,6,6,0,0,0,0,0,7,0,0,0,1
+r03069,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_35,sales engagement,shortlist,10,2026-10-31,7,7,0,0,0,0,0,9,0,0,0,1
+r03070,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_35,sales engagement,shortlist,11,2026-11-07,4,4,0,0,0,0,0,12,0,0,0,1
+r03071,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_36,sales engagement,evaluate,8,2026-10-17,8,8,0,0,0,0,0,8,0,0,0,1
+r03072,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_36,sales engagement,evaluate,9,2026-10-24,6,6,1,0,1,0,1,7,0,0,0,1
+r03073,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_36,sales engagement,evaluate,10,2026-10-31,8,8,0,0,0,0,0,9,0,0,0,1
+r03074,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_36,sales engagement,evaluate,11,2026-11-07,8,8,0,0,0,0,0,8,0,0,0,1
+r03075,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_37,CPQ,shortlist,8,2026-10-17,9,4,0,0,0,0,0,16,0,0,0,1
+r03076,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_37,CPQ,shortlist,9,2026-10-24,9,4,1,0,1,0,1,9,0,0,0,1
+r03077,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_37,CPQ,shortlist,10,2026-10-31,8,3,0,1,0,1,0,10,0,0,0,1
+r03078,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_37,CPQ,shortlist,11,2026-11-07,9,4,1,1,1,1,1,11,0,0,0,1
+r03079,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_38,CPQ,evaluate,8,2026-10-17,6,5,0,0,0,0,0,8,0,0,0,1
+r03080,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_38,CPQ,evaluate,9,2026-10-24,7,6,0,0,0,0,0,10,0,0,0,1
+r03081,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_38,CPQ,evaluate,10,2026-10-31,6,5,1,0,1,0,1,7,0,0,0,1
+r03082,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_38,CPQ,evaluate,11,2026-11-07,5,4,0,0,0,0,0,5,0,0,0,1
+r03083,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_39,applicant tracking system,shortlist,8,2026-10-17,5,3,0,2,0,1,0,5,0,0,0,1
+r03084,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_39,applicant tracking system,shortlist,9,2026-10-24,6,4,1,2,1,1,1,7,0,0,0,1
+r03085,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_39,applicant tracking system,shortlist,10,2026-10-31,3,3,1,0,1,0,1,4,0,0,0,1
+r03086,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_39,applicant tracking system,shortlist,11,2026-11-07,6,4,1,2,1,1,1,6,0,0,0,1
+r03087,gemini_b2b,gemini,dataforseo,gemini,1,3.6 Flash,010-shortlist-stability,b2b_40,applicant tracking system,evaluate,8,2026-10-17,4,4,0,0,0,0,0,4,0,0,0,1
+r03088,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_40,applicant tracking system,evaluate,9,2026-10-24,10,7,0,0,0,0,0,10,0,0,0,1
+r03089,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_40,applicant tracking system,evaluate,10,2026-10-31,6,6,1,0,1,0,1,6,0,0,0,1
+r03090,gemini_b2b,gemini,dataforseo,gemini,1,3.5 Flash-Lite,010-shortlist-stability,b2b_40,applicant tracking system,evaluate,11,2026-11-07,0,0,0,0,0,0,0,0,0,0,0,1
+r03091,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_01,CRM,shortlist,8,2026-10-16,4,4,1,0,1,0,1,9,0,0,0,1
+r03092,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_01,CRM,shortlist,9,2026-10-23,5,5,1,0,1,0,1,12,0,0,0,1
+r03093,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_01,CRM,shortlist,10,2026-10-30,6,6,0,0,0,0,0,16,0,0,0,1
+r03094,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_01,CRM,shortlist,11,2026-11-06,4,4,0,0,0,0,0,11,0,0,0,1
+r03095,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_02,CRM,evaluate,8,2026-10-16,11,8,0,1,0,1,0,11,0,0,0,1
+r03096,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_02,CRM,evaluate,9,2026-10-23,9,6,0,1,0,1,0,12,0,0,0,1
+r03097,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_02,CRM,evaluate,10,2026-10-30,10,9,0,0,0,0,0,11,0,0,0,1
+r03098,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_02,CRM,evaluate,11,2026-11-06,9,9,0,0,0,0,0,10,0,0,0,1
+r03099,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_03,marketing automation,shortlist,8,2026-10-16,9,8,1,0,1,0,1,13,0,0,0,1
+r03100,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_03,marketing automation,shortlist,9,2026-10-23,9,7,1,0,1,0,1,11,0,0,0,1
+r03101,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_03,marketing automation,shortlist,10,2026-10-30,7,6,2,0,1,0,2,10,0,0,0,1
+r03102,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_03,marketing automation,shortlist,11,2026-11-06,6,5,1,0,1,0,1,10,0,0,0,1
+r03103,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_04,marketing automation,evaluate,8,2026-10-16,9,9,0,0,0,0,0,9,0,0,0,1
+r03104,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_04,marketing automation,evaluate,9,2026-10-23,8,7,0,0,0,0,0,8,0,0,0,1
+r03105,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_04,marketing automation,evaluate,10,2026-10-30,12,10,0,0,0,0,3,12,0,0,0,1
+r03106,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_04,marketing automation,evaluate,11,2026-11-06,6,5,1,0,1,0,1,6,0,0,0,1
+r03107,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_05,customer support helpdesk,shortlist,8,2026-10-16,14,14,2,0,1,0,2,22,0,0,0,1
+r03108,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_05,customer support helpdesk,shortlist,9,2026-10-23,15,12,0,0,0,0,0,18,0,0,0,1
+r03109,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_05,customer support helpdesk,shortlist,10,2026-10-30,15,14,0,0,0,0,0,23,0,0,0,1
+r03110,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_05,customer support helpdesk,shortlist,11,2026-11-06,10,10,2,0,1,0,2,12,0,0,0,1
+r03111,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_06,customer support helpdesk,evaluate,8,2026-10-16,10,10,0,0,0,0,0,13,0,0,0,1
+r03112,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_06,customer support helpdesk,evaluate,9,2026-10-23,8,7,1,1,1,1,1,12,0,0,0,1
+r03113,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_06,customer support helpdesk,evaluate,10,2026-10-30,9,9,0,0,0,0,0,13,0,0,0,1
+r03114,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_06,customer support helpdesk,evaluate,11,2026-11-06,9,7,1,2,1,1,1,13,0,0,0,1
+r03115,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_07,HRIS,shortlist,8,2026-10-16,12,9,2,3,1,1,3,13,0,0,0,1
+r03116,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_07,HRIS,shortlist,9,2026-10-23,16,10,0,3,0,1,0,16,0,0,0,1
+r03117,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_07,HRIS,shortlist,10,2026-10-30,11,7,0,3,0,1,0,11,0,0,0,1
+r03118,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_07,HRIS,shortlist,11,2026-11-06,12,8,0,1,0,1,0,15,0,0,0,1
+r03119,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_08,HRIS,evaluate,8,2026-10-16,12,10,1,0,1,0,1,12,0,0,0,1
+r03120,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_08,HRIS,evaluate,9,2026-10-23,13,13,2,0,1,0,2,15,0,0,0,1
+r03121,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_08,HRIS,evaluate,10,2026-10-30,13,13,0,0,0,0,0,15,0,0,0,1
+r03122,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_08,HRIS,evaluate,11,2026-11-06,15,14,1,0,1,0,1,15,0,0,0,1
+r03123,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_09,payroll,shortlist,8,2026-10-16,13,10,0,2,0,1,0,17,0,0,0,1
+r03124,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_09,payroll,shortlist,9,2026-10-23,11,9,0,2,0,1,0,17,0,0,0,1
+r03125,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_09,payroll,shortlist,10,2026-10-30,13,7,0,4,0,1,0,20,0,0,0,1
+r03126,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_09,payroll,shortlist,11,2026-11-06,12,12,0,0,0,0,0,17,0,0,0,1
+r03127,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_10,payroll,evaluate,8,2026-10-16,7,7,0,0,0,0,0,7,0,0,0,1
+r03128,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_10,payroll,evaluate,9,2026-10-23,9,8,1,0,1,0,1,13,0,0,0,1
+r03129,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_10,payroll,evaluate,10,2026-10-30,7,6,1,0,1,0,1,7,0,0,0,1
+r03130,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_10,payroll,evaluate,11,2026-11-06,6,6,0,0,0,0,0,9,0,0,0,1
+r03131,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_11,expense management,shortlist,8,2026-10-16,8,4,0,1,0,1,0,16,0,0,0,1
+r03132,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_11,expense management,shortlist,9,2026-10-23,4,4,1,0,1,0,1,8,0,0,0,1
+r03133,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_11,expense management,shortlist,10,2026-10-30,6,6,0,0,0,0,0,18,0,0,0,1
+r03134,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_11,expense management,shortlist,11,2026-11-06,7,6,0,0,0,0,0,15,0,0,0,1
+r03135,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_12,expense management,evaluate,8,2026-10-16,6,5,2,1,1,1,2,6,0,0,0,1
+r03136,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_12,expense management,evaluate,9,2026-10-23,7,6,1,0,1,0,1,7,0,0,0,1
+r03137,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_12,expense management,evaluate,10,2026-10-30,9,7,0,0,0,0,0,13,0,0,0,1
+r03138,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_12,expense management,evaluate,11,2026-11-06,6,6,2,0,1,0,2,9,0,0,0,1
+r03139,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_13,accounts payable automation,shortlist,8,2026-10-16,9,6,0,3,0,1,0,21,0,0,0,1
+r03140,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_13,accounts payable automation,shortlist,9,2026-10-23,8,8,0,0,0,0,0,15,0,0,0,1
+r03141,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_13,accounts payable automation,shortlist,10,2026-10-30,9,8,0,0,0,0,0,17,0,0,0,1
+r03142,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_13,accounts payable automation,shortlist,11,2026-11-06,7,7,0,0,0,0,0,19,0,0,0,1
+r03143,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_14,accounts payable automation,evaluate,8,2026-10-16,14,14,1,0,1,0,1,18,0,0,0,1
+r03144,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_14,accounts payable automation,evaluate,9,2026-10-23,12,12,0,0,0,0,0,18,0,0,0,1
+r03145,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_14,accounts payable automation,evaluate,10,2026-10-30,18,18,1,0,1,0,1,21,0,0,0,1
+r03146,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_14,accounts payable automation,evaluate,11,2026-11-06,15,15,0,0,0,0,0,21,0,0,0,1
+r03147,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_15,mid-market ERP,shortlist,8,2026-10-16,7,7,2,0,1,0,2,10,0,0,0,1
+r03148,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_15,mid-market ERP,shortlist,9,2026-10-23,7,7,1,0,1,0,1,7,0,0,0,1
+r03149,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_15,mid-market ERP,shortlist,10,2026-10-30,6,6,0,0,0,0,0,6,0,0,0,1
+r03150,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_15,mid-market ERP,shortlist,11,2026-11-06,7,7,0,0,0,0,0,7,0,0,0,1
+r03151,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_16,mid-market ERP,evaluate,8,2026-10-16,10,10,0,0,0,0,0,10,0,0,0,1
+r03152,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_16,mid-market ERP,evaluate,9,2026-10-23,7,6,0,0,0,0,0,7,0,0,0,1
+r03153,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_16,mid-market ERP,evaluate,10,2026-10-30,9,9,0,0,0,0,0,9,0,0,0,1
+r03154,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_16,mid-market ERP,evaluate,11,2026-11-06,8,8,0,0,0,0,0,8,0,0,0,1
+r03155,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_17,cloud data warehouse,shortlist,8,2026-10-16,11,7,1,4,1,1,1,22,0,0,0,1
+r03156,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_17,cloud data warehouse,shortlist,9,2026-10-23,6,5,1,0,1,0,1,21,0,0,0,1
+r03157,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_17,cloud data warehouse,shortlist,10,2026-10-30,8,4,1,3,1,1,1,20,0,0,0,1
+r03158,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_17,cloud data warehouse,shortlist,11,2026-11-06,7,5,1,2,1,1,1,17,0,0,0,1
+r03159,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_18,cloud data warehouse,evaluate,8,2026-10-16,4,4,0,0,0,0,0,14,0,0,0,1
+r03160,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_18,cloud data warehouse,evaluate,9,2026-10-23,5,4,1,0,1,0,1,20,0,0,0,1
+r03161,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_18,cloud data warehouse,evaluate,10,2026-10-30,5,5,0,0,0,0,0,21,0,0,0,1
+r03162,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_18,cloud data warehouse,evaluate,11,2026-11-06,5,4,1,0,1,0,1,17,0,0,0,1
+r03163,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_19,product analytics,shortlist,8,2026-10-16,10,6,1,2,1,1,1,10,0,0,0,1
+r03164,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_19,product analytics,shortlist,9,2026-10-23,9,4,2,2,1,1,2,9,0,0,0,1
+r03165,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_19,product analytics,shortlist,10,2026-10-30,8,6,1,1,1,1,1,8,0,0,0,1
+r03166,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_19,product analytics,shortlist,11,2026-11-06,9,6,1,1,1,1,1,9,0,0,0,1
+r03167,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_20,product analytics,evaluate,8,2026-10-16,13,11,0,0,0,0,0,13,0,0,0,1
+r03168,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_20,product analytics,evaluate,9,2026-10-23,12,10,2,0,1,0,2,12,0,0,0,1
+r03169,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_20,product analytics,evaluate,10,2026-10-30,10,9,1,0,1,0,1,10,0,0,0,1
+r03170,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_20,product analytics,evaluate,11,2026-11-06,11,10,0,0,0,0,0,11,0,0,0,1
+r03171,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_21,observability/APM,shortlist,8,2026-10-16,9,7,2,2,1,1,2,10,0,0,0,1
+r03172,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_21,observability/APM,shortlist,9,2026-10-23,10,9,2,0,1,0,2,10,0,0,0,1
+r03173,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_21,observability/APM,shortlist,10,2026-10-30,8,8,1,0,1,0,1,11,0,0,0,1
+r03174,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_21,observability/APM,shortlist,11,2026-11-06,9,6,0,0,0,0,0,12,0,0,0,1
+r03175,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_22,observability/APM,evaluate,8,2026-10-16,8,7,1,0,1,0,1,9,0,0,0,1
+r03176,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_22,observability/APM,evaluate,9,2026-10-23,13,9,1,0,1,0,1,14,0,0,0,1
+r03177,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_22,observability/APM,evaluate,10,2026-10-30,10,8,0,0,0,0,0,12,0,0,0,1
+r03178,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_22,observability/APM,evaluate,11,2026-11-06,10,9,1,0,1,0,1,11,0,0,0,1
+r03179,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_23,SOC 2 compliance automation,shortlist,8,2026-10-16,6,6,1,0,1,0,1,23,0,0,0,1
+r03180,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_23,SOC 2 compliance automation,shortlist,9,2026-10-23,5,5,0,0,0,0,0,17,0,0,0,1
+r03181,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_23,SOC 2 compliance automation,shortlist,10,2026-10-30,6,6,0,0,0,0,0,17,0,0,0,1
+r03182,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_23,SOC 2 compliance automation,shortlist,11,2026-11-06,8,7,1,0,1,0,1,18,0,0,0,1
+r03183,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_24,SOC 2 compliance automation,evaluate,8,2026-10-16,6,6,0,0,0,0,0,6,0,0,0,1
+r03184,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_24,SOC 2 compliance automation,evaluate,9,2026-10-23,10,8,1,0,1,0,1,10,0,0,0,1
+r03185,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_24,SOC 2 compliance automation,evaluate,10,2026-10-30,8,7,0,0,0,0,0,8,0,0,0,1
+r03186,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_24,SOC 2 compliance automation,evaluate,11,2026-11-06,7,6,0,0,0,0,0,7,0,0,0,1
+r03187,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_25,endpoint security (EDR),shortlist,8,2026-10-16,13,9,1,0,1,0,1,20,0,0,0,1
+r03188,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_25,endpoint security (EDR),shortlist,9,2026-10-23,12,9,1,0,1,0,1,17,0,0,0,1
+r03189,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_25,endpoint security (EDR),shortlist,10,2026-10-30,11,10,0,0,0,0,0,20,0,0,0,1
+r03190,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_25,endpoint security (EDR),shortlist,11,2026-11-06,11,9,0,0,0,0,0,13,0,0,0,1
+r03191,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_26,endpoint security (EDR),evaluate,8,2026-10-16,12,8,0,0,0,0,0,13,0,0,0,1
+r03192,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_26,endpoint security (EDR),evaluate,9,2026-10-23,9,9,0,0,0,0,0,9,0,0,0,1
+r03193,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_26,endpoint security (EDR),evaluate,10,2026-10-30,11,11,0,0,0,0,0,12,0,0,0,1
+r03194,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_26,endpoint security (EDR),evaluate,11,2026-11-06,11,11,0,0,0,0,0,11,0,0,0,1
+r03195,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_27,identity and SSO,shortlist,8,2026-10-16,8,5,0,3,0,1,0,10,0,0,0,1
+r03196,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_27,identity and SSO,shortlist,9,2026-10-23,9,9,0,0,0,0,0,13,0,0,0,1
+r03197,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_27,identity and SSO,shortlist,10,2026-10-30,7,4,0,3,0,1,0,12,0,0,0,1
+r03198,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_27,identity and SSO,shortlist,11,2026-11-06,12,5,2,0,1,0,2,13,0,0,0,1
+r03199,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_28,identity and SSO,evaluate,8,2026-10-16,11,9,0,1,0,1,0,11,0,0,0,1
+r03200,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_28,identity and SSO,evaluate,9,2026-10-23,10,9,0,0,0,0,0,15,0,0,0,1
+r03201,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_28,identity and SSO,evaluate,10,2026-10-30,9,8,0,0,0,0,0,9,0,0,0,1
+r03202,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_28,identity and SSO,evaluate,11,2026-11-06,11,8,0,3,0,1,0,11,0,0,0,1
+r03203,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_29,project management,shortlist,8,2026-10-16,7,7,0,0,0,0,0,20,0,0,0,1
+r03204,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_29,project management,shortlist,9,2026-10-23,10,7,0,1,0,1,0,21,0,0,0,1
+r03205,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_29,project management,shortlist,10,2026-10-30,6,6,0,0,0,0,0,14,0,0,0,1
+r03206,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_29,project management,shortlist,11,2026-11-06,9,8,0,0,0,0,0,22,0,0,0,1
+r03207,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_30,project management,evaluate,8,2026-10-16,12,11,2,0,1,0,2,16,0,0,0,1
+r03208,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_30,project management,evaluate,9,2026-10-23,11,10,1,0,1,0,1,14,0,0,0,1
+r03209,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_30,project management,evaluate,10,2026-10-30,11,10,0,0,0,0,0,15,0,0,0,1
+r03210,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_30,project management,evaluate,11,2026-11-06,13,12,0,0,0,0,0,16,0,0,0,1
+r03211,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_31,e-signature,shortlist,8,2026-10-16,9,8,0,0,0,0,0,25,0,0,0,1
+r03212,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_31,e-signature,shortlist,9,2026-10-23,7,4,1,1,1,1,1,12,0,0,0,1
+r03213,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_31,e-signature,shortlist,10,2026-10-30,6,6,0,0,0,0,0,16,0,0,0,1
+r03214,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_31,e-signature,shortlist,11,2026-11-06,7,3,1,4,1,1,1,22,0,0,0,1
+r03215,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_32,e-signature,evaluate,8,2026-10-16,10,7,1,2,1,1,1,11,0,0,0,1
+r03216,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_32,e-signature,evaluate,9,2026-10-23,9,8,0,0,0,0,0,9,0,0,0,1
+r03217,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_32,e-signature,evaluate,10,2026-10-30,6,6,1,0,1,0,1,8,0,0,0,1
+r03218,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_32,e-signature,evaluate,11,2026-11-06,9,8,0,0,0,0,0,11,0,0,0,1
+r03219,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_33,contract lifecycle management,shortlist,8,2026-10-16,6,6,0,0,0,0,0,13,0,0,0,1
+r03220,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_33,contract lifecycle management,shortlist,9,2026-10-23,6,6,0,0,0,0,0,14,0,0,0,1
+r03221,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_33,contract lifecycle management,shortlist,10,2026-10-30,10,10,0,0,0,0,0,17,0,0,0,1
+r03222,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_33,contract lifecycle management,shortlist,11,2026-11-06,8,8,0,0,0,0,0,16,0,0,0,1
+r03223,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_34,contract lifecycle management,evaluate,8,2026-10-16,13,11,1,0,1,0,1,13,0,0,0,1
+r03224,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_34,contract lifecycle management,evaluate,9,2026-10-23,15,12,1,0,1,0,1,16,0,0,0,1
+r03225,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_34,contract lifecycle management,evaluate,10,2026-10-30,14,12,0,0,0,0,0,14,0,0,0,1
+r03226,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_34,contract lifecycle management,evaluate,11,2026-11-06,10,10,2,0,1,0,2,10,0,0,0,1
+r03227,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_35,sales engagement,shortlist,8,2026-10-16,12,8,0,3,0,1,0,12,0,0,0,1
+r03228,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_35,sales engagement,shortlist,9,2026-10-23,12,7,0,0,0,0,0,17,0,0,0,1
+r03229,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_35,sales engagement,shortlist,10,2026-10-30,14,8,1,2,1,1,1,17,0,0,0,1
+r03230,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_35,sales engagement,shortlist,11,2026-11-06,12,9,0,0,0,0,0,14,0,0,0,1
+r03231,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_36,sales engagement,evaluate,8,2026-10-16,15,10,1,3,1,1,1,16,0,0,0,1
+r03232,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_36,sales engagement,evaluate,9,2026-10-23,16,11,0,2,0,1,0,17,0,0,0,1
+r03233,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_36,sales engagement,evaluate,10,2026-10-30,11,9,0,2,0,1,0,11,0,0,0,1
+r03234,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_36,sales engagement,evaluate,11,2026-11-06,9,8,0,0,0,0,0,9,0,0,0,1
+r03235,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_37,CPQ,shortlist,8,2026-10-16,11,10,0,0,0,0,0,11,0,0,0,1
+r03236,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_37,CPQ,shortlist,9,2026-10-23,15,10,0,0,0,0,0,16,0,0,0,1
+r03237,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_37,CPQ,shortlist,10,2026-10-30,14,11,0,0,0,0,0,14,0,0,0,1
+r03238,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_37,CPQ,shortlist,11,2026-11-06,14,11,0,0,0,0,0,14,0,0,0,1
+r03239,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_38,CPQ,evaluate,8,2026-10-16,13,10,0,1,0,1,0,15,0,0,0,1
+r03240,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_38,CPQ,evaluate,9,2026-10-23,13,10,0,2,0,1,0,17,0,0,0,1
+r03241,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_38,CPQ,evaluate,10,2026-10-30,14,12,0,0,0,0,0,19,0,0,0,1
+r03242,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_38,CPQ,evaluate,11,2026-11-06,14,12,0,0,0,0,0,19,0,0,0,1
+r03243,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_39,applicant tracking system,shortlist,8,2026-10-16,9,6,2,0,1,0,2,12,0,0,0,1
+r03244,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_39,applicant tracking system,shortlist,9,2026-10-23,7,5,1,2,1,1,1,14,0,0,0,1
+r03245,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_39,applicant tracking system,shortlist,10,2026-10-30,8,7,1,0,1,0,1,11,0,0,0,1
+r03246,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_39,applicant tracking system,shortlist,11,2026-11-06,8,7,1,0,1,0,1,9,0,0,0,1
+r03247,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_40,applicant tracking system,evaluate,8,2026-10-16,14,13,0,0,0,0,0,14,0,0,0,1
+r03248,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_40,applicant tracking system,evaluate,9,2026-10-23,15,11,0,0,0,0,0,15,0,0,0,1
+r03249,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_40,applicant tracking system,evaluate,10,2026-10-30,13,11,0,0,0,0,0,13,0,0,0,1
+r03250,claude_api_b2b,claude,anthropic_api,claude,1,claude-opus-5-5,010-shortlist-stability,b2b_40,applicant tracking system,evaluate,11,2026-11-06,11,10,0,1,0,1,0,11,0,0,0,1

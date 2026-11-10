@@ -20,9 +20,19 @@ spot-check script. Computes no retention metric.
 - Audit G, best-for classifier: segment test-retest on all distinct phrases
   (pass at 90%).
 
+Stage 2 (``--stage 2``, waves 1 to 11): Audit A per wave including 8 to 11,
+with the 36-of-40 rule applied (a wave below it leaves H5's lag bins for
+that platform) and the H5 bin pair counts from the true run dates, including
+any pair a late task moved across a bin edge; Audit E on the Stage 2 sample
+(waves 8 to 11; pass at 90% there), with the reused Stage 1 sample and the
+pooled figure alongside; Audit F per wave with model counts and run dates;
+Audit G on every distinct phrase Stage 2 uses (Stage 1 classifications
+reused for the phrases Stage 1 saw, the rest classified at Stage 2).
+
 Usage:
   uv run python experiments/010-shortlist-stability/pipeline/21_audits.py --stage 1
   uv run python .../21_audits.py --stage 1 --split explore | --synthetic planted
+  uv run python .../21_audits.py --stage 2 [--synthetic planted_stable]
 """
 
 from __future__ import annotations
@@ -39,19 +49,36 @@ from common import (
     AUDIT_E_MIN,
     AUDIT_G_MIN,
     EXPLORE_TAXONOMY_CATEGORIES,
+    H5_CONSUMER,
+    H5_CONSUMER_FAR,
+    H5_CONSUMER_NEAR,
+    H5_FAR,
+    H5_NEAR,
     NEW_DATASETS,
     PROMPTS_PER_WAVE,
+    R7_FAR_DAYS,
+    R7_NEAR_DAYS,
     SPEC,
+    STAGE2_NEW_WAVES,
     STAGE_WAVES,
     add_mode_args,
     audit_e,
+    bin_pairs,
+    days_label,
+    h5_excluded,
+    in_days,
     jsonable,
-    load_bestfor,
+    lag_days,
+    load_stage_bestfor,
     mode_from_args,
+    nominal_lag,
     pct,
     fmt,
+    primary_answers,
     read_jsonl,
+    refuse,
     usable,
+    within_pairs,
 )
 
 
@@ -61,9 +88,15 @@ def audit_a(rows: list[dict], stage: int, out: list[str]) -> dict:
     out.append(f"New collection: tasks per platform and wave (need at least {AUDIT_A_MIN} of "
                f"{PROMPTS_PER_WAVE} non-empty and not refused; below {AUDIT_A_H5_MIN} the wave "
                "would leave Stage 2's lag bins). Judge failures are listed separately.\n")
-    out.append("| Dataset | Wave | Collected | Non-empty, not refused | Refusals | Empty | "
-               "Judge failures | Pass |")
-    out.append("|---|---|---|---|---|---|---|---|")
+    s2 = stage == 2
+    if s2:
+        out.append("| Dataset | Wave | Collected | Non-empty, not refused | Refusals | Empty | "
+                   "Judge failures | Pass | In H5's lag bins |")
+        out.append("|---|---|---|---|---|---|---|---|---|")
+    else:
+        out.append("| Dataset | Wave | Collected | Non-empty, not refused | Refusals | Empty | "
+                   "Judge failures | Pass |")
+        out.append("|---|---|---|---|---|---|---|---|")
     for ds in NEW_DATASETS:
         sub = [r for r in rows if r["dataset"] == ds]
         if not sub:
@@ -77,8 +110,11 @@ def audit_a(rows: list[dict], stage: int, out: list[str]) -> dict:
                    "passes": ok >= AUDIT_A_MIN, "h5_bins": ok >= AUDIT_A_H5_MIN}
             res["new"].append(rec)
             res["passes"] &= rec["passes"]
-            out.append(f"| {ds} | {w} | {len(g)} | {ok} | {rec['refusals']} | {rec['empty']} | "
-                       f"{rec['judge_failures']} | {'yes' if rec['passes'] else '**NO**'} |")
+            line = (f"| {ds} | {w} | {len(g)} | {ok} | {rec['refusals']} | {rec['empty']} | "
+                    f"{rec['judge_failures']} | {'yes' if rec['passes'] else '**NO**'} |")
+            if s2:
+                line += " yes |" if rec["h5_bins"] else " **NO: left out of H5's bins** |"
+            out.append(line)
     out.append("")
     hold = [r for r in rows if r["dataset"] not in NEW_DATASETS]
     if hold:
@@ -101,6 +137,69 @@ def audit_a(rows: list[dict], stage: int, out: list[str]) -> dict:
         out.append("")
     out.append("Refusals (an apology-shaped refusal in the first 600 characters, 009's heuristic), "
                "empty answers and judge failures are excluded from every analysis.\n")
+    return res
+
+
+def lag_bins(rows: list[dict], out: list[str]) -> dict:
+    """Stage 2: the pairs H5 and R7 use, from the true run dates (spec §3)."""
+    out.append("### H5 lag bins from the true run dates\n")
+    excluded = h5_excluded(rows)
+    res: dict = {"excluded_waves": sorted([list(k) for k in excluded]), "datasets": {}}
+    if excluded:
+        out.append("Waves below 36 of 40 left out of H5's lag bins (kept everywhere else): "
+                   + ", ".join(f"{ds} wave {w}" for ds, w in sorted(excluded)) + ".\n")
+    else:
+        out.append("No wave fell below 36 of 40, so every wave is in H5's lag bins.\n")
+    out.append("Usable within-prompt answer pairs (same prompt, same platform) in each bin. Lag = "
+               "days between the two answers' run dates. The schedule (days 0 to 6, 13, 20, 27, "
+               "34) gives 11 near pairs (1 to 2 days apart) and 8 far pairs (27 days or more) "
+               "per prompt; R7's bins are 0 to 6 and 27 to 34 days apart.\n")
+    out.append("| Dataset | Prompts | Near (1 to 2 days) | Far (27+ days) | Near per prompt | Far "
+               "per prompt | R7 near (0 to 6) | R7 far (27 to 34) | Pairs moved by run dates |")
+    out.append("|---|---|---|---|---|---|---|---|---|")
+    us = [r for r in rows if usable(r)]
+    bins = (("near", H5_NEAR), ("far", H5_FAR), ("r7_near", R7_NEAR_DAYS), ("r7_far", R7_FAR_DAYS))
+    for ds in NEW_DATASETS:
+        own = primary_answers(us, ds)
+        if not own:
+            continue
+        pairs = within_pairs(own)
+        n_items = len({a["item_id"] for a in own})
+        cnt = {k: len(bin_pairs(pairs, b, excluded)) for k, b in bins}
+        moved = []
+        for x, y in pairs:
+            lag, nom = lag_days(x, y), nominal_lag(x, y)
+            if lag == nom:
+                continue
+            changes = [f"{'enters' if in_days(lag, b) else 'leaves'} {k}" for k, b in bins
+                       if in_days(lag, b) != in_days(nom, b)]
+            if changes:
+                x, y = sorted((x, y), key=lambda a: a["wave"])
+                moved.append({"item_id": x["item_id"], "waves": [x["wave"], y["wave"]],
+                              "scheduled_lag": nom, "true_lag": lag, "bins_changed": changes})
+        per = {k: cnt[k] / n_items for k in cnt}
+        res["datasets"][ds] = {"prompts": n_items, **cnt,
+                               "per_prompt": per, "moved": moved}
+        out.append(f"| {ds} | {n_items} | {cnt['near']} | {cnt['far']} | {per['near']:.2f} | "
+                   f"{per['far']:.2f} | {cnt['r7_near']} | {cnt['r7_far']} | {len(moved)} |")
+    out.append("")
+    for ds, d in res["datasets"].items():
+        for m in d["moved"]:
+            out.append(f"- {ds} {m['item_id']} waves {m['waves'][0]} and {m['waves'][1]}: "
+                       f"scheduled {days_label((m['scheduled_lag'],) * 2)} apart, ran "
+                       f"{days_label((m['true_lag'],) * 2)} apart, so the pair {' and '.join(m['bins_changed'])} (true lag used)")
+    if any(d["moved"] for d in res["datasets"].values()):
+        out.append("")
+    cons = primary_answers(us, H5_CONSUMER)
+    if cons:
+        pairs = within_pairs(cons)
+        near, far = bin_pairs(pairs, H5_CONSUMER_NEAR), bin_pairs(pairs, H5_CONSUMER_FAR)
+        lags = [lag_days(x, y) for x, y in pairs]
+        res["datasets"][H5_CONSUMER] = {"near": len(near), "far": len(far),
+                                        "lag_range": [min(lags), max(lags)]}
+        out.append(f"{H5_CONSUMER} (secondary H5, holdout lags {min(lags)} to {max(lags)} days): "
+                   f"{len(near)} pairs {days_label(H5_CONSUMER_NEAR)} apart, {len(far)} pairs "
+                   f"{days_label(H5_CONSUMER_FAR)} apart.\n")
     return res
 
 
@@ -152,6 +251,55 @@ def audit_d(mode, out: list[str]) -> dict:
                                                 ("precision", "recall", "signed_by")}}
 
 
+def audit_e_stage2(first: list[dict], second: list[dict], out: list[str]) -> dict:
+    out.append("## Audit E: judge test-retest\n")
+    s2 = [a for a in second if a["dataset"] in NEW_DATASETS and a["wave"] in STAGE2_NEW_WAVES]
+    if not s2:
+        out.append("**No Stage 2 second pass yet.** The seeded 10% sample of waves 8 to 11 must be "
+                   "judged twice (20_answers.py --stage 2 --write-rejudge-sample, then "
+                   "judge_runner.mts --split b2b_main_rejudge_s2).\n")
+        return {"status": "missing", "passes": False}
+    first = [a for a in first if usable(a)]
+    second = [a for a in second if usable(a)]
+    out.append("Same answer text judged twice. The Stage 2 sample is a seeded 10% of waves 8 to "
+               "11 (spec §2: the Stage 1 sample is reused). Pass: category agreement at least "
+               f"{AUDIT_E_MIN:.0%} over lexicon brand mentions in the Stage 2 sample; the reused "
+               "Stage 1 sample and the pooled figure are shown alongside.\n")
+    out.append("| Group | Answers re-judged | Brand mentions | Category agreement | Cohen's kappa "
+               "| Top choices kept as top choice |")
+    out.append("|---|---|---|---|---|---|")
+
+    def is_s2(a: dict) -> bool:
+        return a["dataset"] in NEW_DATASETS and a["wave"] in STAGE2_NEW_WAVES
+
+    groups = [("Stage 2 sample (waves 8 to 11)", is_s2)]
+    groups += [(f"{ds}, waves 8 to 11", (lambda a, ds=ds: is_s2(a) and a["dataset"] == ds))
+               for ds in NEW_DATASETS]
+    groups += [("Stage 1 sample (waves 1 to 7, reused)",
+                lambda a: a["dataset"] in NEW_DATASETS and not is_s2(a)),
+               ("new collection, both samples", lambda a: a["dataset"] in NEW_DATASETS),
+               ("all, with the holdout samples", lambda a: True)]
+    res: dict = {"groups": {}}
+    for name, keep in groups:
+        e = audit_e([a for a in first if keep(a)], [a for a in second if keep(a)])
+        if not e["answers"]:
+            continue
+        e.pop("pairs")
+        res["groups"][name] = e
+        out.append(f"| {name} | {e['answers']} | {e['mentions']} | {pct(e['agreement'])} | "
+                   f"{fmt(e['kappa'])} | {pct(e['top_kept'])} of {e['top_choices']} |")
+    main = res["groups"].get("Stage 2 sample (waves 8 to 11)", {})
+    res["passes"] = bool(main) and main["agreement"] >= AUDIT_E_MIN
+    res["agreement"] = main.get("agreement")
+    out.append("")
+    out.append(f"Stage 2 sample agreement {pct(main.get('agreement', float('nan')))}: "
+               f"**{'PASS' if res['passes'] else 'FAIL: the retention figures need an instrument-noise caveat and R4 moves to the main text'}**\n")
+    if main.get("changes"):
+        out.append("Category changes between passes in the Stage 2 sample (first -> second): "
+                   + "; ".join(f"{k}: {v}" for k, v in list(main["changes"].items())[:8]) + "\n")
+    return res
+
+
 def audit_e_section(first: list[dict], second: list[dict], out: list[str]) -> dict:
     out.append("## Audit E: judge test-retest\n")
     if not second:
@@ -190,10 +338,58 @@ def audit_e_section(first: list[dict], second: list[dict], out: list[str]) -> di
     return res
 
 
-def audit_f(rows: list[dict], out: list[str]) -> dict:
+def audit_f_stage2(rows: list[dict], out: list[str]) -> dict:
+    """Stage 2: the reported model and run dates of every wave (a model change is a finding)."""
     out.append("## Audit F: model drift\n")
-    out.append("The model each answer reports (DataForSEO `model`; Anthropic model id; claude.ai "
-               "answers are recorded as `claude.ai`; holdout ChatGPT from the source studies).\n")
+    out.append("The model each answer reports, per wave (DataForSEO `model`; Anthropic model id), "
+               "and the answers' run dates (DataForSEO dates are UTC, so ChatGPT and Gemini "
+               "answers are dated the day after the 20:00 local submission; Claude's is the local "
+               "batch submission date; spec deviation 2).\n")
+    res: dict = {}
+    for ds in NEW_DATASETS:
+        g = [r for r in rows if r["dataset"] == ds and usable(r)]
+        if not g:
+            continue
+        overall = Counter(r.get("model") or "(not recorded)" for r in g)
+        modal = overall.most_common(1)[0][0]
+        out.append(f"**{ds}**: modal `{modal}` ({pct(overall[modal] / len(g))} of answers); "
+                   + ", ".join(f"`{m}` {n}" for m, n in overall.most_common()) + "\n")
+        out.append("| Wave | Answers | Models | Run dates |")
+        out.append("|---|---|---|---|")
+        waves = {}
+        for w in sorted({r["wave"] for r in g}):
+            gw = [r for r in g if r["wave"] == w]
+            mc = Counter(r.get("model") or "(not recorded)" for r in gw)
+            dc = Counter(r.get("run_date") for r in gw)
+            waves[w] = {"answers": len(gw), "models": dict(mc), "run_dates": dict(sorted(dc.items()))}
+            out.append(f"| {w} | {len(gw)} | " + ", ".join(f"`{m}` {n}" for m, n in mc.most_common())
+                       + " | " + ", ".join(f"{d} ({n})" for d, n in sorted(dc.items())) + " |")
+        changed = [w for w, v in waves.items() if Counter(v["models"]).most_common(1)[0][0] != modal]
+        minority = [w for w, v in waves.items() if len(v["models"]) > 1]
+        res[ds] = {"modal": modal, "models": dict(overall), "waves": waves,
+                   "off_modal_share": 1 - overall[modal] / len(g),
+                   "waves_with_other_modal": changed, "waves_with_two_models": minority}
+        out.append("")
+        if changed:
+            out.append(f"- **model change mid-collection** (a finding; R2 keeps `{modal}` only): "
+                       f"waves whose model differs from the mode: {', '.join(map(str, changed))}")
+        if minority:
+            out.append(f"- waves with more than one reported model: {', '.join(map(str, minority))}")
+        if changed or minority:
+            out.append("")
+    hold = [r for r in rows if r["dataset"] not in NEW_DATASETS]
+    if hold:
+        out.append("Holdout datasets (unchanged from Stage 1):\n")
+        res |= audit_f(hold, out, header=False)
+    return res
+
+
+def audit_f(rows: list[dict], out: list[str], header: bool = True) -> dict:
+    if header:
+        out.append("## Audit F: model drift\n")
+        out.append("The model each answer reports (DataForSEO `model`; Anthropic model id; "
+                   "claude.ai answers are recorded as `claude.ai`; holdout ChatGPT from the "
+                   "source studies).\n")
     res = {}
     keys = sorted({(r["dataset"], r["arm"]) for r in rows},
                   key=lambda k: (list(SPEC).index(k[0]), k[1]))
@@ -226,25 +422,33 @@ def audit_f(rows: list[dict], out: list[str]) -> dict:
 
 def audit_g(mode, out: list[str]) -> dict:
     out.append("## Audit G: best-for classifier\n")
-    bf = load_bestfor(mode.bestfor)
+    bf = load_stage_bestfor(mode)
     if bf is None:
         out.append(f"**Not available yet** (best-for files under `{mode.bestfor.name}/`).\n")
         return {"status": "missing", "passes": False}
     res: dict = {"groups": {}}
     out.append(f"Segment test-retest over every distinct phrase (two classifier passes). Pass: "
                f"at least {AUDIT_G_MIN:.0%}.\n")
+    groups = [("all", lambda c, p: True),
+              ("B2B", lambda c, p: c not in EXPLORE_TAXONOMY_CATEGORIES),
+              ("headphones and agencies", lambda c, p: c in EXPLORE_TAXONOMY_CATEGORIES)]
+    if mode.stage == 2:
+        new = json.loads((mode.bestfor / "phrases.json").read_text())
+        fresh = {(c, e["phrase"]) for c, lst in new.items() for e in lst}
+        out.append("Stage 2: every distinct phrase the Stage 2 frame uses. Phrases Stage 1 had "
+                   "classified keep their two Stage 1 passes (reused); the rest were classified "
+                   "twice at Stage 2 with the same frozen taxonomies.\n")
+        groups += [("classified at Stage 1 (reused)", lambda c, p: (c, p) not in fresh),
+                   ("classified at Stage 2 (new phrases)", lambda c, p: (c, p) in fresh)]
     out.append("| Categories | Distinct phrases | Same segment both passes | Outside every "
                "segment (pass a) |\n|---|---|---|---|")
-    groups = (("all", lambda c: True),
-              ("B2B", lambda c: c not in EXPLORE_TAXONOMY_CATEGORIES),
-              ("headphones and agencies", lambda c: c in EXPLORE_TAXONOMY_CATEGORIES))
     for name, keep in groups:
         tot = agree = other = 0
         for c, lst in bf.phrases.items():
-            if not keep(c):
-                continue
             for e in lst:
                 p = e["phrase"]
+                if not keep(c, p):
+                    continue
                 ga = bf.seg_a.get(c, {}).get(p)
                 tot += 1
                 agree += ga is not None and bf.seg_b.get(c, {}).get(p) == ga
@@ -265,6 +469,17 @@ def main() -> None:
     add_mode_args(ap)
     a = ap.parse_args()
     mode = mode_from_args(a)
+    if mode.stage == 2:
+        # The Stage 2 frame exists only once 20_answers.py --stage 2 has passed
+        # its input gate (every wave 8 to 11 task and the Stage 2 sample judged).
+        if not mode.meta_path.exists():
+            refuse([f"no {mode.meta_path.name}; run 20_answers.py --stage 2 first"],
+                   "21_audits.py")
+        m2 = json.loads(mode.meta_path.read_text())
+        if (m2.get("mode"), m2.get("stage"), m2.get("stage2_inputs_complete")) != (
+                mode.kind, 2, True):
+            refuse([f"{mode.answers_path.name} is not a complete Stage 2 frame for this mode"],
+                   "21_audits.py")
     if not mode.answers_path.exists():
         raise SystemExit(f"no answer frame at {mode.answers_path}; run 20_answers.py first")
     rows = read_jsonl(mode.answers_path)
@@ -273,21 +488,35 @@ def main() -> None:
 
     out = [f"# Experiment 010: Stage {mode.stage} data-quality audits{mode.tag}\n",
            "Generated by `pipeline/21_audits.py`. Aggregates only.\n"]
-    out.append(f"Answers in the frame: {len(rows)} ({sum(usable(r) for r in rows)} usable). "
-               f"Firewall: {meta.get('filtered_waves', 0)} new-collection tasks from waves after "
-               f"{max(STAGE_WAVES[mode.stage])} dropped before any judge output was read.")
+    if mode.stage == 2:
+        out.append(f"Answers in the frame: {len(rows)} ({sum(usable(r) for r in rows)} usable). "
+                   f"Stage 2 frame: new-collection waves 1 to {max(STAGE_WAVES[2])} "
+                   f"({meta.get('filtered_waves', 0)} tasks dropped), built only after every "
+                   "wave 8 to 11 task and the Stage 2 re-judge sample were judged OK.")
+    else:
+        out.append(f"Answers in the frame: {len(rows)} ({sum(usable(r) for r in rows)} usable). "
+                   f"Firewall: {meta.get('filtered_waves', 0)} new-collection tasks from waves "
+                   f"after {max(STAGE_WAVES[mode.stage])} dropped before any judge output was "
+                   "read.")
     if meta.get("lexicon_v3_sha256"):
         out.append(f"Lexicon v3 sha256 `{meta['lexicon_v3_sha256'][:12]}...`; B2B taxonomy sha256 "
                    f"`{(meta.get('taxonomy_b2b_sha256') or '')[:12]}...`.")
     out.append("")
-    res = {"A": audit_a(rows, mode.stage, out), "B": audit_b(rows, meta, out)}
+    res = {"A": audit_a(rows, mode.stage, out)}
+    if mode.stage == 2:
+        res["A"]["lag_bins"] = lag_bins(rows, out)
+    res["B"] = audit_b(rows, meta, out)
     out.append("## Audit C: independence\n")
     out.append("Pairs share prompts, so every interval resamples prompts (the cluster), never "
                "pairs. The two prompts of a B2B category share a market; robustness R5 "
                "(23_robustness.py) resamples categories instead.\n")
     res["D"] = audit_d(mode, out)
-    res["E"] = audit_e_section(rows, second, out)
-    res["F"] = audit_f(rows, out)
+    if mode.stage == 2:
+        res["E"] = audit_e_stage2(rows, second, out)
+        res["F"] = audit_f_stage2(rows, out)
+    else:
+        res["E"] = audit_e_section(rows, second, out)
+        res["F"] = audit_f(rows, out)
     res["G"] = audit_g(mode, out)
     out.append("## Summary\n")
     out.append("| Audit | Result |\n|---|---|")
@@ -296,7 +525,9 @@ def main() -> None:
     out.append(f"| D lexicon v3 | {res['D'].get('status')}"
                f"{', pass' if res['D'].get('passes') else ''} |")
     out.append(f"| E judge test-retest | {'pass' if res['E'].get('passes') else res['E'].get('status', 'FAIL')} |")
-    out.append(f"| F model drift | {'change found' if any(v['runs_with_other_modal'] for v in res['F'].values()) else 'no change'} |")
+    changed = any(v.get("runs_with_other_modal") or v.get("waves_with_other_modal")
+                  for v in res["F"].values())
+    out.append(f"| F model drift | {'change found' if changed else 'no change'} |")
     out.append(f"| G classifier | {'pass' if res['G'].get('passes') else res['G'].get('status', 'FAIL')} |")
     out.append("")
     mode.results.mkdir(parents=True, exist_ok=True)

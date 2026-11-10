@@ -1,23 +1,31 @@
 """Shared code for experiment 010's pre-registered pipeline (pipeline/20_ to 24_).
 
-Implements spec.md (FROZEN at 6342963) §2 to §7 for Stage 1. Stage 2 keeps its
-interfaces here (wave sets, lag bins, the Audit A threshold for H5 bins) but
-is not implemented yet: every stage script exits 4 on ``--stage 2``.
+Implements spec.md (FROZEN at 6342963) §2 to §7 for both stages. Stage 1 (run
+to run) uses new-collection waves 1 to 7; Stage 2 (over time) uses waves 1 to
+11 and adds H5 (drift), its lag bins, the Audit A rule for those bins, the
+Stage 2 Audit E sample and the Stage 2 best-for files. ``25_release.py``
+releases the datasets of either stage (Stage 2: the update of the Stage 1
+release with waves 8 to 11).
 
 Modes (every stage takes exactly one):
 
-- confirmatory (default): the new collection, waves 1 to 7 at Stage 1
-  (``data/raw/tasks_b2b_main.jsonl`` + ``judged_b2b_main.jsonl``, rebuilt with
-  lexicon v3), and the holdouts (``tasks_holdout`` + ``judged_holdout``).
-  Gated: lexicon v3 and the B2B best-for taxonomy must be frozen (their
-  sha256 recorded below) before anything reads a judged file, and Audit D
-  must have passed before any metric is computed.
+- confirmatory (default): the new collection, waves 1 to 7 at Stage 1 and 1
+  to 11 at Stage 2 (``data/raw/tasks_b2b_main.jsonl`` +
+  ``judged_b2b_main.jsonl``, rebuilt with lexicon v3), and the holdouts
+  (``tasks_holdout`` + ``judged_holdout``). Gated: lexicon v3 and the B2B
+  best-for taxonomy must be frozen (their sha256 recorded below) before
+  anything reads a judged file, and Audit D must have passed before any
+  metric is computed. Stage 2 also needs every wave 8 to 11 task and the
+  Stage 2 re-judge sample judged OK, and the Stage 2 best-for phrases
+  classified twice.
 - ``--split explore``: the exploration split (three old datasets only), for
   checking this code against ``results/exploration.md``. Never confirmatory.
-- ``--synthetic {planted,broken_join}``: fake tasks and judge output with
-  planted structure, written by ``20_answers.py`` under
+- ``--synthetic <world>``: fake tasks and judge output with planted
+  structure, written by ``20_answers.py`` under
   ``data/interim/synthetic/<world>/raw/`` and pushed through the same code as
-  real data.
+  real data. Stage 1 worlds: ``planted``, ``broken_join``. Stage 2 worlds:
+  ``planted_stable`` (no drift), ``planted_drift`` (a planted drop in far
+  pairs on one platform), ``broken_join``.
 
 Inference (spec §5): pooled Dice retention, prompt-level cluster bootstrap
 (prompts drawn with replacement; a pair of answers inside one cluster carries
@@ -41,6 +49,7 @@ import sys
 from collections import Counter, defaultdict
 from collections.abc import Callable, Iterable
 from dataclasses import dataclass
+from datetime import date
 from pathlib import Path
 
 import numpy as np
@@ -115,15 +124,35 @@ PROMPTS_PER_WAVE = 40
 
 #: Firewall rule 1: Stage 1 uses waves 1 to 7 of the new collection only.
 STAGE_WAVES = {1: tuple(range(1, 8)), 2: tuple(range(1, 12))}
-#: Stage 2 interfaces (spec §4 H5, §7 R7). Not used at Stage 1.
+#: The waves Stage 2 adds (its Audit E sample is drawn from these only).
+STAGE2_NEW_WAVES = tuple(range(8, 12))
+#: Schedule day of each wave (run_wave.py, collection_schedule.json): days 0
+#: to 6, then 13, 20, 27, 34. Used only to show which pairs the true run
+#: dates moved across a bin edge; lags themselves come from run dates (§3).
+WAVE_OFFSETS = (0, 1, 2, 3, 4, 5, 6, 13, 20, 27, 34)
+#: Stage 2 lag bins (spec §4 H5, §7 R7), inclusive day ranges (None = open).
 H5_NEAR_DAYS = (1, 2)
 H5_FAR_MIN_DAYS = 27
 H5_CONSUMER_NEAR_DAYS = (0, 2)
 H5_CONSUMER_FAR_MIN_DAYS = 15
 R7_NEAR_DAYS = (0, 6)
 R7_FAR_DAYS = (27, 34)
+H5_NEAR = H5_NEAR_DAYS
+H5_FAR = (H5_FAR_MIN_DAYS, None)
+H5_CONSUMER_NEAR = H5_CONSUMER_NEAR_DAYS
+H5_CONSUMER_FAR = (H5_CONSUMER_FAR_MIN_DAYS, None)
+#: Bins of the descriptive retention-by-days-apart curve (Stage 2).
+CURVE_BINS = ((0, 0), (1, 2), (3, 6), (7, 13), (14, 20), (21, 26), (27, 34), (35, 99))
+#: Datasets H5 tests (spec §4 Stage 2 primary family).
+H5_DATASETS = ("chatgpt_b2b", "gemini_b2b", "claude_api_b2b")
+H5_CONSUMER = "chatgpt_consumer"
 
-SYNTHETIC_WORLDS = ("planted", "broken_join")
+STAGE_WORLDS = {1: ("planted", "broken_join"),
+                2: ("planted_stable", "planted_drift", "broken_join")}
+SYNTHETIC_WORLDS = ("planted", "broken_join", "planted_stable", "planted_drift")
+
+#: Stage 2 Audit E sample of waves 8 to 11 (spec §2 Audit E).
+REJUDGE_S2_SPLIT = "b2b_main_rejudge_s2"
 
 # --------------------------------------------------------------- statuses
 
@@ -259,6 +288,11 @@ class Mode:
         return self.interim_file("answers_rejudge.jsonl")
 
     @property
+    def rejudge_splits(self) -> tuple[str, ...]:
+        """New-collection Audit E samples the stage uses (Stage 2 reuses Stage 1's)."""
+        return ("b2b_main_rejudge",) + ((REJUDGE_S2_SPLIT,) if self.stage == 2 else ())
+
+    @property
     def meta_path(self) -> Path:
         return self.interim_file("meta.json")
 
@@ -278,29 +312,26 @@ class Mode:
 
 def add_mode_args(ap: argparse.ArgumentParser) -> None:
     ap.add_argument("--stage", type=int, choices=(1, 2), required=True,
-                    help="analysis stage (spec 'Two stages'); 2 is not implemented yet")
+                    help="analysis stage (spec 'Two stages'): 1 run to run, 2 over time")
     g = ap.add_mutually_exclusive_group()
     g.add_argument("--synthetic", choices=SYNTHETIC_WORLDS, default=None,
-                   help="run on a synthetic dry-run world")
+                   help="run on a synthetic dry-run world (Stage 1: planted, broken_join; "
+                        "Stage 2: planted_stable, planted_drift, broken_join)")
     g.add_argument("--split", choices=("explore",), default=None,
                    help="run on the exploration split (code check against exploration.md)")
 
 
 def mode_from_args(a: argparse.Namespace) -> Mode:
-    if a.stage == 2:
-        stage2_not_implemented()
     if a.synthetic:
+        if a.synthetic not in STAGE_WORLDS[a.stage]:
+            raise SystemExit(f"--synthetic {a.synthetic} is not a Stage {a.stage} world "
+                             f"({', '.join(STAGE_WORLDS[a.stage])})")
         return Mode("synthetic", a.stage, a.synthetic)
     if a.split == "explore":
+        if a.stage == 2:
+            raise SystemExit("the exploration split has no Stage 2 (no new-collection waves)")
         return Mode("explore", a.stage)
     return Mode("confirmatory", a.stage)
-
-
-def stage2_not_implemented() -> None:
-    print("Stage 2 (waves 1 to 11, H5 drift) is pre-registered in spec §4 but not implemented "
-          "yet. Interfaces kept in pipeline/common.py: STAGE_WAVES[2], H5_NEAR_DAYS, "
-          "H5_FAR_MIN_DAYS, H5_CONSUMER_*_DAYS, R7_*_DAYS, AUDIT_A_H5_MIN.", file=sys.stderr)
-    sys.exit(4)
 
 
 # --------------------------------------------------------------------- io
@@ -439,14 +470,24 @@ REFUSAL = re.compile(
 )
 
 
+_TASK_ID_FIELD = re.compile(r'^\{\s*"task_id"\s*:\s*"((?:[^"\\]|\\.)*)"')
+
+
 def load_judged(path: Path, keep: set[str]) -> dict[str, dict]:
-    """task_id -> judge record (an OK record wins over a failed retry), for kept ids only."""
+    """task_id -> judge record (an OK record wins over a failed retry), for kept ids only.
+
+    A line whose leading ``task_id`` is not kept is skipped before it is
+    parsed, so rows outside a stage's firewall are never decoded.
+    """
     out: dict[str, dict] = {}
     if not path.exists():
         return out
     with path.open() as f:
         for line in f:
             if not line.strip():
+                continue
+            m = _TASK_ID_FIELD.match(line)
+            if m and json.loads(f'"{m.group(1)}"') not in keep:
                 continue
             r = json.loads(line)
             tid = r.get("task_id")
@@ -576,6 +617,93 @@ def load_bestfor(path: Path) -> BestFor | None:
     if not all((path / f).exists() for f in files):
         return None
     return BestFor(*(json.loads((path / f).read_text()) for f in files))
+
+
+#: Stage 2 best-for files (bestfor_stage2/). ``phrases.json`` holds only the
+#: phrases Stage 1 did not classify (the input of bestfor_segments.mts
+#: normalize and classify); ``phrases_used.json`` every distinct phrase Stage 2
+#: uses; ``reuse.json`` the sha256 of the Stage 1 files whose classifications
+#: are reused.
+BESTFOR_S2_FILES = ("phrases.json", "phrases_used.json", "taxonomy.json", "reuse.json",
+                    "norm.json", "segments_a.json", "segments_b.json")
+BESTFOR_S1_FILES = ("norm.json", "segments_a.json", "segments_b.json", "taxonomy.json")
+
+
+def stage1_bestfor_dir(mode: Mode) -> Path:
+    return mode.raw / "bestfor_stage1"
+
+
+def bestfor_file_shas(path: Path, files: Iterable[str] = BESTFOR_S1_FILES) -> dict[str, str]:
+    return {f: sha256_file(path / f) for f in files if (path / f).exists()}
+
+
+def load_stage_bestfor(mode: Mode) -> BestFor | None:
+    """The stage's best-for maps. Stage 1 (and explore): the stage directory as
+    is. Stage 2: Stage 1's classifications (reused, spec §5) merged with the
+    Stage 2 classifications of the phrases Stage 1 did not see; ``phrases`` =
+    every distinct phrase Stage 2 uses (what Audit G reports on)."""
+    if mode.stage == 1 or mode.kind == "explore":
+        return load_bestfor(mode.bestfor)
+    s1 = load_bestfor(stage1_bestfor_dir(mode))
+    d2 = mode.bestfor
+    if s1 is None or not all((d2 / f).exists() for f in BESTFOR_S2_FILES):
+        return None
+    new = {f: json.loads((d2 / f).read_text()) for f in BESTFOR_S2_FILES}
+    cats = set(s1.seg_a) | set(new["segments_a.json"])
+    seg_a = {c: s1.seg_a.get(c, {}) | new["segments_a.json"].get(c, {}) for c in cats}
+    seg_b = {c: s1.seg_b.get(c, {}) | new["segments_b.json"].get(c, {}) for c in cats}
+    return BestFor(s1.norm | new["norm.json"], seg_a, seg_b, new["taxonomy.json"],
+                   new["phrases_used.json"])
+
+
+def bestfor_problems(mode: Mode) -> list[str]:
+    """Why the stage's best-for files are not ready (empty list = ready)."""
+    if mode.stage == 1 or mode.kind == "explore":
+        bf = load_bestfor(mode.bestfor)
+        if bf is None:
+            return [f"best-for files missing under {mode.bestfor} (20_answers.py "
+                    "--gather-bestfor, then bestfor_segments.mts normalize and classify "
+                    "--pass a / --pass b with --split stage1)"]
+        if mode.confirmatory and not instrument_problems() and bf.taxonomy != merged_stage_taxonomy():
+            return ["bestfor_stage1/taxonomy.json is not the frozen B2B + exploration "
+                    "taxonomy; re-run 20_answers.py --gather-bestfor"]
+        return []
+    d1, d2 = stage1_bestfor_dir(mode), mode.bestfor
+    out = []
+    if load_bestfor(d1) is None:
+        out.append(f"the Stage 1 best-for files under {d1} are missing (Stage 2 reuses them)")
+    if not all((d2 / f).exists() for f in ("phrases.json", "phrases_used.json", "taxonomy.json",
+                                           "reuse.json")):
+        out.append(f"Stage 2 best-for phrases are not gathered under {d2} (20_answers.py "
+                   "--stage 2 --gather-bestfor)")
+        return out
+    missing = [f for f in ("norm.json", "segments_a.json", "segments_b.json")
+               if not (d2 / f).exists()]
+    if missing:
+        out.append(f"Stage 2 best-for phrases are not classified yet ({', '.join(missing)} "
+                   f"missing under {d2.name}/: bestfor_segments.mts normalize, classify --pass a, "
+                   "classify --pass b, all with --split stage2)")
+        return out
+    todo = json.loads((d2 / "phrases.json").read_text())
+    files = {f: json.loads((d2 / f).read_text()) for f in ("segments_a.json", "segments_b.json")}
+    norm = json.loads((d2 / "norm.json").read_text())
+    gaps = sum(1 for c, lst in todo.items() for e in lst
+               if e["phrase"] not in norm or any(e["phrase"] not in files[f].get(c, {})
+                                                  for f in files))
+    if gaps:
+        out.append(f"{gaps} new Stage 2 best-for phrases lack a normalized key or a classifier "
+                   "pass; re-run normalize and classify --pass a and b with --split stage2")
+    reuse = json.loads((d2 / "reuse.json").read_text())
+    if reuse.get("stage1_sha256") != bestfor_file_shas(d1):
+        out.append("the Stage 1 best-for files changed after the Stage 2 phrases were gathered; "
+                   "re-run 20_answers.py --stage 2 --gather-bestfor")
+    tax2 = json.loads((d2 / "taxonomy.json").read_text())
+    tax1 = json.loads((d1 / "taxonomy.json").read_text()) if (d1 / "taxonomy.json").exists() else None
+    if tax2 != tax1:
+        out.append("bestfor_stage2/taxonomy.json differs from bestfor_stage1/taxonomy.json")
+    if mode.confirmatory and not instrument_problems() and tax2 != merged_stage_taxonomy():
+        out.append("bestfor_stage2/taxonomy.json is not the frozen B2B + exploration taxonomy")
+    return out
 
 
 def merged_stage_taxonomy(raw: Path | None = None) -> dict:
@@ -1099,6 +1227,11 @@ def analysis_gate(mode: Mode, n_boot: int) -> list[str]:
     if meta.get("mode") != mode.kind or meta.get("stage") != mode.stage:
         problems.append(f"{mode.answers_path.name} was built in another mode or stage")
     if not mode.confirmatory:
+        if mode.kind == "synthetic" and mode.stage == 2:
+            # the Stage 2 dry run exercises the same input gates as real data
+            problems += bestfor_problems(mode)
+            if not meta.get("stage2_inputs_complete"):
+                problems.append("the synthetic Stage 2 frame lacks its Stage 2 inputs")
         return problems
     problems += instrument_problems()
     if meta.get("lexicon_v3_sha256") != LEXICON_V3_SHA256:
@@ -1108,18 +1241,172 @@ def analysis_gate(mode: Mode, n_boot: int) -> list[str]:
     if meta.get("max_new_wave", 99) > max(STAGE_WAVES[mode.stage]):
         problems.append("the answer frame holds new-collection waves beyond the stage firewall")
     problems += audit_d_problems(mode)
-    bf = load_bestfor(mode.bestfor)
-    if bf is None:
-        problems.append(f"best-for files missing under {mode.bestfor} (20_answers.py "
-                        "--gather-bestfor, then bestfor_segments.mts normalize and classify "
-                        "--pass a / --pass b with --split stage1)")
-    elif not instrument_problems() and bf.taxonomy != merged_stage_taxonomy():
-        problems.append("bestfor_stage1/taxonomy.json is not the frozen B2B + exploration "
-                        "taxonomy; re-run 20_answers.py --gather-bestfor")
-    for split in ("b2b_main_rejudge", "holdout_rejudge"):
+    problems += bestfor_problems(mode)
+    for split in (*mode.rejudge_splits, "holdout_rejudge"):
         if not (mode.raw / f"judged_{split}.jsonl").exists():
             problems.append(f"Audit E re-judge output judged_{split}.jsonl is missing")
+    if mode.stage == 2 and not meta.get("stage2_inputs_complete"):
+        problems.append("the Stage 2 answer frame was built before every wave 8 to 11 task and "
+                        "the Stage 2 re-judge sample were judged OK; rebuild it")
     return problems
+
+
+def stage2_input_problems(raw: Path, tasks: list[dict]) -> list[str]:
+    """Stage 2 inputs (spec §8 step 7): the Stage 2 Audit E sample judged OK,
+    then every wave 8 to 11 task judged OK. Checks the cheap files first, so
+    the main judged file is opened only once the re-judge sample is complete.
+    ``tasks`` are the new-collection tasks of waves 1 to 11."""
+    s2 = [t for t in tasks if int(t["wave"]) in STAGE2_NEW_WAVES]
+    want = 3 * PROMPTS_PER_WAVE * len(STAGE2_NEW_WAVES)
+    if len(s2) != want:
+        return [f"tasks_b2b_main.jsonl holds {len(s2)} wave 8 to 11 tasks, expected {want}"]
+    rj_tasks = raw / f"tasks_{REJUDGE_S2_SPLIT}.jsonl"
+    if not rj_tasks.exists():
+        return [f"the Stage 2 Audit E sample {rj_tasks.name} is missing (20_answers.py --stage 2 "
+                "--write-rejudge-sample)"]
+    expect = rejudge_sample(s2)
+    got = read_jsonl(rj_tasks)
+    if [t["task_id"] for t in got] != [t["task_id"] for t in expect]:
+        return [f"{rj_tasks.name} is not the seeded 10% sample of waves 8 to 11"]
+    rj_judged = raw / f"judged_{REJUDGE_S2_SPLIT}.jsonl"
+    rj = load_judged(rj_judged, {t["task_id"] for t in got})
+    bad = [t["task_id"] for t in got if not (rj.get(t["task_id"]) or {}).get("ok")]
+    if bad:
+        return [f"{len(bad)} of {len(got)} Stage 2 re-judge tasks are not judged OK in "
+                f"{rj_judged.name} (judge_runner.mts --split {REJUDGE_S2_SPLIT})"]
+    main = load_judged(raw / "judged_b2b_main.jsonl", {t["task_id"] for t in s2})
+    bad = [t["task_id"] for t in s2 if not (main.get(t["task_id"]) or {}).get("ok")]
+    if bad:
+        return [f"{len(bad)} of {len(s2)} wave 8 to 11 tasks are not judged OK in "
+                "judged_b2b_main.jsonl (judge_runner.mts --split b2b_main)"]
+    return []
+
+
+# ------------------------------------------------------------- Stage 2 lags
+
+
+def lag_days(x: dict, y: dict) -> int:
+    """Days between the two answers' run dates (spec §3; true dates, deviation 2)."""
+    return abs((date.fromisoformat(x["run_date"]) - date.fromisoformat(y["run_date"])).days)
+
+
+def nominal_lag(x: dict, y: dict) -> int:
+    """Days between the two answers' scheduled wave days (new collection only)."""
+    return abs(WAVE_OFFSETS[x["wave"] - 1] - WAVE_OFFSETS[y["wave"] - 1])
+
+
+def in_days(lag: int, bounds: tuple[int, int | None]) -> bool:
+    lo, hi = bounds
+    return lag >= lo and (hi is None or lag <= hi)
+
+
+def days_label(bounds: tuple[int, int | None]) -> str:
+    lo, hi = bounds
+    if hi is None:
+        return f"{lo}+ days"
+    return f"{lo} day{'s' if lo != 1 else ''}" if lo == hi else f"{lo} to {hi} days"
+
+
+def h5_wave_counts(rows: list[dict]) -> dict[tuple[str, int], int]:
+    """(new dataset, wave) -> answers collected non-empty and not refused (Audit A)."""
+    out: Counter = Counter()
+    for r in rows:
+        if r["dataset"] in NEW_DATASETS:
+            out[(r["dataset"], r["wave"])] += int(not r["empty"] and not r["refusal"])
+    return dict(out)
+
+
+def h5_excluded(rows: list[dict]) -> set[tuple[str, int]]:
+    """Audit A (spec §2): a wave below 36 of 40 on a platform leaves H5's lag bins
+    for that platform (it stays everywhere else). ``rows`` = the whole frame,
+    flagged answers included."""
+    return {k for k, n in h5_wave_counts(rows).items() if n < AUDIT_A_H5_MIN}
+
+
+def bin_pairs(pairs: list[Pair], bounds: tuple[int, int | None],
+              excluded: set[tuple[str, int]] = frozenset()) -> list[Pair]:
+    return [(x, y) for x, y in pairs
+            if (x["dataset"], x["wave"]) not in excluded and (y["dataset"], y["wave"]) not in excluded
+            and in_days(lag_days(x, y), bounds)]
+
+
+def h5_bins_for(dataset: str) -> tuple[tuple[int, int | None], tuple[int, int | None]]:
+    return (H5_CONSUMER_NEAR, H5_CONSUMER_FAR) if dataset == H5_CONSUMER else (H5_NEAR, H5_FAR)
+
+
+def h5_panel(own: list[dict], dataset: str, *, excluded: set[tuple[str, int]],
+             bins: tuple | None = None, n_boot: int = N_BOOT, by_category: bool = False,
+             halves: dict[str, str] | None = None) -> Panel:
+    """A panel with the ``near`` and ``far`` within-prompt pair sets of H5.
+
+    ``halves`` (Stage 2 H_pla) adds ``near_A``/``far_A``/``near_B``/``far_B``.
+    """
+    near_b, far_b = bins or h5_bins_for(dataset)
+    unit_of = (lambda a: a["category"]) if by_category else None
+    panel = Panel(unit_strata(own, None, unit_of), unit_of=unit_of, n_boot=n_boot)
+    pairs = within_pairs(own)
+    near, far = bin_pairs(pairs, near_b, excluded), bin_pairs(pairs, far_b, excluded)
+    panel.add("near", near)
+    panel.add("far", far)
+    if halves is not None:
+        for h in ("A", "B"):
+            panel.add(f"near_{h}", [p for p in near if halves[p[0]["item_id"]] == h])
+            panel.add(f"far_{h}", [p for p in far if halves[p[0]["item_id"]] == h])
+    return panel
+
+
+def h5_est(panel: Panel, key: str, suffix: str = "") -> Est:
+    """H5 contrast: retention over far pairs minus retention over near pairs."""
+    return panel.est(f"far{suffix}", key) - panel.est(f"near{suffix}", key)
+
+
+def h5_row(panel: Panel, dataset: str, key: str, *, test: str = "H5",
+           band: float = EQ_BAND) -> tuple[dict, Est]:
+    """H5 for one status (unadjusted 90% CI), with the two bin levels and pair counts."""
+    e = h5_est(panel, key)
+    row = test_row(test, "equiv", e, band)
+    n_items = len({x["item_id"] for x, _ in panel.pairs["near"] + panel.pairs["far"]}) or 1
+    near, far = panel.est("near", key), panel.est("far", key)
+    row |= {"dataset": dataset, "key": key, "near": [near.point, *near.ci()],
+            "far": [far.point, *far.ci()], "near_pairs": panel.sets["near"].n_pairs,
+            "far_pairs": panel.sets["far"].n_pairs,
+            "near_per_prompt": panel.sets["near"].n_pairs / n_items,
+            "far_per_prompt": panel.sets["far"].n_pairs / n_items,
+            "near_appearances": panel.appearances("near", key),
+            "far_appearances": panel.appearances("far", key)}
+    return row, e
+
+
+def lag_regression(own: list[dict], key: str, *, excluded: set[tuple[str, int]],
+                   n_boot: int = N_BOOT) -> tuple[Est, int]:
+    """R7: weighted least-squares slope of pair retention on lag (days), every
+    within-prompt pair. Pair retention = 2|A & B| / (|A| + |B|), weighted by
+    |A| + |B| (so the fit is the pooled-Dice analogue); the slope's interval
+    is the prompt-level cluster bootstrap. Returns the slope per day."""
+    strata = unit_strata(own)
+    idx = {u: i for i, u in enumerate(strata[0])}
+    n = len(idx)
+    sums = np.zeros((5, n))  # w, w*x, w*y, w*x^2, w*x*y with w = den, w*y = num
+    pairs = [p for p in within_pairs(own)
+             if (p[0]["dataset"], p[0]["wave"]) not in excluded
+             and (p[1]["dataset"], p[1]["wave"]) not in excluded]
+    for x, y in pairs:
+        num, den = pair_values(x, y)[key]
+        if not den:
+            continue
+        lag = lag_days(x, y)
+        i = idx[x["item_id"]]
+        sums[:, i] += (den, den * lag, num, den * lag * lag, num * lag)
+    W = boot_weights([n], n_boot)
+
+    def slope(Wm: np.ndarray) -> np.ndarray:
+        s = Wm @ sums.T
+        sw, sx, sy, sxx, sxy = s.T
+        d = sw * sxx - sx * sx
+        with np.errstate(invalid="ignore", divide="ignore"):
+            return np.where(d > 0, (sw * sxy - sx * sy) / np.where(d > 0, d, 1), np.nan)
+
+    return Est(float(slope(np.ones((1, n)))[0]), slope(W)), len(pairs)
 
 
 def audit_d_problems(mode: Mode) -> list[str]:

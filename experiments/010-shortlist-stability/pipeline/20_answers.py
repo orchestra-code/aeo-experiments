@@ -22,10 +22,19 @@ Inputs per mode (see common.Mode):
   Refuses (exit 3) before reading any judged file while LEXICON_V3_SHA256 or
   TAXONOMY_B2B_SHA256 is None, or when the task file was not built with the
   frozen lexicon v3.
+  Stage 2 (``--stage 2``): waves 1 to 11, the holdouts as at Stage 1, and the
+  second passes of the Stage 1 sample (reused) and of the Stage 2 sample
+  ``judged_b2b_main_rejudge_s2`` -> ``stage2_answers*.jsonl``. Refuses (exit
+  3) until the Stage 2 re-judge sample and then every wave 8 to 11 task are
+  judged OK (the re-judge files are checked first, so the main judged file is
+  not opened before then).
 - ``--split explore``: tasks_explore + judged_explore (three old datasets).
-- ``--synthetic {planted,broken_join}``: writes a fake world (tasks, judge
-  output, lexicon, best-for files, Audit D score) under
+- ``--synthetic <world>``: writes a fake world (tasks, judge output, lexicon,
+  best-for files, Audit D score, both stages' re-judge samples) under
   ``data/interim/synthetic/<world>/raw/`` and builds it with the same code.
+  Stage 1 worlds ``planted`` and ``broken_join``; Stage 2 worlds
+  ``planted_stable``, ``planted_drift`` and ``broken_join``
+  (``check_synthetic_stage2.sh``).
 
 Instrument helpers (each writes one file under data/raw, refuses to
 overwrite a different existing file, and computes no metric):
@@ -38,17 +47,28 @@ overwrite a different existing file, and computes no metric):
   --split taxonomy_b2b`` and the freeze.
 - ``--write-rejudge-sample``: the seeded 10% Audit E sample of the Stage 1
   new-collection tasks -> ``tasks_b2b_main_rejudge.jsonl`` (then
-  ``judge_runner.mts --split b2b_main_rejudge``).
+  ``judge_runner.mts --split b2b_main_rejudge``). With ``--stage 2``: the
+  seeded 10% of the wave 8 to 11 tasks only, same order convention ->
+  ``tasks_b2b_main_rejudge_s2.jsonl`` (then ``--split b2b_main_rejudge_s2``).
+  Reads task files only, never judge output.
 - ``--gather-bestfor``: after the answer frame is built, the Stage 1 phrases
   (recommended lexicon brands, both judge passes) and the merged frozen
   taxonomy -> ``bestfor_stage1/{phrases,taxonomy}.json``. Then
   ``bestfor_segments.mts normalize``, ``classify --pass a``, ``classify --pass
-  b``, all with ``--split stage1``.
+  b``, all with ``--split stage1``. With ``--stage 2``: every phrase of the
+  Stage 2 frame -> ``bestfor_stage2/phrases_used.json``; those Stage 1 did not
+  classify -> ``bestfor_stage2/phrases.json`` (the classifier's input, same
+  commands with ``--split stage2``); the frozen taxonomy and ``reuse.json``
+  (sha256 of the reused Stage 1 files).
+- ``--synthetic-classify`` (Stage 2 dry runs only): a stand-in for the paid
+  classifier on ``bestfor_stage2/phrases.json``.
 
 Usage:
   uv run python experiments/010-shortlist-stability/pipeline/20_answers.py --stage 1
   uv run python .../20_answers.py --stage 1 --split explore
   uv run python .../20_answers.py --stage 1 --synthetic planted
+  uv run python .../20_answers.py --stage 2 [--write-rejudge-sample | --gather-bestfor]
+  uv run python .../20_answers.py --stage 2 --synthetic planted_stable
 """
 
 from __future__ import annotations
@@ -56,6 +76,8 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import re
+import shutil
 from collections import Counter, defaultdict
 from datetime import date, timedelta
 from pathlib import Path
@@ -72,20 +94,25 @@ from common import (
     PROMPTS_B2B,
     RAW,
     REC,
+    REJUDGE_S2_SPLIT,
     SEED,
     SRC_002,
     SRC_003,
     SRC_005,
     SRC_009,
+    STAGE2_NEW_WAVES,
     STAGE_WAVES,
     TAXONOMY_B2B_SHA256,
+    WAVE_OFFSETS,
     Mode,
     add_mode_args,
+    bestfor_file_shas,
     brands009,
     build_rows,
     holdout_mapper,
     instrument_problems,
     lexicon_file_mapper,
+    load_bestfor,
     load_judged,
     merged_stage_taxonomy,
     mode_from_args,
@@ -94,6 +121,8 @@ from common import (
     refuse,
     rejudge_sample,
     sha256_file,
+    stage1_bestfor_dir,
+    stage2_input_problems,
     usable,
     write_jsonl,
 )
@@ -231,6 +260,14 @@ def build(mode: Mode) -> None:
 
         new_tasks, filtered = load_stage_tasks(raw / "tasks_b2b_main.jsonl", mode.stage)
         meta["lexicon_v3_check"] = check_lexicon_build(new_tasks, patterns, "tasks_b2b_main")
+        if mode.stage == 2:
+            # Stage 2 inputs (every wave 8 to 11 task and the Stage 2 re-judge
+            # sample judged OK) before the frame is built; nothing below runs
+            # on a partly judged collection.
+            problems = stage2_input_problems(raw, new_tasks)
+            if problems:
+                refuse(problems, WHO)
+            meta["stage2_inputs_complete"] = True
         judged = load_judged(raw / "judged_b2b_main.jsonl", {t["task_id"] for t in new_tasks})
         check_judged_canonicals(new_tasks, judged, "judged_b2b_main")
         rows += build_rows(new_tasks, judged, new_mapper, intents, {})
@@ -240,15 +277,19 @@ def build(mode: Mode) -> None:
         hjudged = load_judged(raw / "judged_holdout.jsonl", {t["task_id"] for t in hold})
         rows += build_rows(hold, hjudged, hold_mapper, intents, models)
 
-        rj_new = raw / "tasks_b2b_main_rejudge.jsonl"
-        if rj_new.exists():
-            rt, _ = load_stage_tasks(rj_new, mode.stage)
-            rjud = load_judged(raw / "judged_b2b_main_rejudge.jsonl", {t["task_id"] for t in rt})
-            check_judged_canonicals(rt, rjud, "judged_b2b_main_rejudge")
-            rejudge += build_rows(rt, rjud, new_mapper, intents, {}, pass_name="rejudge")
-        else:
-            log("no tasks_b2b_main_rejudge.jsonl yet (Audit E sample of the new collection; "
-                "20_answers.py --write-rejudge-sample)")
+        for split in mode.rejudge_splits:  # Stage 2 reuses the Stage 1 sample (spec §2 Audit E)
+            rj_new = raw / f"tasks_{split}.jsonl"
+            if rj_new.exists():
+                rt, _ = load_stage_tasks(rj_new, mode.stage)
+                rjud = load_judged(raw / f"judged_{split}.jsonl", {t["task_id"] for t in rt})
+                check_judged_canonicals(rt, rjud, f"judged_{split}")
+                rejudge += build_rows(rt, rjud, new_mapper, intents, {}, pass_name="rejudge")
+            else:
+                log(f"no tasks_{split}.jsonl yet (Audit E sample of the new collection; "
+                    f"20_answers.py{' --stage 2' if split == REJUDGE_S2_SPLIT else ''} "
+                    "--write-rejudge-sample)")
+        if mode.stage == 2:
+            meta["rejudge_splits"] = list(mode.rejudge_splits)
         rj_hold = raw / "tasks_holdout_rejudge.jsonl"
         if rj_hold.exists():
             rt = read_jsonl(rj_hold)
@@ -323,11 +364,17 @@ def write_rejudge_sample(mode: Mode) -> None:
     _, patterns = lexicon_file_mapper(LEXICON_V3)
     tasks, _ = load_stage_tasks(RAW / "tasks_b2b_main.jsonl", mode.stage)
     check_lexicon_build(tasks, patterns, "tasks_b2b_main")
+    split = "b2b_main_rejudge"
+    if mode.stage == 2:
+        # Spec §2 Audit E: the Stage 2 sample is drawn from waves 8 to 11 only
+        # (the Stage 1 sample is reused), in the same seeded order.
+        tasks = [t for t in tasks if int(t["wave"]) in STAGE2_NEW_WAVES]
+        split = REJUDGE_S2_SPLIT
     sample = rejudge_sample(tasks, AUDIT_E_SHARE)
     text = "".join(json.dumps(t) + "\n" for t in sample)
-    write_new_file(RAW / "tasks_b2b_main_rejudge.jsonl", text)
+    write_new_file(RAW / f"tasks_{split}.jsonl", text)
     log(f"{len(sample)} of {len(tasks)} Stage {mode.stage} tasks; judge them with "
-        "judge_runner.mts --split b2b_main_rejudge")
+        f"judge_runner.mts --split {split}")
 
 
 def gather_bestfor(mode: Mode) -> None:
@@ -349,6 +396,9 @@ def gather_bestfor(mode: Mode) -> None:
                     counts[a["category"]].update(a["best_for"].get(b, []))
     phrases = {c: [{"phrase": p, "count": n} for p, n in cnt.most_common()]
                for c, cnt in sorted(counts.items())}
+    if mode.stage == 2:
+        gather_bestfor_stage2(mode, phrases)
+        return
     taxonomy = (merged_stage_taxonomy() if mode.confirmatory
                 else json.loads((mode.bestfor / "taxonomy.json").read_text()))
     missing = sorted(set(phrases) - set(taxonomy))
@@ -360,13 +410,79 @@ def gather_bestfor(mode: Mode) -> None:
         f"--split stage{mode.stage}")
 
 
+def gather_bestfor_stage2(mode: Mode, used: dict[str, list[dict]]) -> None:
+    """Stage 2 best-for files (spec §5 taxonomy protocol, frozen taxonomies).
+
+    Phrases Stage 1 already classified (both passes and a normalized key) are
+    reused from bestfor_stage1; only the others go to ``phrases.json`` for
+    bestfor_segments.mts. Audit G is reported on every phrase in ``used``.
+    """
+    d1 = stage1_bestfor_dir(mode)
+    s1 = load_bestfor(d1)
+    if s1 is None:
+        refuse([f"the Stage 1 best-for files under {d1} are missing (Stage 2 reuses them)"], WHO)
+    taxonomy = merged_stage_taxonomy() if mode.confirmatory else s1.taxonomy
+    if s1.taxonomy != taxonomy:
+        refuse(["bestfor_stage1/taxonomy.json is not the frozen B2B + exploration taxonomy"], WHO)
+    missing = sorted(set(used) - set(taxonomy))
+    if missing:
+        refuse([f"{len(missing)} categories have phrases but no frozen taxonomy"], WHO)
+
+    def known(c: str, p: str) -> bool:
+        return p in s1.norm and p in s1.seg_a.get(c, {}) and p in s1.seg_b.get(c, {})
+
+    new = {c: [e for e in lst if not known(c, e["phrase"])] for c, lst in used.items()}
+    new = {c: lst for c, lst in new.items() if lst}
+    n_used = sum(len(v) for v in used.values())
+    n_new = sum(len(v) for v in new.values())
+    reuse = {"stage1_sha256": bestfor_file_shas(d1), "phrases_used": n_used,
+             "reused_from_stage1": n_used - n_new, "new": n_new}
+    d2 = mode.bestfor
+    write_new_file(d2 / "phrases.json", json.dumps(new, indent=1))
+    write_new_file(d2 / "phrases_used.json", json.dumps(used, indent=1))
+    write_new_file(d2 / "taxonomy.json", json.dumps(taxonomy, indent=1))
+    write_new_file(d2 / "reuse.json", json.dumps(reuse, indent=1) + "\n")
+    log(f"{n_used} distinct phrases in the Stage 2 frame: {n_used - n_new} classified at Stage 1 "
+        f"(reused), {n_new} new")
+    log("next: bestfor_segments.mts normalize, classify --pass a, classify --pass b, all with "
+        "--split stage2")
+
+
+def synthetic_classify(mode: Mode) -> None:
+    """Dry-run stand-in for bestfor_segments.mts normalize + classify (a and b)
+    on bestfor_stage2/phrases.json: the planted segment of each synthetic
+    phrase, with 4% of pass b flipped. Synthetic worlds only."""
+    if mode.kind != "synthetic" or mode.stage != 2:
+        refuse(["--synthetic-classify stands in for the paid classifier in Stage 2 dry runs only"],
+               WHO)
+    d2 = mode.bestfor
+    todo = json.loads((d2 / "phrases.json").read_text())
+    taxonomy = json.loads((d2 / "taxonomy.json").read_text())
+    rng = np.random.default_rng(SEED + 11)
+    norm, sa, sb = {}, {}, {}
+    for c, lst in todo.items():
+        ids = [s["id"] for s in taxonomy[c]]
+        sa[c], sb[c] = {}, {}
+        for e in lst:
+            p = e["phrase"]
+            m = re.match(r"^(.*) (seg_\d+|general) use (\d+)$", p)
+            seg = m.group(2) if m and m.group(2) in ids else "other"
+            norm[p] = p if (not m or m.group(3) == "0") else f"{m.group(1)} {m.group(2)} shared"
+            sa[c][p] = seg
+            sb[c][p] = (str(rng.choice([x for x in ids if x != seg])) if rng.random() < 0.04
+                        else seg)
+    (d2 / "norm.json").write_text(json.dumps(norm, indent=1))
+    (d2 / "segments_a.json").write_text(json.dumps(sa, indent=1))
+    (d2 / "segments_b.json").write_text(json.dumps(sb, indent=1))
+    log(f"synthetic classifier: {len(norm)} new phrases normalized and classified twice")
+
+
 # ------------------------------------------------------- synthetic worlds
 # Fake answers with planted structure, written in the real file formats so
 # the build above (and everything after it) runs unchanged. Brand names are
 # coded (V0307, Hp04, Ag017); categories are "Category 01" to "Category 20".
 
 SCHEDULE_START = date(2026, 10, 3)
-WAVE_OFFSETS = (0, 1, 2, 3, 4, 5, 6, 13, 20, 27, 34)  # run_wave.py, collection_schedule.json
 SEGMENTS = ("seg_1", "seg_2", "seg_3", "seg_4", "general")
 REASONS = ("price", "fit", "complexity", "support")
 
@@ -402,6 +518,44 @@ PLANTED_EXPECT = {
     "chatgpt_agency": {"H1": ("SMALLER", "NOT_SHOWN")},
 }
 
+#: Stage 2 worlds. Both copy the real collection's quirks: one ChatGPT task
+#: of wave 6 run a day late (b2b_11), seven Gemini tasks of wave 8 a day late
+#: and one wave 8 Gemini answer from another model, plus a Gemini wave (3)
+#: with 5 empty answers, so 35 of 40 and out of H5's lag bins for Gemini
+#: (Audit A). From wave 8 a fourth best-for phrase variant appears, so the
+#: Stage 2 best-for gather has new phrases to classify. planted_drift adds
+#: drift on claude_api_b2b: from day 0 to day 27 one core vendor of every
+#: prompt is replaced by another with a chance that grows from 0 to 1, about
+#: a 0.10 drop in shortlist retention between far and near pairs.
+STAGE2_WORLDS = ("planted_stable", "planted_drift")
+DRIFT_DATASET = "claude_api_b2b"
+DRIFT_FULL_DAY = 27
+LATE_TASKS = {("chatgpt_b2b", 6): {"b2b_11"},
+              ("gemini_b2b", 8): {"b2b_02", "b2b_06", "b2b_10", "b2b_11", "b2b_21", "b2b_25",
+                                  "b2b_30"}}
+OTHER_MODEL = {("gemini_b2b", 8, "b2b_14"): "3.6 Flash"}
+SHORT_WAVE = ("gemini_b2b", 3, {f"b2b_{n}" for n in range(31, 36)})
+
+_STABLE = ("NULL", "NEGLIGIBLE")
+PLANTED_EXPECT_STAGE2 = {
+    # world: {dataset: expected H5 verdict(s) on R (Holm-adjusted)}, plus pair counts
+    "planted_stable": {"H5": {"chatgpt_b2b": _STABLE, "gemini_b2b": _STABLE,
+                              "claude_api_b2b": _STABLE},
+                       "H5_consumer": _STABLE},
+    "planted_drift": {"H5": {"chatgpt_b2b": _STABLE, "gemini_b2b": _STABLE,
+                             "claude_api_b2b": ("REAL",)},
+                      "H5_consumer": _STABLE},
+    # usable pairs in H5's bins: ChatGPT loses 2 near pairs to the late task
+    # (b2b_11 waves 4-6 now 3 days apart, waves 6-7 now 0) and 4 near + 1 far
+    # to the planted refusal (wave 3, b2b_05); Gemini's wave 3 leaves the bins
+    # (4 near + 1 far pairs per prompt) and the empty wave 2 answer (b2b_06)
+    # takes 2 more near and 1 far pair.
+    "pairs": {"chatgpt_b2b": {"near": 434, "far": 319}, "gemini_b2b": {"near": 278, "far": 279},
+              "claude_api_b2b": {"near": 440, "far": 320}},
+    "excluded": [["gemini_b2b", 3]],
+    "r2_modal": {"chatgpt_b2b": "gpt-6"},
+}
+
 
 class World:
     def __init__(self, world: str):
@@ -413,6 +567,7 @@ class World:
         self.pool["headphones"] = [f"Hp{j:02d}" for j in range(1, 15)]
         self.pool["coffee"] = [f"Ag{j:03d}" for j in range(1, 121)]
         self.profiles: dict[tuple, dict] = {}
+        self.stage2 = world in STAGE2_WORLDS
 
     # -- instruments
 
@@ -474,18 +629,23 @@ class World:
             self.profiles[key] = {
                 "core": core, "periph": periph,
                 "generic": rest[0] if rest else None, "caution": rest[1] if len(rest) > 1 else None,
+                "drift": rest[2] if len(rest) > 2 else None,
                 "seg": {b: str(self.rng.choice(SEGMENTS)) for b in pool},
                 "untracked": [f"Unlisted {item} {k}" for k in range(4)],
             }
         return self.profiles[key]
 
-    def answer(self, prof: dict, gen: dict, cat: str) -> tuple[list[str], dict, list[str]]:
+    def answer(self, prof: dict, gen: dict, cat: str, drift_p: float = 0.0
+               ) -> tuple[list[str], dict, list[str]]:
         rng = self.rng
-        rec = [b for b, p in zip(prof["core"], gen["p_core"]) if rng.random() < p]
+        core = list(prof["core"])
+        if drift_p > 0 and prof["drift"] and rng.random() < drift_p:
+            core[3] = prof["drift"]  # the planted drift: one core vendor replaced
+        rec = [b for b, p in zip(core, gen["p_core"]) if rng.random() < p]
         rec += [b for b in prof["periph"] if rng.random() < gen["p_periph"]]
         gen_b = [prof["generic"]] if prof["generic"] and rng.random() < gen["p_gen"] else []
         cau = [prof["caution"]] if prof["caution"] and rng.random() < gen["p_cau"] else []
-        base = {b: i for i, b in enumerate(prof["core"] + prof["periph"])}
+        base = {b: i for i, b in enumerate(core + prof["periph"])}
         base |= {prof["generic"]: 3.5, prof["caution"]: 5.5}
         present = rec + gen_b + cau
         key = {b: base[b] + (rng.normal(0, gen["sigma"]) if gen["sigma"] else 0.0)
@@ -505,18 +665,20 @@ class World:
         untracked = [n for n in prof["untracked"] if rng.random() < 0.5]
         return order, cats, untracked
 
-    def best_for(self, prof: dict, b: str, cat: str, gen: dict) -> list[str]:
+    def best_for(self, prof: dict, b: str, cat: str, gen: dict, variants: int = 3) -> list[str]:
         seg = prof["seg"][b]
         if self.rng.random() >= gen["seg_keep"]:
             seg = str(self.rng.choice([s for s in SEGMENTS if s != seg]))
-        return [self.phrase(cat, seg, int(self.rng.integers(0, 3)))]
+        return [self.phrase(cat, seg, int(self.rng.integers(0, variants)))]
 
     def judged(self, tid: str, prof: dict, gen: dict, cat: str, order: list[str],
-               cats: dict[str, str], untracked: list[str], pin: str | None) -> dict:
+               cats: dict[str, str], untracked: list[str], pin: str | None,
+               variants: int = 3) -> dict:
         brands, raw = [], []
         for b in order + untracked:
             c = cats.get(b, "one_of_many")
-            bf = self.best_for(prof, b, cat, gen) if c in REC and b in cats else []
+            bf = (self.best_for(prof, b, cat, gen, variants) if c in REC and b in cats
+                  else [])
             cav = ([{"reasonType": str(self.rng.choice(REASONS)), "reason": "",
                      "reasonNorm": "", "audience": "", "audienceNorm": ""}]
                    if c == "cautioned_against" or (c == "one_of_many" and self.rng.random() < 0.1)
@@ -551,9 +713,10 @@ class World:
                 "tracked": [{"canonical": b, "aliases": [b]} for b in order]}
 
     def emit(self, out: list, judged: list, *, tid, dataset, exp, arm, item, cat, wave,
-             run_date, model, platform, group, gen, pin, special=None) -> None:
+             run_date, model, platform, group, gen, pin, special=None, drift_p=0.0,
+             variants=3) -> None:
         prof = self.profile(group, item, cat, gen)
-        order, cats, untracked = self.answer(prof, gen, cat)
+        order, cats, untracked = self.answer(prof, gen, cat, drift_p)
         if special == "refusal":
             order, cats, untracked = [], {}, []
             answer = "I can't help with that request."
@@ -563,10 +726,12 @@ class World:
             answer = self.text(order, untracked)
         out.append(self.task(tid, dataset, exp, arm, item, cat, wave, run_date, model, platform,
                              order, answer))
-        judged.append(self.judged(tid, prof, gen, cat, order, cats, untracked, pin))
+        judged.append(self.judged(tid, prof, gen, cat, order, cats, untracked, pin, variants))
 
     def build(self, raw: Path) -> None:
         pin = judge_pin_sha()
+        # the Stage 2 best-for files are regenerated from each new world
+        shutil.rmtree(raw / "bestfor_stage2", ignore_errors=True)
         prompts = self.prompts()
         cat_of = {p["item_id"]: p["category"] for p in prompts}
         new_tasks, new_judged = [], []
@@ -578,6 +743,9 @@ class World:
                 day = SCHEDULE_START + timedelta(days=off + (plat != "claude"))
                 model = {"chatgpt": "gpt-5-6" if wave <= 5 else "gpt-6",
                          "gemini": "3.5 Flash-Lite", "claude": "claude-opus-5-5"}[plat]
+                drift_p = (min(1.0, off / DRIFT_FULL_DAY)
+                           if self.world == "planted_drift" and ds == DRIFT_DATASET else 0.0)
+                variants = 4 if self.stage2 and wave >= 8 else 3
                 for p in prompts:
                     item = p["item_id"]
                     special = None
@@ -585,10 +753,18 @@ class World:
                         special = "refusal"
                     if (ds, wave, item) == ("gemini_b2b", 2, "b2b_06"):
                         special = "empty"
+                    run_day, run_model = day, model
+                    if self.stage2:
+                        if item in LATE_TASKS.get((ds, wave), ()):
+                            run_day = day + timedelta(days=1)
+                        run_model = OTHER_MODEL.get((ds, wave, item), model)
+                        if (ds, wave) == SHORT_WAVE[:2] and item in SHORT_WAVE[2]:
+                            special = "empty"
                     self.emit(new_tasks, new_judged, tid=f"{ds}|010|{plat}|{item}|w{wave}",
                               dataset=ds, exp="010", arm=plat, item=item, cat=cat_of[item],
-                              wave=wave, run_date=day.isoformat(), model=model,
-                              platform=platform, group=ds, gen=gen, pin=pin, special=special)
+                              wave=wave, run_date=run_day.isoformat(), model=run_model,
+                              platform=platform, group=ds, gen=gen, pin=pin, special=special,
+                              drift_p=drift_p, variants=variants)
         hold_tasks, hold_judged = [], []
         studies = (("002", 7, date(2026, 7, 17)), ("003", 5, date(2026, 7, 24)),
                    ("005", 5, date(2026, 8, 1)))
@@ -656,6 +832,10 @@ class World:
         write_jsonl(raw / "judged_b2b_main_rejudge.jsonl", [second(t["task_id"]) for t in rj_new])
         write_jsonl(raw / "tasks_holdout_rejudge.jsonl", rj_hold)
         write_jsonl(raw / "judged_holdout_rejudge.jsonl", [second(t["task_id"]) for t in rj_hold])
+        # the Stage 2 Audit E sample: waves 8 to 11 only, same seeded order
+        rj_s2 = rejudge_sample([t for t in new_tasks if t["wave"] in STAGE2_NEW_WAVES])
+        write_jsonl(raw / f"tasks_{REJUDGE_S2_SPLIT}.jsonl", rj_s2)
+        write_jsonl(raw / f"judged_{REJUDGE_S2_SPLIT}.jsonl", [second(t["task_id"]) for t in rj_s2])
         with (raw / PROMPTS_B2B).open("w", newline="") as f:
             w = csv.DictWriter(f, fieldnames=list(prompts[0]))
             w.writeheader()
@@ -674,8 +854,14 @@ class World:
             {"precision": 0.97, "recall": 0.93, "passes": True, "n_answers": 30,
              "signed_by": "synthetic dry run"}, indent=1) + "\n")
         (raw / "planted_expect.json").write_text(json.dumps(PLANTED_EXPECT, indent=1) + "\n")
+        if self.stage2:
+            (raw / "planted_expect_stage2.json").write_text(json.dumps(
+                {"world": self.world, **PLANTED_EXPECT_STAGE2[self.world],
+                 **{k: PLANTED_EXPECT_STAGE2[k] for k in ("pairs", "excluded", "r2_modal")}},
+                indent=1) + "\n")
         log(f"synthetic world {self.world}: {len(new_tasks)} new-collection tasks (waves 1 to "
-            f"11), {len(hold_tasks)} holdout tasks, {len(rj_new) + len(rj_hold)} re-judged")
+            f"11), {len(hold_tasks)} holdout tasks, "
+            f"{len(rj_new) + len(rj_hold) + len(rj_s2)} re-judged")
 
     def misfile(self, tasks: list[dict], prompts: list[dict], lex: Path
                 ) -> tuple[list[dict], dict[str, str]]:
@@ -715,6 +901,8 @@ def main() -> None:
                     help="task/judged split holding new waves 1 and 2 for the taxonomy pool")
     ap.add_argument("--write-rejudge-sample", action="store_true")
     ap.add_argument("--gather-bestfor", action="store_true")
+    ap.add_argument("--synthetic-classify", action="store_true",
+                    help="Stage 2 dry runs: stand in for bestfor_segments.mts on bestfor_stage2/")
     a = ap.parse_args()
     mode = mode_from_args(a)
 
@@ -728,6 +916,9 @@ def main() -> None:
         return
     if a.gather_bestfor:
         gather_bestfor(mode)
+        return
+    if a.synthetic_classify:
+        synthetic_classify(mode)
         return
     if mode.kind == "synthetic":
         World(mode.world).build(mode.raw)
