@@ -597,3 +597,34 @@ All checks run at both stages except R7 (Stage 2 only).
    pre-registered 80% share) and same-platform vs cross-platform shortlist
    agreement (`stage1_platform_agreement`). The all-status figures move to the
    appendix. No test, verdict or estimate changes.
+9. **Stage 2 collection (waves 8 to 11, Oct 16 to Nov 7).** All 40 prompts
+   collected on every platform in every wave. Wave 8: 7 Gemini tasks failed
+   and ran a day late on retry (true run date Oct 18); their wave 8 to 9
+   pairs are 6 days apart, which touches no H5 bin and adds 7 pairs to R7's
+   0 to 6 day bin. Wave 9 started 1 to 2.5 hours late (the collection machine
+   was asleep) and one ChatGPT collection step crashed on a connection reset
+   and finished on Oct 25; no run date changed. The late wave 6 ChatGPT task
+   (deviation 2) moves 2 ChatGPT pairs out of the 1 to 2 day bin (438 near
+   pairs instead of 440). Audit F: ChatGPT reports `gpt-6` on all of waves 6
+   to 11 (`gpt-5-6` in waves 1 to 5), so ChatGPT's far pairs span the model
+   change; one wave 8 Gemini answer reports "3.6 Flash". No wave fell below
+   36 of 40.
+10. **Stage 2 implementation choices (2026-11-09, recorded before any Stage 2
+    metric was computed).** (a) Audit E passes on the seeded 10% sample of
+    waves 8 to 11 (48 answers); the Stage 1 sample is shown alongside. (b)
+    Best-for phrases already classified at Stage 1 keep their Stage 1
+    classifications; only new phrases are classified, with the frozen
+    taxonomies; Audit G reports all phrases Stage 2 uses. (c) Audit A's
+    36-of-40 rule also applies to R7's bins and the lag regression; the
+    descriptive curve keeps every wave. (d) R7's "days 0 to 6 vs 27 to 34"
+    means pair lags. (e) Holm for TOST uses the CI at level 1 - 2 alpha_k, as
+    at Stage 1. (f) H1 to H7 on all 11 waves are reported as estimates with
+    intervals and no verdict labels (firewall rule 3). (g) The claude_api_b2b
+    vs 009 opus55_plain comparison counts lexicon v2.1 brands on both sides
+    (as-built v3 rows shown too). (h) R7's regression is pair retention on
+    lag, weighted by appearances, reported as change per 30 days. (i) The
+    lead figure is shortlist only, following deviation 8. (j) The Stage 2
+    placebo (H5 on random halves, +/-0.05) came out inconclusive on 2 of 3
+    platforms in the no-drift synthetic world (half-panel interval about
+    0.04 wide), so it is underpowered by design; as at Stage 1 it warns and
+    does not stop.

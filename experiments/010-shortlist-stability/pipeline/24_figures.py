@@ -27,9 +27,21 @@ metric and cannot run before 22_model.py has passed its gate and H_pos.
 Color follows the platform (aeo_research.plotting.PLATFORM_COLORS, validated
 palette); claude.ai shares Claude's hue with a hollow marker.
 
+Stage 2 (``--stage 2``, reads only ``results/stage2_model.json``), spec §9
+article 2 lead figure, split the way Jim chose at Stage 1 (the shortlist is
+the story):
+
+S0 stage2_shortlist_by_lag  LEAD. Shortlist (R) retention by days between
+   the two answers, one line per platform (ChatGPT, Gemini, Claude API) with
+   its 90% band; the two bins H5 compares are shaded, and each platform's
+   label carries its far-minus-near change.
+S1 stage2_status_by_lag  The same curve for the shortlist, the best-for use
+   case (WS) and the top choice (T), one panel per platform.
+
 Usage:
   uv run python experiments/010-shortlist-stability/pipeline/24_figures.py --stage 1
   uv run python .../24_figures.py --stage 1 --split explore | --synthetic planted
+  uv run python .../24_figures.py --stage 2 [--synthetic planted_stable]
 """
 
 from __future__ import annotations
@@ -38,6 +50,7 @@ import argparse
 import json
 
 import matplotlib.pyplot as plt
+from matplotlib.lines import Line2D
 import numpy as np
 from common import MARGIN, PRIMARY, add_mode_args, mode_from_args
 
@@ -47,6 +60,7 @@ from aeo_research.plotting import (
     INK,
     INK_MUTED,
     PLATFORM_COLORS,
+    PLATFORM_MARKERS,
     save_figure,
     theme,
 )
@@ -269,6 +283,116 @@ def f2_gaps(res: dict, outdir, tag: str) -> None:
     save_figure(fig, outdir, "stage1_gaps")
 
 
+# ------------------------------------------------------------------ Stage 2
+
+S2_ORDER = ("chatgpt_b2b", "gemini_b2b", "claude_api_b2b")
+#: Bins with fewer pairs than this (about one per prompt) are left off the
+#: lines; they are in the model tables.
+S2_MIN_PAIRS = 40
+S2_STATUS = (("R", "On the shortlist", "-", "o"), ("WS", "Best for the same use case", "--", "s"),
+             ("T", "The top pick", ":", "^"))
+
+
+def s2_points(curve: dict, key: str) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
+    bins = [b for b in curve["bins"] if b["pairs"] >= S2_MIN_PAIRS and b[key][0] is not None]
+    x = np.array([b["mean_lag"] for b in bins])
+    est, lo, hi = (np.array([b[key][i] for b in bins], dtype=float) for i in range(3))
+    return x, est, lo, hi
+
+
+def s2_days_axis(ax) -> None:
+    ax.set_xlim(-0.5, 36)
+    ax.set_xticks([0, 7, 14, 21, 28, 35])
+    ax.set_ylim(0, 1.0)
+    ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda v, _: f"{v:.0%}"))
+    ax.grid(axis="y", color=GRID)
+    ax.grid(axis="x", visible=False)
+
+
+def change_words(r: dict | None) -> str:
+    """H5 in words for the legend: the change a month apart against a day or two apart."""
+    if not r or r.get("estimate") is None:
+        return ""
+    pts = round(100 * r["estimate"])
+    if pts == 0:
+        return ": no change a month apart against a day or two apart"
+    unit = "point" if abs(pts) == 1 else "points"
+    return f": {abs(pts)} {unit} {'lower' if pts < 0 else 'higher'} a month apart than a day or two apart"
+
+
+def s0_shortlist_by_lag(res: dict, outdir, tag: str) -> None:
+    meta, curves = res["meta"], (res.get("descriptives") or {}).get("curve") or {}
+    datasets = [ds for ds in S2_ORDER if ds in curves]
+    if not datasets:
+        print("no lag curves in the Stage 2 model results; S0 skipped")
+        return
+    h5 = {r["dataset"]: r for r in res.get("primary", [])}
+    fig, ax = plt.subplots(figsize=(12, 6.4))
+    for lo, hi in ((1, 2), (27, 34)):
+        ax.axvspan(lo - 0.5, hi + 0.5, color=GRID, alpha=0.35, lw=0, zorder=0)
+    ax.text(1.5, 0.03, "1 to 2\ndays", ha="center", va="bottom", fontsize=10, color=INK_MUTED)
+    ax.text(30.5, 0.03, "27 days\nor more", ha="center", va="bottom", fontsize=10,
+            color=INK_MUTED)
+    ends = []
+    for ds in datasets:
+        x, est, lo, hi = s2_points(curves[ds], "R")
+        color = PLATFORM_COLORS[meta["color_keys"][ds]]
+        marker = PLATFORM_MARKERS.get(meta["color_keys"][ds], "o")
+        ax.fill_between(x, lo, hi, color=color, alpha=0.15, lw=0, zorder=1)
+        ax.plot(x, est, color=color, lw=2, marker=marker, ms=8, mec="white", mew=1.5,
+                zorder=3, label=f"{meta['labels'][ds]}{change_words(h5.get(ds))}")
+        ends.append([est[-1], x[-1], f"{meta['labels'][ds]} {est[-1]:.0%}"])
+    # direct labels at the line ends, nudged apart so they never overlap
+    ends.sort()
+    for k in range(1, len(ends)):
+        ends[k][0] = max(ends[k][0], ends[k - 1][0] + 0.045)
+    for yv, xv, text in ends:
+        ax.text(xv + 0.6, yv, text, va="center", fontsize=11, color=INK)
+    s2_days_axis(ax)
+    ax.set_xlim(-0.5, 39)
+    ax.set_xlabel("Days between the two answers to the same question")
+    ax.set_ylabel("Shortlisted vendors shortlisted again")
+    ax.legend(loc="lower left", bbox_to_anchor=(0, 0.12), frameon=False, fontsize=11)
+    fig.suptitle(f"How often AI shortlists a vendor again, by days between the answers{tag}\n"
+                 "40 B2B buying questions asked on 11 days over five weeks. Line: share. Band: "
+                 "90% interval. Shaded: the two gaps the study compares.", x=0.01, ha="left",
+                 fontsize=14, color=INK, linespacing=1.6)
+    fig.subplots_adjust(top=0.84)
+    save_figure(fig, outdir, "stage2_shortlist_by_lag")
+
+
+def s1_status_by_lag(res: dict, outdir, tag: str) -> None:
+    meta, curves = res["meta"], (res.get("descriptives") or {}).get("curve") or {}
+    datasets = [ds for ds in S2_ORDER if ds in curves]
+    if not datasets:
+        print("no lag curves in the Stage 2 model results; S1 skipped")
+        return
+    fig, axes = plt.subplots(1, len(datasets), figsize=(13, 6.0), sharey=True, squeeze=False)
+    for ax, ds in zip(axes[0], datasets):
+        color = PLATFORM_COLORS[meta["color_keys"][ds]]
+        for key, label, ls, marker in S2_STATUS:
+            x, est, lo, hi = s2_points(curves[ds], key)
+            if not x.size:
+                continue
+            ax.fill_between(x, lo, hi, color=color, alpha=0.10, lw=0, zorder=1)
+            ax.plot(x, est, color=color, lw=2, ls=ls, marker=marker, ms=8, mec="white",
+                    mew=1.5, zorder=3, label=label)
+        s2_days_axis(ax)
+        ax.set_title(f"{meta['labels'][ds]} ({meta['n_answers'][ds]:,} answers)", fontsize=12)
+        ax.set_xlabel("Days between the two answers")
+    axes[0][0].set_ylabel("Share kept in the other answer")
+    handles = [Line2D([], [], color=INK_MUTED, lw=2, ls=ls, marker=marker, ms=8, label=label)
+               for _, label, ls, marker in S2_STATUS]
+    leg = axes[0][0].legend(handles=handles, loc="lower left", bbox_to_anchor=(-0.02, 1.07),
+                            ncol=3, frameon=False, fontsize=11)
+    leg.set_in_layout(False)  # keeps the wide legend from squeezing the panels
+    fig.suptitle(f"The shortlist, the use case and the top pick over five weeks{tag}\n"
+                 "Same question, answers some days apart. Line: share kept. Band: 90% "
+                 "interval.\n ", x=0.01, ha="left", fontsize=14, color=INK, linespacing=1.6)
+    fig.subplots_adjust(top=0.72)
+    save_figure(fig, outdir, "stage2_status_by_lag")
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -284,6 +408,11 @@ def main() -> None:
     tag = {"synthetic": " (synthetic test data)", "explore": " (exploration data)"}.get(
         mode.kind, "")
     theme()
+    if mode.stage == 2:
+        s0_shortlist_by_lag(res, mode.figures, tag)
+        s1_status_by_lag(res, mode.figures, tag)
+        print(f"wrote figures to {mode.figures}")
+        return
     f0_shortlist(res, mode.figures, tag)
     f3_shortlist_runs(res, mode.figures, tag)
     f4_platform_agreement(res, mode.figures, tag)
