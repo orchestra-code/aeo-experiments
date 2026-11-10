@@ -1,0 +1,1181 @@
+{
+ "A": {
+  "new": [
+   {
+    "dataset": "chatgpt_b2b",
+    "wave": 1,
+    "collected": 40,
+    "ok": 40,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0,
+    "passes": true,
+    "h5_bins": true
+   },
+   {
+    "dataset": "chatgpt_b2b",
+    "wave": 2,
+    "collected": 40,
+    "ok": 40,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0,
+    "passes": true,
+    "h5_bins": true
+   },
+   {
+    "dataset": "chatgpt_b2b",
+    "wave": 3,
+    "collected": 40,
+    "ok": 40,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0,
+    "passes": true,
+    "h5_bins": true
+   },
+   {
+    "dataset": "chatgpt_b2b",
+    "wave": 4,
+    "collected": 40,
+    "ok": 40,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0,
+    "passes": true,
+    "h5_bins": true
+   },
+   {
+    "dataset": "chatgpt_b2b",
+    "wave": 5,
+    "collected": 40,
+    "ok": 40,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0,
+    "passes": true,
+    "h5_bins": true
+   },
+   {
+    "dataset": "chatgpt_b2b",
+    "wave": 6,
+    "collected": 40,
+    "ok": 40,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0,
+    "passes": true,
+    "h5_bins": true
+   },
+   {
+    "dataset": "chatgpt_b2b",
+    "wave": 7,
+    "collected": 40,
+    "ok": 40,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0,
+    "passes": true,
+    "h5_bins": true
+   },
+   {
+    "dataset": "chatgpt_b2b",
+    "wave": 8,
+    "collected": 40,
+    "ok": 40,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0,
+    "passes": true,
+    "h5_bins": true
+   },
+   {
+    "dataset": "chatgpt_b2b",
+    "wave": 9,
+    "collected": 40,
+    "ok": 40,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0,
+    "passes": true,
+    "h5_bins": true
+   },
+   {
+    "dataset": "chatgpt_b2b",
+    "wave": 10,
+    "collected": 40,
+    "ok": 40,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0,
+    "passes": true,
+    "h5_bins": true
+   },
+   {
+    "dataset": "chatgpt_b2b",
+    "wave": 11,
+    "collected": 40,
+    "ok": 40,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0,
+    "passes": true,
+    "h5_bins": true
+   },
+   {
+    "dataset": "gemini_b2b",
+    "wave": 1,
+    "collected": 40,
+    "ok": 40,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0,
+    "passes": true,
+    "h5_bins": true
+   },
+   {
+    "dataset": "gemini_b2b",
+    "wave": 2,
+    "collected": 40,
+    "ok": 40,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0,
+    "passes": true,
+    "h5_bins": true
+   },
+   {
+    "dataset": "gemini_b2b",
+    "wave": 3,
+    "collected": 40,
+    "ok": 40,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0,
+    "passes": true,
+    "h5_bins": true
+   },
+   {
+    "dataset": "gemini_b2b",
+    "wave": 4,
+    "collected": 40,
+    "ok": 40,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0,
+    "passes": true,
+    "h5_bins": true
+   },
+   {
+    "dataset": "gemini_b2b",
+    "wave": 5,
+    "collected": 40,
+    "ok": 40,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0,
+    "passes": true,
+    "h5_bins": true
+   },
+   {
+    "dataset": "gemini_b2b",
+    "wave": 6,
+    "collected": 40,
+    "ok": 40,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0,
+    "passes": true,
+    "h5_bins": true
+   },
+   {
+    "dataset": "gemini_b2b",
+    "wave": 7,
+    "collected": 40,
+    "ok": 40,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0,
+    "passes": true,
+    "h5_bins": true
+   },
+   {
+    "dataset": "gemini_b2b",
+    "wave": 8,
+    "collected": 40,
+    "ok": 40,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0,
+    "passes": true,
+    "h5_bins": true
+   },
+   {
+    "dataset": "gemini_b2b",
+    "wave": 9,
+    "collected": 40,
+    "ok": 40,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0,
+    "passes": true,
+    "h5_bins": true
+   },
+   {
+    "dataset": "gemini_b2b",
+    "wave": 10,
+    "collected": 40,
+    "ok": 40,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0,
+    "passes": true,
+    "h5_bins": true
+   },
+   {
+    "dataset": "gemini_b2b",
+    "wave": 11,
+    "collected": 40,
+    "ok": 40,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0,
+    "passes": true,
+    "h5_bins": true
+   },
+   {
+    "dataset": "claude_api_b2b",
+    "wave": 1,
+    "collected": 40,
+    "ok": 40,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0,
+    "passes": true,
+    "h5_bins": true
+   },
+   {
+    "dataset": "claude_api_b2b",
+    "wave": 2,
+    "collected": 40,
+    "ok": 40,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0,
+    "passes": true,
+    "h5_bins": true
+   },
+   {
+    "dataset": "claude_api_b2b",
+    "wave": 3,
+    "collected": 40,
+    "ok": 40,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0,
+    "passes": true,
+    "h5_bins": true
+   },
+   {
+    "dataset": "claude_api_b2b",
+    "wave": 4,
+    "collected": 40,
+    "ok": 40,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0,
+    "passes": true,
+    "h5_bins": true
+   },
+   {
+    "dataset": "claude_api_b2b",
+    "wave": 5,
+    "collected": 40,
+    "ok": 40,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0,
+    "passes": true,
+    "h5_bins": true
+   },
+   {
+    "dataset": "claude_api_b2b",
+    "wave": 6,
+    "collected": 40,
+    "ok": 40,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0,
+    "passes": true,
+    "h5_bins": true
+   },
+   {
+    "dataset": "claude_api_b2b",
+    "wave": 7,
+    "collected": 40,
+    "ok": 40,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0,
+    "passes": true,
+    "h5_bins": true
+   },
+   {
+    "dataset": "claude_api_b2b",
+    "wave": 8,
+    "collected": 40,
+    "ok": 40,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0,
+    "passes": true,
+    "h5_bins": true
+   },
+   {
+    "dataset": "claude_api_b2b",
+    "wave": 9,
+    "collected": 40,
+    "ok": 40,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0,
+    "passes": true,
+    "h5_bins": true
+   },
+   {
+    "dataset": "claude_api_b2b",
+    "wave": 10,
+    "collected": 40,
+    "ok": 40,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0,
+    "passes": true,
+    "h5_bins": true
+   },
+   {
+    "dataset": "claude_api_b2b",
+    "wave": 11,
+    "collected": 40,
+    "ok": 40,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0,
+    "passes": true,
+    "h5_bins": true
+   }
+  ],
+  "holdout": [
+   {
+    "dataset": "chatgpt_agency",
+    "arm": "chatgpt",
+    "runs": 3,
+    "prompts": 27,
+    "answers": 81,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0
+   },
+   {
+    "dataset": "chatgpt_consumer",
+    "arm": "chatgpt",
+    "runs": 17,
+    "prompts": 95,
+    "answers": 1615,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0
+   },
+   {
+    "dataset": "claude_b2b",
+    "arm": "opus55_plain",
+    "runs": 3,
+    "prompts": 26,
+    "answers": 78,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0
+   },
+   {
+    "dataset": "claude_b2b",
+    "arm": "ui_default",
+    "runs": 3,
+    "prompts": 26,
+    "answers": 78,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0
+   },
+   {
+    "dataset": "claude_b2b",
+    "arm": "ui_think",
+    "runs": 3,
+    "prompts": 26,
+    "answers": 78,
+    "refusals": 0,
+    "empty": 0,
+    "judge_failures": 0
+   }
+  ],
+  "passes": true,
+  "lag_bins": {
+   "excluded_waves": [],
+   "datasets": {
+    "chatgpt_b2b": {
+     "prompts": 40,
+     "near": 438,
+     "far": 320,
+     "r7_near": 840,
+     "r7_far": 320,
+     "per_prompt": {
+      "near": 10.95,
+      "far": 8.0,
+      "r7_near": 21.0,
+      "r7_far": 8.0
+     },
+     "moved": [
+      {
+       "item_id": "b2b_11",
+       "waves": [
+        4,
+        6
+       ],
+       "scheduled_lag": 2,
+       "true_lag": 3,
+       "bins_changed": [
+        "leaves near"
+       ]
+      },
+      {
+       "item_id": "b2b_11",
+       "waves": [
+        6,
+        7
+       ],
+       "scheduled_lag": 1,
+       "true_lag": 0,
+       "bins_changed": [
+        "leaves near"
+       ]
+      }
+     ]
+    },
+    "gemini_b2b": {
+     "prompts": 40,
+     "near": 440,
+     "far": 320,
+     "r7_near": 847,
+     "r7_far": 320,
+     "per_prompt": {
+      "near": 11.0,
+      "far": 8.0,
+      "r7_near": 21.175,
+      "r7_far": 8.0
+     },
+     "moved": [
+      {
+       "item_id": "b2b_25",
+       "waves": [
+        8,
+        9
+       ],
+       "scheduled_lag": 7,
+       "true_lag": 6,
+       "bins_changed": [
+        "enters r7_near"
+       ]
+      },
+      {
+       "item_id": "b2b_21",
+       "waves": [
+        8,
+        9
+       ],
+       "scheduled_lag": 7,
+       "true_lag": 6,
+       "bins_changed": [
+        "enters r7_near"
+       ]
+      },
+      {
+       "item_id": "b2b_02",
+       "waves": [
+        8,
+        9
+       ],
+       "scheduled_lag": 7,
+       "true_lag": 6,
+       "bins_changed": [
+        "enters r7_near"
+       ]
+      },
+      {
+       "item_id": "b2b_10",
+       "waves": [
+        8,
+        9
+       ],
+       "scheduled_lag": 7,
+       "true_lag": 6,
+       "bins_changed": [
+        "enters r7_near"
+       ]
+      },
+      {
+       "item_id": "b2b_11",
+       "waves": [
+        8,
+        9
+       ],
+       "scheduled_lag": 7,
+       "true_lag": 6,
+       "bins_changed": [
+        "enters r7_near"
+       ]
+      },
+      {
+       "item_id": "b2b_06",
+       "waves": [
+        8,
+        9
+       ],
+       "scheduled_lag": 7,
+       "true_lag": 6,
+       "bins_changed": [
+        "enters r7_near"
+       ]
+      },
+      {
+       "item_id": "b2b_30",
+       "waves": [
+        8,
+        9
+       ],
+       "scheduled_lag": 7,
+       "true_lag": 6,
+       "bins_changed": [
+        "enters r7_near"
+       ]
+      }
+     ]
+    },
+    "claude_api_b2b": {
+     "prompts": 40,
+     "near": 440,
+     "far": 320,
+     "r7_near": 840,
+     "r7_far": 320,
+     "per_prompt": {
+      "near": 11.0,
+      "far": 8.0,
+      "r7_near": 21.0,
+      "r7_far": 8.0
+     },
+     "moved": []
+    },
+    "chatgpt_consumer": {
+     "near": 2945,
+     "far": 2185,
+     "lag_range": [
+      0,
+      20
+     ]
+    }
+   }
+  }
+ },
+ "B": {
+  "chatgpt_b2b": {
+   "answers": 440,
+   "demoted": 0.038636363636363635,
+   "over_cap": 0.0,
+   "fallback_mapped": 0,
+   "untracked_per_answer": 3.1772727272727272
+  },
+  "gemini_b2b": {
+   "answers": 440,
+   "demoted": 0.00909090909090909,
+   "over_cap": 0.0,
+   "fallback_mapped": 0,
+   "untracked_per_answer": 3.456818181818182
+  },
+  "claude_api_b2b": {
+   "answers": 440,
+   "demoted": 0.013636363636363636,
+   "over_cap": 0.0,
+   "fallback_mapped": 0,
+   "untracked_per_answer": 3.831818181818182
+  },
+  "claude_b2b": {
+   "answers": 234,
+   "demoted": 0.029914529914529916,
+   "over_cap": 0.004273504273504274,
+   "fallback_mapped": 1,
+   "untracked_per_answer": 3.517094017094017
+  },
+  "chatgpt_consumer": {
+   "answers": 1615,
+   "demoted": 0.007430340557275541,
+   "over_cap": 0.0,
+   "fallback_mapped": 0,
+   "untracked_per_answer": 0.6198142414860681
+  },
+  "chatgpt_agency": {
+   "answers": 81,
+   "demoted": 0.04938271604938271,
+   "over_cap": 0.012345679012345678,
+   "fallback_mapped": 0,
+   "untracked_per_answer": 5.283950617283951
+  },
+  "judge_rows_off_pin": 0
+ },
+ "D": {
+  "status": "scored",
+  "passes": true,
+  "precision": 1.0,
+  "recall": 1.0,
+  "signed_by": "Jim Wrubel"
+ },
+ "E": {
+  "groups": {
+   "Stage 2 sample (waves 8 to 11)": {
+    "answers": 48,
+    "mentions": 340,
+    "agreement": 0.9558823529411765,
+    "kappa": 0.8876553000264341,
+    "top_choices": 22,
+    "top_kept": 0.8636363636363636,
+    "changes": {
+     "top_choice -> one_of_many": 3,
+     "one_of_many -> generic_mention": 3,
+     "unclassified -> generic_mention": 2,
+     "generic_mention -> unclassified": 2,
+     "generic_mention -> one_of_many": 2,
+     "one_of_many -> cautioned_against": 2,
+     "one_of_many -> top_choice": 1
+    }
+   },
+   "chatgpt_b2b, waves 8 to 11": {
+    "answers": 18,
+    "mentions": 113,
+    "agreement": 0.9380530973451328,
+    "kappa": 0.8717990275526742,
+    "top_choices": 13,
+    "top_kept": 0.9230769230769231,
+    "changes": {
+     "one_of_many -> generic_mention": 2,
+     "top_choice -> one_of_many": 1,
+     "unclassified -> generic_mention": 1,
+     "one_of_many -> top_choice": 1,
+     "generic_mention -> one_of_many": 1,
+     "generic_mention -> unclassified": 1
+    }
+   },
+   "gemini_b2b, waves 8 to 11": {
+    "answers": 11,
+    "mentions": 46,
+    "agreement": 0.9347826086956522,
+    "kappa": 0.8205461638491548,
+    "top_choices": 2,
+    "top_kept": 0.5,
+    "changes": {
+     "top_choice -> one_of_many": 1,
+     "unclassified -> generic_mention": 1,
+     "one_of_many -> generic_mention": 1
+    }
+   },
+   "claude_api_b2b, waves 8 to 11": {
+    "answers": 19,
+    "mentions": 181,
+    "agreement": 0.9723756906077348,
+    "kappa": 0.9170865781035271,
+    "top_choices": 7,
+    "top_kept": 0.8571428571428571,
+    "changes": {
+     "one_of_many -> cautioned_against": 2,
+     "generic_mention -> unclassified": 1,
+     "top_choice -> one_of_many": 1,
+     "generic_mention -> one_of_many": 1
+    }
+   },
+   "Stage 1 sample (waves 1 to 7, reused)": {
+    "answers": 84,
+    "mentions": 567,
+    "agreement": 0.9365079365079365,
+    "kappa": 0.8671923797626483,
+    "top_choices": 67,
+    "top_kept": 0.8955223880597015,
+    "changes": {
+     "one_of_many -> top_choice": 9,
+     "top_choice -> one_of_many": 7,
+     "one_of_many -> unclassified": 4,
+     "cautioned_against -> one_of_many": 3,
+     "generic_mention -> one_of_many": 3,
+     "unclassified -> generic_mention": 3,
+     "one_of_many -> generic_mention": 3,
+     "generic_mention -> unclassified": 3,
+     "one_of_many -> cautioned_against": 1
+    }
+   },
+   "new collection, both samples": {
+    "answers": 132,
+    "mentions": 907,
+    "agreement": 0.9437706725468578,
+    "kappa": 0.8744994302458082,
+    "top_choices": 89,
+    "top_kept": 0.8876404494382022,
+    "changes": {
+     "top_choice -> one_of_many": 10,
+     "one_of_many -> top_choice": 10,
+     "one_of_many -> generic_mention": 6,
+     "generic_mention -> one_of_many": 5,
+     "unclassified -> generic_mention": 5,
+     "generic_mention -> unclassified": 5,
+     "one_of_many -> unclassified": 4,
+     "cautioned_against -> one_of_many": 3,
+     "one_of_many -> cautioned_against": 3
+    }
+   },
+   "all, with the holdout samples": {
+    "answers": 325,
+    "mentions": 1832,
+    "agreement": 0.9557860262008734,
+    "kappa": 0.8923354526399189,
+    "top_choices": 241,
+    "top_kept": 0.91701244813278,
+    "changes": {
+     "top_choice -> one_of_many": 20,
+     "one_of_many -> top_choice": 15,
+     "generic_mention -> one_of_many": 13,
+     "one_of_many -> generic_mention": 8,
+     "one_of_many -> unclassified": 7,
+     "unclassified -> generic_mention": 5,
+     "one_of_many -> cautioned_against": 5,
+     "generic_mention -> unclassified": 5,
+     "cautioned_against -> one_of_many": 3
+    }
+   }
+  },
+  "passes": true,
+  "agreement": 0.9558823529411765
+ },
+ "F": {
+  "chatgpt_b2b": {
+   "modal": "gpt-6",
+   "models": {
+    "gpt-5-6": 200,
+    "gpt-6": 240
+   },
+   "waves": {
+    "1": {
+     "answers": 40,
+     "models": {
+      "gpt-5-6": 40
+     },
+     "run_dates": {
+      "2026-10-04": 40
+     }
+    },
+    "2": {
+     "answers": 40,
+     "models": {
+      "gpt-5-6": 40
+     },
+     "run_dates": {
+      "2026-10-05": 40
+     }
+    },
+    "3": {
+     "answers": 40,
+     "models": {
+      "gpt-5-6": 40
+     },
+     "run_dates": {
+      "2026-10-06": 40
+     }
+    },
+    "4": {
+     "answers": 40,
+     "models": {
+      "gpt-5-6": 40
+     },
+     "run_dates": {
+      "2026-10-07": 40
+     }
+    },
+    "5": {
+     "answers": 40,
+     "models": {
+      "gpt-5-6": 40
+     },
+     "run_dates": {
+      "2026-10-08": 40
+     }
+    },
+    "6": {
+     "answers": 40,
+     "models": {
+      "gpt-6": 40
+     },
+     "run_dates": {
+      "2026-10-09": 39,
+      "2026-10-10": 1
+     }
+    },
+    "7": {
+     "answers": 40,
+     "models": {
+      "gpt-6": 40
+     },
+     "run_dates": {
+      "2026-10-10": 40
+     }
+    },
+    "8": {
+     "answers": 40,
+     "models": {
+      "gpt-6": 40
+     },
+     "run_dates": {
+      "2026-10-17": 40
+     }
+    },
+    "9": {
+     "answers": 40,
+     "models": {
+      "gpt-6": 40
+     },
+     "run_dates": {
+      "2026-10-24": 40
+     }
+    },
+    "10": {
+     "answers": 40,
+     "models": {
+      "gpt-6": 40
+     },
+     "run_dates": {
+      "2026-10-31": 40
+     }
+    },
+    "11": {
+     "answers": 40,
+     "models": {
+      "gpt-6": 40
+     },
+     "run_dates": {
+      "2026-11-07": 40
+     }
+    }
+   },
+   "off_modal_share": 0.4545454545454546,
+   "waves_with_other_modal": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "waves_with_two_models": []
+  },
+  "gemini_b2b": {
+   "modal": "3.5 Flash-Lite",
+   "models": {
+    "3.5 Flash-Lite": 439,
+    "3.6 Flash": 1
+   },
+   "waves": {
+    "1": {
+     "answers": 40,
+     "models": {
+      "3.5 Flash-Lite": 40
+     },
+     "run_dates": {
+      "2026-10-04": 40
+     }
+    },
+    "2": {
+     "answers": 40,
+     "models": {
+      "3.5 Flash-Lite": 40
+     },
+     "run_dates": {
+      "2026-10-05": 40
+     }
+    },
+    "3": {
+     "answers": 40,
+     "models": {
+      "3.5 Flash-Lite": 40
+     },
+     "run_dates": {
+      "2026-10-06": 40
+     }
+    },
+    "4": {
+     "answers": 40,
+     "models": {
+      "3.5 Flash-Lite": 40
+     },
+     "run_dates": {
+      "2026-10-07": 40
+     }
+    },
+    "5": {
+     "answers": 40,
+     "models": {
+      "3.5 Flash-Lite": 40
+     },
+     "run_dates": {
+      "2026-10-08": 40
+     }
+    },
+    "6": {
+     "answers": 40,
+     "models": {
+      "3.5 Flash-Lite": 40
+     },
+     "run_dates": {
+      "2026-10-09": 40
+     }
+    },
+    "7": {
+     "answers": 40,
+     "models": {
+      "3.5 Flash-Lite": 40
+     },
+     "run_dates": {
+      "2026-10-10": 40
+     }
+    },
+    "8": {
+     "answers": 40,
+     "models": {
+      "3.5 Flash-Lite": 39,
+      "3.6 Flash": 1
+     },
+     "run_dates": {
+      "2026-10-17": 33,
+      "2026-10-18": 7
+     }
+    },
+    "9": {
+     "answers": 40,
+     "models": {
+      "3.5 Flash-Lite": 40
+     },
+     "run_dates": {
+      "2026-10-24": 40
+     }
+    },
+    "10": {
+     "answers": 40,
+     "models": {
+      "3.5 Flash-Lite": 40
+     },
+     "run_dates": {
+      "2026-10-31": 40
+     }
+    },
+    "11": {
+     "answers": 40,
+     "models": {
+      "3.5 Flash-Lite": 40
+     },
+     "run_dates": {
+      "2026-11-07": 40
+     }
+    }
+   },
+   "off_modal_share": 0.002272727272727315,
+   "waves_with_other_modal": [],
+   "waves_with_two_models": [
+    8
+   ]
+  },
+  "claude_api_b2b": {
+   "modal": "claude-opus-5-5",
+   "models": {
+    "claude-opus-5-5": 440
+   },
+   "waves": {
+    "1": {
+     "answers": 40,
+     "models": {
+      "claude-opus-5-5": 40
+     },
+     "run_dates": {
+      "2026-10-03": 40
+     }
+    },
+    "2": {
+     "answers": 40,
+     "models": {
+      "claude-opus-5-5": 40
+     },
+     "run_dates": {
+      "2026-10-04": 40
+     }
+    },
+    "3": {
+     "answers": 40,
+     "models": {
+      "claude-opus-5-5": 40
+     },
+     "run_dates": {
+      "2026-10-05": 40
+     }
+    },
+    "4": {
+     "answers": 40,
+     "models": {
+      "claude-opus-5-5": 40
+     },
+     "run_dates": {
+      "2026-10-06": 40
+     }
+    },
+    "5": {
+     "answers": 40,
+     "models": {
+      "claude-opus-5-5": 40
+     },
+     "run_dates": {
+      "2026-10-07": 40
+     }
+    },
+    "6": {
+     "answers": 40,
+     "models": {
+      "claude-opus-5-5": 40
+     },
+     "run_dates": {
+      "2026-10-08": 40
+     }
+    },
+    "7": {
+     "answers": 40,
+     "models": {
+      "claude-opus-5-5": 40
+     },
+     "run_dates": {
+      "2026-10-09": 40
+     }
+    },
+    "8": {
+     "answers": 40,
+     "models": {
+      "claude-opus-5-5": 40
+     },
+     "run_dates": {
+      "2026-10-16": 40
+     }
+    },
+    "9": {
+     "answers": 40,
+     "models": {
+      "claude-opus-5-5": 40
+     },
+     "run_dates": {
+      "2026-10-23": 40
+     }
+    },
+    "10": {
+     "answers": 40,
+     "models": {
+      "claude-opus-5-5": 40
+     },
+     "run_dates": {
+      "2026-10-30": 40
+     }
+    },
+    "11": {
+     "answers": 40,
+     "models": {
+      "claude-opus-5-5": 40
+     },
+     "run_dates": {
+      "2026-11-06": 40
+     }
+    }
+   },
+   "off_modal_share": 0.0,
+   "waves_with_other_modal": [],
+   "waves_with_two_models": []
+  },
+  "claude_b2b (opus55_plain)": {
+   "modal": "claude-opus-5-5",
+   "models": {
+    "claude-opus-5-5": 78
+   },
+   "off_modal_share": 0.0,
+   "runs_with_other_modal": []
+  },
+  "claude_b2b": {
+   "modal": "claude.ai",
+   "models": {
+    "claude.ai": 78
+   },
+   "off_modal_share": 0.0,
+   "runs_with_other_modal": []
+  },
+  "claude_b2b (ui_think)": {
+   "modal": "claude.ai",
+   "models": {
+    "claude.ai": 78
+   },
+   "off_modal_share": 0.0,
+   "runs_with_other_modal": []
+  },
+  "chatgpt_consumer": {
+   "modal": "gpt-5-5",
+   "models": {
+    "gpt-5-5": 1548,
+    "(not recorded)": 67
+   },
+   "off_modal_share": 0.041486068111455054,
+   "runs_with_other_modal": [
+    "002 w7"
+   ]
+  },
+  "chatgpt_agency": {
+   "modal": "gpt-5-5",
+   "models": {
+    "gpt-5-5": 78,
+    "(not recorded)": 3
+   },
+   "off_modal_share": 0.03703703703703709,
+   "runs_with_other_modal": []
+  }
+ },
+ "G": {
+  "groups": {
+   "all": {
+    "phrases": 18279,
+    "agreement": 0.9589146014552219,
+    "outside": 0.013512774221784561
+   },
+   "B2B": {
+    "phrases": 13840,
+    "agreement": 0.9604768786127168,
+    "outside": 0.007658959537572254
+   },
+   "headphones and agencies": {
+    "phrases": 4439,
+    "agreement": 0.9540437035368327,
+    "outside": 0.03176391079071863
+   },
+   "classified at Stage 1 (reused)": {
+    "phrases": 14608,
+    "agreement": 0.9594742606790799,
+    "outside": 0.015470974808324206
+   },
+   "classified at Stage 2 (new phrases)": {
+    "phrases": 3671,
+    "agreement": 0.9566875510760011,
+    "outside": 0.005720512122037592
+   }
+  },
+  "passes": true
+ }
+}

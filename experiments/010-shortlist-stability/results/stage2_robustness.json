@@ -1,0 +1,3150 @@
+{
+ "R1": [
+  {
+   "dataset": "chatgpt_b2b",
+   "answers": 440,
+   "near_pairs": 438,
+   "far_pairs": 320,
+   "tests": [
+    {
+     "test": "H5 R",
+     "kind": "equiv",
+     "estimate": -0.014782782652971727,
+     "lo": -0.039740898624828006,
+     "hi": 0.010397580777760878,
+     "ci_level": 0.9,
+     "p": 0.0125,
+     "threshold": 0.05,
+     "verdict": "NULL",
+     "label": "Practically equivalent (null)",
+     "n_draws": 2000,
+     "dataset": "chatgpt_b2b",
+     "key": "R_all",
+     "near": [
+      0.7932985204525674,
+      0.7630671817265704,
+      0.8238629884388154
+     ],
+     "far": [
+      0.7785157377995957,
+      0.7401232555014594,
+      0.8162060812373835
+     ],
+     "near_pairs": 438,
+     "far_pairs": 320,
+     "near_per_prompt": 10.95,
+     "far_per_prompt": 8.0,
+     "near_appearances": 4596,
+     "far_appearances": 3463
+    },
+    {
+     "test": "H5 T",
+     "kind": "equiv",
+     "estimate": 0.0016500844039883944,
+     "lo": -0.05723565202661298,
+     "hi": 0.052372568996820155,
+     "ci_level": 0.9,
+     "p": 0.0735,
+     "threshold": 0.05,
+     "verdict": "INCONCLUSIVE",
+     "label": "Inconclusive: do not claim a null",
+     "n_draws": 2000,
+     "dataset": "chatgpt_b2b",
+     "key": "T_all",
+     "near": [
+      0.591283863368669,
+      0.534238550397087,
+      0.6444214720543383
+     ],
+     "far": [
+      0.5929339477726574,
+      0.5188630948547878,
+      0.6575230339532988
+     ],
+     "near_pairs": 438,
+     "far_pairs": 320,
+     "near_per_prompt": 10.95,
+     "far_per_prompt": 8.0,
+     "near_appearances": 849,
+     "far_appearances": 651
+    }
+   ]
+  },
+  {
+   "dataset": "gemini_b2b",
+   "answers": 440,
+   "near_pairs": 440,
+   "far_pairs": 320,
+   "tests": [
+    {
+     "test": "H5 R",
+     "kind": "equiv",
+     "estimate": -0.026798865671225802,
+     "lo": -0.0651227286363613,
+     "hi": 0.010255601306860809,
+     "ci_level": 0.9,
+     "p": 0.1455,
+     "threshold": 0.05,
+     "verdict": "INCONCLUSIVE",
+     "label": "Inconclusive: do not claim a null",
+     "n_draws": 2000,
+     "dataset": "gemini_b2b",
+     "key": "R_all",
+     "near": [
+      0.6056767534600047,
+      0.560573074976452,
+      0.6493568731587901
+     ],
+     "far": [
+      0.5788778877887789,
+      0.5319064377125038,
+      0.6273032228517712
+     ],
+     "near_pairs": 440,
+     "far_pairs": 320,
+     "near_per_prompt": 11.0,
+     "far_per_prompt": 8.0,
+     "near_appearances": 4263,
+     "far_appearances": 3030
+    },
+    {
+     "test": "H5 T",
+     "kind": "equiv",
+     "estimate": -0.1597976614976366,
+     "lo": -0.2913706674741823,
+     "hi": -0.026240746760491828,
+     "ci_level": 0.9,
+     "p": 0.901,
+     "threshold": 0.05,
+     "verdict": "REAL",
+     "label": "Real change: report it",
+     "n_draws": 2000,
+     "dataset": "gemini_b2b",
+     "key": "T_all",
+     "near": [
+      0.3856041131105398,
+      0.2662168756099392,
+      0.4892849462365591
+     ],
+     "far": [
+      0.22580645161290322,
+      0.1254656862745098,
+      0.32693380040034314
+     ],
+     "near_pairs": 440,
+     "far_pairs": 320,
+     "near_per_prompt": 11.0,
+     "far_per_prompt": 8.0,
+     "near_appearances": 389,
+     "far_appearances": 248
+    }
+   ]
+  },
+  {
+   "dataset": "claude_api_b2b",
+   "answers": 440,
+   "near_pairs": 440,
+   "far_pairs": 320,
+   "tests": [
+    {
+     "test": "H5 R",
+     "kind": "equiv",
+     "estimate": -0.03395999635345526,
+     "lo": -0.056239876121718206,
+     "hi": -0.013834192306673368,
+     "ci_level": 0.9,
+     "p": 0.1085,
+     "threshold": 0.05,
+     "verdict": "REAL",
+     "label": "Real change: report it",
+     "n_draws": 2000,
+     "dataset": "claude_api_b2b",
+     "key": "R_all",
+     "near": [
+      0.7601378213623111,
+      0.7326945108109572,
+      0.7877379346340471
+     ],
+     "far": [
+      0.7261778250088559,
+      0.6958770540505119,
+      0.7574135708046061
+     ],
+     "near_pairs": 440,
+     "far_pairs": 320,
+     "near_per_prompt": 11.0,
+     "far_per_prompt": 8.0,
+     "near_appearances": 7546,
+     "far_appearances": 5646
+    },
+    {
+     "test": "H5 T",
+     "kind": "equiv",
+     "estimate": 0.025974025974025983,
+     "lo": -0.05023660021990068,
+     "hi": 0.09563200965713263,
+     "ci_level": 0.9,
+     "p": 0.294,
+     "threshold": 0.05,
+     "verdict": "INCONCLUSIVE",
+     "label": "Inconclusive: do not claim a null",
+     "n_draws": 2000,
+     "dataset": "claude_api_b2b",
+     "key": "T_all",
+     "near": [
+      0.42857142857142855,
+      0.3290384495457978,
+      0.5064811449341209
+     ],
+     "far": [
+      0.45454545454545453,
+      0.3374892647772675,
+      0.5449591280653951
+     ],
+     "near_pairs": 440,
+     "far_pairs": 320,
+     "near_per_prompt": 11.0,
+     "far_per_prompt": 8.0,
+     "near_appearances": 462,
+     "far_appearances": 308
+    }
+   ]
+  },
+  {
+   "dataset": "chatgpt_consumer",
+   "answers": 1615,
+   "near_pairs": 2945,
+   "far_pairs": 2185,
+   "tests": [
+    {
+     "test": "H5 R",
+     "kind": "equiv",
+     "estimate": -0.016180101430616434,
+     "lo": -0.026343792775195808,
+     "hi": -0.006821521362516832,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.05,
+     "verdict": "NEGLIGIBLE",
+     "label": "Detectable but negligible",
+     "n_draws": 2000,
+     "dataset": "chatgpt_consumer",
+     "key": "R_all",
+     "near": [
+      0.7975895921462207,
+      0.780494140847323,
+      0.8154726953674302
+     ],
+     "far": [
+      0.7814094907156043,
+      0.7600137170142548,
+      0.8019365715031151
+     ],
+     "near_pairs": 2945,
+     "far_pairs": 2185,
+     "near_per_prompt": 31.0,
+     "far_per_prompt": 23.0,
+     "near_appearances": 25058,
+     "far_appearances": 18418
+    },
+    {
+     "test": "H5 T",
+     "kind": "equiv",
+     "estimate": -0.04295592080690913,
+     "lo": -0.06972415521221091,
+     "hi": -0.017089989450617068,
+     "ci_level": 0.9,
+     "p": 0.3325,
+     "threshold": 0.05,
+     "verdict": "REAL",
+     "label": "Real change: report it",
+     "n_draws": 2000,
+     "dataset": "chatgpt_consumer",
+     "key": "T_all",
+     "near": [
+      0.6739746739746739,
+      0.6352088529152287,
+      0.7113820212120098
+     ],
+     "far": [
+      0.6310187531677648,
+      0.5852816117260456,
+      0.6724769995687336
+     ],
+     "near_pairs": 2945,
+     "far_pairs": 2185,
+     "near_per_prompt": 31.0,
+     "far_per_prompt": 23.0,
+     "near_appearances": 5291,
+     "far_appearances": 3946
+    }
+   ]
+  }
+ ],
+ "R2": [
+  {
+   "dataset": "chatgpt_b2b",
+   "answers": 240,
+   "near_pairs": 39,
+   "far_pairs": 80,
+   "tests": [
+    {
+     "test": "H5 R",
+     "kind": "equiv",
+     "estimate": 0.01061076604554867,
+     "lo": -0.02823167595626987,
+     "hi": 0.04790633945390258,
+     "ci_level": 0.9,
+     "p": 0.0385,
+     "threshold": 0.05,
+     "verdict": "NULL",
+     "label": "Practically equivalent (null)",
+     "n_draws": 2000,
+     "dataset": "chatgpt_b2b",
+     "key": "R",
+     "near": [
+      0.7989130434782609,
+      0.7469842332292131,
+      0.8476489446967673
+     ],
+     "far": [
+      0.8095238095238095,
+      0.7696196326631919,
+      0.8487840268971009
+     ],
+     "near_pairs": 39,
+     "far_pairs": 80,
+     "near_per_prompt": 0.975,
+     "far_per_prompt": 2.0,
+     "near_appearances": 368,
+     "far_appearances": 798
+    },
+    {
+     "test": "H5 T",
+     "kind": "equiv",
+     "estimate": 0.24271079590228528,
+     "lo": 0.13151068654412115,
+     "hi": 0.3553078291907259,
+     "ci_level": 0.9,
+     "p": 0.9975,
+     "threshold": 0.05,
+     "verdict": "REAL",
+     "label": "Real change: report it",
+     "n_draws": 2000,
+     "dataset": "chatgpt_b2b",
+     "key": "T",
+     "near": [
+      0.2962962962962963,
+      0.16653005464480874,
+      0.41509433962264153
+     ],
+     "far": [
+      0.5390070921985816,
+      0.45112781954887216,
+      0.6212325962325962
+     ],
+     "near_pairs": 39,
+     "far_pairs": 80,
+     "near_per_prompt": 0.975,
+     "far_per_prompt": 2.0,
+     "near_appearances": 54,
+     "far_appearances": 141
+    },
+    {
+     "test": "H5 WS",
+     "kind": "equiv",
+     "estimate": 0.0060780125582761135,
+     "lo": -0.04106345877734034,
+     "hi": 0.052884372938264715,
+     "ci_level": 0.9,
+     "p": 0.0635,
+     "threshold": 0.05,
+     "verdict": "INCONCLUSIVE",
+     "label": "Inconclusive: do not claim a null",
+     "n_draws": 2000,
+     "dataset": "chatgpt_b2b",
+     "key": "WS",
+     "near": [
+      0.5144508670520231,
+      0.467115997158505,
+      0.5647119232802235
+     ],
+     "far": [
+      0.5205288796102993,
+      0.4835405160473984,
+      0.5592035119111427
+     ],
+     "near_pairs": 39,
+     "far_pairs": 80,
+     "near_per_prompt": 0.975,
+     "far_per_prompt": 2.0,
+     "near_appearances": 692,
+     "far_appearances": 1437
+    }
+   ]
+  },
+  {
+   "dataset": "gemini_b2b",
+   "answers": 439,
+   "near_pairs": 440,
+   "far_pairs": 320,
+   "tests": [
+    {
+     "test": "H5 R",
+     "kind": "equiv",
+     "estimate": -0.018315729916356216,
+     "lo": -0.05798766739359826,
+     "hi": 0.01690757557657339,
+     "ci_level": 0.9,
+     "p": 0.085,
+     "threshold": 0.05,
+     "verdict": "INCONCLUSIVE",
+     "label": "Inconclusive: do not claim a null",
+     "n_draws": 2000,
+     "dataset": "gemini_b2b",
+     "key": "R",
+     "near": [
+      0.6406699816801884,
+      0.600032422870015,
+      0.6793390741003843
+     ],
+     "far": [
+      0.6223542517638322,
+      0.5765170644337219,
+      0.6669187432084245
+     ],
+     "near_pairs": 440,
+     "far_pairs": 320,
+     "near_per_prompt": 11.0,
+     "far_per_prompt": 8.0,
+     "near_appearances": 3821,
+     "far_appearances": 2693
+    },
+    {
+     "test": "H5 T",
+     "kind": "equiv",
+     "estimate": -0.1729077097859259,
+     "lo": -0.30993996558590625,
+     "hi": -0.03694108047135627,
+     "ci_level": 0.9,
+     "p": 0.9265,
+     "threshold": 0.05,
+     "verdict": "REAL",
+     "label": "Real change: report it",
+     "n_draws": 2000,
+     "dataset": "gemini_b2b",
+     "key": "T",
+     "near": [
+      0.40431266846361186,
+      0.28489577698438456,
+      0.5106515543182872
+     ],
+     "far": [
+      0.23140495867768596,
+      0.12901841340163367,
+      0.33497787002075463
+     ],
+     "near_pairs": 440,
+     "far_pairs": 320,
+     "near_per_prompt": 11.0,
+     "far_per_prompt": 8.0,
+     "near_appearances": 371,
+     "far_appearances": 242
+    },
+    {
+     "test": "H5 WS",
+     "kind": "equiv",
+     "estimate": -0.043389220317610055,
+     "lo": -0.08202507066015668,
+     "hi": -0.008150052951340732,
+     "ci_level": 0.9,
+     "p": 0.343,
+     "threshold": 0.05,
+     "verdict": "REAL",
+     "label": "Real change: report it",
+     "n_draws": 2000,
+     "dataset": "gemini_b2b",
+     "key": "WS",
+     "near": [
+      0.39751552795031053,
+      0.36523155310305566,
+      0.4286588482644137
+     ],
+     "far": [
+      0.3541263076327005,
+      0.3193290631373658,
+      0.3877207737258793
+     ],
+     "near_pairs": 440,
+     "far_pairs": 320,
+     "near_per_prompt": 11.0,
+     "far_per_prompt": 8.0,
+     "near_appearances": 7245,
+     "far_appearances": 5162
+    }
+   ]
+  },
+  {
+   "dataset": "claude_api_b2b",
+   "answers": 440,
+   "near_pairs": 440,
+   "far_pairs": 320,
+   "tests": [
+    {
+     "test": "H5 R",
+     "kind": "equiv",
+     "estimate": -0.023906434862262627,
+     "lo": -0.036418039105623835,
+     "hi": -0.01076119193810893,
+     "ci_level": 0.9,
+     "p": 0.0005,
+     "threshold": 0.05,
+     "verdict": "NEGLIGIBLE",
+     "label": "Detectable but negligible",
+     "n_draws": 2000,
+     "dataset": "claude_api_b2b",
+     "key": "R",
+     "near": [
+      0.7871463102516707,
+      0.7618002675430389,
+      0.8124077542094309
+     ],
+     "far": [
+      0.7632398753894081,
+      0.7369557906342441,
+      0.7911356895086223
+     ],
+     "near_pairs": 440,
+     "far_pairs": 320,
+     "near_per_prompt": 11.0,
+     "far_per_prompt": 8.0,
+     "near_appearances": 7033,
+     "far_appearances": 5136
+    },
+    {
+     "test": "H5 T",
+     "kind": "equiv",
+     "estimate": 0.030132367184417252,
+     "lo": -0.04698474010178748,
+     "hi": 0.09991885272882974,
+     "ci_level": 0.9,
+     "p": 0.3285,
+     "threshold": 0.05,
+     "verdict": "INCONCLUSIVE",
+     "label": "Inconclusive: do not claim a null",
+     "n_draws": 2000,
+     "dataset": "claude_api_b2b",
+     "key": "T",
+     "near": [
+      0.4288840262582057,
+      0.3285283635932419,
+      0.5077715072090498
+     ],
+     "far": [
+      0.45901639344262296,
+      0.3396139864981824,
+      0.5512447434819175
+     ],
+     "near_pairs": 440,
+     "far_pairs": 320,
+     "near_per_prompt": 11.0,
+     "far_per_prompt": 8.0,
+     "near_appearances": 457,
+     "far_appearances": 305
+    },
+    {
+     "test": "H5 WS",
+     "kind": "equiv",
+     "estimate": -0.03384378239776181,
+     "lo": -0.049720227125602215,
+     "hi": -0.016326944841546096,
+     "ci_level": 0.9,
+     "p": 0.0445,
+     "threshold": 0.05,
+     "verdict": "NEGLIGIBLE",
+     "label": "Detectable but negligible",
+     "n_draws": 2000,
+     "dataset": "claude_api_b2b",
+     "key": "WS",
+     "near": [
+      0.5222406882393196,
+      0.49450629345401653,
+      0.5471723764308695
+     ],
+     "far": [
+      0.48839690584155776,
+      0.4642207850266742,
+      0.5125381134675775
+     ],
+     "near_pairs": 440,
+     "far_pairs": 320,
+     "near_per_prompt": 11.0,
+     "far_per_prompt": 8.0,
+     "near_appearances": 10229,
+     "far_appearances": 7498
+    }
+   ]
+  },
+  {
+   "dataset": "chatgpt_consumer",
+   "answers": 1548,
+   "near_pairs": 2790,
+   "far_pairs": 2185,
+   "tests": [
+    {
+     "test": "H5 R",
+     "kind": "equiv",
+     "estimate": -0.015673723001597306,
+     "lo": -0.02610818381268633,
+     "hi": -0.006194405537959332,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.05,
+     "verdict": "NEGLIGIBLE",
+     "label": "Detectable but negligible",
+     "n_draws": 2000,
+     "dataset": "chatgpt_consumer",
+     "key": "R",
+     "near": [
+      0.8258272058823529,
+      0.8109504177136161,
+      0.8400615514222561
+     ],
+     "far": [
+      0.8101534828807556,
+      0.7922190180218616,
+      0.8275268000102943
+     ],
+     "near_pairs": 2790,
+     "far_pairs": 2185,
+     "near_per_prompt": 29.36842105263158,
+     "far_per_prompt": 23.0,
+     "near_appearances": 21760,
+     "far_appearances": 16940
+    },
+    {
+     "test": "H5 T",
+     "kind": "equiv",
+     "estimate": -0.044013140785793436,
+     "lo": -0.07170999358067426,
+     "hi": -0.017705080656791296,
+     "ci_level": 0.9,
+     "p": 0.37,
+     "threshold": 0.05,
+     "verdict": "REAL",
+     "label": "Real change: report it",
+     "n_draws": 2000,
+     "dataset": "chatgpt_consumer",
+     "key": "T",
+     "near": [
+      0.6780568135034993,
+      0.6393869007927687,
+      0.7143778207607995
+     ],
+     "far": [
+      0.6340436727177059,
+      0.5876065496348516,
+      0.6766688355050595
+     ],
+     "near_pairs": 2790,
+     "far_pairs": 2185,
+     "near_per_prompt": 29.36842105263158,
+     "far_per_prompt": 23.0,
+     "near_appearances": 4858,
+     "far_appearances": 3801
+    },
+    {
+     "test": "H5 WS",
+     "kind": "equiv",
+     "estimate": -0.014869565664756945,
+     "lo": -0.023619819608854974,
+     "hi": -0.006483529858557597,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.05,
+     "verdict": "NEGLIGIBLE",
+     "label": "Detectable but negligible",
+     "n_draws": 2000,
+     "dataset": "chatgpt_consumer",
+     "key": "WS",
+     "near": [
+      0.5521104327050703,
+      0.5331407099609848,
+      0.5715388794625822
+     ],
+     "far": [
+      0.5372408670403134,
+      0.5193486353866776,
+      0.5564667667820786
+     ],
+     "near_pairs": 2790,
+     "far_pairs": 2185,
+     "near_per_prompt": 29.36842105263158,
+     "far_per_prompt": 23.0,
+     "near_appearances": 37670,
+     "far_appearances": 29618
+    }
+   ]
+  }
+ ],
+ "R3": [
+  {
+   "dataset": "chatgpt_b2b",
+   "answers": 438,
+   "near_pairs": 432,
+   "far_pairs": 318,
+   "tests": [
+    {
+     "test": "H5 R",
+     "kind": "equiv",
+     "estimate": -0.014764846652865704,
+     "lo": -0.03915057090771188,
+     "hi": 0.006866784759800736,
+     "ci_level": 0.9,
+     "p": 0.009,
+     "threshold": 0.05,
+     "verdict": "NULL",
+     "label": "Practically equivalent (null)",
+     "n_draws": 2000,
+     "dataset": "chatgpt_b2b",
+     "key": "R",
+     "near": [
+      0.824727946283862,
+      0.7989771811223472,
+      0.8484056972468142
+     ],
+     "far": [
+      0.8099630996309963,
+      0.7773685478460174,
+      0.8421085080147965
+     ],
+     "near_pairs": 432,
+     "far_pairs": 318,
+     "near_per_prompt": 10.8,
+     "far_per_prompt": 7.95,
+     "near_appearances": 4319,
+     "far_appearances": 3252
+    },
+    {
+     "test": "H5 T",
+     "kind": "equiv",
+     "estimate": 0.0012927575856637175,
+     "lo": -0.05792477491552831,
+     "hi": 0.05285852708628532,
+     "ci_level": 0.9,
+     "p": 0.0725,
+     "threshold": 0.05,
+     "verdict": "INCONCLUSIVE",
+     "label": "Inconclusive: do not claim a null",
+     "n_draws": 2000,
+     "dataset": "chatgpt_b2b",
+     "key": "T",
+     "near": [
+      0.5980861244019139,
+      0.5407403034675762,
+      0.6504854368932039
+     ],
+     "far": [
+      0.5993788819875776,
+      0.524751733044369,
+      0.6629919976057587
+     ],
+     "near_pairs": 432,
+     "far_pairs": 318,
+     "near_per_prompt": 10.8,
+     "far_per_prompt": 7.95,
+     "near_appearances": 836,
+     "far_appearances": 644
+    },
+    {
+     "test": "H5 WS",
+     "kind": "equiv",
+     "estimate": -0.02713061232404146,
+     "lo": -0.05043527946545978,
+     "hi": -0.0035026192346994077,
+     "ci_level": 0.9,
+     "p": 0.052,
+     "threshold": 0.05,
+     "verdict": "REAL",
+     "label": "Real change: report it",
+     "n_draws": 2000,
+     "dataset": "chatgpt_b2b",
+     "key": "WS",
+     "near": [
+      0.5338756832337613,
+      0.5113584876517812,
+      0.5564670056956391
+     ],
+     "far": [
+      0.5067450709097199,
+      0.47651062449435727,
+      0.5373894182564746
+     ],
+     "near_pairs": 432,
+     "far_pairs": 318,
+     "near_per_prompt": 10.8,
+     "far_per_prompt": 7.95,
+     "near_appearances": 7867,
+     "far_appearances": 5782
+    }
+   ]
+  },
+  {
+   "dataset": "gemini_b2b",
+   "answers": 435,
+   "near_pairs": 440,
+   "far_pairs": 306,
+   "tests": [
+    {
+     "test": "H5 R",
+     "kind": "equiv",
+     "estimate": -0.002436927605550143,
+     "lo": -0.03347512715728045,
+     "hi": 0.025435667396799776,
+     "ci_level": 0.9,
+     "p": 0.0065,
+     "threshold": 0.05,
+     "verdict": "NULL",
+     "label": "Practically equivalent (null)",
+     "n_draws": 2000,
+     "dataset": "gemini_b2b",
+     "key": "R",
+     "near": [
+      0.6406699816801884,
+      0.600032422870015,
+      0.6793390741003843
+     ],
+     "far": [
+      0.6382330540746383,
+      0.5954067633716269,
+      0.6790778320286819
+     ],
+     "near_pairs": 440,
+     "far_pairs": 306,
+     "near_per_prompt": 11.0,
+     "far_per_prompt": 7.65,
+     "near_appearances": 3821,
+     "far_appearances": 2626
+    },
+    {
+     "test": "H5 T",
+     "kind": "equiv",
+     "estimate": -0.16499642914737253,
+     "lo": -0.3017426008050627,
+     "hi": -0.03134212424936949,
+     "ci_level": 0.9,
+     "p": 0.913,
+     "threshold": 0.05,
+     "verdict": "REAL",
+     "label": "Real change: report it",
+     "n_draws": 2000,
+     "dataset": "gemini_b2b",
+     "key": "T",
+     "near": [
+      0.40431266846361186,
+      0.28489577698438456,
+      0.5106515543182872
+     ],
+     "far": [
+      0.23931623931623933,
+      0.13389880952380953,
+      0.3430672204746053
+     ],
+     "near_pairs": 440,
+     "far_pairs": 306,
+     "near_per_prompt": 11.0,
+     "far_per_prompt": 7.65,
+     "near_appearances": 371,
+     "far_appearances": 234
+    },
+    {
+     "test": "H5 WS",
+     "kind": "equiv",
+     "estimate": -0.033662024765597154,
+     "lo": -0.06726645858712767,
+     "hi": -0.0039987764396312965,
+     "ci_level": 0.9,
+     "p": 0.183,
+     "threshold": 0.05,
+     "verdict": "REAL",
+     "label": "Real change: report it",
+     "n_draws": 2000,
+     "dataset": "gemini_b2b",
+     "key": "WS",
+     "near": [
+      0.39751552795031053,
+      0.36523155310305566,
+      0.4286588482644137
+     ],
+     "far": [
+      0.3638535031847134,
+      0.3295510043585007,
+      0.3966497495943388
+     ],
+     "near_pairs": 440,
+     "far_pairs": 306,
+     "near_per_prompt": 11.0,
+     "far_per_prompt": 7.65,
+     "near_appearances": 7245,
+     "far_appearances": 5024
+    }
+   ]
+  },
+  {
+   "dataset": "claude_api_b2b",
+   "answers": 440,
+   "near_pairs": 440,
+   "far_pairs": 320,
+   "tests": [
+    {
+     "test": "H5 R",
+     "kind": "equiv",
+     "estimate": -0.023906434862262627,
+     "lo": -0.036418039105623835,
+     "hi": -0.01076119193810893,
+     "ci_level": 0.9,
+     "p": 0.0005,
+     "threshold": 0.05,
+     "verdict": "NEGLIGIBLE",
+     "label": "Detectable but negligible",
+     "n_draws": 2000,
+     "dataset": "claude_api_b2b",
+     "key": "R",
+     "near": [
+      0.7871463102516707,
+      0.7618002675430389,
+      0.8124077542094309
+     ],
+     "far": [
+      0.7632398753894081,
+      0.7369557906342441,
+      0.7911356895086223
+     ],
+     "near_pairs": 440,
+     "far_pairs": 320,
+     "near_per_prompt": 11.0,
+     "far_per_prompt": 8.0,
+     "near_appearances": 7033,
+     "far_appearances": 5136
+    },
+    {
+     "test": "H5 T",
+     "kind": "equiv",
+     "estimate": 0.030132367184417252,
+     "lo": -0.04698474010178748,
+     "hi": 0.09991885272882974,
+     "ci_level": 0.9,
+     "p": 0.3285,
+     "threshold": 0.05,
+     "verdict": "INCONCLUSIVE",
+     "label": "Inconclusive: do not claim a null",
+     "n_draws": 2000,
+     "dataset": "claude_api_b2b",
+     "key": "T",
+     "near": [
+      0.4288840262582057,
+      0.3285283635932419,
+      0.5077715072090498
+     ],
+     "far": [
+      0.45901639344262296,
+      0.3396139864981824,
+      0.5512447434819175
+     ],
+     "near_pairs": 440,
+     "far_pairs": 320,
+     "near_per_prompt": 11.0,
+     "far_per_prompt": 8.0,
+     "near_appearances": 457,
+     "far_appearances": 305
+    },
+    {
+     "test": "H5 WS",
+     "kind": "equiv",
+     "estimate": -0.03384378239776181,
+     "lo": -0.049720227125602215,
+     "hi": -0.016326944841546096,
+     "ci_level": 0.9,
+     "p": 0.0445,
+     "threshold": 0.05,
+     "verdict": "NEGLIGIBLE",
+     "label": "Detectable but negligible",
+     "n_draws": 2000,
+     "dataset": "claude_api_b2b",
+     "key": "WS",
+     "near": [
+      0.5222406882393196,
+      0.49450629345401653,
+      0.5471723764308695
+     ],
+     "far": [
+      0.48839690584155776,
+      0.4642207850266742,
+      0.5125381134675775
+     ],
+     "near_pairs": 440,
+     "far_pairs": 320,
+     "near_per_prompt": 11.0,
+     "far_per_prompt": 8.0,
+     "near_appearances": 10229,
+     "far_appearances": 7498
+    }
+   ]
+  },
+  {
+   "dataset": "chatgpt_consumer",
+   "answers": 1521,
+   "near_pairs": 2729,
+   "far_pairs": 2028,
+   "tests": [
+    {
+     "test": "H5 R",
+     "kind": "equiv",
+     "estimate": -0.014878891317462561,
+     "lo": -0.02348559666175624,
+     "hi": -0.0062860661444018645,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.05,
+     "verdict": "NEGLIGIBLE",
+     "label": "Detectable but negligible",
+     "n_draws": 2000,
+     "dataset": "chatgpt_consumer",
+     "key": "R",
+     "near": [
+      0.8319782006768338,
+      0.8192273848615235,
+      0.8445171588507568
+     ],
+     "far": [
+      0.8170993093593713,
+      0.8015069386341539,
+      0.8322804265637391
+     ],
+     "near_pairs": 2729,
+     "far_pairs": 2028,
+     "near_per_prompt": 29.98901098901099,
+     "far_per_prompt": 22.285714285714285,
+     "near_appearances": 22753,
+     "far_appearances": 16796
+    },
+    {
+     "test": "H5 T",
+     "kind": "equiv",
+     "estimate": -0.04517059279940239,
+     "lo": -0.07367594003127285,
+     "hi": -0.020693741565702226,
+     "ci_level": 0.9,
+     "p": 0.376,
+     "threshold": 0.05,
+     "verdict": "REAL",
+     "label": "Real change: report it",
+     "n_draws": 2000,
+     "dataset": "chatgpt_consumer",
+     "key": "T",
+     "near": [
+      0.6803840877914952,
+      0.6420262754799169,
+      0.7200654380361614
+     ],
+     "far": [
+      0.6352134949920928,
+      0.5907996957379458,
+      0.6784843521899991
+     ],
+     "near_pairs": 2729,
+     "far_pairs": 2028,
+     "near_per_prompt": 29.98901098901099,
+     "far_per_prompt": 22.285714285714285,
+     "near_appearances": 5103,
+     "far_appearances": 3794
+    },
+    {
+     "test": "H5 WS",
+     "kind": "equiv",
+     "estimate": -0.013974153597513306,
+     "lo": -0.023019153521435038,
+     "hi": -0.0055295351155330635,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.05,
+     "verdict": "NEGLIGIBLE",
+     "label": "Detectable but negligible",
+     "n_draws": 2000,
+     "dataset": "chatgpt_consumer",
+     "key": "WS",
+     "near": [
+      0.5552538760181684,
+      0.5364061547862546,
+      0.5734103482224142
+     ],
+     "far": [
+      0.5412797224206551,
+      0.5230414393784635,
+      0.5586766305760951
+     ],
+     "near_pairs": 2729,
+     "far_pairs": 2028,
+     "near_per_prompt": 29.98901098901099,
+     "far_per_prompt": 22.285714285714285,
+     "near_appearances": 39409,
+     "far_appearances": 29397
+    }
+   ]
+  }
+ ],
+ "R4": [
+  {
+   "dataset": "chatgpt_b2b (57 swapped)",
+   "answers": 440,
+   "near_pairs": 438,
+   "far_pairs": 320,
+   "tests": [
+    {
+     "test": "H5 R",
+     "kind": "equiv",
+     "estimate": -0.009186090289217907,
+     "lo": -0.03471250621220089,
+     "hi": 0.014738475014576117,
+     "ci_level": 0.9,
+     "p": 0.004,
+     "threshold": 0.05,
+     "verdict": "NULL",
+     "label": "Practically equivalent (null)",
+     "n_draws": 2000,
+     "dataset": "chatgpt_b2b",
+     "key": "R",
+     "near": [
+      0.8174474959612278,
+      0.7901922605125132,
+      0.8429765348762456
+     ],
+     "far": [
+      0.8082614056720099,
+      0.7760712004799597,
+      0.8395460875520478
+     ],
+     "near_pairs": 438,
+     "far_pairs": 320,
+     "near_per_prompt": 10.95,
+     "far_per_prompt": 8.0,
+     "near_appearances": 4333,
+     "far_appearances": 3244
+    },
+    {
+     "test": "H5 T",
+     "kind": "equiv",
+     "estimate": 0.0037912184799858695,
+     "lo": -0.05382673060182462,
+     "hi": 0.05395451341266745,
+     "ci_level": 0.9,
+     "p": 0.0735,
+     "threshold": 0.05,
+     "verdict": "INCONCLUSIVE",
+     "label": "Inconclusive: do not claim a null",
+     "n_draws": 2000,
+     "dataset": "chatgpt_b2b",
+     "key": "T",
+     "near": [
+      0.5943396226415094,
+      0.5375480867366966,
+      0.6472089989068726
+     ],
+     "far": [
+      0.5981308411214953,
+      0.523322966507177,
+      0.6625295627927521
+     ],
+     "near_pairs": 438,
+     "far_pairs": 320,
+     "near_per_prompt": 10.95,
+     "far_per_prompt": 8.0,
+     "near_appearances": 848,
+     "far_appearances": 642
+    },
+    {
+     "test": "H5 WS",
+     "kind": "equiv",
+     "estimate": -0.030673125982986438,
+     "lo": -0.056153609261841375,
+     "hi": -0.004377354847460363,
+     "ci_level": 0.9,
+     "p": 0.1085,
+     "threshold": 0.05,
+     "verdict": "REAL",
+     "label": "Real change: report it",
+     "n_draws": 2000,
+     "dataset": "chatgpt_b2b",
+     "key": "WS",
+     "near": [
+      0.528249303268305,
+      0.5051359461245434,
+      0.5509439625656243
+     ],
+     "far": [
+      0.49757617728531855,
+      0.4665787053351914,
+      0.5288914613634115
+     ],
+     "near_pairs": 438,
+     "far_pairs": 320,
+     "near_per_prompt": 10.95,
+     "far_per_prompt": 8.0,
+     "near_appearances": 7894,
+     "far_appearances": 5776
+    }
+   ]
+  },
+  {
+   "dataset": "gemini_b2b (34 swapped)",
+   "answers": 440,
+   "near_pairs": 440,
+   "far_pairs": 320,
+   "tests": [
+    {
+     "test": "H5 R",
+     "kind": "equiv",
+     "estimate": -0.018315729916356216,
+     "lo": -0.05798766739359826,
+     "hi": 0.01690757557657339,
+     "ci_level": 0.9,
+     "p": 0.085,
+     "threshold": 0.05,
+     "verdict": "INCONCLUSIVE",
+     "label": "Inconclusive: do not claim a null",
+     "n_draws": 2000,
+     "dataset": "gemini_b2b",
+     "key": "R",
+     "near": [
+      0.6406699816801884,
+      0.600032422870015,
+      0.6793390741003843
+     ],
+     "far": [
+      0.6223542517638322,
+      0.5765170644337219,
+      0.6669187432084245
+     ],
+     "near_pairs": 440,
+     "far_pairs": 320,
+     "near_per_prompt": 11.0,
+     "far_per_prompt": 8.0,
+     "near_appearances": 3821,
+     "far_appearances": 2693
+    },
+    {
+     "test": "H5 T",
+     "kind": "equiv",
+     "estimate": -0.220317126755182,
+     "lo": -0.37014253605900244,
+     "hi": -0.06996370597421048,
+     "ci_level": 0.9,
+     "p": 0.9715,
+     "threshold": 0.05,
+     "verdict": "REAL",
+     "label": "Real change: report it",
+     "n_draws": 2000,
+     "dataset": "gemini_b2b",
+     "key": "T",
+     "near": [
+      0.4099722991689751,
+      0.2883435582822086,
+      0.5178722760290557
+     ],
+     "far": [
+      0.1896551724137931,
+      0.09997512437810946,
+      0.2807017543859649
+     ],
+     "near_pairs": 440,
+     "far_pairs": 320,
+     "near_per_prompt": 11.0,
+     "far_per_prompt": 8.0,
+     "near_appearances": 361,
+     "far_appearances": 232
+    },
+    {
+     "test": "H5 WS",
+     "kind": "equiv",
+     "estimate": -0.04702744773030937,
+     "lo": -0.08503382495655498,
+     "hi": -0.012202807916221062,
+     "ci_level": 0.9,
+     "p": 0.41,
+     "threshold": 0.05,
+     "verdict": "REAL",
+     "label": "Real change: report it",
+     "n_draws": 2000,
+     "dataset": "gemini_b2b",
+     "key": "WS",
+     "near": [
+      0.3987823439878234,
+      0.36594335889754614,
+      0.43019731375765996
+     ],
+     "far": [
+      0.35175489625751405,
+      0.31809296165802503,
+      0.3841728143947623
+     ],
+     "near_pairs": 440,
+     "far_pairs": 320,
+     "near_per_prompt": 11.0,
+     "far_per_prompt": 8.0,
+     "near_appearances": 7227,
+     "far_appearances": 5157
+    }
+   ]
+  },
+  {
+   "dataset": "claude_api_b2b (41 swapped)",
+   "answers": 440,
+   "near_pairs": 440,
+   "far_pairs": 320,
+   "tests": [
+    {
+     "test": "H5 R",
+     "kind": "equiv",
+     "estimate": -0.023089395559200532,
+     "lo": -0.03557068612183385,
+     "hi": -0.00960872509090893,
+     "ci_level": 0.9,
+     "p": 0.0005,
+     "threshold": 0.05,
+     "verdict": "NEGLIGIBLE",
+     "label": "Detectable but negligible",
+     "n_draws": 2000,
+     "dataset": "claude_api_b2b",
+     "key": "R",
+     "near": [
+      0.7868106878908471,
+      0.7614954824651573,
+      0.8121295943240959
+     ],
+     "far": [
+      0.7637212923316465,
+      0.7374473312450096,
+      0.7914703328232545
+     ],
+     "near_pairs": 440,
+     "far_pairs": 320,
+     "near_per_prompt": 11.0,
+     "far_per_prompt": 8.0,
+     "near_appearances": 7036,
+     "far_appearances": 5138
+    },
+    {
+     "test": "H5 T",
+     "kind": "equiv",
+     "estimate": 0.010809451985922591,
+     "lo": -0.07244815996548366,
+     "hi": 0.08131581885713499,
+     "ci_level": 0.9,
+     "p": 0.1895,
+     "threshold": 0.05,
+     "verdict": "INCONCLUSIVE",
+     "label": "Inconclusive: do not claim a null",
+     "n_draws": 2000,
+     "dataset": "claude_api_b2b",
+     "key": "T",
+     "near": [
+      0.44017094017094016,
+      0.34919886193471095,
+      0.5118544508741152
+     ],
+     "far": [
+      0.45098039215686275,
+      0.3304178978471929,
+      0.5454545454545454
+     ],
+     "near_pairs": 440,
+     "far_pairs": 320,
+     "near_per_prompt": 11.0,
+     "far_per_prompt": 8.0,
+     "near_appearances": 468,
+     "far_appearances": 306
+    },
+    {
+     "test": "H5 WS",
+     "kind": "equiv",
+     "estimate": -0.0326403553661917,
+     "lo": -0.04834219810004576,
+     "hi": -0.015283442824171458,
+     "ci_level": 0.9,
+     "p": 0.0355,
+     "threshold": 0.05,
+     "verdict": "NEGLIGIBLE",
+     "label": "Detectable but negligible",
+     "n_draws": 2000,
+     "dataset": "claude_api_b2b",
+     "key": "WS",
+     "near": [
+      0.5216710693669895,
+      0.49406677501969126,
+      0.546536574634008
+     ],
+     "far": [
+      0.4890307140007978,
+      0.4650972193051365,
+      0.5130843301287407
+     ],
+     "near_pairs": 440,
+     "far_pairs": 320,
+     "near_per_prompt": 11.0,
+     "far_per_prompt": 8.0,
+     "near_appearances": 10221,
+     "far_appearances": 7521
+    }
+   ]
+  },
+  {
+   "dataset": "chatgpt_consumer (156 swapped)",
+   "answers": 1615,
+   "near_pairs": 2945,
+   "far_pairs": 2185,
+   "tests": [
+    {
+     "test": "H5 R",
+     "kind": "equiv",
+     "estimate": -0.01633622635615528,
+     "lo": -0.026980748362583306,
+     "hi": -0.0067426099483355265,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.05,
+     "verdict": "NEGLIGIBLE",
+     "label": "Detectable but negligible",
+     "n_draws": 2000,
+     "dataset": "chatgpt_consumer",
+     "key": "R",
+     "near": [
+      0.8264643028479218,
+      0.8116575086119107,
+      0.8407686711423956
+     ],
+     "far": [
+      0.8101280764917665,
+      0.7921409172935018,
+      0.8274667527724812
+     ],
+     "near_pairs": 2945,
+     "far_pairs": 2185,
+     "near_per_prompt": 31.0,
+     "far_per_prompt": 23.0,
+     "near_appearances": 22929,
+     "far_appearances": 16943
+    },
+    {
+     "test": "H5 T",
+     "kind": "equiv",
+     "estimate": -0.04418553710384776,
+     "lo": -0.07188466842432407,
+     "hi": -0.017441736727445145,
+     "ci_level": 0.9,
+     "p": 0.3705,
+     "threshold": 0.05,
+     "verdict": "REAL",
+     "label": "Real change: report it",
+     "n_draws": 2000,
+     "dataset": "chatgpt_consumer",
+     "key": "T",
+     "near": [
+      0.6809094472755782,
+      0.6425780583852064,
+      0.7174471860642074
+     ],
+     "far": [
+      0.6367239101717305,
+      0.5905474408725712,
+      0.6798969488313751
+     ],
+     "near_pairs": 2945,
+     "far_pairs": 2185,
+     "near_per_prompt": 31.0,
+     "far_per_prompt": 23.0,
+     "near_appearances": 5102,
+     "far_appearances": 3785
+    },
+    {
+     "test": "H5 WS",
+     "kind": "equiv",
+     "estimate": -0.01470286864421566,
+     "lo": -0.024004495623715188,
+     "hi": -0.005891586676683019,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.05,
+     "verdict": "NEGLIGIBLE",
+     "label": "Detectable but negligible",
+     "n_draws": 2000,
+     "dataset": "chatgpt_consumer",
+     "key": "WS",
+     "near": [
+      0.5517867500567423,
+      0.5328053437263427,
+      0.5716858221429407
+     ],
+     "far": [
+      0.5370838814125266,
+      0.5189296539450254,
+      0.5561078426602656
+     ],
+     "near_pairs": 2945,
+     "far_pairs": 2185,
+     "near_per_prompt": 31.0,
+     "far_per_prompt": 23.0,
+     "near_appearances": 39653,
+     "far_appearances": 29649
+    }
+   ]
+  }
+ ],
+ "R4_ceiling": {
+  "chatgpt_b2b": {
+   "R": [
+    0.9846153846153847,
+    0.9711521105248542,
+    0.995058472176009
+   ],
+   "T": [
+    0.9369369369369369,
+    0.8841666666666667,
+    0.9800196078431372
+   ],
+   "C": [
+    0.9090909090909091,
+    0.6666666666666666,
+    1.0
+   ],
+   "M": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "Pk": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "WS": [
+    0.8759398496240601,
+    0.852424008904872,
+    0.8973868854150544
+   ],
+   "WP": [
+    0.6095979247730221,
+    0.5737814143775569,
+    0.6451460449295072
+   ]
+  },
+  "gemini_b2b": {
+   "R": [
+    0.9967637540453075,
+    0.9910393651079948,
+    1.0
+   ],
+   "T": [
+    0.8,
+    0.5,
+    0.9629629629629629
+   ],
+   "C": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "M": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "Pk": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "WS": [
+    0.8743545611015491,
+    0.832832255106719,
+    0.9120032719836401
+   ],
+   "WP": [
+    0.6825595984943539,
+    0.636780444799308,
+    0.7363637332310413
+   ]
+  },
+  "claude_api_b2b": {
+   "R": [
+    0.981574539363484,
+    0.9677364400725394,
+    0.9924248154770091
+   ],
+   "T": [
+    0.8085106382978723,
+    0.6428571428571429,
+    0.9090909090909091
+   ],
+   "C": [
+    0.8979591836734694,
+    0.8,
+    0.9787668258792878
+   ],
+   "M": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "Pk": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "WS": [
+    0.886438809261301,
+    0.8580553471701259,
+    0.9116380821685931
+   ],
+   "WP": [
+    0.5959252971137521,
+    0.5457737690703288,
+    0.6442224574788269
+   ]
+  },
+  "chatgpt_consumer": {
+   "R": [
+    0.9968203497615262,
+    0.9938650306748467,
+    0.999195494770716
+   ],
+   "T": [
+    0.9647887323943662,
+    0.9440531468531469,
+    0.9833928228219982
+   ],
+   "C": [
+    null,
+    null,
+    null
+   ],
+   "M": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "Pk": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "WS": [
+    0.8761638733705773,
+    0.8622161058530385,
+    0.8899797660852418
+   ],
+   "WP": [
+    0.5978890023833844,
+    0.5721236615731887,
+    0.6246891033225822
+   ]
+  },
+  "all": {
+   "R": [
+    0.9888475836431226,
+    0.9846331860940893,
+    0.9927370688833388
+   ],
+   "T": [
+    0.9266247379454927,
+    0.9041066682244355,
+    0.9471374592600552
+   ],
+   "C": [
+    0.9090909090909091,
+    0.8235294117647058,
+    0.968421052631579
+   ],
+   "M": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "Pk": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "WS": [
+    0.8758884636413341,
+    0.8665939459016498,
+    0.8848675138342206
+   ],
+   "WP": [
+    0.6055883933369156,
+    0.5870158217498268,
+    0.6232554008487239
+   ]
+  }
+ },
+ "R5": [
+  {
+   "dataset": "chatgpt_b2b",
+   "answers": 440,
+   "near_pairs": 438,
+   "far_pairs": 320,
+   "tests": [
+    {
+     "test": "H5 R",
+     "kind": "equiv",
+     "estimate": -0.01174715733626941,
+     "lo": -0.038983955779119554,
+     "hi": 0.012706827757132898,
+     "ci_level": 0.9,
+     "p": 0.016,
+     "threshold": 0.05,
+     "verdict": "NULL",
+     "label": "Practically equivalent (null)",
+     "n_draws": 2000,
+     "dataset": "chatgpt_b2b",
+     "key": "R",
+     "near": [
+      0.8192272309107635,
+      0.7913770658401902,
+      0.8453047579957235
+     ],
+     "far": [
+      0.8074800735744941,
+      0.7731480576083487,
+      0.8420131330232876
+     ],
+     "near_pairs": 438,
+     "far_pairs": 320,
+     "near_per_prompt": 10.95,
+     "far_per_prompt": 8.0,
+     "near_appearances": 4348,
+     "far_appearances": 3262
+    },
+    {
+     "test": "H5 T",
+     "kind": "equiv",
+     "estimate": 0.0036989917857379595,
+     "lo": -0.055673519791615854,
+     "hi": 0.05175625264500855,
+     "ci_level": 0.9,
+     "p": 0.064,
+     "threshold": 0.05,
+     "verdict": "INCONCLUSIVE",
+     "label": "Inconclusive: do not claim a null",
+     "n_draws": 2000,
+     "dataset": "chatgpt_b2b",
+     "key": "T",
+     "near": [
+      0.5938242280285035,
+      0.5458928781834402,
+      0.6460844143979536
+     ],
+     "far": [
+      0.5975232198142415,
+      0.5189829918656749,
+      0.6685821625607749
+     ],
+     "near_pairs": 438,
+     "far_pairs": 320,
+     "near_per_prompt": 10.95,
+     "far_per_prompt": 8.0,
+     "near_appearances": 842,
+     "far_appearances": 646
+    },
+    {
+     "test": "H5 WS",
+     "kind": "equiv",
+     "estimate": -0.025157307513887117,
+     "lo": -0.05285374802294356,
+     "hi": -0.001363635228983035,
+     "ci_level": 0.9,
+     "p": 0.064,
+     "threshold": 0.05,
+     "verdict": "REAL",
+     "label": "Real change: report it",
+     "n_draws": 2000,
+     "dataset": "chatgpt_b2b",
+     "key": "WS",
+     "near": [
+      0.5305039787798409,
+      0.5122269151902651,
+      0.5497853049774072
+     ],
+     "far": [
+      0.5053466712659538,
+      0.4744077730189987,
+      0.5362997688309477
+     ],
+     "near_pairs": 438,
+     "far_pairs": 320,
+     "near_per_prompt": 10.95,
+     "far_per_prompt": 8.0,
+     "near_appearances": 7917,
+     "far_appearances": 5798
+    }
+   ]
+  },
+  {
+   "dataset": "gemini_b2b",
+   "answers": 440,
+   "near_pairs": 440,
+   "far_pairs": 320,
+   "tests": [
+    {
+     "test": "H5 R",
+     "kind": "equiv",
+     "estimate": -0.018315729916356216,
+     "lo": -0.047264771940001934,
+     "hi": 0.007666405320183861,
+     "ci_level": 0.9,
+     "p": 0.031,
+     "threshold": 0.05,
+     "verdict": "NULL",
+     "label": "Practically equivalent (null)",
+     "n_draws": 2000,
+     "dataset": "gemini_b2b",
+     "key": "R",
+     "near": [
+      0.6406699816801884,
+      0.6053552922777721,
+      0.6775700800915332
+     ],
+     "far": [
+      0.6223542517638322,
+      0.5757783994545288,
+      0.669944789395525
+     ],
+     "near_pairs": 440,
+     "far_pairs": 320,
+     "near_per_prompt": 11.0,
+     "far_per_prompt": 8.0,
+     "near_appearances": 3821,
+     "far_appearances": 2693
+    },
+    {
+     "test": "H5 T",
+     "kind": "equiv",
+     "estimate": -0.1729077097859259,
+     "lo": -0.30180890283641354,
+     "hi": -0.042332845280370165,
+     "ci_level": 0.9,
+     "p": 0.935,
+     "threshold": 0.05,
+     "verdict": "REAL",
+     "label": "Real change: report it",
+     "n_draws": 2000,
+     "dataset": "gemini_b2b",
+     "key": "T",
+     "near": [
+      0.40431266846361186,
+      0.286598467626505,
+      0.5074626865671642
+     ],
+     "far": [
+      0.23140495867768596,
+      0.11950192958573232,
+      0.34219457013574656
+     ],
+     "near_pairs": 440,
+     "far_pairs": 320,
+     "near_per_prompt": 11.0,
+     "far_per_prompt": 8.0,
+     "near_appearances": 371,
+     "far_appearances": 242
+    },
+    {
+     "test": "H5 WS",
+     "kind": "equiv",
+     "estimate": -0.043389220317610055,
+     "lo": -0.0756625485424436,
+     "hi": -0.014778654456451103,
+     "ci_level": 0.9,
+     "p": 0.3765,
+     "threshold": 0.05,
+     "verdict": "REAL",
+     "label": "Real change: report it",
+     "n_draws": 2000,
+     "dataset": "gemini_b2b",
+     "key": "WS",
+     "near": [
+      0.39751552795031053,
+      0.37436946112966524,
+      0.4227964224392545
+     ],
+     "far": [
+      0.3541263076327005,
+      0.3194854209799862,
+      0.3896859122384502
+     ],
+     "near_pairs": 440,
+     "far_pairs": 320,
+     "near_per_prompt": 11.0,
+     "far_per_prompt": 8.0,
+     "near_appearances": 7245,
+     "far_appearances": 5162
+    }
+   ]
+  },
+  {
+   "dataset": "claude_api_b2b",
+   "answers": 440,
+   "near_pairs": 440,
+   "far_pairs": 320,
+   "tests": [
+    {
+     "test": "H5 R",
+     "kind": "equiv",
+     "estimate": -0.023906434862262627,
+     "lo": -0.034872661683421964,
+     "hi": -0.013535460186118859,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.05,
+     "verdict": "NEGLIGIBLE",
+     "label": "Detectable but negligible",
+     "n_draws": 2000,
+     "dataset": "claude_api_b2b",
+     "key": "R",
+     "near": [
+      0.7871463102516707,
+      0.7591009377470406,
+      0.8139423110245648
+     ],
+     "far": [
+      0.7632398753894081,
+      0.7315319824122547,
+      0.7917561679042388
+     ],
+     "near_pairs": 440,
+     "far_pairs": 320,
+     "near_per_prompt": 11.0,
+     "far_per_prompt": 8.0,
+     "near_appearances": 7033,
+     "far_appearances": 5136
+    },
+    {
+     "test": "H5 T",
+     "kind": "equiv",
+     "estimate": 0.030132367184417252,
+     "lo": -0.03686157434481568,
+     "hi": 0.10005999330349265,
+     "ci_level": 0.9,
+     "p": 0.315,
+     "threshold": 0.05,
+     "verdict": "INCONCLUSIVE",
+     "label": "Inconclusive: do not claim a null",
+     "n_draws": 2000,
+     "dataset": "claude_api_b2b",
+     "key": "T",
+     "near": [
+      0.4288840262582057,
+      0.338705410479604,
+      0.4953192401468263
+     ],
+     "far": [
+      0.45901639344262296,
+      0.36681222707423583,
+      0.534825714793711
+     ],
+     "near_pairs": 440,
+     "far_pairs": 320,
+     "near_per_prompt": 11.0,
+     "far_per_prompt": 8.0,
+     "near_appearances": 457,
+     "far_appearances": 305
+    },
+    {
+     "test": "H5 WS",
+     "kind": "equiv",
+     "estimate": -0.03384378239776181,
+     "lo": -0.05378469537492451,
+     "hi": -0.01269540913893596,
+     "ci_level": 0.9,
+     "p": 0.0985,
+     "threshold": 0.05,
+     "verdict": "REAL",
+     "label": "Real change: report it",
+     "n_draws": 2000,
+     "dataset": "claude_api_b2b",
+     "key": "WS",
+     "near": [
+      0.5222406882393196,
+      0.4912440183802359,
+      0.5544562092375903
+     ],
+     "far": [
+      0.48839690584155776,
+      0.4632433731517444,
+      0.5147850052897541
+     ],
+     "near_pairs": 440,
+     "far_pairs": 320,
+     "near_per_prompt": 11.0,
+     "far_per_prompt": 8.0,
+     "near_appearances": 10229,
+     "far_appearances": 7498
+    }
+   ]
+  }
+ ],
+ "R6": [
+  {
+   "dataset": "claude_b2b (ui_default + ui_think)",
+   "answers": 156,
+   "R_within": [
+    0.7413931144915933,
+    0.7094958312172,
+    0.7758077956989247
+   ],
+   "tests": [
+    {
+     "test": "H1",
+     "kind": "margin",
+     "estimate": 0.5263354776039852,
+     "lo": 0.47964910830814494,
+     "hi": 0.5685407147993388,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.1,
+     "verdict": "SUPPORTED",
+     "label": "Supported: more stable by more than 0.10",
+     "n_draws": 2000,
+     "dataset": "claude_b2b (ui_default + ui_think)",
+     "label_short": "shortlist minus exact position",
+     "n_pairs": 312
+    },
+    {
+     "test": "H2",
+     "kind": "margin",
+     "estimate": 0.34745372055219936,
+     "lo": 0.23762099959290434,
+     "hi": 0.4838153517563879,
+     "ci_level": 0.9,
+     "p": 0.0005,
+     "threshold": 0.1,
+     "verdict": "SUPPORTED",
+     "label": "Supported: more stable by more than 0.10",
+     "n_draws": 2000,
+     "dataset": "claude_b2b (ui_default + ui_think)",
+     "label_short": "shortlist minus top choice",
+     "n_pairs": 312
+    },
+    {
+     "test": "H3",
+     "kind": "nonsup",
+     "estimate": -0.17657342657342656,
+     "lo": -0.3230798368298368,
+     "hi": -0.04680678017634538,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.1,
+     "verdict": "SUPPORTED",
+     "label": "Supported",
+     "n_draws": 2000,
+     "dataset": "claude_b2b (ui_default + ui_think)",
+     "label_short": "top choice minus rank 1",
+     "n_pairs": 312
+    },
+    {
+     "test": "H4",
+     "kind": "level",
+     "estimate": 0.9734848484848485,
+     "lo": 0.9437323113207547,
+     "hi": 0.9964285714285714,
+     "ci_level": 0.9,
+     "p": 0.0005,
+     "threshold": 0.9,
+     "verdict": "SUPPORTED",
+     "label": "Supported",
+     "n_draws": 2000,
+     "dataset": "claude_b2b (ui_default + ui_think)",
+     "label_short": "top choice stays recommended",
+     "n_pairs": 312
+    },
+    {
+     "test": "H6",
+     "kind": "equiv",
+     "estimate": 0.012286486249518336,
+     "lo": 0.0006867141577685088,
+     "hi": 0.02433870071810857,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.05,
+     "verdict": "NEGLIGIBLE",
+     "label": "Detectable but negligible",
+     "n_draws": 2000,
+     "dataset": "claude_b2b (ui_default + ui_think)",
+     "label_short": "shortlist minus mentioned",
+     "n_pairs": 312
+    },
+    {
+     "test": "H7",
+     "kind": "margin",
+     "estimate": 0.29940269405519093,
+     "lo": 0.2764049168999307,
+     "hi": 0.3262807361565668,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.1,
+     "verdict": "SUPPORTED",
+     "label": "Supported: more stable by more than 0.10",
+     "n_draws": 2000,
+     "dataset": "claude_b2b (ui_default + ui_think)",
+     "label_short": "shortlist minus best-for use case",
+     "n_pairs": 312
+    }
+   ]
+  }
+ ],
+ "R7_bins": [
+  {
+   "dataset": "chatgpt_b2b",
+   "answers": 440,
+   "near_pairs": 840,
+   "far_pairs": 320,
+   "tests": [
+    {
+     "test": "H5 R",
+     "kind": "equiv",
+     "estimate": -0.003526443442160465,
+     "lo": -0.026008675388396595,
+     "hi": 0.017310506096507722,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.05,
+     "verdict": "NULL",
+     "label": "Practically equivalent (null)",
+     "n_draws": 2000,
+     "dataset": "chatgpt_b2b",
+     "key": "R",
+     "near": [
+      0.8110065170166546,
+      0.783962126892816,
+      0.83584607483989
+     ],
+     "far": [
+      0.8074800735744941,
+      0.7752870220019462,
+      0.8390661477215547
+     ],
+     "near_pairs": 840,
+     "far_pairs": 320,
+     "near_per_prompt": 21.0,
+     "far_per_prompt": 8.0,
+     "near_appearances": 8286,
+     "far_appearances": 3262
+    },
+    {
+     "test": "H5 T",
+     "kind": "equiv",
+     "estimate": 0.04446454316005921,
+     "lo": -0.01075251835766658,
+     "hi": 0.09169166543819464,
+     "ci_level": 0.9,
+     "p": 0.435,
+     "threshold": 0.05,
+     "verdict": "INCONCLUSIVE",
+     "label": "Inconclusive: do not claim a null",
+     "n_draws": 2000,
+     "dataset": "chatgpt_b2b",
+     "key": "T",
+     "near": [
+      0.5530586766541823,
+      0.5,
+      0.6037153204865382
+     ],
+     "far": [
+      0.5975232198142415,
+      0.5236360602370135,
+      0.6608041514223848
+     ],
+     "near_pairs": 840,
+     "far_pairs": 320,
+     "near_per_prompt": 21.0,
+     "far_per_prompt": 8.0,
+     "near_appearances": 1602,
+     "far_appearances": 646
+    },
+    {
+     "test": "H5 WS",
+     "kind": "equiv",
+     "estimate": -0.008399033201400119,
+     "lo": -0.030547222849076783,
+     "hi": 0.012703890309902401,
+     "ci_level": 0.9,
+     "p": 0.0025,
+     "threshold": 0.05,
+     "verdict": "NULL",
+     "label": "Practically equivalent (null)",
+     "n_draws": 2000,
+     "dataset": "chatgpt_b2b",
+     "key": "WS",
+     "near": [
+      0.5137457044673539,
+      0.4917793752293566,
+      0.5358546032262768
+     ],
+     "far": [
+      0.5053466712659538,
+      0.4756067159272122,
+      0.5354383137383174
+     ],
+     "near_pairs": 840,
+     "far_pairs": 320,
+     "near_per_prompt": 21.0,
+     "far_per_prompt": 8.0,
+     "near_appearances": 15132,
+     "far_appearances": 5798
+    }
+   ]
+  },
+  {
+   "dataset": "gemini_b2b",
+   "answers": 440,
+   "near_pairs": 847,
+   "far_pairs": 320,
+   "tests": [
+    {
+     "test": "H5 R",
+     "kind": "equiv",
+     "estimate": -0.022273847409721492,
+     "lo": -0.05850289915010078,
+     "hi": 0.011488172704390714,
+     "ci_level": 0.9,
+     "p": 0.0955,
+     "threshold": 0.05,
+     "verdict": "INCONCLUSIVE",
+     "label": "Inconclusive: do not claim a null",
+     "n_draws": 2000,
+     "dataset": "gemini_b2b",
+     "key": "R",
+     "near": [
+      0.6446280991735537,
+      0.6047937743618522,
+      0.682246212782086
+     ],
+     "far": [
+      0.6223542517638322,
+      0.5765170644337219,
+      0.6669187432084245
+     ],
+     "near_pairs": 847,
+     "far_pairs": 320,
+     "near_per_prompt": 21.175,
+     "far_per_prompt": 8.0,
+     "near_appearances": 7381,
+     "far_appearances": 2693
+    },
+    {
+     "test": "H5 T",
+     "kind": "equiv",
+     "estimate": -0.1577223660719564,
+     "lo": -0.2925653512506011,
+     "hi": -0.024621239229867854,
+     "ci_level": 0.9,
+     "p": 0.895,
+     "threshold": 0.05,
+     "verdict": "REAL",
+     "label": "Real change: report it",
+     "n_draws": 2000,
+     "dataset": "gemini_b2b",
+     "key": "T",
+     "near": [
+      0.38912732474964234,
+      0.27422855557867,
+      0.49449570273003035
+     ],
+     "far": [
+      0.23140495867768596,
+      0.12901841340163367,
+      0.33497787002075463
+     ],
+     "near_pairs": 847,
+     "far_pairs": 320,
+     "near_per_prompt": 21.175,
+     "far_per_prompt": 8.0,
+     "near_appearances": 699,
+     "far_appearances": 242
+    },
+    {
+     "test": "H5 WS",
+     "kind": "equiv",
+     "estimate": -0.040418887283763916,
+     "lo": -0.07527144105435993,
+     "hi": -0.008339940311605886,
+     "ci_level": 0.9,
+     "p": 0.2935,
+     "threshold": 0.05,
+     "verdict": "REAL",
+     "label": "Real change: report it",
+     "n_draws": 2000,
+     "dataset": "gemini_b2b",
+     "key": "WS",
+     "near": [
+      0.3945451949164644,
+      0.3626699579732085,
+      0.4244414488064062
+     ],
+     "far": [
+      0.3541263076327005,
+      0.3193290631373658,
+      0.3877207737258793
+     ],
+     "near_pairs": 847,
+     "far_pairs": 320,
+     "near_per_prompt": 21.175,
+     "far_per_prompt": 8.0,
+     "near_appearances": 14006,
+     "far_appearances": 5162
+    }
+   ]
+  },
+  {
+   "dataset": "claude_api_b2b",
+   "answers": 440,
+   "near_pairs": 840,
+   "far_pairs": 320,
+   "tests": [
+    {
+     "test": "H5 R",
+     "kind": "equiv",
+     "estimate": -0.01722246614675893,
+     "lo": -0.02948341999499963,
+     "hi": -0.0049915034355064065,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.05,
+     "verdict": "NEGLIGIBLE",
+     "label": "Detectable but negligible",
+     "n_draws": 2000,
+     "dataset": "claude_api_b2b",
+     "key": "R",
+     "near": [
+      0.780462341536167,
+      0.7553623277384309,
+      0.8056246441730314
+     ],
+     "far": [
+      0.7632398753894081,
+      0.7369557906342441,
+      0.7911356895086223
+     ],
+     "near_pairs": 840,
+     "far_pairs": 320,
+     "near_per_prompt": 21.0,
+     "far_per_prompt": 8.0,
+     "near_appearances": 13410,
+     "far_appearances": 5136
+    },
+    {
+     "test": "H5 T",
+     "kind": "equiv",
+     "estimate": 0.024744092973139398,
+     "lo": -0.04292601146588478,
+     "hi": 0.08353440288780822,
+     "ci_level": 0.9,
+     "p": 0.2465,
+     "threshold": 0.05,
+     "verdict": "INCONCLUSIVE",
+     "label": "Inconclusive: do not claim a null",
+     "n_draws": 2000,
+     "dataset": "claude_api_b2b",
+     "key": "T",
+     "near": [
+      0.43427230046948356,
+      0.3389355742296919,
+      0.508415439309294
+     ],
+     "far": [
+      0.45901639344262296,
+      0.3396139864981824,
+      0.5512447434819175
+     ],
+     "near_pairs": 840,
+     "far_pairs": 320,
+     "near_per_prompt": 21.0,
+     "far_per_prompt": 8.0,
+     "near_appearances": 852,
+     "far_appearances": 305
+    },
+    {
+     "test": "H5 WS",
+     "kind": "equiv",
+     "estimate": -0.027388252010020764,
+     "lo": -0.04235548469391796,
+     "hi": -0.011781285615738674,
+     "ci_level": 0.9,
+     "p": 0.006,
+     "threshold": 0.05,
+     "verdict": "NEGLIGIBLE",
+     "label": "Detectable but negligible",
+     "n_draws": 2000,
+     "dataset": "claude_api_b2b",
+     "key": "WS",
+     "near": [
+      0.5157851578515785,
+      0.4903300174674166,
+      0.5404813180403731
+     ],
+     "far": [
+      0.48839690584155776,
+      0.4642207850266742,
+      0.5125381134675775
+     ],
+     "near_pairs": 840,
+     "far_pairs": 320,
+     "near_per_prompt": 21.0,
+     "far_per_prompt": 8.0,
+     "near_appearances": 19512,
+     "far_appearances": 7498
+    }
+   ]
+  }
+ ],
+ "R7_regression": {
+  "chatgpt_b2b": {
+   "R": {
+    "slope_per_day": -0.00036693581511074885,
+    "per_30_days": [
+     -0.011008074453322466,
+     -0.03396348025962489,
+     0.009763359770910422
+    ],
+    "verdict": "NULL",
+    "label": "Practically equivalent (null)"
+   },
+   "T": {
+    "slope_per_day": 0.0006350473592455279,
+    "per_30_days": [
+     0.019051420777365838,
+     -0.03718134037315851,
+     0.06813667080779005
+    ],
+    "verdict": "INCONCLUSIVE",
+    "label": "Inconclusive: do not claim a null"
+   },
+   "WS": {
+    "slope_per_day": -0.000851609338625934,
+    "per_30_days": [
+     -0.025548280158778018,
+     -0.04754581500108918,
+     -0.004785848093555997
+    ],
+    "verdict": "NEGLIGIBLE",
+    "label": "Detectable but negligible"
+   },
+   "pairs": 2200
+  },
+  "gemini_b2b": {
+   "R": {
+    "slope_per_day": -0.0006327278045429246,
+    "per_30_days": [
+     -0.018981834136287738,
+     -0.05269238066995306,
+     0.012209744879082246
+    ],
+    "verdict": "INCONCLUSIVE",
+    "label": "Inconclusive: do not claim a null"
+   },
+   "T": {
+    "slope_per_day": -0.004371651828153918,
+    "per_30_days": [
+     -0.13114955484461754,
+     -0.24022258117181094,
+     -0.015890231216573923
+    ],
+    "verdict": "REAL",
+    "label": "Real change: report it"
+   },
+   "WS": {
+    "slope_per_day": -0.0009857401341006506,
+    "per_30_days": [
+     -0.029572204023019518,
+     -0.05909115007759272,
+     -0.001146608270137874
+    ],
+    "verdict": "REAL",
+    "label": "Real change: report it"
+   },
+   "pairs": 2200
+  },
+  "claude_api_b2b": {
+   "R": {
+    "slope_per_day": -0.0008820661994567867,
+    "per_30_days": [
+     -0.0264619859837036,
+     -0.037910976677329906,
+     -0.01466349893385186
+    ],
+    "verdict": "NEGLIGIBLE",
+    "label": "Detectable but negligible"
+   },
+   "T": {
+    "slope_per_day": -0.0006527057294065726,
+    "per_30_days": [
+     -0.019581171882197178,
+     -0.07789616966945714,
+     0.03659004059948329
+    ],
+    "verdict": "INCONCLUSIVE",
+    "label": "Inconclusive: do not claim a null"
+   },
+   "WS": {
+    "slope_per_day": -0.0013015181780595166,
+    "per_30_days": [
+     -0.0390455453417855,
+     -0.053770841743582716,
+     -0.023360352628338903
+    ],
+    "verdict": "REAL",
+    "label": "Real change: report it"
+   },
+   "pairs": 2200
+  },
+  "chatgpt_consumer": {
+   "R": {
+    "slope_per_day": -0.0008695274064180384,
+    "per_30_days": [
+     -0.02608582219254115,
+     -0.04281398570246264,
+     -0.011948086249244214
+    ],
+    "verdict": "NEGLIGIBLE",
+    "label": "Detectable but negligible"
+   },
+   "T": {
+    "slope_per_day": -0.002132157605388321,
+    "per_30_days": [
+     -0.06396472816164964,
+     -0.1058361304350209,
+     -0.02325633034560188
+    ],
+    "verdict": "REAL",
+    "label": "Real change: report it"
+   },
+   "WS": {
+    "slope_per_day": -0.0007887542096979911,
+    "per_30_days": [
+     -0.023662626290939733,
+     -0.03781720174260495,
+     -0.010592266735202782
+    ],
+    "verdict": "NEGLIGIBLE",
+    "label": "Detectable but negligible"
+   },
+   "pairs": 12920
+  }
+ },
+ "R8": [
+  {
+   "dataset": "chatgpt_b2b, shortlist",
+   "answers": 220,
+   "near_pairs": 218,
+   "far_pairs": 160,
+   "tests": [
+    {
+     "test": "H5 R",
+     "kind": "equiv",
+     "estimate": -0.010191658992632968,
+     "lo": -0.054016633911421086,
+     "hi": 0.031739756045701784,
+     "ci_level": 0.9,
+     "p": 0.0625,
+     "threshold": 0.05,
+     "verdict": "INCONCLUSIVE",
+     "label": "Inconclusive: do not claim a null",
+     "n_draws": 2000,
+     "dataset": "chatgpt_b2b",
+     "key": "R",
+     "near": [
+      0.7763671875,
+      0.7323355662631723,
+      0.8181015922988436
+     ],
+     "far": [
+      0.766175528507367,
+      0.7107837797566615,
+      0.8199783773331165
+     ],
+     "near_pairs": 218,
+     "far_pairs": 160,
+     "near_per_prompt": 10.9,
+     "far_per_prompt": 8.0,
+     "near_appearances": 2048,
+     "far_appearances": 1561
+    },
+    {
+     "test": "H5 T",
+     "kind": "equiv",
+     "estimate": 0.0036139332365746624,
+     "lo": -0.08636184585846242,
+     "hi": 0.08487808493086599,
+     "ci_level": 0.9,
+     "p": 0.1825,
+     "threshold": 0.05,
+     "verdict": "INCONCLUSIVE",
+     "label": "Inconclusive: do not claim a null",
+     "n_draws": 2000,
+     "dataset": "chatgpt_b2b",
+     "key": "T",
+     "near": [
+      0.6179245283018868,
+      0.5339225113122172,
+      0.6995085455260298
+     ],
+     "far": [
+      0.6215384615384615,
+      0.50814332247557,
+      0.7236607064827923
+     ],
+     "near_pairs": 218,
+     "far_pairs": 160,
+     "near_per_prompt": 10.9,
+     "far_per_prompt": 8.0,
+     "near_appearances": 424,
+     "far_appearances": 325
+    },
+    {
+     "test": "H5 WS",
+     "kind": "equiv",
+     "estimate": -0.021145756252984205,
+     "lo": -0.06637794817680352,
+     "hi": 0.019868319153001246,
+     "ci_level": 0.9,
+     "p": 0.132,
+     "threshold": 0.05,
+     "verdict": "INCONCLUSIVE",
+     "label": "Inconclusive: do not claim a null",
+     "n_draws": 2000,
+     "dataset": "chatgpt_b2b",
+     "key": "WS",
+     "near": [
+      0.4898067249139529,
+      0.46097758494918517,
+      0.5180165218507897
+     ],
+     "far": [
+      0.4686609686609687,
+      0.42365697514927364,
+      0.5138113038193581
+     ],
+     "near_pairs": 218,
+     "far_pairs": 160,
+     "near_per_prompt": 10.9,
+     "far_per_prompt": 8.0,
+     "near_appearances": 3777,
+     "far_appearances": 2808
+    }
+   ]
+  },
+  {
+   "dataset": "chatgpt_b2b, evaluate",
+   "answers": 220,
+   "near_pairs": 220,
+   "far_pairs": 160,
+   "tests": [
+    {
+     "test": "H5 R",
+     "kind": "equiv",
+     "estimate": -0.012006236740536247,
+     "lo": -0.038532007704624685,
+     "hi": 0.011909687504270842,
+     "ci_level": 0.9,
+     "p": 0.0135,
+     "threshold": 0.05,
+     "verdict": "NULL",
+     "label": "Practically equivalent (null)",
+     "n_draws": 2000,
+     "dataset": "chatgpt_b2b",
+     "key": "R",
+     "near": [
+      0.8573913043478261,
+      0.8338376792362255,
+      0.8817612387612388
+     ],
+     "far": [
+      0.8453850676072898,
+      0.8123848310416918,
+      0.8764179104477612
+     ],
+     "near_pairs": 220,
+     "far_pairs": 160,
+     "near_per_prompt": 11.0,
+     "far_per_prompt": 8.0,
+     "near_appearances": 2300,
+     "far_appearances": 1701
+    },
+    {
+     "test": "H5 T",
+     "kind": "equiv",
+     "estimate": 0.0038307323108109914,
+     "lo": -0.07673368684539959,
+     "hi": 0.07278704617408818,
+     "ci_level": 0.9,
+     "p": 0.145,
+     "threshold": 0.05,
+     "verdict": "INCONCLUSIVE",
+     "label": "Inconclusive: do not claim a null",
+     "n_draws": 2000,
+     "dataset": "chatgpt_b2b",
+     "key": "T",
+     "near": [
+      0.569377990430622,
+      0.5011175848759741,
+      0.6405260718794444
+     ],
+     "far": [
+      0.573208722741433,
+      0.4738675958188153,
+      0.6627236287285916
+     ],
+     "near_pairs": 220,
+     "far_pairs": 160,
+     "near_per_prompt": 11.0,
+     "far_per_prompt": 8.0,
+     "near_appearances": 418,
+     "far_appearances": 321
+    },
+    {
+     "test": "H5 WS",
+     "kind": "equiv",
+     "estimate": -0.027833519137866913,
+     "lo": -0.052889520939934875,
+     "hi": -0.0031970105622838234,
+     "ci_level": 0.9,
+     "p": 0.072,
+     "threshold": 0.05,
+     "verdict": "REAL",
+     "label": "Real change: report it",
+     "n_draws": 2000,
+     "dataset": "chatgpt_b2b",
+     "key": "WS",
+     "near": [
+      0.5676328502415459,
+      0.5408850436071462,
+      0.5954278478987197
+     ],
+     "far": [
+      0.539799331103679,
+      0.5043354235081602,
+      0.5752755575488201
+     ],
+     "near_pairs": 220,
+     "far_pairs": 160,
+     "near_per_prompt": 11.0,
+     "far_per_prompt": 8.0,
+     "near_appearances": 4140,
+     "far_appearances": 2990
+    }
+   ]
+  },
+  {
+   "dataset": "gemini_b2b, shortlist",
+   "answers": 220,
+   "near_pairs": 220,
+   "far_pairs": 160,
+   "tests": [
+    {
+     "test": "H5 R",
+     "kind": "equiv",
+     "estimate": -0.010092674105863453,
+     "lo": -0.05444038463319892,
+     "hi": 0.03502688928616613,
+     "ci_level": 0.9,
+     "p": 0.067,
+     "threshold": 0.05,
+     "verdict": "INCONCLUSIVE",
+     "label": "Inconclusive: do not claim a null",
+     "n_draws": 2000,
+     "dataset": "gemini_b2b",
+     "key": "R",
+     "near": [
+      0.5762514551804424,
+      0.5086485691587364,
+      0.6429514122335332
+     ],
+     "far": [
+      0.566158781074579,
+      0.4962944771920536,
+      0.6386956763506644
+     ],
+     "near_pairs": 220,
+     "far_pairs": 160,
+     "near_per_prompt": 11.0,
+     "far_per_prompt": 8.0,
+     "near_appearances": 1718,
+     "far_appearances": 1247
+    },
+    {
+     "test": "H5 T",
+     "kind": "equiv",
+     "estimate": -0.21979405034324942,
+     "lo": -0.38820934538063706,
+     "hi": -0.05666444453742061,
+     "ci_level": 0.9,
+     "p": 0.956,
+     "threshold": 0.05,
+     "verdict": "REAL",
+     "label": "Real change: report it",
+     "n_draws": 2000,
+     "dataset": "gemini_b2b",
+     "key": "T",
+     "near": [
+      0.4434782608695652,
+      0.2857142857142857,
+      0.5806558075162356
+     ],
+     "far": [
+      0.2236842105263158,
+      0.07894736842105263,
+      0.3756406706660514
+     ],
+     "near_pairs": 220,
+     "far_pairs": 160,
+     "near_per_prompt": 11.0,
+     "far_per_prompt": 8.0,
+     "near_appearances": 230,
+     "far_appearances": 152
+    },
+    {
+     "test": "H5 WS",
+     "kind": "equiv",
+     "estimate": -0.03876418988648095,
+     "lo": -0.0826434044158295,
+     "hi": 0.003780516446726999,
+     "ci_level": 0.9,
+     "p": 0.31,
+     "threshold": 0.05,
+     "verdict": "INCONCLUSIVE",
+     "label": "Inconclusive: do not claim a null",
+     "n_draws": 2000,
+     "dataset": "gemini_b2b",
+     "key": "WS",
+     "near": [
+      0.33700980392156865,
+      0.2898796583850932,
+      0.38006632387301187
+     ],
+     "far": [
+      0.2982456140350877,
+      0.25505119898180556,
+      0.3387417027119099
+     ],
+     "near_pairs": 220,
+     "far_pairs": 160,
+     "near_per_prompt": 11.0,
+     "far_per_prompt": 8.0,
+     "near_appearances": 3264,
+     "far_appearances": 2394
+    }
+   ]
+  },
+  {
+   "dataset": "gemini_b2b, evaluate",
+   "answers": 220,
+   "near_pairs": 220,
+   "far_pairs": 160,
+   "tests": [
+    {
+     "test": "H5 R",
+     "kind": "equiv",
+     "estimate": -0.02247924817934477,
+     "lo": -0.08453587567874567,
+     "hi": 0.02954280471656808,
+     "ci_level": 0.9,
+     "p": 0.2215,
+     "threshold": 0.05,
+     "verdict": "INCONCLUSIVE",
+     "label": "Inconclusive: do not claim a null",
+     "n_draws": 2000,
+     "dataset": "gemini_b2b",
+     "key": "R",
+     "near": [
+      0.6932952924393724,
+      0.6532787743193207,
+      0.7322798600576378
+     ],
+     "far": [
+      0.6708160442600276,
+      0.6188224415698623,
+      0.7175322123882176
+     ],
+     "near_pairs": 220,
+     "far_pairs": 160,
+     "near_per_prompt": 11.0,
+     "far_per_prompt": 8.0,
+     "near_appearances": 2103,
+     "far_appearances": 1446
+    },
+    {
+     "test": "H5 T",
+     "kind": "equiv",
+     "estimate": -0.09598108747044917,
+     "lo": -0.3381231915068633,
+     "hi": 0.11836554126322574,
+     "ci_level": 0.9,
+     "p": 0.6015,
+     "threshold": 0.05,
+     "verdict": "INCONCLUSIVE",
+     "label": "Inconclusive: do not claim a null",
+     "n_draws": 2000,
+     "dataset": "gemini_b2b",
+     "key": "T",
+     "near": [
+      0.3404255319148936,
+      0.13793103448275862,
+      0.5149791326438032
+     ],
+     "far": [
+      0.24444444444444444,
+      0.09523809523809523,
+      0.3658708347646856
+     ],
+     "near_pairs": 220,
+     "far_pairs": 160,
+     "near_per_prompt": 11.0,
+     "far_per_prompt": 8.0,
+     "near_appearances": 141,
+     "far_appearances": 90
+    },
+    {
+     "test": "H5 WS",
+     "kind": "equiv",
+     "estimate": -0.04466719083275622,
+     "lo": -0.10894743855123794,
+     "hi": 0.008391119973605603,
+     "ci_level": 0.9,
+     "p": 0.4425,
+     "threshold": 0.05,
+     "verdict": "INCONCLUSIVE",
+     "label": "Inconclusive: do not claim a null",
+     "n_draws": 2000,
+     "dataset": "gemini_b2b",
+     "key": "WS",
+     "near": [
+      0.4471238382316001,
+      0.41019361174945274,
+      0.4856976181289524
+     ],
+     "far": [
+      0.4024566473988439,
+      0.3521041404929546,
+      0.44901491783703634
+     ],
+     "near_pairs": 220,
+     "far_pairs": 160,
+     "near_per_prompt": 11.0,
+     "far_per_prompt": 8.0,
+     "near_appearances": 3981,
+     "far_appearances": 2768
+    }
+   ]
+  },
+  {
+   "dataset": "claude_api_b2b, shortlist",
+   "answers": 220,
+   "near_pairs": 220,
+   "far_pairs": 160,
+   "tests": [
+    {
+     "test": "H5 R",
+     "kind": "equiv",
+     "estimate": -0.030905224006093523,
+     "lo": -0.052966252180355375,
+     "hi": -0.009935382938939256,
+     "ci_level": 0.9,
+     "p": 0.0775,
+     "threshold": 0.05,
+     "verdict": "REAL",
+     "label": "Real change: report it",
+     "n_draws": 2000,
+     "dataset": "claude_api_b2b",
+     "key": "R",
+     "near": [
+      0.7672493100275989,
+      0.7265017019689917,
+      0.8118280983859513
+     ],
+     "far": [
+      0.7363440860215054,
+      0.6930467560090937,
+      0.7815967139729437
+     ],
+     "near_pairs": 220,
+     "far_pairs": 160,
+     "near_per_prompt": 11.0,
+     "far_per_prompt": 8.0,
+     "near_appearances": 3261,
+     "far_appearances": 2325
+    },
+    {
+     "test": "H5 T",
+     "kind": "equiv",
+     "estimate": -0.02692307692307694,
+     "lo": -0.12191767404022082,
+     "hi": 0.0832500765146266,
+     "ci_level": 0.9,
+     "p": 0.3365,
+     "threshold": 0.05,
+     "verdict": "INCONCLUSIVE",
+     "label": "Inconclusive: do not claim a null",
+     "n_draws": 2000,
+     "dataset": "claude_api_b2b",
+     "key": "T",
+     "near": [
+      0.45,
+      0.29712087912087914,
+      0.5617318629490915
+     ],
+     "far": [
+      0.4230769230769231,
+      0.2557683538531692,
+      0.5510735544217686
+     ],
+     "near_pairs": 220,
+     "far_pairs": 160,
+     "near_per_prompt": 11.0,
+     "far_per_prompt": 8.0,
+     "near_appearances": 240,
+     "far_appearances": 156
+    },
+    {
+     "test": "H5 WS",
+     "kind": "equiv",
+     "estimate": -0.0426317206937758,
+     "lo": -0.07333380642629818,
+     "hi": -0.011045221920620569,
+     "ci_level": 0.9,
+     "p": 0.355,
+     "threshold": 0.05,
+     "verdict": "REAL",
+     "label": "Real change: report it",
+     "n_draws": 2000,
+     "dataset": "claude_api_b2b",
+     "key": "WS",
+     "near": [
+      0.4824733289788809,
+      0.43889772519221115,
+      0.5264653063493829
+     ],
+     "far": [
+      0.4398416082851051,
+      0.4085267847682821,
+      0.4713864168325135
+     ],
+     "near_pairs": 220,
+     "far_pairs": 160,
+     "near_per_prompt": 11.0,
+     "far_per_prompt": 8.0,
+     "near_appearances": 4593,
+     "far_appearances": 3283
+    }
+   ]
+  },
+  {
+   "dataset": "claude_api_b2b, evaluate",
+   "answers": 220,
+   "near_pairs": 220,
+   "far_pairs": 160,
+   "tests": [
+    {
+     "test": "H5 R",
+     "kind": "equiv",
+     "estimate": -0.01886223377105478,
+     "lo": -0.03376252060859233,
+     "hi": -0.003541040625892067,
+     "ci_level": 0.9,
+     "p": 0.0,
+     "threshold": 0.05,
+     "verdict": "NEGLIGIBLE",
+     "label": "Detectable but negligible",
+     "n_draws": 2000,
+     "dataset": "claude_api_b2b",
+     "key": "R",
+     "near": [
+      0.8043478260869565,
+      0.7735790724065884,
+      0.8358552823210493
+     ],
+     "far": [
+      0.7854855923159018,
+      0.7525695695454342,
+      0.8197156738609326
+     ],
+     "near_pairs": 220,
+     "far_pairs": 160,
+     "near_per_prompt": 11.0,
+     "far_per_prompt": 8.0,
+     "near_appearances": 3772,
+     "far_appearances": 2811
+    },
+    {
+     "test": "H5 T",
+     "kind": "equiv",
+     "estimate": 0.09111434138496272,
+     "lo": -0.03884325598681561,
+     "hi": 0.1735654106752606,
+     "ci_level": 0.9,
+     "p": 0.7345,
+     "threshold": 0.05,
+     "verdict": "INCONCLUSIVE",
+     "label": "Inconclusive: do not claim a null",
+     "n_draws": 2000,
+     "dataset": "claude_api_b2b",
+     "key": "T",
+     "near": [
+      0.4055299539170507,
+      0.28712412907957463,
+      0.5046917775889738
+     ],
+     "far": [
+      0.4966442953020134,
+      0.30375911008822404,
+      0.614671669793621
+     ],
+     "near_pairs": 220,
+     "far_pairs": 160,
+     "near_per_prompt": 11.0,
+     "far_per_prompt": 8.0,
+     "near_appearances": 217,
+     "far_appearances": 149
+    },
+    {
+     "test": "H5 WS",
+     "kind": "equiv",
+     "estimate": -0.028432791401151847,
+     "lo": -0.04563362339971177,
+     "hi": -0.009540532025815632,
+     "ci_level": 0.9,
+     "p": 0.019,
+     "threshold": 0.05,
+     "verdict": "NEGLIGIBLE",
+     "label": "Detectable but negligible",
+     "n_draws": 2000,
+     "dataset": "claude_api_b2b",
+     "key": "WS",
+     "near": [
+      0.5546486870120653,
+      0.5274183530196372,
+      0.5841368307023017
+     ],
+     "far": [
+      0.5262158956109134,
+      0.4961968009515954,
+      0.5582081914444426
+     ],
+     "near_pairs": 220,
+     "far_pairs": 160,
+     "near_per_prompt": 11.0,
+     "far_per_prompt": 8.0,
+     "near_appearances": 5636,
+     "far_appearances": 4215
+    }
+   ]
+  }
+ ]
+}
