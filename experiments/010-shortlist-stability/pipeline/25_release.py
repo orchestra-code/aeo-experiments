@@ -1,9 +1,20 @@
-"""Stage 25: gate-checked Stage 1 public datasets -> data/public/ (spec §3, §8 step 6).
+"""Stage 25: gate-checked public datasets -> data/public/ (spec §3, §8 steps 6 and 8).
+
+``--stage 1`` is the signed Stage 1 release (2026-10-11: new-collection waves
+1 to 7 and the holdouts). ``--stage 2`` is the Stage 2 update: the same three
+files, names and columns, now with waves 1 to 11 of the new collection (the
+holdout rows are unchanged). The Stage 2 update keeps every Stage 1 row byte
+for byte, in the same place at the top of each file, with the same run ids,
+brand codes and segment ids; the waves 8 to 11 rows follow, numbered on from
+the last Stage 1 run id. Before writing, Stage 2 rebuilds the Stage 1 release
+in-process, checks it against the sha256 of the signed Stage 1 files, and
+checks that each Stage 2 file starts with exactly those bytes; after writing,
+it checks the written files again.
 
 Three files, written through ``aeo_research.release_dataset``:
 
-- ``ai-shortlist-stability-answers.csv``: one row per Stage 1 answer (all six
-  datasets, every arm), derived counts and flags only.
+- ``ai-shortlist-stability-answers.csv``: one row per answer of the stage
+  (all six datasets, every arm), derived counts and flags only.
 - ``ai-shortlist-stability-mentions.csv``: one row per (answer, lexicon
   brand): brand code, first-mention position, the judge's status, best-for
   segment ids, caveat reason types. Joins the answers file on ``run_id``.
@@ -35,8 +46,10 @@ public output):
   text, question text for headphone and agency prompts, search queries,
   cited URLs, the R1 names outside the lexicon (counts only).
 
-Checks before anything is written: the frame is the confirmatory Stage 1
-frame built with the frozen lexicon v3 and taxonomy, Audit D passed and is
+Checks before anything is written: the frame is the stage's confirmatory
+frame built with the frozen lexicon v3 and taxonomy (Stage 2: built after
+every wave 8 to 11 task and the Stage 2 re-judge sample were judged OK, with
+the Stage 2 best-for files classified), Audit D passed and is
 signed, 009's codes are reproduced exactly from its public file, every
 segment label and definition is clean against every lexicon alias (009's
 v2.1, lexicon v3, 005's lexicons, keep and drop rows) and a capitalized-name
@@ -44,11 +57,13 @@ heuristic, and every public value and datasheet passes an alias scan
 (aliases of at least 4 characters, case-insensitive). After writing, the
 files are scanned again; a hit deletes them.
 
-The checklist ``results/release-checklist.md`` is written once and never
-overwritten. Do not commit data/public/ until it is signed, and do not sync
-the datasets to the site before that (``sync_site_assets.py --figures-only``).
+The checklists ``results/release-checklist.md`` (Stage 1, signed) and
+``results/release-checklist-stage2.md`` (the Stage 2 update) are each written
+once and never overwritten. Do not commit data/public/ until the stage's
+checklist is signed, and do not sync the datasets to the site before that
+(``sync_site_assets.py --figures-only``).
 
-Usage: uv run python experiments/010-shortlist-stability/pipeline/25_release.py --stage 1
+Usage: uv run python experiments/010-shortlist-stability/pipeline/25_release.py --stage 2
 """
 
 from __future__ import annotations
@@ -61,17 +76,20 @@ import re
 import sys
 import textwrap
 from collections import Counter
+from dataclasses import replace
+from datetime import date, timedelta
 from pathlib import Path
+from types import SimpleNamespace
 
 import pandas as pd
 from common import (
     DATASETS,
     EXP,
     EXPLORE_TAXONOMY_CATEGORIES,
-    INTERIM,
     JUDGE_PIN,
     LEXICON_V3,
     LEXICON_V3_SHA256,
+    NEW_DATASETS,
     RAW,
     REC,
     RESULTS,
@@ -79,18 +97,22 @@ from common import (
     SPEC,
     SRC_005,
     SRC_009,
+    STAGE2_NEW_WAVES,
+    STAGE_WAVES,
     TAXONOMY_B2B,
     TAXONOMY_B2B_SHA256,
     TAXONOMY_EXPLORE_SHA256,
+    WAVE_OFFSETS,
     Mode,
     audit_d_problems,
+    bestfor_problems,
     instrument_problems,
     load_bestfor,
     load_module,
+    load_stage_bestfor,
     merged_stage_taxonomy,
     read_jsonl,
     sha256_file,
-    stage2_not_implemented,
 )
 
 from aeo_research import ColumnSpec, Datasheet, release_dataset
@@ -102,7 +124,20 @@ ANSWERS_SLUG = "ai-shortlist-stability-answers"
 MENTIONS_SLUG = "ai-shortlist-stability-mentions"
 SEGMENTS_SLUG = "ai-shortlist-stability-segments"
 SPEC_COMMIT = "6342963"
-N_STAGE1 = 2770
+#: Answers in each stage's frame: Stage 1 = new waves 1 to 7 + holdouts; Stage
+#: 2 adds 3 platforms x 40 prompts x waves 8 to 11.
+N_ANSWERS = {1: 2770, 2: 3250}
+STAGE1_RELEASED = "2026-10-11"
+#: sha256 of the three CSVs of the signed Stage 1 release (results/
+#: release-checklist.md, signed 2026-10-11; commit 4432548). The Stage 2
+#: update rebuilds Stage 1 in-process, must reproduce these bytes, and must
+#: start each of its files with them.
+STAGE1_CSV_SHA256 = {
+    "ai-shortlist-stability-answers": "829a4ca17e2d9134ba0e1a53dc7b107bd37ef0cedc4cef69d70dd7ed8b5d235c",
+    "ai-shortlist-stability-mentions": "0390179f1830ac6e7b246a00cbc009a1266cd2626f968ac3b1adea8a6a083eb9",
+    "ai-shortlist-stability-segments": "ac564322df9ff3e160053fa25f1e374ff6b5d18adf2c122c3ebd459fe7caed6c",
+}
+SCHEDULE = EXP / "collection_schedule.json"
 
 PUB009_ANSWERS = SRC_009 / "data/public/claude-api-vs-claude-ai-answers.csv"
 PUB009_PROMPTS = SRC_009 / "data/public/claude-api-vs-claude-ai-prompts.csv"
@@ -392,6 +427,27 @@ ANSWER_COLUMNS = [
     ColumnSpec("judge_ok", "1 if the judge returned a valid classification"),
 ]
 
+#: Stage 2 descriptions of the answer columns whose meaning widened (same
+#: columns, same names; the other descriptions are Stage 1's).
+ANSWER_COLUMNS_STAGE2 = {
+    "run_id": (
+        "Id of one answer evaluated in this study; joins the mentions file. r00001 to "
+        f"r{N_ANSWERS[1]:05d} are the Stage 1 release's ids, unchanged; r{N_ANSWERS[1] + 1:05d} "
+        f"to r{N_ANSWERS[2]:05d} are the answers of waves 8 to 11"),
+    "wave": (
+        "Run number within the study: 1 to 11 for the new collection (waves 1 to 7 daily "
+        "from 2026-10-03, waves 8 to 11 weekly from 2026-10-16), 1 to 3 for claude_b2b, and "
+        "the source study's wave (1 to 7) for the consumer and agency answers. Rows with "
+        "wave 1 to 7 are the Stage 1 release"),
+}
+
+
+def answer_columns(stage: int) -> list[ColumnSpec]:
+    if stage == 1:
+        return ANSWER_COLUMNS
+    return [replace(c, description=ANSWER_COLUMNS_STAGE2.get(c.name, c.description))
+            for c in ANSWER_COLUMNS]
+
 MENTION_COLUMNS = [
     ColumnSpec("run_id", "Answer id; joins the answers file"),
     ColumnSpec(
@@ -455,6 +511,26 @@ def flag(x) -> int:
     return int(bool(x))
 
 
+def stage2_added(row: dict) -> bool:
+    """A new-collection answer of waves 8 to 11 (what the Stage 2 update adds)."""
+    return row["dataset"] in NEW_DATASETS and int(row["wave"]) in STAGE2_NEW_WAVES
+
+
+def wave_dates(waves) -> list[str]:
+    """Scheduled local date of each wave (collection_schedule.json start + offset)."""
+    start = date.fromisoformat(json.loads(SCHEDULE.read_text())["start"])
+    return [(start + timedelta(days=WAVE_OFFSETS[w - 1])).isoformat() for w in waves]
+
+
+def csv_bytes(df: pd.DataFrame, columns: list[ColumnSpec]) -> bytes:
+    """The bytes release_dataset writes for this frame (df[names].to_csv, index=False)."""
+    return df[[c.name for c in columns]].to_csv(index=False).encode()
+
+
+def sha256_bytes(b: bytes) -> str:
+    return hashlib.sha256(b).hexdigest()
+
+
 def read_lexicon_rows(path: Path) -> list[dict]:
     csv.field_size_limit(sys.maxsize)
     with path.open(newline="") as f:
@@ -490,26 +566,57 @@ def alias_regex(aliases, min_len: int = 1) -> re.Pattern:
 # ------------------------------------------------------------------ inputs
 
 
-def check_inputs() -> tuple[list[dict], dict]:
-    problems = instrument_problems() + audit_d_problems(Mode("confirmatory", 1))
-    meta_path = INTERIM / "stage1_meta.json"
+def check_inputs(stage: int = 1) -> tuple[list[dict], dict]:
+    mode = Mode("confirmatory", stage)
+    problems = instrument_problems() + audit_d_problems(mode)
+    meta_path = mode.meta_path
     meta = json.loads(meta_path.read_text()) if meta_path.exists() else {}
-    if meta.get("mode") != "confirmatory" or meta.get("stage") != 1:
-        problems.append("stage1_answers.jsonl is not the confirmatory Stage 1 frame")
+    if meta.get("mode") != "confirmatory" or meta.get("stage") != stage:
+        problems.append(f"{mode.answers_path.name} is not the confirmatory Stage {stage} frame")
     if meta.get("lexicon_v3_sha256") != LEXICON_V3_SHA256:
         problems.append("the answer frame was built with another lexicon v3")
     if meta.get("taxonomy_b2b_sha256") != TAXONOMY_B2B_SHA256:
         problems.append("the answer frame was built with another B2B taxonomy")
     if meta.get("judge_rows_off_pin"):
         problems.append("judged rows off the judge pin")
+    if meta.get("max_new_wave") != max(STAGE_WAVES[stage]):
+        problems.append(f"the frame's last new-collection wave is {meta.get('max_new_wave')}, "
+                        f"not {max(STAGE_WAVES[stage])}")
+    if stage == 2:
+        if not meta.get("stage2_inputs_complete"):
+            problems.append("the Stage 2 frame was built before every wave 8 to 11 task and the "
+                            "Stage 2 re-judge sample were judged OK")
+        problems += bestfor_problems(mode)
     if problems:
         raise SystemExit("refusing to release:\n  - " + "\n  - ".join(problems))
-    rows = read_jsonl(INTERIM / "stage1_answers.jsonl")
-    if len(rows) != N_STAGE1:
-        raise SystemExit(f"expected {N_STAGE1} Stage 1 answers, found {len(rows)}")
+    rows = read_jsonl(mode.answers_path)
+    if len(rows) != N_ANSWERS[stage]:
+        raise SystemExit(f"expected {N_ANSWERS[stage]} Stage {stage} answers, found {len(rows)}")
     if {r["dataset"] for r in rows} != {d.name for d in DATASETS}:
         raise SystemExit("unexpected dataset set in the frame")
+    added = [r for r in rows if stage2_added(r)]
+    want = 0 if stage == 1 else len(NEW_DATASETS) * 40 * len(STAGE2_NEW_WAVES)
+    if len(added) != want:
+        raise SystemExit(f"expected {want} waves 8 to 11 answers in the frame, found {len(added)}")
     return rows, meta
+
+
+def stage_bestfor(stage: int):
+    """Stage 1: bestfor_stage1 as is. Stage 2: Stage 1's classifications plus the
+    Stage 2 classifications of the phrases Stage 1 did not see (deviation 10b)."""
+    bf = (load_bestfor(RAW / "bestfor_stage1") if stage == 1
+          else load_stage_bestfor(Mode("confirmatory", 2)))
+    if bf is None or bf.taxonomy != merged_stage_taxonomy():
+        raise SystemExit(f"Stage {stage} best-for files missing or not the frozen taxonomy")
+    if stage == 2:
+        s1 = load_bestfor(RAW / "bestfor_stage1")
+        for c in s1.seg_a:
+            for src, dst in ((s1.seg_a, bf.seg_a), (s1.seg_b, bf.seg_b)):
+                changed = [p for p, g in src[c].items() if dst[c].get(p) != g]
+                if changed:
+                    raise SystemExit(f"{c}: {len(changed)} Stage 1 phrases changed segment at "
+                                     "Stage 2 (deviation 10b keeps their Stage 1 classification)")
+    return bf
 
 
 def codes_009() -> dict[str, str]:
@@ -636,13 +743,17 @@ def taxonomy_scan(seg_map: dict, segments: pd.DataFrame) -> dict:
 
 def build_frames(rows: list[dict], codes: dict[str, str], items: dict, seg_map: dict, bf
                  ) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """Answer and mention frames. Rows sort by dataset, arm, study, item and
+    wave; the answers a Stage 2 update adds (waves 8 to 11) sort after every
+    Stage 1 row, in the same order, so Stage 1 rows keep their run ids and the
+    Stage 1 file is a prefix of the updated one."""
     order = {d.name: k for k, d in enumerate(DATASETS)}
 
     def pub_item(r):
         return items.get((r["dataset"], r["item_id"]), r["item_id"])
 
-    rows = sorted(rows, key=lambda r: (order[r["dataset"]], r["arm"], r["source_exp"],
-                                       pub_item(r), int(r["wave"])))
+    rows = sorted(rows, key=lambda r: (stage2_added(r), order[r["dataset"]], r["arm"],
+                                       r["source_exp"], pub_item(r), int(r["wave"])))
     ans, men = [], []
     for n, r in enumerate(rows, start=1):
         rid = f"r{n:05d}"
@@ -756,16 +867,81 @@ def file_scan(paths: list[Path]) -> dict:
 # --------------------------------------------------------------- datasheets
 
 
-def common_notes(meta: dict) -> list[str]:
+def pct(x: float) -> str:
+    return f"{round(100 * x)}%"
+
+
+def stage2_audit_figures() -> dict:
+    """Audit E (the Stage 2 sample) and Audit G (every phrase Stage 2 uses), from 21_audits.py."""
+    d = json.loads((RESULTS / "stage2_audits.json").read_text())
+    if not d["E"].get("passes") or not d["G"].get("passes"):
+        raise SystemExit("Stage 2 Audit E or Audit G did not pass (results/stage2_audits.json)")
+    g = d["G"]["groups"]
+    return {"e": d["E"]["groups"]["Stage 2 sample (waves 8 to 11)"], "g": g["all"],
+            "g_new": g["classified at Stage 2 (new phrases)"],
+            "g_reused": g["classified at Stage 1 (reused)"]}
+
+
+def check_stage2_models(answers: pd.DataFrame) -> None:
+    """The model strings the Stage 2 datasheets describe (Audit F, deviation 9)."""
+    new = answers[answers["dataset"].isin(NEW_DATASETS)]
+    for (ds, w, m), n in Counter(zip(new["dataset"], new["wave"], new["model"])).items():
+        ok = {"chatgpt_b2b": m == ("gpt-5-6" if w <= 5 else "gpt-6"),
+              "gemini_b2b": m == "3.5 Flash-Lite" or (m == "3.6 Flash" and w == 8 and n == 1),
+              "claude_api_b2b": m == "claude-opus-5-5"}[ds]
+        if not ok:
+            raise SystemExit(f"{ds} wave {w} reports {m!r} ({n}); the datasheet notes say otherwise")
+
+
+def common_notes(meta: dict, stage: int = 1) -> list[str]:
     pin = json.loads(JUDGE_PIN.read_text())
+    if stage == 1:
+        deviations = (
+            f"Pre-registered: spec frozen at commit {SPEC_COMMIT} (2026-10-03). Deviations 1 to 8 "
+            "are listed in the spec's section 'Deviations from the frozen spec' "
+            f"(experiments/{STUDY}/spec.md). Deviations 1 to 7 were made before any Stage 1 "
+            "metric was computed; deviation 8 changes only the article's lead figure.")
+        dates = (
+            "Dates. A DataForSEO run date is the scraper's UTC timestamp, so answers submitted "
+            "at 20:00 local time (US) carry the next day's date; a Claude API run date is its batch "
+            "submission date. One ChatGPT task of wave 6 ran a day late and keeps its true "
+            "date (deviation 2). ChatGPT reported gpt-5-6 in waves 1 to 5 and gpt-6 in waves 6 "
+            "and 7.")
+        audit_e = ("Judge test-retest on a seeded 10% sample (Audit E): 96% category agreement, "
+                   "Cohen's kappa 0.89.")
+        run_notes = []
+    else:
+        e = stage2_audit_figures()["e"]
+        deviations = (
+            f"Pre-registered: spec frozen at commit {SPEC_COMMIT} (2026-10-03). Deviations 1 to "
+            "10 are listed in the spec's section 'Deviations from the frozen spec' "
+            f"(experiments/{STUDY}/spec.md). Deviations 1 to 7 were made before any Stage 1 "
+            "metric was computed; deviation 8 changes only the first article's lead figure; "
+            "deviation 9 records the Stage 2 collection (waves 8 to 11) and deviation 10 the "
+            "Stage 2 implementation choices, recorded before any Stage 2 metric was computed.")
+        dates = (
+            "Dates. A DataForSEO run date is the scraper's UTC timestamp, so answers submitted "
+            "at 20:00 local time (US) carry the next day's date; a Claude API run date is its batch "
+            "submission date. Tasks that failed and ran late keep their true dates: one ChatGPT "
+            "task of wave 6 (deviation 2) and 7 Gemini tasks of wave 8, dated 2026-10-18 "
+            "(deviation 9).")
+        audit_e = (
+            "Judge test-retest (Audit E) on seeded 10% samples: 96% category agreement, Cohen's "
+            f"kappa 0.89 at Stage 1; {pct(e['agreement'])} agreement, kappa {e['kappa']:.2f} on "
+            f"the {e['answers']} answers sampled from waves 8 to 11.")
+        run_notes = [
+            "Stage 2 run notes (deviation 9). All 40 questions were collected on every platform "
+            "in every wave, with no empty answer and no refusal. Wave 9 started 1 to 2.5 hours "
+            "late; no run date changed. ChatGPT reported gpt-5-6 in waves 1 to 5 and gpt-6 in "
+            "waves 6 to 11, so ChatGPT comparisons across the weekly waves span that model "
+            "change. Gemini reported 3.5 Flash-Lite on every answer but one, a wave 8 answer "
+            "that reports 3.6 Flash. Every Claude API answer reports claude-opus-5-5."]
     return [
-        f"Pre-registered: spec frozen at commit {SPEC_COMMIT} (2026-10-03). Deviations 1 to 8 "
-        "are listed in the spec's section 'Deviations from the frozen spec' "
-        f"(experiments/{STUDY}/spec.md). Deviations 1 to 7 were made before any Stage 1 "
-        "metric was computed; deviation 8 changes only the article's lead figure.",
+        deviations,
         f"Instruments: lexicon v3 sha256 {LEXICON_V3_SHA256}; B2B best-for taxonomy sha256 "
         f"{TAXONOMY_B2B_SHA256} (both pinned in harness/instrument.py, frozen 2026-10-11 "
-        "before any confirmatory metric).",
+        "before any confirmatory metric"
+        + (", and used unchanged for both stages)." if stage == 2 else ")."),
         "Collection. ChatGPT and Gemini: DataForSEO's LLM scraper (US location, English; web "
         "search forced on ChatGPT, which the Gemini endpoint does not accept; Gemini as "
         "served in the Gemini app). Claude: the Anthropic Batches API, Opus 5.5 at effort "
@@ -774,11 +950,8 @@ def common_notes(meta: dict) -> list[str]:
         "experiment 009 from one fresh Pro account. The headphone and agency answers are "
         "ChatGPT answers collected through DataForSEO in July and August 2026 by "
         "experiments 002, 003 and 005.",
-        "Dates. A DataForSEO run date is the scraper's UTC timestamp, so answers submitted "
-        "at 20:00 local time (US) carry the next day's date; a Claude API run date is its batch "
-        "submission date. One ChatGPT task of wave 6 ran a day late and keeps its true "
-        "date (deviation 2). ChatGPT reported gpt-5-6 in waves 1 to 5 and gpt-6 in waves 6 "
-        "and 7.",
+        dates,
+        *run_notes,
         "Brands. New collection: lexicon v3, experiment 009's lexicon v2.1 plus 40 curated brands or aliases, matched after removing citation "
         "links whose text is a domain (deviation 6); Audit D on 30 answers: precision 1.00, "
         "recall 1.00. claude_b2b keeps 009's frozen lexicon v2.1 and extraction; headphone "
@@ -786,39 +959,91 @@ def common_notes(meta: dict) -> list[str]:
         "Statuses. The Spyglasses production recommendation judge, pinned "
         f"(harness/judge_pin.json: sha256 {pin['sha256']}, Spyglasses commit "
         f"{pin['commit'][:7]}, model {pin['model']}, reasoning effort "
-        f"{pin['reasoningEffort']}, MENTION_ASSESSMENT_VERSION 2). Judge test-retest on a "
-        "seeded 10% sample (Audit E): 96% category agreement, Cohen's kappa 0.89.",
+        f"{pin['reasoningEffort']}, MENTION_ASSESSMENT_VERSION 2). {audit_e}",
     ]
 
 
-def write_datasheets(answers, mentions, segments, meta, code_stats, log) -> dict[str, dict]:
-    notes = common_notes(meta)
+def taxonomy_notes(stage: int) -> list[str]:
+    head = (
+        "Use-case segments. B2B: the 20 frozen taxonomies, built by the Spyglasses utility "
+        "model (gpt-5.6-luna, reasoning effort medium) from 6,014 distinct best-for phrases, 7 "
+        "or 8 segments plus 'general' per category. Headphones and agencies: the exploration "
+        f"taxonomies (sha256 {TAXONOMY_EXPLORE_SHA256}). Each phrase was classified twice "
+        "(effort none); pass a is used in the analysis, and ")
+    if stage == 1:
+        return [head + "the two passes agree on 96% of distinct phrases (Audit G)."]
+    a = stage2_audit_figures()
+    return [
+        head + f"the two passes agree on {pct(a['g']['agreement'])} of the "
+        f"{a['g']['phrases']:,} distinct phrases Stage 2 uses (Audit G). The "
+        f"{a['g_reused']['phrases']:,} phrases already classified at Stage 1 keep their Stage 1 "
+        "classifications; "
+        f"the {a['g_new']['phrases']:,} phrases first seen at Stage 2 were classified twice with "
+        "the same frozen taxonomies (deviation 10), so no Stage 1 row's segment ids change."]
+
+
+def changelog(rel: SimpleNamespace, s1: SimpleNamespace) -> str:
+    """The Changelog section appended to each Stage 2 datasheet."""
+    n1, n2 = len(s1.answers), len(rel.answers)
+    m1, m2 = len(s1.mentions), len(rel.mentions)
+    d = wave_dates(range(1, 12))
+    items = [
+        f"{STAGE1_RELEASED}, Stage 1 release: new-collection waves 1 to 7 ({d[0]} to {d[6]}) "
+        f"and the holdouts; {n1:,} answers (run_id r00001 to r{n1:05d}), {m1:,} brand mentions "
+        f"and {len(s1.segments)} use-case segments.",
+        f"{date.today().isoformat()}, Stage 2 update: adds waves 8 to 11 of the new collection "
+        f"({', '.join(d[7:10])} and {d[10]}): {n2 - n1:,} answers (run_id r{n1 + 1:05d} to "
+        f"r{n2:05d}) and {m2 - m1:,} brand mentions. The holdout rows and the segments file are "
+        "unchanged. Every Stage 1 row is unchanged, byte for byte, and comes first in its file, "
+        "with the same run_id, brand codes and segment ids.",
+        f"Stage 1 data only: keep the answers with wave 7 or less (no holdout row has a later "
+        f"wave; these are run_id r00001 to r{n1:05d}) and the mentions whose run_id is among "
+        "them. That gives back the Stage 1 CSV files exactly.",
+    ]
+    return "## Changelog\n\n" + "\n".join(f"- {i}" for i in items) + "\n"
+
+
+def write_datasheets(rel: SimpleNamespace, s1: SimpleNamespace | None = None
+                     ) -> dict[str, dict]:
+    stage = rel.stage
+    answers, mentions, segments = rel.answers, rel.mentions, rel.segments
+    code_stats, log = rel.code_stats, rel.log
+    notes = common_notes(rel.meta, stage)
+    tax_notes = taxonomy_notes(stage)
     n_by = answers.groupby("dataset").size().to_dict()
-    tax_notes = [
-        "Use-case segments. B2B: the 20 frozen taxonomies, built by the Spyglasses utility model (gpt-5.6-luna, reasoning effort medium) from "
-        "6,014 distinct best-for phrases, 7 or 8 segments plus 'general' per category. "
-        "Headphones and agencies: the exploration taxonomies (sha256 "
-        f"{TAXONOMY_EXPLORE_SHA256}). Each phrase was classified twice (effort none); pass "
-        "a is used in the analysis, and the two passes agree on 96% of distinct phrases "
-        "(Audit G).",
-    ]
+    title = "AI shortlist stability, " + ("Stage 1" if stage == 1 else "Stages 1 and 2")
+    if stage == 1:
+        scope = (
+            f"One row per answer evaluated in this study at Stage 1 ({len(answers):,}): "
+            f"840 new answers to 40 synthetic B2B software questions, asked once a day "
+            "for 7 days (2026-10-03 to 2026-10-09) on ChatGPT, Gemini and Claude "
+            f"({n_by['chatgpt_b2b']} each); ")
+    else:
+        d = wave_dates(range(1, 12))
+        n_new = sum(n_by[ds] for ds in NEW_DATASETS)
+        scope = (
+            f"One row per answer evaluated in this study ({len(answers):,}): {n_new:,} new "
+            "answers to 40 synthetic B2B software questions on ChatGPT, Gemini and Claude "
+            f"({n_by['chatgpt_b2b']} each), asked in 11 waves: daily for 7 days (waves 1 to 7, "
+            f"{d[0]} to {d[6]}), then weekly (waves 8 to 11: {', '.join(d[7:10])} and {d[10]}; "
+            "local submission dates); ")
+    scope += (
+        f"{n_by['claude_b2b']} answers from experiment "
+        "009's holdout (26 questions x 3 runs x 3 arms, of which ui_default is the "
+        f"tested arm); {n_by['chatgpt_consumer']:,} ChatGPT headphone answers (95 "
+        f"questions, 17 runs each) and {n_by['chatgpt_agency']} brand-design agency "
+        "answers (27 questions, 3 runs each) from the holdouts of experiments 002, "
+        "003 and 005. "
+        + ("The holdout rows are those of the Stage 1 release, unchanged. " if stage == 2 else "")
+        + f"The per-brand rows are in {MENTIONS_SLUG}.csv (join on run_id).")
     paths = {}
     paths["answers"] = release_dataset(
-        answers, ANSWER_COLUMNS, PUBLIC,
+        answers, answer_columns(stage), PUBLIC,
         Datasheet(
-            title="AI shortlist stability, Stage 1: answers on ChatGPT, Gemini and Claude",
+            title=f"{title}: answers on ChatGPT, Gemini and Claude",
             dataset_slug=ANSWERS_SLUG, study=STUDY, unit="answers",
             notes=[
-                f"One row per answer evaluated in this study at Stage 1 ({len(answers):,}): "
-                f"840 new answers to 40 synthetic B2B software questions, asked once a day "
-                "for 7 days (2026-10-03 to 2026-10-09) on ChatGPT, Gemini and Claude "
-                f"({n_by['chatgpt_b2b']} each); {n_by['claude_b2b']} answers from experiment "
-                "009's holdout (26 questions x 3 runs x 3 arms, of which ui_default is the "
-                f"tested arm); {n_by['chatgpt_consumer']:,} ChatGPT headphone answers (95 "
-                f"questions, 17 runs each) and {n_by['chatgpt_agency']} brand-design agency "
-                "answers (27 questions, 3 runs each) from the holdouts of experiments 002, "
-                "003 and 005. The per-brand rows are in "
-                f"{MENTIONS_SLUG}.csv (join on run_id).",
+                scope,
                 "The B2B question text is public in experiment 009's release "
                 "(claude-api-vs-claude-ai-prompts.csv; item_id joins). Headphone and agency "
                 "question text is never published; those item ids and categories are "
@@ -834,22 +1059,31 @@ def write_datasheets(answers, mentions, segments, meta, code_stats, log) -> dict
             ],
         ),
     )
+    code_note = (
+        "Brand codes. One code is one brand everywhere in this file. A brand that "
+        "experiment 009's public dataset coded keeps 009's code, so the claude_b2b "
+        "rows reproduce that file's brand_codes exactly. Every other brand in the "
+        f"frozen lexicons was coded from {BRAND_PREFIX}{code_stats['first_new']:04d} "
+        "on, in a seeded order over the whole lexicon rather than in order of "
+        "appearance. Headphone and agency brands have their "
+        "own codes. No mapping to names is published.")
+    if stage == 2:
+        code_note += (
+            " The Stage 2 update uses the same code table, so every code means the same brand "
+            "as in the Stage 1 release, and adds no code: the table already covered every "
+            "brand of the frozen lexicons, which stay frozen for Stage 2 (spec firewall rule 4), "
+            "so a brand outside them is counted only in the answers file's n_brands_all. "
+            f"{len(rel.first_seen)} codes appear for the first time in waves 8 to 11.")
     paths["mentions"] = release_dataset(
         mentions, MENTION_COLUMNS, PUBLIC,
         Datasheet(
-            title="AI shortlist stability, Stage 1: each lexicon brand in each answer",
+            title=f"{title}: each lexicon brand in each answer",
             dataset_slug=MENTIONS_SLUG, study=STUDY, unit="brand mentions",
             notes=[
                 f"One row per lexicon brand named in an answer evaluated in this study "
                 f"({len(mentions):,} rows from {len(answers):,} answers; answers that name no "
                 f"lexicon brand have no rows). Join to {ANSWERS_SLUG}.csv on run_id.",
-                "Brand codes. One code is one brand everywhere in this file. A brand that "
-                "experiment 009's public dataset coded keeps 009's code, so the claude_b2b "
-                "rows reproduce that file's brand_codes exactly. Every other brand in the "
-                f"frozen lexicons was coded from {BRAND_PREFIX}{code_stats['first_new']:04d} "
-                "on, in a seeded order over the whole lexicon rather than in order of "
-                "appearance. Headphone and agency brands have their "
-                "own codes. No mapping to names is published.",
+                code_note,
                 "Position is first-mention order among lexicon brands. Exact-position "
                 "retention (spec: Pk) compares (brand_code, position) pairs; rank 1 is "
                 "position 1.",
@@ -871,13 +1105,16 @@ def write_datasheets(answers, mentions, segments, meta, code_stats, log) -> dict
     paths["segments"] = release_dataset(
         segments, SEGMENT_COLUMNS, PUBLIC,
         Datasheet(
-            title="AI shortlist stability, Stage 1: the B2B best-for use-case segments",
+            title=f"{title}: the B2B best-for use-case segments",
             dataset_slug=SEGMENTS_SLUG, study=STUDY, unit="use-case segments",
             notes=[
                 f"The {segments['category'].nunique()} frozen B2B best-for taxonomies used in "
                 f"this study ({len(segments)} segments, including one 'general' segment per "
                 f"category). The mentions file's segment_ids join on category and "
                 "segment_id.",
+                *(["Unchanged by the Stage 2 update: the taxonomies are frozen for both "
+                   "stages, and this file is byte for byte the Stage 1 release's."]
+                  if stage == 2 else []),
                 *tax_notes,
                 f"Labels and definitions are as the model wrote them, except {n_edit} "
                 "segments (edited = 1) whose label, definition or id named a vendor or "
@@ -891,22 +1128,69 @@ def write_datasheets(answers, mentions, segments, meta, code_stats, log) -> dict
             ],
         ),
     )
+    if stage == 2:
+        log_text = changelog(rel, s1)
+        for d in paths.values():
+            md = d["datasheet"]
+            md.write_text(md.read_text() + "\n" + log_text)
     return paths
 
 
 # ---------------------------------------------------------------- checklist
 
 
+BLANK_SIGNATURE = "- Name: ______________  Date: ______________"
+
+
+def checklist_kept(path: Path) -> bool:
+    """A checklist in results/ is the signed record: written once, never overwritten."""
+    if not path.exists():
+        return False
+    signed = "Name: ______________  Date:" not in path.read_text()
+    print(f"checklist kept ({'signed' if signed else 'unsigned'}): {path}")
+    return True
+
+
+def check_item(body: str, break_on_hyphens: bool = True) -> str:
+    return textwrap.fill(body, 78, initial_indent="- [ ] ", subsequent_indent="      ",
+                         break_on_hyphens=break_on_hyphens)
+
+
+def fill_template(notes: dict[str, str], stage: int, decisions: str, prereq: str,
+                  break_on_hyphens: bool = True) -> str:
+    """The house template with the content items ticked (each with its 010 note
+    under it), the decisions and prerequisites before the sign-off, and the
+    sign-off lines blank for Jim."""
+    text = CHECKLIST_TEMPLATE.read_text().replace("<experiment slug>", STUDY)
+    text = text.replace('"citations evaluated in this study"', '"answers evaluated in this study"')
+    lines = []
+    for line in text.splitlines():
+        if line.startswith("- Name:"):
+            line = BLANK_SIGNATURE
+        elif line.startswith("- Release gate run:"):
+            line = (f"- Release gate run: `pipeline/25_release.py --stage {stage}` exit 0 on "
+                    "______________")
+        elif line.startswith("- [ ]"):
+            line = "- [x]" + line[len("- [ ]"):]
+        lines.append(line)
+    out = "\n".join(lines) + "\n"
+    for anchor, note in notes.items():
+        start = out.index(anchor)
+        ends = [out.find(sep, start) for sep in ("\n- [", "\n\n")]
+        end = min(e for e in ends if e != -1)
+        wrapped = textwrap.fill(note, 78, initial_indent="      ", subsequent_indent="      ",
+                                break_on_hyphens=break_on_hyphens)
+        out = out[:end] + "\n" + wrapped + out[end:]
+    anchor = out.index("## Sign-off")
+    return out[:anchor] + decisions + "\n\n" + prereq + out[anchor:]
+
+
 def write_checklist(answers, mentions, segments, code_stats, log, tax_scan, val_scan,
                     file_hits) -> None:
     """Fill the house template once; never overwrite (the file in results/ is the signed record)."""
     path = RESULTS / "release-checklist.md"
-    if path.exists():
-        signed = "Name: ______________  Date:" not in path.read_text()
-        print(f"checklist kept ({'signed' if signed else 'unsigned'}): {path}")
+    if checklist_kept(path):
         return
-    text = CHECKLIST_TEMPLATE.read_text().replace("<experiment slug>", STUDY)
-    text = text.replace('"citations evaluated in this study"', '"answers evaluated in this study"')
     n_codes_obs = mentions["brand_code"].nunique()
     notes = {
         "Every column is a **derived feature": (
@@ -945,26 +1229,7 @@ def write_checklist(answers, mentions, segments, code_stats, log, tax_scan, val_
             "(010: DataForSEO and Anthropic outputs appear only as derived counts, labels "
             "and codes, not raw payloads.)"),
     }
-    lines = []
-    for line in text.splitlines():
-        if line.startswith("- Name:"):
-            line = "- Name: ______________  Date: ______________"
-        elif line.startswith("- Release gate run:"):
-            line = "- Release gate run: `pipeline/25_release.py --stage 1` exit 0 on ______________"
-        elif line.startswith("- [ ]"):
-            line = "- [x]" + line[len("- [ ]"):]
-        lines.append(line)
-    out = "\n".join(lines) + "\n"
-    for anchor, note in notes.items():
-        start = out.index(anchor)
-        ends = [out.find(sep, start) for sep in ("\n- [", "\n\n")]
-        end = min(e for e in ends if e != -1)
-        wrapped = textwrap.fill(note, 78, initial_indent="      ", subsequent_indent="      ")
-        out = out[:end] + "\n" + wrapped + out[end:]
-
-    def item(body: str) -> str:
-        return textwrap.fill(body, 78, initial_indent="- [ ] ", subsequent_indent="      ")
-
+    item = check_item
     b2b_log = [e for e in log if e["category"] not in EXPLORE_TAXONOMY_CATEGORIES]
     hp_log = [e for e in log if e["category"] in EXPLORE_TAXONOMY_CATEGORIES]
     edits = "\n".join(
@@ -1045,35 +1310,199 @@ def write_checklist(answers, mentions, segments, code_stats, log, tax_scan, val_
         "\n      scored at the instrument freeze, 2026-10-11): precision 1.00, recall 1.00\n"
         "      against gates 0.95 / 0.90.\n\n"
     )
-    anchor = out.index("## Sign-off")
-    out = out[:anchor] + decisions + "\n\n" + prereq + out[anchor:]
-    path.write_text(out)
+    path.write_text(fill_template(notes, 1, decisions, prereq))
+    print(f"checklist (unsigned): {path}")
+
+
+def write_checklist_stage2(rel: SimpleNamespace, s1: SimpleNamespace, proof: dict,
+                           val_scan: dict, file_hits: dict) -> None:
+    """The Stage 2 update's checklist, from the house template; written once, never overwritten."""
+    path = RESULTS / "release-checklist-stage2.md"
+    if checklist_kept(path):
+        return
+    answers, mentions, segments = rel.answers, rel.mentions, rel.segments
+    n1, n2 = len(s1.answers), len(answers)
+    m1, m2 = len(s1.mentions), len(mentions)
+    a2 = stage2_audit_figures()
+    models = sorted({m for m in answers["model"] if m}, key=str.lower)
+    new_models = sorted(set(models) - {m for m in s1.answers["model"] if m})
+    first_seen = rel.first_seen
+    fs_009 = [c for c in first_seen if int(c[1:]) < rel.code_stats["first_new"]]
+    notes = {
+        "Every column is a **derived feature": (
+            f"(010 Stage 2: the same {len(ANSWER_COLUMNS)} answer, {len(MENTION_COLUMNS)} "
+            f"mention and {len(SEGMENT_COLUMNS)} segment columns, names and order as the signed "
+            "Stage 1 release, each allow-listed in `pipeline/25_release.py`. Only the "
+            "descriptions of `run_id` and `wave` changed, to cover waves 8 to 11.)"),
+        "No customer prompt text": (
+            "(010 Stage 2: as at Stage 1, no answer text, question text, best-for phrases, "
+            "judge evidence, caveat reason text, search queries or URLs. The segments file, "
+            "the only model-written text, is unchanged.)"),
+        "No customer, property": (
+            "(010 Stage 2: no customer data was used. Brands ship as `bNNNN` codes from the "
+            f"Stage 1 code table ({mentions['brand_code'].nunique()} distinct codes in the "
+            f"mentions file, {s1.mentions['brand_code'].nunique()} at Stage 1). Answer ids: "
+            f"Stage 1 rows keep r00001 to r{n1:05d}; the {n2 - n1} new answers are "
+            f"r{n1 + 1:05d} to r{n2:05d}, sequential in the same sort (dataset, arm, study, "
+            "item, wave), so they carry no information beyond those public columns.)"),
+        "Free-text columns marked": (
+            "(010 Stage 2: only `model` is marked public_fact. Its values, reviewed one by "
+            f"one: {', '.join(models)}, or blank. New since Stage 1: "
+            f"{', '.join(new_models) or 'none'} (one wave 8 Gemini answer). ChatGPT reports "
+            "gpt-6 in waves 6 to 11, as Audit F found.)"),
+        "The datasheet and every mention": (
+            f"(010 Stage 2: {n2:,} answers evaluated in this study ({n1:,} at Stage 1, "
+            f"{n2 - n1} added); the mentions file reports {m2:,} brand mentions in those "
+            f"answers ({m2 - m1:,} added); the segments file {len(segments)} use-case segments, "
+            "unchanged.)"),
+        "Nothing in the dataset, datasheet": (
+            "(010 Stage 2: as at Stage 1, the brand-code range reveals the size of the frozen "
+            "lexicons, which are study instruments, not the Spyglasses database. The Audit G "
+            "phrase count in the datasheets counts phrases in this study's answers.)"),
+        "Could any set of rows": (
+            "(010 Stage 2: no customer is involved. Waves 8 to 11 used Spyglasses' own "
+            "DataForSEO and Anthropic accounts, as waves 1 to 7 did. Brand names are withheld "
+            "per 009's 2026-10-02 release instruction.)"),
+        "Third-party data terms": (
+            "(010 Stage 2: DataForSEO and Anthropic outputs appear only as derived counts, "
+            "labels and codes, not raw payloads.)"),
+    }
+    allowed = ", ".join(f"'{w}' ({(SCAN_ALLOW | GENERIC_WORDS)[w]})"
+                        for w in sorted(set(val_scan["allowed"]) | set(file_hits["allowed"])))
+    sha = ", ".join(f"`{s}.csv` {h[:12]}" for s, h in STAGE1_CSV_SHA256.items())
+    d = wave_dates(range(1, 12))
+
+    def item(body: str) -> str:  # keep file names and ids whole
+        return check_item(body, break_on_hyphens=False)
+
+    decisions = "\n\n".join([
+        "## Decisions to confirm when signing (tick each)",
+        item(
+            "Scope: this is an update of the signed Stage 1 release (results/"
+            "release-checklist.md, 2026-10-11), not a new dataset. Same three file names, same "
+            "columns; the files in data/public/ are replaced. The Stage 1 version stays in git "
+            "history (commit 4432548) and on the site until the datasets are synced, and each "
+            "datasheet's Changelog says how to filter back to it. Alternative not taken: "
+            "versioned file names (a separate `-stage1` set), which would leave two copies of "
+            "the same rows on the site."),
+        item(
+            f"Stage 1 rows unchanged and first: the {n1:,} Stage 1 answers keep run_id r00001 "
+            f"to r{n1:05d} and their position; the {n2 - n1} answers of waves 8 to 11 are "
+            f"appended as r{n1 + 1:05d} to r{n2:05d}, in the same sort among themselves. So the "
+            "answers file is not in one global dataset order (chatgpt_b2b rows of waves 8 to 11 "
+            "come after the holdouts). Alternative not taken: re-sorting and renumbering, "
+            "which would change most Stage 1 run_ids and break any join a reader built on the "
+            "Stage 1 files."),
+        item(
+            "Proof that Stage 1 rows are unchanged, run by the gate itself: it rebuilds the "
+            "Stage 1 release in-process from the Stage 1 frame and checks it against the "
+            f"sha256 of the signed files ({sha}); each Stage 2 CSV must start with exactly "
+            "those bytes (checked before writing and again on the written files); the rows "
+            "after the prefix must be waves 8 to 11 only; the segments file must be identical. "
+            f"Result: answers {proof['answers_prefix']:,} of {n2:,} rows are the Stage 1 bytes, "
+            f"mentions {proof['mentions_prefix']:,} of {m2:,}, segments identical. Filtering the "
+            "new files to wave 7 or less (mentions: by run_id) gives the signed files back "
+            "byte for byte."),
+        item(
+            "Brand codes: the code table is unchanged (checked: identical to the Stage 1 "
+            f"table, {rel.code_stats['reused_009']} codes from 009 and "
+            f"{rel.code_stats['new']} seeded codes from {BRAND_PREFIX}"
+            f"{rel.code_stats['first_new']:04d} on). No brand needed a new code: the Stage 1 "
+            "table already covered every brand of the frozen lexicons, and firewall rule 4 "
+            "keeps them frozen, so a brand that first appears in waves 8 to 11 outside the "
+            "lexicons is counted only in `n_brands_all` (R1), never coded. The gate refuses to "
+            "release if an observed brand has no code, rather than inventing one. "
+            f"{len(first_seen)} codes appear for the first time in waves 8 to 11 "
+            f"({len(fs_009)} of them 009 codes, {len(first_seen) - len(fs_009)} from the seeded "
+            "range); the datasheet states the count, not the codes."),
+        item(
+            "Best-for segment ids: phrases classified at Stage 1 keep their Stage 1 "
+            "classifications (deviation 10b; checked: no Stage 1 phrase changes segment in "
+            f"the merged maps); the {a2['g_new']['phrases']:,} phrases first seen at Stage 2 "
+            "were classified twice with the frozen taxonomies. Audit G over all "
+            f"{a2['g']['phrases']:,} distinct phrases Stage 2 uses: "
+            f"{pct(a2['g']['agreement'])} (pass). The datasheets give these two phrase counts; "
+            "they count phrases in this study's answers, not anything in the Spyglasses "
+            "database. Confirm, or drop the counts from the notes."),
+        item(
+            "Segments file unchanged, so the 25 segment rewrites and the definition decision "
+            "signed at Stage 1 carry over as they are; nothing in REWRITES changed."),
+        item(
+            "Datasheets: titles now read 'Stages 1 and 2'; 'Released' is the Stage 2 date "
+            f"({date.today().isoformat()}) and the Changelog keeps the Stage 1 date "
+            f"({STAGE1_RELEASED}); the deviations pointer covers 1 to 10; a Stage 2 run "
+            "notes item records deviation 9 (ChatGPT gpt-6 in waves 6 to 11, one Gemini "
+            "answer reporting 3.6 Flash, wave 9's late start, the 7 Gemini tasks of wave 8 "
+            "dated 2026-10-18); Audit E adds the Stage 2 sample "
+            f"({pct(a2['e']['agreement'])}, kappa {a2['e']['kappa']:.2f}, "
+            f"{a2['e']['answers']} answers). The gate's datasheet writer has no changelog "
+            "field, so `25_release.py` appends the Changelog section after the gate writes "
+            "each datasheet; the alias scan and an em dash check then run on the finished "
+            "files. The model notes are checked against the data (the gate refuses if a "
+            "wave's model differs from what the notes say)."),
+        item(
+            f"Wave dates: the datasheets give scheduled local dates (waves 8 to 11: "
+            f"{', '.join(d[7:10])} and {d[10]}); run_date carries the true dates, through "
+            f"{answers['run_date'].max()} for ChatGPT and Gemini (UTC). Late tasks keep their "
+            "true dates, as at Stage 1."),
+        item(
+            f"Scans, all clean: the segment scan as at Stage 1 (unchanged file); every public "
+            "value, column description, note and Changelog line, and the written CSV and "
+            "datasheet files, against every alias of at least 4 characters, "
+            f"case-insensitively; accepted: {allowed}. No other hit."),
+        item(
+            "Brand codes are pseudonyms, not anonymity, as signed at Stage 1. Four more runs "
+            "per question add frequency information, so a reader who knows a market guesses "
+            "the most frequent codes a little more easily; no name ships. Confirm this is "
+            "still acceptable."),
+        item(
+            f"Answer-level flags: 0 refusals and 0 empty answers of {n2:,}; "
+            f"`refusal_phrase` flags {int(answers['refusal_phrase'].sum())} answers "
+            f"({int(s1.answers['refusal_phrase'].sum())} at Stage 1)."),
+        item(
+            "Not released, as at Stage 1: R1's names outside the lexicon (only the count "
+            "`n_brands_all`), the Audit E second-pass labels (now including the Stage 2 "
+            "sample of waves 8 to 11), and the per-answer judge metadata, which is constant "
+            "and stated in the datasheets."),
+        item(
+            "Site: the Stage 2 figures were synced with `sync_site_assets.py --figures-only` "
+            "for the article 2 draft; the datasets are not synced. After signing: commit "
+            "data/public/ and this checklist, then run `uv run python scripts/"
+            "sync_site_assets.py 010-shortlist-stability`."),
+    ])
+    prereq = "\n".join([
+        "## Prerequisites",
+        "",
+        "- [x] Stage 1 release checklist signed by Jim Wrubel (`results/release-checklist.md`,",
+        "      2026-10-11); its decisions carry over except where listed above.",
+        "- [x] Audit D signed (precision 1.00, recall 1.00); Stage 2 audits pass",
+        "      (`results/stage2_audits.md`): Audit A every wave 40 of 40, Audit E",
+        f"      {pct(a2['e']['agreement'])} on the waves 8 to 11 sample, Audit G "
+        f"{pct(a2['g']['agreement'])}.",
+        "- [ ] STOP 4: Stage 2 results reviewed by Jim (`results/stage2_model.md`,",
+        "      `results/stage2_robustness.md`).",
+        "",
+        "",
+    ])
+    path.write_text(fill_template(notes, 2, decisions, prereq, break_on_hyphens=False))
     print(f"checklist (unsigned): {path}")
 
 
 # --------------------------------------------------------------------- main
 
 
-def main() -> None:
-    ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
-    ap.add_argument("--stage", type=int, choices=(1, 2), required=True)
-    a = ap.parse_args()
-    if a.stage == 2:
-        stage2_not_implemented()
-    if sha256_file(TAXONOMY_B2B) != TAXONOMY_B2B_SHA256:
-        raise SystemExit("taxonomy changed")
-
-    rows, meta = check_inputs()
-    bf = load_bestfor(RAW / "bestfor_stage1")
-    if bf is None or bf.taxonomy != merged_stage_taxonomy():
-        raise SystemExit("bestfor_stage1 files missing or not the frozen taxonomy")
+def build_release(stage: int) -> SimpleNamespace:
+    """Check the stage's inputs and build its three public frames (nothing written)."""
+    tag = f"[stage {stage}]"
+    rows, meta = check_inputs(stage)
+    bf = stage_bestfor(stage)
     seg_map, segments, log = public_taxonomy()
     for cat, m in list(bf.seg_a.items()) + list(bf.seg_b.items()):
         bad = {g for g in m.values() if g not in NO_SEGMENT and (cat, g) not in seg_map}
         if bad:
             raise SystemExit(f"{cat}: classifier segments outside the taxonomy: {sorted(bad)}")
     tax_scan = taxonomy_scan(seg_map, segments)
-    print(f"segment scan: {tax_scan['texts']} texts x {tax_scan['aliases']} aliases, "
+    print(f"{tag} segment scan: {tax_scan['texts']} texts x {tax_scan['aliases']} aliases, "
           f"0 vendor names (generic words accepted: {tax_scan['generic_word_hits']})")
 
     codes, code_stats = brand_codes(rows)
@@ -1081,14 +1510,82 @@ def main() -> None:
     answers, mentions = build_frames(rows, codes, items, seg_map, bf)
     check_b2b_public(answers)
     n_join = check_codes_against_009(answers, mentions)
-    print(f"brand codes: {code_stats}; claude_b2b rows matching 009's public codes: {n_join}")
-    if len(answers) != N_STAGE1 or answers["refusal"].sum() or answers["empty"].sum():
+    print(f"{tag} brand codes: {code_stats}; claude_b2b rows matching 009's public codes: {n_join}")
+    if len(answers) != N_ANSWERS[stage] or answers["refusal"].sum() or answers["empty"].sum():
         raise SystemExit("unexpected answer counts, refusals or empty answers")
+    if stage == 2:
+        check_stage2_models(answers)
+    return SimpleNamespace(stage=stage, meta=meta, answers=answers, mentions=mentions,
+                           segments=segments, log=log, tax_scan=tax_scan, codes=codes,
+                           code_stats=code_stats, first_seen=[])
 
-    descriptions = " ".join(c.description for c in ANSWER_COLUMNS + MENTION_COLUMNS + SEGMENT_COLUMNS)
-    val_scan = value_scan({"answers": answers, "mentions": mentions, "segments": segments},
-                          {"column descriptions": descriptions,
-                           "notes": " ".join(common_notes(meta))})
+
+def stage1_bytes(s1: SimpleNamespace) -> dict[str, bytes]:
+    """The in-process Stage 1 rebuild, which must be the signed files byte for byte."""
+    out = {ANSWERS_SLUG: csv_bytes(s1.answers, answer_columns(1)),
+           MENTIONS_SLUG: csv_bytes(s1.mentions, MENTION_COLUMNS),
+           SEGMENTS_SLUG: csv_bytes(s1.segments, SEGMENT_COLUMNS)}
+    for slug, b in out.items():
+        if sha256_bytes(b) != STAGE1_CSV_SHA256[slug]:
+            raise SystemExit(f"the Stage 1 rebuild of {slug}.csv is not the signed file "
+                             "(STAGE1_CSV_SHA256); the Stage 1 inputs or code changed")
+    return out
+
+
+def check_stage1_prefix(rel: SimpleNamespace, s1: SimpleNamespace, s1b: dict[str, bytes]
+                        ) -> dict:
+    """Stage 2 = the signed Stage 1 bytes, then waves 8 to 11 only."""
+    s2b = {ANSWERS_SLUG: csv_bytes(rel.answers, answer_columns(2)),
+           MENTIONS_SLUG: csv_bytes(rel.mentions, MENTION_COLUMNS),
+           SEGMENTS_SLUG: csv_bytes(rel.segments, SEGMENT_COLUMNS)}
+    for slug in s2b:
+        if not s2b[slug].startswith(s1b[slug]):
+            raise SystemExit(f"{slug}.csv: the Stage 2 file does not start with the Stage 1 bytes")
+    if s2b[SEGMENTS_SLUG] != s1b[SEGMENTS_SLUG]:
+        raise SystemExit("the segments file changed at Stage 2")
+    if rel.codes != s1.codes:
+        raise SystemExit("the brand code table changed at Stage 2")
+    n1, n2 = len(s1.answers), len(rel.answers)
+    tail = rel.answers.iloc[n1:]
+    if not (tail["dataset"].isin(NEW_DATASETS) & tail["wave"].isin(STAGE2_NEW_WAVES)).all():
+        raise SystemExit("rows after the Stage 1 prefix are not all waves 8 to 11")
+    if list(tail["run_id"]) != [f"r{i:05d}" for i in range(n1 + 1, n2 + 1)]:
+        raise SystemExit("waves 8 to 11 run ids do not continue from the last Stage 1 id")
+    head = rel.answers.iloc[:n1]
+    if (head["dataset"].isin(NEW_DATASETS) & head["wave"].isin(STAGE2_NEW_WAVES)).any():
+        raise SystemExit("a waves 8 to 11 answer sits inside the Stage 1 prefix")
+    mtail = rel.mentions.iloc[len(s1.mentions):]
+    if not mtail["run_id"].isin(set(tail["run_id"])).all():
+        raise SystemExit("mention rows after the Stage 1 prefix belong to Stage 1 answers")
+    rel.first_seen = sorted(set(rel.mentions["brand_code"]) - set(s1.mentions["brand_code"]))
+    return {"answers_prefix": n1, "mentions_prefix": len(s1.mentions)}
+
+
+def main() -> None:
+    ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
+    ap.add_argument("--stage", type=int, choices=(1, 2), required=True)
+    stage = ap.parse_args().stage
+    if sha256_file(TAXONOMY_B2B) != TAXONOMY_B2B_SHA256:
+        raise SystemExit("taxonomy changed")
+
+    rel = build_release(stage)
+    s1 = s1b = proof = None
+    if stage == 2:
+        s1 = build_release(1)
+        s1b = stage1_bytes(s1)
+        proof = check_stage1_prefix(rel, s1, s1b)
+        print(f"Stage 1 prefix: answers {proof['answers_prefix']:,} of {len(rel.answers):,} rows "
+              f"and mentions {proof['mentions_prefix']:,} of {len(rel.mentions):,} are the signed "
+              f"Stage 1 bytes; segments identical; code table identical; "
+              f"{len(rel.first_seen)} codes first seen in waves 8 to 11")
+    answers, mentions, segments = rel.answers, rel.mentions, rel.segments
+
+    columns = answer_columns(stage) + MENTION_COLUMNS + SEGMENT_COLUMNS
+    texts = {"column descriptions": " ".join(c.description for c in columns),
+             "notes": " ".join(common_notes(rel.meta, stage) + taxonomy_notes(stage))}
+    if stage == 2:
+        texts["changelog"] = changelog(rel, s1)
+    val_scan = value_scan({"answers": answers, "mentions": mentions, "segments": segments}, texts)
     if val_scan["hits"]:
         raise SystemExit(f"brand alias in a public value: {val_scan['hits'][:20]}")
     print(f"value scan: 0 hits (accepted: {val_scan['allowed']})")
@@ -1096,25 +1593,36 @@ def main() -> None:
     outputs = [PUBLIC / f"{s}{ext}" for s in (ANSWERS_SLUG, MENTIONS_SLUG, SEGMENTS_SLUG)
                for ext in (".csv", ".datasheet.md")]
     try:
-        paths = write_datasheets(answers, mentions, segments, meta, code_stats, log)
+        paths = write_datasheets(rel, s1)
     except Exception:
         for p in outputs:  # never leave a partial release behind
             p.unlink(missing_ok=True)
         raise
     written = [p for d in paths.values() for p in d.values()]
     file_hits = file_scan(written)
-    if file_hits["hits"]:
+    problems = [f"brand alias: {file_hits['hits'][:20]}"] if file_hits["hits"] else []
+    problems += [f"{p.name}: em dash" for p in written if "—" in p.read_text()]
+    if stage == 2:
+        for slug, b in s1b.items():
+            got = (PUBLIC / f"{slug}.csv").read_bytes()
+            if not got.startswith(b) or (slug == SEGMENTS_SLUG and got != b):
+                problems.append(f"{slug}.csv as written does not start with the Stage 1 bytes")
+    if problems:
         for p in written:
             p.unlink()
-        raise SystemExit(f"brand alias in a written file, outputs deleted: {file_hits['hits'][:20]}")
+        raise SystemExit(f"written files failed their checks, outputs deleted: {problems}")
     print(f"file scan: {len(written)} files, 0 hits (accepted: {file_hits['allowed']})")
     for p in written:
         print(f"released: {p}")
     print(f"rows: answers {len(answers):,}, mentions {len(mentions):,}, segments {len(segments)}")
 
-    write_checklist(answers, mentions, segments, code_stats, log, tax_scan, val_scan, file_hits)
+    if stage == 1:
+        write_checklist(answers, mentions, segments, rel.code_stats, rel.log, rel.tax_scan,
+                        val_scan, file_hits)
+    else:
+        write_checklist_stage2(rel, s1, proof, val_scan, file_hits)
     print("Do not commit data/public/ or sync the datasets to the site until the release "
-          "checklist is signed.")
+          f"checklist{' for the Stage 2 update' if stage == 2 else ''} is signed.")
 
 
 if __name__ == "__main__":

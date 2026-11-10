@@ -4,7 +4,8 @@ Implements spec.md (FROZEN at 6342963) §2 to §7 for both stages. Stage 1 (run
 to run) uses new-collection waves 1 to 7; Stage 2 (over time) uses waves 1 to
 11 and adds H5 (drift), its lag bins, the Audit A rule for those bins, the
 Stage 2 Audit E sample and the Stage 2 best-for files. ``25_release.py``
-still exits 4 on ``--stage 2`` (the Stage 2 dataset update is not built).
+releases the datasets of either stage (Stage 2: the update of the Stage 1
+release with waves 8 to 11).
 
 Modes (every stage takes exactly one):
 
@@ -331,13 +332,6 @@ def mode_from_args(a: argparse.Namespace) -> Mode:
             raise SystemExit("the exploration split has no Stage 2 (no new-collection waves)")
         return Mode("explore", a.stage)
     return Mode("confirmatory", a.stage)
-
-
-def stage2_not_implemented() -> None:
-    """25_release.py only: the Stage 2 dataset update is not built yet."""
-    print("The Stage 2 dataset update (spec §8 step 8) is not implemented in 25_release.py yet; "
-          "the Stage 2 analysis is pipeline/20_ to 24_ with --stage 2.", file=sys.stderr)
-    sys.exit(4)
 
 
 # --------------------------------------------------------------------- io

@@ -1,0 +1,210 @@
+---
+title: "The AI shortlist held for a month"
+description: "Experiment 010, Stage 2, pre-registered: the same 40 B2B software buying questions asked on 11 days over five weeks on ChatGPT, Gemini and the Claude API. A vendor shortlisted in one answer was shortlisted again a month later about as often as a day or two later: 81% against 82% on ChatGPT and 76% against 79% on Claude. Gemini was lower and its test was inconclusive, but it showed no drift. Only Gemini's top pick clearly moved."
+pubDate: 2026-11-10
+authors:
+  - name: "Spyglasses Research"
+    url: "https://spyglasses.io"
+experiment: "010-shortlist-stability"
+heroFigure: "/figures/010-shortlist-stability/stage2_shortlist_by_lag.png"
+figures:
+  - "/figures/010-shortlist-stability/stage2_shortlist_by_lag.png"
+  - "/figures/010-shortlist-stability/stage2_status_by_lag.png"
+datasets:
+  - title: "AI shortlist stability, one row per answer (derived features)"
+    path: "/datasets/010-shortlist-stability/ai-shortlist-stability-answers.csv"
+    license: "CC BY 4.0"
+    rows: 3250
+  - title: "AI shortlist stability, one row per answer and vendor (vendors as codes)"
+    path: "/datasets/010-shortlist-stability/ai-shortlist-stability-mentions.csv"
+    license: "CC BY 4.0"
+    rows: 17965
+  - title: "AI shortlist stability, the use-case groups for each B2B category"
+    path: "/datasets/010-shortlist-stability/ai-shortlist-stability-segments.csv"
+    license: "CC BY 4.0"
+    rows: 172
+tags: ["chatgpt", "gemini", "claude", "shortlist", "rank-stability", "drift", "b2b-software", "brand-recommendations", "pre-registered"]
+draft: true
+---
+
+## Key findings
+
+- **The shortlist held for a month.** We asked ChatGPT, Gemini and the Claude API the same 40 B2B software buying questions on 11 days over five weeks. On ChatGPT, a shortlisted vendor was shortlisted again 82% of the time when the two answers were a day or two apart. When they were a month apart, it was 81%.
+- **ChatGPT and Claude did not drift.** Our pre-registered bar for drift was a loss of 5 points. On ChatGPT the difference was 1 point, and the test showed no drift. On the Claude API it was 2 points: small enough to measure, and smaller than the bar.
+- **Gemini is less stable, but it did not drift either.** Its rate went from 64% to 62%. Its test was inconclusive. That means the data cannot rule out a drop slightly larger than 5 points. It does not mean Gemini drifted.
+- **Gemini's top pick was the one thing that clearly moved.** Its top pick was the top pick again 40% of the time a day or two apart and 23% of the time a month apart. Chase the shortlist, not the top spot.
+
+## Why we asked
+
+Many AI-visibility tools report rank. Our earlier research found that rank in AI answers does not hold up well ([rank stability in ChatGPT](/articles/rank-stability-chatgpt), [prompt phrasing and consistency](/articles/prompt-phrasing-consistency)).
+
+[Stage 1 of this study](/articles/ai-shortlist-stability) looked at the shortlist instead. The shortlist is the set of vendors an AI answer recommends. Stage 1 found that the shortlist repeats from day to day. A vendor on ChatGPT's shortlist was shortlisted again in another run 81% of the time. On the Claude API it was 78%, and on Gemini 64%.
+
+Stage 1 compared answers zero to six days apart. A tracking number is only useful if it also does not drift over weeks. If the shortlist slowly changed on its own, a vendor's trend line would fall even when nothing about the vendor changed.
+
+So Stage 2 asks: is a vendor shortlisted again as often a month later as it is a day or two later?
+
+We fixed this test before we saw any Stage 1 result. The plan was frozen on 2026-10-03, before the first answer was collected. It set the test, the band of plus or minus 0.05 and the day ranges. The Stage 1 article announced all three.
+
+We expected no drift. An AI answer starts from a pool of candidate vendors, drawn from what the model knows and the pages its search finds. For established vendors, neither should change much in a month.
+
+## What we did
+
+This is a summary. The [Stage 1 article](/articles/ai-shortlist-stability) has the full methods.
+
+**Questions and platforms.** We used the same 40 B2B software buying questions, two for each of 20 software categories. No question names a vendor. Each question was asked on ChatGPT and Gemini through DataForSEO, a data provider, from a US location, and on Claude through Anthropic's API (Opus 5.5), at the same evening hour. Stage 1 collected seven daily rounds, from 2026-10-03 to 10-09. Stage 2 added four weekly rounds on 2026-10-16, 10-23, 10-30 and 11-06. We call each round a wave.
+
+**Sample.** Across both stages, 3,250 answers were evaluated in this study. The main Stage 2 test uses 1,320 B2B answers: 40 questions, 11 waves, 3 platforms. A secondary check uses 1,615 older ChatGPT answers about headphones. claude.ai is not part of Stage 2, because its answers span only four days.
+
+**Nothing new was built.** Stage 2 used the frozen vendor list, classifier and use-case groups from Stage 1, unchanged. The classifier is the language model Spyglasses runs in production. It labels each named vendor as a top choice, one of many, a generic mention, or cautioned against. A vendor is **shortlisted** when it is a top choice or one of many.
+
+**The repeat rate.** We compare two answers to the same question on the same platform. Here is Stage 1's invented example. Answer 1 shortlists vendors A, B, C, D and E. Answer 2 shortlists A, B, C and F. Together the two lists have 9 places. A, B and C appear on both, so they hold 6 of the 9 places. The repeat rate is 6 / 9, or 0.67. We add up the places across all pairs before dividing.
+
+**Days apart.** For each pair of answers, we counted the days between them. Pairs **1 to 2 days apart** are the near group, with 11 pairs per question. Pairs **27 or more days apart** are the far group, with 8 pairs per question. The far pairs are 27 to 34 days apart, or about a month.
+
+**Intervals.** We drew the 40 questions at random with replacement 2,000 times and recomputed every number each time. The middle 90% of those results is the 90% interval.
+
+The full plan is in the [pre-registered spec](https://github.com/orchestra-code/aeo-experiments/blob/6342963/experiments/010-shortlist-stability/spec.md), frozen at commit `6342963`.
+
+## Results
+
+### The shortlist did not drift
+
+<figure>
+  <img src="/figures/010-shortlist-stability/stage2_shortlist_by_lag.png" alt="A line chart of the share of shortlisted vendors shortlisted again, by days between the two answers, with 90% bands. ChatGPT stays near 80% to 82% from 1 day to 34 days apart, ending at 81%. Claude API stays near 75% to 79%, ending at 76%. Gemini stays near 62% to 65%, ending at 62%. Shaded columns mark the two groups the study compares: 1 to 2 days apart and 27 days or more." />
+</figure>
+
+The main test is called H5. For each platform, we took the repeat rate of the far pairs and subtracted the repeat rate of the near pairs. A negative number means the shortlist repeated less often a month apart.
+
+We set a band of plus or minus 0.05 before collecting any data. Losing 5 points in five weeks would mean a tracking number needs to be recalibrated every month. A platform passes when the whole interval for the difference sits inside the band. Statisticians call this an equivalence test (TOST).
+
+We ran H5 three times, once per platform. So we widened the intervals with the Holm method, as in Stage 1. That keeps the chance of any false result across the three tests at 5%.
+
+| Platform | 1 to 2 days apart | 27+ days apart | Far minus near | Interval (Holm) | Verdict |
+|---|---|---|---|---|---|
+| ChatGPT | 0.82 | 0.81 | -0.01 | -0.04 to 0.01 | no drift |
+| Claude API | 0.79 | 0.76 | -0.02 | -0.04 to -0.01 | a small drop, smaller than the band |
+| Gemini | 0.64 | 0.62 | -0.02 | -0.06 to 0.02 | inconclusive |
+
+The differences are computed before rounding. Each platform had 320 far pairs and 438 to 440 near pairs.
+
+**ChatGPT.** The whole interval sits inside the band, and it includes zero. We could have detected a 5-point drift. We found none larger than 4 points.
+
+**Claude API.** The interval sits inside the band, but it does not include zero. So there was a small drop we can measure, of about 2 points over a month. Our rules call this "detectable but negligible." It is smaller than the bar we set.
+
+**Gemini.** The best estimate is a drop of 2 points, the same as Claude's. The interval runs from -0.06 to 0.02. It includes zero, so we found no drift. It also reaches just past -0.05. So we cannot rule out a drop slightly larger than our bar. "Inconclusive" means the data cannot tell these two cases apart. It is not evidence that Gemini drifted.
+
+Gemini is harder to call because its shortlist changes more from one answer to the next. That makes its numbers noisier and its intervals wider. In the robustness checks, Gemini came out as no drift or inconclusive, never as a drift.
+
+A control passed first: shortlists for different categories overlapped by only 0.01 on every platform.
+
+### The curve is flat
+
+The chart above also shows the gaps in between, grouped by days apart.
+
+| Days apart | 1 to 2 | 3 to 6 | 7 to 13 | 14 to 20 | 21 to 26 | 27 to 34 |
+|---|---|---|---|---|---|---|
+| ChatGPT | 0.82 | 0.80 | 0.82 | 0.82 | 0.80 | 0.81 |
+| Claude API | 0.79 | 0.77 | 0.78 | 0.77 | 0.75 | 0.76 |
+| Gemini | 0.64 | 0.65 | 0.63 | 0.64 | 0.63 | 0.62 |
+
+No platform shows a steady slide. ChatGPT's line stays within 2 points. The Claude API's line eases down slightly, to 0.75 and 0.76 after three weeks. Gemini's stays within 3 points. These groups are a description, not a test.
+
+### Use cases moved a little
+
+<figure>
+  <img src="/figures/010-shortlist-stability/stage2_status_by_lag.png" alt="Three panels, one per platform, each with three lines over days between the two answers, with 90% bands: on the shortlist, best for the same use case, and the top pick. On every platform the shortlist line is highest and flat. The use-case line sits near 50% on ChatGPT and Claude API and near 35% to 40% on Gemini, sloping slightly down. The top-pick line is the noisiest; on Gemini it falls from 40% at 1 to 2 days to 23% at 27 days or more, with a wide band." />
+</figure>
+
+AI answers often say a vendor is best for something, such as small teams. Stage 1 grouped those phrases into seven or eight use cases per category, and found they repeat less often than the shortlist. Over a month, they also slipped a little. These are secondary tests, with no correction for running several.
+
+| Platform | 1 to 2 days apart | 27+ days apart | Far minus near | Interval | Verdict |
+|---|---|---|---|---|---|
+| ChatGPT | 0.53 | 0.51 | -0.03 | -0.05 to -0.00 | a small drop, smaller than the band |
+| Claude API | 0.52 | 0.49 | -0.03 | -0.05 to -0.02 | a small drop, smaller than the band |
+| Gemini | 0.40 | 0.35 | -0.04 | -0.08 to -0.01 | a real change, small |
+
+On Gemini the interval reaches past the band, so it counts as a real change. Its best estimate, 4 points, is still inside the band. A vendor tends to stay on the list, and the reason given for it moves a little more.
+
+### Gemini's top pick moved
+
+Some answers single out one vendor as the top pick. On Gemini, the top pick was the top pick again 40% of the time when the answers were a day or two apart. A month apart, it was 23%. The difference, -0.17 (interval -0.31 to -0.04), is a real change. It was the only result in the study whose best estimate moved by more than the band.
+
+The path was bumpy rather than a steady slide. Top picks are rare on Gemini, so the interval is wide. On ChatGPT and the Claude API, the top-pick test was inconclusive: 0.59 against 0.60, and 0.43 against 0.46.
+
+Stage 1 found that top picks rotate inside a stable shortlist. On Gemini, the top pick also shifted over the month, while the shortlist around it held. Chase the shortlist, not the top spot.
+
+### ChatGPT changed models during the study
+
+ChatGPT reported `gpt-5-6` in waves 1 to 5 and `gpt-6` in waves 6 to 11. Six of each question's eight far pairs compare a `gpt-5-6` answer with a `gpt-6` answer. So ChatGPT's month-apart pairs span a model change. They still showed no drift.
+
+We also checked the `gpt-6` answers alone. The difference was +0.01 (interval -0.03 to 0.05), which is no drift. But that check rests on few pairs, 39 near and 80 far, so it is a thin check that agrees.
+
+Gemini and the Claude API kept the same model throughout, except for one Gemini answer in wave 8.
+
+### Older consumer data agrees
+
+We ran the same test on 1,615 older ChatGPT answers about headphones. They came from earlier experiments in July and August 2026: 95 questions, 17 runs each, over about three weeks. Here the far pairs were 15 or more days apart, and the near pairs 0 to 2 days apart.
+
+The shortlist repeated 0.83 of the time near and 0.81 far. The difference, -0.02 (interval -0.03 to -0.01), is a small drop, smaller than the band. This is a secondary result.
+
+## What we can and cannot claim
+
+**We can claim:** across 1,320 B2B answers evaluated in this study, a vendor's chance of being shortlisted again did not fall over five weeks on ChatGPT or the Claude API by as much as our pre-registered bar of 5 points. Answers a month apart agreed on the shortlist about as often as answers a day or two apart. On the Claude API, a drop of about 2 points was measurable but smaller than the bar.
+
+**Gemini is inconclusive, not drifting.** Its best estimate was a 2-point drop, and its interval included zero. Its interval also reached 6 points, so we cannot claim no drift on Gemini. Gemini's shortlist is also less stable from day to day, at 0.64.
+
+**Gemini's top pick changed.** Top picks are rare, so this rests on fewer answers than the shortlist. The top-pick and use-case tests are secondary, with no correction for running several.
+
+**Five weeks, one season, one model change.** We cannot say what happens over three months or a year. ChatGPT's change from `gpt-5-6` to `gpt-6` did not move the shortlist, but a different update could.
+
+**One question is not a category.** The unit is a specific question. Stage 1 showed that two different questions in the same category share only about half their shortlist.
+
+**Synthetic B2B questions, one location.** The 40 questions were written by a model and reviewed by a person, not taken from real buyers. ChatGPT and Gemini came through DataForSEO from a US location, and Claude through Anthropic's API. We make no claim about claude.ai over time, logged-in or personalized sessions, follow-up questions, or other platforms.
+
+**The vendor list and the classifier.** The same limits as Stage 1 apply. Vendors outside our list are invisible to the main measures. The classifier is a language model, and its top-pick labels are noisier than its shortlist labels. It was the same classifier for every wave, so its noise affects near and far pairs alike.
+
+**Nothing about buyers.** We did not measure what anyone does with an answer. No vendor is named in this article, and vendors appear only as codes in the data.
+
+## Pre-registration, audits and changes to the plan
+
+**Pre-registration.** The test, the band, the day ranges, the schedule and the secondary tests were frozen on 2026-10-03, before any answer was collected. Waves 8 to 11 were collected on that schedule, whatever Stage 1 showed. Stage 2 does not re-test the Stage 1 hypotheses. We recomputed them on all 11 waves as descriptions only, so no claim gets two chances. The shortlist's lead over the exact position stayed about where Stage 1 found it: 0.46 on ChatGPT, 0.38 on Gemini and 0.56 on the Claude API.
+
+**Audits.**
+
+- **Completeness.** All 40 questions came back with a usable answer in every wave on every platform. No answer was a refusal or empty.
+- **Classifier test-retest.** We re-ran the classifier on a random 10% of the new answers from waves 8 to 11 (48 answers). It gave the same label to 96% of vendor mentions, against a minimum of 90%. Cohen's kappa, an agreement score that corrects for chance, was 0.89.
+- **Use-case classifier.** The same use case on two passes for 96% of distinct phrases, against a minimum of 90%.
+- **Vendor matching.** The Stage 1 vendor list and its hand check (precision 1.00, recall 1.00) were reused unchanged.
+
+**The placebo.** We split the questions at random into two halves of 20 and ran H5 on each half. The two halves should agree within plus or minus 0.05. On the Claude API they did. On ChatGPT and Gemini the result was inconclusive. The halves' estimates were close (-0.01 and -0.02 on ChatGPT, -0.02 and -0.02 on Gemini), but 20 questions per half give wide intervals. Before computing any Stage 2 result, we ran the placebo on simulated data with no drift at all. It came out inconclusive there too, on 2 of 3 platforms. So this placebo is underpowered by design. We treat it as a warning, not a reason to stop.
+
+**Changes to the plan.** The spec's deviation log records two Stage 2 entries.
+
+9. **Collection.** Every question was collected on every platform in every wave. In wave 8, seven Gemini questions failed and ran a day late; their pairs with wave 9 touch neither H5 group. Wave 9 started a little late, but no answer date changed. The late ChatGPT answer from Stage 1 moves 2 pairs out of the near group, leaving 438.
+10. **Implementation choices,** recorded on 2026-11-09 before any Stage 2 result was computed. They fill in details the plan left open: which answers the classifier re-check uses, that use-case phrases classified at Stage 1 keep their labels, how the regression below is weighted and reported, and that the lead chart shows the shortlist only, as in Stage 1. The underpowered placebo above is recorded here too.
+
+## Robustness
+
+We re-ran H5 several ways. No check put the best estimate of shortlist drift beyond the band on any platform. Two checks on the Claude API had intervals reaching just past it.
+
+- **A different way to measure time.** We fit a line to the repeat rate against days apart, using every pair. The change per 30 days was -0.01 on ChatGPT, -0.02 on Gemini and -0.03 on the Claude API. The verdicts were the same as H5's.
+- **Different day groups.** Comparing pairs 0 to 6 days apart with pairs 27 to 34 days apart gave the same three verdicts.
+- **Every vendor the classifier names,** not only those on our list. ChatGPT showed no drift and Gemini was inconclusive. The Claude API dropped 3 points, with an interval reaching -0.06, just past the band.
+- **Without answers that name no listed vendor,** and **resampling whole categories instead of questions.** ChatGPT and Claude were unchanged. Gemini came out as no drift in both.
+- **The classifier's second pass swapped in:** no change to any verdict.
+- **"Shortlist" questions versus "evaluate" questions.** No subset showed a large drift. With half the questions, several came out inconclusive. On the Claude API's "shortlist" questions, the drop was 3 points, and its interval reached just past the band.
+- **`gpt-6` answers only:** no drift, on few pairs (above). On this thin subset the top pick repeated more often a month apart than a day or two apart. We do not read anything into that.
+- **Experiment 009's Claude answers,** collected with the same setup in the week before this study began. On 26 of the questions, they shared 0.72 of their shortlist with the new answers. The new answers shared 0.77 with each other, and 009's answers 0.73. The cross-study figure did not fall with time: 0.75 at 0 to 6 days apart, 0.74 at 35 days or more. This is a description, not a test.
+
+## Data and reproducibility
+
+- **Datasets:** [answers](/datasets/010-shortlist-stability/ai-shortlist-stability-answers.csv) (CC BY 4.0, now including waves 8 to 11), [answer and vendor rows](/datasets/010-shortlist-stability/ai-shortlist-stability-mentions.csv) (CC BY 4.0) and [use-case groups](/datasets/010-shortlist-stability/ai-shortlist-stability-segments.csv) (CC BY 4.0). Each has a datasheet with the column dictionary. Vendors appear as codes, so every repeat rate in this article can be recomputed without naming a vendor. Answer text is not released.
+- **Questions:** the [40 B2B prompts](/datasets/009-claude-model-fidelity/claude-api-vs-claude-ai-prompts.csv), released with experiment 009.
+- **Pre-registered spec:** [frozen at `6342963`](https://github.com/orchestra-code/aeo-experiments/blob/6342963/experiments/010-shortlist-stability/spec.md) on 2026-10-03. The [current spec](https://github.com/orchestra-code/aeo-experiments/blob/main/experiments/010-shortlist-stability/spec.md) adds the deviation log.
+- **Analysis code:** [experiments/010-shortlist-stability/](https://github.com/orchestra-code/aeo-experiments/tree/main/experiments/010-shortlist-stability), including the audits, the model, the robustness checks and the figure code. Stage 2 runs with `--stage 2`.
+- **Stage 1:** [When AI shortlists your software, it usually shortlists you again](/articles/ai-shortlist-stability).
+
+## Changelog
+
+- 2026-11-10: published.
